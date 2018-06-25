@@ -2,7 +2,7 @@
 
 > Liquid Design System components for React
 
-[![NPM](https://img.shields.io/npm/v/liquid-design-react.svg)](https://www.npmjs.com/package/liquid-design-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/liquid-design-react.svg)](https://www.npmjs.com/package/liquid-design-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Install
 
@@ -31,6 +31,8 @@ class Example extends Component {
 1. start the package development - `$ yarn && yarn start`
 1. start the storybook dev environment - `$ cd example && yarn && yarn start`
 1. run tests - `$ npm run test:watch`
+
+This repo is using [Commitizen](http://commitizen.github.io/cz-cli/) to enforce [conventional commit messages](http://conventionalcommits.org/) - please use `$ npm run cm` instead of `$ git commit`
 
 ## License
 
