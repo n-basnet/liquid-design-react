@@ -7,6 +7,6 @@ describe('Badge', () => {
   it('displays text', () => {
     const text = 'Some text'
     const wrapper = shallow(<Badge text={text} />)
-    expect(wrapper.text()).toEqual(text)
+    expect(wrapper.children().text()).toEqual(text)
   })
 })
