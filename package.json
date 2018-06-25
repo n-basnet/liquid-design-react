@@ -36,6 +36,8 @@
     "commitizen": "^2.10.1",
     "conventional-changelog-cli": "^2.0.1",
     "cross-env": "^5.1.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-config-standard-react": "^6.0.0",
