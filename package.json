@@ -15,7 +15,8 @@
     "prepare": "yarn run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cm": "git-cz",
-    "commitmsg": "commitlint -E GIT_PARAMS"
+    "commitmsg": "commitlint -E GIT_PARAMS",
+    "lint": "eslint ./src ./example/storybook"
   },
   "dependencies": {},
   "peerDependencies": {
