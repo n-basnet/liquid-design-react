@@ -7,6 +7,9 @@
     "react"
   ],
   "plugins": [
-    "external-helpers"
+    "external-helpers",
+    ["babel-plugin-root-import", {
+      "rootPathSuffix": "src"
+    }]
   ]
 }

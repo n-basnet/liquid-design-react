@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import ExampleComponent from 'liquid-design-react'
+import { Badge } from 'liquid-design-react'
 
-storiesOf('ExampleComponent', module)
+storiesOf('Badge', module)
   .add('with text', () => (
-    <ExampleComponent text='Modern React component module' />
+    <Badge text='Delivery in 3-4 days' />
   ))
