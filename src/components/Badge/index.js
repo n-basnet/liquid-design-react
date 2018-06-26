@@ -1,28 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { space } from 'styled-system'
+import system from 'system-components'
 
-import { DEFAULT_THEME } from '~/utils/Theme'
+import { DEFAULT_THEME } from '~/utils/consts/themes'
+import { borderRadius, fontFamily } from '~/utils/consts/rules'
 
-const Box = styled.span`
-  ${space}
-  background-color: ${props => props.theme.colors.secondary};
-  display: inline-block;
-`
+const BadgeWrapper = system(
+  props => ({
+    backgroundColor: props.theme.colors.secondary,
+  }),
+  {
+    display: 'inline-block',
+    borderRadius,
+    fontFamily,
+    fontSize: '12px',
+  },
+  'space'
+)
 
-Box.defaultProps = {
+BadgeWrapper.defaultProps = {
   theme: DEFAULT_THEME,
-  m: 4,
-  p: 2,
 }
 
 export const Badge = ({
   text,
 }) =>
-  <Box>
+  <BadgeWrapper px={2} py={1}>
     {text}
-  </Box>
+  </BadgeWrapper>
 
 Badge.propTypes = {
   text: PropTypes.string.isRequired,

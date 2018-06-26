@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "styled-components": "^3.3.3",
-    "styled-system": "^2.3.2"
+    "styled-system": "^2.3.2",
+    "system-components": "^2.2.2"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",

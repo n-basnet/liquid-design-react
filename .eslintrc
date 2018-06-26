@@ -5,11 +5,15 @@
     "standard-react"
   ],
   "env": {
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "plugins": [
     "react"
   ],
+  "globals": {
+    "expect": true
+  },
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": true

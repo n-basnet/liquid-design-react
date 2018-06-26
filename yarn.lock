@@ -1543,6 +1543,14 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+clean-tag@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/clean-tag/-/clean-tag-1.0.4.tgz#9b407b306fadce114e6dffa774e7b61bdfc0c190"
+  dependencies:
+    html-tags "^2.0.0"
+    react ">=16.0.0"
+    styled-system ">=1.1 || >=2.0"
+
 cli-cursor@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"
@@ -3184,6 +3192,10 @@ html-encoding-sniffer@^1.0.2:
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-1.0.2.tgz#e70d84b94da53aa375e11fe3a351be6642ca46f8"
   dependencies:
     whatwg-encoding "^1.0.1"
+
+html-tags@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
 htmlparser2@^3.9.1:
   version "3.9.2"
@@ -5495,7 +5507,7 @@ react-test-renderer@^16.0.0-0:
     prop-types "^15.6.0"
     react-is "^16.4.1"
 
-react@^16.2.0:
+react@>=16.0.0, react@^16.2.0:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
   dependencies:
@@ -6297,7 +6309,7 @@ styled-components@^3.3.3:
     stylis-rule-sheet "^0.0.10"
     supports-color "^3.2.3"
 
-styled-system@^2.3.2:
+"styled-system@>=1.1 || >=2.0", styled-system@^2.3.1, styled-system@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-2.3.2.tgz#b5dbc7d197b41dd06b80b16e17b52503363a5aac"
   dependencies:
@@ -6342,6 +6354,13 @@ svgo@^0.7.0:
 symbol-tree@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
+
+system-components@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/system-components/-/system-components-2.2.2.tgz#dbc005a8bfa64562e8aac9fa4c4f10fea9e54f6e"
+  dependencies:
+    clean-tag "^1.0.4"
+    styled-system "^2.3.1"
 
 table@4.0.2:
   version "4.0.2"

@@ -9,6 +9,6 @@ storiesOf('Badge', module)
   ))
   .add('using a different theme', () => (
     <Theme themeName='richPurple'>
-      <Badge text='Delivery with a new theme' />
+      <Badge text='Delivery in 3-4 days' />
     </Theme>
   ))

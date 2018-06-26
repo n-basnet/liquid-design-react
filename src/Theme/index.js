@@ -2,22 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'styled-components'
 
-const THEMES = {
-  vibrantCyan: {
-    colors: {
-      primary: '#2DBECD',
-      secondary: '#FFC832',
-    },
-  },
-  richPurple: {
-    colors: {
-      primary: '#503291',
-      secondary: '#2DBECD',
-    },
-  },
-}
-
-export const DEFAULT_THEME = THEMES.vibrantCyan
+import { THEMES } from '~/utils/consts/themes'
 
 export const Theme = ({themeName, children}) =>
   <ThemeProvider theme={THEMES[themeName]} >
@@ -25,6 +10,6 @@ export const Theme = ({themeName, children}) =>
   </ThemeProvider>
 
 Theme.propTypes = {
-  themeName: PropTypes.string.isRequired,
+  themeName: PropTypes.oneOf(Object.keys(THEMES)).isRequired,
   children: PropTypes.element.isRequired,
 }
