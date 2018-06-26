@@ -8,7 +8,7 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "scripts": {
-    "test": "cross-env CI=1 jest",
+    "test": "cross-env CI=1 jest --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/*.js",
     "test:watch": "jest --watch",
     "build": "rollup -c",
     "start": "rollup -c -w",
