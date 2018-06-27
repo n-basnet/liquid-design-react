@@ -4,21 +4,23 @@ import system from 'system-components'
 import { darken } from 'polished'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
-import { borderRadius, fontFamily } from '~/utils/consts/rules'
+import { borderRadius, fontFamily, transition } from '~/utils/consts/rules'
 import Icon from '~/components/Icon'
 
 const BadgeWrapper = system(
   props => ({
     backgroundColor: props.theme.colors.secondary,
-    '&:hover': {
+    '&:hover': !props.disabled && {
       backgroundColor: darken(0.2, props.theme.colors.secondary),
     },
     opacity: props.disabled ? 0.5 : 1,
+    cursor: 'default',
   }),
   {
     display: 'inline-block',
     borderRadius,
     fontFamily,
+    transition,
     fontSize: '12px',
     padding: '5px 10px',
   },

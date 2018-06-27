@@ -6,7 +6,9 @@ import { ContentCard } from '.'
 describe('ContentCard', () => {
   it('renders', () => {
     const wrapper = shallow(
-      <ContentCard />
+      <ContentCard
+        title='Some title'
+      />
     )
     expect(wrapper).toBeTruthy()
   })
