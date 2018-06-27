@@ -34,6 +34,10 @@ class Example extends Component {
 
 This repo is using [Commitizen](http://commitizen.github.io/cz-cli/) to enforce [conventional commit messages](http://conventionalcommits.org/) - please use `$ npm run cm` instead of `$ git commit`
 
+### Adding new components
+
+Use `$ npm run add-component` to quickly bootstrap new components
+
 ## License
 
 MIT ©
