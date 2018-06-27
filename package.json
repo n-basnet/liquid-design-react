@@ -19,6 +19,7 @@
     "lint": "eslint ./src ./example/storybook"
   },
   "dependencies": {
+    "polished": "^1.9.2",
     "styled-components": "^3.3.3",
     "styled-system": "^2.3.2",
     "system-components": "^2.2.2"
