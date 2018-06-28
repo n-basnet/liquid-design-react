@@ -1,5 +1,7 @@
-import React, { Fragment } from 'react'
+import React, {Fragment} from 'react'
 import { configure, addDecorator } from '@storybook/react'
+
+import { Theme } from 'liquid-design-react'
 
 import COMPONENTS from './components.json'
 
@@ -10,14 +12,16 @@ function loadStories() {
 }
 
 addDecorator(storyFn => (
-  <Fragment>
-    <style>{`
-      body {
-        margin: 0;
-      }
-    `}</style>
-    {storyFn()}
-  </Fragment>
+  <Theme>
+    <Fragment>
+      <style>{`
+        body {
+          margin: 0;
+        }
+      `}</style>
+      {storyFn()}
+    </Fragment>
+  </Theme>
 ))
 
 configure(loadStories, module)

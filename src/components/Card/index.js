@@ -11,7 +11,6 @@ export const Card = styled.div`
     text-align: center;
   `}
   ${props => css`
-    font-family: ${props.theme.fontFamily};
     border-radius: ${props.theme.borderRadius};
     background-color: ${props.theme.colors.white};
     transition: ${props.theme.transition};

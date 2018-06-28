@@ -12,15 +12,19 @@ npm install --save liquid-design-react
 
 ## Usage
 
+Wrap the root of your application with the `Theme` component to provide typographic defaults and global styles.
+
 ```jsx
 import React, { Component } from 'react'
 
-import { Badge } from 'liquid-design-react'
+import { Badge, Theme } from 'liquid-design-react'
 
 class Example extends Component {
   render () {
     return (
-      <Badge text='Hello' />
+      <Theme>
+        <Badge text='Hello' />
+      </Theme>
     )
   }
 }

@@ -8,7 +8,6 @@ import Icon from '~/components/Icon'
 
 const BadgeWrapper = styled.div`
   ${props => css`
-    font-family: ${props.theme.fontFamily};
     opacity: ${props.disabled ? 0.5 : 1};
     border-radius: ${props.theme.borderRadius};
     transition: ${props.theme.transition};
