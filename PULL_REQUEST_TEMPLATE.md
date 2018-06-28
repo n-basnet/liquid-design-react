@@ -7,7 +7,7 @@
 # PR checklist
 - [ ] Is description present and extensive enough to inform about the considered trade-offs and path taken to achieve the goal?
 - [ ] Does it work on IE 11?
-- [ ] Is README up to date and contains new element/component/module?
+- [ ] Are tests and storybook presentation present?
 - [ ] Did you put links to solutions that not everyone is familiar with?
 - [ ] Are your commits well organized?
 - [ ] Give input for the reviewer - ask to check some particular code snippets, tell them about your worries and so on.
