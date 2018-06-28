@@ -28,6 +28,12 @@ storiesOf('ContentCard', module)
       {...defaultProps}
     />
   ))
+  .add('stacked', () => (
+    <ContentCard
+      {...defaultProps}
+      stacked
+    />
+  ))
   .add('active', () => (
     <ContentCard
       {...defaultProps}

@@ -9,6 +9,9 @@ storiesOf('Card', module)
   .add('default', () => (
     <Card>{chance.paragraph({ sentences: 3 })}</Card>
   ))
+  .add('stacked', () => (
+    <Card stacked>{chance.paragraph({ sentences: 3 })}</Card>
+  ))
   .add('active', () => (
     <Card active>{chance.paragraph({ sentences: 3 })}</Card>
   ))

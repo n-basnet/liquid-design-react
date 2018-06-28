@@ -43,9 +43,10 @@ export const ContentCard = ({
   imagePath,
   description,
   featured,
+  stacked,
   active,
 }) =>
-  <Card active={active} center>
+  <Card active={active} stacked={stacked} center>
     <TitleWrapper>{title}</TitleWrapper>
     {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
     <ImageWrapper src={imagePath || ''} />
@@ -61,5 +62,6 @@ ContentCard.propTypes = {
   featured: PropTypes.string,
   imagePath: PropTypes.string,
   labels: PropTypes.arrayOf(PropTypes.shape(Label.propTypes)),
+  stacked: PropTypes.bool,
   active: PropTypes.bool,
 }

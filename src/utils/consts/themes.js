@@ -12,6 +12,7 @@ const themeBase = {
 
 const themeBaseColors = {
   white: COLORS.WHITE,
+  grey: COLORS.GREY,
 }
 
 export const THEMES = {
