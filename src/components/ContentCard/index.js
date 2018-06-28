@@ -5,6 +5,7 @@ import styled, {css} from 'styled-components'
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
 import Card from '~/components/Card'
+import Placeholder from '~/components/aux/Placeholder'
 import { Flex } from '~/components/primitives/Flex'
 import Label from '~/components/ContentCard/Label'
 
@@ -49,7 +50,10 @@ const ContentCard = ({
   <Card active={active} stacked={stacked} center>
     <TitleWrapper>{title}</TitleWrapper>
     {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
-    <ImageWrapper src={imagePath || ''} />
+    {imagePath
+      ? <ImageWrapper src={imagePath} />
+      : <Placeholder />
+    }
     {featured && <FeaturedWrapper>{featured}</FeaturedWrapper>}
     <Flex spread mt='20px'>
       {labels.map((label, i) => <Label {...label} key={i} isRight={i === 1} />)}

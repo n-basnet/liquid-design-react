@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components'
 import { darken } from 'polished'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
-import Icon from '~/components/Icon'
+import Icon from '~/components/aux/Icon'
 
 const BadgeWrapper = styled.div`
   ${props => css`

@@ -17,7 +17,6 @@ const labels = [
 
 const defaultProps = {
   title: 'Title Name',
-  imagePath: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1',
   labels,
 }
 
@@ -25,6 +24,12 @@ storiesOf('ContentCard', module)
   .addDecorator(getBackgroundWrapper('#e9e9e8'))
   .add('default', () => (
     <ContentCard
+      {...defaultProps}
+    />
+  ))
+  .add('default with image', () => (
+    <ContentCard
+      imagePath='https://images.unsplash.com/photo-1521028640727-38d16fc99ba1'
       {...defaultProps}
     />
   ))
