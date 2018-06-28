@@ -4,30 +4,9 @@ import styled, {css} from 'styled-components'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
+import { Card } from '~/components/Card'
 import { Flex } from '~/components/primitives/Flex'
 import Label from '~/components/ContentCard/Label'
-
-const ContentCardWrapper = styled.div`
-  ${props => props.active && css`
-    box-shadow: ${props.theme.doubleBoxShadow};
-  `}
-  ${props => css`
-    font-family: ${props.theme.fontFamily};
-    border-radius: ${props.theme.borderRadius};
-    background-color: ${props.theme.colors.white};
-    transition: ${props.theme.transition};
-    &:hover {
-      box-shadow: ${props.theme.boxShadow};
-    };
-  `}
-  max-width: 330px;
-  padding: 20px;
-  text-align: center;
-`
-
-ContentCardWrapper.defaultProps = {
-  theme: DEFAULT_THEME,
-}
 
 const ImageWrapper = styled.div`
   ${getBackgroundImage};
@@ -66,7 +45,7 @@ export const ContentCard = ({
   featured,
   active,
 }) =>
-  <ContentCardWrapper active={active}>
+  <Card active={active} center>
     <TitleWrapper>{title}</TitleWrapper>
     {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
     <ImageWrapper src={imagePath || ''} />
@@ -74,7 +53,7 @@ export const ContentCard = ({
     <Flex spread mt='20px'>
       {labels.map((label, i) => <Label {...label} key={i} isRight={i === 1} />)}
     </Flex>
-  </ContentCardWrapper>
+  </Card>
 
 ContentCard.propTypes = {
   title: PropTypes.string.isRequired,
