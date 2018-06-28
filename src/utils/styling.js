@@ -1,5 +1,7 @@
-export const getBackgroundImage = src => ({
-  backgroundImage: `url(${src})`,
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
-})
+import {css} from 'styled-components'
+
+export const getBackgroundImage = ({src}) => css`
+  background-image: url(${src});
+  background-position: center;
+  background-size: cover;
+`

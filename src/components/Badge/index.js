@@ -1,39 +1,38 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
-import system from 'system-components'
+import styled, {css} from 'styled-components'
 import { darken } from 'polished'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
-import { borderRadius, fontFamily, transition } from '~/utils/consts/rules'
 import Icon from '~/components/Icon'
 
-const BadgeWrapper = system(
-  props => ({
-    backgroundColor: props.theme.colors.secondary,
-    '&:hover': !props.disabled && {
-      backgroundColor: darken(0.2, props.theme.colors.secondary),
+const BadgeWrapper = styled.div`
+  ${props => css`
+    font-family: ${props.theme.fontFamily};
+    opacity: ${props.disabled ? 0.5 : 1};
+    border-radius: ${props.theme.borderRadius};
+    transition: ${props.theme.transition};
+    background-color: ${props.theme.colors.secondary};
+    &:hover {
+      ${!props.disabled && css`
+        background-color: ${darken(0.2, props.theme.colors.secondary)};
+      `}
     },
-    opacity: props.disabled ? 0.5 : 1,
-    cursor: 'default',
-  }),
-  {
-    display: 'inline-block',
-    borderRadius,
-    fontFamily,
-    transition,
-    fontSize: '12px',
-    padding: '5px 10px',
-  },
-)
+  `};
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px 10px;
+  cursor: default;
+`
 
 BadgeWrapper.defaultProps = {
   theme: DEFAULT_THEME,
 }
 
-const BadgeTextWrapper = system(
-  {is: 'span'},
-  'space',
-).extend`
+const BadgeTextWrapper = styled.span`
+  ${props => props.padLeft && css`
+    padding-left: 8px;
+  `};
   display: inline-block;
   vertical-align: middle;
   padding-top: 2px;
@@ -47,7 +46,7 @@ export const Badge = ({
   <BadgeWrapper disabled={disabled}>
     <Fragment>
       {icon && <Icon name={icon} style={{verticalAlign: 'middle'}} />}
-      <BadgeTextWrapper pl={icon && 2}>{text}</BadgeTextWrapper>
+      <BadgeTextWrapper padLeft={!!icon}>{text}</BadgeTextWrapper>
     </Fragment>
   </BadgeWrapper>
 

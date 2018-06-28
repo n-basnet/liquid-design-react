@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import system from 'system-components'
+import styled, {css} from 'styled-components'
 
-const LabelWrapper = system(
-  {blacklist: ['isRight']},
-  props => ({
-    textAlign: props.isRight ? 'right' : 'left',
-  }),
-)
+const LabelWrapper = styled.div([
+  props => css`
+    text-align: ${props.isRight ? 'right' : 'left'};
+  `,
+])
 
 const Label = ({name, value, isRight}) =>
   <LabelWrapper isRight={isRight}>
