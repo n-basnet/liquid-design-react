@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
-import { Card } from '~/components/Card'
+import Card from '~/components/Card'
 import { Flex } from '~/components/primitives/Flex'
 import Label from '~/components/ContentCard/Label'
 
@@ -37,7 +37,7 @@ FeaturedWrapper.defaultProps = {
   theme: DEFAULT_THEME,
 }
 
-export const ContentCard = ({
+const ContentCard = ({
   title,
   labels = [],
   imagePath,
@@ -65,3 +65,5 @@ ContentCard.propTypes = {
   stacked: PropTypes.bool,
   active: PropTypes.bool,
 }
+
+export default ContentCard

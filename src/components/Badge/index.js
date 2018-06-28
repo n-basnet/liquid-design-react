@@ -37,7 +37,7 @@ const BadgeTextWrapper = styled.span`
   padding-top: 2px;
 `
 
-export const Badge = ({
+const Badge = ({
   text,
   icon,
   disabled,
@@ -54,3 +54,5 @@ Badge.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.string,
 }
+
+export default Badge

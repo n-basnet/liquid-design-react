@@ -3,7 +3,7 @@ const jsFileTemplate = ({name}) =>
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const ${name} = () =>
+const ${name} = () =>
   <div>
     ${name}
   </div>
@@ -11,6 +11,8 @@ export const ${name} = () =>
 ${name}.propTypes = {
 
 }
+
+export default ${name}
 `
 
 const testFileTemplate = ({name}) =>
@@ -18,7 +20,7 @@ const testFileTemplate = ({name}) =>
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { ${name} } from '.'
+import ${name} from '.'
 
 describe('${name}', () => {
   it('renders', () => {

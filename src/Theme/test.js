@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { Theme } from '.'
+import Theme from '.'
 
 describe('Theme', () => {
   it('renders', () => {

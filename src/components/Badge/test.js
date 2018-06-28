@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
-import { Badge } from '.'
+import Badge from '.'
 
 describe('Badge', () => {
   it('displays text', () => {

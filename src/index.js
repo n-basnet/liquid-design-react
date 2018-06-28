@@ -1,5 +1,5 @@
-export * from '~/Theme'
+export { default as Theme } from '~/Theme'
 
-export * from '~/components/Badge'
-export * from '~/components/ContentCard'
-export * from '~/components/Card'
+export { default as Badge } from '~/components/Badge'
+export { default as ContentCard } from '~/components/ContentCard'
+export { default as Card } from '~/components/Card'

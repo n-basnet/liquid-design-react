@@ -53,7 +53,7 @@ inquirer.prompt(QUESTIONS).then(({name}) => {
   const indexFile = fs.readFileSync(indexFilePath, 'utf8')
   saveFile(indexFilePath, `
 ${indexFile.trim()}
-export * from '~/components/${canonisedName}'
+export { default as ${canonisedName} } from '~/components/${canonisedName}'
 `)
 
   // add to storybook

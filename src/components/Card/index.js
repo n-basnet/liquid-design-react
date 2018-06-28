@@ -6,7 +6,7 @@ import { DEFAULT_THEME } from '~/utils/consts/themes'
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
-export const Card = styled.div`
+const Card = styled.div`
   ${props => props.active && css`
     box-shadow: ${props.theme.doubleBoxShadow};
   `}
@@ -40,3 +40,5 @@ Card.propTypes = {
   center: PropTypes.bool,
   active: PropTypes.bool,
 }
+
+export default Card
