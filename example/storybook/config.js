@@ -1,7 +1,10 @@
 import React, {Fragment} from 'react'
 import { configure, addDecorator } from '@storybook/react'
+import { configureActions } from '@storybook/addon-actions'
 
 import { Theme } from 'liquid-design-react'
+
+configureActions()
 
 import COMPONENTS from './components.json'
 
