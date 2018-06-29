@@ -10,4 +10,9 @@ export const getBackgroundWrapper = (backgroundColor = '#fff') => storyFn =>
     {storyFn()}
   </div>
 
+export const getWrapper = style => storyFn =>
+  <div style={style}>
+    {storyFn()}
+  </div>
+
 export const chance = new Chance()

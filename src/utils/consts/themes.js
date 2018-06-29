@@ -13,6 +13,7 @@ const themeBase = {
 const themeBaseColors = {
   white: COLORS.WHITE,
   grey: COLORS.GREY,
+  darkGrey: COLORS.DARK_GREY,
 }
 
 export const THEMES = {
