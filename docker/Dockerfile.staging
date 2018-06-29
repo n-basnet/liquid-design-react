@@ -1,0 +1,22 @@
+# specify node version
+FROM quay.io/netguru/ng-node:10 as builder
+
+## add code & build app
+COPY . $APP_HOME
+
+RUN yarn install
+RUN cd example && ls && yarn install
+RUN npm run build-example
+
+
+## Real app image
+FROM nginx:alpine as app
+
+ENV VIRTUAL_HOST merck-react.staging.devguru.co
+ENV VIRTUAL_PORT 3000
+ENV LETSENCRYPT_HOST merck-react.staging.devguru.co
+ENV LETSENCRYPT_EMAIL devops-team@netguru.co
+## Copy build/ folder to new image
+COPY --from=builder /app/example/out /app/dist
+RUN ls /app/dist
+COPY nginx-staging.conf /etc/nginx/nginx.conf

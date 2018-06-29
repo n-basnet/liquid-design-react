@@ -1,0 +1,25 @@
+version: '3.2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.staging
+    command: nginx
+    hostname: "netguru.merck-react.integration.web"
+    labels:
+      - "netguru.appname=merck-react"
+      - "netguru.stage=integration"
+    env_file: /home/deploy/apps/merck-react/shared/secrets.env
+    environment:
+      - VIRTUAL_HOST=$PULL_REQUEST_NUMBER.merck-react.integration.devguru.co
+      - VIRTUAL_PORT=3000
+      - PULL_REQUEST_ID=netguru/merck-react#$PULL_REQUEST_NUMBER
+    expose:
+      - 3000
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    external:
+      name: frontend
