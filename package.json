@@ -17,7 +17,8 @@
     "cm": "git-cz",
     "commitmsg": "commitlint -E GIT_PARAMS",
     "lint": "eslint ./src ./example/storybook",
-    "add-component": "node scripts/addComponent.js"
+    "add-component": "node scripts/addComponent.js",
+    "build-example": "npm run build && cd example && npm run build"
   },
   "dependencies": {
     "polished": "^1.9.2",

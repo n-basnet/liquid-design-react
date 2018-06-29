@@ -42,6 +42,11 @@ This repo is using [Commitizen](http://commitizen.github.io/cz-cli/) to enforce 
 
 Use `$ npm run add-component` to quickly bootstrap new components
 
+### Static build of storybook
+
+1. `$ npm run build-example`
+2. serve the static assets from `example/out` (e.g. `cd example/out && npx http-server`)
+
 ## License
 
 MIT ©
