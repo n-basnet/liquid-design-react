@@ -20,6 +20,7 @@ const Card = styled.div`
   ${props => props.center && css`
     text-align: center;
   `}
+  ${props => props.css && css([props.css])}
   ${props => css`
     border-radius: ${props.theme.borderRadius};
     background-color: ${props.theme.colors.white};

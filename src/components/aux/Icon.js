@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Favorite from '~/graphics/svgs/favorite.svg'
+import CircleX from '~/graphics/svgs/circle-x.svg'
 
 const ICONS = {
   favorite: Favorite,
+  circleX: CircleX,
 }
 
 const Icon = ({
   name,
-  size = 20,
+  size = 14,
   style = {},
 }) => {
   const SVGIconComponent = ICONS[name]

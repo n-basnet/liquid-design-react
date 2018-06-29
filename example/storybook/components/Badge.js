@@ -13,7 +13,7 @@ storiesOf('Badge', module)
     <Badge text='Delivery in 3-4 days' disabled />
   ))
   .add('with text and icon', () => (
-    <Badge text='Delivery in 3-4 days' icon='favorite' />
+    <Badge text='Delivery in 3-4 days' icon='circleX' />
   ))
   .add('using a different theme', () => (
     <Theme themeName='richPurple'>

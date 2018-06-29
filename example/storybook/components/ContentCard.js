@@ -29,7 +29,7 @@ storiesOf('ContentCard', module)
   ))
   .add('default with image', () => (
     <ContentCard
-      imagePath='https://images.unsplash.com/photo-1521028640727-38d16fc99ba1'
+      imagePath='https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400'
       {...defaultProps}
     />
   ))
@@ -56,5 +56,31 @@ storiesOf('ContentCard', module)
       {...defaultProps}
       description={chance.paragraph({ sentences: 1 })}
       featured='e.g. Amount, etc.'
+    />
+  ))
+  .add('with badge', () => (
+    <ContentCard
+      {...defaultProps}
+      badge={{
+        text: 'Delivery in 3-4 days',
+      }}
+    />
+  ))
+  .add('with badge with icon', () => (
+    <ContentCard
+      {...defaultProps}
+      badge={{
+        text: 'Delivery in 3-4 days',
+        icon: 'favorite',
+      }}
+    />
+  ))
+  .add('with badge with icon on the right side', () => (
+    <ContentCard
+      {...defaultProps}
+      badge={{
+        text: 'Delivery in 3-4 days',
+        iconRight: 'favorite',
+      }}
     />
   ))

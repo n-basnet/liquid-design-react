@@ -14,13 +14,27 @@ const BadgeWrapper = styled.div`
     background-color: ${props.theme.colors.secondary};
     &:hover {
       ${!props.disabled && css`
-        background-color: ${darken(0.2, props.theme.colors.secondary)};
+        background-color: ${darken(0.12, props.theme.colors.secondary)};
       `}
     },
   `};
+  ${props => props.onCard
+    ? css`
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      width: 100%;
+      text-align: left;
+      padding: 1px 25px;
+    `
+    : css`
+      padding: 1px 11px;
+    `};
   display: inline-block;
   font-size: 12px;
-  padding: 5px 10px;
+  letter-spacing: 0.2px;
   cursor: default;
 `
 
@@ -40,18 +54,28 @@ const BadgeTextWrapper = styled.span`
 const Badge = ({
   text,
   icon,
+  iconOnRight,
   disabled,
+  onCard,
 }) =>
-  <BadgeWrapper disabled={disabled}>
+  <BadgeWrapper disabled={disabled} onCard={onCard}>
     <Fragment>
-      {icon && <Icon name={icon} style={{verticalAlign: 'middle'}} />}
-      <BadgeTextWrapper padLeft={!!icon}>{text}</BadgeTextWrapper>
+      {icon && !iconOnRight && <Icon name={icon} style={{verticalAlign: 'middle'}} />}
+      <BadgeTextWrapper padLeft={icon && !iconOnRight}>{text}</BadgeTextWrapper>
+      {icon && iconOnRight && <Icon name={icon} style={{
+        verticalAlign: 'middle',
+        position: 'absolute',
+        right: '25px',
+        top: '3px',
+      }} />}
     </Fragment>
   </BadgeWrapper>
 
 Badge.propTypes = {
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  onCard: PropTypes.bool,
+  iconOnRight: PropTypes.bool,
   icon: PropTypes.string,
 }
 
