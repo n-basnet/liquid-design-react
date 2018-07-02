@@ -1,7 +1,6 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
 import styled, {css} from 'styled-components'
-import { darken } from 'polished'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import Icon from '~/components/aux/Icon'
@@ -11,10 +10,10 @@ const BadgeWrapper = styled.div`
     opacity: ${props.disabled ? 0.5 : 1};
     border-radius: ${props.theme.borderRadius};
     transition: ${props.theme.transition};
-    background-color: ${props.theme.colors.secondary};
+    background-color: ${props.theme.colors.secondary.base};
     &:hover {
       ${!props.disabled && css`
-        background-color: ${darken(0.12, props.theme.colors.secondary)};
+        background-color: ${props.theme.colors.secondary.dark};
       `}
     },
   `};

@@ -1,4 +1,4 @@
-import { rgba } from 'polished'
+import { rgba, darken } from 'polished'
 
 import COLORS from '~/utils/consts/colors'
 
@@ -18,16 +18,28 @@ const themeBaseColors = {
 export const THEMES = {
   vibrantCyan: {
     colors: {
-      primary: COLORS.VIBRANT_CYAN,
-      secondary: COLORS.VIBRANT_YELLOW,
+      primary: {
+        base: COLORS.VIBRANT_CYAN,
+        dark: darken(0.12, COLORS.VIBRANT_CYAN),
+      },
+      secondary: {
+        base: COLORS.VIBRANT_YELLOW,
+        dark: darken(0.12, COLORS.VIBRANT_YELLOW),
+      },
       ...themeBaseColors,
     },
     ...themeBase,
   },
   richPurple: {
     colors: {
-      primary: COLORS.DEEP_PURPLE,
-      secondary: COLORS.VIBRANT_CYAN,
+      primary: {
+        base: COLORS.DEEP_PURPLE,
+        dark: darken(0.12, COLORS.DEEP_PURPLE),
+      },
+      secondary: {
+        base: COLORS.VIBRANT_CYAN,
+        dark: darken(0.12, COLORS.VIBRANT_CYAN),
+      },
       ...themeBaseColors,
     },
     ...themeBase,

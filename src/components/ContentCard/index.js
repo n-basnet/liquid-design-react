@@ -31,7 +31,7 @@ const DescriptionWrapper = styled.div`
 
 const FeaturedWrapper = styled.div`
   ${props => css`
-    color: ${props.theme.colors.primary};
+    color: ${props.theme.colors.primary.base};
   `}
   margin-top: 20px;
   font-size: 22px;
