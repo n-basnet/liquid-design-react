@@ -29,6 +29,8 @@ const Card = styled.div`
       box-shadow: ${props.theme.boxShadow};
     };
   `}
+  display: inline-block;
+  margin: 10px;
   max-width: ${CARD_WIDTH}px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
 `

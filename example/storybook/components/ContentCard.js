@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { ContentCard } from 'liquid-design-react'
@@ -23,9 +23,14 @@ const defaultProps = {
 storiesOf('ContentCard', module)
   .addDecorator(getBackgroundWrapper('#e9e9e8'))
   .add('default', () => (
-    <ContentCard
-      {...defaultProps}
-    />
+    <ContentCard {...defaultProps} />
+  ))
+  .add('multiple', () => (
+    <Fragment>
+      <ContentCard {...defaultProps} />
+      <ContentCard {...defaultProps} />
+      <ContentCard {...defaultProps} />
+    </Fragment>
   ))
   .add('default with image', () => (
     <ContentCard

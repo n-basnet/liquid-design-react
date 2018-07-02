@@ -6,6 +6,9 @@ const LabelWrapper = styled.div`
   ${props => css`
     text-align: ${props.isRight ? 'right' : 'left'};
   `};
+  ${props => props.isRight && css`
+    margin-left: 30px;
+  `};
   margin-top: 19px;
   font-size: 14px;
   div {
