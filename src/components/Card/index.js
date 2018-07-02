@@ -32,6 +32,7 @@ const Card = styled.div`
   display: inline-block;
   margin: 10px;
   max-width: ${CARD_WIDTH}px;
+  min-width: ${CARD_WIDTH * 0.8}px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
 `
 
