@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import system from 'system-components'
 
 export const Flex = system(
@@ -8,3 +9,7 @@ export const Flex = system(
   }),
   'space'
 )
+
+Flex.propTypes = {
+  spread: PropTypes.bool,
+}
