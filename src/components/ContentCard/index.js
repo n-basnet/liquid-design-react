@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
-import Card from '~/components/Card'
+import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
 import Placeholder from '~/components/aux/Placeholder'
 import { Flex } from '~/components/primitives/Flex'

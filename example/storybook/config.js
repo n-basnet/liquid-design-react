@@ -6,11 +6,11 @@ import { Theme } from 'liquid-design-react'
 
 configureActions()
 
-import COMPONENTS from './components.json'
+import MODULES from './modules.json'
 
 function loadStories() {
-  COMPONENTS.map(v => {
-    require(`./components/${v}.js`)
+  MODULES.map(({name, type}) => {
+    require(`./${type}s/${name}.js`)
   })
 }
 

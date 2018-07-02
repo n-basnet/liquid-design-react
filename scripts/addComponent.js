@@ -2,9 +2,10 @@ const fs = require('fs-extra')
 const inquirer = require('inquirer')
 const camelcase = require('camelcase')
 
-const storybookComponents = require('../example/storybook/components.json')
+const storybookModules = require('../example/storybook/modules.json')
 const fileTemplates = require('./addComponentTemplates.js')
 
+const COMPONENT_TYPES = ['component', 'element', 'module']
 const QUESTIONS = [
   {
     type: 'input',
@@ -17,6 +18,12 @@ const QUESTIONS = [
       return true
     },
   },
+  {
+    type: 'list',
+    name: 'type',
+    message: 'What is the component type?',
+    choices: COMPONENT_TYPES,
+  },
 ]
 
 const saveFile = (path, content) => {
@@ -28,20 +35,20 @@ const saveFile = (path, content) => {
   })
 }
 
-inquirer.prompt(QUESTIONS).then(({name}) => {
+inquirer.prompt(QUESTIONS).then(({name, type}) => {
   const canonisedName = camelcase(name, {pascalCase: true})
 
   ;[
     {
-      path: `src/components/${canonisedName}/index.js`,
+      path: `src/${type}s/${canonisedName}/index.js`,
       content: fileTemplates.jsFileTemplate({name: canonisedName}),
     },
     {
-      path: `src/components/${canonisedName}/test.js`,
+      path: `src/${type}s/${canonisedName}/test.js`,
       content: fileTemplates.testFileTemplate({name: canonisedName}),
     },
     {
-      path: `example/storybook/components/${canonisedName}.js`,
+      path: `example/storybook/${type}s/${canonisedName}.js`,
       content: fileTemplates.storybookFileTemplate({name: canonisedName}),
     },
   ].map(file => {
@@ -53,10 +60,10 @@ inquirer.prompt(QUESTIONS).then(({name}) => {
   const indexFile = fs.readFileSync(indexFilePath, 'utf8')
   saveFile(indexFilePath, `
 ${indexFile.trim()}
-export { default as ${canonisedName} } from '~/components/${canonisedName}'
+export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
 `)
 
   // add to storybook
-  const newStorybookComponents = [...storybookComponents, canonisedName]
-  saveFile('example/storybook/components.json', JSON.stringify(newStorybookComponents, null, 2))
+  const newStorybookModules = [...storybookModules, {name: canonisedName, type}]
+  saveFile('example/storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
 })
