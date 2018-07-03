@@ -7,6 +7,7 @@ import Star from '~/graphics/svgs/star.svg'
 import StarHalf from '~/graphics/svgs/star-half.svg'
 import Dot from '~/graphics/svgs/dot.svg'
 import DotHalf from '~/graphics/svgs/dot-half.svg'
+import ArrowRight from '~/graphics/svgs/arrow-right.svg'
 
 const ICONS = {
   favorite: Favorite,
@@ -15,6 +16,7 @@ const ICONS = {
   starHalf: StarHalf,
   dot: Dot,
   dotHalf: DotHalf,
+  arrowRight: ArrowRight,
 }
 
 const Icon = ({

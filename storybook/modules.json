@@ -14,5 +14,9 @@
   {
     "name": "Ratings",
     "type": "component"
+  },
+  {
+    "name": "Breadcrumbs",
+    "type": "component"
   }
 ]
