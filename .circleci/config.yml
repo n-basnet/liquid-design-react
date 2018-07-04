@@ -1,0 +1,85 @@
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10
+
+version: 2
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - restore-cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save-cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/repo/node_modules
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules
+
+  lint:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run Linter
+          command: yarn run lint
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Run tests
+          command: yarn test
+
+  deploy_staging:
+    <<: *defaults
+    working_directory: ~/repo/deployment
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - restore-cache:
+          key: yarn-{{ checksum "yarn.lock" }}
+      - run:
+          name: Deploy To Staging
+          command: bundle exec cap staging deploy
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - checkout_code
+      - build:
+          requires:
+            - checkout_code
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
+      - deploy_staging:
+          requires:
+            - build
+            - lint
+            - test
+          filters:
+            branches:
+              only: master
