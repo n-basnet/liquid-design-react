@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:10
+    - image: circleci/ruby:2.5-node
 
 version: 2
 jobs:
@@ -55,8 +55,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - restore-cache:
-          key: yarn-{{ checksum "yarn.lock" }}
+      - run: bundle install
       - run:
           name: Deploy To Staging
           command: bundle exec cap staging deploy
