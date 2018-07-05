@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const LabelWrapper = styled.div`
   ${props => css`
@@ -16,7 +16,7 @@ const LabelWrapper = styled.div`
   };
 `
 
-const Label = ({name, value, isRight}) =>
+const Label = ({ name, value, isRight }) =>
   <LabelWrapper isRight={isRight}>
     <div>{name}</div>
     <strong>{value}</strong>

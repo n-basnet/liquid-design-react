@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
@@ -58,7 +58,7 @@ const ContentCard = ({
     css={badge && 'position: relative;'}
     center
   >
-    <div style={{marginBottom: description ? '16px' : '43px'}}>
+    <div style={{ marginBottom: description ? '16px' : '43px' }}>
       <TitleWrapper>{title}</TitleWrapper>
       {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
     </div>

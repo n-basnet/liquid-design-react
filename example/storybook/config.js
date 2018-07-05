@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 
@@ -9,7 +9,7 @@ configureActions()
 import MODULES from './modules.json'
 
 function loadStories() {
-  MODULES.map(({name, type}) => {
+  MODULES.map(({ name, type }) => {
     require(`./${type}s/${name}.js`)
   })
 }

@@ -1,6 +1,6 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import Icon from '~/components/aux/Icon'
@@ -59,7 +59,7 @@ const Badge = ({
 }) =>
   <BadgeWrapper disabled={disabled} onCard={onCard}>
     <Fragment>
-      {icon && !iconOnRight && <Icon name={icon} style={{verticalAlign: 'middle'}} />}
+      {icon && !iconOnRight && <Icon name={icon} style={{ verticalAlign: 'middle' }} />}
       <BadgeTextWrapper padLeft={icon && !iconOnRight}>{text}</BadgeTextWrapper>
       {icon && iconOnRight && <Icon name={icon} style={{
         verticalAlign: 'middle',

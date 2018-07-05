@@ -6,7 +6,7 @@ import { Ratings } from 'liquid-design-react'
 import { getWrapper } from '../helpers'
 
 storiesOf('Ratings', module)
-  .addDecorator(getWrapper({padding: '20px'}))
+  .addDecorator(getWrapper({ padding: '20px' }))
   .add('default', () => (
     <Ratings rating={1.7} />
   ))

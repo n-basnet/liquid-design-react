@@ -28,6 +28,8 @@
     // allow imports mixed with non-import statements at top of file
     "import/first": 0,
 
-    "comma-dangle": ["error", "always-multiline"]
+    "comma-dangle": ["error", "always-multiline"],
+
+    "object-curly-spacing": ["error", "always"]
   }
 }

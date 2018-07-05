@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 import Icon from '~/components/aux/Icon'
 
 const StyledStep = styled.div`
@@ -33,7 +33,7 @@ const StyledStep = styled.div`
   };
 `
 
-const Step = ({halfIcon, dots, ...props}) =>
+const Step = ({ halfIcon, dots, ...props }) =>
   <StyledStep {...props} dots={dots}>
     <Icon name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`} size={20} />
   </StyledStep>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {times} from '~/utils/aux'
+import { times } from '~/utils/aux'
 import Step from '~/components/Ratings/Step'
 
 class Ratings extends React.Component {
@@ -19,7 +19,7 @@ class Ratings extends React.Component {
     const { onSubmit, rating, steps = 5, disabled, dots } = this.props
     const interactive = onSubmit && !disabled
     return (
-      <div onMouseLeave={() => this.setState({hovered: null})}>
+      <div onMouseLeave={() => this.setState({ hovered: null })}>
         {times(steps).map(v => (
           <Step
             key={v}
@@ -28,7 +28,7 @@ class Ratings extends React.Component {
             hovered={interactive && this.state.hovered !== null && v <= this.state.hovered}
             rated={rating >= v + 1}
             halfIcon={rating !== v + 1 && Math.round(rating) === v + 1}
-            onMouseEnter={interactive && (() => this.setState({hovered: v}))}
+            onMouseEnter={interactive && (() => this.setState({ hovered: v }))}
             onClick={interactive && (() => onSubmit(v + 1))}
           />
         ))}
