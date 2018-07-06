@@ -9,6 +9,8 @@ export const Base = styled.div`
   line-height: 1.4;
   * {
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 `
 
