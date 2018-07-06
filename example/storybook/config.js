@@ -3,10 +3,9 @@ import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 
 import { Theme } from 'liquid-design-react'
+import MODULES from './modules.json'
 
 configureActions()
-
-import MODULES from './modules.json'
 
 function loadStories() {
   MODULES.map(({ name, type }) => {
