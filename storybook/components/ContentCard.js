@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { ContentCard } from 'liquid-design-react'
+import { ContentCard } from '~'
 import { getBackgroundWrapper, chance } from '../helpers'
 
 const labels = [

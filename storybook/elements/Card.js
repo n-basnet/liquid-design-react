@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { getBackgroundWrapper, chance } from '../helpers'
-import { Card } from 'liquid-design-react'
+import { Card } from '~'
 
 storiesOf('Card', module)
   .addDecorator(getBackgroundWrapper('#e9e9e8'))

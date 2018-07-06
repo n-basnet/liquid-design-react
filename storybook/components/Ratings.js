@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Ratings } from 'liquid-design-react'
+import { Ratings } from '~'
 import { getWrapper } from '../helpers'
 
 storiesOf('Ratings', module)

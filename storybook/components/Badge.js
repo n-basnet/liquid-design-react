@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Badge, Theme } from 'liquid-design-react'
+import { Badge, Theme } from '~'
 import { getBackgroundWrapper } from '../helpers'
 
 storiesOf('Badge', module)

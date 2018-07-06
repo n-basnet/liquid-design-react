@@ -16,9 +16,10 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cm": "git-cz",
     "commitmsg": "commitlint -E GIT_PARAMS",
-    "lint": "eslint ./src ./example/storybook ./scripts",
+    "lint": "eslint ./src ./storybook ./scripts",
     "add-component": "node scripts/addComponent.js",
-    "build-example": "npm run build && cd example && npm run build"
+    "start-storybook": "start-storybook -p 9001 -c storybook",
+    "build-storybook": "build-storybook -c storybook -o out"
   },
   "dependencies": {
     "object-keys": "^1.0.12",
@@ -35,7 +36,9 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
-    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-actions": "^4.0.0-alpha.12",
+    "@storybook/addon-info": "^4.0.0-alpha.12",
+    "@storybook/react": "^4.0.0-alpha.12",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^23.2.0",
@@ -66,6 +69,7 @@
     "jest-cli": "^23.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-svg-loader": "^2.1.0",
     "rollup": "^0.54.0",
     "rollup-plugin-auto-external": "^1.2.0",
     "rollup-plugin-babel": "^3.0.3",

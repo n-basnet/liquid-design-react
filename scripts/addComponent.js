@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const inquirer = require('inquirer')
 const camelcase = require('camelcase')
 
-const storybookModules = require('../example/storybook/modules.json')
+const storybookModules = require('../storybook/modules.json')
 const fileTemplates = require('./addComponentTemplates.js')
 
 const COMPONENT_TYPES = ['component', 'element', 'module']
@@ -48,7 +48,7 @@ inquirer.prompt(QUESTIONS).then(({ name, type }) => {
       content: fileTemplates.testFileTemplate({ name: canonisedName }),
     },
     {
-      path: `example/storybook/${type}s/${canonisedName}.js`,
+      path: `storybook/${type}s/${canonisedName}.js`,
       content: fileTemplates.storybookFileTemplate({ name: canonisedName }),
     },
   ].map(file => {
@@ -65,5 +65,5 @@ export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
 
   // add to storybook
   const newStorybookModules = [...storybookModules, { name: canonisedName, type }]
-  saveFile('example/storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
+  saveFile('storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
 })

@@ -3,7 +3,7 @@ import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
 
-import { Theme } from 'liquid-design-react'
+import { Theme } from '~'
 import MODULES from './modules.json'
 
 configureActions()
@@ -17,6 +17,9 @@ function loadStories() {
 addDecorator(withInfo({
   inline: true,
   header: false,
+  propTablesExclude: [
+    Fragment,
+  ],
 }))
 
 addDecorator(storyFn => (
