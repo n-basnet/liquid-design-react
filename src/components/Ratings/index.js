@@ -16,10 +16,13 @@ class Ratings extends React.Component {
     dots: PropTypes.bool,
   }
   render () {
-    const { onSubmit, rating, steps = 5, disabled, dots } = this.props
+    const { onSubmit, rating = 0, steps = 5, disabled, dots } = this.props
     const interactive = onSubmit && !disabled
     return (
-      <div onMouseLeave={() => this.setState({ hovered: null })}>
+      <div
+        onMouseLeave={() => this.setState({ hovered: null })}
+        style={{ display: 'inline-block' }}
+      >
         {times(steps).map(v => (
           <Step
             key={v}

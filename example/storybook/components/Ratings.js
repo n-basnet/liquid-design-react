@@ -8,7 +8,10 @@ import { getWrapper } from '../helpers'
 storiesOf('Ratings', module)
   .addDecorator(getWrapper({ padding: '20px' }))
   .add('default', () => (
-    <Ratings rating={1.7} />
+    <Ratings />
+  ))
+  .add('active', () => (
+    <Ratings rating={2.5} />
   ))
   .add('interactive', () => (
     <Ratings
@@ -17,7 +20,7 @@ storiesOf('Ratings', module)
     />
   ))
   .add('disabled', () => (
-    <Ratings rating={3.5} disabled />
+    <Ratings disabled />
   ))
   .add('using dots', () => (
     <Ratings rating={3.5} dots />
