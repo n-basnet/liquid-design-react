@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { DEFAULT_THEME } from '~/utils/consts/themes'
-
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
@@ -35,10 +33,6 @@ const Card = styled.div`
   min-width: ${CARD_WIDTH * 0.8}px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
 `
-
-Card.defaultProps = {
-  theme: DEFAULT_THEME,
-}
 
 Card.propTypes = {
   center: PropTypes.bool,

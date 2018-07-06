@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { DEFAULT_THEME } from '~/utils/consts/themes'
 import Icon from '~/components/aux/Icon'
 
 const BadgeWrapper = styled.div`
@@ -36,10 +35,6 @@ const BadgeWrapper = styled.div`
   letter-spacing: 0.2px;
   cursor: default;
 `
-
-BadgeWrapper.defaultProps = {
-  theme: DEFAULT_THEME,
-}
 
 const BadgeTextWrapper = styled.span`
   ${props => props.padLeft && css`

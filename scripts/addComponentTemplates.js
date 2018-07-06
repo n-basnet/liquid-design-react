@@ -1,4 +1,4 @@
-const jsFileTemplate = ({name}) =>
+const jsFileTemplate = ({ name }) =>
   `
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -15,24 +15,27 @@ ${name}.propTypes = {
 export default ${name}
 `
 
-const testFileTemplate = ({name}) =>
+const testFileTemplate = ({ name }) =>
   `
 import React from 'react'
 import { shallow } from 'enzyme'
 
+import Theme from '~/Theme'
 import ${name} from '.'
 
 describe('${name}', () => {
   it('renders', () => {
     const wrapper = shallow(
-      <${name} />
+      <Theme>
+        <${name} />
+      </Theme>
     )
     expect(wrapper).toBeTruthy()
   })
 })
 `
 
-const storybookFileTemplate = ({name}) =>
+const storybookFileTemplate = ({ name }) =>
   `
 import React from 'react'
 import { storiesOf } from '@storybook/react'

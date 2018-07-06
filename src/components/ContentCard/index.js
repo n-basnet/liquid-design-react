@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getBackgroundImage } from '~/utils/styling'
 import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
@@ -37,10 +36,6 @@ const FeaturedWrapper = styled.div`
   font-size: 22px;
   font-weight: bold;
 `
-
-FeaturedWrapper.defaultProps = {
-  theme: DEFAULT_THEME,
-}
 
 const ContentCard = ({
   title,

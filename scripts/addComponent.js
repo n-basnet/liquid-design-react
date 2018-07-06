@@ -35,21 +35,21 @@ const saveFile = (path, content) => {
   })
 }
 
-inquirer.prompt(QUESTIONS).then(({name, type}) => {
-  const canonisedName = camelcase(name, {pascalCase: true})
+inquirer.prompt(QUESTIONS).then(({ name, type }) => {
+  const canonisedName = camelcase(name, { pascalCase: true })
 
   ;[
     {
       path: `src/${type}s/${canonisedName}/index.js`,
-      content: fileTemplates.jsFileTemplate({name: canonisedName}),
+      content: fileTemplates.jsFileTemplate({ name: canonisedName }),
     },
     {
       path: `src/${type}s/${canonisedName}/test.js`,
-      content: fileTemplates.testFileTemplate({name: canonisedName}),
+      content: fileTemplates.testFileTemplate({ name: canonisedName }),
     },
     {
       path: `example/storybook/${type}s/${canonisedName}.js`,
-      content: fileTemplates.storybookFileTemplate({name: canonisedName}),
+      content: fileTemplates.storybookFileTemplate({ name: canonisedName }),
     },
   ].map(file => {
     saveFile(file.path, file.content)
@@ -64,6 +64,6 @@ export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
 `)
 
   // add to storybook
-  const newStorybookModules = [...storybookModules, {name: canonisedName, type}]
+  const newStorybookModules = [...storybookModules, { name: canonisedName, type }]
   saveFile('example/storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
 })
