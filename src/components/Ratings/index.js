@@ -9,14 +9,20 @@ class Ratings extends React.Component {
     hovered: null,
   }
   static propTypes = {
+    /** Amount of stars/dots to display */
     steps: PropTypes.number,
     rating: PropTypes.number,
+    /** Submit handler - if provided, the component will be interactive */
     onSubmit: PropTypes.func,
     disabled: PropTypes.bool,
     dots: PropTypes.bool,
   }
+  static defaultProps = {
+    rating: 0,
+    steps: 5,
+  }
   render () {
-    const { onSubmit, rating = 0, steps = 5, disabled, dots } = this.props
+    const { onSubmit, rating, steps, disabled, dots } = this.props
     const interactive = onSubmit && !disabled
     return (
       <div
