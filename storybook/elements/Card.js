@@ -5,7 +5,7 @@ import { getBackgroundWrapper, chance } from '../helpers'
 import { Card } from '~'
 
 storiesOf('Card', module)
-  .addDecorator(getBackgroundWrapper('#e9e9e8'))
+  .addDecorator(getBackgroundWrapper('#f8f8fc'))
   .add('default', () => (
     <Card>{chance.paragraph({ sentences: 3 })}</Card>
   ))

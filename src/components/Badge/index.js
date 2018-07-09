@@ -40,9 +40,15 @@ const BadgeTextWrapper = styled.span`
   ${props => props.padLeft && css`
     padding-left: 8px;
   `};
+  ${props => props.onCard ? css`
+    padding-top: 5px;
+    padding-bottom: 5px;
+  ` : css`
+    padding-top: 1px;
+    padding-bottom: 1px;
+  `}
   display: inline-block;
   vertical-align: middle;
-  padding-top: 2px;
 `
 
 /**
@@ -58,12 +64,12 @@ const Badge = ({
   <BadgeWrapper disabled={disabled} onCard={onCard}>
     <Fragment>
       {icon && !iconOnRight && <Icon name={icon} style={{ verticalAlign: 'middle' }} />}
-      <BadgeTextWrapper padLeft={icon && !iconOnRight}>{text}</BadgeTextWrapper>
+      <BadgeTextWrapper padLeft={icon && !iconOnRight} onCard={onCard}>{text}</BadgeTextWrapper>
       {icon && iconOnRight && <Icon name={icon} style={{
         verticalAlign: 'middle',
         position: 'absolute',
         right: '25px',
-        top: '3px',
+        top: '7px',
       }} />}
     </Fragment>
   </BadgeWrapper>
