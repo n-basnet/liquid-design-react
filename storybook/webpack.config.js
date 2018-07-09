@@ -1,3 +1,5 @@
+const { getSVGOConfig } = require('../scripts/getSVGOConfig')
+
 module.exports = (baseConfig, env, defaultConfig) => {
   const svgRuleIndex = defaultConfig.module.rules.indexOf(
     defaultConfig.module.rules.find(v => v.loader && v.loader.indexOf('svg-url-loader') > 0)
@@ -12,7 +14,8 @@ module.exports = (baseConfig, env, defaultConfig) => {
       {
         loader: 'react-svg-loader',
         options: {
-          jsx: true, // true outputs JSX tags
+          jsx: true,
+          svgo: getSVGOConfig(),
         },
       },
     ],
