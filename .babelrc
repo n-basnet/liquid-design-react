@@ -10,7 +10,8 @@
     ["babel-plugin-root-import", {
       "rootPathSuffix": "src"
     }],
-    "babel-plugin-styled-components"
+    "babel-plugin-styled-components",
+    "add-react-displayname"
   ],
   "env": {
     "test": {
