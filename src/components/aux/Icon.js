@@ -8,6 +8,8 @@ import StarHalf from '~/graphics/svgs/star-half.svg'
 import Dot from '~/graphics/svgs/dot.svg'
 import DotHalf from '~/graphics/svgs/dot-half.svg'
 import ArrowRight from '~/graphics/svgs/arrow-right.svg'
+import Info from '~/graphics/svgs/info.svg'
+import Warning from '~/graphics/svgs/warning.svg'
 
 const ICONS = {
   favorite: Favorite,
@@ -17,20 +19,14 @@ const ICONS = {
   dot: Dot,
   dotHalf: DotHalf,
   arrowRight: ArrowRight,
+  info: Info,
+  warning: Warning,
 }
 
-const Icon = ({
-  name,
-  size = 14,
-  style = {},
-}) => {
+const Icon = ({ name, size = 14, style = {} }) => {
   const SVGIconComponent = ICONS[name]
   return (
-    <SVGIconComponent
-      width={`${size}px`}
-      height={`${size}px`}
-      style={style}
-    />
+    <SVGIconComponent width={`${size}px`} height={`${size}px`} style={style} />
   )
 }
 

@@ -14,6 +14,11 @@ const themeBaseColors = {
   white: COLORS.WHITE,
   grey: COLORS.GREY,
   darkGrey: COLORS.DARK_GREY,
+  vibrantYellow: COLORS.VIBRANT_YELLOW,
+  richRed: COLORS.RICH_RED,
+  sensitiveGrey: {
+    darkest: COLORS.SENSITIVE_GREY_DARKEST,
+  },
 }
 
 export const THEMES = {
