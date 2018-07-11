@@ -12,6 +12,10 @@
     "type": "element"
   },
   {
+    "name": "Icon",
+    "type": "element"
+  },
+  {
     "name": "Ratings",
     "type": "component"
   },

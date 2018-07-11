@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PlaceholderImage from '~/graphics/svgs/placeholder.svg'
+import PlaceholderImage from '~/graphics/svgIllustrations/placeholder.svg'
 
 const Placeholder = ({
   size = 150,

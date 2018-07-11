@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
-import Icon from '~/components/aux/Icon'
+import Icon from '~/elements/Icon'
 
 const StyledStep = styled.div`
   display: inline-block;
@@ -19,28 +19,29 @@ const StyledStep = styled.div`
 
   & > svg {
     ${props => css`
-        fill: ${props.theme.colors.darkGrey};
-        path ${!props.dots && '+ path'} {
-          fill: ${props.hovered ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
-        };
-        ${props => props.rated && css`
-          fill: ${props.theme.colors.primary.base};
-        `};
-        ${props => props.hovered && css`
-          fill: ${props.theme.colors.primary.dark};
-        `};
+      path ${!props.dots && '+ path'} {
+        fill: ${props.hovered ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
+      };
+      ${props => props.hovered && css`
+        fill: ${props.theme.colors.primary.dark} !important;
       `};
+    `};
   };
 `
 
 const Step = ({ halfIcon, dots, ...props }) =>
   <StyledStep {...props} dots={dots}>
-    <Icon name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`} size={20} />
+    <Icon
+      name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`}
+      size={20}
+      color={props.rated ? '' : 'darkGrey'}
+    />
   </StyledStep>
 
 Step.propTypes = {
   halfIcon: PropTypes.bool,
   dots: PropTypes.bool,
+  rated: PropTypes.bool,
 }
 
 export default Step

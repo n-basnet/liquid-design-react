@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/components/aux/Icon'
+import Icon from '~/elements/Icon'
 
 const BadgeWrapper = styled.div`
   ${props => css`
@@ -63,9 +63,9 @@ const Badge = ({
 }) =>
   <BadgeWrapper disabled={disabled} onCard={onCard}>
     <Fragment>
-      {icon && !iconOnRight && <Icon name={icon} style={{ verticalAlign: 'middle' }} />}
+      {icon && !iconOnRight && <Icon name={icon} color='black' style={{ verticalAlign: 'middle' }} />}
       <BadgeTextWrapper padLeft={icon && !iconOnRight} onCard={onCard}>{text}</BadgeTextWrapper>
-      {icon && iconOnRight && <Icon name={icon} style={{
+      {icon && iconOnRight && <Icon name={icon} color='black' style={{
         verticalAlign: 'middle',
         position: 'absolute',
         right: '25px',

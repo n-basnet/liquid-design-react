@@ -20,6 +20,6 @@ const optimiseFile = async fileName => {
   })
 }
 
-fs.readdirSync('src/graphics/svgs')
+fs.readdirSync('src/graphics/svgIcons')
   .filter(v => /\.svg$/.test(v))
-  .map(v => optimiseFile(`src/graphics/svgs/${v}`))
+  .map(v => optimiseFile(`src/graphics/svgIcons/${v}`))

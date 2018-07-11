@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/components/aux/Icon'
+import Icon from '~/elements/Icon'
 
 const bgColorSelector = props => {
   if (props.info) return props.theme.colors.vibrantYellow
@@ -15,9 +15,6 @@ const BubbleWrapper = styled.div`
   ${props => css`
     opacity: ${props.disabled ? 0.5 : 1};
     background-color: ${bgColorSelector(props)};
-    & svg {
-      fill: ${props.theme.colors.white};
-    }
   `};
   width: 32px;
   height: 32px;
@@ -38,8 +35,8 @@ const Label = styled.span`
 const Bubble = ({ disabled, icon, info, label, warning }) => (
   <BubbleWrapper disabled={disabled} info={info} warning={warning}>
     {label && <Label maxlength='2'>{label}</Label>}
-    {info && <Icon name='info' size={16} />}
-    {warning && <Icon name='warning' size={16} />}
+    {info && <Icon color='white' name='info' size={16} />}
+    {warning && <Icon color='white' name='warning' size={16} />}
   </BubbleWrapper>
 )
 
