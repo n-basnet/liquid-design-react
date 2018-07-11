@@ -4,8 +4,8 @@ import { storiesOf } from '@storybook/react'
 import { getBackgroundWrapper, chance } from '../helpers'
 import { Card } from '~'
 
-storiesOf('Card', module)
-  .addDecorator(getBackgroundWrapper('#f8f8fc'))
+storiesOf('Elements/Card', module)
+  .addDecorator(getBackgroundWrapper({ dark: true }))
   .add('default', () => (
     <Card>{chance.paragraph({ sentences: 3 })}</Card>
   ))

@@ -1,3 +1,5 @@
+const formatTypeString = v => `${v.replace(/^\w/, c => c.toUpperCase())}s`
+
 const jsFileTemplate = ({ name }) =>
   `
 import React from 'react'
@@ -35,14 +37,14 @@ describe('${name}', () => {
 })
 `
 
-const storybookFileTemplate = ({ name }) =>
+const storybookFileTemplate = ({ name, type }) =>
   `
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { ${name} } from '~'
 
-storiesOf('${name}', module)
+storiesOf('${formatTypeString(type)}/${name}', module)
   .add('default', () => (
     <${name} />
   ))

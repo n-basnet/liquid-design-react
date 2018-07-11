@@ -1,16 +1,11 @@
 import React from 'react'
 import Chance from 'chance'
 
-export const getBackgroundWrapper = (backgroundColor = '#fff') => storyFn =>
+export const getBackgroundWrapper = ({ dark } = {}) => storyFn =>
   <div style={{
-    backgroundColor,
-    padding: '30px',
+    backgroundColor: dark ? '#e9e9e8' : '#fff',
+    padding: '40px 40px 20px',
   }}>
-    {storyFn()}
-  </div>
-
-export const getWrapper = style => storyFn =>
-  <div style={style}>
     {storyFn()}
   </div>
 

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { getBackgroundWrapper } from '../helpers'
 import { Bubble } from '~'
 
-storiesOf('Bubble', module)
+storiesOf('Elements/Bubble', module)
   .addDecorator(getBackgroundWrapper())
   .add('default', () => <Bubble label='2' />)
   .add('info', () => <Bubble info />)

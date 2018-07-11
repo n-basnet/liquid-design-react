@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { Badge } from '~'
 import { getBackgroundWrapper } from '../helpers'
 
-storiesOf('Badge', module)
+storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
   .add('default', () => (
     <Badge text='Delivery in 3-4 days' />
@@ -20,7 +20,8 @@ storiesOf('Badge', module)
       position: 'relative',
       maxWidth: '288px',
       height: '50px',
-      marginLeft: '30px',
+      marginLeft: '40px',
+      marginBottom: '50px',
     }}>
       {storyFn()}
     </div>

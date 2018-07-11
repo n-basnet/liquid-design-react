@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { Breadcrumbs } from '~'
+import { getBackgroundWrapper } from '../helpers'
 
 const getItems = (modifier = {}) => [
   {
@@ -20,7 +21,8 @@ const getItems = (modifier = {}) => [
   },
 ]
 
-storiesOf('Breadcrumbs', module)
+storiesOf('Components/Breadcrumbs', module)
+  .addDecorator(getBackgroundWrapper())
   .add('default', () => (
     <Breadcrumbs
       items={getItems()}

@@ -49,7 +49,7 @@ inquirer.prompt(QUESTIONS).then(({ name, type }) => {
     },
     {
       path: `storybook/${type}s/${canonisedName}.js`,
-      content: fileTemplates.storybookFileTemplate({ name: canonisedName }),
+      content: fileTemplates.storybookFileTemplate({ name: canonisedName, type }),
     },
   ].map(file => {
     saveFile(file.path, file.content)

@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { Ratings } from '~'
-import { getWrapper } from '../helpers'
+import { getBackgroundWrapper } from '../helpers'
 
-storiesOf('Ratings', module)
-  .addDecorator(getWrapper({ padding: '20px' }))
+storiesOf('Components/Ratings', module)
+  .addDecorator(getBackgroundWrapper())
   .add('default', () => (
     <Ratings />
   ))

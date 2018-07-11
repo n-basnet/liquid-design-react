@@ -20,8 +20,8 @@ const defaultProps = {
   labels,
 }
 
-storiesOf('ContentCard', module)
-  .addDecorator(getBackgroundWrapper('#e9e9e8'))
+storiesOf('Components/ContentCard', module)
+  .addDecorator(getBackgroundWrapper({ dark: true }))
   .add('default', () => (
     <ContentCard {...defaultProps} />
   ))
