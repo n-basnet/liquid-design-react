@@ -63,7 +63,7 @@ const ContentCard = ({
     }
     {featured && <FeaturedWrapper>{featured}</FeaturedWrapper>}
     <Flex spread mt={featured ? '0px' : '20px'}>
-      {labels.map((label, i) => <Label {...label} key={i} isRight={i === 1} />)}
+      {labels.map((label, i) => <Label {...label} key={i} />)}
     </Flex>
     {badge && (
       <Badge

@@ -50,12 +50,6 @@ storiesOf('Components/ContentCard', module)
       active
     />
   ))
-  .add('with single label', () => (
-    <ContentCard
-      {...defaultProps}
-      labels={[labels[0]]}
-    />
-  ))
   .add('with description and featured', () => (
     <ContentCard
       {...defaultProps}

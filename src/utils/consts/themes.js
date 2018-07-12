@@ -7,7 +7,7 @@ const themeBase = {
   fontFamily: `'Lato', sans-serif`,
   transition: 'all 200ms',
   boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
-  doubleBoxShadow: `0 0 20px ${rgba(COLORS.BLACK, 0.2)}, 0 30px 60px ${rgba(COLORS.BLACK, 0.3)}`,
+  doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
 }
 
 const themeBaseColors = {

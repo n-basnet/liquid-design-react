@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const LabelWrapper = styled.div`
-  ${props => css`
-    text-align: ${props.isRight ? 'right' : 'left'};
-  `};
-  ${props => props.isRight && css`
-    margin-left: 30px;
-  `};
+  text-align: left;
+  &:nth-child(2) {
+    text-align: right;
+  };
   margin-top: 19px;
   font-size: 14px;
   div {
@@ -16,8 +14,8 @@ const LabelWrapper = styled.div`
   };
 `
 
-const Label = ({ name, value, isRight }) =>
-  <LabelWrapper isRight={isRight}>
+const Label = ({ name, value }) =>
+  <LabelWrapper>
     <div>{name}</div>
     <strong>{value}</strong>
   </LabelWrapper>
@@ -25,7 +23,6 @@ const Label = ({ name, value, isRight }) =>
 Label.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  isRight: PropTypes.bool,
 }
 
 export default Label

@@ -1,10 +1,19 @@
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
+import { media } from '~/utils/styling'
+
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
 const Card = styled.div`
+  display: inline-block;
+  margin: 10px;
+  padding: ${getCardPadding(CARD_WIDTH)}px;
+  max-width: ${CARD_WIDTH}px;
+  ${media.min.phone`
+    width: ${CARD_WIDTH}px;
+  `}
   ${props => props.active && css`
     box-shadow: ${props.theme.doubleBoxShadow};
   `}
@@ -18,7 +27,6 @@ const Card = styled.div`
   ${props => props.center && css`
     text-align: center;
   `}
-  ${props => props.css && css([props.css])}
   ${props => css`
     border-radius: ${props.theme.borderRadius};
     background-color: ${props.theme.colors.white};
@@ -27,16 +35,13 @@ const Card = styled.div`
       box-shadow: ${props.theme.boxShadow};
     };
   `}
-  display: inline-block;
-  margin: 10px;
-  max-width: ${CARD_WIDTH}px;
-  min-width: ${CARD_WIDTH * 0.8}px;
-  padding: ${getCardPadding(CARD_WIDTH)}px;
+  ${props => props.css && css([props.css])}
 `
 
 Card.propTypes = {
   center: PropTypes.bool,
   active: PropTypes.bool,
+  stacked: PropTypes.bool,
 }
 
 export default Card

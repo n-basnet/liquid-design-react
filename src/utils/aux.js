@@ -1,5 +1,1 @@
-import objectKeys from 'object-keys'
-
-const keys = Object.keys || objectKeys
-
-export const times = n => keys([...Array(n)]).map(v => parseInt(v))
+export const times = n => Object.keys([...Array(n)]).map(v => parseInt(v))
