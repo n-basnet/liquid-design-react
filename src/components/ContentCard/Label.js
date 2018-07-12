@@ -6,19 +6,20 @@ const LabelWrapper = styled.div`
   text-align: left;
   &:nth-child(2) {
     text-align: right;
-  };
+  }
   margin-top: 19px;
   font-size: 14px;
   div {
     font-size: 12px;
-  };
+  }
 `
 
-const Label = ({ name, value }) =>
+const Label = ({ name, value }) => (
   <LabelWrapper>
     <div>{name}</div>
     <strong>{value}</strong>
   </LabelWrapper>
+)
 
 Label.propTypes = {
   name: PropTypes.string.isRequired,

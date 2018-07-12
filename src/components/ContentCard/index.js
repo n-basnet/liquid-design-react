@@ -31,7 +31,7 @@ const DescriptionWrapper = styled.div`
 const FeaturedWrapper = styled.div`
   ${props => css`
     color: ${props.theme.colors.primary.base};
-  `}
+  `};
   margin-top: 20px;
   font-size: 22px;
   font-weight: bold;
@@ -46,7 +46,7 @@ const ContentCard = ({
   stacked,
   active,
   badge,
-}) =>
+}) => (
   <Card
     active={active}
     stacked={stacked}
@@ -57,10 +57,7 @@ const ContentCard = ({
       <TitleWrapper>{title}</TitleWrapper>
       {description && <DescriptionWrapper>{description}</DescriptionWrapper>}
     </div>
-    {imagePath
-      ? <ImageWrapper src={imagePath} />
-      : <Placeholder />
-    }
+    {imagePath ? <ImageWrapper src={imagePath} /> : <Placeholder />}
     {featured && <FeaturedWrapper>{featured}</FeaturedWrapper>}
     <Flex spread mt={featured ? '0px' : '20px'}>
       {labels.map((label, i) => <Label {...label} key={i} />)}
@@ -74,6 +71,7 @@ const ContentCard = ({
       />
     )}
   </Card>
+)
 
 ContentCard.propTypes = {
   title: PropTypes.string.isRequired,

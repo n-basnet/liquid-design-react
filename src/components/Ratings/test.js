@@ -5,9 +5,7 @@ import Ratings from '.'
 
 describe('Ratings', () => {
   it('renders', () => {
-    const wrapper = shallow(
-      <Ratings />
-    )
+    const wrapper = shallow(<Ratings />)
     expect(wrapper).toBeTruthy()
   })
 })

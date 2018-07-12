@@ -21,7 +21,7 @@ class Ratings extends React.Component {
     rating: 0,
     steps: 5,
   }
-  render () {
+  render() {
     const { onSubmit, rating, steps, disabled, dots } = this.props
     const interactive = onSubmit && !disabled
     return (
@@ -34,7 +34,11 @@ class Ratings extends React.Component {
             key={v}
             disabled={disabled}
             dots={dots}
-            hovered={interactive && this.state.hovered !== null && v <= this.state.hovered}
+            hovered={
+              interactive &&
+              this.state.hovered !== null &&
+              v <= this.state.hovered
+            }
             rated={rating >= v + 1}
             halfIcon={rating !== v + 1 && Math.round(rating) === v + 1}
             onMouseEnter={interactive && (() => this.setState({ hovered: v }))}

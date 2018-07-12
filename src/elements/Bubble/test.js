@@ -5,9 +5,7 @@ import Bubble from '.'
 
 describe('Bubble', () => {
   it('renders', () => {
-    const wrapper = shallow(
-      <Bubble />
-    )
+    const wrapper = shallow(<Bubble />)
     expect(wrapper).toBeTruthy()
   })
 })

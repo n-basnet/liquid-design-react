@@ -5,7 +5,7 @@ export const Flex = system(
   { blacklist: ['spread'] },
   props => ({
     display: 'flex',
-    ...props.spread && { justifyContent: 'space-between' },
+    ...(props.spread && { justifyContent: 'space-between' }),
   }),
   'space'
 )

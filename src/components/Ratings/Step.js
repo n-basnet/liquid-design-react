@@ -10,26 +10,32 @@ const StyledStep = styled.div`
   height: 20px;
   margin-right: 10px;
 
-  ${props => props.onClick && css`
-    cursor: pointer;
-  `};
-  ${props => props.disabled && css`
-    opacity: 0.6;
-  `};
+  ${props =>
+    props.onClick &&
+    css`
+      cursor: pointer;
+    `};
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.6;
+    `};
 
   & > svg {
     ${props => css`
       path ${!props.dots && '+ path'} {
-        fill: ${props.hovered ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
-      };
-      ${props => props.hovered && css`
-        fill: ${props.theme.colors.primary.dark} !important;
-      `};
+        fill: ${props.theme.colors.primary[props.hovered ? 'dark' : 'base']};
+      }
+      ${props =>
+    props.hovered &&
+        css`
+          fill: ${props.theme.colors.primary.dark} !important;
+        `};
     `};
-  };
+  }
 `
 
-const Step = ({ halfIcon, dots, ...props }) =>
+const Step = ({ halfIcon, dots, ...props }) => (
   <StyledStep {...props} dots={dots}>
     <Icon
       name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`}
@@ -37,6 +43,7 @@ const Step = ({ halfIcon, dots, ...props }) =>
       color={props.rated ? '' : 'darkGrey'}
     />
   </StyledStep>
+)
 
 Step.propTypes = {
   halfIcon: PropTypes.bool,

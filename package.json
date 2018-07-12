@@ -15,8 +15,8 @@
     "prepare": "yarn run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cm": "git-cz",
-    "commitmsg": "commitlint -E GIT_PARAMS",
     "lint": "eslint ./src ./storybook ./scripts",
+    "format": "prettier-standard",
     "add-component": "node scripts/addComponent.js",
     "prepare-svgs": "node scripts/prepareSVGs.js",
     "start-storybook": "start-storybook -p 9001 -c storybook",
@@ -65,9 +65,11 @@
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "fs-extra": "^6.0.1",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0-rc.13",
     "inquirer": "^6.0.0",
     "jest-cli": "^23.2.0",
+    "lint-staged": "^7.2.0",
+    "prettier-standard": "^8.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-svg-loader": "^2.1.0",
@@ -87,6 +89,12 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "lint-staged": {
+    "*.js": [
+      "npm run format",
+      "git add"
+    ]
+  },
   "jest": {
     "setupFiles": [
       "<rootDir>/src/setupTests.js"
@@ -97,5 +105,11 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  }
 }

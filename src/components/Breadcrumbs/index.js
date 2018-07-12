@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 
 import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
 
-const Breadcrumbs = ({
-  items = [],
-  active,
-}) =>
+const Breadcrumbs = ({ items = [], active }) => (
   <div>
-    {items.map((v, i) => <SingleBreadcrumb key={i} active={i === active} {...v} />)}
+    {items.map((v, i) => (
+      <SingleBreadcrumb key={i} active={i === active} {...v} />
+    ))}
   </div>
+)
 
 Breadcrumbs.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(SingleBreadcrumb.propTypes)),

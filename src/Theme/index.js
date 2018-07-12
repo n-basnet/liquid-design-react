@@ -14,13 +14,17 @@ export const Base = styled.div`
   }
 `
 
-const Theme = ({ themeName, ...props }) =>
-  <ThemeProvider theme={THEMES[themeName] || DEFAULT_THEME} >
+const Theme = ({ themeName, ...props }) => (
+  <ThemeProvider theme={THEMES[themeName] || DEFAULT_THEME}>
     <Fragment>
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' />
+      <link
+        href='https://fonts.googleapis.com/css?family=Lato:400,900'
+        rel='stylesheet'
+      />
       <Base {...props} />
     </Fragment>
   </ThemeProvider>
+)
 
 Theme.propTypes = {
   themeName: PropTypes.oneOf(Object.keys(THEMES)),

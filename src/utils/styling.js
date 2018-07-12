@@ -11,15 +11,16 @@ const SCREEN_SIZES = {
   phone: 576,
 }
 
-const getMediaQuery = (mediaQueryKey) => Object.keys(SCREEN_SIZES).reduce((acc, label) => {
-  acc[label] = (...args) => css`
-    @media (${mediaQueryKey}: ${SCREEN_SIZES[label]}px) {
-      ${css(...args)}
-    }
-  `
+const getMediaQuery = mediaQueryKey =>
+  Object.keys(SCREEN_SIZES).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+      @media (${mediaQueryKey}: ${SCREEN_SIZES[label]}px) {
+        ${css(...args)};
+      }
+    `
 
-  return acc
-}, {})
+    return acc
+  }, {})
 
 export const media = {
   min: getMediaQuery('min-width'),
