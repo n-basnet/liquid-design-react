@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
-import Icon from '~/elements/Icon'
+import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 
 const StyledStep = styled.div`
   display: inline-block;
@@ -21,7 +21,7 @@ const StyledStep = styled.div`
       opacity: 0.6;
     `};
 
-  & > svg {
+  .${ICON_CLASSNAME} svg {
     ${props => css`
       path ${!props.dots && '+ path'} {
         fill: ${props.theme.colors.primary[props.hovered ? 'dark' : 'base']};
@@ -29,7 +29,7 @@ const StyledStep = styled.div`
       ${props =>
     props.hovered &&
         css`
-          fill: ${props.theme.colors.primary.dark} !important;
+          fill: ${props.theme.colors.primary.dark};
         `};
     `};
   }

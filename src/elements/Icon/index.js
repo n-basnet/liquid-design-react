@@ -1,8 +1,31 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTheme } from 'styled-components'
+import styled, { css, withTheme } from 'styled-components'
 
 import ICONS from '~/elements/Icon/iconsList'
+import { GLOBAL_CLASSNAME_PREFIX } from '~/utils/consts'
+
+export const ICON_CLASSNAME = `${GLOBAL_CLASSNAME_PREFIX}Icon`
+
+const IconWrapper = styled.div`
+  display: inline-block;
+  position: relative;
+  ${props => css`
+    ${props.onClick && css`
+      cursor: pointer;
+    `};
+    &, svg {
+      width: ${props.dimensions.width};
+      height: ${props.dimensions.height};
+    };
+    svg {
+      fill: ${props.svgFill};
+      position: absolute;
+      top: 0;
+      left: 0;
+    };
+  `};
+`
 
 // exported separately for testing and storybook (without `withTheme` decorator)
 export const Icon = ({
@@ -22,16 +45,18 @@ export const Icon = ({
   const alternativeColor = theme.colors[color] || color
   const fill = alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
   return (
-    <SVGIconComponent
-      width={`${size}${unit}`}
-      height={`${size}${unit}`}
-      style={{
-        fill,
-        ...onClick && { cursor: 'pointer' },
-        ...style,
-      }}
+    <IconWrapper
+      className={ICON_CLASSNAME}
+      svgFill={fill}
       onClick={onClick}
-    />
+      dimensions={{
+        width: `${size}${unit}`,
+        height: `${size}${unit}`,
+      }}
+      style={style}
+    >
+      <SVGIconComponent />
+    </IconWrapper>
   )
 }
 

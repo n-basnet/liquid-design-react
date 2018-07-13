@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/elements/Icon'
+import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 
 const StyledSingleBreadcrumb = styled.div`
   display: inline-block;
   padding: 7px 5px;
-  svg {
+  .${ICON_CLASSNAME} {
     transform: translate(-1px, 1px);
     vertical-align: middle;
   }
