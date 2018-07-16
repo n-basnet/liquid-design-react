@@ -20,7 +20,7 @@ import React, { Component } from 'react'
 import { Badge, Theme } from 'liquid-design-react'
 
 class Example extends Component {
-  render () {
+  render() {
     return (
       <Theme>
         <Badge text='Hello' />
@@ -33,10 +33,6 @@ class Example extends Component {
 ## Contributing
 
 see [CONTRIBUTING.md](CONTRIBUTING.md)
-
-### SVG icons
-
-are optimised using [svgo](https://github.com/svg/svgo) - run `$ npm run prepare-svgs` to optimise files stored in `src/graphics/svgIcons`
 
 ## License
 
