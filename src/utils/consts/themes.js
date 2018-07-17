@@ -25,6 +25,7 @@ const themeBaseColors = {
   sensitiveGrey: {
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
+  richBlack: COLORS.RICH_BLACK,
 }
 
 export const THEMES = {

@@ -26,5 +26,9 @@
   {
     "name": "Bubble",
     "type": "element"
+  },
+  {
+    "name": "Quote",
+    "type": "component"
   }
 ]

@@ -8,4 +8,5 @@ export default {
   GREY: '#f5f5f5',
   DARK_GREY: '#e9e9ed',
   SENSITIVE_GREY_DARKEST: '#d5d5d9',
+  RICH_BLACK: '#1b1b25',
 }
