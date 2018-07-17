@@ -20,6 +20,7 @@ const themeBase = {
 }
 
 const themeBaseColors = {
+  black: COLORS.BLACK,
   white: COLORS.WHITE,
   grey: COLORS.GREY,
   darkGrey: COLORS.DARK_GREY,

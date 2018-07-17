@@ -14,8 +14,9 @@ const BadgeWrapper = styled.div`
       ${!props.disabled &&
         css`
           background-color: ${props.theme.colors.secondary.dark};
-        `}
-    },
+        `};
+    }
+    cursor: ${props.disabled ? 'not-allowed' : 'default'};
   `};
   ${props =>
     props.onCard
@@ -35,7 +36,6 @@ const BadgeWrapper = styled.div`
   display: inline-block;
   font-size: 12px;
   letter-spacing: 0.2px;
-  cursor: default;
 `
 
 const BadgeTextWrapper = styled.span`

@@ -6,23 +6,21 @@ import { getBackgroundWrapper } from '../helpers'
 
 storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => (
-    <Badge text='Delivery in 3-4 days' />
-  ))
-  .add('disabled', () => (
-    <Badge text='Delivery in 3-4 days' disabled />
-  ))
+  .add('default', () => <Badge text='Delivery in 3-4 days' />)
+  .add('disabled', () => <Badge text='Delivery in 3-4 days' disabled />)
   .add('default and icon', () => (
     <Badge text='Delivery in 3-4 days' icon='circleX' />
   ))
   .addDecorator(storyFn => (
-    <div style={{
-      position: 'relative',
-      maxWidth: '288px',
-      height: '50px',
-      marginLeft: '40px',
-      marginBottom: '50px',
-    }}>
+    <div
+      style={{
+        position: 'relative',
+        maxWidth: '300px',
+        height: '50px',
+        marginLeft: '40px',
+        marginBottom: '50px',
+      }}
+    >
       {storyFn()}
     </div>
   ))
@@ -34,4 +32,13 @@ storiesOf('Components/Badge', module)
   ))
   .add('on a ContentCard - right icon', () => (
     <Badge text='Delivery in 3-4 days' onCard iconOnRight icon='circleX' />
+  ))
+  .add('on a ContentCard - right icon disabled', () => (
+    <Badge
+      text='Delivery in 3-4 days'
+      onCard
+      iconOnRight
+      disabled
+      icon='circleX'
+    />
   ))
