@@ -3,7 +3,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: docker/Dockerfile.staging
+      dockerfile: docker/Dockerfile.integration
     command: nginx
     hostname: "netguru.merck-react.integration.web"
     labels:
