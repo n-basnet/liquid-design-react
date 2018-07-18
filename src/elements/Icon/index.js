@@ -11,26 +11,28 @@ const IconWrapper = styled.div`
   display: inline-block;
   position: relative;
   ${props => css`
-    ${props.onClick && css`
-      cursor: pointer;
-    `};
-    &, svg {
+    ${props.onClick &&
+      css`
+        cursor: pointer;
+      `};
+    &,
+    svg {
       width: ${props.dimensions.width};
       height: ${props.dimensions.height};
-    };
+    }
     svg {
       fill: ${props.svgFill};
       position: absolute;
       top: 0;
       left: 0;
-    };
+    }
   `};
 `
 
 // exported separately for testing and storybook (without `withTheme` decorator)
 export const Icon = ({
   name,
-  size = 14,
+  size = 24,
   style = {},
   theme,
   secondary,
@@ -43,7 +45,8 @@ export const Icon = ({
     return <code>invalid icon name</code>
   }
   const alternativeColor = theme.colors[color] || color
-  const fill = alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
+  const fill =
+    alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
   return (
     <IconWrapper
       className={ICON_CLASSNAME}

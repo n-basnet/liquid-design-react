@@ -44,10 +44,12 @@ const GLYPHS = [
 const IconSet = ({ iconList, iconProps = {} }) => (
   <Fragment>
     {iconList.map((name, i) => (
-      <div key={i} style={{ display: 'inline-block', margin: '10px', width: '130px' }}>
+      <div
+        key={i}
+        style={{ display: 'inline-block', margin: '10px', width: '130px' }}
+      >
         <IconWithTheme
           name={name}
-          size={20}
           onClick={action('click on icon')}
           {...iconProps}
         />
@@ -69,9 +71,7 @@ storiesOf('Elements/Icon', module)
       maxPropObjectKeys: 0,
     },
   })
-  .add('single Icon', () => (
-    <Icon name='bottle' size={20} theme={DEFAULT_THEME} />
-  ))
+  .add('single Icon', () => <Icon name='bottle' theme={DEFAULT_THEME} />)
   .addDecorator(storyFn => (
     <Fragment>
       {/* just to make addon-info aware of the original `Icon` props */}
@@ -82,15 +82,10 @@ storiesOf('Elements/Icon', module)
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [
-        IconSet,
-        Fragment,
-      ],
+      propTablesExclude: [IconSet, Fragment],
     },
   })
-  .add('default', () => (
-    <IconSet iconList={ICONS} />
-  ))
+  .add('default', () => <IconSet iconList={ICONS} />)
   .add('secondary color', () => (
     <IconSet iconList={ICONS} iconProps={{ secondary: true }} />
   ))
@@ -100,6 +95,4 @@ storiesOf('Elements/Icon', module)
   .add('custom color', () => (
     <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />
   ))
-  .add('glyphs', () => (
-    <IconSet iconList={GLYPHS} />
-  ))
+  .add('glyphs', () => <IconSet iconList={GLYPHS} />)
