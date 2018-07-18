@@ -29,10 +29,12 @@ const IconWrapper = styled.div`
   `};
 `
 
+export const DEFAULT_SIZE = 24
+
 // exported separately for testing and storybook (without `withTheme` decorator)
 export const Icon = ({
   name,
-  size = 24,
+  size = DEFAULT_SIZE,
   style = {},
   theme,
   secondary,
@@ -41,7 +43,7 @@ export const Icon = ({
   onClick,
 }) => {
   const SVGIconComponent = ICONS[name]
-  if (!SVGIconComponent) {
+  if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }
   const alternativeColor = theme.colors[color] || color

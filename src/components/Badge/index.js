@@ -66,7 +66,12 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
     <Fragment>
       {icon &&
         !iconOnRight && (
-        <Icon color='black' name={icon} style={{ verticalAlign: 'middle' }} />
+        <Icon
+          color='black'
+          size={14}
+          name={icon}
+          style={{ verticalAlign: 'middle' }}
+        />
       )}
       <BadgeTextWrapper padLeft={icon && !iconOnRight} onCard={onCard}>
         {text}
@@ -75,6 +80,7 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
         iconOnRight && (
         <Icon
           color='black'
+          size={14}
           name={icon}
           style={{
             verticalAlign: 'middle',
