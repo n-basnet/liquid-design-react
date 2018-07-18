@@ -41,8 +41,10 @@ class Ratings extends React.Component {
             }
             rated={rating >= v + 1}
             halfIcon={rating !== v + 1 && Math.round(rating) === v + 1}
-            onMouseEnter={interactive && (() => this.setState({ hovered: v }))}
-            onClick={interactive && (() => onSubmit(v + 1))}
+            onMouseEnter={
+              interactive ? () => this.setState({ hovered: v }) : undefined
+            }
+            onClick={interactive ? () => onSubmit(v + 1) : undefined}
           />
         ))}
       </div>
