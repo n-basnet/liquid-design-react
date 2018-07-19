@@ -15,9 +15,9 @@ const getStackedHoverBoxShadow = theme => `
 `
 
 const getStackedBoxShadow = (theme, hover) => `
-  1px 1px 0 0 ${theme.colors.grey},
+  1px 1px 0 0 ${theme.colors.grey.aux},
   3px 3px 0 0 ${theme.colors.white},
-  4px 4px 0 0 ${theme.colors.grey},
+  4px 4px 0 0 ${theme.colors.grey.aux},
   6px 6px 0 0 ${theme.colors.white}
   ${hover ? `, ${getStackedHoverBoxShadow(theme)}` : ''}
 `
