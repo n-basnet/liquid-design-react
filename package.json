@@ -10,8 +10,8 @@
   "scripts": {
     "test": "cross-env CI=1 jest --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/*.js",
     "test:watch": "jest --watch",
-    "build": "rollup -c",
-    "start": "rollup -c -w",
+    "build": "BABEL_ENV=main rollup -c",
+    "start": "BABEL_ENV=main rollup -c -w",
     "prepare": "yarn run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cm": "git-cz",
@@ -19,14 +19,18 @@
     "format": "prettier-standard",
     "add-component": "node scripts/addComponent.js",
     "prepare-svgs": "node scripts/prepareSVGs.js",
-    "start-storybook": "start-storybook -p 9001 -c storybook",
-    "build-storybook": "build-storybook -c storybook -o out"
+    "start-storybook": "BABEL_ENV=main start-storybook -p 9001 -c storybook",
+    "build-storybook": "BABEL_ENV=main build-storybook -c storybook -o out"
   },
   "dependencies": {
+    "animate.css": "^3.6.1",
     "polished": "^1.9.2",
+    "ramda": "^0.25.0",
+    "react-animated-transitions": "^0.0.6",
+    "react-transition-group": "^2.4.0",
     "styled-components": "^3.3.3",
-    "styled-system": "^2.3.2",
-    "system-components": "^2.2.2"
+    "system-components": "^2.2.2",
+    "uniqid": "^5.0.3"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
@@ -44,6 +48,7 @@
     "babel-jest": "^23.2.0",
     "babel-plugin-add-react-displayname": "^0.0.5",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-ramda": "^1.6.1",
     "babel-plugin-root-import": "^6.1.0",
     "babel-plugin-styled-components": "^1.5.1",
     "babel-preset-env": "^1.6.0",
@@ -100,7 +105,7 @@
       "<rootDir>/src/setupTests.js"
     ],
     "moduleNameMapper": {
-      "\\.(svg)$": "<rootDir>/src/empty-module.js"
+      "\\.(svg|css)$": "<rootDir>/src/empty-module.js"
     }
   },
   "files": [

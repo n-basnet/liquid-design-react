@@ -25,4 +25,10 @@ const getMediaQuery = mediaQueryKey =>
 export const media = {
   min: getMediaQuery('min-width'),
   max: getMediaQuery('max-width'),
+  customMin: breakpoint => (...args) =>
+    css`
+      @media (min-width: ${breakpoint}px) {
+        ${css(...args)};
+      }
+    `,
 }

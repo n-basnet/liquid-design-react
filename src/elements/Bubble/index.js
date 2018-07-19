@@ -6,8 +6,8 @@ import Icon from '~/elements/Icon'
 import { fadeIn } from '~/utils/keyframes'
 
 const bgColorSelector = props => {
-  if (props.info) return props.theme.colors.vibrantYellow
-  if (props.warning) return props.theme.colors.richRed
+  if (props.info) return props.theme.colors.vibrantYellow.base
+  if (props.warning) return props.theme.colors.richRed.base
   if (props.disabled) return props.theme.colors.sensitiveGrey.darkest
   else return props.theme.colors.primary.base
 }

@@ -1,8 +1,13 @@
 export default {
   VIBRANT_CYAN: '#2DBECD',
+  VIBRANT_CYAN_DARK: '#29abb9',
   VIBRANT_YELLOW: '#FFC832',
+  VIBRANT_YELLOW_DARK: '#f3be2f',
   DEEP_PURPLE: '#503291',
   RICH_RED: '#E61E50',
+  RICH_RED_DARK: '#cf1b48',
+  RICH_BLUE: '#0f69af',
+  RICH_BLUE_DARK: '#0e5f9e',
   WHITE: '#fff',
   BLACK: '#000',
   GREY: '#f5f5f5',

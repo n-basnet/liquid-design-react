@@ -14,14 +14,27 @@ const themeBase = {
     COLORS.BLACK,
     0.05
   )}`,
+  zIndex: {
+    notifications: 10,
+  },
 }
 
 const themeBaseColors = {
   white: COLORS.WHITE,
   grey: COLORS.GREY,
   darkGrey: COLORS.DARK_GREY,
-  vibrantYellow: COLORS.VIBRANT_YELLOW,
-  richRed: COLORS.RICH_RED,
+  vibrantYellow: {
+    base: COLORS.VIBRANT_YELLOW,
+    dark: COLORS.VIBRANT_YELLOW_DARK,
+  },
+  richRed: {
+    base: COLORS.RICH_RED,
+    dark: COLORS.RICH_RED_DARK,
+  },
+  richBlue: {
+    base: COLORS.RICH_BLUE,
+    dark: COLORS.RICH_BLUE_DARK,
+  },
   sensitiveGrey: {
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
@@ -33,11 +46,11 @@ export const THEMES = {
     colors: {
       primary: {
         base: COLORS.VIBRANT_CYAN,
-        dark: darken(0.12, COLORS.VIBRANT_CYAN),
+        dark: COLORS.VIBRANT_CYAN_DARK,
       },
       secondary: {
         base: COLORS.VIBRANT_YELLOW,
-        dark: darken(0.12, COLORS.VIBRANT_YELLOW),
+        dark: COLORS.VIBRANT_YELLOW_DARK,
       },
       ...themeBaseColors,
     },
@@ -51,7 +64,7 @@ export const THEMES = {
       },
       secondary: {
         base: COLORS.VIBRANT_CYAN,
-        dark: darken(0.12, COLORS.VIBRANT_CYAN),
+        dark: COLORS.VIBRANT_CYAN_DARK,
       },
       ...themeBaseColors,
     },
