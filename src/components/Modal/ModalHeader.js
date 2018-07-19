@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/elements/Icon'
+import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 
 const ModalHeaderWrapper = styled.div`
   display: flex;
@@ -12,6 +12,9 @@ const ModalHeaderWrapper = styled.div`
   ${props => css`
     background-color: ${props.theme.colors.grey.base};
   `};
+  .${ICON_CLASSNAME} {
+    transform: translateY(-2px);
+  }
 `
 
 const ModalHeader = ({ label, onClose }) => (
