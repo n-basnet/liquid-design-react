@@ -34,5 +34,9 @@
   {
     "name": "Notifications",
     "type": "component"
+  },
+  {
+    "name": "Modal",
+    "type": "component"
   }
 ]

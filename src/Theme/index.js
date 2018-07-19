@@ -30,7 +30,7 @@ const Theme = ({ themeName, ...props }) => (
 
 Theme.propTypes = {
   themeName: PropTypes.oneOf(Object.keys(THEMES)),
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default Theme

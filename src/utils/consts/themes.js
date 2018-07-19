@@ -22,7 +22,10 @@ const themeBase = {
 const themeBaseColors = {
   black: COLORS.BLACK,
   white: COLORS.WHITE,
-  grey: COLORS.GREY,
+  grey: {
+    base: COLORS.GREY,
+    aux: COLORS.AUX_GREY,
+  },
   darkGrey: COLORS.DARK_GREY,
   vibrantYellow: {
     base: COLORS.VIBRANT_YELLOW,
