@@ -4,6 +4,11 @@ import PropTypes from 'prop-types'
 import { times } from '~/utils/aux'
 import Step from '~/components/Ratings/Step'
 
+export const roundToNearest = (value, number = 0.5) => {
+  const remainder = value % number
+  return remainder > 0 ? value - remainder + number : value
+}
+
 class Ratings extends React.Component {
   state = {
     hovered: null,
@@ -24,29 +29,39 @@ class Ratings extends React.Component {
   render() {
     const { onSubmit, rating, steps, disabled, dots } = this.props
     const interactive = onSubmit && !disabled
+    const roundedRating = roundToNearest(rating)
+    const isHalf = index =>
+      roundedRating !== index && Math.round(roundedRating) === index
     return (
       <div
         onMouseLeave={() => this.setState({ hovered: null })}
         style={{ display: 'inline-block' }}
       >
-        {times(steps).map(v => (
-          <Step
-            key={v}
-            disabled={disabled}
-            dots={dots}
-            hovered={
-              interactive &&
-              this.state.hovered !== null &&
-              v <= this.state.hovered
-            }
-            rated={rating >= v + 1}
-            halfIcon={rating !== v + 1 && Math.round(rating) === v + 1}
-            onMouseEnter={
-              interactive ? () => this.setState({ hovered: v }) : undefined
-            }
-            onClick={interactive ? () => onSubmit(v + 1) : undefined}
-          />
-        ))}
+        {times(steps).map(index => {
+          const normalisedIndex = index + 1
+          return (
+            <Step
+              key={index}
+              disabled={disabled}
+              dots={dots}
+              hovered={
+                interactive &&
+                this.state.hovered !== null &&
+                index <= this.state.hovered
+              }
+              rated={roundedRating >= normalisedIndex}
+              halfIcon={isHalf(normalisedIndex)}
+              onMouseEnter={
+                interactive
+                  ? () => this.setState({ hovered: index })
+                  : undefined
+              }
+              onClick={
+                interactive ? () => onSubmit(normalisedIndex) : undefined
+              }
+            />
+          )
+        })}
       </div>
     )
   }
