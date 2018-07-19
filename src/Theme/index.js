@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import styled, { ThemeProvider } from 'styled-components'
 
 import { THEMES, DEFAULT_THEME } from '~/utils/consts/themes'
+import styleReset from '~/Theme/style-reset'
 
 export const Base = styled.div`
   font-family: ${props => props.theme.fontFamily};
   line-height: 1.4;
+  ${styleReset};
   * {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;

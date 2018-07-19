@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Quote } from '~'
+import { getBackgroundWrapper } from '../helpers'
 
 const author = 'Neville Brody'
 const imagePath =
@@ -12,16 +13,19 @@ const quotationV2 =
   'Digital design is like painting, except the paint never dries.'
 const source = 'http://merck.design'
 
-storiesOf('Components/Quote/Default Quote', module).add('default', () => (
-  <Quote
-    author={author}
-    imagePath={imagePath}
-    source={source}
-    quotation={quotation}
-  />
-))
+storiesOf('Components/Quote/Default Quote', module)
+  .addDecorator(getBackgroundWrapper())
+  .add('default', () => (
+    <Quote
+      author={author}
+      imagePath={imagePath}
+      source={source}
+      quotation={quotation}
+    />
+  ))
 
 storiesOf('Components/Quote/Typographic Quote', module)
+  .addDecorator(getBackgroundWrapper())
   .add('Big', () => (
     <Quote author={author} big source={source} quotation={quotationV2} />
   ))
