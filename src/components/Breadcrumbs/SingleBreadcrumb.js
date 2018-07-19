@@ -23,6 +23,7 @@ const StyledSingleBreadcrumb = styled.div`
       `};
     ${props.active &&
       css`
+        padding-right: 0;
         font-weight: bold;
         color: ${props.theme.colors.primary.base};
       };
