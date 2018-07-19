@@ -1,6 +1,6 @@
 {
-  "name": "liquid-design-react",
-  "version": "1.0.0",
+  "name": "@netguru-team-m/liquid-design-react",
+  "version": "1.0.2",
   "description": "",
   "author": "",
   "license": "MIT",
@@ -120,7 +120,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "husky": {
     "hooks": {
