@@ -6,7 +6,9 @@ import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 
 const StyledSingleBreadcrumb = styled.div`
   display: inline-block;
-  padding: 7px 5px;
+  padding: 7px 3px;
+  line-height: 1;
+
   .${ICON_CLASSNAME} {
     transform: translate(-1px, 1px);
     vertical-align: middle;
@@ -25,14 +27,6 @@ const StyledSingleBreadcrumb = styled.div`
         color: ${props.theme.colors.primary.base};
       };
     `};
-    ${props.active &&
-      css`
-        font-weight: bold;
-        color: ${props.theme.colors.primary.base};
-        span {
-          transform: translateY(0.5px);
-        }
-      `};
     ${props.disabled &&
       css`
         color: ${props.theme.colors.darkGrey};
@@ -48,12 +42,12 @@ const StyledSingleBreadcrumb = styled.div`
 const SingleBreadcrumbTextWrapper = styled.span`
   display: inline-block;
   vertical-align: middle;
-  padding-left: 7px;
+  padding-left: 5px;
 `
 
 const SingleBreadcrumb = ({ name, onClick, active, disabled }) => (
   <StyledSingleBreadcrumb active={active} disabled={disabled} onClick={onClick}>
-    <Icon name='arrowRight' size={15} color={disabled && 'darkGrey'} />
+    <Icon name='arrowRight' size={19} color={disabled && 'darkGrey'} />
     <SingleBreadcrumbTextWrapper>{name}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
 )
