@@ -8,10 +8,8 @@ const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
 const getStackedHoverBoxShadow = theme => `
-  6px 10px 20px ${rgba(theme.colors.black, 0.1)}, 6px 2px 4px ${rgba(
-  theme.colors.black,
-  0.05
-)}
+  6px 8px 4px ${rgba(theme.colors.black, 0.05)},
+  6px 16px 20px ${rgba(theme.colors.black, 0.1)}
 `
 
 const getStackedBoxShadow = (theme, hover) => `
