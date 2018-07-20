@@ -69,7 +69,7 @@ class Notifications extends React.Component {
               item
               enter='fadeInDown'
               exit='fadeOutUp'
-              timeout={ANIMATION_DURATION}
+              timeout={ANIMATION_DURATION * 0.9}
             >
               <SingleNotification
                 getRemoveHandler={this.removeNotificationHandler}
