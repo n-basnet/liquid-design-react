@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { cursorValue } from '~/utils/styling'
 
 const StyledSingleBreadcrumb = styled.div`
   display: inline-block;
@@ -13,6 +14,8 @@ const StyledSingleBreadcrumb = styled.div`
     transform: translate(-1px, 1px);
     vertical-align: middle;
   }
+
+  ${cursorValue};
 
   ${props => css`
     ${!props.disabled &&

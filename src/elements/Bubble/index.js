@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import Icon from '~/elements/Icon'
 import { fadeIn } from '~/utils/keyframes'
+import { cursorValue } from '~/utils/styling'
 
 const bgColorSelector = props => {
   if (props.info) return props.theme.colors.vibrantYellow.base
@@ -17,6 +18,7 @@ const BubbleWrapper = styled.div`
     opacity: ${props.disabled ? 0.5 : 1};
     background-color: ${bgColorSelector(props)};
   `};
+  ${cursorValue};
   width: 30px;
   height: 30px;
   border-radius: 50%;

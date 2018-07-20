@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Icon from '~/elements/Icon'
+import { cursorValue } from '~/utils/styling'
 
 const BadgeWrapper = styled.div`
   ${props => css`
@@ -16,7 +17,7 @@ const BadgeWrapper = styled.div`
           background-color: ${props.theme.colors.secondary.dark};
         `};
     }
-    cursor: ${props.disabled ? 'not-allowed' : 'default'};
+    ${cursorValue};
   `};
   ${props =>
     props.onCard

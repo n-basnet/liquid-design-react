@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 
 import styled, { css } from 'styled-components'
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { cursorValue } from '~/utils/styling'
 
 const StyledStep = styled.div`
   display: inline-block;
   width: 20px;
   height: 20px;
   margin-right: 10px;
+
+  ${cursorValue};
 
   ${props =>
     props.onClick &&

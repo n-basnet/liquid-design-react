@@ -32,3 +32,7 @@ export const media = {
       }
     `,
 }
+
+export const cursorValue = props => css`
+  cursor: ${props.disabled ? 'not-allowed' : 'default'};
+`
