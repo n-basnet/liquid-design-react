@@ -6,6 +6,7 @@ const themeBase = {
   borderRadius: '6px',
   fontFamily: `'Lato', sans-serif`,
   transition: 'all 200ms',
+  smallBoxShadow: `0 1px 2px 0 ${rgba(COLORS.BLACK, 0.1)};`,
   boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(
     COLORS.BLACK,
     0.05
