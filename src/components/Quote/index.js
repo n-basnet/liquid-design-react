@@ -7,7 +7,8 @@ import { TypographicQuote } from '~/components/Quote/TypographicQuote'
 
 const QuoteWrapper = styled.blockquote`
   display: inline-block;
-  width: 300px;
+  max-width: 300px;
+  margin: 0;
   padding: 25px;
 `
 
@@ -23,6 +24,7 @@ export const AuthorWrapper = styled.div`
   padding: 10px 0;
   font-size: 18px;
   font-weight: 900;
+  line-height: 1.25;
   text-align: center;
   ${props => css`
     color: ${props.theme.colors.richBlack};
@@ -32,6 +34,7 @@ export const AuthorWrapper = styled.div`
 export const PhraseWrapper = styled.p`
   margin: 0;
   font-size: 14px;
+  line-height: 1.25;
   text-align: center;
 `
 
@@ -60,5 +63,7 @@ Quote.propTypes = {
   source: PropTypes.string,
   quotation: PropTypes.string,
 }
+
+Quote.displayName = 'Quote'
 
 export default Quote

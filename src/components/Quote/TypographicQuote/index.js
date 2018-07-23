@@ -6,20 +6,21 @@ const QuoteWrapper = styled.blockquote`
   display: inline-block;
   padding: 25px;
   ${props => css`
-    width: ${props.big ? '500px' : '385px'};
+    max-width: ${props.big ? '500px' : '385px'};
   `};
 `
 
 const PhraseWrapper = styled.p`
   margin: 0;
   font-weight: 900;
+  line-height: 1.25;
   ${props => css`
     font-size: ${props.big ? '32px' : '22px'};
   `};
 `
 
 const AuthorWrapper = styled.div`
-  padding: 10px 0;
+  padding: 10px 0 10px 3px;
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.2px;
@@ -34,7 +35,7 @@ export const TypographicQuote = ({ author, big, small, source, quotation }) => (
       {`»${quotation}«`}
     </PhraseWrapper>
     <AuthorWrapper big={big} small={small}>
-      {` – ${author}`}
+      {`– ${author}`}
     </AuthorWrapper>
   </QuoteWrapper>
 )
