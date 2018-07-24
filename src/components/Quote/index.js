@@ -14,7 +14,7 @@ const QuoteWrapper = styled.blockquote`
 
 export const ImageWrapper = styled.div`
   ${getBackgroundImage};
-  max-width: 200px;
+  width: 200px;
   min-height: 200px;
   margin: 0 auto 10px auto;
   border-radius: 50%;
