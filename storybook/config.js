@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { configure, addDecorator } from '@storybook/react'
+import 'loki/configure-react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
 
@@ -14,13 +15,15 @@ function loadStories() {
   })
 }
 
-addDecorator(
-  withInfo({
-    inline: true,
-    header: false,
-    propTablesExclude: [Fragment],
-  })
-)
+if (!process.env.STORYBOOK_HIDE_INFO) {
+  addDecorator(
+    withInfo({
+      inline: true,
+      header: false,
+      propTablesExclude: [Fragment],
+    })
+  )
+}
 
 addDecorator(storyFn => (
   <ThemeWrapper>

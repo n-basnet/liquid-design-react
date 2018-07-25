@@ -10,6 +10,9 @@
   "scripts": {
     "test": "cross-env CI=1 jest --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/*.js",
     "test:watch": "jest --watch",
+    "test:loki": "npm run storybook:build-loki && loki --requireReference --reactUri file:./out --verboseRenderer",
+    "test:loki:approve": "loki approve",
+    "test:loki:update": "npm run storybook:build-loki && loki update --requireReference --reactUri file:./out",
     "build": "BABEL_ENV=main rollup -c",
     "start": "BABEL_ENV=main rollup -c -w",
     "prepare": "yarn run build",
@@ -19,16 +22,17 @@
     "format": "prettier-standard",
     "add-component": "node scripts/addComponent.js",
     "prepare-svgs": "node scripts/prepareSVGs.js",
-    "start-storybook": "BABEL_ENV=main start-storybook -p 9001 -c storybook",
-    "build-storybook": "BABEL_ENV=main build-storybook -c storybook -o out"
+    "storybook:start": "BABEL_ENV=main start-storybook -p 9001 -c storybook",
+    "storybook:build": "BABEL_ENV=main build-storybook -c storybook -o out",
+    "storybook:build-loki": "STORYBOOK_HIDE_INFO=1 npm run storybook:build"
   },
   "dependencies": {
     "animate.css": "^3.6.1",
     "polished": "^1.9.2",
     "ramda": "^0.25.0",
     "react-animated-transitions": "^0.0.6",
-    "react-transition-group": "^2.4.0",
     "react-modal": "^3.5.1",
+    "react-transition-group": "^2.4.0",
     "styled-components": "^3.3.3",
     "system-components": "^2.2.2",
     "uniqid": "^5.0.3"
@@ -56,7 +60,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "camelcase": "^5.0.0",
-    "chance": "^1.0.16",
     "commitizen": "^2.10.1",
     "conventional-changelog-cli": "^2.0.1",
     "cross-env": "^5.1.4",
@@ -70,11 +73,13 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "fast-lorem-ipsum": "^1.2.0",
     "fs-extra": "^6.0.1",
     "husky": "^1.0.0-rc.13",
     "inquirer": "^6.0.0",
     "jest-cli": "^23.2.0",
     "lint-staged": "^7.2.0",
+    "loki": "^0.13.0",
     "prettier-standard": "^8.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -116,6 +121,23 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
+    }
+  },
+  "loki": {
+    "chromeSelector": "#storybook-main-element",
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.docker",
+        "width": 1200,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false,
+        "fitWindow": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.docker",
+        "preset": "iPhone 7"
+      }
     }
   }
 }

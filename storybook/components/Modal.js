@@ -69,9 +69,12 @@ storiesOf('Components/Modal', module)
     },
   })
   .add('simple', () => (
-    <Modal label='Header Label' open onClose={action('close modal')}>
-      <Presentation.Simple />
-    </Modal>
+    <div style={{ height: '400px' }}>
+      <style>{'#storybook-theme-wrapper {display: none}'}</style>
+      <Modal label='Header Label' open onClose={action('close modal')}>
+        <Presentation.Simple />
+      </Modal>
+    </div>
   ))
   .add('usage in app', () => <ModalApp />, {
     info: {

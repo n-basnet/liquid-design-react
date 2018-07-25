@@ -50,7 +50,7 @@ const ContentCard = ({
   <Card
     active={active}
     stacked={stacked}
-    css={badge && 'position: relative;'}
+    css={badge && 'position: relative; padding-bottom: 34px'}
     center
   >
     <div style={{ marginBottom: description ? '16px' : '43px' }}>

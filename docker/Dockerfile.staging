@@ -5,7 +5,7 @@ FROM quay.io/netguru/ng-node:10 as builder
 COPY . $APP_HOME
 
 RUN yarn install
-RUN npm run build-storybook
+RUN npm run storybook:build
 
 
 ## Real app image

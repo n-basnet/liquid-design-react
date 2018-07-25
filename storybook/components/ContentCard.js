@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { ContentCard } from '~'
-import { getBackgroundWrapper, chance } from '../helpers'
+import { getBackgroundWrapper, placeholderText } from '../helpers'
 
 const labels = [
   {
@@ -22,9 +22,7 @@ const defaultProps = {
 
 storiesOf('Components/ContentCard', module)
   .addDecorator(getBackgroundWrapper({ dark: true }))
-  .add('default', () => (
-    <ContentCard {...defaultProps} />
-  ))
+  .add('default', () => <ContentCard {...defaultProps} />)
   .add('multiple', () => (
     <Fragment>
       <ContentCard {...defaultProps} />
@@ -38,22 +36,12 @@ storiesOf('Components/ContentCard', module)
       {...defaultProps}
     />
   ))
-  .add('stacked', () => (
-    <ContentCard
-      {...defaultProps}
-      stacked
-    />
-  ))
-  .add('active', () => (
-    <ContentCard
-      {...defaultProps}
-      active
-    />
-  ))
+  .add('stacked', () => <ContentCard {...defaultProps} stacked />)
+  .add('active', () => <ContentCard {...defaultProps} active />)
   .add('with description and featured', () => (
     <ContentCard
       {...defaultProps}
-      description={chance.paragraph({ sentences: 1 })}
+      description={placeholderText(15)}
       featured='e.g. Amount, etc.'
     />
   ))

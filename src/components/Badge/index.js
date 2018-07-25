@@ -24,7 +24,7 @@ const BadgeWrapper = styled.div`
       ? css`
           position: absolute;
           left: 0;
-          bottom: -10px;
+          bottom: 0;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
           width: 100%;

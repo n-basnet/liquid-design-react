@@ -25,7 +25,7 @@ export default class ThemeWrapper extends React.Component {
   render() {
     return (
       <Theme themeName={this.state.currentThemeName}>
-        <ThemeSelectWrapper>
+        <ThemeSelectWrapper id='storybook-theme-wrapper'>
           Theme:
           <select onChange={this.handleChange} value={this.state.themeName}>
             {themeNames.map((themeName, i) => (
@@ -35,7 +35,7 @@ export default class ThemeWrapper extends React.Component {
             ))}
           </select>
         </ThemeSelectWrapper>
-        <div>{this.props.children}</div>
+        <div id='storybook-main-element'>{this.props.children}</div>
       </Theme>
     )
   }
