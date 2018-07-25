@@ -34,6 +34,8 @@ import close from '~/graphics/svgIcons/close.svg'
 import exportFile from '~/graphics/svgIcons/exportFile.svg'
 import radioButton from '~/graphics/svgIcons/radioButton.svg'
 import preferences from '~/graphics/svgIcons/preferences.svg'
+import checkboxEmpty from '~/graphics/svgIcons/checkbox/empty.svg'
+import checkboxFilled from '~/graphics/svgIcons/checkbox/filled.svg'
 
 export default {
   favorite,
@@ -72,4 +74,6 @@ export default {
   exportFile,
   radioButton,
   preferences,
+  checkboxEmpty,
+  checkboxFilled,
 }

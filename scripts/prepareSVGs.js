@@ -1,5 +1,6 @@
 const { getSVGOConfig } = require('./getSVGOConfig')
 
+const glob = require('glob')
 const fs = require('fs')
 const path = require('path')
 const SVGO = require('svgo')
@@ -12,7 +13,7 @@ const optimiseFile = async fileName => {
 
   const optimised = await svgo.optimize(contents, { path: filePath })
 
-  fs.writeFile(filePath, optimised.data, 'utf8', (err) => {
+  fs.writeFile(filePath, optimised.data, 'utf8', err => {
     if (err) {
       console.log(err)
     }
@@ -20,6 +21,8 @@ const optimiseFile = async fileName => {
   })
 }
 
-fs.readdirSync('src/graphics/svgIcons')
-  .filter(v => /\.svg$/.test(v))
-  .map(v => optimiseFile(`src/graphics/svgIcons/${v}`))
+glob('src/graphics/svgIcons/**/*.svg', {}, (error, files) => {
+  if (!error) {
+    files.map(optimiseFile)
+  }
+})

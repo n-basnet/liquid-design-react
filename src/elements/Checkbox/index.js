@@ -2,30 +2,30 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import empty from '~/graphics/checkbox/empty.svg'
-import filled from '~/graphics/checkbox/filled.svg'
-import hover from '~/graphics/checkbox/hover.svg'
+import { cursorValue } from '~/utils/styling'
+import { default as Icon, ICON_CLASSNAME } from '~/elements/Icon'
 
 const CheckboxWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  padding-left: 32px;
+  display: inline-flex;
+  align-items: center;
   ${props => css`
-    cursor: ${props.disabled ? 'not-allowed' : 'pointer'};
+    ${cursorValue({ ...props, pointer: true })};
   `};
-  & svg {
-    left: 0px;
-    top: 0px;
-    width: 24px;
-    height: 24px;
-    position: absolute;
-  }
-  &:hover {
-    & svg {
-      ${props => css`
-        border-radius: ${!props.disabled && '7px'};
-        box-shadow: ${!props.disabled && props.theme.smallBoxShadow};
-      `};
+  ${props =>
+    props.disabled &&
+    css`
+      opacity: 0.3;
+    `};
+  .${ICON_CLASSNAME} svg {
+    transition: fill 200ms;
+    border-radius: 7px;
+    &:hover {
+      ${props =>
+    !props.disabled &&
+        props.checked &&
+        css`
+          box-shadow: ${props.theme.smallBoxShadow};
+        `};
     }
   }
 `
@@ -35,45 +35,51 @@ const Input = styled.input`
 `
 
 export const Label = styled.label`
-  position: relative;
+  padding-left: 8px;
   font-size: 14px;
   line-height: 1.75;
   ${props => css`
+    ${cursorValue({ ...props, pointer: true })};
     color: ${props.theme.colors.richBlack};
-    cursor: ${props.disabled ? 'not-allowed' : 'pointer'};
-    ${props.disabled &&
-      css`
-        opacity: 0.3;
-      `};
   `};
 `
 
 class Checkbox extends Component {
   state = {
-    filled: false,
+    checked: false,
     hover: null,
   }
 
   static propTypes = {
     disabled: PropTypes.bool,
-    id: PropTypes.string,
-    name: PropTypes.string,
+    /** for controlling the checkbox externally */
+    isChecked: PropTypes.bool,
     label: PropTypes.string,
-    value: PropTypes.string,
+    onChange: PropTypes.func,
   }
 
-  toggleCheckbox = () =>
-    !this.props.disabled && this.setState({ filled: !this.state.filled })
+  toggleCheckbox = () => {
+    if (!this.props.disabled) {
+      const checked = !this.state.checked
+      this.setState({ checked })
+      this.props.onChange && this.props.onChange(checked)
+    }
+  }
+
+  isChecked = () =>
+    this.props.isChecked !== undefined
+      ? this.props.isChecked
+      : this.state.checked
 
   render() {
-    const { disabled, id, name, label, value } = this.props
-    const CustomInput = this.state.filled
-      ? filled
-      : this.state.hover ? hover : empty
+    const { disabled, label, isChecked } = this.props
+    const { hover } = this.state
+    const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
 
     return (
       <CheckboxWrapper
         disabled={disabled}
+        checked={isChecked || this.isChecked()}
         onClick={this.toggleCheckbox}
         onMouseEnter={() =>
           !this.props.disabled && this.setState({ hover: true })
@@ -82,11 +88,12 @@ class Checkbox extends Component {
           !this.props.disabled && this.setState({ hover: false })
         }
       >
-        <Input id={id} name={name} type='checkbox' value={value} />
-        <CustomInput />
-        <Label disabled={disabled} htmlFor={id}>
-          {label}
-        </Label>
+        <Input type='checkbox' />
+        <Icon
+          name={`checkbox${iconVersion}`}
+          color={!hover && !this.isChecked() ? 'darkGrey' : undefined}
+        />
+        <Label disabled={disabled}>{label}</Label>
       </CheckboxWrapper>
     )
   }

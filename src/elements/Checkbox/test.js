@@ -5,7 +5,7 @@ import Checkbox, { Label } from '.'
 
 describe('Checkbox', () => {
   const label = 'Checkbox text'
-  const wrapper = shallow(<Checkbox label={label} />)
+  const wrapper = shallow(<Checkbox label={label} onChange={jest.fn()} />)
 
   it('displays the correct label', () => {
     expect(
@@ -16,9 +16,9 @@ describe('Checkbox', () => {
     ).toEqual(label)
   })
 
-  it('has a state "filled" equal to true after the checkbox is clicked', () => {
+  it('has a state "checked" equal to true after the checkbox is clicked', () => {
     wrapper.simulate('click')
-    expect(wrapper.state('filled')).toEqual(true)
+    expect(wrapper.state('checked')).toEqual(true)
   })
 
   it('has a state "hover" equal to true triggered by the onMouseEnter event', () => {
