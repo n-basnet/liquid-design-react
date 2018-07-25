@@ -3,8 +3,8 @@ import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
 
-import { Theme } from '~'
 import MODULES from './modules.json'
+import ThemeWrapper from './ThemeWrapper'
 
 configureActions()
 
@@ -14,16 +14,16 @@ function loadStories() {
   })
 }
 
-addDecorator(withInfo({
-  inline: true,
-  header: false,
-  propTablesExclude: [
-    Fragment,
-  ],
-}))
+addDecorator(
+  withInfo({
+    inline: true,
+    header: false,
+    propTablesExclude: [Fragment],
+  })
+)
 
 addDecorator(storyFn => (
-  <Theme>
+  <ThemeWrapper>
     <Fragment>
       <style>{`
         body {
@@ -32,7 +32,7 @@ addDecorator(storyFn => (
       `}</style>
       {storyFn()}
     </Fragment>
-  </Theme>
+  </ThemeWrapper>
 ))
 
 configure(loadStories, module)

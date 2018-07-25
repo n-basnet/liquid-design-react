@@ -1,4 +1,4 @@
-import { rgba, darken } from 'polished'
+import { rgba } from 'polished'
 
 import COLORS from '~/utils/consts/colors'
 
@@ -45,35 +45,38 @@ const themeBaseColors = {
   richBlack: COLORS.RICH_BLACK,
 }
 
+const getTheme = ({ primary, secondary }) => ({
+  colors: {
+    primary: {
+      base: COLORS[primary],
+      dark: COLORS[`${primary}_DARK`],
+    },
+    secondary: {
+      base: COLORS[secondary],
+      dark: COLORS[`${secondary}_DARK`],
+    },
+    ...themeBaseColors,
+  },
+  ...themeBase,
+})
+
 export const THEMES = {
-  vibrantCyan: {
-    colors: {
-      primary: {
-        base: COLORS.VIBRANT_CYAN,
-        dark: COLORS.VIBRANT_CYAN_DARK,
-      },
-      secondary: {
-        base: COLORS.VIBRANT_YELLOW,
-        dark: COLORS.VIBRANT_YELLOW_DARK,
-      },
-      ...themeBaseColors,
-    },
-    ...themeBase,
-  },
-  richPurple: {
-    colors: {
-      primary: {
-        base: COLORS.DEEP_PURPLE,
-        dark: darken(0.12, COLORS.DEEP_PURPLE),
-      },
-      secondary: {
-        base: COLORS.VIBRANT_CYAN,
-        dark: COLORS.VIBRANT_CYAN_DARK,
-      },
-      ...themeBaseColors,
-    },
-    ...themeBase,
-  },
+  vibrantCyan: getTheme({
+    primary: 'VIBRANT_CYAN',
+    secondary: 'VIBRANT_YELLOW',
+  }),
+  richBlue: getTheme({
+    primary: 'RICH_BLUE',
+    secondary: 'VIBRANT_YELLOW',
+  }),
+  richPurple: getTheme({
+    primary: 'RICH_PURPLE',
+    secondary: 'VIBRANT_CYAN',
+  }),
+  vibrantMagenta: getTheme({
+    primary: 'VIBRANT_MAGENTA',
+    secondary: 'RICH_PURPLE',
+  }),
 }
 
 export const DEFAULT_THEME = THEMES.vibrantCyan
