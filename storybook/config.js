@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { configure, addDecorator } from '@storybook/react'
-import 'loki/configure-react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
 
@@ -15,7 +14,7 @@ function loadStories() {
   })
 }
 
-if (!process.env.STORYBOOK_HIDE_INFO) {
+if (!process.env.STORYBOOK_LOKI_BUILD) {
   addDecorator(
     withInfo({
       inline: true,
@@ -23,6 +22,8 @@ if (!process.env.STORYBOOK_HIDE_INFO) {
       propTablesExclude: [Fragment],
     })
   )
+} else {
+  import('loki/configure-react')
 }
 
 addDecorator(storyFn => (

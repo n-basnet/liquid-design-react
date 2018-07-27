@@ -24,7 +24,7 @@
     "prepare-svgs": "node scripts/prepareSVGs.js",
     "storybook:start": "BABEL_ENV=main start-storybook -p 9001 -c storybook",
     "storybook:build": "BABEL_ENV=main build-storybook -c storybook -o out",
-    "storybook:build-loki": "STORYBOOK_HIDE_INFO=1 npm run storybook:build"
+    "storybook:build-loki": "STORYBOOK_LOKI_BUILD=1 npm run storybook:build"
   },
   "dependencies": {
     "animate.css": "^3.6.1",
