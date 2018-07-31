@@ -4,6 +4,8 @@ import star from '~/graphics/svgIcons/star.svg'
 import starHalf from '~/graphics/svgIcons/starHalf.svg'
 import dot from '~/graphics/svgIcons/dot.svg'
 import info from '~/graphics/svgIcons/info.svg'
+import infoCircle from '~/graphics/svgIcons/infoCircle.svg'
+import infoFilled from '~/graphics/svgIcons/infoFilled.svg'
 import warning from '~/graphics/svgIcons/warning.svg'
 import dotHalf from '~/graphics/svgIcons/dotHalf.svg'
 import arrowTop from '~/graphics/svgIcons/arrowTop.svg'
@@ -47,6 +49,8 @@ export default {
   arrowTop,
   arrowRight,
   info,
+  infoCircle,
+  infoFilled,
   warning,
   bottle,
   costCenter,

@@ -16,6 +16,7 @@ const themeBase = {
     0.05
   )}`,
   zIndex: {
+    tooltips: 9,
     notifications: 10,
   },
 }
@@ -51,6 +52,7 @@ const getTheme = ({ primary, secondary }) => ({
     primary: {
       base: COLORS[primary],
       dark: COLORS[`${primary}_DARK`],
+      darker: COLORS[`${primary}_DARKER`],
     },
     secondary: {
       base: COLORS[secondary],

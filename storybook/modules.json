@@ -42,5 +42,9 @@
   {
     "name": "Checkbox",
     "type": "element"
+  },
+  {
+    "name": "Tooltip",
+    "type": "component"
   }
 ]

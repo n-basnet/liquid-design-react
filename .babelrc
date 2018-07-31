@@ -1,33 +1,46 @@
 {
-
   "env": {
     "main": {
       "presets": [
-        ["env", {
-          "modules": false
-        }],
+        [
+          "env",
+          {
+            "modules": false
+          }
+        ],
         "stage-0",
         "react"
       ],
       "plugins": [
-        ["babel-plugin-root-import", {
-          "rootPathSuffix": "src"
-        }],
+        [
+          "babel-plugin-root-import",
+          {
+            "rootPathSuffix": "src"
+          }
+        ],
         "babel-plugin-styled-components",
+        "transform-decorators-legacy",
         "add-react-displayname",
-        ["ramda", {
-          "useES": true
-        }]
-      ],
+        [
+          "ramda",
+          {
+            "useES": true
+          }
+        ]
+      ]
     },
     "test": {
       "presets": [["env"], "stage-0", "react"],
       "plugins": [
-        ["babel-plugin-root-import", {
-          "rootPathSuffix": "src"
-        }],
-        "babel-plugin-styled-components"
-      ],
+        [
+          "babel-plugin-root-import",
+          {
+            "rootPathSuffix": "src"
+          }
+        ],
+        "babel-plugin-styled-components",
+        "transform-decorators-legacy"
+      ]
     }
   }
 }
