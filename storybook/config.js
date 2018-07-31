@@ -16,11 +16,6 @@ const runStorybookConfig = async () => {
     })
   }
 
-  if (Object.hasOwnProperty('assign')) {
-    const { withKnobs } = await import('@storybook/addon-knobs')
-    addDecorator(withKnobs)
-  }
-
   if (process.env.STORYBOOK_LOKI_BUILD) {
     import('loki/configure-react')
   } else {
@@ -45,6 +40,11 @@ const runStorybookConfig = async () => {
       </Fragment>
     </ThemeWrapper>
   ))
+
+  if (Object.hasOwnProperty('assign')) {
+    const { withKnobs } = await import('@storybook/addon-knobs')
+    addDecorator(withKnobs)
+  }
 
   configure(loadStories, module)
 }
