@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import React, { Fragment } from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
@@ -6,37 +7,46 @@ import { withInfo } from '@storybook/addon-info'
 import MODULES from './modules.json'
 import ThemeWrapper from './ThemeWrapper'
 
-configureActions()
+const runStorybookConfig = async () => {
+  configureActions()
 
-function loadStories() {
-  MODULES.map(({ name, type }) => {
-    require(`./${type}s/${name}.js`)
-  })
-}
-
-if (!process.env.STORYBOOK_LOKI_BUILD) {
-  addDecorator(
-    withInfo({
-      inline: true,
-      header: false,
-      propTablesExclude: [Fragment],
+  function loadStories() {
+    MODULES.map(({ name, type }) => {
+      require(`./${type}s/${name}.js`)
     })
-  )
-} else {
-  import('loki/configure-react')
-}
+  }
 
-addDecorator(storyFn => (
-  <ThemeWrapper>
-    <Fragment>
-      <style>{`
+  if (Object.hasOwnProperty('assign')) {
+    const { withKnobs } = await import('@storybook/addon-knobs')
+    addDecorator(withKnobs)
+  }
+
+  if (process.env.STORYBOOK_LOKI_BUILD) {
+    import('loki/configure-react')
+  } else {
+    addDecorator(
+      withInfo({
+        inline: true,
+        header: false,
+        propTablesExclude: [Fragment],
+      })
+    )
+  }
+
+  addDecorator(storyFn => (
+    <ThemeWrapper>
+      <Fragment>
+        <style>{`
         body {
           margin: 0;
         }
       `}</style>
-      {storyFn()}
-    </Fragment>
-  </ThemeWrapper>
-))
+        {storyFn()}
+      </Fragment>
+    </ThemeWrapper>
+  ))
 
-configure(loadStories, module)
+  configure(loadStories, module)
+}
+
+runStorybookConfig()

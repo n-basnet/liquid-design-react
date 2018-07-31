@@ -12,10 +12,10 @@ const QuoteWrapper = styled.blockquote`
 
 const PhraseWrapper = styled.p`
   margin: 0;
-  font-weight: 900;
   line-height: 1.25;
   ${props => css`
     font-size: ${props.big ? '32px' : '22px'};
+    font-weight: ${props.theme.fontWeight.black};
   `};
 `
 
@@ -29,21 +29,21 @@ const AuthorWrapper = styled.div`
   `};
 `
 
-export const TypographicQuote = ({ author, big, small, source, quotation }) => (
-  <QuoteWrapper big={big} small={small}>
-    <PhraseWrapper big={big} small={small}>
-      {`»${quotation}«`}
-    </PhraseWrapper>
-    <AuthorWrapper big={big} small={small}>
-      {`– ${author}`}
-    </AuthorWrapper>
+export const TypographicQuote = ({ source, author, big, quotation }) => (
+  <QuoteWrapper big={big} cite={source}>
+    <PhraseWrapper big={big}>{`»${quotation}«`}</PhraseWrapper>
+    <AuthorWrapper big={big}>{`– ${author}`}</AuthorWrapper>
   </QuoteWrapper>
 )
 
 TypographicQuote.propTypes = {
-  author: PropTypes.string,
+  quotation: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   big: PropTypes.bool,
-  small: PropTypes.bool,
   source: PropTypes.string,
-  quotation: PropTypes.string,
+}
+
+TypographicQuote.defaultProps = {
+  big: false,
+  source: '',
 }

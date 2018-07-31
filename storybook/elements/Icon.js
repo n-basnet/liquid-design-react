@@ -2,38 +2,17 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { number } from '@storybook/addon-knobs'
+import { without } from 'ramda'
 
 import { getBackgroundWrapper } from '../helpers'
 import IconWithTheme, { Icon } from '~/elements/Icon'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
-
-const ICONS = [
-  'bottle',
-  'bus',
-  'costCenter',
-  'energy',
-  'travel',
-  'finance',
-  'goods',
-  'transportation',
-  'it',
-  'material',
-  'misc',
-  'personnelCosts',
-  'postings',
-  'promotion',
-  'rental',
-  'research',
-  'service',
-  'startup',
-  'technicalService',
-  'board',
-]
+import iconsList from '~/elements/Icon/iconsList'
 
 const GLYPHS = [
   'arrowTop',
   'bell',
-  'checkbox',
+  'checkboxFilled',
   'close',
   'exportFile',
   'radioButton',
@@ -41,7 +20,25 @@ const GLYPHS = [
   'info',
 ]
 
-const IconSet = ({ iconList, iconProps = {} }) => (
+const OMIT_ICONS = [
+  'circleX',
+  'star',
+  'starHalf',
+  'dot',
+  'dotHalf',
+  'arrowRight',
+  'warning',
+  'checkboxEmpty',
+  'infoCircle',
+]
+
+const SORTED_ICON_NAMES = Object.keys(iconsList).sort(
+  (a, b) => (a < b ? -1 : a > b ? 1 : 0)
+)
+const ICONS_LIST = without(OMIT_ICONS, SORTED_ICON_NAMES)
+const ICONS = without(GLYPHS, ICONS_LIST)
+
+const IconSet = ({ iconList, iconProps }) => (
   <Fragment>
     {iconList.map((name, i) => (
       <div
@@ -50,7 +47,7 @@ const IconSet = ({ iconList, iconProps = {} }) => (
       >
         <IconWithTheme
           name={name}
-          onClick={action('click on icon')}
+          onClick={() => action('click on icon')(name)}
           {...iconProps}
         />
         <div>{name}</div>
@@ -60,8 +57,12 @@ const IconSet = ({ iconList, iconProps = {} }) => (
 )
 
 IconSet.propTypes = {
-  iconList: PropTypes.arrayOf(PropTypes.string),
+  iconList: PropTypes.arrayOf(PropTypes.string).isRequired,
   iconProps: PropTypes.object,
+}
+
+IconSet.defaultProps = {
+  iconProps: {},
 }
 
 storiesOf('Elements/Icon', module)
@@ -71,11 +72,16 @@ storiesOf('Elements/Icon', module)
       maxPropObjectKeys: 0,
     },
   })
-  .add('single Icon', () => <Icon name='bottle' theme={DEFAULT_THEME} />)
+  .add('single Icon', () => (
+    <Icon
+      size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
+      name='bottle'
+    />
+  ))
   .addDecorator(storyFn => (
     <Fragment>
       {/* just to make addon-info aware of the original `Icon` props */}
-      <Icon style={{ display: 'none' }} name='board' theme={DEFAULT_THEME} />
+      <Icon style={{ display: 'none' }} name='board' />
       {storyFn()}
     </Fragment>
   ))
@@ -90,7 +96,7 @@ storiesOf('Elements/Icon', module)
     <IconSet iconList={ICONS} iconProps={{ secondary: true }} />
   ))
   .add('alternative color', () => (
-    <IconSet iconList={ICONS} iconProps={{ color: 'darkGrey' }} />
+    <IconSet iconList={ICONS} iconProps={{ color: 'sensitiveGrey.base' }} />
   ))
   .add('custom color', () => (
     <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />

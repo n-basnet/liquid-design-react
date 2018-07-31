@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -15,7 +15,7 @@ const ThemeSelectWrapper = styled.div`
   }
 `
 
-export default class ThemeWrapper extends React.Component {
+export default class ThemeWrapper extends PureComponent {
   state = {
     currentThemeName: themeNames[0],
   }
@@ -42,5 +42,5 @@ export default class ThemeWrapper extends React.Component {
 }
 
 ThemeWrapper.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 }

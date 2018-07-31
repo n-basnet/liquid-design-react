@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, withTheme } from 'styled-components'
+import { path } from 'ramda'
 
-import ICONS from '~/elements/Icon/iconsList'
-import { GLOBAL_CLASSNAME_PREFIX } from '~/utils/consts'
+import iconsList from '~/elements/Icon/iconsList'
+import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { DEFAULT_THEME } from '~/utils/consts/themes'
 
-export const ICON_CLASSNAME = `${GLOBAL_CLASSNAME_PREFIX}Icon`
+export const ICON_CLASSNAME = `${GLOBAL_CSS_PREFIX}Icon`
 
 const IconWrapper = styled.div`
   display: inline-block;
@@ -34,19 +36,19 @@ export const DEFAULT_SIZE = 24
 // exported separately for testing and storybook (without `withTheme` decorator)
 export const Icon = ({
   name,
-  size = DEFAULT_SIZE,
-  style = {},
+  size,
+  style,
   theme,
   secondary,
   color,
-  unit = 'px',
+  unit,
   onClick,
 }) => {
-  const SVGIconComponent = ICONS[name]
+  const SVGIconComponent = iconsList[name]
   if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }
-  const alternativeColor = theme.colors[color] || color
+  const alternativeColor = path(color.split('.'), theme.colors) || color
   const fill =
     alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
   return (
@@ -72,15 +74,25 @@ Icon.propTypes = {
   size: PropTypes.number,
   /** Style object to be passed to inlined SVG */
   style: PropTypes.object,
-  /** (provided by `styled-components`) */
+  /** (provided by `styled-components` via withTheme decorator) */
   theme: PropTypes.object,
   /** Use the theme's secondary color. Theme's primary color is the default. */
   secondary: PropTypes.bool,
-  /** A different color - either from the theme or a custom one (if not found in the theme) */
+  /** A different color - either from the theme (can be a path, like `grey.dark`) or a custom one (if not found in the theme) */
   color: PropTypes.string,
   /** Size unit */
   unit: PropTypes.string,
   onClick: PropTypes.func,
+}
+
+Icon.defaultProps = {
+  size: DEFAULT_SIZE,
+  style: {},
+  theme: DEFAULT_THEME,
+  secondary: false,
+  color: '',
+  unit: 'px',
+  onClick: null,
 }
 
 export default withTheme(Icon)

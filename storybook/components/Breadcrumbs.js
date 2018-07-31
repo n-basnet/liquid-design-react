@@ -1,23 +1,23 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { Breadcrumbs } from '~'
-import { getBackgroundWrapper } from '../helpers'
+import { getBackgroundWrapper, getTextKnob } from '../helpers'
 import { times } from '~/utils/aux'
 
 const getItems = (modifier = {}) => [
   {
-    name: 'Breadcrumb 1',
+    name: getTextKnob({ defaultText: 'Breadcrumb 1', name: 'item 1' }),
     onClick: action('click breadcrumb 1'),
   },
   {
-    name: 'Breadcrumb 2',
+    name: getTextKnob({ defaultText: 'Breadcrumb 2', name: 'item 2' }),
     ...(!modifier.disabled && { onClick: action('click breadcrumb 2') }),
     ...modifier,
   },
   {
-    name: 'Breadcrumb 3',
+    name: getTextKnob({ defaultText: 'Breadcrumb 3', name: 'item 3' }),
     onClick: action('click breadcrumb 3'),
   },
 ]
@@ -28,7 +28,7 @@ const getItemsForInteractive = onClick =>
     onClick: () => onClick(v),
   }))
 
-class BreadcrumbsApp extends React.Component {
+class BreadcrumbsApp extends PureComponent {
   state = { active: null }
   setActive = active => {
     this.setState({ active })

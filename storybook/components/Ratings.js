@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
+import { number } from '@storybook/addon-knobs'
 
 import { Ratings } from '~'
 import { getBackgroundWrapper } from '../helpers'
@@ -11,16 +12,21 @@ const SectionText = styled.div`
   margin-top: 10px;
 `
 
-class RatingsApp extends React.Component {
+class RatingsApp extends PureComponent {
+  static propTypes = {
+    dots: Ratings.propTypes.dots,
+    steps: Ratings.propTypes.steps,
+  }
+  static defaultProps = {
+    dots: Ratings.defaultProps.dots,
+    steps: Ratings.defaultProps.steps,
+  }
   state = {
     rating: firstRating,
     ratingsSum: firstRating,
     ratingsAmount: 1,
     lastRating: null,
     disabled: false,
-  }
-  static propTypes = {
-    dots: Ratings.propTypes.dots,
   }
   addRating = newRating => {
     const { ratingsSum, ratingsAmount } = this.state
@@ -42,15 +48,16 @@ class RatingsApp extends React.Component {
   }
   render() {
     const { rating, lastRating, ratingsAmount, disabled } = this.state
-    const { dots } = this.props
+    const { dots, steps } = this.props
     return (
       <div>
         <SectionText>official rating ({rating}):</SectionText>
-        <Ratings rating={rating} dots={dots} />
+        <Ratings rating={rating} dots={dots} steps={steps} />
         <SectionText>interactive rating:</SectionText>
         <Ratings
           onSubmit={this.addRating}
           dots={dots}
+          steps={steps}
           rating={lastRating}
           disabled={disabled}
         />
@@ -74,6 +81,10 @@ storiesOf('Components/Ratings', module)
       propTablesExclude: [RatingsApp],
     },
   })
-  .add('default', () => <RatingsApp />)
+  .add('default', () => (
+    <RatingsApp
+      steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })}
+    />
+  ))
   .add('dots', () => <RatingsApp dots />)
   .add('single', () => <Ratings />)

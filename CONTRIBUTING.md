@@ -20,7 +20,7 @@ Use `$ yarn add-component` to quickly bootstrap new components.
 
 ### SVG icons
 
-are optimised using [svgo](https://github.com/svg/svgo) - run `$ yarn prepare-svgs` to optimise files stored in `src/graphics/svgIcons`.
+are optimised using [svgo](https://github.com/svg/svgo) - run `$ yarn prepare-svgs` to optimise files stored in `src/assets/svgIcons`.
 
 ## Code style
 

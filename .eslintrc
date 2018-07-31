@@ -25,6 +25,9 @@
 
     "comma-dangle": ["error", "always-multiline"],
 
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+
+    "react/require-default-props": 2,
+    "react/sort-comp": 2,
   }
 }

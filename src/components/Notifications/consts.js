@@ -1,13 +1,13 @@
 export const NOTIFICATION_CONFIG = {
-  reminder: {
+  isReminder: {
     color: 'richBlue',
     icon: 'bell',
   },
-  error: {
+  isError: {
     color: 'richRed',
     icon: 'warning',
   },
-  info: {
+  isInfo: {
     color: 'vibrantYellow',
     icon: 'info',
   },

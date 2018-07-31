@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { times } from '~/utils/aux'
@@ -9,10 +9,7 @@ export const roundToNearest = (value, number = 0.5) => {
   return remainder > 0 ? value - remainder + number : value
 }
 
-class Ratings extends React.Component {
-  state = {
-    hovered: null,
-  }
+class Ratings extends PureComponent {
   static propTypes = {
     /** Amount of stars/dots to display */
     steps: PropTypes.number,
@@ -23,8 +20,14 @@ class Ratings extends React.Component {
     dots: PropTypes.bool,
   }
   static defaultProps = {
-    rating: 0,
     steps: 5,
+    rating: 0,
+    disabled: false,
+    dots: false,
+    onSubmit: null,
+  }
+  state = {
+    hovered: null,
   }
   render() {
     const { onSubmit, rating, steps, disabled, dots } = this.props

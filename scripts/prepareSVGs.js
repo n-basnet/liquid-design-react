@@ -21,7 +21,7 @@ const optimiseFile = async fileName => {
   })
 }
 
-glob('src/graphics/svgIcons/**/*.svg', {}, (error, files) => {
+glob('src/assets/svgIcons/**/*.svg', {}, (error, files) => {
   if (!error) {
     files.map(optimiseFile)
   }

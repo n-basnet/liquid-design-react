@@ -8,15 +8,15 @@ const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
 const getStackedHoverBoxShadow = theme => `
-  6px 8px 4px ${rgba(theme.colors.black, 0.05)},
-  6px 16px 20px ${rgba(theme.colors.black, 0.1)}
+  6px 8px 4px ${rgba(theme.colors.black.base, 0.05)},
+  6px 16px 20px ${rgba(theme.colors.black.base, 0.1)}
 `
 
 const getStackedBoxShadow = (theme, hover) => `
   1px 1px 0 0 ${theme.colors.grey.aux},
-  3px 3px 0 0 ${theme.colors.white},
+  3px 3px 0 0 ${theme.colors.white.base},
   4px 4px 0 0 ${theme.colors.grey.aux},
-  6px 6px 0 0 ${theme.colors.white}
+  6px 6px 0 0 ${theme.colors.white.base}
   ${hover ? `, ${getStackedHoverBoxShadow(theme)}` : ''}
 `
 
@@ -48,7 +48,7 @@ const Card = styled.div`
     `};
   ${props => css`
     border-radius: ${props.theme.borderRadius};
-    background-color: ${props.theme.colors.white};
+    background-color: ${props.theme.colors.white.base};
     transition: ${props.theme.transition};
   `};
   ${props =>

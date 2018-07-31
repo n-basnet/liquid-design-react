@@ -29,4 +29,8 @@ ModalHeader.propTypes = {
   label: PropTypes.string,
 }
 
+ModalHeader.defaultProps = {
+  label: '',
+}
+
 export default ModalHeader

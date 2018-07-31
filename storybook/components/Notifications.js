@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
@@ -9,20 +9,24 @@ import {
   NOTIFICATION_WRAPPER_PADDING,
 } from '~/components/Notifications/consts'
 import SingleNotification from '~/components/Notifications/SingleNotification'
+import { getTextKnob } from '../helpers'
 
-const defaultSingleNotificationProps = {
-  text: 'Notification text',
-  id: '1',
+const DEFAULT_TEXT = 'Notification text'
+const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
+  text: asKnob
+    ? getTextKnob({ defaultText: DEFAULT_TEXT, name: `item ${id}` })
+    : DEFAULT_TEXT,
+  id: id.toString(),
   getRemoveHandler: id => action(`remove ${id}`),
-}
+})
 
 const DEFAULT_TYPE = 'default'
 const typesToDisplay = [DEFAULT_TYPE, ...NOTIFICATION_TYPES]
 
-class NotificationApp extends React.Component {
-  createNotification = type => {
+class NotificationApp extends PureComponent {
+  createNotification = (type, id) => {
     this.notificationsRef.addNotification({
-      text: defaultSingleNotificationProps.text,
+      text: getDefaultSingleNotificationProps(id, false).text,
       ...(type !== DEFAULT_TYPE && { [type]: true }),
     })
   }
@@ -33,10 +37,10 @@ class NotificationApp extends React.Component {
           {typesToDisplay.map((type, i) => (
             <button
               key={i}
-              onClick={() => this.createNotification(type)}
+              onClick={() => this.createNotification(type, i)}
               style={{ margin: '5px' }}
             >
-              display {type}
+              display {type.replace(/^is/, '').toLowerCase()}
             </button>
           ))}
         </div>
@@ -71,11 +75,11 @@ storiesOf('Components/Notifications', module)
   })
   .add('single', () => (
     <SingleNotificationsWrapper>
-      {typesToDisplay.map(v => (
+      {typesToDisplay.map((v, i) => (
         <SingleNotification
           key={v}
           {...v && v !== DEFAULT_TYPE && { [v]: true }}
-          {...defaultSingleNotificationProps}
+          {...getDefaultSingleNotificationProps(i)}
         />
       ))}
     </SingleNotificationsWrapper>
@@ -97,7 +101,7 @@ storiesOf('Components/Notifications', module)
     Usage: call \`Notification\`'s \`addNotification\` method via a ref:
 
     ~~~js
-    class NotificationApp extends React.Component {
+    class NotificationApp extends PureComponent {
       createNotification = () => {
         this.notificationsRef.addNotification({ text: 'Some info', info: true })
       }

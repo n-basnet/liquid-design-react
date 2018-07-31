@@ -6,7 +6,6 @@ import { getBackgroundImage } from '~/utils/styling'
 import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
 import Placeholder from '~/components/aux/Placeholder'
-import { Flex } from '~/components/primitives/Flex'
 import Label from '~/components/ContentCard/Label'
 
 const ImageWrapper = styled.div`
@@ -37,6 +36,14 @@ const FeaturedWrapper = styled.div`
   font-weight: bold;
 `
 
+const LabelsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  ${props => css`
+    margin-top: ${props.featured ? 0 : 20}px;
+  `};
+`
+
 const ContentCard = ({
   title,
   labels = [],
@@ -59,9 +66,9 @@ const ContentCard = ({
     </div>
     {imagePath ? <ImageWrapper src={imagePath} /> : <Placeholder />}
     {featured && <FeaturedWrapper>{featured}</FeaturedWrapper>}
-    <Flex spread mt={featured ? '0px' : '20px'}>
+    <LabelsWrapper featured={featured}>
       {labels.map((label, i) => <Label {...label} key={i} />)}
-    </Flex>
+    </LabelsWrapper>
     {badge && (
       <Badge
         icon={badge.icon || badge.iconRight}
@@ -86,6 +93,16 @@ ContentCard.propTypes = {
     icon: PropTypes.string,
     iconRight: PropTypes.string,
   }),
+}
+
+ContentCard.defaultProps = {
+  description: null,
+  featured: null,
+  imagePath: null,
+  labels: [],
+  stacked: false,
+  active: false,
+  badge: null,
 }
 
 export default ContentCard

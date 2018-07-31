@@ -2,14 +2,16 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Badge } from '~'
-import { getBackgroundWrapper } from '../helpers'
+import { getBackgroundWrapper, getTextKnob } from '../helpers'
+
+const defaultText = 'Delivery in 3-4 days'
 
 storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => <Badge text='Delivery in 3-4 days' />)
-  .add('disabled', () => <Badge text='Delivery in 3-4 days' disabled />)
+  .add('default', () => <Badge text={getTextKnob({ defaultText })} />)
+  .add('disabled', () => <Badge text={getTextKnob({ defaultText })} disabled />)
   .add('default and icon', () => (
-    <Badge text='Delivery in 3-4 days' icon='circleX' />
+    <Badge text={getTextKnob({ defaultText })} icon='circleX' />
   ))
   .addDecorator(storyFn => (
     <div
@@ -25,17 +27,22 @@ storiesOf('Components/Badge', module)
     </div>
   ))
   .add('on a ContentCard', () => (
-    <Badge text='Delivery in 3-4 days' onCard icon='circleX' />
+    <Badge text={getTextKnob({ defaultText })} onCard icon='circleX' />
   ))
   .add('on a ContentCard - disabled', () => (
-    <Badge text='Delivery in 3-4 days' onCard disabled icon='circleX' />
+    <Badge text={getTextKnob({ defaultText })} onCard disabled icon='circleX' />
   ))
   .add('on a ContentCard - right icon', () => (
-    <Badge text='Delivery in 3-4 days' onCard iconOnRight icon='circleX' />
+    <Badge
+      text={getTextKnob({ defaultText })}
+      onCard
+      iconOnRight
+      icon='circleX'
+    />
   ))
   .add('on a ContentCard - right icon disabled', () => (
     <Badge
-      text='Delivery in 3-4 days'
+      text={getTextKnob({ defaultText })}
       onCard
       iconOnRight
       disabled

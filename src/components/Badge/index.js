@@ -68,7 +68,7 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
       {icon &&
         !iconOnRight && (
         <Icon
-          color='black'
+          color='black.base'
           size={14}
           name={icon}
           style={{ verticalAlign: 'middle' }}
@@ -80,7 +80,7 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
       {icon &&
         iconOnRight && (
         <Icon
-          color='black'
+          color='black.base'
           size={14}
           name={icon}
           style={{
@@ -99,10 +99,17 @@ Badge.propTypes = {
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   icon: PropTypes.string,
-  /** By default, icon will be place on the left side. Use this prop to override this behaviour */
+  /** By default, icon will be placed on the left side. Use this prop to override this behaviour */
   iconOnRight: PropTypes.bool,
   /** Special kind of badge to be displayed on a ContentCard component */
   onCard: PropTypes.bool,
+}
+
+Badge.defaultProps = {
+  disabled: false,
+  icon: null,
+  iconOnRight: false,
+  onCard: false,
 }
 
 export default Badge

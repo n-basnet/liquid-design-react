@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -23,11 +23,10 @@ export const ImageWrapper = styled.div`
 export const AuthorWrapper = styled.div`
   padding: 10px 0;
   font-size: 18px;
-  font-weight: 900;
   line-height: 1.25;
   text-align: center;
   ${props => css`
-    color: ${props.theme.colors.richBlack};
+    font-weight: ${props.theme.fontWeight.black};
   `};
 `
 
@@ -38,30 +37,39 @@ export const PhraseWrapper = styled.p`
   text-align: center;
 `
 
-const Quote = ({ author, big, imagePath, small, source, quotation }) =>
-  imagePath ? (
-    <QuoteWrapper cite={source}>
-      <ImageWrapper src={imagePath} />
-      <AuthorWrapper>{author}</AuthorWrapper>
-      <PhraseWrapper>{quotation}</PhraseWrapper>
-    </QuoteWrapper>
-  ) : (
-    <TypographicQuote
-      author={author}
-      big={big}
-      small={small}
-      source={source}
-      quotation={quotation}
-    />
-  )
+const Quote = ({ author, big, imagePath, source, quotation }) => (
+  <Fragment>
+    {imagePath ? (
+      <QuoteWrapper cite={source}>
+        <ImageWrapper src={imagePath} />
+        <AuthorWrapper>{author}</AuthorWrapper>
+        <PhraseWrapper>{quotation}</PhraseWrapper>
+      </QuoteWrapper>
+    ) : (
+      <TypographicQuote
+        author={author}
+        big={big}
+        quotation={quotation}
+        source={source}
+      />
+    )}
+  </Fragment>
+)
 
 Quote.propTypes = {
-  author: PropTypes.string,
+  quotation: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
   big: PropTypes.bool,
+  /** if provided, will display a differently styled quote */
   imagePath: PropTypes.string,
-  small: PropTypes.bool,
+  /** source of the quote, for the HTML `cite` attribute */
   source: PropTypes.string,
-  quotation: PropTypes.string,
+}
+
+Quote.defaultProps = {
+  big: false,
+  imagePath: null,
+  source: '',
 }
 
 Quote.displayName = 'Quote'

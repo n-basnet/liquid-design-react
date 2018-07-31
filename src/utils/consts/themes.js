@@ -17,18 +17,23 @@ const themeBase = {
   )}`,
   zIndex: {
     tooltips: 9,
-    notifications: 10,
+  },
+  fontWeight: {
+    black: 900,
   },
 }
 
 const themeBaseColors = {
-  black: COLORS.BLACK,
-  white: COLORS.WHITE,
+  black: {
+    base: COLORS.BLACK,
+  },
+  white: {
+    base: COLORS.WHITE,
+  },
   grey: {
     base: COLORS.GREY,
     aux: COLORS.AUX_GREY,
   },
-  darkGrey: COLORS.DARK_GREY,
   vibrantYellow: {
     base: COLORS.VIBRANT_YELLOW,
     dark: COLORS.VIBRANT_YELLOW_DARK,
@@ -42,9 +47,12 @@ const themeBaseColors = {
     dark: COLORS.RICH_BLUE_DARK,
   },
   sensitiveGrey: {
+    base: COLORS.DARK_GREY,
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
-  richBlack: COLORS.RICH_BLACK,
+  richBlack: {
+    base: COLORS.RICH_BLACK,
+  },
 }
 
 const getTheme = ({ primary, secondary }) => ({
@@ -82,4 +90,5 @@ export const THEMES = {
   }),
 }
 
-export const DEFAULT_THEME = THEMES.vibrantCyan
+export const DEFAULT_THEME_NAME = 'vibrantCyan'
+export const DEFAULT_THEME = THEMES[DEFAULT_THEME_NAME]

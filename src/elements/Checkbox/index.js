@@ -45,17 +45,24 @@ export const Label = styled.label`
 `
 
 class Checkbox extends Component {
-  state = {
-    checked: false,
-    hover: null,
-  }
-
   static propTypes = {
     disabled: PropTypes.bool,
     /** for controlling the checkbox externally */
     isChecked: PropTypes.bool,
     label: PropTypes.string,
     onChange: PropTypes.func,
+  }
+
+  static defaultProps = {
+    disabled: false,
+    isChecked: false,
+    label: null,
+    onChange: null,
+  }
+
+  state = {
+    checked: false,
+    hover: null,
   }
 
   toggleCheckbox = () => {
@@ -91,7 +98,7 @@ class Checkbox extends Component {
         <Input type='checkbox' />
         <Icon
           name={`checkbox${iconVersion}`}
-          color={!hover && !this.isChecked() ? 'darkGrey' : undefined}
+          color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
         />
         <Label disabled={disabled}>{label}</Label>
       </CheckboxWrapper>

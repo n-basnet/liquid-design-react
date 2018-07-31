@@ -27,7 +27,7 @@ const QUESTIONS = [
 ]
 
 const saveFile = (path, content) => {
-  fs.outputFile(path, `${content.trim()}\n`, (err) => {
+  fs.outputFile(path, `${content.trim()}\n`, err => {
     if (err) {
       return console.log(err)
     }
@@ -37,7 +37,6 @@ const saveFile = (path, content) => {
 
 inquirer.prompt(QUESTIONS).then(({ name, type }) => {
   const canonisedName = camelcase(name, { pascalCase: true })
-
   ;[
     {
       path: `src/${type}s/${canonisedName}/index.js`,
@@ -49,7 +48,10 @@ inquirer.prompt(QUESTIONS).then(({ name, type }) => {
     },
     {
       path: `storybook/${type}s/${canonisedName}.js`,
-      content: fileTemplates.storybookFileTemplate({ name: canonisedName, type }),
+      content: fileTemplates.storybookFileTemplate({
+        name: canonisedName,
+        type,
+      }),
     },
   ].map(file => {
     saveFile(file.path, file.content)
@@ -58,12 +60,21 @@ inquirer.prompt(QUESTIONS).then(({ name, type }) => {
   // add to index.js
   const indexFilePath = 'src/index.js'
   const indexFile = fs.readFileSync(indexFilePath, 'utf8')
-  saveFile(indexFilePath, `
+  saveFile(
+    indexFilePath,
+    `
 ${indexFile.trim()}
 export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
-`)
+`
+  )
 
   // add to storybook
-  const newStorybookModules = [...storybookModules, { name: canonisedName, type }]
-  saveFile('storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
+  const newStorybookModules = [
+    ...storybookModules,
+    { name: canonisedName, type },
+  ]
+  saveFile(
+    'storybook/modules.json',
+    JSON.stringify(newStorybookModules, null, 2)
+  )
 })

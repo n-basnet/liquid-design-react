@@ -2,29 +2,57 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Quote } from '~'
+import { getTextKnob } from '../helpers'
 
-const author = 'Neville Brody'
-const imagePath =
-  'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg'
-const quotation =
-  'Digital design is like painting, except the paint never dries ever again.'
-const quotationV2 =
-  'Digital design is like painting, except the paint never dries.'
-const source = 'http://merck.design'
+const getAuthor = () =>
+  getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
+const getImagePath = () =>
+  getTextKnob({
+    name: 'imagePath',
+    defaultText:
+      'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg',
+  })
+const getQuotation = () =>
+  getTextKnob({
+    name: 'quotation',
+    defaultText:
+      'Digital design is like painting, except the paint never dries ever again.',
+  })
+const getQuotationForTypographicQuote = () =>
+  getTextKnob({
+    name: 'quotation',
+    defaultText:
+      'Digital design is like painting, except the paint never dries.',
+  })
+const getSource = () =>
+  getTextKnob({
+    name: 'source',
+    defaultText: 'http://merck.design',
+  })
 
 storiesOf('Components/Quote/Default Quote', module).add('default', () => (
   <Quote
-    author={author}
-    imagePath={imagePath}
-    source={source}
-    quotation={quotation}
+    author={getAuthor()}
+    imagePath={getImagePath()}
+    source={getSource()}
+    quotation={getQuotation()}
   />
 ))
 
 storiesOf('Components/Quote/Typographic Quote', module)
   .add('Big', () => (
-    <Quote author={author} big source={source} quotation={quotationV2} />
+    <Quote
+      author={getAuthor()}
+      big
+      source={getSource()}
+      quotation={getQuotationForTypographicQuote()}
+    />
   ))
   .add('Small', () => (
-    <Quote author={author} small source={source} quotation={quotationV2} />
+    <Quote
+      author={getAuthor()}
+      small
+      source={getSource()}
+      quotation={getQuotationForTypographicQuote()}
+    />
   ))

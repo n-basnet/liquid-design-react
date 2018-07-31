@@ -33,7 +33,7 @@ const StyledSingleBreadcrumb = styled.div`
     `};
     ${props.disabled &&
       css`
-        color: ${props.theme.colors.darkGrey};
+        color: ${props.theme.colors.sensitiveGrey.base};
       `};
     ${!props.disabled &&
       props.onClick &&
@@ -50,8 +50,16 @@ const SingleBreadcrumbTextWrapper = styled.span`
 `
 
 const SingleBreadcrumb = ({ name, onClick, active, disabled }) => (
-  <StyledSingleBreadcrumb active={active} disabled={disabled} onClick={onClick}>
-    <Icon name='arrowRight' size={19} color={disabled && 'darkGrey'} />
+  <StyledSingleBreadcrumb
+    active={active}
+    disabled={disabled}
+    onClick={onClick || undefined}
+  >
+    <Icon
+      name='arrowRight'
+      size={19}
+      color={disabled ? 'sensitiveGrey.base' : undefined}
+    />
     <SingleBreadcrumbTextWrapper>{name}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
 )
@@ -61,6 +69,12 @@ SingleBreadcrumb.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
+}
+
+SingleBreadcrumb.defaultProps = {
+  active: false,
+  disabled: false,
+  onClick: null,
 }
 
 export default SingleBreadcrumb

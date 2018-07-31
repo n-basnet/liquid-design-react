@@ -7,8 +7,8 @@ import { fadeIn } from '~/utils/keyframes'
 import { cursorValue } from '~/utils/styling'
 
 const bgColorSelector = props => {
-  if (props.info) return props.theme.colors.vibrantYellow.base
-  if (props.warning) return props.theme.colors.richRed.base
+  if (props.isInfo) return props.theme.colors.vibrantYellow.base
+  if (props.isWarning) return props.theme.colors.richRed.base
   if (props.disabled) return props.theme.colors.sensitiveGrey.darkest
   else return props.theme.colors.primary.base
 }
@@ -31,26 +31,34 @@ const BubbleWrapper = styled.div`
 export const Label = styled.span`
   padding-bottom: 1px;
   font-size: 18px;
-  font-weight: 900;
   ${props => css`
-    color: ${props.theme.colors.white};
+    color: ${props.theme.colors.white.base};
+    font-weight: ${props.theme.fontWeight.black};
   `};
 `
 
-const Bubble = ({ disabled, icon, info, label, warning }) => (
-  <BubbleWrapper disabled={disabled} info={info} warning={warning}>
+const Bubble = ({ disabled, icon, isInfo, label, isWarning }) => (
+  <BubbleWrapper disabled={disabled} isInfo={isInfo} isWarning={isWarning}>
     {label && <Label>{label.toString().length > 2 ? 99 : label}</Label>}
-    {info && <Icon color='white' name='info' size={16} />}
-    {warning && <Icon color='white' name='warning' size={16} />}
+    {isInfo && <Icon color='white.base' name='info' size={16} />}
+    {isWarning && <Icon color='white.base' name='warning' size={16} />}
   </BubbleWrapper>
 )
 
 Bubble.propTypes = {
-  disabled: PropTypes.bool,
-  icon: PropTypes.string,
-  info: PropTypes.bool,
   label: PropTypes.number,
-  warning: PropTypes.bool,
+  icon: PropTypes.string,
+  isInfo: PropTypes.bool,
+  isWarning: PropTypes.bool,
+  disabled: PropTypes.bool,
+}
+
+Bubble.defaultProps = {
+  label: null,
+  icon: null,
+  isInfo: false,
+  isWarning: false,
+  disabled: false,
 }
 
 export default Bubble

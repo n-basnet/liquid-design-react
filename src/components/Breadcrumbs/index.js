@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
 
-const Breadcrumbs = ({ items = [], active }) => (
+const Breadcrumbs = ({ items, active }) => (
   <div>
     {items.map((v, i) => (
       <SingleBreadcrumb key={i} active={i === active} {...v} />
@@ -14,6 +14,11 @@ const Breadcrumbs = ({ items = [], active }) => (
 Breadcrumbs.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(SingleBreadcrumb.propTypes)),
   active: PropTypes.number,
+}
+
+Breadcrumbs.defaultProps = {
+  items: [],
+  active: null,
 }
 
 export default Breadcrumbs

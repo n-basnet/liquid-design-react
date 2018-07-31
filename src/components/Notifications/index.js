@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { filter } from 'ramda'
 import Animated from 'react-animated-transitions'
 import 'animate.css/source/fading_entrances/fadeInDown.css'
 import 'animate.css/source/fading_exits/fadeOutUp.css'
 
+import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { Base } from '~/Theme'
 import SingleNotification from '~/components/Notifications/SingleNotification'
 import { NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
+import { getOrCreateDOMNode } from '~/utils/dom'
 
 const DEFAULT_AUTO_REMOVE_TIMEOUT = 3000
 const ANIMATION_DURATION = 200
+const ANIMATED_ITEM_TIMEOUT = ANIMATION_DURATION * 0.9
 
 const NotificationsWrapper = styled.div`
   position: fixed;
@@ -21,24 +26,21 @@ const NotificationsWrapper = styled.div`
   padding: ${NOTIFICATION_WRAPPER_PADDING}px;
   text-align: center;
   pointer-events: none;
-  ${props => css`
-    z-index: ${props.theme.zIndex.notifications};
-  `};
   .animated {
     animation-duration: ${ANIMATION_DURATION}ms;
   }
 `
 
-class Notifications extends React.Component {
-  state = {
-    items: [],
-  }
+class Notifications extends PureComponent {
   static propTypes = {
     /** Timeout after which a notification should disappear */
     autoRemoveTimeout: PropTypes.number,
   }
   static defaultProps = {
     autoRemoveTimeout: DEFAULT_AUTO_REMOVE_TIMEOUT,
+  }
+  state = {
+    items: [],
   }
   addNotification = notification => {
     const id = uniqid()
@@ -47,7 +49,7 @@ class Notifications extends React.Component {
       items: [{ ...notification, id }, ...items],
     }))
 
-    if (!notification.error) {
+    if (!notification.isError) {
       setTimeout(
         this.removeNotificationHandler(id),
         this.props.autoRemoveTimeout
@@ -59,27 +61,32 @@ class Notifications extends React.Component {
       items: filter(item => item.id !== id, items),
     }))
   }
+  getDOMNode = () => getOrCreateDOMNode(`${GLOBAL_CSS_PREFIX}Notifications`)
   render() {
-    return (
-      <NotificationsWrapper>
-        <Animated items>
-          {this.state.items.map(item => (
-            <Animated
-              key={item.id}
-              item
-              enter='fadeInDown'
-              exit='fadeOutUp'
-              timeout={ANIMATION_DURATION * 0.9}
-            >
-              <SingleNotification
-                getRemoveHandler={this.removeNotificationHandler}
-                autoRemoveTimeout={this.props.autoRemoveTimeout}
-                {...item}
-              />
-            </Animated>
-          ))}
-        </Animated>
-      </NotificationsWrapper>
+    return ReactDOM.createPortal(
+      // Theme's Base is needed because the component attaches itself directly to the body element
+      <Base>
+        <NotificationsWrapper>
+          <Animated items>
+            {this.state.items.map(item => (
+              <Animated
+                key={item.id}
+                item
+                enter='fadeInDown'
+                exit='fadeOutUp'
+                timeout={ANIMATED_ITEM_TIMEOUT}
+              >
+                <SingleNotification
+                  getRemoveHandler={this.removeNotificationHandler}
+                  autoRemoveTimeout={this.props.autoRemoveTimeout}
+                  {...item}
+                />
+              </Animated>
+            ))}
+          </Animated>
+        </NotificationsWrapper>
+      </Base>,
+      this.getDOMNode()
     )
   }
 }

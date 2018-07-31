@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { pick } from 'ramda'
+import { pick, filter } from 'ramda'
 
 import Icon from '~/elements/Icon'
-import { Flex } from '~/components/primitives/Flex'
 import {
   NOTIFICATION_TYPES,
   NOTIFICATION_CONFIG,
@@ -12,8 +11,8 @@ import {
 } from '~/components/Notifications/consts'
 import { media } from '~/utils/styling'
 
-const getNotificationType = props =>
-  Object.keys(pick(NOTIFICATION_TYPES, props))[0]
+export const getNotificationType = props =>
+  Object.keys(filter(v => !!v, pick(NOTIFICATION_TYPES, props)))[0]
 
 const getBackgroundColor = ({ theme, ...props }, hover = false) => {
   const type = getNotificationType(props)
@@ -32,7 +31,7 @@ const SingleNotificationWrapper = styled.div`
   pointer-events: none;
 `
 
-const getColor = props => (props.info ? 'black' : 'white')
+const getColor = props => (props.isInfo ? 'black' : 'white')
 
 const STANDARD_WIDTH = 500
 
@@ -42,7 +41,6 @@ const SingleNotificationInnerWrapper = styled.div`
   align-items: center;
   margin-bottom: 10px;
   padding: 10px 15px;
-  font-weight: 900;
   font-size: 14px;
   line-height: 1;
   pointer-events: auto;
@@ -51,11 +49,12 @@ const SingleNotificationInnerWrapper = styled.div`
     width: ${STANDARD_WIDTH}px;
   `};
   ${props => css`
-    color: ${props.theme.colors[getColor(props)]};
+    color: ${props.theme.colors[getColor(props)].base};
     background-color: ${getBackgroundColor(props)};
     border-radius: ${props.theme.borderRadius};
     box-shadow: ${props.theme.boxShadow};
     transition: ${props.theme.transition};
+    font-weight: ${props.theme.fontWeight.black};
     &:hover {
       background-color: ${getBackgroundColor(props, true)};
     }
@@ -66,21 +65,26 @@ const TextWrapper = styled.span`
   padding-right: 10px;
 `
 
+const SingleNotificationLeftInnerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const SingleNotification = props => {
-  const { text, info, id, getRemoveHandler } = props
+  const { text, isInfo, id, getRemoveHandler } = props
   const iconName = getIconName(props)
-  const iconColor = getColor(props)
+  const iconColor = `${getColor(props)}.base`
   return (
     <SingleNotificationWrapper>
       <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)}>
-        <Flex centerY>
+        <SingleNotificationLeftInnerWrapper>
           {iconName && (
-            <Icon color={iconColor} name={iconName} size={info ? 16 : 20} />
+            <Icon color={iconColor} name={iconName} size={isInfo ? 16 : 20} />
           )}
           <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>
             {text}
           </TextWrapper>
-        </Flex>
+        </SingleNotificationLeftInnerWrapper>
         <Icon
           color={iconColor}
           name='close'
@@ -96,9 +100,15 @@ SingleNotification.propTypes = {
   text: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   getRemoveHandler: PropTypes.func.isRequired,
-  reminder: PropTypes.bool,
-  error: PropTypes.bool,
-  info: PropTypes.bool,
+  isReminder: PropTypes.bool,
+  isError: PropTypes.bool,
+  isInfo: PropTypes.bool,
+}
+
+SingleNotification.defaultProps = {
+  isReminder: false,
+  isError: false,
+  isInfo: false,
 }
 
 export default SingleNotification

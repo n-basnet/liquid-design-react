@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { PureComponent } from 'react'
+import styled, { css } from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { getBackgroundWrapper } from '../helpers'
+import { getBackgroundWrapper, getTextKnob } from '../helpers'
 import { Modal } from '~'
 
 const ModalPresentation = styled.div`
@@ -12,7 +12,9 @@ const ModalPresentation = styled.div`
     margin-top: 0;
     margin-bottom: 32px;
     font-size: 22px;
-    font-weight: 900;
+    ${props => css`
+      font-weight: ${props.theme.fontWeight.black};
+    `};
   }
   p {
     line-height: 28px;
@@ -23,17 +25,13 @@ const ModalPresentation = styled.div`
 const Presentation = {
   Simple: () => (
     <ModalPresentation>
-      <h1>Headline Text</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo.
-      </p>
+      <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
+      <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
     </ModalPresentation>
   ),
 }
 
-class ModalApp extends React.Component {
+class ModalApp extends PureComponent {
   state = {
     open: false,
   }
@@ -82,7 +80,7 @@ storiesOf('Components/Modal', module)
     Modals provide additional information in another layer. Modals can be closed manually by the user. Modals should be used sparingly.
 
     ~~~js
-    class ModalApp extends React.Component {
+    class ModalApp extends PureComponent {
       state = {
         open: false,
       }

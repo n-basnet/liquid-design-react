@@ -33,14 +33,14 @@ describe('Bubble', () => {
 
   it('renders the correct icon for the info bubble', () => {
     const icon = 'info'
-    const wrapper = shallow(<Bubble info />)
+    const wrapper = shallow(<Bubble isInfo />)
 
     expect(wrapper.find(Icon).prop('name')).toEqual(icon)
   })
 
   it('renders the correct icon for the warning bubble', () => {
     const icon = 'warning'
-    const wrapper = shallow(<Bubble warning />)
+    const wrapper = shallow(<Bubble isWarning />)
 
     expect(wrapper.find(Icon).prop('name')).toEqual(icon)
   })

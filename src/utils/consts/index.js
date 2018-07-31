@@ -1,1 +1,1 @@
-export const GLOBAL_CLASSNAME_PREFIX = 'LD__'
+export const GLOBAL_CSS_PREFIX = 'LD__'

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { mount } from 'enzyme'
 
 import Theme from '~/Theme'
 import Notifications from '.'
+import { getNotificationType } from './SingleNotification'
 import { NOTIFICATION_TYPES } from './consts'
 
 const notificationText = 'some text'
@@ -12,7 +13,7 @@ const getNotification = type => ({
   [type]: true,
 })
 
-class NotificationApp extends React.Component {
+class NotificationApp extends PureComponent {
   render() {
     return (
       <Theme>
@@ -49,16 +50,16 @@ describe('Notifications', () => {
   it('addNotification: updates state', () => {
     expect(notificationsRef.state.items).toEqual([])
 
-    notificationsRef.addNotification(getNotification('info'))
+    notificationsRef.addNotification(getNotification('isInfo'))
 
     expect(notificationsRef.state.items[0]).toMatchObject({
       text: notificationText,
-      info: true,
+      isInfo: true,
     })
   })
 
   it('removeNotificationHandler: removes a notification', () => {
-    notificationsRef.addNotification(getNotification('error'))
+    notificationsRef.addNotification(getNotification('isError'))
     const notificationId = notificationsRef.state.items[0].id
     expect(notificationsRef.state.items).toHaveLength(1)
     notificationsRef.removeNotificationHandler(notificationId)()
@@ -66,16 +67,27 @@ describe('Notifications', () => {
   })
 
   it('removes regular notification after a timeout', () => {
-    notificationsRef.addNotification(getNotification('info'))
+    notificationsRef.addNotification(getNotification('isInfo'))
     expect(notificationsRef.state.items).toHaveLength(1)
     jest.runAllTimers()
     expect(notificationsRef.state.items).toHaveLength(0)
   })
 
   it('does not remove error notification after a timeout', () => {
-    notificationsRef.addNotification(getNotification('error'))
+    notificationsRef.addNotification(getNotification('isError'))
     expect(notificationsRef.state.items).toHaveLength(1)
     jest.runAllTimers()
     expect(notificationsRef.state.items).toHaveLength(1)
+  })
+
+  it('getNotificationType helper', () => {
+    const type = 'isError'
+    expect(
+      getNotificationType({
+        [type]: true,
+        isReminder: false,
+        somethingElse: 42,
+      })
+    ).toEqual(type)
   })
 })

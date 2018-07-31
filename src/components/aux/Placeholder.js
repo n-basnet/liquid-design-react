@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import PlaceholderImage from '~/graphics/svgIllustrations/placeholder.svg'
+import PlaceholderImage from '~/assets/svgIllustrations/placeholder.svg'
 
-const Placeholder = ({ size = 150 }) => (
+const Placeholder = ({ size }) => (
   <PlaceholderImage
     width={`${size}px`}
     height={`${size}px`}
@@ -15,6 +15,10 @@ const Placeholder = ({ size = 150 }) => (
 
 Placeholder.propTypes = {
   size: PropTypes.number,
+}
+
+Placeholder.defaultProps = {
+  size: 150,
 }
 
 export default Placeholder

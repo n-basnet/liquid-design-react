@@ -5,10 +5,10 @@ import { withTheme, injectGlobal, css } from 'styled-components'
 
 import { Base } from '~/Theme'
 import ModalContent from '~/components/Modal/ModalContent'
-import { GLOBAL_CLASSNAME_PREFIX } from '~/utils/consts'
+import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 
 const TRANSITION_DURATION = 200
-const MODAL_OVERLAY_CLASSNAME = `${GLOBAL_CLASSNAME_PREFIX}Modal`
+const MODAL_OVERLAY_CLASSNAME = `${GLOBAL_CSS_PREFIX}Modal`
 
 const getReactModalContentStyle = theme => ({
   padding: 0,

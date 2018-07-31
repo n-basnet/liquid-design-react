@@ -22,10 +22,11 @@ const ModalContent = ({ label, onClose, children }) => (
 ModalContent.propTypes = {
   onClose: PropTypes.func.isRequired,
   label: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.node.isRequired,
+}
+
+ModalContent.defaultProps = {
+  label: ModalHeader.defaultProps.label,
 }
 
 export default ModalContent
