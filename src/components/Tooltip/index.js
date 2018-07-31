@@ -32,7 +32,7 @@ const TooltipContentWrapper = styled.div`
   ${props => css`
     ${getPosition(props)};
     z-index: ${props.theme.zIndex.tooltips};
-    background-color: ${props.theme.colors.white};
+    background-color: ${props.theme.colors.white.base};
     border-radius: ${props.theme.borderRadius};
     ${hasCSSFilters()
     ? `filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));`
@@ -47,7 +47,7 @@ const TooltipContentWrapper = styled.div`
           height: 0;
           ${props => css`
             ${getArrowStyle({
-    color: props.theme.colors.white,
+    color: props.theme.colors.white.base,
     wall: props.wall,
     side: props.side,
   })};

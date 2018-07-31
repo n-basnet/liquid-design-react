@@ -39,7 +39,7 @@ storiesOf('Components/Tooltip', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(storyFn => (
     <Fragment>
-      {/* just to make addon-info aware of the original `Notifications` props */}
+      {/* just to make addon-info aware of the original `Tooltip` props */}
       <div style={{ display: 'none' }}>
         <Tooltip>something</Tooltip>
       </div>
