@@ -18,13 +18,13 @@ const CheckboxWrapper = styled.div`
     `};
   .${ICON_CLASSNAME} svg {
     transition: fill 200ms;
-    border-radius: 7px;
+    border-radius: 8px;
     &:hover {
       ${props =>
     !props.disabled &&
         props.checked &&
         css`
-          box-shadow: ${props.theme.smallBoxShadow};
+          fill: ${props.theme.colors.primary.dark};
         `};
     }
   }
@@ -105,5 +105,7 @@ class Checkbox extends Component {
     )
   }
 }
+
+Checkbox.displayName = 'Checkbox'
 
 export default Checkbox

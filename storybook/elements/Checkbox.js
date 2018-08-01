@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
@@ -8,6 +9,12 @@ import { Checkbox } from '~'
 const label = 'Checkbox text'
 
 class CheckboxApp extends React.Component {
+  static propTypes = {
+    externallyControlled: PropTypes.bool,
+  }
+  static defaultProps = {
+    externallyControlled: false,
+  }
   state = {
     isChecked: false,
   }
@@ -17,16 +24,26 @@ class CheckboxApp extends React.Component {
     action('change state')(isChecked)
   }
   render() {
+    const { externallyControlled } = this.props
     return (
       <div>
-        <Checkbox isChecked={this.state.isChecked} label={label} />
-        <br />
-        <input
-          type='checkbox'
-          onChange={this.toggle}
-          checked={this.state.isChecked}
+        <Checkbox
+          isChecked={this.state.isChecked}
+          onChange={externallyControlled ? null : this.toggle}
+          label={label}
         />
-        {'<- control the checkbox'}
+        {externallyControlled && (
+          <Fragment>
+            <br />
+            <input
+              id='toggleCheckbox'
+              type='checkbox'
+              onChange={this.toggle}
+              checked={this.state.isChecked}
+            />
+            <label htmlFor='toggleCheckbox'>{'<- control the checkbox'}</label>
+          </Fragment>
+        )}
       </div>
     )
   }
@@ -46,7 +63,8 @@ storiesOf('Elements/Checkbox', module)
       propTablesExclude: [CheckboxApp],
     },
   })
-  .add('controlled externally', () => <CheckboxApp />, {
+  .add('stateful', () => <CheckboxApp />)
+  .add('controlled externally', () => <CheckboxApp externallyControlled />, {
     info: {
       text: `
     ~~~js
