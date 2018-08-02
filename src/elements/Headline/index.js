@@ -21,7 +21,7 @@ Headline.propTypes = {
 }
 
 Headline.defaultProps = {
-  type: 'XH1',
+  type: 'H1',
 }
 
 export default Headline

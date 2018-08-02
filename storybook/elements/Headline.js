@@ -8,7 +8,9 @@ const defaultText = 'Our pursuit is progress for people.'
 
 storiesOf('Elements/Headline', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '830px' } }))
-  .add('XH1', () => <Headline>{getTextKnob({ defaultText })}</Headline>)
+  .add('XH1', () => (
+    <Headline type='XH1'>{getTextKnob({ defaultText })}</Headline>
+  ))
   .add('XH2', () => (
     <Headline type='XH2'>{getTextKnob({ defaultText })}</Headline>
   ))
@@ -24,9 +26,7 @@ storiesOf('Elements/Headline', module)
   .add('XH6', () => (
     <Headline type='XH6'>{getTextKnob({ defaultText })}</Headline>
   ))
-  .add('H1', () => (
-    <Headline type='H1'>{getTextKnob({ defaultText })}</Headline>
-  ))
+  .add('H1', () => <Headline>{getTextKnob({ defaultText })}</Headline>)
   .add('H2', () => (
     <Headline type='H2'>{getTextKnob({ defaultText })}</Headline>
   ))
