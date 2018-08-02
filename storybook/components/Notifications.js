@@ -9,7 +9,7 @@ import {
   NOTIFICATION_WRAPPER_PADDING,
 } from '~/components/Notifications/consts'
 import SingleNotification from '~/components/Notifications/SingleNotification'
-import { getTextKnob } from '../helpers'
+import { getTextKnob, formatList } from '../helpers'
 
 const DEFAULT_TEXT = 'Notification text'
 const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
@@ -98,12 +98,16 @@ storiesOf('Components/Notifications', module)
       text: `
     Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.
 
+    Notication types can be set via boolean props: ${formatList(
+    NOTIFICATION_TYPES
+  )}.
+
     Usage: call \`Notification\`'s \`addNotification\` method via a ref:
 
     ~~~js
     class NotificationApp extends PureComponent {
       createNotification = () => {
-        this.notificationsRef.addNotification({ text: 'Some info', info: true })
+        this.notificationsRef.addNotification({ text: 'Some info', isInfo: true })
       }
       render() {
         return (

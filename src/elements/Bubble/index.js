@@ -37,7 +37,7 @@ export const Label = styled.span`
   `};
 `
 
-const Bubble = ({ disabled, icon, isInfo, label, isWarning }) => (
+const Bubble = ({ disabled, isInfo, label, isWarning }) => (
   <BubbleWrapper disabled={disabled} isInfo={isInfo} isWarning={isWarning}>
     {label && <Label>{label.toString().length > 2 ? 99 : label}</Label>}
     {isInfo && <Icon color='white.base' name='info' size={16} />}
@@ -46,16 +46,17 @@ const Bubble = ({ disabled, icon, isInfo, label, isWarning }) => (
 )
 
 Bubble.propTypes = {
+  /** the content to be displayed in the element  */
   label: PropTypes.number,
-  icon: PropTypes.string,
+  /** info styling */
   isInfo: PropTypes.bool,
+  /** warning styling */
   isWarning: PropTypes.bool,
   disabled: PropTypes.bool,
 }
 
 Bubble.defaultProps = {
   label: null,
-  icon: null,
   isInfo: false,
   isWarning: false,
   disabled: false,

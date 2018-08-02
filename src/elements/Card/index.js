@@ -63,8 +63,11 @@ const Card = styled.div`
 `
 
 Card.propTypes = {
+  /** with text centering */
   center: PropTypes.bool,
+  /** active style - with drop shadow */
   active: PropTypes.bool,
+  /** stacked style - suggesting multiple items */
   stacked: PropTypes.bool,
 }
 

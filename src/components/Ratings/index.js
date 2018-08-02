@@ -11,12 +11,13 @@ export const roundToNearest = (value, number = 0.5) => {
 
 class Ratings extends PureComponent {
   static propTypes = {
-    /** Amount of stars/dots to display */
+    /** amount of stars/dots to display */
     steps: PropTypes.number,
     rating: PropTypes.number,
-    /** Submit handler - if provided, the component will be interactive */
+    /** submit handler - if provided, the component will be interactive */
     onSubmit: PropTypes.func,
     disabled: PropTypes.bool,
+    /** different shape of single step - dot instead of default star */
     dots: PropTypes.bool,
   }
   static defaultProps = {

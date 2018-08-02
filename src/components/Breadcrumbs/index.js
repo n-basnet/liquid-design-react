@@ -13,6 +13,7 @@ const Breadcrumbs = ({ items, active }) => (
 
 Breadcrumbs.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape(SingleBreadcrumb.propTypes)),
+  /** index of the item that should be marked as active (e.g. current in the navigation) */
   active: PropTypes.number,
 }
 

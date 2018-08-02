@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
-import { getBackgroundWrapper } from '../helpers'
+import { getBackgroundWrapper, formatList } from '../helpers'
 import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
 import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
 
@@ -77,6 +77,13 @@ storiesOf('Components/Tooltip', module)
     {
       info: {
         text: `
+          Tooltip has ${WALLS_KEYS.length *
+            SIDES_KEYS.length} possible placements, from the perspective of the Tooltip content: each wall (${formatList(
+  WALLS_KEYS
+)}) can have the arrow placed on either side (${formatList(
+  SIDES_KEYS
+)}).
+
           ~~~js
           <Tooltip>some content</Tooltip>
           ~~~

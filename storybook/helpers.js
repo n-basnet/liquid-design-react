@@ -21,3 +21,5 @@ export const getTextKnob = ({
   defaultText,
   placeholderTextLength = 30,
 } = {}) => text(name, defaultText || placeholderText(placeholderTextLength))
+
+export const formatList = list => list.map(v => `\`${v}\``).join(', ')

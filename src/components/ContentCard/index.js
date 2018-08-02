@@ -81,13 +81,18 @@ const ContentCard = ({
 )
 
 ContentCard.propTypes = {
+  /** main text to be displayed */
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+  /** a special text to be displayed below the image */
   featured: PropTypes.string,
   imagePath: PropTypes.string,
   labels: PropTypes.arrayOf(PropTypes.shape(Label.propTypes)),
+  /** stacked style - suggesting multiple items */
   stacked: PropTypes.bool,
+  /** active style - with drop shadow */
   active: PropTypes.bool,
+  /** Badge component props, to be attached to the element's bottom */
   badge: PropTypes.shape({
     text: PropTypes.string.isRequired,
     icon: PropTypes.string,

@@ -4,24 +4,24 @@ import PropTypes from 'prop-types'
 import * as H from '~/elements/Headline/H'
 import * as BH from '~/elements/Headline/BH'
 
-const Headline = ({ children, type }) => {
+const Headline = ({ children, size }) => {
   const HEADLINES = {
     ...H,
     ...BH,
   }
 
-  const HeadlineComponent = HEADLINES[type]
+  const HeadlineComponent = HEADLINES[size]
 
   return <HeadlineComponent>{children}</HeadlineComponent>
 }
 
 Headline.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.string,
+  size: PropTypes.string,
 }
 
 Headline.defaultProps = {
-  type: 'H1',
+  size: 'H1',
 }
 
 export default Headline

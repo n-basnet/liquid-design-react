@@ -96,6 +96,7 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
 )
 
 Badge.propTypes = {
+  /** text to be displayed in the Badge */
   text: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
   icon: PropTypes.string,
