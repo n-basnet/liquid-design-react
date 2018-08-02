@@ -5,6 +5,30 @@ import COLORS from '~/utils/consts/colors'
 const themeBase = {
   borderRadius: '6px',
   fontFamily: `'Lato', sans-serif`,
+  fontSize: {
+    xh1: '92px',
+    xh2: '72px',
+    xh3: '64px',
+    xh4: '48px',
+    xh5: '40px',
+    xh6: '36px',
+    h1: '32px',
+    h2: '26px',
+    h3: '22px',
+    h4: '18px',
+    h5: '16px',
+    h6: '14px',
+    bh1: '48px',
+    bh2: '40px',
+    bh3: '36px',
+    bh4: '32px',
+    bh5: '26px',
+    bh6: '22px',
+  },
+  fontWeight: {
+    regular: '400',
+    black: '900',
+  },
   transition: 'all 200ms',
   boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(
     COLORS.BLACK,
@@ -16,9 +40,6 @@ const themeBase = {
   )}`,
   zIndex: {
     tooltips: 9,
-  },
-  fontWeight: {
-    black: 900,
   },
 }
 

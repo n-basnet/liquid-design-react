@@ -22,9 +22,9 @@ const PhraseWrapper = styled.p`
 const AuthorWrapper = styled.div`
   padding: 10px 0 10px 3px;
   font-size: 12px;
-  font-weight: 400;
   letter-spacing: 0.2px;
   ${props => css`
+    font-weight: ${props.theme.fontWeight.regular};
     color: ${props.theme.colors.primary.base};
   `};
 `

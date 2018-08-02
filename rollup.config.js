@@ -4,8 +4,11 @@ import autoExternal from 'rollup-plugin-auto-external'
 import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import reactSvg from 'rollup-plugin-react-svg'
+import url from 'rollup-plugin-url'
 
 import pkg from './package.json'
+
+const MAX_INLINE_FILE_SIZE_KB = 100
 
 export default {
   input: 'src/index.js',
@@ -31,5 +34,9 @@ export default {
     resolve(),
     commonjs(),
     reactSvg(),
+    url({
+      limit: MAX_INLINE_FILE_SIZE_KB * 1024,
+      include: ['**/*.woff', '**/*.woff2'],
+    }),
   ],
 }

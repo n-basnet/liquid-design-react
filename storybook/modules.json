@@ -46,5 +46,9 @@
   {
     "name": "Tooltip",
     "type": "component"
+  },
+  {
+    "name": "Headline",
+    "type": "element"
   }
 ]

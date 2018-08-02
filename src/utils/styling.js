@@ -5,6 +5,7 @@ export const getBackgroundImage = ({ src }) => css`
   background-position: center;
   background-size: cover;
 `
+
 const SCREEN_SIZES = {
   desktop: 992,
   tablet: 768,
