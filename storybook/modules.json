@@ -50,5 +50,17 @@
   {
     "name": "Headline",
     "type": "element"
+  },
+  {
+    "name": "Paragraph",
+    "type": "element"
+  },
+  {
+    "name": "Label",
+    "type": "element"
+  },
+  {
+    "name": "Link",
+    "type": "element"
   }
 ]
