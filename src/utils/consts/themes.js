@@ -67,7 +67,8 @@ const themeBaseColors = {
     dark: COLORS.RICH_BLUE_DARK,
   },
   sensitiveGrey: {
-    base: COLORS.DARK_GREY,
+    base: COLORS.SENSITIVE_GREY_BASE,
+    darker: COLORS.SENSITIVE_GREY_DARKER,
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
   richBlack: {

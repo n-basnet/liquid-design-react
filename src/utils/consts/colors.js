@@ -19,7 +19,8 @@ export default {
   BLACK: '#000',
   GREY: '#F8F8FC',
   AUX_GREY: '#f5f5f5',
-  DARK_GREY: '#e9e9ed',
+  SENSITIVE_GREY_BASE: '#f8f8fc',
+  SENSITIVE_GREY_DARKER: '#e9e9ed',
   SENSITIVE_GREY_DARKEST: '#d5d5d9',
   RICH_BLACK: '#1b1b25',
 }
