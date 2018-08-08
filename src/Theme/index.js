@@ -33,7 +33,7 @@ const Theme = ({ themeName, ...props }) => (
   <ThemeProvider theme={THEMES[themeName]}>
     <Fragment>
       <link
-        href='https://fonts.googleapis.com/css?family=Lato:400,900'
+        href='https://fonts.googleapis.com/css?family=Lato:400,700,900'
         rel='stylesheet'
       />
       <Base {...props} />

@@ -27,6 +27,7 @@ const themeBase = {
   },
   fontWeight: {
     regular: '400',
+    bold: '700',
     black: '900',
   },
   transition: 'all 200ms',
@@ -55,8 +56,10 @@ const themeBaseColors = {
     aux: COLORS.AUX_GREY,
   },
   vibrantYellow: {
+    lightest: COLORS.VIBRANT_YELLOW_LIGHTEST,
     base: COLORS.VIBRANT_YELLOW,
     dark: COLORS.VIBRANT_YELLOW_DARK,
+    darker: COLORS.VIBRANT_YELLOW_DARKER,
   },
   richRed: {
     base: COLORS.RICH_RED,
@@ -67,7 +70,9 @@ const themeBaseColors = {
     dark: COLORS.RICH_BLUE_DARK,
   },
   sensitiveGrey: {
-    base: COLORS.SENSITIVE_GREY_BASE,
+    lightest: COLORS.SENSITIVE_GREY_LIGHTEST,
+    base: COLORS.SENSITIVE_GREY,
+    dark: COLORS.SENSITIVE_GREY_DARK,
     darker: COLORS.SENSITIVE_GREY_DARKER,
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
@@ -79,6 +84,7 @@ const themeBaseColors = {
 const getTheme = ({ primary, secondary }) => ({
   colors: {
     primary: {
+      lightest: COLORS[`${primary}_LIGHTEST`],
       base: COLORS[primary],
       dark: COLORS[`${primary}_DARK`],
       darker: COLORS[`${primary}_DARKER`],

@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "animate.css": "^3.6.1",
+    "enzyme-to-json": "^3.3.4",
     "polished": "^1.9.2",
     "ramda": "^0.25.0",
     "react-animated-transitions": "^0.0.6",

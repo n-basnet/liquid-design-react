@@ -66,5 +66,9 @@
   {
     "name": "Accordion",
     "type": "component"
+  },
+  {
+    "name": "Button",
+    "type": "element"
   }
 ]
