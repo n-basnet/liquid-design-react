@@ -43,7 +43,7 @@ const Step = ({ halfIcon, dots, ...props }) => (
     <Icon
       name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`}
       size={20}
-      color={props.rated ? '' : 'sensitiveGrey.base'}
+      color={props.rated ? '' : 'sensitiveGrey.darker'}
     />
   </StyledStep>
 )

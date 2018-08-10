@@ -96,7 +96,7 @@ storiesOf('Elements/Icon', module)
     <IconSet iconList={ICONS} iconProps={{ secondary: true }} />
   ))
   .add('alternative color', () => (
-    <IconSet iconList={ICONS} iconProps={{ color: 'sensitiveGrey.base' }} />
+    <IconSet iconList={ICONS} iconProps={{ color: 'sensitiveGrey.darker' }} />
   ))
   .add('custom color', () => (
     <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />

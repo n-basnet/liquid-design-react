@@ -19,7 +19,7 @@ const ImageWrapper = styled.div`
 const TitleWrapper = styled.h1`
   margin: 0;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: ${props => props.theme.fontWeight.black};
 `
 
 const DescriptionWrapper = styled.div`
@@ -30,10 +30,10 @@ const DescriptionWrapper = styled.div`
 const FeaturedWrapper = styled.div`
   ${props => css`
     color: ${props.theme.colors.primary.base};
+    font-weight: ${props.theme.fontWeight.black};
   `};
   margin-top: 20px;
   font-size: 22px;
-  font-weight: bold;
 `
 
 const LabelsWrapper = styled.div`
@@ -42,6 +42,9 @@ const LabelsWrapper = styled.div`
   ${props => css`
     margin-top: ${props.featured ? 0 : 20}px;
   `};
+  strong {
+    font-weight: ${props => props.theme.fontWeight.black};
+  }
 `
 
 const ContentCard = ({

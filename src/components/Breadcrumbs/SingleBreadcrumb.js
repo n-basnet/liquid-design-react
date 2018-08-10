@@ -27,13 +27,13 @@ const StyledSingleBreadcrumb = styled.div`
     ${props.active &&
       css`
         padding-right: 0;
-        font-weight: bold;
+        font-weight: ${props.theme.fontWeight.black};
         color: ${props.theme.colors.primary.base};
       };
     `};
     ${props.disabled &&
       css`
-        color: ${props.theme.colors.sensitiveGrey.base};
+        color: ${props.theme.colors.sensitiveGrey.darker};
       `};
     ${!props.disabled &&
       props.onClick &&
@@ -58,7 +58,7 @@ const SingleBreadcrumb = ({ name, onClick, active, disabled }) => (
     <Icon
       name='arrowRight'
       size={19}
-      color={disabled ? 'sensitiveGrey.base' : undefined}
+      color={disabled ? 'sensitiveGrey.darker' : undefined}
     />
     <SingleBreadcrumbTextWrapper>{name}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
