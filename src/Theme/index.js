@@ -27,6 +27,11 @@ export const Base = styled.div`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  _:-ms-lang(x),
+  _:-webkit-full-screen,
+  * {
+    line-height: normal;
+  }
 `
 
 const Theme = ({ themeName, ...props }) => (

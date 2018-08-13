@@ -29,6 +29,7 @@ const DescriptionWrapper = styled.div`
 
 const FeaturedWrapper = styled.div`
   ${props => css`
+    font-weight: ${props.theme.fontWeight.black};
     color: ${props.theme.colors.primary.base};
     font-weight: ${props.theme.fontWeight.black};
   `};

@@ -70,5 +70,9 @@
   {
     "name": "Button",
     "type": "element"
+  },
+  {
+    "name": "Tag",
+    "type": "element"
   }
 ]
