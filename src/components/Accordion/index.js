@@ -6,10 +6,17 @@ import Icon from '~/elements/Icon'
 import { media } from '~/utils/styling'
 
 const AccordionWrapper = styled.div`
+  cursor: pointer;
   ${props => css`
     margin-top: -1px;
     border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
+    transition: ${props.theme.transition};
   `};
+  &:hover {
+    ${props => css`
+      background-color: ${props.theme.colors.sensitiveGrey.base};
+    `};
+  }
 `
 
 export const SectionTitle = styled.div`
@@ -32,10 +39,8 @@ export const SectionTitle = styled.div`
     `};
   `};
   &:hover {
-    cursor: pointer;
     ${props => css`
       color: ${props.theme.colors.primary.base};
-      background-color: ${props.theme.colors.sensitiveGrey.base};
     `};
   }
   & svg {
@@ -74,15 +79,15 @@ class Accordion extends Component {
     isOpen: null,
   }
 
+  toggleAccordion = () =>
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+
   render() {
     const { content, isOpen = this.state.isOpen, title } = this.props
 
     return (
-      <AccordionWrapper isOpen={isOpen}>
-        <SectionTitle
-          isOpen={isOpen}
-          onClick={() => this.setState({ isOpen: !this.state.isOpen })}
-        >
+      <AccordionWrapper isOpen={isOpen} onClick={this.toggleAccordion}>
+        <SectionTitle isOpen={isOpen}>
           <Icon name={'arrowBottom'} size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
@@ -91,5 +96,7 @@ class Accordion extends Component {
     )
   }
 }
+
+Accordion.displayName = 'Accordion'
 
 export default Accordion
