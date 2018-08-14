@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List matches the snapshot 1`] = `
+<ul>
+  <ListHead
+    grey={true}
+  >
+    <WithTheme(Icon)
+      color="richBlack"
+      name="star"
+      size={16}
+    />
+  </ListHead>
+  <ListItem
+    active={true}
+    disabled={false}
+    grey={true}
+    icon="star"
+    key="item 1"
+    onClick={[Function]}
+  >
+    <WithTheme(Icon)
+      color="richBlack"
+      name="star"
+      size={16}
+    />
+    <span>
+      item 1
+    </span>
+  </ListItem>
+  <ListItem
+    active={false}
+    disabled={false}
+    grey={true}
+    icon="star"
+    key="item 2"
+    onClick={[Function]}
+  >
+    <WithTheme(Icon)
+      color="richBlack"
+      name="star"
+      size={16}
+    />
+    <span>
+      item 2
+    </span>
+  </ListItem>
+  <ListItem
+    active={false}
+    disabled={true}
+    grey={true}
+    icon="star"
+    key="item 3"
+  >
+    <WithTheme(Icon)
+      color="richBlack"
+      name="star"
+      size={16}
+    />
+    <span>
+      item 3
+    </span>
+  </ListItem>
+</ul>
+`;

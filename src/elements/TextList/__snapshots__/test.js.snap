@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bullet List matches the snapshot 1`] = `
+<NumberedList>
+  <ListItem
+    key="1"
+    name="Lorem ipsum dolor sit amet"
+  >
+    <NumberedList>
+      <ListItem
+        key="2"
+        name="Lorem ipsum dolor sit amet"
+      >
+        <NumberedList>
+          <ListItem
+            key="3"
+            name="Lorem ipsum dolor sit amet"
+          />
+        </NumberedList>
+      </ListItem>
+      <ListItem
+        key="4"
+        name="Lorem ipsum dolor sit amet"
+      />
+    </NumberedList>
+  </ListItem>
+  <ListItem
+    key="5"
+    name="Lorem ipsum dolor sit amet"
+  />
+</NumberedList>
+`;
+
+exports[`Numbered List matches the snapshot 1`] = `
+<NumberedList>
+  <ListItem
+    key="1"
+    name="Lorem ipsum dolor sit amet"
+  >
+    <NumberedList>
+      <ListItem
+        key="2"
+        name="Lorem ipsum dolor sit amet"
+      >
+        <NumberedList>
+          <ListItem
+            key="3"
+            name="Lorem ipsum dolor sit amet"
+          />
+        </NumberedList>
+      </ListItem>
+      <ListItem
+        key="4"
+        name="Lorem ipsum dolor sit amet"
+      />
+    </NumberedList>
+  </ListItem>
+  <ListItem
+    key="5"
+    name="Lorem ipsum dolor sit amet"
+  />
+</NumberedList>
+`;
