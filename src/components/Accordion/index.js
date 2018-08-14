@@ -52,7 +52,7 @@ export const SectionTitle = styled.div`
 `
 
 export const SectionContent = styled.div`
-  padding: 0 15px 10px 50px;
+  padding: 0 15px 15px 50px;
   font-family: Lato;
   font-size: 16px;
   line-height: 1.75;
