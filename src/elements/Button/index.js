@@ -28,7 +28,7 @@ const Button = ({
 
   return appearance === 'ghost' ? (
     <GhostButtonWrapper {...wrapperProps}>
-      {icon && <Icon name={icon} size={size === 'large' ? 18 : 16} />}
+      {icon && <Icon name={icon} size={size === 'big' ? 18 : 16} />}
       {label && (
         <GhostLabel
           appearance={appearance}

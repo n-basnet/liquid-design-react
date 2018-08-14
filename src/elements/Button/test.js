@@ -10,7 +10,7 @@ describe('Button', () => {
   const icon = 'favorite'
   const onClickMock = jest.fn()
   const wrapper = shallow(
-    <Button icon={icon} label={label} size='large' onClick={onClickMock} />
+    <Button icon={icon} label={label} size='big' onClick={onClickMock} />
   )
 
   it('renders a label text correctly', () => {

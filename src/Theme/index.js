@@ -22,6 +22,9 @@ export const Base = styled.div`
     color: ${props.theme.colors.richBlack.base};
     font-family: ${props.theme.fontFamily};
   `};
+  button {
+    font-family: ${props => props.theme.fontFamily};
+  }
   * {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;

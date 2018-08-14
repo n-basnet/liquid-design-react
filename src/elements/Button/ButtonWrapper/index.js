@@ -9,7 +9,7 @@ import { ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
 
 export const widthSelector = props => {
-  return props.label ? '100px' : props.size === 'large' ? '50px' : '40px'
+  return props.label ? '93px' : props.size === 'big' ? '50px' : '40px'
 }
 
 export const ButtonWrapper = styled.button`
@@ -20,8 +20,8 @@ export const ButtonWrapper = styled.button`
   border: none;
   ${props => css`
     min-width: ${widthSelector(props)};
-    min-height: ${props.size === 'large' ? '50px' : '40px'};
-    padding: ${props.size === 'large' ? '13px 0' : '8px 0px'};
+    min-height: ${props.size === 'big' ? '50px' : '40px'};
+    padding: ${props.size === 'big' ? '13px 0' : '8px 0px'};
     background-color: ${
   props.disabled
     ? bgColorSelector(props, 'lightest')
@@ -53,6 +53,9 @@ export const ButtonWrapper = styled.button`
         cursor: pointer;
       `}
   `};
+  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    line-height: 1;
+  }
   &:active span,
   &:focus span {
     position: relative;

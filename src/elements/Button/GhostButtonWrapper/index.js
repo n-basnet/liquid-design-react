@@ -19,7 +19,6 @@ export const GhostButtonWrapper = styled.button`
         ${!props.disabled &&
           css`
             font-weight: ${props.theme.fontWeight.black};
-            text-decoration: underline;
             color: ${props.theme.colors.primary.base};
           `};
       }
