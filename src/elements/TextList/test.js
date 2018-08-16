@@ -6,30 +6,31 @@ import TextList from '.'
 import { BulletList } from '~/elements/TextList/BulletList'
 import { NumberedList } from '~/elements/TextList/NumberedList'
 
+const name = 'Lorem ipsum dolor sit amet'
 const data = [
   {
     id: 1,
-    name: 'Lorem ipsum dolor sit amet',
+    name,
     items: [
       {
         id: 2,
-        name: 'Lorem ipsum dolor sit amet',
+        name,
         items: [
           {
             id: 3,
-            name: 'Lorem ipsum dolor sit amet',
+            name,
           },
         ],
       },
       {
         id: 4,
-        name: 'Lorem ipsum dolor sit amet',
+        name,
       },
     ],
   },
   {
     id: 5,
-    name: 'Lorem ipsum dolor sit amet',
+    name,
   },
 ]
 

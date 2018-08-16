@@ -12,6 +12,7 @@
         "react"
       ],
       "plugins": [
+        "add-react-displayname",
         [
           "babel-plugin-root-import",
           {
@@ -20,7 +21,6 @@
         ],
         "babel-plugin-styled-components",
         "transform-decorators-legacy",
-        "add-react-displayname",
         [
           "ramda",
           {

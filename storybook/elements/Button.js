@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions'
 import { Button } from '~'
 import { getBackgroundWrapper } from '../helpers'
 
-storiesOf('Elements/Buttons/Primary', module)
+storiesOf('Elements/Button/Primary', module)
   .addDecorator(getBackgroundWrapper())
   .add('primary small', () => <Button label='Text' onClick={action('click')} />)
   .add('primary small disabled', () => (
@@ -48,7 +48,7 @@ storiesOf('Elements/Buttons/Primary', module)
     <Button disabled icon='circleX' size='big' onClick={action('click')} />
   ))
 
-storiesOf('Elements/Buttons/Secondary', module)
+storiesOf('Elements/Button/Secondary', module)
   .addDecorator(getBackgroundWrapper())
   .add('secondary small', () => (
     <Button appearance='secondary' label='Text' onClick={action('click')} />
@@ -143,7 +143,7 @@ storiesOf('Elements/Buttons/Secondary', module)
     />
   ))
 
-storiesOf('Elements/Buttons/Highlight', module)
+storiesOf('Elements/Button/Highlight', module)
   .addDecorator(getBackgroundWrapper())
   .add('highlight small', () => (
     <Button appearance='highlight' label='Text' onClick={action('click')} />
@@ -238,7 +238,7 @@ storiesOf('Elements/Buttons/Highlight', module)
     />
   ))
 
-storiesOf('Elements/Buttons/Ghost', module)
+storiesOf('Elements/Button/Ghost', module)
   .addDecorator(getBackgroundWrapper())
   .add('ghost small', () => (
     <Button appearance='ghost' label='Text' onClick={action('click')} />

@@ -13,19 +13,12 @@ export const ListHead = styled.div`
   line-height: 1.75;
   ${props => css`
     border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
-    color: ${props.theme.colors.richBlack};
     ${props.grey &&
       css`
         background-color: ${props.theme.colors.sensitiveGrey.base};
       `};
     .${ICON_CLASSNAME} {
       margin-right: 10px;
-      svg {
-      fill: ${
-  props.active
-    ? props.theme.colors.primary.base
-    : props.theme.colors.richBlack
-};
-    };
+    }
   `};
 `

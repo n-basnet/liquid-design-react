@@ -6,8 +6,8 @@ import { XH1 } from './H'
 
 describe('Headline', () => {
   const text = 'Headline'
-  const size = 'XH1'
-  const wrapper = shallow(<Headline size={size}>{text}</Headline>)
+  const type = 'XH1'
+  const wrapper = shallow(<Headline type={type}>{text}</Headline>)
   it('renders the Headline text', () => {
     expect(
       wrapper

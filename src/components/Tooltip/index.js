@@ -102,6 +102,4 @@ Tooltip.defaultProps = {
   side: SIDES.left,
 }
 
-Tooltip.displayName = 'Tooltip'
-
 export default enhanceWithClickOutside(Tooltip)

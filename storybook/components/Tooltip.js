@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
-import { getBackgroundWrapper, formatList } from '../helpers'
+import { getBackgroundWrapper, formatList, placeholderText } from '../helpers'
 import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
 import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
 
@@ -28,10 +28,7 @@ const Wrapper = styled.div`
 const SampleContent = () => (
   <ContentWrapper>
     <strong>Headline</strong>
-    <div>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna.
-    </div>
+    <div>{placeholderText(19)}</div>
   </ContentWrapper>
 )
 

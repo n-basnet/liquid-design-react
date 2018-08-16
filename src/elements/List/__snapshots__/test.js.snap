@@ -16,7 +16,7 @@ exports[`List matches the snapshot 1`] = `
     disabled={false}
     grey={true}
     icon="star"
-    key="item 1"
+    key="0"
     onClick={[Function]}
   >
     <WithTheme(Icon)
@@ -33,7 +33,7 @@ exports[`List matches the snapshot 1`] = `
     disabled={false}
     grey={true}
     icon="star"
-    key="item 2"
+    key="1"
     onClick={[Function]}
   >
     <WithTheme(Icon)
@@ -50,7 +50,7 @@ exports[`List matches the snapshot 1`] = `
     disabled={true}
     grey={true}
     icon="star"
-    key="item 3"
+    key="2"
   >
     <WithTheme(Icon)
       color="richBlack"

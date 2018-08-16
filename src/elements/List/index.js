@@ -20,7 +20,7 @@ const List = ({
       disabled={index === disabledItemIndex}
       grey={grey}
       icon={icon}
-      key={item}
+      key={index}
       onClick={index !== disabledItemIndex ? () => onClick(index) : undefined}
     >
       {icon && (

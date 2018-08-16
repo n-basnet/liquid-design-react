@@ -16,7 +16,7 @@
     "type": "element"
   },
   {
-    "name": "Ratings",
+    "name": "Rating",
     "type": "component"
   },
   {

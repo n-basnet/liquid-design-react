@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
@@ -44,7 +44,7 @@ export const Label = styled.label`
   `};
 `
 
-class Checkbox extends Component {
+class Checkbox extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
     /** for controlling the checkbox externally */
@@ -105,7 +105,5 @@ class Checkbox extends Component {
     )
   }
 }
-
-Checkbox.displayName = 'Checkbox'
 
 export default Checkbox

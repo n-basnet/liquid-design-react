@@ -4,64 +4,43 @@ import { storiesOf } from '@storybook/react'
 import { TextList } from '~'
 import { getTextKnob } from '../helpers'
 
-const getListItem = () =>
-  getTextKnob({ name: 'listItem', defaultText: 'Lorem ipsum dolor sit amet' })
+const getListItem = id => ({
+  id,
+  name: getTextKnob({
+    name: `listItem ${id}`,
+    defaultText: 'Lorem ipsum dolor sit amet',
+  }),
+})
 
-const data = [
+const getData = () => [
   {
-    id: 1,
-    name: getListItem(),
+    ...getListItem(1),
     items: [
       {
-        id: 2,
-        name: getListItem(),
-        items: [
-          {
-            id: 3,
-            name: getListItem(),
-          },
-        ],
+        ...getListItem(2),
+        items: [getListItem(3)],
       },
+      getListItem(4),
+    ],
+  },
+  {
+    ...getListItem(5),
+    items: [
       {
-        id: 4,
-        name: getListItem(),
+        ...getListItem(6),
+        items: [getListItem(7), getListItem(8), getListItem(9)],
       },
     ],
   },
   {
-    id: 5,
-    name: getListItem(),
-    items: [
-      {
-        id: 6,
-        name: getListItem(),
-        items: [
-          {
-            id: 7,
-            name: getListItem(),
-          },
-          {
-            id: 8,
-            name: getListItem(),
-          },
-          {
-            id: 9,
-            name: getListItem(),
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 10,
-    name: getListItem(),
+    ...getListItem(10),
   },
 ]
 
 storiesOf('Elements/TextList', module).add('numbered list', () => (
-  <TextList data={data} />
+  <TextList data={getData()} />
 ))
 
 storiesOf('Elements/TextList', module).add('bullet list', () => (
-  <TextList data={data} listType='bullet' />
+  <TextList data={getData()} listType='bullet' />
 ))

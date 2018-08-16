@@ -18,7 +18,6 @@ export const ListItem = styled.li`
   }
   ${props => css`
     border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
-    color: ${props.theme.colors.richBlack};
     ${cursorValue}
     &:hover {
       ${!props.disabled &&
@@ -28,7 +27,7 @@ export const ListItem = styled.li`
     ? props.theme.colors.sensitiveGrey.dark
     : props.theme.colors.white};
           color: ${props.theme.colors.primary.base};
-          font-weight: 900;
+          font-weight: ${props.theme.fontWeight.black};
           transition: ${props.theme.transition};
           .${ICON_CLASSNAME} {
             svg {
@@ -44,7 +43,7 @@ export const ListItem = styled.li`
     }
     ${props.active &&
       css`
-        font-weight: 900;
+        font-weight: ${props.theme.fontWeight.black};
         color: ${props.theme.colors.primary.base};
       `};
     ${props.grey &&
@@ -60,12 +59,12 @@ export const ListItem = styled.li`
       `};
     .${ICON_CLASSNAME} {
       margin-right: 10px;
-      svg {
-      fill: ${
-  props.active
-    ? props.theme.colors.primary.base
-    : props.theme.colors.richBlack
-};
-    };
+      ${props =>
+    props.active &&
+        css`
+          svg {
+            fill: ${props.theme.colors.primary.base};
+          }
+        `};
   `};
 `

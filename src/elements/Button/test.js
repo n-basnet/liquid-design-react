@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Button from '.'
-import { Label } from '~/elements/Button/Labels'
+import ButtonLabel from '~/elements/Button/Labels/Button'
 import Icon from '~/elements/Icon'
 
 describe('Button', () => {
@@ -16,7 +16,7 @@ describe('Button', () => {
   it('renders a label text correctly', () => {
     expect(
       wrapper
-        .find(Label)
+        .find(ButtonLabel)
         .children()
         .text()
     ).toEqual(label)

@@ -72,6 +72,4 @@ Quote.defaultProps = {
   source: '',
 }
 
-Quote.displayName = 'Quote'
-
 export default Quote

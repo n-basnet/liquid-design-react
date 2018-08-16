@@ -10,15 +10,12 @@ export const bgColorSelector = (props, shade) => {
 }
 
 export const colorSelector = props => {
-  if (props.appearance === 'secondary' && props.disabled) {
-    return props.theme.colors.sensitiveGrey.darker
-  }
-  if (props.appearance === 'secondary') {
-    return props.theme.colors.primary.base
-  }
   const colorsMap = {
     primary: ['white', 'base'],
     highlight: ['richBlack', 'base'],
+    secondary: props.disabled
+      ? ['sensitiveGrey', 'darker']
+      : ['primary', 'base'],
   }
   return path(colorsMap[props.appearance], props.theme.colors)
 }

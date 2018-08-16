@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ButtonWrapper } from '~/elements/Button/ButtonWrapper'
-import { GhostButtonWrapper } from '~/elements/Button/GhostButtonWrapper'
-import { Label, GhostLabel } from '~/elements/Button/Labels'
+import ButtonWrapper from '~/elements/Button/Wrappers/Button'
+import GhostWrapper from '~/elements/Button/Wrappers/Ghost'
+import ButtonLabel from '~/elements/Button/Labels/Button'
+import GhostLabel from '~/elements/Button/Labels/Ghost'
 import Icon from '~/elements/Icon'
 
 const Button = ({
@@ -26,31 +27,30 @@ const Button = ({
     onClick,
   }
 
-  return appearance === 'ghost' ? (
-    <GhostButtonWrapper {...wrapperProps}>
-      {icon && <Icon name={icon} size={size === 'big' ? 18 : 16} />}
+  const isGhost = appearance === 'ghost'
+  const LabelComponent = isGhost ? GhostLabel : ButtonLabel
+  const WrapperComponent = isGhost ? GhostWrapper : ButtonWrapper
+
+  return (
+    <WrapperComponent {...wrapperProps}>
+      {icon && (
+        <Icon
+          name={icon}
+          size={isGhost ? (size === 'big' ? 18 : 16) : 24}
+          style={!isGhost && label ? { marginLeft: '28px' } : {}}
+        />
+      )}
       {label && (
-        <GhostLabel
+        <LabelComponent
           appearance={appearance}
           disabled={disabled}
           icon={icon}
           size={size}
         >
           {label}
-        </GhostLabel>
+        </LabelComponent>
       )}
-    </GhostButtonWrapper>
-  ) : (
-    <ButtonWrapper {...wrapperProps}>
-      {icon && (
-        <Icon name={icon} style={label && { marginLeft: '28px' }} size={24} />
-      )}
-      {label && (
-        <Label appearance={appearance} disabled={disabled} icon={icon}>
-          {label}
-        </Label>
-      )}
-    </ButtonWrapper>
+    </WrapperComponent>
   )
 }
 
@@ -75,12 +75,5 @@ Button.propTypes = {
   size: PropTypes.string,
   onClick: PropTypes.func,
 }
-
-Button.defaultProps = {
-  appearance: 'primary',
-  size: 'small',
-}
-
-Button.displayName = 'Button'
 
 export default Button

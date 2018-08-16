@@ -9,7 +9,6 @@ import warning from '~/assets/svgIcons/warning.svg'
 import dotHalf from '~/assets/svgIcons/dotHalf.svg'
 import arrowTop from '~/assets/svgIcons/arrows/top.svg'
 import arrowRight from '~/assets/svgIcons/arrows/right.svg'
-import arrowBottom from '~/graphics/svgIcons/arrowBottom.svg'
 import bottle from '~/assets/svgIcons/bottle.svg'
 import costCenter from '~/assets/svgIcons/costCenter.svg'
 import energy from '~/assets/svgIcons/energy.svg'
@@ -46,7 +45,6 @@ export default {
   dotHalf,
   arrowTop,
   arrowRight,
-  arrowBottom,
   info,
   infoCircle,
   infoFilled,
