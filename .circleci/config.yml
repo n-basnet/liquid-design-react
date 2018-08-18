@@ -60,6 +60,15 @@ jobs:
           name: Deploy To Staging
           command: bundle exec cap staging deploy
 
+  publish_package:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Publish package on npm
+          command: yarn semantic-release || true
+
 workflows:
   version: 2
   build-and-deploy:
@@ -82,3 +91,11 @@ workflows:
           filters:
             branches:
               only: master
+      - publish_package:
+          requires:
+            - build
+            - lint
+            - test
+          filters:
+            branches:
+              only: production
