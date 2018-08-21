@@ -30,6 +30,7 @@ const OMIT_ICONS = [
   'warning',
   'checkboxEmpty',
   'infoCircle',
+  'heart',
 ]
 
 const SORTED_ICON_NAMES = Object.keys(iconsList).sort(

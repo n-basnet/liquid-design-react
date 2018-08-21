@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Icon from '~/elements/Icon'
-import { fadeIn } from '~/utils/keyframes'
+import { fadeIn } from '~/utils/styling/animations'
 import { cursorValue } from '~/utils/styling'
 
 const bgColorSelector = props => {

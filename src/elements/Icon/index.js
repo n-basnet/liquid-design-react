@@ -62,7 +62,7 @@ export const Icon = ({
       }}
       style={style}
     >
-      {SVGIconComponent && <SVGIconComponent />}
+      <SVGIconComponent />
     </IconWrapper>
   )
 }

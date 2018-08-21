@@ -82,5 +82,9 @@
   {
     "name": "TextList",
     "type": "element"
+  },
+  {
+    "name": "Favorite",
+    "type": "element"
   }
 ]
