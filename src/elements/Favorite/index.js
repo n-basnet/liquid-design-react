@@ -61,6 +61,7 @@ const AnimationWrapper = styled.div`
   position: absolute;
   top: -19px;
   left: -19px;
+  pointer-events: none;
 
   ${props =>
     spriteAnimation({
