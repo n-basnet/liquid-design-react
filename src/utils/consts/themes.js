@@ -45,39 +45,102 @@ const themeBase = {
 }
 
 const themeBaseColors = {
-  black: {
-    base: COLORS.BLACK,
+  richPurple: {
+    lightest: COLORS.RICH_PURPLE_LIGHTEST,
+    lighter: COLORS.RICH_PURPLE_LIGHTER,
+    light: COLORS.RICH_PURPLE_LIGHT,
+    base: COLORS.RICH_PURPLE,
+    dark: COLORS.RICH_PURPLE_DARK,
+    darker: COLORS.RICH_PURPLE_DARKER,
+    darkest: COLORS.RICH_PURPLE_DARKEST,
   },
-  white: {
-    base: COLORS.WHITE,
+  vibrantMagenta: {
+    lightest: COLORS.VIBRANT_MAGENTA_LIGHTEST,
+    lighter: COLORS.VIBRANT_MAGENTA_LIGHTER,
+    light: COLORS.VIBRANT_MAGENTA_LIGHT,
+    base: COLORS.VIBRANT_MAGENTA,
+    dark: COLORS.VIBRANT_MAGENTA_DARK,
+    darker: COLORS.VIBRANT_MAGENTA_DARKER,
+    darkest: COLORS.VIBRANT_MAGENTA_DARKEST,
   },
-  grey: {
-    base: COLORS.GREY,
-    aux: COLORS.AUX_GREY,
+  richBlue: {
+    lightest: COLORS.RICH_BLUE_LIGHTEST,
+    lighter: COLORS.RICH_BLUE_LIGHTER,
+    light: COLORS.RICH_BLUE_LIGHT,
+    base: COLORS.RICH_BLUE,
+    dark: COLORS.RICH_BLUE_DARK,
+    darker: COLORS.RICH_BLUE_DARKER,
+    darkest: COLORS.RICH_BLUE_DARKEST,
+  },
+  vibrantCyan: {
+    lightest: COLORS.VIBRANT_CYAN_LIGHTEST,
+    lighter: COLORS.VIBRANT_CYAN_LIGHTER,
+    light: COLORS.VIBRANT_CYAN_LIGHT,
+    base: COLORS.VIBRANT_CYAN,
+    dark: COLORS.VIBRANT_CYAN_DARK,
+    darker: COLORS.VIBRANT_CYAN_DARKER,
+    darkest: COLORS.VIBRANT_CYAN_DARKEST,
   },
   vibrantYellow: {
     lightest: COLORS.VIBRANT_YELLOW_LIGHTEST,
+    lighter: COLORS.VIBRANT_YELLOW_LIGHTER,
+    light: COLORS.VIBRANT_YELLOW_LIGHT,
     base: COLORS.VIBRANT_YELLOW,
     dark: COLORS.VIBRANT_YELLOW_DARK,
     darker: COLORS.VIBRANT_YELLOW_DARKER,
+    darkest: COLORS.VIBRANT_YELLOW_DARKEST,
+  },
+  vibrantGreen: {
+    lightest: COLORS.VIBRANT_GREEN_LIGHTEST,
+    lighter: COLORS.VIBRANT_GREEN_LIGHTER,
+    light: COLORS.VIBRANT_GREEN_LIGHT,
+    base: COLORS.VIBRANT_GREEN,
+    dark: COLORS.VIBRANT_GREEN_DARK,
+    darker: COLORS.VIBRANT_GREEN_DARKER,
+    darkest: COLORS.VIBRANT_GREEN_DARKEST,
   },
   richRed: {
+    lightest: COLORS.LIGHTEST,
+    lighter: COLORS.LIGHTER,
+    light: COLORS.RICH_RED_LIGHT,
     base: COLORS.RICH_RED,
     dark: COLORS.RICH_RED_DARK,
+    darker: COLORS.RICH_RED_DARKER,
+    darkest: COLORS.RICH_RED_DARKEST,
   },
-  richBlue: {
-    base: COLORS.RICH_BLUE,
-    dark: COLORS.RICH_BLUE_DARK,
+  richBlack: {
+    lightest: COLORS.RICH_BLACK_LIGHTEST,
+    lighter: COLORS.RICH_BLACK_LIGHTER,
+    light: COLORS.RICH_BLACK_LIGHT,
+    base: COLORS.RICH_BLACK,
   },
   sensitiveGrey: {
     lightest: COLORS.SENSITIVE_GREY_LIGHTEST,
+    lighter: COLORS.SENSITIVE_GREY_LIGHTER,
+    light: COLORS.SENSITIVE_GREY_LIGHT,
     base: COLORS.SENSITIVE_GREY,
     dark: COLORS.SENSITIVE_GREY_DARK,
     darker: COLORS.SENSITIVE_GREY_DARKER,
     darkest: COLORS.SENSITIVE_GREY_DARKEST,
   },
-  richBlack: {
-    base: COLORS.RICH_BLACK,
+  white: {
+    base: COLORS.WHITE,
+  },
+  richGreen: {
+    lightest: COLORS.RICH_GREEN_LIGHTEST,
+    lighter: COLORS.RICH_GREEN_LIGHTER,
+    light: COLORS.RICH_GREEN_LIGHT,
+    base: COLORS.RICH_GREEN,
+    dark: COLORS.RICH_GREEN_DARK,
+    darker: COLORS.RICH_GREEN_DARKER,
+    darkest: COLORS.RICH_GREEN_DARKEST,
+  },
+  black: {
+    base: COLORS.BLACK,
+  },
+  grey: {
+    base: COLORS.GREY,
+    aux: COLORS.AUX_GREY,
   },
 }
 
