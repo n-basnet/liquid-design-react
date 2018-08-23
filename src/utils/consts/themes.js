@@ -144,7 +144,7 @@ const themeBaseColors = {
   },
 }
 
-const getTheme = ({ primary, secondary }) => ({
+const getTheme = ({ primary, secondary }, props = {}) => ({
   colors: {
     primary: {
       lightest: COLORS[`${primary}_LIGHTEST`],
@@ -159,6 +159,7 @@ const getTheme = ({ primary, secondary }) => ({
     ...themeBaseColors,
   },
   ...themeBase,
+  ...props,
 })
 
 export const THEMES = {
@@ -174,10 +175,13 @@ export const THEMES = {
     primary: 'RICH_PURPLE',
     secondary: 'VIBRANT_CYAN',
   }),
-  vibrantMagenta: getTheme({
-    primary: 'VIBRANT_MAGENTA',
-    secondary: 'RICH_PURPLE',
-  }),
+  vibrantMagenta: getTheme(
+    {
+      primary: 'VIBRANT_MAGENTA',
+      secondary: 'RICH_PURPLE',
+    },
+    { hasWhiteText: true }
+  ),
 }
 
 export const DEFAULT_THEME_NAME = 'vibrantCyan'

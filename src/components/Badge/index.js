@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/elements/Icon'
+import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
 
 const BadgeWrapper = styled.div`
@@ -11,7 +11,13 @@ const BadgeWrapper = styled.div`
     border-radius: ${props.theme.borderRadius};
     transition: ${props.theme.transition};
     background-color: ${props.theme.colors.secondary.base};
-    &:hover {
+    ${props.theme.hasWhiteText &&
+      css`
+        color: ${props.theme.colors.white.base};
+        .${ICON_CLASSNAME} svg {
+          fill: ${props.theme.colors.white.base};
+        }
+      `} &:hover {
       ${!props.disabled &&
         css`
           background-color: ${props.theme.colors.secondary.dark};

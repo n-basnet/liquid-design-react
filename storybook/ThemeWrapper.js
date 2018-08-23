@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import { Theme } from '~'
-import { THEMES } from '~/utils/consts/themes'
+import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 import { camelCaseToHuman } from '~/utils/aux'
 
 const themeNames = Object.keys(THEMES)
@@ -17,7 +17,7 @@ const ThemeSelectWrapper = styled.div`
 
 export default class ThemeWrapper extends PureComponent {
   state = {
-    currentThemeName: themeNames[0],
+    currentThemeName: DEFAULT_THEME_NAME,
   }
   handleChange = ({ target }) => {
     this.setState({ currentThemeName: target.value })
