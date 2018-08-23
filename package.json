@@ -46,6 +46,8 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.1",
     "@storybook/addon-actions": "^4.0.0-alpha.12",
     "@storybook/addon-info": "^4.0.0-alpha.12",
     "@storybook/addon-knobs": "^3.4.8",
@@ -105,7 +107,24 @@
   },
   "release": {
     "branch": "production",
-    "verifyConditions": "condition-circle"
+    "verifyConditions": [
+      "condition-circle",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      {
+        "path": "@semantic-release/changelog",
+        "changelogFile": "CHANGELOG.md"
+      },
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": ["package.json", "dist/*.js", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
   },
   "config": {
     "commitizen": {
