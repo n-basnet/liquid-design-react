@@ -1,10 +1,10 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import autoExternal from 'rollup-plugin-auto-external'
-import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import reactSvg from 'rollup-plugin-react-svg'
 import url from 'rollup-plugin-url'
+import string from 'rollup-plugin-string'
 
 import pkg from './package.json'
 
@@ -24,9 +24,6 @@ export default {
   ],
   plugins: [
     autoExternal(),
-    postcss({
-      modules: true,
-    }),
     babel({
       exclude: 'node_modules/**',
       plugins: ['external-helpers'],
@@ -37,6 +34,9 @@ export default {
     url({
       limit: MAX_INLINE_FILE_SIZE_KB * 1024,
       include: ['**/*.woff', '**/*.woff2'],
+    }),
+    string({
+      include: '**/*.css',
     }),
   ],
 }

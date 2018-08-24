@@ -1,14 +1,19 @@
 const { getSVGOConfig } = require('../scripts/getSVGOConfig')
 
-module.exports = (baseConfig, env, defaultConfig) => {
-  const svgRuleIndex = defaultConfig.module.rules.indexOf(
-    defaultConfig.module.rules.find(
-      v => v.loader && v.loader.indexOf('svg-url-loader') > 0
-    )
-  )
+const findRuleIndex = (testRegex, rules) =>
+  rules.indexOf(rules.find(v => v.test.toString() === testRegex.toString()))
 
-  defaultConfig.module.rules[svgRuleIndex] = {
-    test: /\.svg$/,
+const updateRule = ({ testRegex, use, rules }) => {
+  rules[findRuleIndex(testRegex, rules)] = {
+    test: testRegex,
+    use,
+  }
+  return rules
+}
+
+module.exports = (baseConfig, env, defaultConfig) => {
+  defaultConfig.module.rules = updateRule({
+    testRegex: /\.svg$/,
     use: [
       {
         loader: 'babel-loader',
@@ -21,7 +26,15 @@ module.exports = (baseConfig, env, defaultConfig) => {
         },
       },
     ],
-  }
+    rules: defaultConfig.module.rules,
+  })
+
+  defaultConfig.module.rules = updateRule({
+    testRegex: /\.css$/,
+    use: 'raw-loader',
+    rules: defaultConfig.module.rules,
+  })
+
   defaultConfig.resolve.extensions.push('.svg')
 
   return defaultConfig

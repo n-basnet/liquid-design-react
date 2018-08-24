@@ -31,3 +31,7 @@ This repo uses [JavaScript Standard Style](https://standardjs.com/).
 is set up with [Loki](https://loki.js.org)
 To run those tests locally, run `$ yarn test:loki`. If the tests fail, check out the differences in `.loki/difference` and if those differences are all intended, run `yarn test:loki:approve`.
 After adding new stories to storybook, make sure to run `$ yarn test:loki:update`.
+
+## Handling external CSS
+
+External CSS (i.e. `animate.css` animations) is imported as string (`raw-loader` in webpack-bundled Storybook, `rollup-plugin-string` in rollup-bundled distribution package). This way we make no assumptions about user's CSS loader.

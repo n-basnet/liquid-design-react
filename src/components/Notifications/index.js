@@ -5,8 +5,8 @@ import uniqid from 'uniqid'
 import styled from 'styled-components'
 import { filter } from 'ramda'
 import Animated from 'react-animated-transitions'
-import 'animate.css/source/fading_entrances/fadeInDown.css'
-import 'animate.css/source/fading_exits/fadeOutUp.css'
+import fadeInDownCSSAnimation from 'animate.css/source/fading_entrances/fadeInDown.css'
+import fadeOutUpCSSAnimation from 'animate.css/source/fading_exits/fadeOutUp.css'
 
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { Base } from '~/Theme'
@@ -26,6 +26,8 @@ const NotificationsWrapper = styled.div`
   padding: ${NOTIFICATION_WRAPPER_PADDING}px;
   text-align: center;
   pointer-events: none;
+  ${fadeInDownCSSAnimation};
+  ${fadeOutUpCSSAnimation};
   .animated {
     animation-duration: ${ANIMATION_DURATION}ms;
   }

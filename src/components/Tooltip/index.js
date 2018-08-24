@@ -58,6 +58,20 @@ const TooltipContentWrapper = styled.div`
 `
 
 export class Tooltip extends React.PureComponent {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+    /** the wall on which the arrow will be displayed */
+    wall: PropTypes.oneOf(WALLS_KEYS),
+    /** the side of the wall - left or right - on which the arrow should be displayed */
+    side: PropTypes.oneOf(SIDES_KEYS),
+    /** force open state for tooltip */
+    isOpen: PropTypes.bool,
+  }
+  static defaultProps = {
+    wall: WALLS.top,
+    side: SIDES.left,
+    isOpen: null,
+  }
   state = {
     isOpen: false,
   }
@@ -68,18 +82,20 @@ export class Tooltip extends React.PureComponent {
   render() {
     const { isOpen, isHovered } = this.state
     const { children, wall, side } = this.props
+    const isTooltipOpen =
+      this.props.isOpen !== null ? this.props.isOpen : isOpen
     return (
       <TooltipWrapper
-        isOpen={isOpen}
+        isOpen={isTooltipOpen}
         isHovered={isHovered}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
         <Icon
-          name={`info${isHovered || isOpen ? 'Filled' : 'Circle'}`}
+          name={`info${isHovered || isTooltipOpen ? 'Filled' : 'Circle'}`}
           onClick={this.handleClick}
         />
-        {isOpen && (
+        {isTooltipOpen && (
           <TooltipContentWrapper wall={wall} side={side}>
             {children}
           </TooltipContentWrapper>
@@ -87,19 +103,6 @@ export class Tooltip extends React.PureComponent {
       </TooltipWrapper>
     )
   }
-}
-
-Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
-  /** the wall on which the arrow will be displayed */
-  wall: PropTypes.oneOf(WALLS_KEYS),
-  /** the side of the wall - left or right - on which the arrow should be displayed */
-  side: PropTypes.oneOf(SIDES_KEYS),
-}
-
-Tooltip.defaultProps = {
-  wall: WALLS.top,
-  side: SIDES.left,
 }
 
 export default enhanceWithClickOutside(Tooltip)

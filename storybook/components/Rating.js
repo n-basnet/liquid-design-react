@@ -75,6 +75,7 @@ class RatingApp extends PureComponent {
 
 storiesOf('Components/Rating', module)
   .addDecorator(getBackgroundWrapper())
+  .add('single', () => <Rating />)
   .addParameters({
     info: {
       source: false,
@@ -87,4 +88,3 @@ storiesOf('Components/Rating', module)
     />
   ))
   .add('dots', () => <RatingApp dots />)
-  .add('single', () => <Rating />)

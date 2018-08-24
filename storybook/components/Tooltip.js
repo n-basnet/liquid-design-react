@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { getBackgroundWrapper, formatList, placeholderText } from '../helpers'
 import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
 import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
+import { media } from '~/utils/styling'
 
 const ContentWrapper = styled.div`
   strong {
@@ -23,6 +24,13 @@ const Wrapper = styled.div`
   display: inline-block;
   min-width: 150px;
   margin: 20px;
+`
+
+const GroupWrapper = styled.div`
+  padding: 30px 50px;
+  ${media.customMin(600)`
+    padding: 90px 220px;
+  `};
 `
 
 const SampleContent = () => (
@@ -55,10 +63,17 @@ storiesOf('Components/Tooltip', module)
       ],
     },
   })
+  .add('open', () => (
+    <div style={{ paddingBottom: '180px' }}>
+      <WrappedTooltip isOpen>
+        <SampleContent />
+      </WrappedTooltip>
+    </div>
+  ))
   .add(
     'default',
     () => (
-      <div style={{ padding: '90px 220px' }}>
+      <GroupWrapper>
         {WALLS_KEYS.map(wall =>
           SIDES_KEYS.map(side => (
             <Wrapper key={`${wall}-${side}`}>
@@ -69,7 +84,7 @@ storiesOf('Components/Tooltip', module)
             </Wrapper>
           ))
         )}
-      </div>
+      </GroupWrapper>
     ),
     {
       info: {
