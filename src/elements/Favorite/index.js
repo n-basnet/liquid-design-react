@@ -13,7 +13,7 @@ const FavoriteWrapper = styled.div`
   display: inline-block;
   position: relative;
   ${props => css`
-    ${cursorValue({ ...props, pointer: true })};
+    ${cursorValue({ ...props, defaultValue: 'pointer' })};
 
     .${ICON_CLASSNAME} svg {
       fill: ${path(
