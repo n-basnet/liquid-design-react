@@ -34,6 +34,6 @@ export const media = {
     `,
 }
 
-export const cursorValue = ({ disabled, pointer }) => css`
-  cursor: ${disabled ? 'not-allowed' : pointer ? 'pointer' : 'default'};
+export const cursorValue = ({ disabled, defaultValue = 'default' }) => css`
+  cursor: ${disabled ? 'not-allowed' : defaultValue};
 `

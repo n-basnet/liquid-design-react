@@ -9,7 +9,7 @@ const CheckboxWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   ${props => css`
-    ${cursorValue({ ...props, pointer: true })};
+    ${cursorValue({ ...props, defaultValue: 'pointer' })};
   `};
   ${props =>
     props.disabled &&
@@ -39,7 +39,7 @@ export const Label = styled.label`
   font-size: 14px;
   line-height: 1.75;
   ${props => css`
-    ${cursorValue({ ...props, pointer: true })};
+    ${cursorValue({ ...props, defaultValue: 'pointer' })};
     color: ${props.theme.colors.richBlack};
   `};
 `
