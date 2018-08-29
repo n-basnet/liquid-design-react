@@ -14,36 +14,34 @@ const List = ({
   listHead,
   onClick,
 }) => {
-  const ListItems = items.map((item, index) => (
-    <ListItem
-      active={index === activeItemIndex}
-      disabled={index === disabledItemIndex}
-      grey={grey}
-      icon={icon}
-      key={index}
-      onClick={index !== disabledItemIndex ? () => onClick(index) : undefined}
-    >
-      {icon && (
-        <Icon
-          color={activeItemIndex ? 'primary' : 'richBlack'}
-          name={icon}
-          size={16}
-        />
-      )}
-      <span>{item}</span>
-    </ListItem>
-  ))
+  const getItemIcon = isActive => (
+    <Icon
+      color={`${isActive ? 'primary' : 'richBlack'}.base`}
+      name={icon}
+      size={16}
+    />
+  )
+  const ListItems = items.map((item, index) => {
+    const isActive = index === activeItemIndex
+    return (
+      <ListItem
+        active={isActive}
+        disabled={index === disabledItemIndex}
+        grey={grey}
+        icon={icon}
+        key={index}
+        onClick={index !== disabledItemIndex ? () => onClick(index) : undefined}
+      >
+        {icon && getItemIcon(isActive)}
+        <span>{item}</span>
+      </ListItem>
+    )
+  })
 
   return (
     <ul>
       <ListHead grey={grey}>
-        {icon && (
-          <Icon
-            color={activeItemIndex ? 'primary' : 'richBlack'}
-            name={icon}
-            size={16}
-          />
-        )}
+        {icon && getItemIcon()}
         {listHead}
       </ListHead>
       {ListItems}

@@ -5,7 +5,6 @@ const H = styled.div`
   line-height: 1.25;
   ${props => css`
     font-weight: ${props.theme.fontWeight.black};
-    color: ${props.theme.colors.richBlack};
   `};
 `
 

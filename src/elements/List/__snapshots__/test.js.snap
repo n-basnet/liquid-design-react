@@ -6,7 +6,7 @@ exports[`List matches the snapshot 1`] = `
     grey={true}
   >
     <WithTheme(Icon)
-      color="richBlack"
+      color="richBlack.base"
       name="star"
       size={16}
     />
@@ -20,7 +20,7 @@ exports[`List matches the snapshot 1`] = `
     onClick={[Function]}
   >
     <WithTheme(Icon)
-      color="richBlack"
+      color="primary.base"
       name="star"
       size={16}
     />
@@ -37,7 +37,7 @@ exports[`List matches the snapshot 1`] = `
     onClick={[Function]}
   >
     <WithTheme(Icon)
-      color="richBlack"
+      color="richBlack.base"
       name="star"
       size={16}
     />
@@ -53,7 +53,7 @@ exports[`List matches the snapshot 1`] = `
     key="2"
   >
     <WithTheme(Icon)
-      color="richBlack"
+      color="richBlack.base"
       name="star"
       size={16}
     />

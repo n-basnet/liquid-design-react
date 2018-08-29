@@ -40,7 +40,6 @@ export const Label = styled.label`
   line-height: 1.75;
   ${props => css`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
-    color: ${props.theme.colors.richBlack};
   `};
 `
 

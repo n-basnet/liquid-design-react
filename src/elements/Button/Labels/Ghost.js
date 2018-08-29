@@ -11,7 +11,7 @@ export default styled.div`
     color: ${props.disabled
     ? props.theme.colors.sensitiveGrey.darker
     : props.icon
-      ? props.theme.colors.richBlack
+      ? props.theme.colors.richBlack.base
       : props.theme.colors.primary.base};
     &:active {
       ${!props.disabled &&
