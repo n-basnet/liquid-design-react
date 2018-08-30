@@ -171,10 +171,13 @@ export const THEMES = {
     primary: 'RICH_BLUE',
     secondary: 'VIBRANT_YELLOW',
   }),
-  richPurple: getTheme({
-    primary: 'RICH_PURPLE',
-    secondary: 'VIBRANT_CYAN',
-  }),
+  richPurple: getTheme(
+    {
+      primary: 'RICH_PURPLE',
+      secondary: 'VIBRANT_CYAN',
+    },
+    { hasWhiteText: true }
+  ),
   vibrantMagenta: getTheme(
     {
       primary: 'VIBRANT_MAGENTA',
