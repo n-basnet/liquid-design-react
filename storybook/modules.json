@@ -90,5 +90,9 @@
   {
     "name": "SearchBar",
     "type": "component"
+  },
+  {
+    "name": "Toggle",
+    "type": "element"
   }
 ]

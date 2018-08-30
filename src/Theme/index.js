@@ -29,6 +29,9 @@ export const Base = styled.div`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -moz-user-focus: ignore;
+    -moz-user-select: none;
   }
   _:-ms-lang(x),
   _:-webkit-full-screen,
