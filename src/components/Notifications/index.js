@@ -52,10 +52,7 @@ class Notifications extends PureComponent {
     }))
 
     if (!notification.isError) {
-      setTimeout(
-        this.removeNotificationHandler(id),
-        this.props.autoRemoveTimeout
-      )
+      setTimeout(this.removeNotificationHandler(id), this.props.autoRemoveTimeout)
     }
   }
   removeNotificationHandler = id => () => {

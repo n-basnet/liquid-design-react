@@ -94,5 +94,9 @@
   {
     "name": "Toggle",
     "type": "element"
+  },
+  {
+    "name": "FlyOut",
+    "type": "component"
   }
 ]

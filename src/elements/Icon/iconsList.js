@@ -38,6 +38,7 @@ import checkboxEmpty from '~/assets/svgIcons/checkbox/empty.svg'
 import checkboxFilled from '~/assets/svgIcons/checkbox/filled.svg'
 import heart from '~/assets/svgIcons/heart.svg'
 import search from '~/assets/svgIcons/search.svg'
+import dots from '~/assets/svgIcons/dots.svg'
 
 export default {
   circleX,
@@ -80,4 +81,5 @@ export default {
   checkboxFilled,
   heart,
   search,
+  dots,
 }

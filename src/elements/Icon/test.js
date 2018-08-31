@@ -27,9 +27,7 @@ describe('Icon', () => {
   it('handles theme colors', () => {
     ;['black.base', 'richBlue.dark'].map(color => {
       const wrapper = getWrapper({ color, name: 'close' })
-      expect(wrapper.prop('svgFill')).toEqual(
-        path(color.split('.'), DEFAULT_THEME.colors)
-      )
+      expect(wrapper.prop('svgFill')).toEqual(path(color.split('.'), DEFAULT_THEME.colors))
     })
   })
 

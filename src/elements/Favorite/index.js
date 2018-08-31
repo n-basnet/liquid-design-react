@@ -49,9 +49,7 @@ const FavoriteWrapper = styled.div`
 
 export const ANIMATION_DURATION = 500
 const SPRITESHEET_SCALE_FACTOR = 5
-const HEART_ANIMATION_SPRITESHEET_STRING = ReactDOMServer.renderToStaticMarkup(
-  <Heart />
-)
+const HEART_ANIMATION_SPRITESHEET_STRING = ReactDOMServer.renderToStaticMarkup(<Heart />)
 
 const SPRITESHEET_DIMENSIONS_DATA = HEART_ANIMATION_SPRITESHEET_STRING.match(
   /viewBox="0 0 (\d*) (\d*)"/

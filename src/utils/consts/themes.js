@@ -140,6 +140,7 @@ const themeBaseColors = {
   },
   grey: {
     base: COLORS.GREY,
+    dark: COLORS.GREY_DARK,
     aux: COLORS.AUX_GREY,
   },
 }

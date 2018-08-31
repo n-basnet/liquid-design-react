@@ -73,12 +73,7 @@ const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
     <Fragment>
       {icon &&
         !iconOnRight && (
-        <Icon
-          color='black.base'
-          size={14}
-          name={icon}
-          style={{ verticalAlign: 'middle' }}
-        />
+        <Icon color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
       )}
       <BadgeTextWrapper padLeft={icon && !iconOnRight} onCard={onCard}>
         {text}

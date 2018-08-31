@@ -54,9 +54,7 @@ const getArrow = ({ color, direction, size = ARROW_SIZE }) =>
 
 export const getArrowStyle = ({ color, wall, side }) => css`
   ${getYAttribute({ wall, side })} : ${isHorizontalWall(wall) ? -10 : 20}px;
-  ${getXAttribute({ wall, side })} : ${isHorizontalWall(wall)
-  ? ARROW_SIZE
-  : -ARROW_SIZE}px;
+  ${getXAttribute({ wall, side })} : ${isHorizontalWall(wall) ? ARROW_SIZE : -ARROW_SIZE}px;
   ${getArrow({ direction: wall, color })};
 `
 

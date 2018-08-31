@@ -46,12 +46,7 @@ const Quote = ({ author, big, imagePath, source, quotation }) => (
         <PhraseWrapper>{quotation}</PhraseWrapper>
       </QuoteWrapper>
     ) : (
-      <TypographicQuote
-        author={author}
-        big={big}
-        quotation={quotation}
-        source={source}
-      />
+      <TypographicQuote author={author} big={big} quotation={quotation} source={source} />
     )}
   </Fragment>
 )

@@ -71,11 +71,10 @@ class Checkbox extends PureComponent {
       this.props.onChange && this.props.onChange(checked)
     }
   }
+  handleMouseEnter = () => !this.props.disabled && this.setState({ hover: true })
+  handleMouseLeave = () => !this.props.disabled && this.setState({ hover: false })
 
-  isChecked = () =>
-    this.props.isChecked !== undefined
-      ? this.props.isChecked
-      : this.state.checked
+  isChecked = () => (this.props.isChecked !== undefined ? this.props.isChecked : this.state.checked)
 
   render() {
     const { disabled, label, isChecked } = this.props
@@ -87,12 +86,8 @@ class Checkbox extends PureComponent {
         disabled={disabled}
         checked={isChecked || this.isChecked()}
         onClick={this.toggleCheckbox}
-        onMouseEnter={() =>
-          !this.props.disabled && this.setState({ hover: true })
-        }
-        onMouseLeave={() =>
-          !this.props.disabled && this.setState({ hover: false })
-        }
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         <Input type='checkbox' />
         <Icon

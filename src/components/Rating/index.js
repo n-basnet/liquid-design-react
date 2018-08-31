@@ -32,10 +32,9 @@ class Rating extends PureComponent {
   }
   render() {
     const { onSubmit, rating, steps, disabled, dots } = this.props
-    const interactive = onSubmit && !disabled
+    const isInteractive = onSubmit && !disabled
     const roundedRating = roundToNearest(rating)
-    const isHalf = index =>
-      roundedRating !== index && Math.round(roundedRating) === index
+    const isHalf = index => roundedRating !== index && Math.round(roundedRating) === index
     return (
       <div
         onMouseLeave={() => this.setState({ hovered: null })}
@@ -48,21 +47,11 @@ class Rating extends PureComponent {
               key={index}
               disabled={disabled}
               dots={dots}
-              hovered={
-                interactive &&
-                this.state.hovered !== null &&
-                index <= this.state.hovered
-              }
+              hovered={isInteractive && this.state.hovered !== null && index <= this.state.hovered}
               rated={roundedRating >= normalisedIndex}
               halfIcon={isHalf(normalisedIndex)}
-              onMouseEnter={
-                interactive
-                  ? () => this.setState({ hovered: index })
-                  : undefined
-              }
-              onClick={
-                interactive ? () => onSubmit(normalisedIndex) : undefined
-              }
+              onMouseEnter={isInteractive ? () => this.setState({ hovered: index }) : undefined}
+              onClick={isInteractive ? () => onSubmit(normalisedIndex) : undefined}
             />
           )
         })}

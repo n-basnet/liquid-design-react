@@ -73,5 +73,6 @@ export default {
   SENSITIVE_PINK: '#E1C3CD',
   BLACK: '#000',
   GREY: '#F8F8FC',
+  GREY_DARK: '#F3F3F7',
   AUX_GREY: '#f5f5f5',
 }
