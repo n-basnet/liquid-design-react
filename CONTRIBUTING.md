@@ -35,3 +35,8 @@ After adding new stories to storybook, make sure to run `$ yarn test:loki:update
 ## Handling external CSS
 
 External CSS (i.e. `animate.css` animations) is imported as string (`raw-loader` in webpack-bundled Storybook, `rollup-plugin-string` in rollup-bundled distribution package). This way we make no assumptions about user's CSS loader.
+
+## releasing/publishing
+
+Automated with [semantic-release](https://github.com/semantic-release/semantic-release). To publish new version, push `production` branch to the repo after merging master to it. `semantic-release` on CI will take it from there.
+One caveat though: after a release, `production` will be one commit ahead of master (consisting of `package.json` and `CHANGELOG.md` updates) - but as the master is protected, a PR is needed to sync `master` with `production`. CI will open a PR (using [hub](https://hub.github.com/)), but it will have to be approved and handled by a developer on GitHub.

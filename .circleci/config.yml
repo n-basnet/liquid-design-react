@@ -69,6 +69,18 @@ jobs:
           name: Publish package on npm
           command: yarn semantic-release || true
 
+  create_pull_request:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Install hub
+          command: which hub || bash ./scripts/install-hub.sh
+      - run:
+          name: Create Pull Request
+          command: hub pull-request --message "sync master after release" --base master --head production
+
 workflows:
   version: 2
   build-and-deploy:
@@ -96,6 +108,14 @@ workflows:
             - build
             - lint
             - test
+          filters:
+            branches:
+              only: production
+      - create_pull_request:
+          requires:
+            - checkout_code
+          requires:
+            - publish_package
           filters:
             branches:
               only: production
