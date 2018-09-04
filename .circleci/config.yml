@@ -79,7 +79,7 @@ jobs:
           command: which hub || bash ./scripts/install-hub.sh
       - run:
           name: Create Pull Request
-          command: hub pull-request --message "sync master after release" --base master --head production
+          command: hub pull-request --message="sync master after release" --base=master --head=production
 
 workflows:
   version: 2
