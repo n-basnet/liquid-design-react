@@ -26,7 +26,7 @@ const BadgeWrapper = styled.div`
     ${cursorValue};
   `};
   ${props =>
-    props.onCard
+    props.isOnCard
       ? css`
           position: absolute;
           left: 0;
@@ -52,7 +52,7 @@ const BadgeTextWrapper = styled.span`
       padding-left: 8px;
     `};
   ${props =>
-    props.onCard
+    props.isOnCard
       ? css`
           padding-top: 5px;
           padding-bottom: 5px;
@@ -68,18 +68,18 @@ const BadgeTextWrapper = styled.span`
 /**
  * Badges symbolize special properties of an item or person. Badges provide a short overview about that property and its value.
  */
-const Badge = ({ text, icon, iconOnRight, disabled, onCard }) => (
-  <BadgeWrapper disabled={disabled} onCard={onCard}>
+const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard }) => (
+  <BadgeWrapper disabled={disabled} isOnCard={isOnCard}>
     <Fragment>
       {icon &&
-        !iconOnRight && (
+        !isIconOnRight && (
         <Icon color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
       )}
-      <BadgeTextWrapper padLeft={icon && !iconOnRight} onCard={onCard}>
+      <BadgeTextWrapper padLeft={icon && !isIconOnRight} isOnCard={isOnCard}>
         {text}
       </BadgeTextWrapper>
       {icon &&
-        iconOnRight && (
+        isIconOnRight && (
         <Icon
           color='black.base'
           size={14}
@@ -102,16 +102,16 @@ Badge.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.string,
   /** By default, icon will be placed on the left side. Use this prop to override this behaviour */
-  iconOnRight: PropTypes.bool,
+  isIconOnRight: PropTypes.bool,
   /** Special kind of badge to be displayed on a ContentCard component */
-  onCard: PropTypes.bool,
+  isOnCard: PropTypes.bool,
 }
 
 Badge.defaultProps = {
   disabled: false,
   icon: null,
-  iconOnRight: false,
-  onCard: false,
+  isIconOnRight: false,
+  isOnCard: false,
 }
 
 export default Badge

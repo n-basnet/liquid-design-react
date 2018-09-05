@@ -55,7 +55,7 @@ injectGlobal`
   }
 `
 
-const Modal = ({ open, ...props }) => (
+export const Modal = ({ open, ...props }) => (
   <ReactModal
     isOpen={open}
     ariaHideApp={false}

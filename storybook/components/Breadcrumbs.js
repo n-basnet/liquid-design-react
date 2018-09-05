@@ -8,23 +8,23 @@ import { times } from '~/utils/aux'
 
 const getItems = (modifier = {}) => [
   {
-    name: getTextKnob({ defaultText: 'Breadcrumb 1', name: 'item 1' }),
+    content: getTextKnob({ defaultText: 'Breadcrumb 1', name: 'item 1' }),
     onClick: action('click breadcrumb 1'),
   },
   {
-    name: getTextKnob({ defaultText: 'Breadcrumb 2', name: 'item 2' }),
+    content: getTextKnob({ defaultText: 'Breadcrumb 2', name: 'item 2' }),
     ...(!modifier.disabled && { onClick: action('click breadcrumb 2') }),
     ...modifier,
   },
   {
-    name: getTextKnob({ defaultText: 'Breadcrumb 3', name: 'item 3' }),
+    content: getTextKnob({ defaultText: 'Breadcrumb 3', name: 'item 3' }),
     onClick: action('click breadcrumb 3'),
   },
 ]
 
 const getItemsForInteractive = onClick =>
   times(3).map(v => ({
-    name: `Breadcrumb ${v + 1}`,
+    content: `Breadcrumb ${v + 1}`,
     onClick: () => onClick(v),
   }))
 
@@ -34,12 +34,7 @@ class BreadcrumbsApp extends PureComponent {
     this.setState({ active })
   }
   render() {
-    return (
-      <Breadcrumbs
-        items={getItemsForInteractive(this.setActive)}
-        active={this.state.active}
-      />
-    )
+    return <Breadcrumbs items={getItemsForInteractive(this.setActive)} active={this.state.active} />
   }
 }
 

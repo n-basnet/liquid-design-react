@@ -54,9 +54,7 @@ export const spriteAnimation = ({
     width: ${dimensions[0] / steps[1]}px;
     height: ${dimensions[1] / steps[0]}px;
     background-image: url("${`data:image/svg+xml,
-      ${encodeURIComponent(
-    prepareSVGBackgroundImageString(backgroundImageString, { dimensions })
-  )}
+      ${encodeURIComponent(prepareSVGBackgroundImageString(backgroundImageString, { dimensions }))}
   `}");
     background-position-y: 0;
     background-repeat: no-repeat;

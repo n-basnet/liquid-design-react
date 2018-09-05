@@ -96,10 +96,7 @@ const SearchBarWrapper = styled.form`
             `
       : css`
               &:hover {
-                ${getBackgroundColor(
-    props.ghost,
-    props.theme.colors.sensitiveGrey.dark
-  )};
+                ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
                 ${getIconColorStyles};
               }
             `
@@ -205,10 +202,8 @@ export class SearchBar extends PureComponent {
   }
   getResultKeyDownHandler = (handler, value) => e =>
     e.key === 'Enter' && this.triggerResultHandler(handler, value)
-  getResultOnClickHandler = (handler, value) => () =>
-    this.triggerResultHandler(handler, value)
-  handleClickOutside = () =>
-    this.setInputValue(this.state.value, DEFAULT_RESULTS)
+  getResultOnClickHandler = (handler, value) => () => this.triggerResultHandler(handler, value)
+  handleClickOutside = () => this.setInputValue(this.state.value, DEFAULT_RESULTS)
   render() {
     const { handleSubmit, disabled, ghost } = this.props
     const { focused, value, results } = this.state

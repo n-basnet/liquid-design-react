@@ -37,9 +37,7 @@ const getData = () => [
   },
 ]
 
-storiesOf('Elements/TextList', module).add('numbered list', () => (
-  <TextList data={getData()} />
-))
+storiesOf('Elements/TextList', module).add('numbered list', () => <TextList data={getData()} />)
 
 storiesOf('Elements/TextList', module).add('bullet list', () => (
   <TextList data={getData()} listType='bullet' />

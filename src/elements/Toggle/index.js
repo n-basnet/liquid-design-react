@@ -18,21 +18,15 @@ const TOGGLE_KNOB_HEIGHT_ICONS = 36
 const ICON_SIZE = 22
 
 const getWidth = props => (props.hasIcons ? TOGGLE_WIDTH_ICONS : TOGGLE_WIDTH)
-const getKnobWidth = props =>
-  props.hasIcons ? TOGGLE_KNOB_WIDTH_ICONS : TOGGLE_KNOB_SIDE
-const getKnobHeight = props =>
-  props.hasIcons ? TOGGLE_KNOB_HEIGHT_ICONS : TOGGLE_KNOB_SIDE
+const getKnobWidth = props => (props.hasIcons ? TOGGLE_KNOB_WIDTH_ICONS : TOGGLE_KNOB_SIDE)
+const getKnobHeight = props => (props.hasIcons ? TOGGLE_KNOB_HEIGHT_ICONS : TOGGLE_KNOB_SIDE)
 const getActiveColor = props =>
-  path(
-    props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'base'],
-    props.theme.colors
-  )
+  path(props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'base'], props.theme.colors)
 const getKnobColor = props =>
   props.disabled && props.hasIcons
     ? props.theme.colors.sensitiveGrey.darker
     : props.theme.colors[props.hasIcons ? 'primary' : 'white'].base
-const getIconOffset = props =>
-  getKnobWidth(props) / 2 - ICON_SIZE / 2 + TOGGLE_KNOB_PAD
+const getIconOffset = props => getKnobWidth(props) / 2 - ICON_SIZE / 2 + TOGGLE_KNOB_PAD
 
 const ToggleWrapper = styled.div`
   position: relative;
@@ -52,9 +46,7 @@ const ToggleWrapper = styled.div`
     transition: ${props.theme.transition};
     background-color: ${props.hasIcons
     ? props.theme.colors.sensitiveGrey.base
-    : props.disabled
-      ? rgba(props.theme.colors.sensitiveGrey.base, 0.5)
-      : getActiveColor(props)};
+    : props.disabled ? rgba(props.theme.colors.sensitiveGrey.base, 0.5) : getActiveColor(props)};
     &:after {
       width: ${getKnobWidth(props)}px;
       height: ${getKnobHeight(props)}px;
@@ -69,9 +61,7 @@ const ToggleWrapper = styled.div`
           `};
       ${props.isActive &&
         css`
-          transform: translateX(
-            ${getWidth(props) - getKnobWidth(props) - TOGGLE_KNOB_PAD * 2}px
-          );
+          transform: translateX(${getWidth(props) - getKnobWidth(props) - TOGGLE_KNOB_PAD * 2}px);
         `};
     }
     ${props.hasIcons &&

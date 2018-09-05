@@ -8,7 +8,7 @@ describe('Accordion', () => {
   const title = 'Section title'
   const content = placeholderText()
 
-  const wrapper = shallow(<Accordion content={content} title={title} />)
+  const wrapper = shallow(<Accordion title={title}>{content}</Accordion>)
 
   it('renders a title', () => {
     const textNodeChildIndex = 1

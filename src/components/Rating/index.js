@@ -49,7 +49,7 @@ class Rating extends PureComponent {
               dots={dots}
               hovered={isInteractive && this.state.hovered !== null && index <= this.state.hovered}
               rated={roundedRating >= normalisedIndex}
-              halfIcon={isHalf(normalisedIndex)}
+              isHalfIcon={isHalf(normalisedIndex)}
               onMouseEnter={isInteractive ? () => this.setState({ hovered: index }) : undefined}
               onClick={isInteractive ? () => onSubmit(normalisedIndex) : undefined}
             />

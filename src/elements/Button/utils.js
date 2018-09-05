@@ -13,9 +13,7 @@ export const colorSelector = props => {
   const colorsMap = {
     primary: ['white', 'base'],
     highlight: ['richBlack', 'base'],
-    secondary: props.disabled
-      ? ['sensitiveGrey', 'darker']
-      : ['primary', 'base'],
+    secondary: props.disabled ? ['sensitiveGrey', 'darker'] : ['primary', 'base'],
   }
   return path(colorsMap[props.appearance], props.theme.colors)
 }

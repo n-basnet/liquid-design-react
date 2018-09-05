@@ -62,7 +62,7 @@ const ContentCard = ({
     active={active}
     stacked={stacked}
     css={badge && 'position: relative; padding-bottom: 34px'}
-    center
+    hasCenteredText
   >
     <div style={{ marginBottom: description ? '16px' : '43px' }}>
       <TitleWrapper>{title}</TitleWrapper>
@@ -76,9 +76,9 @@ const ContentCard = ({
     {badge && (
       <Badge
         icon={badge.icon || badge.iconRight}
-        iconOnRight={!!badge.iconRight}
+        isIconOnRight={!!badge.iconRight}
         text={badge.text}
-        onCard
+        isOnCard
       />
     )}
   </Card>

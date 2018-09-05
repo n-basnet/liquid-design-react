@@ -51,12 +51,8 @@ class CheckboxApp extends React.Component {
 
 storiesOf('Elements/Checkbox', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => (
-    <Checkbox label={label} onChange={action('checkbox click')} />
-  ))
-  .add('disabled', () => (
-    <Checkbox disabled label={label} onChange={action('checkbox click')} />
-  ))
+  .add('default', () => <Checkbox label={label} onChange={action('checkbox click')} />)
+  .add('disabled', () => <Checkbox disabled label={label} onChange={action('checkbox click')} />)
   .addParameters({
     info: {
       source: false,

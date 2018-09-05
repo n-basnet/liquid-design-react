@@ -73,9 +73,9 @@ const DEFAULT_IS_OPEN_VALUE = null
 
 class Accordion extends PureComponent {
   static propTypes = {
-    content: PropTypes.string.isRequired,
-    isOpen: PropTypes.bool,
     title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    isOpen: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -86,24 +86,20 @@ class Accordion extends PureComponent {
     isOpen: DEFAULT_IS_OPEN_VALUE,
   }
 
-  toggleAccordion = () =>
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  toggleAccordion = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
 
   render() {
-    const { content, title } = this.props
+    const { children, title, isOpen } = this.props
 
-    const isOpen =
-      this.props.isOpen !== DEFAULT_IS_OPEN_VALUE
-        ? this.props.isOpen
-        : this.state.isOpen
+    const isAccordionOpen = isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
 
     return (
-      <AccordionWrapper isOpen={isOpen} onClick={this.toggleAccordion}>
-        <SectionTitle isOpen={isOpen}>
+      <AccordionWrapper isOpen={isAccordionOpen} onClick={this.toggleAccordion}>
+        <SectionTitle isOpen={isAccordionOpen}>
           <Icon name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
-        <SectionContent isOpen={isOpen}>{content}</SectionContent>
+        <SectionContent isOpen={isAccordionOpen}>{children}</SectionContent>
       </AccordionWrapper>
     )
   }

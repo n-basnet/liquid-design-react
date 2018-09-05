@@ -8,9 +8,7 @@ import { Bubble } from '~'
 storiesOf('Elements/Bubble', module)
   .addDecorator(getBackgroundWrapper())
   .add('default', () => (
-    <Bubble
-      label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })}
-    />
+    <Bubble label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })} />
   ))
   .add('info', () => <Bubble isInfo />)
   .add('warning', () => <Bubble isWarning />)

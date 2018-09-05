@@ -54,13 +54,7 @@ storiesOf('Components/Tooltip', module)
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [
-        WrappedTooltip,
-        ContentWrapper,
-        Wrapper,
-        SampleContent,
-        Fragment,
-      ],
+      propTablesExclude: [WrappedTooltip, ContentWrapper, Wrapper, SampleContent, Fragment],
     },
   })
   .add('open', () => (
@@ -92,9 +86,7 @@ storiesOf('Components/Tooltip', module)
           Tooltip has ${WALLS_KEYS.length *
             SIDES_KEYS.length} possible placements, from the perspective of the Tooltip content: each wall (${formatList(
   WALLS_KEYS
-)}) can have the arrow placed on either side (${formatList(
-  SIDES_KEYS
-)}).
+)}) can have the arrow placed on either side (${formatList(SIDES_KEYS)}).
 
           ~~~js
           <Tooltip>some content</Tooltip>

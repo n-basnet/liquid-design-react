@@ -9,11 +9,11 @@ const content = placeholderText(72)
 
 storiesOf('Components/Accordion', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default single', () => <Accordion content={content} title={title} />)
+  .add('default single', () => <Accordion title={title}>{content}</Accordion>)
   .add('default stacked', () => (
     <section>
-      <Accordion content={content} title={title} />
-      <Accordion content={content} title={title} />
-      <Accordion content={content} title={title} />
+      <Accordion title={title}>{content}</Accordion>
+      <Accordion title={title}>{content}</Accordion>
+      <Accordion title={title}>{content}</Accordion>
     </section>
   ))

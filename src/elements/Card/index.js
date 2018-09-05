@@ -2,8 +2,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-import { media } from '~/utils/styling'
-
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
 
@@ -13,9 +11,9 @@ const getStackedHoverBoxShadow = theme => `
 `
 
 const getStackedBoxShadow = (theme, hover) => `
-  1px 1px 0 0 ${theme.colors.grey.aux},
+  1px 1px 0 0 ${theme.colors.auxGrey.base},
   3px 3px 0 0 ${theme.colors.white.base},
-  4px 4px 0 0 ${theme.colors.grey.aux},
+  4px 4px 0 0 ${theme.colors.auxGrey.base},
   6px 6px 0 0 ${theme.colors.white.base}
   ${hover ? `, ${getStackedHoverBoxShadow(theme)}` : ''}
 `
@@ -25,9 +23,6 @@ const Card = styled.div`
   margin: 10px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
   max-width: ${CARD_WIDTH}px;
-  ${media.min.phone`
-    width: ${CARD_WIDTH}px;
-  `};
   ${props =>
     props.active &&
     css`
@@ -42,7 +37,7 @@ const Card = styled.div`
       }
     `};
   ${props =>
-    props.center &&
+    props.hasCenteredText &&
     css`
       text-align: center;
     `};
@@ -64,7 +59,7 @@ const Card = styled.div`
 
 Card.propTypes = {
   /** with text centering */
-  center: PropTypes.bool,
+  hasCenteredText: PropTypes.bool,
   /** active style - with drop shadow */
   active: PropTypes.bool,
   /** stacked style - suggesting multiple items */

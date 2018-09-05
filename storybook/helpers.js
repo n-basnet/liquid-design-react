@@ -16,10 +16,7 @@ export const getBackgroundWrapper = ({ dark, style } = {}) => storyFn => (
 
 export const placeholderText = amount => loremIpsum(amount, 'w')
 
-export const getTextKnob = ({
-  name = 'content',
-  defaultText,
-  placeholderTextLength = 30,
-} = {}) => text(name, defaultText || placeholderText(placeholderTextLength))
+export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLength = 30 } = {}) =>
+  text(name, defaultText || placeholderText(placeholderTextLength))
 
 export const formatList = list => list.map(v => `\`${v}\``).join(', ')

@@ -4,18 +4,13 @@ import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 
 import Notifications from '~/components/Notifications'
-import {
-  NOTIFICATION_TYPES,
-  NOTIFICATION_WRAPPER_PADDING,
-} from '~/components/Notifications/consts'
+import { NOTIFICATION_TYPES, NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
 import SingleNotification from '~/components/Notifications/SingleNotification'
 import { getTextKnob, formatList } from '../helpers'
 
 const DEFAULT_TEXT = 'Notification text'
 const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
-  text: asKnob
-    ? getTextKnob({ defaultText: DEFAULT_TEXT, name: `item ${id}` })
-    : DEFAULT_TEXT,
+  text: asKnob ? getTextKnob({ defaultText: DEFAULT_TEXT, name: `item ${id}` }) : DEFAULT_TEXT,
   id: id.toString(),
   getRemoveHandler: id => action(`remove ${id}`),
 })
@@ -98,9 +93,7 @@ storiesOf('Components/Notifications', module)
       text: `
     Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.
 
-    Notication types can be set via boolean props: ${formatList(
-    NOTIFICATION_TYPES
-  )}.
+    Notication types can be set via boolean props: ${formatList(NOTIFICATION_TYPES)}.
 
     Usage: call \`Notification\`'s \`addNotification\` method via a ref:
 

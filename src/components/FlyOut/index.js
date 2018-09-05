@@ -20,10 +20,10 @@ const WIDTHS = {
 const getLabelStyle = props => css`
   color: ${props.theme.colors[props.disabled || !props.isOpen ? 'black' : 'primary'].base};
   padding-right: ${props.isOpen && !props.disabled ? 10 : 13}px;
+  transform: translateY(-${props.alignLeft ? 1 : 2}px)
+    ${props.isOpen && !props.disabled && !props.alignLeft && `translateX(-3px)`};
   ${!props.disabled &&
     css`
-      transform: translateY(-${props.alignLeft ? 1 : 2}px)
-        ${props.isOpen && !props.alignLeft && `translateX(-3px)`};
       font-weight: ${props.theme.fontWeight[props.isOpen ? 'black' : 'regular']};
     `};
 `

@@ -68,7 +68,7 @@ Icon.propTypes = {
   theme: PropTypes.object,
   /** Use the theme's secondary color. Theme's primary color is the default. */
   secondary: PropTypes.bool,
-  /** A different color - either from the theme (can be a path, like `grey.dark`) or a custom one (if not found in the theme) */
+  /** A different color - either from the theme (can be a path, like `primary.dark`) or a custom one (if not found in the theme) */
   color: PropTypes.string,
   /** Size unit */
   unit: PropTypes.string,

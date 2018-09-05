@@ -38,10 +38,10 @@ const StyledStep = styled.div`
   }
 `
 
-const Step = ({ halfIcon, dots, ...props }) => (
+const Step = ({ isHalfIcon, dots, ...props }) => (
   <StyledStep {...props} dots={dots}>
     <Icon
-      name={`${dots ? 'dot' : 'star'}${halfIcon ? 'Half' : ''}`}
+      name={`${dots ? 'dot' : 'star'}${isHalfIcon ? 'Half' : ''}`}
       size={20}
       color={props.rated ? '' : 'sensitiveGrey.darker'}
     />
@@ -49,13 +49,13 @@ const Step = ({ halfIcon, dots, ...props }) => (
 )
 
 Step.propTypes = {
-  halfIcon: PropTypes.bool,
+  isHalfIcon: PropTypes.bool,
   dots: PropTypes.bool,
   rated: PropTypes.bool,
 }
 
 Step.defaultProps = {
-  halfIcon: false,
+  isHalfIcon: false,
   dots: false,
   rated: false,
 }

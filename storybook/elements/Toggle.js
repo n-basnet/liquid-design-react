@@ -18,13 +18,7 @@ class ToggleApp extends React.Component {
   toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
   render() {
     const { toggleProps } = this.props
-    return (
-      <Toggle
-        isActive={this.state.isActive}
-        onClick={this.toggle}
-        {...toggleProps}
-      />
-    )
+    return <Toggle isActive={this.state.isActive} onClick={this.toggle} {...toggleProps} />
   }
 }
 
@@ -71,12 +65,8 @@ storiesOf('Elements/Toggle', module)
     },
   })
   .add('default', () => <ToggleApp />, sourceCodeInfo)
-  .add('with icons', () => (
-    <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />
-  ))
+  .add('with icons', () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />)
   .add('with icons disabled', () => (
-    <ToggleApp
-      toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }}
-    />
+    <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />
   ))
   .add('disabled', () => <Toggle disabled />)

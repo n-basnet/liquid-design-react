@@ -11,21 +11,11 @@ breakthrough solutions and technologies.`
 
 storiesOf('Elements/Paragraph', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '570px' } }))
-  .add('X-Large Paragraph', () => (
-    <Paragraph type='xl'>{getTextKnob({ defaultText })}</Paragraph>
-  ))
-  .add('Large Paragraph', () => (
-    <Paragraph type='lg'>{getTextKnob({ defaultText })}</Paragraph>
-  ))
-  .add('Medium Paragraph', () => (
-    <Paragraph>{getTextKnob({ defaultText })}</Paragraph>
-  ))
-  .add('Small Paragraph', () => (
-    <Paragraph type='sm'>{getTextKnob({ defaultText })}</Paragraph>
-  ))
-  .add('X-Small Paragraph', () => (
-    <Paragraph type='xs'>{getTextKnob({ defaultText })}</Paragraph>
-  ))
+  .add('X-Large Paragraph', () => <Paragraph type='xl'>{getTextKnob({ defaultText })}</Paragraph>)
+  .add('Large Paragraph', () => <Paragraph type='lg'>{getTextKnob({ defaultText })}</Paragraph>)
+  .add('Medium Paragraph', () => <Paragraph>{getTextKnob({ defaultText })}</Paragraph>)
+  .add('Small Paragraph', () => <Paragraph type='sm'>{getTextKnob({ defaultText })}</Paragraph>)
+  .add('X-Small Paragraph', () => <Paragraph type='xs'>{getTextKnob({ defaultText })}</Paragraph>)
   .add('Article with three Paragraphs', () => (
     <article>
       <Paragraph type='xs'>{getTextKnob({ defaultText })}</Paragraph>

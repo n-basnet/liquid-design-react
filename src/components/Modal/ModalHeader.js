@@ -10,7 +10,7 @@ const ModalHeaderWrapper = styled.div`
   font-size: 12px;
   padding: 17px 15px 13px 15px;
   ${props => css`
-    background-color: ${props.theme.colors.grey.base};
+    background-color: ${props.theme.colors.sensitiveGrey.base};
   `};
   .${ICON_CLASSNAME} {
     transform: translateY(-2px);

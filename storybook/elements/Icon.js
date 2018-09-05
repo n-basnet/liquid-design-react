@@ -32,26 +32,18 @@ const OMIT_ICONS = [
   'infoCircle',
   'heart',
   'search',
+  'dots',
 ]
 
-const SORTED_ICON_NAMES = Object.keys(iconsList).sort(
-  (a, b) => (a < b ? -1 : a > b ? 1 : 0)
-)
+const SORTED_ICON_NAMES = Object.keys(iconsList).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
 const ICONS_LIST = without(OMIT_ICONS, SORTED_ICON_NAMES)
 const ICONS = without(GLYPHS, ICONS_LIST)
 
 const IconSet = ({ iconList, iconProps }) => (
   <Fragment>
     {iconList.map((name, i) => (
-      <div
-        key={i}
-        style={{ display: 'inline-block', margin: '10px', width: '130px' }}
-      >
-        <IconWithTheme
-          name={name}
-          onClick={() => action('click on icon')(name)}
-          {...iconProps}
-        />
+      <div key={i} style={{ display: 'inline-block', margin: '10px', width: '130px' }}>
+        <IconWithTheme name={name} onClick={() => action('click on icon')(name)} {...iconProps} />
         <div>{name}</div>
       </div>
     ))}
@@ -75,10 +67,7 @@ storiesOf('Elements/Icon', module)
     },
   })
   .add('single Icon', () => (
-    <Icon
-      size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
-      name='bottle'
-    />
+    <Icon size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })} name='bottle' />
   ))
   .addDecorator(storyFn => (
     <Fragment>
@@ -94,13 +83,9 @@ storiesOf('Elements/Icon', module)
     },
   })
   .add('default', () => <IconSet iconList={ICONS} />)
-  .add('secondary color', () => (
-    <IconSet iconList={ICONS} iconProps={{ secondary: true }} />
-  ))
+  .add('secondary color', () => <IconSet iconList={ICONS} iconProps={{ secondary: true }} />)
   .add('alternative color', () => (
     <IconSet iconList={ICONS} iconProps={{ color: 'sensitiveGrey.darker' }} />
   ))
-  .add('custom color', () => (
-    <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />
-  ))
+  .add('custom color', () => <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />)
   .add('glyphs', () => <IconSet iconList={GLYPHS} />)

@@ -6,31 +6,18 @@ import { List } from '~'
 import { times } from '~/utils/aux'
 import { getTextKnob } from '../helpers'
 
-const getListHead = () =>
-  getTextKnob({ name: 'listHead', defaultText: 'List head 01' })
+const getListHead = () => getTextKnob({ name: 'listHead', defaultText: 'List head 01' })
 
-const getListItem = id =>
-  getTextKnob({ name: `listItem ${id}`, defaultText: 'List 01' })
+const getListItem = id => getTextKnob({ name: `listItem ${id}`, defaultText: 'List 01' })
 
 const getItems = () => times(5).map(getListItem)
 
 storiesOf('Elements/List/list with icons', module)
   .add('transparent', () => (
-    <List
-      icon='star'
-      items={getItems()}
-      listHead={getListHead()}
-      onClick={action('click')}
-    />
+    <List icon='star' items={getItems()} listHead={getListHead()} onClick={action('click')} />
   ))
   .add('grey', () => (
-    <List
-      grey
-      icon='star'
-      items={getItems()}
-      listHead={getListHead()}
-      onClick={action('click')}
-    />
+    <List grey icon='star' items={getItems()} listHead={getListHead()} onClick={action('click')} />
   ))
   .add('active', () => (
     <List
@@ -53,19 +40,10 @@ storiesOf('Elements/List/list with icons', module)
 
 storiesOf('Elements/List/list without icons', module)
   .add('transparent', () => (
-    <List
-      items={getItems()}
-      listHead={getListHead()}
-      onClick={action('click')}
-    />
+    <List items={getItems()} listHead={getListHead()} onClick={action('click')} />
   ))
   .add('grey', () => (
-    <List
-      grey
-      items={getItems()}
-      listHead={getListHead()}
-      onClick={action('click')}
-    />
+    <List grey items={getItems()} listHead={getListHead()} onClick={action('click')} />
   ))
   .add('active', () => (
     <List

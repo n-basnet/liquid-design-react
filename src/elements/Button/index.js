@@ -7,21 +7,12 @@ import ButtonLabel from '~/elements/Button/Labels/Button'
 import GhostLabel from '~/elements/Button/Labels/Ghost'
 import Icon from '~/elements/Icon'
 
-const Button = ({
-  active,
-  appearance,
-  disabled,
-  icon,
-  iconRight,
-  label,
-  size,
-  onClick,
-}) => {
+const Button = ({ active, appearance, disabled, icon, isIconOnRight, label, size, onClick }) => {
   const wrapperProps = {
     active,
     appearance,
     disabled,
-    iconRight,
+    isIconOnRight,
     label,
     size,
     onClick,
@@ -41,12 +32,7 @@ const Button = ({
         />
       )}
       {label && (
-        <LabelComponent
-          appearance={appearance}
-          disabled={disabled}
-          icon={icon}
-          size={size}
-        >
+        <LabelComponent appearance={appearance} disabled={disabled} icon={icon} size={size}>
           {label}
         </LabelComponent>
       )}
@@ -59,7 +45,7 @@ Button.defaultProps = {
   appearance: 'primary',
   disabled: false,
   icon: null,
-  iconRight: false,
+  isIconOnRight: false,
   label: null,
   size: 'small',
   onClick: 'null',
@@ -70,7 +56,7 @@ Button.propTypes = {
   appearance: PropTypes.string,
   disabled: PropTypes.bool,
   icon: PropTypes.string,
-  iconRight: PropTypes.bool,
+  isIconOnRight: PropTypes.bool,
   label: PropTypes.string,
   size: PropTypes.string,
   onClick: PropTypes.func,

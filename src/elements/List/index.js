@@ -15,11 +15,7 @@ const List = ({
   onClick,
 }) => {
   const getItemIcon = isActive => (
-    <Icon
-      color={`${isActive ? 'primary' : 'richBlack'}.base`}
-      name={icon}
-      size={16}
-    />
+    <Icon color={`${isActive ? 'primary' : 'richBlack'}.base`} name={icon} size={16} />
   )
   const ListItems = items.map((item, index) => {
     const isActive = index === activeItemIndex

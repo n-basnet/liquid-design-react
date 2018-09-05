@@ -31,14 +31,8 @@ const themeBase = {
     black: '900',
   },
   transition: 'all 200ms',
-  boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(
-    COLORS.BLACK,
-    0.05
-  )}`,
-  doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(
-    COLORS.BLACK,
-    0.05
-  )}`,
+  boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
+  doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
   zIndex: {
     tooltips: 9,
   },
@@ -138,10 +132,8 @@ const themeBaseColors = {
   black: {
     base: COLORS.BLACK,
   },
-  grey: {
-    base: COLORS.GREY,
-    dark: COLORS.GREY_DARK,
-    aux: COLORS.AUX_GREY,
+  auxGrey: {
+    base: COLORS.AUX_GREY,
   },
 }
 

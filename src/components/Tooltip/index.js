@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
@@ -54,7 +54,7 @@ const TooltipContentWrapper = styled.div`
   `};
 `
 
-export class Tooltip extends React.PureComponent {
+export class Tooltip extends PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
     /** the wall on which the arrow will be displayed */
@@ -96,10 +96,10 @@ export class Tooltip extends React.PureComponent {
     this.props.onToggle && this.props.onToggle(false)
   }
   render() {
-    const { isOpen, isHovered } = this.state
+    const { isHovered } = this.state
     const { children, wall, side, style, customTrigger } = this.props
-    const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : isOpen
-    const iconName = `info${isHovered || isOpen ? 'Filled' : 'Circle'}`
+    const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
+    const iconName = `info${isHovered || isTooltipOpen ? 'Filled' : 'Circle'}`
     return (
       <TooltipWrapper
         isOpen={isTooltipOpen}
@@ -112,7 +112,7 @@ export class Tooltip extends React.PureComponent {
         ) : (
           <Icon name={iconName} onClick={this.toggle} />
         )}
-        {isOpen && (
+        {isTooltipOpen && (
           <TooltipContentWrapper
             className={TOOLTIP_WRAPPER_CLASSNAME}
             style={style}

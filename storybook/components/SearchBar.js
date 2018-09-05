@@ -36,11 +36,7 @@ storiesOf('Components/SearchBar', module)
     <EnhancedSearchBar handleSubmit={action('submit')} options={getOptions()} />
   ))
   .add('ghost', () => (
-    <EnhancedSearchBar
-      ghost
-      handleSubmit={action('submit')}
-      options={getOptions()}
-    />
+    <EnhancedSearchBar ghost handleSubmit={action('submit')} options={getOptions()} />
   ))
   .add('disabled', () => <EnhancedSearchBar disabled />)
   .add('disabled ghost', () => <EnhancedSearchBar disabled ghost />)

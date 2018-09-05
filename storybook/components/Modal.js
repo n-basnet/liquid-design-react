@@ -1,10 +1,11 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { getBackgroundWrapper, getTextKnob } from '../helpers'
-import { Modal } from '~'
+import { default as EnhancedModal, Modal } from '~/components/Modal'
+import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 
 const ModalPresentation = styled.div`
   text-align: center;
@@ -45,13 +46,9 @@ class ModalApp extends PureComponent {
     return (
       <div>
         <button onClick={this.openModal}>open modal</button>
-        <Modal
-          label='Header Label'
-          open={this.state.open}
-          onClose={this.closeModal}
-        >
+        <EnhancedModal label='Header Label' open={this.state.open} onClose={this.closeModal}>
           <Presentation.Simple />
-        </Modal>
+        </EnhancedModal>
       </div>
     )
   }
@@ -59,19 +56,28 @@ class ModalApp extends PureComponent {
 
 storiesOf('Components/Modal', module)
   .addDecorator(getBackgroundWrapper())
+  .addDecorator(storyFn => (
+    <Fragment>
+      {/* just to make addon-info aware of the original `Modal` props */}
+      <div style={{ display: 'none' }}>
+        <Modal open={false} theme={THEMES[DEFAULT_THEME_NAME]} children={''} onClose={() => {}} />
+      </div>
+      {storyFn()}
+    </Fragment>
+  ))
   .addParameters({
     info: {
       source: false,
       propTables: [],
-      propTablesExclude: [Presentation.Simple, ModalApp, Modal],
+      propTablesExclude: [Presentation.Simple, ModalApp, EnhancedModal, Fragment],
     },
   })
   .add('simple', () => (
     <div style={{ height: '400px' }}>
       <style>{'#storybook-theme-wrapper {display: none}'}</style>
-      <Modal label='Header Label' open onClose={action('close modal')}>
+      <EnhancedModal label='Header Label' open onClose={action('close modal')}>
         <Presentation.Simple />
-      </Modal>
+      </EnhancedModal>
     </div>
   ))
   .add('usage in app', () => <ModalApp />, {

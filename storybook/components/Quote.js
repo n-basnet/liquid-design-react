@@ -4,25 +4,21 @@ import { storiesOf } from '@storybook/react'
 import { Quote } from '~'
 import { getTextKnob } from '../helpers'
 
-const getAuthor = () =>
-  getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
+const getAuthor = () => getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
 const getImagePath = () =>
   getTextKnob({
     name: 'imagePath',
-    defaultText:
-      'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg',
+    defaultText: 'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg',
   })
 const getQuotation = () =>
   getTextKnob({
     name: 'quotation',
-    defaultText:
-      'Digital design is like painting, except the paint never dries ever again.',
+    defaultText: 'Digital design is like painting, except the paint never dries ever again.',
   })
 const getQuotationForTypographicQuote = () =>
   getTextKnob({
     name: 'quotation',
-    defaultText:
-      'Digital design is like painting, except the paint never dries.',
+    defaultText: 'Digital design is like painting, except the paint never dries.',
   })
 const getSource = () =>
   getTextKnob({

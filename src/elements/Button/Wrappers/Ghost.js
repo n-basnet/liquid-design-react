@@ -12,7 +12,7 @@ export default styled.button`
   border: none;
   outline: none;
   ${props => css`
-    flex-direction: ${props.iconRight ? 'row-reverse' : 'row'};
+    flex-direction: ${props.isIconOnRight ? 'row-reverse' : 'row'};
     ${cursorValue};
     &:hover {
       div {
@@ -32,7 +32,7 @@ export default styled.button`
         fill: ${props.disabled
     ? props.theme.colors.sensitiveGrey.darker
     : props.theme.colors.primary.base};
-        ${props.iconRight
+        ${props.isIconOnRight
     ? css`
               margin-left: 0;
             `

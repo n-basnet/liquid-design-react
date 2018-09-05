@@ -1,29 +1,36 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
+import Theme from '~/Theme'
 import Breadcrumbs from '.'
 import SingleBreadcrumb from './SingleBreadcrumb'
 
 describe('Breadcrumbs', () => {
+  const getWrapper = (props = {}) =>
+    mount(
+      <Theme>
+        <Breadcrumbs {...props} />
+      </Theme>
+    )
   const getItems = (modifier = {}) => [
     {
-      name: 'Breadcrumb 1',
+      content: 'Breadcrumb 1',
     },
     {
-      name: 'Breadcrumb 2',
+      content: 'Breadcrumb 2',
       ...modifier,
     },
     {
-      name: 'Breadcrumb 3',
+      content: 'Breadcrumb 3',
     },
   ]
   it('renders without items', () => {
-    const wrapper = shallow(<Breadcrumbs />)
+    const wrapper = getWrapper()
     expect(wrapper).toBeTruthy()
   })
   it('renders three items', () => {
     const items = getItems()
-    const wrapper = shallow(<Breadcrumbs items={items} />)
+    const wrapper = getWrapper({ items })
     expect(wrapper.find(SingleBreadcrumb).length).toEqual(items.length)
   })
   it('handles clicking on an item', () => {
@@ -34,12 +41,18 @@ describe('Breadcrumbs', () => {
         num = num + 1
       },
     })
-    const wrapper = shallow(<Breadcrumbs items={items} />)
+    const wrapper = getWrapper({ items })
     expect(num).toEqual(initNum)
     wrapper
       .find(SingleBreadcrumb)
       .at(1)
       .simulate('click')
     expect(num).toEqual(initNum + 1)
+  })
+  it('handles a node as item content', () => {
+    const Content = () => <div>link</div>
+    const item = { content: <Content /> }
+    const wrapper = getWrapper({ items: [item] })
+    expect(wrapper.find(Content)).toBeTruthy()
   })
 })

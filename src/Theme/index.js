@@ -18,6 +18,7 @@ injectGlobal`
 
 export const Base = styled.div`
   line-height: 1.4;
+  font-size: 16px;
   ${props => css`
     color: ${props.theme.colors.richBlack.base};
     font-family: ${props.theme.fontFamily};
@@ -43,7 +44,7 @@ export const Base = styled.div`
 const Theme = ({ themeName, ...props }) => (
   <ThemeProvider theme={THEMES[themeName]}>
     <Fragment>
-      <link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' />
+      <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' />
       <Base {...props} />
     </Fragment>
   </ThemeProvider>

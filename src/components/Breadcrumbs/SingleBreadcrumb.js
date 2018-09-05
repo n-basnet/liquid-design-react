@@ -49,15 +49,15 @@ const SingleBreadcrumbTextWrapper = styled.span`
   padding-left: 5px;
 `
 
-const SingleBreadcrumb = ({ name, onClick, active, disabled }) => (
+const SingleBreadcrumb = ({ content, onClick, active, disabled }) => (
   <StyledSingleBreadcrumb active={active} disabled={disabled} onClick={onClick || undefined}>
-    <Icon name='arrowRight' size={19} color={disabled ? 'sensitiveGrey.base' : undefined} />
-    <SingleBreadcrumbTextWrapper>{name}</SingleBreadcrumbTextWrapper>
+    <Icon name='arrowRight' size={19} color={disabled ? 'sensitiveGrey.darker' : undefined} />
+    <SingleBreadcrumbTextWrapper>{content}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
 )
 
 SingleBreadcrumb.propTypes = {
-  name: PropTypes.string.isRequired,
+  content: PropTypes.node.isRequired,
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,

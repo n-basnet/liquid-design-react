@@ -51,8 +51,7 @@ storiesOf('Components/ContentCard', module)
     <ContentCard
       imagePath={getTextKnob({
         name: 'image',
-        defaultText:
-          'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
+        defaultText: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
       })}
       {...getDefaultProps()}
     />

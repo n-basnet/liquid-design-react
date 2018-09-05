@@ -45,8 +45,7 @@ export const TagWrapper = styled.div`
       &:hover {
         ${!props.outline &&
           css`
-            background-color: ${!props.disabled &&
-              props.theme.colors.primary.dark};
+            background-color: ${!props.disabled && props.theme.colors.primary.dark};
             color: ${props.theme.colors.primary.dark};
           `};
         ${!props.disabled &&

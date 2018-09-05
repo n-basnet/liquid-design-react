@@ -63,11 +63,7 @@ class RatingApp extends PureComponent {
         />
         <SectionText>ratings #: {ratingsAmount}</SectionText>
         disabled:
-        <input
-          type='checkbox'
-          checked={disabled}
-          onClick={this.toggleDisabled}
-        />
+        <input type='checkbox' checked={disabled} onClick={this.toggleDisabled} />
       </div>
     )
   }
@@ -83,8 +79,6 @@ storiesOf('Components/Rating', module)
     },
   })
   .add('default', () => (
-    <RatingApp
-      steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })}
-    />
+    <RatingApp steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })} />
   ))
   .add('dots', () => <RatingApp dots />)

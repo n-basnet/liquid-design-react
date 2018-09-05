@@ -10,9 +10,7 @@ storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
   .add('default', () => <Badge text={getTextKnob({ defaultText })} />)
   .add('disabled', () => <Badge text={getTextKnob({ defaultText })} disabled />)
-  .add('default and icon', () => (
-    <Badge text={getTextKnob({ defaultText })} icon='circleX' />
-  ))
+  .add('default and icon', () => <Badge text={getTextKnob({ defaultText })} icon='circleX' />)
   .addDecorator(storyFn => (
     <div
       style={{
@@ -27,25 +25,14 @@ storiesOf('Components/Badge', module)
     </div>
   ))
   .add('on a ContentCard', () => (
-    <Badge text={getTextKnob({ defaultText })} onCard icon='circleX' />
+    <Badge text={getTextKnob({ defaultText })} isOnCard icon='circleX' />
   ))
   .add('on a ContentCard - disabled', () => (
-    <Badge text={getTextKnob({ defaultText })} onCard disabled icon='circleX' />
+    <Badge text={getTextKnob({ defaultText })} isOnCard disabled icon='circleX' />
   ))
   .add('on a ContentCard - right icon', () => (
-    <Badge
-      text={getTextKnob({ defaultText })}
-      onCard
-      iconOnRight
-      icon='circleX'
-    />
+    <Badge text={getTextKnob({ defaultText })} isOnCard isIconOnRight icon='circleX' />
   ))
   .add('on a ContentCard - right icon disabled', () => (
-    <Badge
-      text={getTextKnob({ defaultText })}
-      onCard
-      iconOnRight
-      disabled
-      icon='circleX'
-    />
+    <Badge text={getTextKnob({ defaultText })} isOnCard isIconOnRight disabled icon='circleX' />
   ))
