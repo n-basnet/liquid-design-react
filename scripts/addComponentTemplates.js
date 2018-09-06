@@ -20,18 +20,21 @@ export default ${name}
 const testFileTemplate = ({ name }) =>
   `
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Theme from '~/Theme'
 import ${name} from '.'
 
 describe('${name}', () => {
-  it('renders', () => {
-    const wrapper = shallow(
+  const getWrapper = (props = {}) =>
+    mount(
       <Theme>
-        <${name} />
+        <${name} {...props} />
       </Theme>
     )
+
+  it('renders', () => {
+    const wrapper = getWrapper()
     expect(wrapper).toBeTruthy()
   })
 })

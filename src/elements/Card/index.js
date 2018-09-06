@@ -1,6 +1,11 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
+
+import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+
+export const CARD_CLASSNAME = `${GLOBAL_CSS_PREFIX}Card`
 
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
@@ -18,7 +23,7 @@ const getStackedBoxShadow = (theme, hover) => `
   ${hover ? `, ${getStackedHoverBoxShadow(theme)}` : ''}
 `
 
-const Card = styled.div`
+const CardWrapper = styled.div`
   display: inline-block;
   margin: 10px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
@@ -57,7 +62,7 @@ const Card = styled.div`
   ${props => props.css && css([props.css])};
 `
 
-Card.propTypes = {
+CardWrapper.propTypes = {
   /** with text centering */
   hasCenteredText: PropTypes.bool,
   /** active style - with drop shadow */
@@ -65,5 +70,7 @@ Card.propTypes = {
   /** stacked style - suggesting multiple items */
   stacked: PropTypes.bool,
 }
+
+const Card = props => <CardWrapper className={CARD_CLASSNAME} {...props} />
 
 export default Card

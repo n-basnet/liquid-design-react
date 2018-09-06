@@ -1,8 +1,19 @@
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
+import styled from 'styled-components'
 
 import { ContentCard } from '~'
+import { CARD_CLASSNAME } from '~/elements/Card'
 import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { media } from '~/utils/styling'
+
+const StoryWrapper = styled.div`
+  ${media.min.phone`
+    .${CARD_CLASSNAME} {
+      min-width: 300px;
+    }
+  `};
+`
 
 const defaultText = 'Delivery in 3-4 days'
 
@@ -38,7 +49,13 @@ const getDefaultProps = () => ({
 })
 
 storiesOf('Components/ContentCard', module)
+  .addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>)
   .addDecorator(getBackgroundWrapper({ dark: true }))
+  .addParameters({
+    info: {
+      propTablesExclude: [StoryWrapper],
+    },
+  })
   .add('default', () => <ContentCard {...getDefaultProps()} />)
   .add('multiple', () => (
     <Fragment>

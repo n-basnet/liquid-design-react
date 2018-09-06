@@ -7,11 +7,11 @@ import { fadeIn } from '~/utils/styling/animations'
 import { cursorValue } from '~/utils/styling'
 
 const bgColorSelector = props => {
-  const { colors, isInfo, isWarning, disabled } = props
-  if (isInfo) return colors.vibrantYellow.base
-  if (isWarning) return colors.richRed.base
-  if (disabled) return colors.sensitiveGrey.darkest
-  else return colors.primary.base
+  const { theme, isInfo, isWarning, disabled } = props
+  if (isInfo) return theme.colors.vibrantYellow.base
+  if (isWarning) return theme.colors.richRed.base
+  if (disabled) return theme.colors.sensitiveGrey.darkest
+  else return theme.colors.primary.base
 }
 
 const BubbleWrapper = styled.div`
