@@ -2,7 +2,12 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
-import { getBackgroundWrapper, formatList, placeholderText } from '../helpers'
+import {
+  includeComponentInPropTable,
+  getBackgroundWrapper,
+  formatList,
+  placeholderText,
+} from '../helpers'
 import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
 import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
 import { media } from '~/utils/styling'
@@ -42,19 +47,18 @@ const SampleContent = () => (
 
 storiesOf('Components/Tooltip', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(storyFn => (
-    <Fragment>
-      {/* just to make addon-info aware of the original `Tooltip` props */}
-      <div style={{ display: 'none' }}>
-        <Tooltip>something</Tooltip>
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(Tooltip, { children: '' }))
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [WrappedTooltip, ContentWrapper, Wrapper, SampleContent, Fragment],
+      propTablesExclude: [
+        WrappedTooltip,
+        ContentWrapper,
+        Wrapper,
+        GroupWrapper,
+        SampleContent,
+        Fragment,
+      ],
     },
   })
   .add('open', () => (

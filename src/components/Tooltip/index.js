@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
+import cx from 'classnames'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import { getPosition, getArrowStyle } from '~/components/Tooltip/utils'
 import { WALLS, WALLS_KEYS, SIDES, SIDES_KEYS } from '~/components/Tooltip/consts'
 import { hasCSSFilters } from '~/utils/featureDetects'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
-export const TOOLTIP_WRAPPER_CLASSNAME = `${GLOBAL_CSS_PREFIX}TooltipWrapper`
+export const TOOLTIP_WRAPPER_CLASSNAME = getClassName({ name: 'TooltipWrapper' })
 
 const getIconColor = props => (props.isOpen ? 'darker' : props.isHovered ? 'dark' : 'base')
 
@@ -62,21 +63,23 @@ export class Tooltip extends PureComponent {
     /** the side of the wall - left or right - on which the arrow should be displayed */
     side: PropTypes.oneOf(SIDES_KEYS),
     /** object for overriding the style of the Tooltip content */
-    style: PropTypes.object,
+    contentStyle: PropTypes.object,
     /** force open state for tooltip */
     isOpen: PropTypes.bool,
     /** provide a custom trigger element, instead of the default info icon */
     customTrigger: PropTypes.func,
     /** callback on toggling the tooltip */
     onToggle: PropTypes.func,
+    className: PropTypes.string,
   }
   static defaultProps = {
     wall: WALLS.top,
     side: SIDES.left,
-    style: {},
+    contentStyle: {},
     customTrigger: undefined,
     isOpen: null,
     onToggle: undefined,
+    className: null,
   }
   state = {
     isOpen: false,
@@ -97,7 +100,7 @@ export class Tooltip extends PureComponent {
   }
   render() {
     const { isHovered } = this.state
-    const { children, wall, side, style, customTrigger } = this.props
+    const { children, wall, side, contentStyle, customTrigger, className, ...props } = this.props
     const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
     const iconName = `info${isHovered || isTooltipOpen ? 'Filled' : 'Circle'}`
     return (
@@ -106,6 +109,8 @@ export class Tooltip extends PureComponent {
         isHovered={isHovered}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        className={cx(getClassName(Tooltip), className)}
+        {...props}
       >
         {customTrigger ? (
           customTrigger(this.toggle)
@@ -115,7 +120,7 @@ export class Tooltip extends PureComponent {
         {isTooltipOpen && (
           <TooltipContentWrapper
             className={TOOLTIP_WRAPPER_CLASSNAME}
-            style={style}
+            style={contentStyle}
             wall={wall}
             side={side}
           >

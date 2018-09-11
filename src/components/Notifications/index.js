@@ -7,12 +7,13 @@ import { filter } from 'ramda'
 import Animated from 'react-animated-transitions'
 import fadeInDownCSSAnimation from 'animate.css/source/fading_entrances/fadeInDown.css'
 import fadeOutUpCSSAnimation from 'animate.css/source/fading_exits/fadeOutUp.css'
+import cx from 'classnames'
 
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { Base } from '~/Theme'
 import SingleNotification from '~/components/Notifications/SingleNotification'
 import { NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
 import { getOrCreateDOMNode } from '~/utils/dom'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const DEFAULT_AUTO_REMOVE_TIMEOUT = 3000
 const ANIMATION_DURATION = 200
@@ -37,9 +38,11 @@ class Notifications extends PureComponent {
   static propTypes = {
     /** Timeout after which a notification should disappear */
     autoRemoveTimeout: PropTypes.number,
+    className: PropTypes.string,
   }
   static defaultProps = {
     autoRemoveTimeout: DEFAULT_AUTO_REMOVE_TIMEOUT,
+    className: null,
   }
   state = {
     items: [],
@@ -60,12 +63,13 @@ class Notifications extends PureComponent {
       items: filter(item => item.id !== id, items),
     }))
   }
-  getDOMNode = () => getOrCreateDOMNode(`${GLOBAL_CSS_PREFIX}Notifications`)
+  getDOMNode = () => getOrCreateDOMNode(getClassName(Notifications))
   render() {
+    const { autoRemoveTimeout, className, ...props } = this.props
     return ReactDOM.createPortal(
       // Theme's Base is needed because the component attaches itself directly to the body element
       <Base>
-        <NotificationsWrapper>
+        <NotificationsWrapper {...props} className={cx(className, getClassName(Notifications))}>
           <Animated items>
             {this.state.items.map(item => (
               <Animated
@@ -77,7 +81,7 @@ class Notifications extends PureComponent {
               >
                 <SingleNotification
                   getRemoveHandler={this.removeNotificationHandler}
-                  autoRemoveTimeout={this.props.autoRemoveTimeout}
+                  autoRemoveTimeout={autoRemoveTimeout}
                   {...item}
                 />
               </Animated>

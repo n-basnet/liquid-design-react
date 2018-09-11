@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { TextList } from '~'
-import { getTextKnob } from '../helpers'
+import { getTextKnob, includeComponentInPropTable, getPropTablesExcludeList } from '../helpers'
+import { default as EnhancedTextList, TextList } from '~/elements/TextList'
 
 const getListItem = id => ({
   id,
@@ -12,7 +12,7 @@ const getListItem = id => ({
   }),
 })
 
-const getData = () => [
+const getItems = () => [
   {
     ...getListItem(1),
     items: [
@@ -37,8 +37,22 @@ const getData = () => [
   },
 ]
 
-storiesOf('Elements/TextList', module).add('numbered list', () => <TextList data={getData()} />)
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([EnhancedTextList]),
+  },
+}
 
-storiesOf('Elements/TextList', module).add('bullet list', () => (
-  <TextList data={getData()} listType='bullet' />
-))
+const getDefaultProps = () => ({
+  items: getItems(),
+})
+
+storiesOf('Elements/TextList', module)
+  .addDecorator(includeComponentInPropTable(TextList, getDefaultProps()))
+  .addParameters(params)
+  .add('numbered list', () => <EnhancedTextList {...getDefaultProps()} />)
+
+storiesOf('Elements/TextList', module)
+  .addDecorator(includeComponentInPropTable(TextList, getDefaultProps()))
+  .addParameters(params)
+  .add('bullet list', () => <EnhancedTextList {...getDefaultProps()} listType='bullet' />)

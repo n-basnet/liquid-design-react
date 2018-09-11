@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import Segment, { SegmentWrapper } from '~/components/FlyOut/Segment'
 import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
 import Ellipsis from '~/components/aux/Ellipsis'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const FlyOutContentWrapper = styled.div`
   overflow: hidden;
@@ -17,9 +18,9 @@ class FlyOutContent extends PureComponent {
   static propTypes = { ...flyOutPropTypes, getRef: PropTypes.func }
   static defaultProps = { ...flyOutDefaultProps, getRef: null }
   render() {
-    const { name, options, getRef } = this.props
+    const { name, options, getRef, ...props } = this.props
     return (
-      <FlyOutContentWrapper innerRef={getRef}>
+      <FlyOutContentWrapper innerRef={getRef} {...props}>
         <SegmentWrapper isHeadline>
           <Ellipsis>{name}</Ellipsis>
         </SegmentWrapper>
@@ -31,4 +32,6 @@ class FlyOutContent extends PureComponent {
   }
 }
 
-export default FlyOutContent
+const { Component } = attachClassName(FlyOutContent)
+
+export default Component

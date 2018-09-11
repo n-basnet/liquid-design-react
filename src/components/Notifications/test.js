@@ -5,6 +5,7 @@ import Theme from '~/Theme'
 import Notifications from '.'
 import { getNotificationType } from './SingleNotification'
 import { NOTIFICATION_TYPES } from './consts'
+import { everyComponentTestSuite } from '~/utils/testUtils'
 
 const notificationText = 'some text'
 
@@ -21,6 +22,7 @@ class NotificationApp extends PureComponent {
           ref={v => {
             this.notificationsRef = v
           }}
+          {...this.props}
         />
       </Theme>
     )
@@ -32,9 +34,10 @@ describe('Notifications', () => {
 
   let notificationsRef
   let notificationsWrapper
+  const getNotificationsWrapper = props => mount(<NotificationApp {...props} />)
 
   beforeEach(() => {
-    const wrapper = mount(<NotificationApp />)
+    const wrapper = getNotificationsWrapper()
     notificationsWrapper = wrapper.find(Notifications)
     notificationsRef = wrapper.instance().notificationsRef
   })
@@ -90,4 +93,6 @@ describe('Notifications', () => {
       })
     ).toEqual(type)
   })
+
+  everyComponentTestSuite(getNotificationsWrapper, Notifications, 'Notifications')
 })

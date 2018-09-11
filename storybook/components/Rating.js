@@ -3,8 +3,12 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 import { number } from '@storybook/addon-knobs'
 
-import { Rating } from '~'
-import { getBackgroundWrapper } from '../helpers'
+import { default as EnhancedRating, Rating } from '~/components/Rating'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
 
 const firstRating = 2.5
 
@@ -52,9 +56,9 @@ class RatingApp extends PureComponent {
     return (
       <div>
         <SectionText>official rating ({rating}):</SectionText>
-        <Rating rating={rating} dots={dots} steps={steps} />
+        <EnhancedRating rating={rating} dots={dots} steps={steps} />
         <SectionText>interactive rating:</SectionText>
-        <Rating
+        <EnhancedRating
           onSubmit={this.addRating}
           dots={dots}
           steps={steps}
@@ -71,13 +75,13 @@ class RatingApp extends PureComponent {
 
 storiesOf('Components/Rating', module)
   .addDecorator(getBackgroundWrapper())
-  .add('single', () => <Rating />)
+  .addDecorator(includeComponentInPropTable(Rating))
   .addParameters({
     info: {
-      source: false,
-      propTablesExclude: [RatingApp],
+      propTablesExclude: getPropTablesExcludeList([RatingApp, EnhancedRating]),
     },
   })
+  .add('single', () => <EnhancedRating />)
   .add('default', () => (
     <RatingApp steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })} />
   ))

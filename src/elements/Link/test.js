@@ -1,20 +1,29 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Link from '.'
 import Icon from '~/elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Link', () => {
-  const linkText = 'Label Text'
-  const textNodeIndex = 1
-  const icon = 'arrowRight'
-  const wrapper = shallow(<Link>{linkText}</Link>)
+  const defaultProps = {
+    children: 'Label Text',
+    icon: 'arrowRight',
+  }
+  const getLinkWrapper = getWrapper(Link, defaultProps)
 
   it('renders the link text', () => {
-    expect(wrapper.childAt(textNodeIndex).text()).toEqual(linkText)
+    expect(
+      getLinkWrapper()
+        .find(Link)
+        .text()
+    ).toEqual(defaultProps.children)
   })
 
   it('renders a correct icon', () => {
-    expect(wrapper.find(Icon).prop('name')).toEqual(icon)
+    expect(
+      getLinkWrapper()
+        .find(Icon)
+        .prop('name')
+    ).toEqual(defaultProps.icon)
   })
+
+  everyComponentTestSuite(getLinkWrapper, Link, 'Link')
 })

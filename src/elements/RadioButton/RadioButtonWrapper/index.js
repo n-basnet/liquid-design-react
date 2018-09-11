@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, safariStyles } from '~/utils/styling'
 
 /*
 additional :before on RadioButtonWrapper is required for the Firefox and Edge, which do not currently support :before for input fields
@@ -22,9 +22,7 @@ export default styled.div`
     !props.disabled &&
           css`
             border-color: ${props =>
-    props.isChecked
-      ? props.theme.colors.primary.dark
-      : props.theme.colors.primary.base};
+    props.isChecked ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
           `}
       }
   }
@@ -55,10 +53,10 @@ export default styled.div`
       outline: none;
       }
     }
-  @supports (-webkit-marquee-repetition:infinite) and (object-fit:fill) {
-    :before {
-        display: none;
-    }
-  }
+    ${safariStyles(`
+      :before {
+          display: none;
+      }
+    `)}
 
 `

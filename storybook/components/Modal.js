@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { getBackgroundWrapper, getTextKnob, includeComponentInPropTable } from '../helpers'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 
@@ -56,18 +56,16 @@ class ModalApp extends PureComponent {
 
 storiesOf('Components/Modal', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(storyFn => (
-    <Fragment>
-      {/* just to make addon-info aware of the original `Modal` props */}
-      <div style={{ display: 'none' }}>
-        <Modal open={false} theme={THEMES[DEFAULT_THEME_NAME]} children={''} onClose={() => {}} />
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(
+    includeComponentInPropTable(Modal, {
+      open: false,
+      theme: THEMES[DEFAULT_THEME_NAME],
+      children: '',
+      onClose: () => {},
+    })
+  )
   .addParameters({
     info: {
-      source: false,
       propTables: [],
       propTablesExclude: [Presentation.Simple, ModalApp, EnhancedModal, Fragment],
     },

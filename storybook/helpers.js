@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
 
@@ -14,9 +14,21 @@ export const getBackgroundWrapper = ({ dark, style } = {}) => storyFn => (
   </div>
 )
 
+export const includeComponentInPropTable = (Component, props = {}) => storyFn => (
+  <Fragment>
+    {/* just to make addon-info aware of the Component props */}
+    <div style={{ display: 'none' }}>
+      <Component {...props} />
+    </div>
+    {storyFn()}
+  </Fragment>
+)
+
 export const placeholderText = amount => loremIpsum(amount, 'w')
 
 export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLength = 30 } = {}) =>
   text(name, defaultText || placeholderText(placeholderTextLength))
 
 export const formatList = list => list.map(v => `\`${v}\``).join(', ')
+
+export const getPropTablesExcludeList = (list = []) => [Fragment, ...list]

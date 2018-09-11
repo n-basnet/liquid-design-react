@@ -1,23 +1,17 @@
-import React from 'react'
-import { shallow } from 'enzyme'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
-import Theme from '~/Theme'
 import Label from '.'
 
 describe('Label', () => {
-  const labelText = 'Label Text'
+  const defaultProps = {
+    children: 'Label Text',
+  }
+  const getLabelWrapper = getWrapper(Label, defaultProps)
 
   it('renders the link text', () => {
-    const wrapper = shallow(
-      <Theme>
-        <Label>{labelText}</Label>
-      </Theme>
-    )
-    expect(
-      wrapper
-        .find(Label)
-        .children()
-        .text()
-    ).toEqual(labelText)
+    const wrapper = getLabelWrapper()
+    expect(wrapper.find(Label).text()).toEqual(defaultProps.children)
   })
+
+  everyComponentTestSuite(getLabelWrapper, Label, 'Label')
 })

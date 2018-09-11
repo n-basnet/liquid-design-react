@@ -1,34 +1,52 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Headline } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+  getTextKnob,
+} from '../helpers'
+import { default as EnhancedHeadline, Headline } from '~/elements/Headline'
 
 const defaultText = 'Our pursuit is progress for people.'
+const getDefaultProps = () => ({
+  children: getTextKnob({ defaultText }),
+})
+
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([EnhancedHeadline]),
+  },
+}
 
 storiesOf('Elements/Headline', module)
+  .addDecorator(includeComponentInPropTable(Headline, getDefaultProps()))
+  .addParameters(params)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '830px' } }))
-  .add('XH1', () => <Headline type='XH1'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XH2', () => <Headline type='XH2'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XH3', () => <Headline type='XH3'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XH4', () => <Headline type='XH4'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XH5', () => <Headline type='XH5'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XH6', () => <Headline type='XH6'>{getTextKnob({ defaultText })}</Headline>)
-  .add('H1', () => <Headline>{getTextKnob({ defaultText })}</Headline>)
-  .add('H2', () => <Headline type='H2'>{getTextKnob({ defaultText })}</Headline>)
-  .add('H3', () => <Headline type='H3'>{getTextKnob({ defaultText })}</Headline>)
-  .add('H4', () => <Headline type='H4'>{getTextKnob({ defaultText })}</Headline>)
-  .add('H5', () => <Headline type='H5'>{getTextKnob({ defaultText })}</Headline>)
-  .add('H6', () => <Headline type='H6'>{getTextKnob({ defaultText })}</Headline>)
+  .add('XH1', () => <EnhancedHeadline type='XH1' {...getDefaultProps()} />)
+  .add('XH2', () => <EnhancedHeadline type='XH2' {...getDefaultProps()} />)
+  .add('XH3', () => <EnhancedHeadline type='XH3' {...getDefaultProps()} />)
+  .add('XH4', () => <EnhancedHeadline type='XH4' {...getDefaultProps()} />)
+  .add('XH5', () => <EnhancedHeadline type='XH5' {...getDefaultProps()} />)
+  .add('XH6', () => <EnhancedHeadline type='XH6' {...getDefaultProps()} />)
+  .add('H1', () => <EnhancedHeadline {...getDefaultProps()} />)
+  .add('H2', () => <EnhancedHeadline type='H2' {...getDefaultProps()} />)
+  .add('H3', () => <EnhancedHeadline type='H3' {...getDefaultProps()} />)
+  .add('H4', () => <EnhancedHeadline type='H4' {...getDefaultProps()} />)
+  .add('H5', () => <EnhancedHeadline type='H5' {...getDefaultProps()} />)
+  .add('H6', () => <EnhancedHeadline type='H6' {...getDefaultProps()} />)
 
 storiesOf('Elements/Brand Headline', module)
+  .addDecorator(includeComponentInPropTable(Headline, getDefaultProps()))
+  .addParameters(params)
   .addDecorator(getBackgroundWrapper())
-  .add('XBH1', () => <Headline type='XBH1'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XBH2', () => <Headline type='XBH2'>{getTextKnob({ defaultText })}</Headline>)
-  .add('XBH3', () => <Headline type='XBH3'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH1', () => <Headline type='BH1'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH2', () => <Headline type='BH2'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH3', () => <Headline type='BH3'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH4', () => <Headline type='BH4'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH5', () => <Headline type='BH5'>{getTextKnob({ defaultText })}</Headline>)
-  .add('BH6', () => <Headline type='BH6'>{getTextKnob({ defaultText })}</Headline>)
+  .add('XBH1', () => <EnhancedHeadline type='XBH1' {...getDefaultProps()} />)
+  .add('XBH2', () => <EnhancedHeadline type='XBH2' {...getDefaultProps()} />)
+  .add('XBH3', () => <EnhancedHeadline type='XBH3' {...getDefaultProps()} />)
+  .add('BH1', () => <EnhancedHeadline type='BH1' {...getDefaultProps()} />)
+  .add('BH2', () => <EnhancedHeadline type='BH2' {...getDefaultProps()} />)
+  .add('BH3', () => <EnhancedHeadline type='BH3' {...getDefaultProps()} />)
+  .add('BH4', () => <EnhancedHeadline type='BH4' {...getDefaultProps()} />)
+  .add('BH5', () => <EnhancedHeadline type='BH5' {...getDefaultProps()} />)
+  .add('BH6', () => <EnhancedHeadline type='BH6' {...getDefaultProps()} />)

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 
 import * as H from '~/elements/Headline/H'
 import * as BH from '~/elements/Headline/BH'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const Headline = ({ children, type, style }) => {
+export const Headline = ({ children, type, ...props }) => {
   const HEADLINES = {
     ...H,
     ...BH,
@@ -12,7 +13,7 @@ const Headline = ({ children, type, style }) => {
 
   const HeadlineComponent = HEADLINES[type]
 
-  return <HeadlineComponent style={style}>{children}</HeadlineComponent>
+  return <HeadlineComponent {...props}>{children}</HeadlineComponent>
 }
 
 Headline.propTypes = {
@@ -26,4 +27,6 @@ Headline.defaultProps = {
   style: null,
 }
 
-export default Headline
+const { Component } = attachClassName(Headline)
+
+export default Component

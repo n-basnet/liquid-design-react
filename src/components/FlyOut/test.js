@@ -1,17 +1,16 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
 import FlyOut from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('FlyOut', () => {
+  const label = 'Some label'
+  const getFlyOutWrapper = getWrapper(FlyOut, { label })
   it('renders a label', () => {
-    const label = 'Some label'
-    const wrapper = shallow(
-      <Theme>
-        <FlyOut label={label} />
-      </Theme>
-    )
-    expect(wrapper.html()).toMatch(label)
+    expect(
+      getFlyOutWrapper()
+        .find(FlyOut)
+        .html()
+    ).toMatch(label)
   })
+
+  everyComponentTestSuite(getFlyOutWrapper, FlyOut, 'FlyOut')
 })

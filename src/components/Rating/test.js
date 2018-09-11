@@ -1,13 +1,9 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Rating, { roundToNearest } from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Rating', () => {
-  it('renders', () => {
-    const wrapper = shallow(<Rating />)
-    expect(wrapper).toBeTruthy()
-  })
+  const getRatingWrapper = getWrapper(Rating, { title: 'Some title' })
+  everyComponentTestSuite(getRatingWrapper, Rating, 'Rating')
 })
 
 it('roundToNearest', () => {

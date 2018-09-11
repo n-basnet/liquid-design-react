@@ -1,19 +1,32 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Accordion } from '~'
-import { getBackgroundWrapper, placeholderText } from '../helpers'
+import { default as EnhancedAccordion, Accordion } from '~/components/Accordion'
+import {
+  getBackgroundWrapper,
+  getPropTablesExcludeList,
+  placeholderText,
+  includeComponentInPropTable,
+} from '../helpers'
 
-const title = 'Section title'
-const content = placeholderText(72)
+const defaultProps = {
+  title: 'Section title',
+  children: placeholderText(72),
+}
 
 storiesOf('Components/Accordion', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default single', () => <Accordion title={title}>{content}</Accordion>)
+  .addDecorator(includeComponentInPropTable(Accordion, defaultProps))
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([EnhancedAccordion]),
+    },
+  })
+  .add('default single', () => <EnhancedAccordion {...defaultProps} />)
   .add('default stacked', () => (
     <section>
-      <Accordion title={title}>{content}</Accordion>
-      <Accordion title={title}>{content}</Accordion>
-      <Accordion title={title}>{content}</Accordion>
+      <EnhancedAccordion {...defaultProps} />
+      <EnhancedAccordion {...defaultProps} />
+      <EnhancedAccordion {...defaultProps} />
     </section>
   ))

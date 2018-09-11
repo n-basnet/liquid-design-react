@@ -1,29 +1,23 @@
-import React from 'react'
-import { mount } from 'enzyme'
-
-import Theme from '~/Theme'
 import Icon from '~/elements/Icon'
 import Toggle from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Toggle', () => {
-  const getWrapper = (props = {}) =>
-    mount(
-      <Theme>
-        <Toggle {...props} />
-      </Theme>
-    )
+  const getToggleWrapper = getWrapper(Toggle)
   it('renders', () => {
-    expect(getWrapper()).toBeTruthy()
+    expect(getToggleWrapper()).toBeTruthy()
   })
   it('renders icons', () => {
     const iconNames = ['circleX', 'circleX']
-    const wrapper = getWrapper({ icons: iconNames })
+    const wrapper = getToggleWrapper({ icons: iconNames })
     expect(wrapper.find(Icon).length).toEqual(iconNames.length)
   })
   it('handles onClick', () => {
     const onClick = jest.fn()
-    const wrapper = getWrapper({ onClick })
+    const wrapper = getToggleWrapper({ onClick })
     wrapper.find(Toggle).simulate('click')
     expect(onClick).toBeCalled()
   })
+
+  everyComponentTestSuite(getToggleWrapper, Toggle, 'Toggle')
 })

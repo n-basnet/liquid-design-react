@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import FooterWrapper from '~/modules/Footer/FooterWrapper'
@@ -9,8 +9,9 @@ import FooterBar from '~/modules/Footer/FooterBar'
 import Headline from '~/elements/Headline'
 import Icon from '~/elements/Icon'
 import Label from '~/elements/Label'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-class Footer extends Component {
+class Footer extends PureComponent {
   static propTypes = {
     headlineText: PropTypes.string,
     iconsNamesAndActions: PropTypes.arrayOf(
@@ -54,19 +55,14 @@ class Footer extends Component {
   ))
 
   render() {
-    const { headlineText, mainIconName } = this.props
+    const { headlineText, mainIconName, ...props } = this.props
 
     return (
-      <FooterWrapper>
+      <FooterWrapper {...props}>
         <Headline size='H1'>{headlineText}</Headline>
         <HorizontalLine />
         <FooterBar>
-          <Icon
-            name={mainIconName}
-            color='black.base'
-            size={80}
-            style={{ marginRight: '140px' }}
-          />
+          <Icon name={mainIconName} color='black.base' size={80} style={{ marginRight: '140px' }} />
           <LabelsWrapper>{this.labels}</LabelsWrapper>
           <IconsWrapper>{this.icons}</IconsWrapper>
         </FooterBar>
@@ -75,4 +71,6 @@ class Footer extends Component {
   }
 }
 
-export default Footer
+const { Component } = attachClassName(Footer)
+
+export default Component

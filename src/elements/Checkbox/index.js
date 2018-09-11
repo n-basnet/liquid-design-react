@@ -4,8 +4,9 @@ import styled, { css } from 'styled-components'
 
 import { cursorValue } from '~/utils/styling'
 import { default as Icon, ICON_CLASSNAME } from '~/elements/Icon'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const CheckboxWrapper = styled.div`
+export const CheckboxWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   ${props => css`
@@ -30,7 +31,7 @@ const CheckboxWrapper = styled.div`
   }
 `
 
-const Input = styled.input`
+export const Input = styled.input`
   display: none;
 `
 
@@ -43,10 +44,10 @@ export const Label = styled.label`
   `};
 `
 
-class Checkbox extends PureComponent {
+export class Checkbox extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
-    /** for controlling the checkbox externally */
+    /** for controlling the checkbox externally - if undefined, the checkbox will use internal state */
     isChecked: PropTypes.bool,
     label: PropTypes.string,
     onChange: PropTypes.func,
@@ -54,7 +55,7 @@ class Checkbox extends PureComponent {
 
   static defaultProps = {
     disabled: false,
-    isChecked: false,
+    isChecked: undefined,
     label: null,
     onChange: null,
   }
@@ -77,19 +78,20 @@ class Checkbox extends PureComponent {
   isChecked = () => (this.props.isChecked !== undefined ? this.props.isChecked : this.state.checked)
 
   render() {
-    const { disabled, label, isChecked } = this.props
+    const { disabled, label, ...props } = this.props
     const { hover } = this.state
     const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
 
     return (
       <CheckboxWrapper
         disabled={disabled}
-        checked={isChecked || this.isChecked()}
+        checked={this.isChecked()}
         onClick={this.toggleCheckbox}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        {...props}
       >
-        <Input type='checkbox' />
+        <Input type='checkbox' checked={this.isChecked()} />
         <Icon
           name={`checkbox${iconVersion}`}
           color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
@@ -100,4 +102,6 @@ class Checkbox extends PureComponent {
   }
 }
 
-export default Checkbox
+const { Component } = attachClassName(Checkbox)
+
+export default Component

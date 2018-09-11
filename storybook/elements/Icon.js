@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 import { without } from 'ramda'
 
-import { getBackgroundWrapper } from '../helpers'
+import { includeComponentInPropTable, getBackgroundWrapper } from '../helpers'
 import IconWithTheme, { Icon } from '~/elements/Icon'
 import iconsList from '~/elements/Icon/iconsList'
 
@@ -69,13 +69,7 @@ storiesOf('Elements/Icon', module)
   .add('single Icon', () => (
     <Icon size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })} name='bottle' />
   ))
-  .addDecorator(storyFn => (
-    <Fragment>
-      {/* just to make addon-info aware of the original `Icon` props */}
-      <Icon style={{ display: 'none' }} name='board' />
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(Icon, { name: 'board' }))
   .addParameters({
     info: {
       source: false,

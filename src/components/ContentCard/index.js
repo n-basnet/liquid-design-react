@@ -7,6 +7,7 @@ import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
 import Placeholder from '~/components/aux/Placeholder'
 import Label from '~/components/ContentCard/Label'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const ImageWrapper = styled.div`
   ${getBackgroundImage};
@@ -48,7 +49,7 @@ const LabelsWrapper = styled.div`
   }
 `
 
-const ContentCard = ({
+export const ContentCard = ({
   title,
   labels = [],
   imagePath,
@@ -57,12 +58,14 @@ const ContentCard = ({
   stacked,
   active,
   badge,
+  ...props
 }) => (
   <Card
     active={active}
     stacked={stacked}
     css={badge && 'position: relative; padding-bottom: 34px'}
     hasCenteredText
+    {...props}
   >
     <div style={{ marginBottom: description ? '16px' : '43px' }}>
       <TitleWrapper>{title}</TitleWrapper>
@@ -114,4 +117,6 @@ ContentCard.defaultProps = {
   badge: null,
 }
 
-export default ContentCard
+const { Component } = attachClassName(ContentCard)
+
+export default Component

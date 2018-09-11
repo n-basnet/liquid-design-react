@@ -6,6 +6,7 @@ import { rgba } from 'polished'
 
 import { cursorValue } from '~/utils/styling'
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const TOGGLE_WIDTH = 60
 const TOGGLE_HEIGHT = 35
@@ -104,13 +105,13 @@ const ToggleWrapper = styled.div`
     `};
 `
 
-const Toggle = ({ icons, onClick, ...props }) => (
+export const Toggle = ({ icons, onClick, ...props }) => (
   <ToggleWrapper
-    {...props}
     hasIcons={!isEmpty(icons)}
     onClick={props.disabled ? null : onClick}
     tabIndex='0'
     role='button'
+    {...props}
   >
     {icons[0] && <Icon name={icons[0]} size={ICON_SIZE} />}
     {icons[1] && <Icon name={icons[1]} size={ICON_SIZE} />}
@@ -131,4 +132,6 @@ Toggle.defaultProps = {
   icons: [],
 }
 
-export default Toggle
+const { Component } = attachClassName(Toggle)
+
+export default Component

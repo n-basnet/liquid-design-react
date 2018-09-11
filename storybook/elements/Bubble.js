@@ -2,14 +2,24 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { number } from '@storybook/addon-knobs'
 
-import { getBackgroundWrapper } from '../helpers'
-import { Bubble } from '~'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { default as EnhancedBubble, Bubble } from '~/elements/Bubble'
 
 storiesOf('Elements/Bubble', module)
   .addDecorator(getBackgroundWrapper())
+  .addDecorator(includeComponentInPropTable(Bubble))
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([EnhancedBubble]),
+    },
+  })
   .add('default', () => (
-    <Bubble label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })} />
+    <EnhancedBubble label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })} />
   ))
-  .add('info', () => <Bubble isInfo />)
-  .add('warning', () => <Bubble isWarning />)
-  .add('disabled', () => <Bubble label={2} disabled />)
+  .add('info', () => <EnhancedBubble isInfo />)
+  .add('warning', () => <EnhancedBubble isWarning />)
+  .add('disabled', () => <EnhancedBubble label={2} disabled />)

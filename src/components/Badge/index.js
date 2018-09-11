@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const BadgeWrapper = styled.div`
   ${props => css`
@@ -68,8 +69,8 @@ const BadgeTextWrapper = styled.span`
 /**
  * Badges symbolize special properties of an item or person. Badges provide a short overview about that property and its value.
  */
-const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard }) => (
-  <BadgeWrapper disabled={disabled} isOnCard={isOnCard}>
+export const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard, ...props }) => (
+  <BadgeWrapper disabled={disabled} isOnCard={isOnCard} {...props}>
     <Fragment>
       {icon &&
         !isIconOnRight && (
@@ -114,4 +115,6 @@ Badge.defaultProps = {
   isOnCard: false,
 }
 
-export default Badge
+const { Component } = attachClassName(Badge)
+
+export default Component

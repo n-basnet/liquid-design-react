@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, safariStyles } from '~/utils/styling'
 
 // supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) - Safari selector
 
@@ -13,7 +13,7 @@ export default styled.label`
   ${props => css`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
   `};
-  @supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
+  ${safariStyles(`
     top: 1px;
-  }
+  `)};
 `

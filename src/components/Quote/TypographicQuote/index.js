@@ -29,8 +29,8 @@ const AuthorWrapper = styled.div`
   `};
 `
 
-export const TypographicQuote = ({ source, author, big, quotation }) => (
-  <QuoteWrapper big={big} cite={source}>
+export const TypographicQuote = ({ source, author, big, quotation, ...props }) => (
+  <QuoteWrapper big={big} cite={source} {...props}>
     <PhraseWrapper big={big}>{`»${quotation}«`}</PhraseWrapper>
     <AuthorWrapper big={big}>{`– ${author}`}</AuthorWrapper>
   </QuoteWrapper>

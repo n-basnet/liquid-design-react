@@ -1,49 +1,42 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Footer from '.'
-import LabelsWrapper from '~/modules/Footer/LabelsWrapper'
-import IconsWrapper from '~/modules/Footer/IconsWrapper'
+import Label from '~/elements/Label'
+import Icon from '~/elements/Icon'
 import Headline from '~/elements/Headline'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Footer', () => {
-  const headlineText = 'Get started today and bring your business idea to life.'
-  const labelsTexts = ['Label Text', 'Label Text', 'Label Text']
   const onClickMock = jest.fn()
-  const iconsNamesAndActions = [
-    { name: 'circleX', onClick: onClickMock },
-    { name: 'circleX', onClick: onClickMock },
-    { name: 'circleX', onClick: onClickMock },
-  ]
+  const defaultProps = {
+    headlineText: 'Get started today and bring your business idea to life.',
+    labelsTexts: ['Label Text', 'Label Text', 'Label Text'],
+    iconsNamesAndActions: [
+      { name: 'circleX', onClick: onClickMock },
+      { name: 'circleX', onClick: onClickMock },
+      { name: 'circleX', onClick: onClickMock },
+    ],
+    mainIconName: 'circleX',
+  }
+  const getFooterWrapper = getWrapper(Footer, defaultProps)
 
-  const wrapper = shallow(
-    <Footer
-      headlineText={headlineText}
-      iconsNamesAndActions={iconsNamesAndActions}
-      labelsTexts={labelsTexts}
-    />
-  )
+  const wrapper = getFooterWrapper()
 
   it('renders footer heading correctly', () => {
-    expect(
-      wrapper
-        .find(Headline)
-        .children()
-        .text()
-    ).toEqual(headlineText)
+    expect(wrapper.find(Headline).text()).toEqual(defaultProps.headlineText)
   })
 
   it('renders proper label', () => {
-    const firstLabel = wrapper.find(LabelsWrapper).childAt(0)
-    const firstLabelText = labelsTexts[0]
+    const firstLabel = wrapper.find(Label).first()
+    const firstLabelText = defaultProps.labelsTexts[0]
 
-    expect(firstLabel.children().text()).toEqual(firstLabelText)
+    expect(firstLabel.text()).toEqual(firstLabelText)
   })
 
   it('renders proper icon', () => {
-    const firstIcon = wrapper.find(IconsWrapper).childAt(0)
-    const firstIconName = iconsNamesAndActions[0]['name']
+    const firstIcon = wrapper.find(Icon).first()
+    const firstIconName = defaultProps.iconsNamesAndActions[0]['name']
 
     expect(firstIcon.prop('name')).toEqual(firstIconName)
   })
+
+  everyComponentTestSuite(getFooterWrapper, Footer, 'Footer')
 })

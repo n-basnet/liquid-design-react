@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -12,17 +12,18 @@ const ModalContentWrapper = styled.div`
   `};
 `
 
-const ModalContent = ({ label, onClose, children }) => (
-  <Fragment>
+const ModalContent = ({ label, onClose, children, theme, ...props }) => (
+  <div {...props}>
     <ModalHeader label={label} onClose={onClose} />
     <ModalContentWrapper>{children}</ModalContentWrapper>
-  </Fragment>
+  </div>
 )
 
 ModalContent.propTypes = {
   onClose: PropTypes.func.isRequired,
   label: PropTypes.string,
   children: PropTypes.node.isRequired,
+  theme: PropTypes.object.isRequired,
 }
 
 ModalContent.defaultProps = {

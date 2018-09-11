@@ -1,24 +1,18 @@
-import React from 'react'
-import { mount } from 'enzyme'
-
-import Favorite, { ANIMATION_DURATION } from '.'
-
-jest.useFakeTimers()
+import Favorite, { FavoriteWrapper } from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Favorite', () => {
+  const getFavoriteWrapper = getWrapper(Favorite)
+
   it('handles click', () => {
-    const wrapper = mount(<Favorite />)
-    expect(wrapper.state('isAnimating')).toEqual(false)
+    const wrapper = getFavoriteWrapper()
 
-    wrapper.simulate('click')
+    expect(wrapper.find(FavoriteWrapper).prop('isAnimating')).toEqual(false)
 
-    expect(wrapper.state('isAnimating')).toEqual(true)
+    wrapper.find(Favorite).simulate('click')
 
-    setTimeout(() => {
-      expect(wrapper.state('isAnimating')).toEqual(false)
-      expect(wrapper.state('isActive')).toEqual(true)
-    }, ANIMATION_DURATION)
-
-    jest.runAllTimers()
+    expect(wrapper.find(FavoriteWrapper).prop('isAnimating')).toEqual(true)
   })
+
+  everyComponentTestSuite(getFavoriteWrapper, Favorite, 'Favorite')
 })

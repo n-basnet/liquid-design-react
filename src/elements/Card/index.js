@@ -2,10 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
-
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
-
-export const CARD_CLASSNAME = `${GLOBAL_CSS_PREFIX}Card`
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const CARD_WIDTH = 300
 const getCardPadding = cardWidth => cardWidth * 8 / 100
@@ -62,7 +59,9 @@ const CardWrapper = styled.div`
   ${props => props.css && css([props.css])};
 `
 
-CardWrapper.propTypes = {
+export const Card = props => <CardWrapper {...props} />
+
+Card.propTypes = {
   /** with text centering */
   hasCenteredText: PropTypes.bool,
   /** active style - with drop shadow */
@@ -71,6 +70,14 @@ CardWrapper.propTypes = {
   stacked: PropTypes.bool,
 }
 
-const Card = props => <CardWrapper className={CARD_CLASSNAME} {...props} />
+Card.defaultProps = {
+  hasCenteredText: false,
+  active: false,
+  stacked: false,
+}
 
-export default Card
+const { Component, globalClassName } = attachClassName(Card)
+
+export { globalClassName }
+
+export default Component

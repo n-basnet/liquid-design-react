@@ -1,21 +1,15 @@
-import React from 'react'
-import { mount } from 'enzyme'
-
-import Theme from '~/Theme'
 import { ICON_CLASSNAME } from '~/elements/Icon'
 import Tooltip from '.'
 import { getArrowStyle, getPosition } from './utils'
 import { WALLS_KEYS, SIDES_KEYS } from './consts'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Tooltip', () => {
-  it('displays and hides content on click', () => {
-    const tooltipContent = 'some content'
-    const wrapper = mount(
-      <Theme>
-        <Tooltip>{tooltipContent}</Tooltip>
-      </Theme>
-    )
+  const tooltipContent = 'some content'
+  const getTooltipWrapper = getWrapper(Tooltip, { children: tooltipContent })
 
+  it('displays and hides content on click', () => {
+    const wrapper = getTooltipWrapper()
     const TooltipIcon = wrapper.find(`.${ICON_CLASSNAME}`).first()
     const getFirstDivText = () =>
       wrapper
@@ -44,4 +38,6 @@ describe('Tooltip', () => {
       })
     )
   })
+
+  everyComponentTestSuite(getTooltipWrapper, Tooltip, 'Tooltip')
 })

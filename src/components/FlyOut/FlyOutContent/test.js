@@ -1,20 +1,19 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
 import FlyOutContent from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('FlyOutContent', () => {
+  const optionName = 'Option 1'
+  const defaultProps = {
+    name: 'Some name',
+    options: [{ name: optionName }],
+  }
+  const getFlyOutContentWrapper = getWrapper(FlyOutContent, defaultProps)
+
   it('renders a name and options', () => {
-    const contentName = 'Some name'
-    const optionName = 'Option 1'
-    const options = [{ name: optionName }]
-    const wrapper = shallow(
-      <Theme>
-        <FlyOutContent name={contentName} options={options} />
-      </Theme>
-    )
-    expect(wrapper.html()).toMatch(contentName)
+    const wrapper = getFlyOutContentWrapper().find(FlyOutContent)
+    expect(wrapper.html()).toMatch(defaultProps.name)
     expect(wrapper.html()).toMatch(optionName)
   })
+
+  everyComponentTestSuite(getFlyOutContentWrapper, FlyOutContent, 'FlyOutContent')
 })

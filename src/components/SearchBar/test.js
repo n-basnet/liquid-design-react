@@ -1,21 +1,15 @@
-import React from 'react'
-import { mount } from 'enzyme'
-
-import Theme from '~/Theme'
 import SearchBar, { PLACEHOLDER_TEXT, ResultWrapper } from '.'
 import Input from '~/components/aux/Input'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('SearchBar', () => {
   let wrapper
   let getInput
   const query = 'Search result'
   const OPTIONS = [{ text: `${query} 1` }, { text: `${query} 1` }]
+  const getSearchBarWrapper = getWrapper(SearchBar, { options: OPTIONS })
   beforeEach(() => {
-    wrapper = mount(
-      <Theme>
-        <SearchBar options={OPTIONS} />
-      </Theme>
-    )
+    wrapper = getSearchBarWrapper()
     getInput = () => wrapper.find(Input)
   })
   it('renders placeholder text', () => {
@@ -42,4 +36,6 @@ describe('SearchBar', () => {
     })
     expect(wrapper.find(ResultWrapper).length).toEqual(0)
   })
+
+  everyComponentTestSuite(getSearchBarWrapper, SearchBar, 'SearchBar')
 })

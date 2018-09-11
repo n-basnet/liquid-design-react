@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import InputWrapper from '~/elements/RadioButton/InputWrapper'
 import RadioButtonWrapper from '~/elements/RadioButton/RadioButtonWrapper'
 import LabelWrapper from '~/elements/RadioButton/LabelWrapper'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 class RadioButton extends PureComponent {
   static propTypes = {
@@ -21,7 +22,7 @@ class RadioButton extends PureComponent {
   }
 
   render() {
-    const { disabled, name, selected, label, value, onClick } = this.props
+    const { disabled, name, selected, label, value, onClick, ...props } = this.props
     const id = `${name}-${value}`
 
     /* additional props in RadioButtonWrapper are required for the Firefox and Edge, which do not currently support :before for input fields */
@@ -31,6 +32,7 @@ class RadioButton extends PureComponent {
         disabled={disabled}
         isChecked={selected === value}
         value={value}
+        {...props}
       >
         <InputWrapper
           disabled={disabled}
@@ -49,4 +51,6 @@ class RadioButton extends PureComponent {
   }
 }
 
-export default RadioButton
+const { Component } = attachClassName(RadioButton)
+
+export default Component

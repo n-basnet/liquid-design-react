@@ -37,3 +37,12 @@ export const media = {
 export const cursorValue = ({ disabled, defaultValue = 'default' }) => css`
   cursor: ${disabled ? 'not-allowed' : defaultValue};
 `
+
+export const safariStyles = styleString =>
+  process.env.NODE_ENV === 'test'
+    ? css``
+    : css`
+        @supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) {
+          ${styleString};
+        }
+      `

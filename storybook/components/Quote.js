@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Quote } from '~'
-import { getTextKnob } from '../helpers'
+import { default as EnhancedQuote, Quote } from '~/components/Quote'
+import { getTextKnob, getPropTablesExcludeList, includeComponentInPropTable } from '../helpers'
 
 const getAuthor = () => getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
 const getImagePath = () =>
@@ -26,18 +26,37 @@ const getSource = () =>
     defaultText: 'http://merck.design',
   })
 
-storiesOf('Components/Quote/Default Quote', module).add('default', () => (
-  <Quote
-    author={getAuthor()}
-    imagePath={getImagePath()}
-    source={getSource()}
-    quotation={getQuotation()}
-  />
-))
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([EnhancedQuote]),
+  },
+}
+
+const defaultProps = {
+  author: getAuthor(),
+  quotation: getQuotation(),
+}
+const propTableDecorator = includeComponentInPropTable(Quote, defaultProps)
+
+storiesOf('Components/Quote/Default Quote', module)
+  .addDecorator(propTableDecorator)
+  .addParameters(params)
+
+  .add('default', () => (
+    <EnhancedQuote
+      author={getAuthor()}
+      imagePath={getImagePath()}
+      source={getSource()}
+      quotation={getQuotation()}
+    />
+  ))
 
 storiesOf('Components/Quote/Typographic Quote', module)
+  .addDecorator(propTableDecorator)
+  .addParameters(params)
+
   .add('Big', () => (
-    <Quote
+    <EnhancedQuote
       author={getAuthor()}
       big
       source={getSource()}
@@ -45,7 +64,7 @@ storiesOf('Components/Quote/Typographic Quote', module)
     />
   ))
   .add('Small', () => (
-    <Quote
+    <EnhancedQuote
       author={getAuthor()}
       small
       source={getSource()}

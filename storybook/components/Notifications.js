@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Notifications from '~/components/Notifications'
 import { NOTIFICATION_TYPES, NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
 import SingleNotification from '~/components/Notifications/SingleNotification'
-import { getTextKnob, formatList } from '../helpers'
+import { getTextKnob, formatList, includeComponentInPropTable } from '../helpers'
 
 const DEFAULT_TEXT = 'Notification text'
 const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
@@ -79,15 +79,7 @@ storiesOf('Components/Notifications', module)
       ))}
     </SingleNotificationsWrapper>
   ))
-  .addDecorator(storyFn => (
-    <Fragment>
-      {/* just to make addon-info aware of the original `Notifications` props */}
-      <div style={{ display: 'none' }}>
-        <Notifications />
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(Notifications))
   .add('usage in app', () => <NotificationApp />, {
     info: {
       text: `

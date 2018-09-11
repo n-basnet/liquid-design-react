@@ -1,33 +1,42 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Checkbox, { Label } from '.'
+import Checkbox, { Label, Input } from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Icon from '~/elements/Icon'
 
 describe('Checkbox', () => {
-  const label = 'Checkbox text'
-  const wrapper = shallow(<Checkbox label={label} onChange={jest.fn()} />)
+  const defaultProps = {
+    label: 'Checkbox text',
+    onChange: jest.fn(),
+  }
+  const getCheckboxWrapper = getWrapper(Checkbox, defaultProps)
 
-  it('displays the correct label', () => {
+  it('renders the label', () => {
     expect(
-      wrapper
+      getCheckboxWrapper()
         .find(Label)
-        .children()
         .text()
-    ).toEqual(label)
+    ).toEqual(defaultProps.label)
   })
 
-  it('has a state "checked" equal to true after the checkbox is clicked', () => {
-    wrapper.simulate('click')
-    expect(wrapper.state('checked')).toEqual(true)
+  it('toggles on click', () => {
+    const wrapper = getCheckboxWrapper()
+    expect(wrapper.find(Input).prop('checked')).toEqual(false)
+    expect(wrapper.find(Icon).prop('name')).toEqual('checkboxEmpty')
+    wrapper.find(Checkbox).simulate('click')
+    expect(wrapper.find(Input).prop('checked')).toEqual(true)
+    expect(wrapper.find(Icon).prop('name')).toEqual('checkboxFilled')
+    wrapper.find(Checkbox).simulate('click')
+    expect(wrapper.find(Input).prop('checked')).toEqual(false)
+    expect(wrapper.find(Icon).prop('name')).toEqual('checkboxEmpty')
   })
 
-  it('has a state "hover" equal to true triggered by the onMouseEnter event', () => {
-    wrapper.simulate('mouseenter')
-    expect(wrapper.state('hover')).toEqual(true)
+  it('updates Icon color on hover', () => {
+    const wrapper = getCheckboxWrapper()
+    expect(wrapper.find(Icon).prop('color')).toBeDefined()
+    wrapper.find(Checkbox).simulate('mouseenter')
+    expect(wrapper.find(Icon).prop('color')).not.toBeDefined()
+    wrapper.find(Checkbox).simulate('mouseleave')
+    expect(wrapper.find(Icon).prop('color')).toBeDefined()
   })
 
-  it('has a state "hover" equal to false triggered by the onMouseLeave event', () => {
-    wrapper.simulate('mouseleave')
-    expect(wrapper.state('hover')).toEqual(false)
-  })
+  everyComponentTestSuite(getCheckboxWrapper, Checkbox, 'Checkbox')
 })

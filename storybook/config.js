@@ -23,6 +23,7 @@ const runStorybookConfig = async () => {
       withInfo({
         inline: true,
         header: false,
+        source: false,
         propTablesExclude: [Fragment],
       })
     )

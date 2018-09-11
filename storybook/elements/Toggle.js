@@ -1,9 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 
-import { Toggle } from '~'
-import { getBackgroundWrapper } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { default as EnhancedToggle, Toggle } from '~/elements/Toggle'
 
 class ToggleApp extends React.Component {
   static propTypes = {
@@ -18,7 +22,7 @@ class ToggleApp extends React.Component {
   toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
   render() {
     const { toggleProps } = this.props
-    return <Toggle isActive={this.state.isActive} onClick={this.toggle} {...toggleProps} />
+    return <EnhancedToggle isActive={this.state.isActive} onClick={this.toggle} {...toggleProps} />
   }
 }
 
@@ -50,18 +54,10 @@ const sourceCodeInfo = {
 
 storiesOf('Elements/Toggle', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(storyFn => (
-    <Fragment>
-      <div style={{ display: 'none' }}>
-        <Toggle />
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(Toggle))
   .addParameters({
     info: {
-      source: false,
-      propTablesExclude: [ToggleApp, Fragment],
+      propTablesExclude: getPropTablesExcludeList([ToggleApp, EnhancedToggle]),
     },
   })
   .add('default', () => <ToggleApp />, sourceCodeInfo)
@@ -69,4 +65,4 @@ storiesOf('Elements/Toggle', module)
   .add('with icons disabled', () => (
     <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />
   ))
-  .add('disabled', () => <Toggle disabled />)
+  .add('disabled', () => <EnhancedToggle disabled />)

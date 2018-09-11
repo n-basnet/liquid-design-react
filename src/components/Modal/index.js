@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { default as ReactModal } from 'react-modal'
 import { withTheme, injectGlobal, css } from 'styled-components'
+import cx from 'classnames'
 
 import { Base } from '~/Theme'
 import ModalContent from '~/components/Modal/ModalContent'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const TRANSITION_DURATION = 200
-const MODAL_OVERLAY_CLASSNAME = `${GLOBAL_CSS_PREFIX}Modal`
 
 const getReactModalContentStyle = theme => ({
   padding: 0,
@@ -38,6 +38,25 @@ const modalOverlayCloseState = css`
   transform: translateY(20px);
 `
 
+export const Modal = ({ open, className, ...props }) => (
+  <ReactModal
+    isOpen={open}
+    ariaHideApp={false}
+    style={{ content: getReactModalContentStyle(props.theme) }}
+    closeTimeoutMS={TRANSITION_DURATION}
+    overlayClassName={MODAL_OVERLAY_CLASSNAME}
+    onRequestClose={props.onClose}
+    shouldCloseOnOverlayClick
+  >
+    {/* Theme's Base is needed because ReactModal attaches itself directly to the body element */}
+    <Base>
+      <ModalContent className={cx(className, MODAL_OVERLAY_CLASSNAME)} {...props} />
+    </Base>
+  </ReactModal>
+)
+
+const MODAL_OVERLAY_CLASSNAME = getClassName(Modal)
+
 injectGlobal`
   .${MODAL_OVERLAY_CLASSNAME}.ReactModal__Overlay {
     transition: all ${TRANSITION_DURATION}ms ease-in-out;
@@ -54,23 +73,6 @@ injectGlobal`
     ${modalOverlayCloseState}
   }
 `
-
-export const Modal = ({ open, ...props }) => (
-  <ReactModal
-    isOpen={open}
-    ariaHideApp={false}
-    style={{ content: getReactModalContentStyle(props.theme) }}
-    closeTimeoutMS={TRANSITION_DURATION}
-    overlayClassName={MODAL_OVERLAY_CLASSNAME}
-    onRequestClose={props.onClose}
-    shouldCloseOnOverlayClick
-  >
-    {/* Theme's Base is needed because ReactModal attaches itself directly to the body element */}
-    <Base>
-      <ModalContent {...props} />
-    </Base>
-  </ReactModal>
-)
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,

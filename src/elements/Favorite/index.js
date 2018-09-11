@@ -8,8 +8,9 @@ import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import Heart from '~/assets/svgSprites/heart.svg'
 import { cursorValue } from '~/utils/styling'
 import { spriteAnimation } from '~/utils/styling/animations'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const FavoriteWrapper = styled.div`
+export const FavoriteWrapper = styled.div`
   display: inline-block;
   position: relative;
   ${props => css`
@@ -77,7 +78,7 @@ const AnimationWrapper = styled.div`
     })};
 `
 
-class Favorite extends PureComponent {
+export class Favorite extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
     active: PropTypes.bool,
@@ -106,7 +107,7 @@ class Favorite extends PureComponent {
     })
   }
   render() {
-    const { disabled, active } = this.props
+    const { disabled, active, ...props } = this.props
     const { isAnimating, isActive } = this.state
     return (
       <FavoriteWrapper
@@ -114,6 +115,7 @@ class Favorite extends PureComponent {
         onClick={this.handleClick}
         isAnimating={isAnimating}
         isActive={isActive || active}
+        {...props}
       >
         <Icon name='heart' />
         <AnimationWrapper isAnimating={isAnimating} />
@@ -122,4 +124,6 @@ class Favorite extends PureComponent {
   }
 }
 
-export default Favorite
+const { Component } = attachClassName(Favorite)
+
+export default Component

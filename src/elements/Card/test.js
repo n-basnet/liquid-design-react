@@ -1,16 +1,14 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
 import Card from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Card', () => {
-  it('renders', () => {
-    const wrapper = shallow(
-      <Theme>
-        <Card />
-      </Theme>
-    )
-    expect(wrapper).toBeTruthy()
+  const defaultProps = {
+    children: 'Some content',
+  }
+  const getCardWrapper = getWrapper(Card, defaultProps)
+  it('renders content', () => {
+    const wrapper = getCardWrapper().find(Card)
+    expect(wrapper.text()).toEqual(defaultProps.children)
   })
+  everyComponentTestSuite(getCardWrapper, Card, 'Card')
 })

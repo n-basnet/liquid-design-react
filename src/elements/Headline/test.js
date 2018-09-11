@@ -1,19 +1,22 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Headline from '.'
 import { XH1 } from './H'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Headline', () => {
-  const text = 'Headline'
-  const type = 'XH1'
-  const wrapper = shallow(<Headline type={type}>{text}</Headline>)
-  it('renders the Headline text', () => {
+  const defaultProps = {
+    children: 'Headline',
+    type: 'XH1',
+  }
+
+  const getHeadlineWrapper = getWrapper(Headline, defaultProps)
+
+  it('renders the children', () => {
     expect(
-      wrapper
+      getHeadlineWrapper()
         .find(XH1)
-        .children()
         .text()
-    ).toEqual(text)
+    ).toEqual(defaultProps.children)
   })
+
+  everyComponentTestSuite(getHeadlineWrapper, Headline, 'Headline')
 })

@@ -2,8 +2,13 @@ import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Breadcrumbs } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { default as EnhancedBreadcrumbs, Breadcrumbs } from '~/components/Breadcrumbs'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
 import { times } from '~/utils/aux'
 
 const getItems = (modifier = {}) => [
@@ -34,19 +39,24 @@ class BreadcrumbsApp extends PureComponent {
     this.setState({ active })
   }
   render() {
-    return <Breadcrumbs items={getItemsForInteractive(this.setActive)} active={this.state.active} />
+    return (
+      <EnhancedBreadcrumbs
+        items={getItemsForInteractive(this.setActive)}
+        active={this.state.active}
+      />
+    )
   }
 }
 
 storiesOf('Components/Breadcrumbs', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => <Breadcrumbs items={getItems()} />)
-  .add('active', () => <Breadcrumbs items={getItems()} active={1} />)
-  .add('disabled', () => <Breadcrumbs items={getItems({ disabled: true })} />)
+  .addDecorator(includeComponentInPropTable(Breadcrumbs))
   .addParameters({
     info: {
-      source: false,
-      propTablesExclude: [BreadcrumbsApp],
+      propTablesExclude: getPropTablesExcludeList([EnhancedBreadcrumbs, BreadcrumbsApp]),
     },
   })
+  .add('default', () => <EnhancedBreadcrumbs items={getItems()} />)
+  .add('active', () => <EnhancedBreadcrumbs items={getItems()} active={1} />)
+  .add('disabled', () => <EnhancedBreadcrumbs items={getItems({ disabled: true })} />)
   .add('interactive', () => <BreadcrumbsApp />)

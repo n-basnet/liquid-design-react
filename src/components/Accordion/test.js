@@ -1,32 +1,30 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Accordion, { SectionTitle, SectionContent } from '.'
 import { placeholderText } from '~/../storybook/helpers'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Accordion', () => {
-  const title = 'Section title'
-  const content = placeholderText()
+  const defaultProps = {
+    title: 'Section title',
+    children: placeholderText(),
+  }
 
-  const wrapper = shallow(<Accordion title={title}>{content}</Accordion>)
+  const getAccordionWrapper = getWrapper(Accordion, defaultProps)
 
   it('renders a title', () => {
-    const textNodeChildIndex = 1
-
     expect(
-      wrapper
+      getAccordionWrapper()
         .find(SectionTitle)
-        .childAt(textNodeChildIndex)
         .text()
-    ).toEqual(title)
+    ).toEqual(defaultProps.title)
   })
 
-  it('renders content', () => {
+  it('renders children', () => {
     expect(
-      wrapper
+      getAccordionWrapper()
         .find(SectionContent)
-        .children()
         .text()
-    ).toEqual(content)
+    ).toEqual(defaultProps.children)
   })
+
+  everyComponentTestSuite(getAccordionWrapper, Accordion, 'Accordion')
 })

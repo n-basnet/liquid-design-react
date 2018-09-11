@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 
 import { times } from '~/utils/aux'
 import Step from '~/components/Rating/Step'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const roundToNearest = (value, number = 0.5) => {
   const remainder = value % number
   return remainder > 0 ? value - remainder + number : value
 }
 
-class Rating extends PureComponent {
+export class Rating extends PureComponent {
   static propTypes = {
     /** amount of stars/dots to display */
     steps: PropTypes.number,
@@ -19,6 +20,7 @@ class Rating extends PureComponent {
     disabled: PropTypes.bool,
     /** different shape of single step - dot instead of default star */
     dots: PropTypes.bool,
+    style: PropTypes.object,
   }
   static defaultProps = {
     steps: 5,
@@ -26,19 +28,21 @@ class Rating extends PureComponent {
     disabled: false,
     dots: false,
     onSubmit: null,
+    style: {},
   }
   state = {
     hovered: null,
   }
   render() {
-    const { onSubmit, rating, steps, disabled, dots } = this.props
+    const { onSubmit, rating, steps, disabled, dots, style, ...props } = this.props
     const isInteractive = onSubmit && !disabled
     const roundedRating = roundToNearest(rating)
     const isHalf = index => roundedRating !== index && Math.round(roundedRating) === index
     return (
       <div
         onMouseLeave={() => this.setState({ hovered: null })}
-        style={{ display: 'inline-block' }}
+        style={{ display: 'inline-block', ...style }}
+        {...props}
       >
         {times(steps).map(index => {
           const normalisedIndex = index + 1
@@ -60,4 +64,6 @@ class Rating extends PureComponent {
   }
 }
 
-export default Rating
+const { Component } = attachClassName(Rating)
+
+export default Component

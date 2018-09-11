@@ -1,21 +1,24 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
+import Modal from '.'
 import ModalContent from './ModalContent'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
-describe('Modal', () => {
+describe('ModalContent', () => {
+  const defaultProps = {
+    children: 'Modal content',
+    label: 'Modal label',
+    onClose: v => v,
+    theme: {},
+    open: true,
+  }
+  const getModalWrapper = getWrapper(Modal, defaultProps)
+
   it('renders content and label', () => {
-    const someContent = 'Modal content'
-    const someLabel = 'Modal label'
-    const wrapper = shallow(
-      <Theme>
-        <ModalContent onClose={v => v} label={someLabel}>
-          {someContent}
-        </ModalContent>
-      </Theme>
-    )
-    expect(wrapper.render().text()).toMatch(someContent)
-    expect(wrapper.render().text()).toMatch(someLabel)
+    const content = getModalWrapper()
+      .find(ModalContent)
+      .html()
+    expect(content).toMatch(defaultProps.children)
+    expect(content).toMatch(defaultProps.label)
   })
+
+  everyComponentTestSuite(getModalWrapper, Modal, 'Modal')
 })

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { default as EnhancedSearchBar, SearchBar } from '~/components/SearchBar'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { getBackgroundWrapper, getTextKnob, includeComponentInPropTable } from '../helpers'
 import { times } from '~/utils/aux'
 
 const getOptions = () =>
@@ -17,15 +17,7 @@ const getOptions = () =>
 
 storiesOf('Components/SearchBar', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(storyFn => (
-    <Fragment>
-      {/* just to make addon-info aware of the original `SearchBar` props */}
-      <div style={{ display: 'none' }}>
-        <SearchBar />
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(SearchBar))
   .addParameters({
     info: {
       source: false,

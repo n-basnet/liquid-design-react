@@ -1,11 +1,11 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 
 import Theme from '.'
 
 describe('Theme', () => {
   it('renders', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Theme themeName='richPurple'>
         <div>hello</div>
       </Theme>

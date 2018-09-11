@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Badge } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { default as EnhancedBadge, Badge } from '~/components/Badge'
+import { getBackgroundWrapper, includeComponentInPropTable, getTextKnob } from '../helpers'
 
 const defaultText = 'Delivery in 3-4 days'
+const defaultProps = { text: getTextKnob({ defaultText }) }
 
 storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => <Badge text={getTextKnob({ defaultText })} />)
-  .add('disabled', () => <Badge text={getTextKnob({ defaultText })} disabled />)
-  .add('default and icon', () => <Badge text={getTextKnob({ defaultText })} icon='circleX' />)
+  .addDecorator(includeComponentInPropTable(Badge, defaultProps))
+  .addParameters({
+    info: {
+      propTablesExclude: [EnhancedBadge, Fragment],
+    },
+  })
+  .add('default', () => <EnhancedBadge {...defaultProps} />)
+  .add('disabled', () => <EnhancedBadge {...defaultProps} disabled />)
+  .add('default and icon', () => <EnhancedBadge {...defaultProps} icon='circleX' />)
   .addDecorator(storyFn => (
     <div
       style={{
@@ -24,15 +31,13 @@ storiesOf('Components/Badge', module)
       {storyFn()}
     </div>
   ))
-  .add('on a ContentCard', () => (
-    <Badge text={getTextKnob({ defaultText })} isOnCard icon='circleX' />
-  ))
+  .add('on a ContentCard', () => <EnhancedBadge {...defaultProps} isOnCard icon='circleX' />)
   .add('on a ContentCard - disabled', () => (
-    <Badge text={getTextKnob({ defaultText })} isOnCard disabled icon='circleX' />
+    <EnhancedBadge {...defaultProps} isOnCard disabled icon='circleX' />
   ))
   .add('on a ContentCard - right icon', () => (
-    <Badge text={getTextKnob({ defaultText })} isOnCard isIconOnRight icon='circleX' />
+    <EnhancedBadge {...defaultProps} isOnCard isIconOnRight icon='circleX' />
   ))
   .add('on a ContentCard - right icon disabled', () => (
-    <Badge text={getTextKnob({ defaultText })} isOnCard isIconOnRight disabled icon='circleX' />
+    <EnhancedBadge {...defaultProps} isOnCard isIconOnRight disabled icon='circleX' />
   ))

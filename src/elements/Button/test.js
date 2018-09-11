@@ -1,31 +1,39 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Button from '.'
 import ButtonLabel from '~/elements/Button/Labels/Button'
 import Icon from '~/elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Button', () => {
-  const label = 'Text'
-  const icon = 'favorite'
-  const onClickMock = jest.fn()
-  const wrapper = shallow(<Button icon={icon} label={label} size='big' onClick={onClickMock} />)
+  const defaultProps = {
+    label: 'Some label',
+    icon: 'star',
+    onClick: jest.fn(),
+  }
+  const getButtonWrapper = getWrapper(Button, defaultProps)
 
-  it('renders a label text correctly', () => {
+  it('renders a label', () => {
     expect(
-      wrapper
+      getButtonWrapper()
         .find(ButtonLabel)
         .children()
         .text()
-    ).toEqual(label)
+    ).toEqual(defaultProps.label)
   })
 
-  it('renders a correct icon', () => {
-    expect(wrapper.find(Icon).prop('name')).toEqual(icon)
+  it('renders an icon', () => {
+    expect(
+      getButtonWrapper()
+        .find(Icon)
+        .prop('name')
+    ).toEqual(defaultProps.icon)
   })
 
   it('calls a function when clicked', () => {
-    wrapper.simulate('click')
-    expect(onClickMock).toBeCalled()
+    getButtonWrapper()
+      .find(Button)
+      .simulate('click')
+    expect(defaultProps.onClick).toBeCalled()
   })
+
+  everyComponentTestSuite(getButtonWrapper, Button, 'Button')
 })

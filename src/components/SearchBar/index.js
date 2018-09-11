@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
+import cx from 'classnames'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import Input from '~/components/aux/Input'
 import { media } from '~/utils/styling'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const getIconColorStyles = props => css`
   .${ICON_CLASSNAME} svg {
@@ -162,6 +164,7 @@ export class SearchBar extends PureComponent {
         onClick: PropTypes.func,
       })
     ),
+    className: PropTypes.string,
   }
   static defaultProps = {
     /** handler for submitting a query */
@@ -169,6 +172,7 @@ export class SearchBar extends PureComponent {
     disabled: false,
     ghost: false,
     options: [],
+    className: null,
   }
   state = {
     value: '',
@@ -205,7 +209,7 @@ export class SearchBar extends PureComponent {
   getResultOnClickHandler = (handler, value) => () => this.triggerResultHandler(handler, value)
   handleClickOutside = () => this.setInputValue(this.state.value, DEFAULT_RESULTS)
   render() {
-    const { handleSubmit, disabled, ghost } = this.props
+    const { handleSubmit, disabled, ghost, className, ...props } = this.props
     const { focused, value, results } = this.state
     const hasResults = !isEmpty(this.state.results)
     return (
@@ -215,6 +219,8 @@ export class SearchBar extends PureComponent {
         hasResults={hasResults}
         disabled={disabled}
         ghost={ghost}
+        className={cx(getClassName(SearchBar), className)}
+        {...props}
       >
         <Icon name='search' size={24} />
         <Input

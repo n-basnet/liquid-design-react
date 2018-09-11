@@ -4,9 +4,10 @@ import PropTypes from 'prop-types'
 import Icon from '~/elements/Icon'
 import { TagWrapper } from '~/elements/Tag/TagWrapper'
 import { Label } from '~/elements/Tag/Label'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const Tag = ({ disabled, icon, label, outline, onClick }) => (
-  <TagWrapper disabled={disabled} outline={outline}>
+export const Tag = ({ disabled, icon, label, outline, onClick, ...props }) => (
+  <TagWrapper disabled={disabled} outline={outline} {...props}>
     <div>
       <Label disabled={disabled} outline={outline}>
         {label}
@@ -38,4 +39,6 @@ Tag.defaultProps = {
   onClick: null,
 }
 
-export default Tag
+const { Component } = attachClassName(Tag)
+
+export default Component

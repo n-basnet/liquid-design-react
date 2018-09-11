@@ -1,23 +1,16 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
 import Paragraph from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Paragraph', () => {
-  const paragraphText = 'Lorem ipsum dolor sit amet'
+  const defaultProps = {
+    children: 'Lorem ipsum dolor sit amet',
+  }
+  const getParagraphWrapper = getWrapper(Paragraph, defaultProps)
 
-  it('renders the paragraph text', () => {
-    const wrapper = shallow(
-      <Theme>
-        <Paragraph>{paragraphText}</Paragraph>
-      </Theme>
-    )
-    expect(
-      wrapper
-        .find(Paragraph)
-        .children()
-        .text()
-    ).toEqual(paragraphText)
+  it('renders the paragraph content', () => {
+    const wrapper = getParagraphWrapper()
+    expect(wrapper.find(Paragraph).text()).toEqual(defaultProps.children)
   })
+
+  everyComponentTestSuite(getParagraphWrapper, Paragraph, 'Paragraph')
 })

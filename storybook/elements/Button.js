@@ -2,68 +2,98 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Button } from '~'
-import { getBackgroundWrapper } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { default as EnhancedButton, Button } from '~/elements/Button'
+
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([EnhancedButton]),
+  },
+}
 
 storiesOf('Elements/Button/Primary', module)
   .addDecorator(getBackgroundWrapper())
-  .add('primary small', () => <Button label='Text' onClick={action('click')} />)
-  .add('primary small disabled', () => <Button disabled label='Text' onClick={action('click')} />)
+  .addDecorator(includeComponentInPropTable(Button))
+  .addParameters(params)
+  .add('primary small', () => <EnhancedButton label='Text' onClick={action('click')} />)
+  .add('primary small disabled', () => (
+    <EnhancedButton disabled label='Text' onClick={action('click')} />
+  ))
   .add('primary small with icon', () => (
-    <Button icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton icon='circleX' label='Text' onClick={action('click')} />
   ))
   .add('primary small with icon disabled', () => (
-    <Button disabled icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton disabled icon='circleX' label='Text' onClick={action('click')} />
   ))
-  .add('primary small with icon only', () => <Button icon='circleX' onClick={action('click')} />)
+  .add('primary small with icon only', () => (
+    <EnhancedButton icon='circleX' onClick={action('click')} />
+  ))
   .add('primary small with icon only disabled', () => (
-    <Button disabled icon='circleX' onClick={action('click')} />
+    <EnhancedButton disabled icon='circleX' onClick={action('click')} />
   ))
-  .add('primary big', () => <Button size='big' label='Text' onClick={action('click')} />)
+  .add('primary big', () => <EnhancedButton size='big' label='Text' onClick={action('click')} />)
   .add('primary big disabled', () => (
-    <Button disabled size='big' label='Text' onClick={action('click')} />
+    <EnhancedButton disabled size='big' label='Text' onClick={action('click')} />
   ))
   .add('primary big with icon', () => (
-    <Button icon='circleX' label='Text' size='big' onClick={action('click')} />
+    <EnhancedButton icon='circleX' label='Text' size='big' onClick={action('click')} />
   ))
   .add('primary big with icon disabled', () => (
-    <Button disabled icon='circleX' label='Text' size='big' onClick={action('click')} />
+    <EnhancedButton disabled icon='circleX' label='Text' size='big' onClick={action('click')} />
   ))
   .add('primary big with icon only', () => (
-    <Button icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton icon='circleX' size='big' onClick={action('click')} />
   ))
   .add('primary big with icon only disabled', () => (
-    <Button disabled icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton disabled icon='circleX' size='big' onClick={action('click')} />
   ))
 
 storiesOf('Elements/Button/Secondary', module)
   .addDecorator(getBackgroundWrapper())
+  .addDecorator(includeComponentInPropTable(Button))
+  .addParameters(params)
   .add('secondary small', () => (
-    <Button appearance='secondary' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' label='Text' onClick={action('click')} />
   ))
   .add('secondary small disabled', () => (
-    <Button appearance='secondary' disabled label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' disabled label='Text' onClick={action('click')} />
   ))
   .add('secondary small with icon', () => (
-    <Button appearance='secondary' icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' icon='circleX' label='Text' onClick={action('click')} />
   ))
   .add('secondary small with icon disabled', () => (
-    <Button disabled appearance='secondary' icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton
+      disabled
+      appearance='secondary'
+      icon='circleX'
+      label='Text'
+      onClick={action('click')}
+    />
   ))
   .add('secondary small with icon only', () => (
-    <Button appearance='secondary' icon='circleX' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' icon='circleX' onClick={action('click')} />
   ))
   .add('secondary small with icon only disabled', () => (
-    <Button appearance='secondary' disabled icon='circleX' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' disabled icon='circleX' onClick={action('click')} />
   ))
   .add('secondary big', () => (
-    <Button appearance='secondary' size='big' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' size='big' label='Text' onClick={action('click')} />
   ))
   .add('secondary big disabled', () => (
-    <Button appearance='secondary' disabled size='big' label='Text' onClick={action('click')} />
+    <EnhancedButton
+      appearance='secondary'
+      disabled
+      size='big'
+      label='Text'
+      onClick={action('click')}
+    />
   ))
   .add('secondary big with icon', () => (
-    <Button
+    <EnhancedButton
       appearance='secondary'
       icon='circleX'
       label='Text'
@@ -72,7 +102,7 @@ storiesOf('Elements/Button/Secondary', module)
     />
   ))
   .add('secondary big with icon disabled', () => (
-    <Button
+    <EnhancedButton
       appearance='secondary'
       disabled
       icon='circleX'
@@ -82,40 +112,60 @@ storiesOf('Elements/Button/Secondary', module)
     />
   ))
   .add('secondary big with icon only', () => (
-    <Button appearance='secondary' icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton appearance='secondary' icon='circleX' size='big' onClick={action('click')} />
   ))
   .add('secondary big with icon only disabled', () => (
-    <Button appearance='secondary' disabled icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton
+      appearance='secondary'
+      disabled
+      icon='circleX'
+      size='big'
+      onClick={action('click')}
+    />
   ))
 
 storiesOf('Elements/Button/Highlight', module)
   .addDecorator(getBackgroundWrapper())
+  .addDecorator(includeComponentInPropTable(Button))
+  .addParameters(params)
   .add('highlight small', () => (
-    <Button appearance='highlight' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' label='Text' onClick={action('click')} />
   ))
   .add('highlight small disabled', () => (
-    <Button appearance='highlight' disabled label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' disabled label='Text' onClick={action('click')} />
   ))
   .add('highlight small with icon', () => (
-    <Button appearance='highlight' icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' icon='circleX' label='Text' onClick={action('click')} />
   ))
   .add('highlight small with icon disabled', () => (
-    <Button appearance='highlight' disabled icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton
+      appearance='highlight'
+      disabled
+      icon='circleX'
+      label='Text'
+      onClick={action('click')}
+    />
   ))
   .add('highlight small with icon only', () => (
-    <Button appearance='highlight' icon='circleX' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' icon='circleX' onClick={action('click')} />
   ))
   .add('highlight small with icon only disabled', () => (
-    <Button appearance='highlight' disabled icon='circleX' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' disabled icon='circleX' onClick={action('click')} />
   ))
   .add('highlight big', () => (
-    <Button appearance='highlight' size='big' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' size='big' label='Text' onClick={action('click')} />
   ))
   .add('highlight big disabled', () => (
-    <Button appearance='highlight' disabled size='big' label='Text' onClick={action('click')} />
+    <EnhancedButton
+      appearance='highlight'
+      disabled
+      size='big'
+      label='Text'
+      onClick={action('click')}
+    />
   ))
   .add('highlight big with icon', () => (
-    <Button
+    <EnhancedButton
       appearance='highlight'
       icon='circleX'
       label='Text'
@@ -124,7 +174,7 @@ storiesOf('Elements/Button/Highlight', module)
     />
   ))
   .add('highlight big with icon disabled', () => (
-    <Button
+    <EnhancedButton
       appearance='highlight'
       disabled
       icon='circleX'
@@ -134,32 +184,48 @@ storiesOf('Elements/Button/Highlight', module)
     />
   ))
   .add('highlight big with icon only', () => (
-    <Button appearance='highlight' icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton appearance='highlight' icon='circleX' size='big' onClick={action('click')} />
   ))
   .add('highlight big with icon only disabled', () => (
-    <Button appearance='highlight' disabled icon='circleX' size='big' onClick={action('click')} />
+    <EnhancedButton
+      appearance='highlight'
+      disabled
+      icon='circleX'
+      size='big'
+      onClick={action('click')}
+    />
   ))
 
 storiesOf('Elements/Button/Ghost', module)
   .addDecorator(getBackgroundWrapper())
-  .add('ghost small', () => <Button appearance='ghost' label='Text' onClick={action('click')} />)
+  .addDecorator(includeComponentInPropTable(Button))
+  .addParameters(params)
+  .add('ghost small', () => (
+    <EnhancedButton appearance='ghost' label='Text' onClick={action('click')} />
+  ))
   .add('ghost small disabled', () => (
-    <Button appearance='ghost' disabled label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='ghost' disabled label='Text' onClick={action('click')} />
   ))
   .add('ghost big', () => (
-    <Button appearance='ghost' label='Text' size='big' onClick={action('click')} />
+    <EnhancedButton appearance='ghost' label='Text' size='big' onClick={action('click')} />
   ))
   .add('ghost big disabled', () => (
-    <Button appearance='ghost' disabled label='Text' size='big' onClick={action('click')} />
+    <EnhancedButton appearance='ghost' disabled label='Text' size='big' onClick={action('click')} />
   ))
   .add('ghost small with icon', () => (
-    <Button appearance='ghost' icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton appearance='ghost' icon='circleX' label='Text' onClick={action('click')} />
   ))
   .add('ghost small with icon disabled', () => (
-    <Button appearance='ghost' disabled icon='circleX' label='Text' onClick={action('click')} />
+    <EnhancedButton
+      appearance='ghost'
+      disabled
+      icon='circleX'
+      label='Text'
+      onClick={action('click')}
+    />
   ))
   .add('ghost small with icon on the right side', () => (
-    <Button
+    <EnhancedButton
       appearance='ghost'
       icon='circleX'
       label='Text'
@@ -168,7 +234,7 @@ storiesOf('Elements/Button/Ghost', module)
     />
   ))
   .add('ghost small with icon on the right side disabled', () => (
-    <Button
+    <EnhancedButton
       appearance='ghost'
       disabled
       icon='circleX'
@@ -178,10 +244,16 @@ storiesOf('Elements/Button/Ghost', module)
     />
   ))
   .add('ghost big with icon', () => (
-    <Button appearance='ghost' icon='circleX' label='Text' size='big' onClick={action('click')} />
+    <EnhancedButton
+      appearance='ghost'
+      icon='circleX'
+      label='Text'
+      size='big'
+      onClick={action('click')}
+    />
   ))
   .add('ghost big with icon disabled', () => (
-    <Button
+    <EnhancedButton
       appearance='ghost'
       disabled
       icon='circleX'
@@ -191,7 +263,7 @@ storiesOf('Elements/Button/Ghost', module)
     />
   ))
   .add('ghost big with icon on the right', () => (
-    <Button
+    <EnhancedButton
       appearance='ghost'
       icon='circleX'
       label='Text'
@@ -201,7 +273,7 @@ storiesOf('Elements/Button/Ghost', module)
     />
   ))
   .add('ghost big with icon on the right disabled', () => (
-    <Button
+    <EnhancedButton
       appearance='ghost'
       disabled
       icon='circleX'

@@ -4,12 +4,10 @@ import styled, { css, withTheme } from 'styled-components'
 import { path } from 'ramda'
 
 import iconsList from '~/elements/Icon/iconsList'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { DEFAULT_THEME } from '~/utils/consts/themes'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-export const ICON_CLASSNAME = `${GLOBAL_CSS_PREFIX}Icon`
-
-const IconWrapper = styled.div`
+export const IconWrapper = styled.div`
   display: inline-block;
   position: relative;
   ${props => css`
@@ -32,25 +30,26 @@ const IconWrapper = styled.div`
 `
 
 export const DEFAULT_SIZE = 24
+export const DEFAULT_UNIT = 'px'
 
 // exported separately for testing and storybook (without `withTheme` decorator)
-export const Icon = ({ name, size, style, theme, secondary, color, unit, onClick }) => {
+export const Icon = ({ name, size, theme, secondary, color, unit, onClick, ...props }) => {
   const SVGIconComponent = iconsList[name]
   if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }
   const alternativeColor = path(color.split('.'), theme.colors) || color
   const fill = alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
+
   return (
     <IconWrapper
-      className={ICON_CLASSNAME}
       svgFill={fill}
       onClick={onClick}
       dimensions={{
         width: `${size}${unit}`,
         height: `${size}${unit}`,
       }}
-      style={style}
+      {...props}
     >
       <SVGIconComponent />
     </IconWrapper>
@@ -62,8 +61,6 @@ Icon.propTypes = {
   name: PropTypes.string.isRequired,
   /** Icon's side dimension (by default in pixels - see `unit` prop) */
   size: PropTypes.number,
-  /** Style object to be passed to inlined SVG */
-  style: PropTypes.object,
   /** (provided by `styled-components` via withTheme decorator) */
   theme: PropTypes.object,
   /** Use the theme's secondary color. Theme's primary color is the default. */
@@ -77,12 +74,15 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
   size: DEFAULT_SIZE,
-  style: {},
   theme: DEFAULT_THEME,
   secondary: false,
   color: '',
-  unit: 'px',
+  unit: DEFAULT_UNIT,
   onClick: null,
 }
 
-export default withTheme(Icon)
+const { Component, globalClassName } = attachClassName(Icon)
+
+export const ICON_CLASSNAME = globalClassName
+
+export default withTheme(Component)

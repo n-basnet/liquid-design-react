@@ -2,12 +2,21 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { getBackgroundWrapper } from '../helpers'
-
-import { Favorite } from '~'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { default as EnhancedFavorite, Favorite } from '~/elements/Favorite'
 
 storiesOf('Elements/Favorite', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => <Favorite onChange={action('toggle favorite')} />)
-  .add('disabled', () => <Favorite disabled />)
-  .add('active', () => <Favorite active onChange={action('toggle favorite')} />)
+  .addDecorator(includeComponentInPropTable(Favorite))
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([EnhancedFavorite]),
+    },
+  })
+  .add('default', () => <EnhancedFavorite onChange={action('toggle favorite')} />)
+  .add('disabled', () => <EnhancedFavorite disabled />)
+  .add('active', () => <EnhancedFavorite active onChange={action('toggle favorite')} />)

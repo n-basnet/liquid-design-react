@@ -1,17 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme'
 
-import Theme from '~/Theme'
 import Breadcrumbs from '.'
 import SingleBreadcrumb from './SingleBreadcrumb'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Breadcrumbs', () => {
-  const getWrapper = (props = {}) =>
-    mount(
-      <Theme>
-        <Breadcrumbs {...props} />
-      </Theme>
-    )
+  const getBreadcrumbsWrapper = getWrapper(Breadcrumbs)
+
   const getItems = (modifier = {}) => [
     {
       content: 'Breadcrumb 1',
@@ -25,12 +20,12 @@ describe('Breadcrumbs', () => {
     },
   ]
   it('renders without items', () => {
-    const wrapper = getWrapper()
+    const wrapper = getBreadcrumbsWrapper()
     expect(wrapper).toBeTruthy()
   })
   it('renders three items', () => {
     const items = getItems()
-    const wrapper = getWrapper({ items })
+    const wrapper = getBreadcrumbsWrapper({ items })
     expect(wrapper.find(SingleBreadcrumb).length).toEqual(items.length)
   })
   it('handles clicking on an item', () => {
@@ -41,7 +36,7 @@ describe('Breadcrumbs', () => {
         num = num + 1
       },
     })
-    const wrapper = getWrapper({ items })
+    const wrapper = getBreadcrumbsWrapper({ items })
     expect(num).toEqual(initNum)
     wrapper
       .find(SingleBreadcrumb)
@@ -52,7 +47,9 @@ describe('Breadcrumbs', () => {
   it('handles a node as item content', () => {
     const Content = () => <div>link</div>
     const item = { content: <Content /> }
-    const wrapper = getWrapper({ items: [item] })
+    const wrapper = getBreadcrumbsWrapper({ items: [item] })
     expect(wrapper.find(Content)).toBeTruthy()
   })
+
+  everyComponentTestSuite(getBreadcrumbsWrapper, Breadcrumbs, 'Breadcrumbs')
 })

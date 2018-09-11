@@ -1,11 +1,7 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import ContentCard from '.'
+import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
 
 describe('ContentCard', () => {
-  it('renders', () => {
-    const wrapper = shallow(<ContentCard title='Some title' />)
-    expect(wrapper).toBeTruthy()
-  })
+  const getContentCardWrapper = getWrapper(ContentCard, { title: 'Some title' })
+  everyComponentTestSuite(getContentCardWrapper, ContentCard, 'ContentCard')
 })

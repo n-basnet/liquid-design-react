@@ -5,8 +5,10 @@ const jsFileTemplate = ({ name }) =>
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ${name} = () =>
-  <div>
+import attachClassName from '~/components/aux/hoc/attachClassName'
+
+export const ${name} = ({...props}) =>
+  <div {...props}>
     ${name}
   </div>
 
@@ -14,29 +16,19 @@ ${name}.propTypes = {
 
 }
 
-export default ${name}
+const { Component } = attachClassName(${name})
+
+export default Component
 `
 
 const testFileTemplate = ({ name }) =>
   `
-import React from 'react'
-import { mount } from 'enzyme'
-
-import Theme from '~/Theme'
 import ${name} from '.'
+import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
 
 describe('${name}', () => {
-  const getWrapper = (props = {}) =>
-    mount(
-      <Theme>
-        <${name} {...props} />
-      </Theme>
-    )
-
-  it('renders', () => {
-    const wrapper = getWrapper()
-    expect(wrapper).toBeTruthy()
-  })
+  const get${name}Wrapper = getWrapper(${name})
+  everyComponentTestSuite(get${name}Wrapper, ${name}, '${name}')
 })
 `
 
@@ -45,9 +37,21 @@ const storybookFileTemplate = ({ name, type }) =>
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { ${name} } from '~'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { default as Enhanced${name}, ${name} } from '~/${type}s/${name}'
 
 storiesOf('${formatTypeString(type)}/${name}', module)
+  .addDecorator(getBackgroundWrapper())
+  .addDecorator(includeComponentInPropTable(${name}))
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([Enhanced${name}]),
+    },
+  })
   .add('default', () => (
     <${name} />
   ))

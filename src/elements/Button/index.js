@@ -6,8 +6,19 @@ import GhostWrapper from '~/elements/Button/Wrappers/Ghost'
 import ButtonLabel from '~/elements/Button/Labels/Button'
 import GhostLabel from '~/elements/Button/Labels/Ghost'
 import Icon from '~/elements/Icon'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const Button = ({ active, appearance, disabled, icon, isIconOnRight, label, size, onClick }) => {
+export const Button = ({
+  active,
+  appearance,
+  disabled,
+  icon,
+  isIconOnRight,
+  label,
+  size,
+  onClick,
+  ...props
+}) => {
   const wrapperProps = {
     active,
     appearance,
@@ -16,6 +27,7 @@ const Button = ({ active, appearance, disabled, icon, isIconOnRight, label, size
     label,
     size,
     onClick,
+    ...props,
   }
 
   const isGhost = appearance === 'ghost'
@@ -48,7 +60,7 @@ Button.defaultProps = {
   isIconOnRight: false,
   label: null,
   size: 'small',
-  onClick: 'null',
+  onClick: null,
 }
 
 Button.propTypes = {
@@ -62,4 +74,6 @@ Button.propTypes = {
   onClick: PropTypes.func,
 }
 
-export default Button
+const { Component } = attachClassName(Button)
+
+export default Component

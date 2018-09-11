@@ -1,11 +1,25 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Label } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+  getTextKnob,
+} from '../helpers'
+import { default as EnhancedLabel, Label } from '~/elements/Label'
 
 const defaultText = 'Label Text'
+const getDefaultProps = () => ({
+  children: getTextKnob({ defaultText }),
+})
 
 storiesOf('Elements/Label', module)
   .addDecorator(getBackgroundWrapper())
-  .add('default', () => <Label>{getTextKnob({ defaultText })}</Label>)
+  .addDecorator(includeComponentInPropTable(Label))
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([EnhancedLabel]),
+    },
+  })
+  .add('default', () => <EnhancedLabel {...getDefaultProps()} />)

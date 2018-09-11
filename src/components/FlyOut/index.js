@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { find, values } from 'ramda'
+import cx from 'classnames'
 
 import Tooltip, { TOOLTIP_WRAPPER_CLASSNAME } from '~/components/Tooltip'
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
@@ -10,6 +11,7 @@ import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTyp
 import { cursorValue } from '~/utils/styling'
 import { hasCSSFilters } from '~/utils/featureDetects'
 import withResizeListener from '~/components/aux/hoc/withResizeListener'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const WIDTHS = {
   max: 500,
@@ -88,6 +90,7 @@ export default class FlyOut extends PureComponent {
     alignLeft: PropTypes.bool,
     disabled: PropTypes.bool,
     width: PropTypes.number,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
@@ -97,6 +100,7 @@ export default class FlyOut extends PureComponent {
     alignLeft: false,
     disabled: false,
     width: null,
+    className: null,
   }
   state = {
     isOpen: false,
@@ -141,7 +145,7 @@ export default class FlyOut extends PureComponent {
       </LabelWrapper>
     )
   render() {
-    const { name, options, alignLeft, disabled, width } = this.props
+    const { name, options, alignLeft, disabled, width, className, ...props } = this.props
     const iconSize = this.isCenterAligned() ? 20 : 15
     const tooltipTranslateX = this.isCenterAligned()
       ? `translateX(50%) translateX(-${iconSize}px)`
@@ -152,9 +156,11 @@ export default class FlyOut extends PureComponent {
         disabled={disabled}
         maxWidth={this.state.tooltipWidth}
         width={width}
+        className={cx(getClassName(FlyOut), className)}
+        {...props}
       >
         <Tooltip
-          style={{
+          contentStyle={{
             padding: 0,
             transform: `${tooltipTranslateX} translateY(${this.isCenterAligned() ? 2 : 6}px)`,
           }}

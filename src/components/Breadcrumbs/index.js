@@ -2,9 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const Breadcrumbs = ({ items, active }) => (
-  <div>{items.map((v, i) => <SingleBreadcrumb key={i} active={i === active} {...v} />)}</div>
+export const Breadcrumbs = ({ items, active, ...props }) => (
+  <div {...props}>
+    {items.map((v, i) => <SingleBreadcrumb key={i} active={i === active} {...v} />)}
+  </div>
 )
 
 Breadcrumbs.propTypes = {
@@ -18,4 +21,6 @@ Breadcrumbs.defaultProps = {
   active: null,
 }
 
-export default Breadcrumbs
+const { Component } = attachClassName(Breadcrumbs)
+
+export default Component

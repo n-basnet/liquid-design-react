@@ -2,9 +2,14 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
-import { ContentCard } from '~'
-import { CARD_CLASSNAME } from '~/elements/Card'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { default as EnhancedContentCard, ContentCard } from '~/components/ContentCard'
+import { globalClassName as CARD_CLASSNAME } from '~/elements/Card'
+import {
+  getPropTablesExcludeList,
+  getBackgroundWrapper,
+  getTextKnob,
+  includeComponentInPropTable,
+} from '../helpers'
 import { media } from '~/utils/styling'
 
 const StoryWrapper = styled.div`
@@ -51,21 +56,22 @@ const getDefaultProps = () => ({
 storiesOf('Components/ContentCard', module)
   .addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>)
   .addDecorator(getBackgroundWrapper({ dark: true }))
+  .addDecorator(includeComponentInPropTable(ContentCard, getDefaultProps()))
   .addParameters({
     info: {
-      propTablesExclude: [StoryWrapper],
+      propTablesExclude: getPropTablesExcludeList([StoryWrapper, EnhancedContentCard]),
     },
   })
-  .add('default', () => <ContentCard {...getDefaultProps()} />)
+  .add('default', () => <EnhancedContentCard {...getDefaultProps()} />)
   .add('multiple', () => (
     <Fragment>
-      <ContentCard {...getDefaultProps()} />
-      <ContentCard {...getDefaultProps()} />
-      <ContentCard {...getDefaultProps()} />
+      <EnhancedContentCard {...getDefaultProps()} />
+      <EnhancedContentCard {...getDefaultProps()} />
+      <EnhancedContentCard {...getDefaultProps()} />
     </Fragment>
   ))
   .add('default with image', () => (
-    <ContentCard
+    <EnhancedContentCard
       imagePath={getTextKnob({
         name: 'image',
         defaultText: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
@@ -73,10 +79,10 @@ storiesOf('Components/ContentCard', module)
       {...getDefaultProps()}
     />
   ))
-  .add('stacked', () => <ContentCard {...getDefaultProps()} stacked />)
-  .add('active', () => <ContentCard {...getDefaultProps()} active />)
+  .add('stacked', () => <EnhancedContentCard {...getDefaultProps()} stacked />)
+  .add('active', () => <EnhancedContentCard {...getDefaultProps()} active />)
   .add('with description and featured', () => (
-    <ContentCard
+    <EnhancedContentCard
       {...getDefaultProps()}
       description={getTextKnob({
         placeholderTextLength: 15,
@@ -88,7 +94,7 @@ storiesOf('Components/ContentCard', module)
     />
   ))
   .add('with badge', () => (
-    <ContentCard
+    <EnhancedContentCard
       {...getDefaultProps()}
       badge={{
         text: getTextKnob({ defaultText }),
@@ -96,7 +102,7 @@ storiesOf('Components/ContentCard', module)
     />
   ))
   .add('with badge with icon', () => (
-    <ContentCard
+    <EnhancedContentCard
       {...getDefaultProps()}
       badge={{
         text: getTextKnob({ defaultText }),
@@ -105,7 +111,7 @@ storiesOf('Components/ContentCard', module)
     />
   ))
   .add('with badge with icon on the right side', () => (
-    <ContentCard
+    <EnhancedContentCard
       {...getDefaultProps()}
       badge={{
         text: getTextKnob({ defaultText }),

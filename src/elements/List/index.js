@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import Icon from '~/elements/Icon'
 import { ListHead } from '~/elements/List/ListHead'
 import { ListItem } from '~/elements/List/ListItem'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const List = ({
+export const List = ({
   activeItemIndex,
   disabledItemIndex,
   grey,
@@ -13,6 +14,7 @@ const List = ({
   items = [],
   listHead,
   onClick,
+  ...props
 }) => {
   const getItemIcon = isActive => (
     <Icon color={`${isActive ? 'primary' : 'richBlack'}.base`} name={icon} size={16} />
@@ -35,7 +37,7 @@ const List = ({
   })
 
   return (
-    <ul>
+    <ul {...props}>
       <ListHead grey={grey}>
         {icon && getItemIcon()}
         {listHead}
@@ -65,4 +67,6 @@ List.defaultProps = {
   onClick: null,
 }
 
-export default List
+const { Component } = attachClassName(List)
+
+export default Component

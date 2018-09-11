@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { getBackgroundImage } from '~/utils/styling'
 import { TypographicQuote } from '~/components/Quote/TypographicQuote'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const QuoteWrapper = styled.blockquote`
   display: inline-block;
@@ -37,16 +38,22 @@ export const PhraseWrapper = styled.p`
   text-align: center;
 `
 
-const Quote = ({ author, big, imagePath, source, quotation }) => (
+export const Quote = ({ author, big, imagePath, source, quotation, ...props }) => (
   <Fragment>
     {imagePath ? (
-      <QuoteWrapper cite={source}>
+      <QuoteWrapper cite={source} {...props}>
         <ImageWrapper src={imagePath} />
         <AuthorWrapper>{author}</AuthorWrapper>
         <PhraseWrapper>{quotation}</PhraseWrapper>
       </QuoteWrapper>
     ) : (
-      <TypographicQuote author={author} big={big} quotation={quotation} source={source} />
+      <TypographicQuote
+        author={author}
+        big={big}
+        quotation={quotation}
+        source={source}
+        {...props}
+      />
     )}
   </Fragment>
 )
@@ -67,4 +74,6 @@ Quote.defaultProps = {
   source: '',
 }
 
-export default Quote
+const { Component } = attachClassName(Quote)
+
+export default Component

@@ -1,5 +1,7 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const fontSizeSelector = props => {
   const sizeMap = {
@@ -13,7 +15,7 @@ const fontSizeSelector = props => {
   return sizeMap[props.type]
 }
 
-const Paragraph = styled.p`
+const ParagraphWrapper = styled.p`
   line-height: 1.75;
   ${props => css`
     font-size: ${fontSizeSelector(props)};
@@ -34,6 +36,8 @@ const Paragraph = styled.p`
   }
 `
 
+export const Paragraph = props => <ParagraphWrapper {...props} />
+
 Paragraph.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
@@ -43,4 +47,6 @@ Paragraph.defaultProps = {
   type: 'md',
 }
 
-export default Paragraph
+const { Component } = attachClassName(Paragraph)
+
+export default Component

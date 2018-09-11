@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import { media } from '~/utils/styling'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const AccordionWrapper = styled.div`
   cursor: pointer;
@@ -71,7 +72,7 @@ export const SectionContent = styled.div`
 
 const DEFAULT_IS_OPEN_VALUE = null
 
-class Accordion extends PureComponent {
+export class Accordion extends PureComponent {
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
@@ -89,12 +90,12 @@ class Accordion extends PureComponent {
   toggleAccordion = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
 
   render() {
-    const { children, title, isOpen } = this.props
+    const { children, title, isOpen, ...props } = this.props
 
     const isAccordionOpen = isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
 
     return (
-      <AccordionWrapper isOpen={isAccordionOpen} onClick={this.toggleAccordion}>
+      <AccordionWrapper isOpen={isAccordionOpen} onClick={this.toggleAccordion} {...props}>
         <SectionTitle isOpen={isAccordionOpen}>
           <Icon name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
@@ -105,4 +106,6 @@ class Accordion extends PureComponent {
   }
 }
 
-export default Accordion
+const { Component } = attachClassName(Accordion)
+
+export default Component

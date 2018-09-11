@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Headline from '~/elements/Headline'
 import Accordion from '~/components/Accordion'
 import COLORS from '~/utils/consts/colors'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 class Faq extends PureComponent {
   static propTypes = {
@@ -18,11 +19,11 @@ class Faq extends PureComponent {
   ))
 
   render() {
-    const { headlinesTexts } = this.props
+    const { headlinesTexts, faqContent, ...props } = this.props
     const richBlackLightest = COLORS.RICH_BLACK_LIGHTEST
 
     return (
-      <section>
+      <section {...props}>
         <Headline type='H1' style={{ paddingBottom: '20px', textAlign: 'center' }}>
           {headlinesTexts.primary}
         </Headline>
@@ -47,4 +48,6 @@ class Faq extends PureComponent {
   }
 }
 
-export default Faq
+const { Component } = attachClassName(Faq)
+
+export default Component

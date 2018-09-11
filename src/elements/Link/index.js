@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Icon from '~/elements/Icon'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const LinkWrapper = styled.div`
+const LinkWrapper = styled.a`
   display: inline-block;
   font-size: 16px;
   line-height: 0.63;
   letter-spacing: 0.2px;
   cursor: pointer;
+  text-decoration: none;
   ${props => css`
     color: ${props.theme.colors.primary.base};
   `};
@@ -22,8 +24,8 @@ const LinkWrapper = styled.div`
   }
 `
 
-const Link = ({ children }) => (
-  <LinkWrapper>
+export const Link = ({ children, href, ...props }) => (
+  <LinkWrapper href={href} {...props}>
     <Icon name='arrowRight' size={14} style={{ top: '2px' }} />
     {children}
   </LinkWrapper>
@@ -31,6 +33,13 @@ const Link = ({ children }) => (
 
 Link.propTypes = {
   children: PropTypes.node.isRequired,
+  href: PropTypes.string,
 }
 
-export default Link
+Link.defaultProps = {
+  href: null,
+}
+
+const { Component } = attachClassName(Link)
+
+export default Component

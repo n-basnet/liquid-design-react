@@ -1,9 +1,11 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { media } from '~/utils/styling'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const Label = styled.div`
+const LabelWrapper = styled.div`
   display: inline-block;
   font-size: 12px;
   line-height: 1.25;
@@ -18,8 +20,12 @@ const Label = styled.div`
   `};
 `
 
+export const Label = props => <LabelWrapper {...props} />
+
 Label.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Label
+const { Component } = attachClassName(Label)
+
+export default Component

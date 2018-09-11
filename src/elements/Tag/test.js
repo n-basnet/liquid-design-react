@@ -1,32 +1,36 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
+import Icon from '~/elements/Icon'
 import Tag from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Tag', () => {
-  const label = 'Tag'
-  const iconNodeIndex = 1
-  const onClickMock = jest.fn()
-  const wrapper = shallow(<Tag label={label} onClick={onClickMock} />)
+  const defaultProps = {
+    label: 'Tag',
+    onClick: jest.fn(),
+  }
+  const getTagWrapper = getWrapper(Tag, defaultProps)
 
-  it('renders the label', () => {
-    expect(wrapper.text()).toMatch(label)
+  it('renders label', () => {
+    expect(
+      getTagWrapper()
+        .find(Tag)
+        .text()
+    ).toMatch(defaultProps.label)
   })
 
-  it('renders a correct default icon named "close"', () => {
+  it('renders a "close" icon by default', () => {
     expect(
-      wrapper
-        .find('div')
-        .childAt(iconNodeIndex)
+      getTagWrapper()
+        .find(Icon)
         .prop('name')
-    ).toBe('close')
+    ).toEqual('close')
   })
 
   it('handles a click event', () => {
-    wrapper
-      .find('div')
-      .childAt(iconNodeIndex)
+    getTagWrapper()
+      .find(Icon)
       .simulate('click')
-    expect(onClickMock).toBeCalled()
+    expect(defaultProps.onClick).toBeCalled()
   })
+
+  everyComponentTestSuite(getTagWrapper, Tag, 'Tag')
 })

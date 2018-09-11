@@ -1,17 +1,17 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import Theme from '~/Theme'
 import Badge from '.'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Badge', () => {
+  const text = 'Some text'
+  const getBadgeWrapper = getWrapper(Badge, { text })
+
   it('displays text', () => {
-    const text = 'Some text'
-    const wrapper = shallow(
-      <Theme>
-        <Badge text={text} />
-      </Theme>
-    )
-    expect(wrapper.html()).toMatch(text)
+    expect(
+      getBadgeWrapper()
+        .find(Badge)
+        .text()
+    ).toEqual(text)
   })
+
+  everyComponentTestSuite(getBadgeWrapper, Badge, 'Badge')
 })
