@@ -31,6 +31,4 @@ const faqContent = getFaqContent()
 
 storiesOf('Modules/Faq', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '1016px' } }))
-  .add('default', () => (
-    <Faq faqContent={faqContent} headlinesTexts={headlinesTexts} />
-  ))
+  .add('default', () => <Faq faqContent={faqContent} headlinesTexts={headlinesTexts} />)

@@ -41,20 +41,10 @@ class RadioButtonApp extends Component {
 storiesOf('Elements/Radio Button', module)
   .addDecorator(getBackgroundWrapper())
   .add('default', () => (
-    <RadioButton
-      selected='radioTwo'
-      label={getTextKnob({ defaultText })}
-      value='radioOne'
-    />
+    <RadioButton selected='radioTwo' label={getTextKnob({ defaultText })} value='radioOne' />
   ))
   .add('active', () => (
-    <RadioButton
-      selected='radioOne'
-      label={getTextKnob({ defaultText })}
-      value='radioOne'
-    />
+    <RadioButton selected='radioOne' label={getTextKnob({ defaultText })} value='radioOne' />
   ))
-  .add('disabled', () => (
-    <RadioButton disabled label={getTextKnob({ defaultText })} />
-  ))
+  .add('disabled', () => <RadioButton disabled label={getTextKnob({ defaultText })} />)
   .add('stateful', () => <RadioButtonApp />)

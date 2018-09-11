@@ -20,9 +20,7 @@ export default styled.input`
     !props.disabled &&
           css`
             border-color: ${props =>
-    props.isChecked
-      ? props.theme.colors.primary.dark
-      : props.theme.colors.primary.base};
+    props.isChecked ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
           `}
       }
     }

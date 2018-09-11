@@ -38,6 +38,9 @@ import checkboxEmpty from '~/assets/svgIcons/checkbox/empty.svg'
 import checkboxFilled from '~/assets/svgIcons/checkbox/filled.svg'
 import heart from '~/assets/svgIcons/heart.svg'
 import search from '~/assets/svgIcons/search.svg'
+import logo from '~/assets/svgIcons/logo.svg'
+import information from '~/assets/svgIcons/information.svg'
+import settings from '~/assets/svgIcons/settings.svg'
 import dots from '~/assets/svgIcons/dots.svg'
 
 export default {
@@ -81,5 +84,8 @@ export default {
   checkboxFilled,
   heart,
   search,
+  logo,
+  information,
+  settings,
   dots,
 }

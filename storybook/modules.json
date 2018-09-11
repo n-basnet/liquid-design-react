@@ -92,18 +92,20 @@
     "type": "element"
   },
   {
-
     "name": "Faq",
     "type": "module"
   },
   {
     "name": "RadioButton",
     "type": "element"
-
   },
   {
     "name": "SearchBar",
     "type": "component"
+  },
+  {
+    "name": "Header",
+    "type": "module"
   },
   {
     "name": "Toggle",
