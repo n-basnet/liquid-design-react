@@ -92,8 +92,14 @@
     "type": "element"
   },
   {
+
+    "name": "Faq",
+    "type": "module"
+  },
+  {
     "name": "RadioButton",
     "type": "element"
+
   },
   {
     "name": "SearchBar",
