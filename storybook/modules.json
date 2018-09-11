@@ -88,6 +88,10 @@
     "type": "element"
   },
   {
+    "name": "RadioButton",
+    "type": "element"
+  },
+  {
     "name": "SearchBar",
     "type": "component"
   },
