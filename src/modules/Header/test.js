@@ -1,34 +1,31 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import Header from '.'
-import LabelsWrapper from './LabelsWrapper'
+import Label from '~/elements/Label'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Header', () => {
-  const labelOne = 'Room 01'
-  const labelOneIndex = 0
-
-  const labelTwo = 'Room 02'
-  const labelTwoIndex = 1
+  const defaultProps = {
+    labelOne: 'Room 01',
+    labelTwo: 'Room 02',
+    withText: true,
+  }
+  const getHeaderWrapper = getWrapper(Header, defaultProps)
+  const wrapper = getHeaderWrapper()
 
   it('renders the text correctly', () => {
-    const wrapper = shallow(
-      <Header withText labelOne={labelOne} labelTwo={labelTwo} />
-    )
     expect(
       wrapper
-        .find(LabelsWrapper)
-        .childAt(labelOneIndex)
-        .children()
+        .find(Label)
+        .first()
         .text()
-    ).toBe(labelOne)
+    ).toBe(defaultProps.labelOne)
 
     expect(
       wrapper
-        .find(LabelsWrapper)
-        .childAt(labelTwoIndex)
-        .children()
+        .find(Label)
+        .at(1)
         .text()
-    ).toBe(labelTwo)
+    ).toBe(defaultProps.labelTwo)
   })
+
+  everyComponentTestSuite(getHeaderWrapper, Header, 'Header')
 })

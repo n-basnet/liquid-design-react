@@ -9,6 +9,7 @@ import SearchBar from '~/components/SearchBar'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
 import LabelsWrapper from '~/modules/Header/LabelsWrapper'
 import { media } from '~/utils/styling'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const IconsWrapper = styled.div`
   padding: 0 21px;
@@ -107,8 +108,9 @@ const Header = ({
   notificationOnClick,
   infoOnClick,
   settingsOnClick,
+  ...props
 }) => (
-  <HeaderWrapper>
+  <HeaderWrapper {...props}>
     <Icon
       color='secondary.base'
       name='logo'
@@ -116,28 +118,14 @@ const Header = ({
       style={{ marginRight: '19px', marginLeft: '19px' }}
     />
     <SearchBarWrapper>
-      <SearchBar
-        ghost
-        options={searchBarOptions}
-        handleSubmit={searchBarHandleSubmit}
-      />
+      <SearchBar ghost options={searchBarOptions} handleSubmit={searchBarHandleSubmit} />
     </SearchBarWrapper>
     <IEfix />
     {withIcons && (
       <IconsWrapper>
-        <Icon
-          name='bell'
-          color='white.base'
-          size={20}
-          onClick={notificationOnClick}
-        />
+        <Icon name='bell' color='white.base' size={20} onClick={notificationOnClick} />
         <Icon name='info' color='white.base' size={20} onClick={infoOnClick} />
-        <Icon
-          color='white.base'
-          name='settings'
-          size={20}
-          onClick={settingsOnClick}
-        />
+        <Icon color='white.base' name='settings' size={20} onClick={settingsOnClick} />
       </IconsWrapper>
     )}
     {withText && (
@@ -157,11 +145,7 @@ const Header = ({
           label={buttonLabel}
           onClick={buttonOnClick}
         />
-        <Button
-          appearance='secondary'
-          icon={buttonIcon}
-          onClick={buttonOnClick}
-        />
+        <Button appearance='secondary' icon={buttonIcon} onClick={buttonOnClick} />
       </ButtonWrapper>
     )}
   </HeaderWrapper>
@@ -204,4 +188,6 @@ Header.defaultProps = {
   settingsOnClick: null,
 }
 
-export default Header
+const { Component } = attachClassName(Header)
+
+export default Component
