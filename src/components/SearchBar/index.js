@@ -7,6 +7,7 @@ import cx from 'classnames'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
 import Input from '~/components/aux/Input'
+import Ellipsis from '~/components/aux/Ellipsis'
 import { media } from '~/utils/styling'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
@@ -241,7 +242,7 @@ export class SearchBar extends PureComponent {
               onClick={this.getResultOnClickHandler(v.onClick, v.text)}
               onKeyDown={this.getResultKeyDownHandler(v.onClick, v.text)}
             >
-              {v.text}
+              <Ellipsis>{v.text}</Ellipsis>
             </ResultWrapper>
           ))}
         </ResultsWrapper>
