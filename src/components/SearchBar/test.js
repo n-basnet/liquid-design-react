@@ -1,5 +1,4 @@
 import SearchBar, { PLACEHOLDER_TEXT, ResultWrapper } from '.'
-import Input from '~/components/aux/Input'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('SearchBar', () => {
@@ -10,10 +9,10 @@ describe('SearchBar', () => {
   const getSearchBarWrapper = getWrapper(SearchBar, { options: OPTIONS })
   beforeEach(() => {
     wrapper = getSearchBarWrapper()
-    getInput = () => wrapper.find(Input)
+    getInput = () => wrapper.find('input')
   })
   it('renders placeholder text', () => {
-    expect(wrapper.find(Input).prop('placeholder')).toEqual(PLACEHOLDER_TEXT)
+    expect(getInput().prop('placeholder')).toEqual(PLACEHOLDER_TEXT)
   })
   it('updates value', () => {
     expect(getInput().prop('value')).toEqual('')

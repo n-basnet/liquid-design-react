@@ -33,6 +33,7 @@ export const Base = styled.div`
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -moz-user-focus: ignore;
     -moz-user-select: none;
+    -ms-overflow-style: none;
   }
   _:-ms-lang(x),
   _:-webkit-full-screen,

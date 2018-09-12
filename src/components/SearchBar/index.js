@@ -34,14 +34,6 @@ const SearchBarWrapper = styled.form`
   ${media.max.phone`
     font-size: 16px;
   `};
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-  }
   .${ICON_CLASSNAME} {
     position: absolute;
     left: 12px;
@@ -56,6 +48,11 @@ const SearchBarWrapper = styled.form`
     transform: translateY(-2px);
     ${media.max.phone`
       padding: 16px 9px 12px 44px;
+    `};
+    ${props => css`
+      &:hover::placeholder {
+        color: ${props.theme.colors.primary.base};
+      }
     `};
     ${props =>
     props.disabled &&
@@ -93,9 +90,6 @@ const SearchBarWrapper = styled.form`
                   box-shadow: ${props.theme.boxShadow};
                 `};
               ${getIconColorStyles};
-              &:after {
-                background-color: ${props.theme.colors.primary.base};
-              }
             `
       : css`
               &:hover {
@@ -199,7 +193,6 @@ export class SearchBar extends PureComponent {
       })
     }
   }
-  handleInputChange = ({ target }) => this.setInputValue(target.value)
   getInputFocusHandler = focused => () => this.setState({ focused })
   triggerResultHandler = (handler, value) => {
     handler && handler()
@@ -229,7 +222,7 @@ export class SearchBar extends PureComponent {
           placeholder={PLACEHOLDER_TEXT}
           value={value}
           disabled={disabled}
-          onChange={this.handleInputChange}
+          onChange={this.setInputValue}
           onFocus={this.getInputFocusHandler(true)}
           onBlur={this.getInputFocusHandler(false)}
         />

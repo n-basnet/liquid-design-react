@@ -3,8 +3,9 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
 import {
-  includeComponentInPropTable,
   getBackgroundWrapper,
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
   formatList,
   placeholderText,
 } from '../helpers'
@@ -51,14 +52,14 @@ storiesOf('Components/Tooltip', module)
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [
+      propTablesExclude: getPropTablesExcludeList([
         WrappedTooltip,
         ContentWrapper,
         Wrapper,
         GroupWrapper,
         SampleContent,
         Fragment,
-      ],
+      ]),
     },
   })
   .add('open', () => (

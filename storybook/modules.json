@@ -114,5 +114,9 @@
   {
     "name": "FlyOut",
     "type": "component"
+  },
+  {
+    "name": "TextField",
+    "type": "element"
   }
 ]

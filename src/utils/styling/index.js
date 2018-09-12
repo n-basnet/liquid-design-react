@@ -32,6 +32,12 @@ export const media = {
         ${css(...args)};
       }
     `,
+  customMax: breakpoint => (...args) =>
+    css`
+      @media (max-width: ${breakpoint}px) {
+        ${css(...args)};
+      }
+    `,
 }
 
 export const cursorValue = ({ disabled, defaultValue = 'default' }) => css`

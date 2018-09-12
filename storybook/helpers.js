@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react'
+import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
 
-export const getBackgroundWrapper = ({ dark, style } = {}) => storyFn => (
-  <div
-    style={{
-      backgroundColor: dark ? '#e9e9e8' : '#fff',
-      padding: '40px 40px 20px',
-      ...style,
-    }}
-  >
-    {storyFn()}
-  </div>
+const BackgroundWrapper = styled.div`
+  padding: 40px 40px 20px;
+  ${props => css`
+    background-color: ${props.dark ? '#e9e9e8' : '#fff'};
+  `};
+`
+
+export const getBackgroundWrapper = (props = {}) => storyFn => (
+  <BackgroundWrapper {...props}>{storyFn()}</BackgroundWrapper>
 )
 
 export const includeComponentInPropTable = (Component, props = {}) => storyFn => (
@@ -31,4 +31,30 @@ export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLeng
 
 export const formatList = list => list.map(v => `\`${v}\``).join(', ')
 
-export const getPropTablesExcludeList = (list = []) => [Fragment, ...list]
+export const getPropTablesExcludeList = (list = []) => [Fragment, BackgroundWrapper, ...list]
+
+export const getStoriesByVersions = ({ versions, subversions }) => {
+  const DEFAULT_VERSION = { name: 'default' }
+  const VERSIONS = [DEFAULT_VERSION, ...versions]
+  const SUBVERSIONS = [DEFAULT_VERSION, ...subversions]
+  const pairs = []
+  VERSIONS.map((versionObject, i) => {
+    const version = versionObject.name
+    SUBVERSIONS.map(subversionObject => {
+      const subversion = subversionObject.name
+      const isSame = version === subversion
+      const props = {
+        ...(versionObject.props || {}),
+        ...(subversionObject.props || {}),
+      }
+      const subversionName = !isSame && subversionObject !== DEFAULT_VERSION && subversion
+      pairs.push({
+        version,
+        subversion: subversionName,
+        name: `${version}${subversionName ? ` - ${subversionName}` : ''}`,
+        props,
+      })
+    })
+  })
+  return pairs
+}

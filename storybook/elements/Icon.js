@@ -5,7 +5,11 @@ import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 import { without } from 'ramda'
 
-import { includeComponentInPropTable, getBackgroundWrapper } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
 import IconWithTheme, { Icon } from '~/elements/Icon'
 import iconsList from '~/elements/Icon/iconsList'
 
@@ -64,6 +68,7 @@ storiesOf('Elements/Icon', module)
   .addParameters({
     info: {
       maxPropObjectKeys: 0,
+      propTablesExclude: getPropTablesExcludeList([IconSet]),
     },
   })
   .add('single Icon', () => (
@@ -73,7 +78,7 @@ storiesOf('Elements/Icon', module)
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [IconSet, Fragment],
+      propTablesExclude: getPropTablesExcludeList([IconSet]),
     },
   })
   .add('default', () => <IconSet iconList={ICONS} />)

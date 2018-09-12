@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
@@ -6,7 +6,12 @@ import styled from 'styled-components'
 import Notifications from '~/components/Notifications'
 import { NOTIFICATION_TYPES, NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
 import SingleNotification from '~/components/Notifications/SingleNotification'
-import { getTextKnob, formatList, includeComponentInPropTable } from '../helpers'
+import {
+  getTextKnob,
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
+  formatList,
+} from '../helpers'
 
 const DEFAULT_TEXT = 'Notification text'
 const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
@@ -54,12 +59,11 @@ const SingleNotificationsWrapper = styled.div`
   padding: ${NOTIFICATION_WRAPPER_PADDING}px;
   text-align: center;
 `
-const propTablesExclude = [
+const propTablesExclude = getPropTablesExcludeList([
   NotificationApp,
-  Fragment,
   SingleNotification,
   SingleNotificationsWrapper,
-]
+])
 
 storiesOf('Components/Notifications', module)
   .addParameters({

@@ -1,9 +1,14 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { getBackgroundWrapper, getTextKnob, includeComponentInPropTable } from '../helpers'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
+} from '../helpers'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 
@@ -67,7 +72,7 @@ storiesOf('Components/Modal', module)
   .addParameters({
     info: {
       propTables: [],
-      propTablesExclude: [Presentation.Simple, ModalApp, EnhancedModal, Fragment],
+      propTablesExclude: getPropTablesExcludeList([Presentation.Simple, ModalApp, Modal]),
     },
   })
   .add('simple', () => (

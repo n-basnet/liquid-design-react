@@ -10,3 +10,5 @@ export const hasCSSFilters = () => {
     (document.documentMode === undefined || document.documentMode > IE9DocumentMode)
   )
 }
+
+export const isTouchDevice = () => 'ontouchstart' in document.documentElement

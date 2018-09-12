@@ -1,9 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { default as EnhancedSearchBar, SearchBar } from '~/components/SearchBar'
-import { getBackgroundWrapper, getTextKnob, includeComponentInPropTable } from '../helpers'
+import {
+  getBackgroundWrapper,
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
+  getTextKnob,
+} from '../helpers'
 import { times } from '~/utils/aux'
 
 const getOptions = () =>
@@ -21,7 +26,7 @@ storiesOf('Components/SearchBar', module)
   .addParameters({
     info: {
       source: false,
-      propTablesExclude: [EnhancedSearchBar, Fragment],
+      propTablesExclude: getPropTablesExcludeList([EnhancedSearchBar]),
     },
   })
   .add('default', () => (

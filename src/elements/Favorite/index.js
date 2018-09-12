@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import ReactDOMServer from 'react-dom/server'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { path } from 'ramda'
@@ -9,6 +8,7 @@ import Heart from '~/assets/svgSprites/heart.svg'
 import { cursorValue } from '~/utils/styling'
 import { spriteAnimation } from '~/utils/styling/animations'
 import attachClassName from '~/components/aux/hoc/attachClassName'
+import { getReactElementString } from '~/utils/aux'
 
 export const FavoriteWrapper = styled.div`
   display: inline-block;
@@ -50,7 +50,7 @@ export const FavoriteWrapper = styled.div`
 
 export const ANIMATION_DURATION = 500
 const SPRITESHEET_SCALE_FACTOR = 5
-const HEART_ANIMATION_SPRITESHEET_STRING = ReactDOMServer.renderToStaticMarkup(<Heart />)
+const HEART_ANIMATION_SPRITESHEET_STRING = getReactElementString(Heart)
 
 const SPRITESHEET_DIMENSIONS_DATA = HEART_ANIMATION_SPRITESHEET_STRING.match(
   /viewBox="0 0 (\d*) (\d*)"/
