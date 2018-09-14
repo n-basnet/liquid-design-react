@@ -3,12 +3,18 @@ import React, { Fragment } from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
+import { setOptions } from '@storybook/addon-options'
 
 import MODULES from './modules.json'
 import ThemeWrapper from './ThemeWrapper'
 
 const runStorybookConfig = async () => {
   configureActions()
+
+  setOptions({
+    name: 'Liquid Design System',
+    url: '/',
+  })
 
   function loadStories() {
     MODULES.map(({ name, type, hasIndexFile }) => {

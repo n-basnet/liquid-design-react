@@ -22,8 +22,8 @@
     "format": "prettier-standard",
     "add-component": "node scripts/addComponent.js",
     "prepare-svgs": "node scripts/prepareSVGs.js",
-    "storybook:start": "BABEL_ENV=main start-storybook -p 9001 -c storybook",
-    "storybook:build": "BABEL_ENV=main build-storybook -c storybook -o out",
+    "storybook:start": "BABEL_ENV=main start-storybook -s ./storybook/public -p 9001 -c storybook",
+    "storybook:build": "BABEL_ENV=main build-storybook -s ./storybook/public -c storybook -o out",
     "storybook:build-loki": "STORYBOOK_LOKI_BUILD=1 npm run storybook:build",
     "semantic-release": "semantic-release"
   },
@@ -53,6 +53,7 @@
     "@storybook/addon-actions": "^4.0.0-alpha.12",
     "@storybook/addon-info": "^4.0.0-alpha.12",
     "@storybook/addon-knobs": "^3.4.8",
+    "@storybook/addon-options": "^3.4.10",
     "@storybook/react": "^4.0.0-alpha.12",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.1",
