@@ -118,5 +118,9 @@
   {
     "name": "TextField",
     "type": "element"
+  },
+  {
+    "name": "LightBox",
+    "type": "module"
   }
 ]

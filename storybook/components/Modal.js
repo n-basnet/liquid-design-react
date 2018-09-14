@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
@@ -11,6 +12,7 @@ import {
 } from '../helpers'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
+import Button from '~/elements/Button'
 
 const ModalPresentation = styled.div`
   text-align: center;
@@ -28,16 +30,46 @@ const ModalPresentation = styled.div`
   }
 `
 
-const Presentation = {
+const ModalCTAPresentation = styled(ModalPresentation)`
+  h1 {
+    margin-bottom: -4px;
+  }
+  > div {
+    margin: 25px 0 -10px 0;
+  }
+  button {
+    margin: 0 10px;
+  }
+`
+
+export const Presentation = {
   Simple: () => (
     <ModalPresentation>
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
     </ModalPresentation>
   ),
+  WithCTA: () => (
+    <ModalCTAPresentation>
+      <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
+      <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
+      <div>
+        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
+        <Button label='Button Text' size='big' onClick={() => {}} />
+      </div>
+    </ModalCTAPresentation>
+  ),
 }
 
-class ModalApp extends PureComponent {
+export class ModalApp extends PureComponent {
+  static propTypes = {
+    Component: PropTypes.func,
+    buttonText: PropTypes.string,
+  }
+  static defaultProps = {
+    Component: EnhancedModal,
+    buttonText: 'Open Modal',
+  }
   state = {
     open: false,
   }
@@ -48,12 +80,13 @@ class ModalApp extends PureComponent {
     this.setState({ open: false })
   }
   render() {
+    const { Component, buttonText } = this.props
     return (
       <div>
-        <button onClick={this.openModal}>open modal</button>
-        <EnhancedModal label='Header Label' open={this.state.open} onClose={this.closeModal}>
+        <button onClick={this.openModal}>{buttonText}</button>
+        <Component label='Header Label' open={this.state.open} onClose={this.closeModal}>
           <Presentation.Simple />
-        </EnhancedModal>
+        </Component>
       </div>
     )
   }
@@ -72,7 +105,7 @@ storiesOf('Components/Modal', module)
   .addParameters({
     info: {
       propTables: [],
-      propTablesExclude: getPropTablesExcludeList([Presentation.Simple, ModalApp, Modal]),
+      propTablesExclude: getPropTablesExcludeList([Presentation.Simple, ModalApp, EnhancedModal]),
     },
   })
   .add('simple', () => (
@@ -102,7 +135,7 @@ storiesOf('Components/Modal', module)
       render() {
         return (
           <div>
-            <button onClick={this.openModal}>open modal</button>
+            <button onClick={this.openModal}>Open Modal</button>
             <Modal
               label='Header Label'
               open={this.state.open}

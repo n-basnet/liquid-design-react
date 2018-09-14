@@ -38,19 +38,20 @@ const modalOverlayCloseState = css`
   transform: translateY(20px);
 `
 
-export const Modal = ({ open, className, ...props }) => (
+export const Modal = ({ open, overlayAuxClassName, reactModalProps, ...props }) => (
   <ReactModal
     isOpen={open}
     ariaHideApp={false}
     style={{ content: getReactModalContentStyle(props.theme) }}
     closeTimeoutMS={TRANSITION_DURATION}
-    overlayClassName={MODAL_OVERLAY_CLASSNAME}
+    overlayClassName={cx(overlayAuxClassName, MODAL_OVERLAY_CLASSNAME)}
     onRequestClose={props.onClose}
     shouldCloseOnOverlayClick
+    {...reactModalProps}
   >
     {/* Theme's Base is needed because ReactModal attaches itself directly to the body element */}
     <Base>
-      <ModalContent className={cx(className, MODAL_OVERLAY_CLASSNAME)} {...props} />
+      <ModalContent {...props} />
     </Base>
   </ReactModal>
 )
@@ -76,7 +77,16 @@ injectGlobal`
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
+  /** props to be passed to `react-modal` */
+  reactModalProps: PropTypes.object,
+  /** additional classname for `react-modal` overlay */
+  overlayAuxClassName: PropTypes.string,
   ...ModalContent.propTypes,
+}
+
+Modal.defaultProps = {
+  reactModalProps: {},
+  overlayAuxClassName: null,
 }
 
 export default withTheme(Modal)
