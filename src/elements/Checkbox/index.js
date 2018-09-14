@@ -91,7 +91,7 @@ export class Checkbox extends PureComponent {
         onMouseLeave={this.handleMouseLeave}
         {...props}
       >
-        <Input type='checkbox' checked={this.isChecked()} />
+        <Input type='checkbox' checked={this.isChecked()} readOnly />
         <Icon
           name={`checkbox${iconVersion}`}
           color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
@@ -102,6 +102,8 @@ export class Checkbox extends PureComponent {
   }
 }
 
-const { Component } = attachClassName(Checkbox)
+const { Component, globalClassName } = attachClassName(Checkbox)
+
+export const CHECKBOX_CLASSNAME = globalClassName
 
 export default Component

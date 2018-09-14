@@ -78,6 +78,6 @@ Card.defaultProps = {
 
 const { Component, globalClassName } = attachClassName(Card)
 
-export { globalClassName }
+export const CARD_CLASSNAME = globalClassName
 
 export default Component

@@ -7,7 +7,7 @@ import { withResizeDetector } from 'react-resize-detector'
 import { cursorValue, media } from '~/utils/styling'
 import { getReactElementString, getSVGImageURLString } from '~/utils/aux'
 import TextareaExpand from '~/assets/svgIllustrations/textarea-expand.svg'
-
+import attachClassName from '~/components/aux/hoc/attachClassName'
 import { isTouchDevice } from '~/utils/featureDetects'
 
 const BOTTOM_BORDER_HEIGHT = 2
@@ -187,6 +187,7 @@ class Input extends PureComponent {
       multiline,
       errorMessage,
       width: resizedWidth,
+      className,
       ...props
     } = this.props
     const { focused, height } = this.state
@@ -218,7 +219,7 @@ class Input extends PureComponent {
 
     return (
       <Fragment>
-        <TextFieldWrapper {...textFieldWrapperProps}>
+        <TextFieldWrapper {...textFieldWrapperProps} className={className}>
           <AuxWrapper {...auxWrapperProps}>
             <this.ComponentName
               onChange={getOnChangeHandler(onChange)}
@@ -249,6 +250,7 @@ Input.propTypes = {
   errorMessage: PropTypes.string,
   /** from `react-resize-detector` decorator */
   width: PropTypes.number,
+  className: PropTypes.string,
 }
 
 Input.defaultProps = {
@@ -262,6 +264,11 @@ Input.defaultProps = {
   disabled: false,
   errorMessage: null,
   width: null,
+  className: null,
 }
 
-export default Input
+const { Component, globalClassName } = attachClassName(Input)
+
+export const INPUT_CLASSNAME = globalClassName
+
+export default Component

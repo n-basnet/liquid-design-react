@@ -52,3 +52,26 @@ export const safariStyles = styleString =>
           ${styleString};
         }
       `
+
+export const disableTextSelectionBackground = css`
+  *::selection {
+    background: rgba(255, 255, 255, 0);
+  }
+`
+
+export const customWebKitScrollBar = css`
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid rgba(255, 255, 255, 0);
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb {
+    ${props => css`
+      border-radius: ${props.theme.borderRadius};
+      background-color: ${props.theme.colors.sensitiveGrey.darkest};
+    `};
+  }
+`

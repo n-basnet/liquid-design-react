@@ -3,10 +3,15 @@ import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
 
+const BACKGROUND_COLORS = {
+  dark: '#e9e9e8',
+  grey: '#f9f9fc',
+}
+
 const BackgroundWrapper = styled.div`
   padding: 40px 40px 20px;
   ${props => css`
-    background-color: ${props.dark ? '#e9e9e8' : '#fff'};
+    background-color: ${BACKGROUND_COLORS[props.color] || '#fff'};
   `};
 `
 

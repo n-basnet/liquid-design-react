@@ -35,11 +35,6 @@ export const Base = styled.div`
     -moz-user-select: none;
     -ms-overflow-style: none;
   }
-  _:-ms-lang(x),
-  _:-webkit-full-screen,
-  * {
-    line-height: normal;
-  }
 `
 
 const Theme = ({ themeName, ...props }) => (

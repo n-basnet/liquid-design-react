@@ -122,5 +122,9 @@
   {
     "name": "LightBox",
     "type": "module"
+  },
+  {
+    "name": "Dropdown",
+    "type": "element"
   }
 ]

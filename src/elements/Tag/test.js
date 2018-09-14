@@ -5,7 +5,7 @@ import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 describe('Tag', () => {
   const defaultProps = {
     label: 'Tag',
-    onClick: jest.fn(),
+    onIconClick: jest.fn(),
   }
   const getTagWrapper = getWrapper(Tag, defaultProps)
 
@@ -25,11 +25,11 @@ describe('Tag', () => {
     ).toEqual('close')
   })
 
-  it('handles a click event', () => {
+  it('handles icon click event', () => {
     getTagWrapper()
       .find(Icon)
       .simulate('click')
-    expect(defaultProps.onClick).toBeCalled()
+    expect(defaultProps.onIconClick).toBeCalled()
   })
 
   everyComponentTestSuite(getTagWrapper, Tag, 'Tag')

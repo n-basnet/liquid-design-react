@@ -6,7 +6,7 @@ import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
 import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
-import Input from '~/components/aux/Input'
+import Input, { INPUT_CLASSNAME } from '~/components/aux/Input'
 import Ellipsis from '~/components/aux/Ellipsis'
 import { media } from '~/utils/styling'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
@@ -42,23 +42,27 @@ const SearchBarWrapper = styled.form`
       top: 14px;
     `};
   }
-  input {
-    min-width: 250px;
-    padding: 12px 9px 9px 44px;
-    transform: translateY(-2px);
-    ${media.max.phone`
-      padding: 16px 9px 12px 44px;
-    `};
-    ${props => css`
-      &:hover::placeholder {
-        color: ${props.theme.colors.primary.base};
-      }
-    `};
+  .${INPUT_CLASSNAME} {
     ${props =>
     props.disabled &&
       css`
-        opacity: 0.6;
+        opacity: 1;
       `};
+    input {
+      min-width: 250px;
+      padding: 12px 9px 9px 44px;
+      transform: translateY(-2px);
+      ${media.max.phone`
+        padding: 16px 9px 12px 44px;
+      `};
+      ${props =>
+    !props.disabled &&
+        css`
+          &:hover::placeholder {
+            color: ${props.theme.colors.primary.base};
+          }
+        `};
+    }
   }
   ${props => css`
     ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.base)};

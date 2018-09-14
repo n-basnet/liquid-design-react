@@ -5,20 +5,21 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getTextKnob,
 } from '../helpers'
 import { default as EnhancedTag, Tag } from '~/elements/Tag'
 
-const defaultProps = { label: 'Tag Label' }
+const getDefaultProps = () => ({ label: getTextKnob({ defaultText: 'Tag Label' }) })
 
 storiesOf('Elements/Tag', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(Tag, defaultProps))
+  .addDecorator(includeComponentInPropTable(Tag, getDefaultProps()))
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([EnhancedTag]),
     },
   })
-  .add('solid', () => <EnhancedTag {...defaultProps} />)
-  .add('solid disabled', () => <EnhancedTag disabled {...defaultProps} />)
-  .add('outline', () => <EnhancedTag {...defaultProps} outline />)
-  .add('outline disabled', () => <EnhancedTag disabled {...defaultProps} outline />)
+  .add('solid', () => <EnhancedTag {...getDefaultProps()} />)
+  .add('solid disabled', () => <EnhancedTag disabled {...getDefaultProps()} />)
+  .add('outline', () => <EnhancedTag {...getDefaultProps()} outline />)
+  .add('outline disabled', () => <EnhancedTag disabled {...getDefaultProps()} outline />)

@@ -10,7 +10,7 @@ import {
 import { default as EnhancedCard, Card } from '~/elements/Card'
 
 storiesOf('Elements/Card', module)
-  .addDecorator(getBackgroundWrapper({ dark: true }))
+  .addDecorator(getBackgroundWrapper({ color: 'dark' }))
   .addDecorator(includeComponentInPropTable(Card, { children: '' }))
   .addParameters({
     info: {

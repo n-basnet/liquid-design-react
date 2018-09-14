@@ -4,20 +4,21 @@ import PropTypes from 'prop-types'
 import Icon from '~/elements/Icon'
 import { TagWrapper } from '~/elements/Tag/TagWrapper'
 import { Label } from '~/elements/Tag/Label'
+import Ellipsis from '~/components/aux/Ellipsis'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
-export const Tag = ({ disabled, icon, label, outline, onClick, ...props }) => (
+export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...props }) => (
   <TagWrapper disabled={disabled} outline={outline} {...props}>
     <div>
       <Label disabled={disabled} outline={outline}>
-        {label}
+        <Ellipsis>{label}</Ellipsis>
       </Label>
       <Icon
         outline={outline}
         name={icon}
-        style={{ margin: '0 6.6px' }}
-        size={16}
-        onClick={onClick}
+        style={{ margin: '0 2px' }}
+        size={iconSize}
+        onClick={onIconClick}
       />
     </div>
   </TagWrapper>
@@ -28,7 +29,8 @@ Tag.propTypes = {
   icon: PropTypes.string,
   label: PropTypes.string,
   outline: PropTypes.bool,
-  onClick: PropTypes.func,
+  onIconClick: PropTypes.func,
+  iconSize: PropTypes.number,
 }
 
 Tag.defaultProps = {
@@ -36,7 +38,8 @@ Tag.defaultProps = {
   icon: 'close',
   label: 'Tag',
   outline: null,
-  onClick: null,
+  onIconClick: null,
+  iconSize: 16,
 }
 
 const { Component } = attachClassName(Tag)

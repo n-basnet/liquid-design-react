@@ -33,8 +33,12 @@ const TooltipContentWrapper = styled.div`
     background-color: ${props.theme.colors.white.base};
     border-radius: ${props.theme.borderRadius};
     ${hasCSSFilters()
-    ? `filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));`
-    : `box-shadow: ${props.theme.boxShadow};`};
+    ? css`
+          filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
+        `
+    : css`
+          box-shadow: ${props.theme.boxShadow};
+        `};
 
     ${hasCSSFilters() &&
       css`

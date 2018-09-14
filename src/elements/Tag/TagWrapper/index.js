@@ -18,6 +18,8 @@ export const tagColor = ({ outline, disabled, theme: { colors } }) => {
 
 export const TagWrapper = styled.div`
   display: inline-block;
+  min-width: 100px;
+  max-width: 100%;
   > div {
     display: flex;
     justify-content: space-around;

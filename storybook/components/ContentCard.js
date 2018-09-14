@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
 import { default as EnhancedContentCard, ContentCard } from '~/components/ContentCard'
-import { globalClassName as CARD_CLASSNAME } from '~/elements/Card'
+import { CARD_CLASSNAME } from '~/elements/Card'
 import {
   getPropTablesExcludeList,
   getBackgroundWrapper,
@@ -55,7 +55,7 @@ const getDefaultProps = () => ({
 
 storiesOf('Components/ContentCard', module)
   .addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>)
-  .addDecorator(getBackgroundWrapper({ dark: true }))
+  .addDecorator(getBackgroundWrapper({ color: 'dark' }))
   .addDecorator(includeComponentInPropTable(ContentCard, getDefaultProps()))
   .addParameters({
     info: {
