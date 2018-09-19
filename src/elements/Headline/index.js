@@ -34,6 +34,8 @@ Headline.defaultProps = {
   className: null,
 }
 
-const { Component } = attachClassName(Headline)
+const { Component, globalClassName } = attachClassName(Headline)
+
+export const HEADLINE_CLASSNAME = globalClassName
 
 export default Component

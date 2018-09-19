@@ -217,6 +217,8 @@ export class Dropdown extends PureComponent {
   }
 }
 
-const { Component } = enhanceWithClickOutside(attachClassName(Dropdown))
+const { Component, globalClassName } = enhanceWithClickOutside(attachClassName(Dropdown))
+
+export const DROPDOWN_CLASSNAME = globalClassName
 
 export default Component

@@ -20,6 +20,7 @@ export const OPTIONS_GROUP_CLASSNAME = getClassName({ name: 'OptionsGroup' })
 
 const OptionsWrapper = styled.div`
   position: absolute;
+  z-index: 1;
   width: 100%;
   max-height: 165px;
   overflow-y: auto;

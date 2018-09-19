@@ -74,6 +74,8 @@ Button.propTypes = {
   onClick: PropTypes.func,
 }
 
-const { Component } = attachClassName(Button)
+const { Component, globalClassName } = attachClassName(Button)
+
+export const BUTTON_CLASSNAME = globalClassName
 
 export default Component

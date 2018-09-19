@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import cx from 'classnames'
 
 import { cursorValue } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
 
 export const CheckboxWrapper = styled.div`
   display: inline-flex;
   align-items: center;
+  outline: none;
   ${props => css`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
   `};
@@ -51,6 +53,7 @@ export class Checkbox extends PureComponent {
     isChecked: PropTypes.bool,
     label: PropTypes.string,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
@@ -58,6 +61,7 @@ export class Checkbox extends PureComponent {
     isChecked: undefined,
     label: null,
     onChange: null,
+    className: null,
   }
 
   state = {
@@ -77,18 +81,31 @@ export class Checkbox extends PureComponent {
 
   isChecked = () => (this.props.isChecked !== undefined ? this.props.isChecked : this.state.checked)
 
+  handleKeyDown = e => {
+    if (!this.props.disabled && e.key === ' ') {
+      e.preventDefault()
+      this.toggleCheckbox()
+    }
+  }
+
   render() {
-    const { disabled, label, ...props } = this.props
+    const { disabled, label, className, ...props } = this.props
     const { hover } = this.state
     const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
 
     return (
       <CheckboxWrapper
+        className={cx(className, {
+          [CHECKBOX_CLASSNAMES.UNCHECKED]: !this.isChecked(),
+          [CHECKBOX_CLASSNAMES.CHECKED]: this.isChecked(),
+        })}
         disabled={disabled}
         checked={this.isChecked()}
         onClick={this.toggleCheckbox}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        onKeyDown={this.handleKeyDown}
+        tabIndex='0'
         {...props}
       >
         <Input type='checkbox' checked={this.isChecked()} readOnly />
@@ -100,6 +117,13 @@ export class Checkbox extends PureComponent {
       </CheckboxWrapper>
     )
   }
+}
+
+const CHECKBOX_CLASSNAME_BASE = getClassName(Checkbox)
+export const CHECKBOX_CLASSNAMES = {
+  BASE: CHECKBOX_CLASSNAME_BASE,
+  UNCHECKED: `${CHECKBOX_CLASSNAME_BASE}--unchecked`,
+  CHECKED: `${CHECKBOX_CLASSNAME_BASE}--checked`,
 }
 
 const { Component, globalClassName } = attachClassName(Checkbox)
