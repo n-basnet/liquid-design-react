@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { isEmpty } from 'ramda'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
 import Ellipsis from '~/components/aux/Ellipsis'
 
@@ -107,7 +107,7 @@ export default class Segment extends PureComponent {
           role='button'
         >
           <Ellipsis>{name}</Ellipsis>
-          {this.hasOptions() && <Icon size={20} name='arrowTop' />}
+          {this.hasOptions() && <Glyph size={20} name='arrowTop' />}
         </SegmentWrapper>
         {isExpanded &&
           options.map((option, i) => (

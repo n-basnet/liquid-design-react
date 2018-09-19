@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { media } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -97,7 +97,7 @@ export class Accordion extends PureComponent {
     return (
       <AccordionWrapper isOpen={isAccordionOpen} onClick={this.toggleAccordion} {...props}>
         <SectionTitle isOpen={isAccordionOpen}>
-          <Icon name='arrowTop' size={20} style={{ marginRight: 15 }} />
+          <Glyph name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
         <SectionContent isOpen={isAccordionOpen}>{children}</SectionContent>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const LinkWrapper = styled.a`
@@ -26,7 +26,7 @@ const LinkWrapper = styled.a`
 
 export const Link = ({ children, href, ...props }) => (
   <LinkWrapper href={href} {...props}>
-    <Icon name='arrowRight' size={14} style={{ top: '2px' }} />
+    <Glyph name='arrowRight' size={14} style={{ top: '2px' }} />
     {children}
   </LinkWrapper>
 )

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { fadeIn } from '~/utils/styling/animations'
 import { cursorValue } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
@@ -42,8 +42,8 @@ export const Label = styled.span`
 export const Bubble = ({ disabled, isInfo, label, isWarning, ...props }) => (
   <BubbleWrapper disabled={disabled} isInfo={isInfo} isWarning={isWarning} {...props}>
     {label && <Label>{label.toString().length > 2 ? 99 : label}</Label>}
-    {isInfo && <Icon color='white.base' name='info' size={16} />}
-    {isWarning && <Icon color='white.base' name='warning' size={16} />}
+    {isInfo && <Glyph color='white.base' name='info' size={16} />}
+    {isWarning && <Glyph color='white.base' name='warning' size={16} />}
   </BubbleWrapper>
 )
 

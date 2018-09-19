@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { path } from 'ramda'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Heart from '~/assets/svgSprites/heart.svg'
 import { cursorValue } from '~/utils/styling'
 import { spriteAnimation } from '~/utils/styling/animations'
@@ -117,7 +117,7 @@ export class Favorite extends PureComponent {
         isActive={isActive || active}
         {...props}
       >
-        <Icon name='heart' />
+        <Glyph name='favorite' />
         <AnimationWrapper isAnimating={isAnimating} />
       </FavoriteWrapper>
     )

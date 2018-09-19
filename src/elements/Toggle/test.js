@@ -1,4 +1,4 @@
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import Toggle from '.'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
@@ -10,7 +10,7 @@ describe('Toggle', () => {
   it('renders icons', () => {
     const iconNames = ['circleX', 'circleX']
     const wrapper = getToggleWrapper({ icons: iconNames })
-    expect(wrapper.find(Icon).length).toEqual(iconNames.length)
+    expect(wrapper.find(Glyph).length).toEqual(iconNames.length)
   })
   it('handles onClick', () => {
     const onClick = jest.fn()

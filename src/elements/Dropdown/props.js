@@ -34,9 +34,4 @@ export const dropdownDefaultProps = {
   onSubmit: () => {},
 }
 
-export const SHARED_PROPS = [
-  'options',
-  'inline',
-  'multiselect',
-  'selectedOptionsIds',
-]
+export const SHARED_PROPS = ['options', 'inline', 'multiselect', 'selectedOptionsIds']

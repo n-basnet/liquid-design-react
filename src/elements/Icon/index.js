@@ -33,8 +33,21 @@ export const DEFAULT_SIZE = 24
 export const DEFAULT_UNIT = 'px'
 
 // exported separately for testing and storybook (without `withTheme` decorator)
-export const Icon = ({ name, size, theme, secondary, color, unit, onClick, ...props }) => {
-  const SVGIconComponent = iconsList[name]
+export const IconProvider = ({
+  name,
+  size,
+  theme,
+  secondary,
+  color,
+  unit,
+  onClick,
+  isFilled,
+  isGlyph,
+  ...props
+}) => {
+  const SVGIconComponent = isGlyph
+    ? iconsList.glyphs[name]
+    : isFilled ? iconsList.filled[name] : iconsList.stroke[name]
   if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }
@@ -56,9 +69,13 @@ export const Icon = ({ name, size, theme, secondary, color, unit, onClick, ...pr
   )
 }
 
-Icon.propTypes = {
+IconProvider.propTypes = {
   /** Name of the icon. Refer to docs for a full list of available icons */
   name: PropTypes.string.isRequired,
+  /** Check if the Icon is glyph. */
+  isGlyph: PropTypes.bool,
+  /** Check if the Icon is filled. */
+  isFilled: PropTypes.bool,
   /** Icon's side dimension (by default in pixels - see `unit` prop) */
   size: PropTypes.number,
   /** (provided by `styled-components` via withTheme decorator) */
@@ -72,16 +89,21 @@ Icon.propTypes = {
   onClick: PropTypes.func,
 }
 
-Icon.defaultProps = {
+IconProvider.defaultProps = {
   size: DEFAULT_SIZE,
   theme: DEFAULT_THEME,
   secondary: false,
   color: '',
   unit: DEFAULT_UNIT,
   onClick: null,
+  isFilled: false,
+  isGlyph: false,
 }
 
-const { Component, globalClassName } = attachClassName(Icon)
+const { Component, globalClassName } = attachClassName(IconProvider)
+
+export const Glyph = props => <Component isGlyph {...props} />
+export const Icon = props => <Component {...props} />
 
 export const ICON_CLASSNAME = globalClassName
 

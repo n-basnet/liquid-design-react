@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import Button from '~/elements/Button'
 import SearchBar from '~/components/SearchBar'
@@ -111,7 +111,7 @@ const Header = ({
   ...props
 }) => (
   <HeaderWrapper {...props}>
-    <Icon
+    <Glyph
       color='secondary.base'
       name='logo'
       size={42}
@@ -123,9 +123,9 @@ const Header = ({
     <IEfix />
     {withIcons && (
       <IconsWrapper>
-        <Icon name='bell' color='white.base' size={20} onClick={notificationOnClick} />
-        <Icon name='info' color='white.base' size={20} onClick={infoOnClick} />
-        <Icon color='white.base' name='settings' size={20} onClick={settingsOnClick} />
+        <Glyph name='bell' color='white.base' size={20} onClick={notificationOnClick} />
+        <Glyph name='info' color='white.base' size={20} onClick={infoOnClick} />
+        <Glyph color='white.base' name='settings' size={20} onClick={settingsOnClick} />
       </IconsWrapper>
     )}
     {withText && (

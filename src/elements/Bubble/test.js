@@ -1,5 +1,5 @@
 import Bubble, { Label } from '.'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Bubble', () => {
@@ -33,14 +33,14 @@ describe('Bubble', () => {
     const icon = 'info'
     const wrapper = getBubbleWrapper({ isInfo: true })
 
-    expect(wrapper.find(Icon).prop('name')).toEqual(icon)
+    expect(wrapper.find(Glyph).prop('name')).toEqual(icon)
   })
 
   it('renders the correct icon for the warning bubble', () => {
     const icon = 'warning'
     const wrapper = getBubbleWrapper({ isWarning: true })
 
-    expect(wrapper.find(Icon).prop('name')).toEqual(icon)
+    expect(wrapper.find(Glyph).prop('name')).toEqual(icon)
   })
 
   everyComponentTestSuite(getBubbleWrapper, Bubble, 'Bubble')

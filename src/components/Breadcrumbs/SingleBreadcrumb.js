@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
 
 const StyledSingleBreadcrumb = styled.div`
@@ -51,7 +51,7 @@ const SingleBreadcrumbTextWrapper = styled.span`
 
 const SingleBreadcrumb = ({ content, onClick, active, disabled }) => (
   <StyledSingleBreadcrumb active={active} disabled={disabled} onClick={onClick || undefined}>
-    <Icon name='arrowRight' size={19} color={disabled ? 'sensitiveGrey.darker' : undefined} />
+    <Glyph name='arrowRight' size={19} color={disabled ? 'sensitiveGrey.darker' : undefined} />
     <SingleBreadcrumbTextWrapper>{content}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
 )

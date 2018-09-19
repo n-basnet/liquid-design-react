@@ -7,7 +7,7 @@ import IconsWrapper from '~/modules/Footer/IconsWrapper'
 import LabelsWrapper from '~/modules/Footer/LabelsWrapper'
 import FooterBar from '~/modules/Footer/FooterBar'
 import Headline from '~/elements/Headline'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -45,7 +45,7 @@ class Footer extends PureComponent {
   ))
 
   icons = this.props.iconsNamesAndActions.map((iconNameAndAction, index) => (
-    <Icon
+    <Glyph
       color='black.base'
       key={`${index}-${iconNameAndAction.name}`}
       name={iconNameAndAction.name}
@@ -62,7 +62,12 @@ class Footer extends PureComponent {
         <Headline size='H1'>{headlineText}</Headline>
         <HorizontalLine />
         <FooterBar>
-          <Icon name={mainIconName} color='black.base' size={80} style={{ marginRight: '140px' }} />
+          <Glyph
+            name={mainIconName}
+            color='black.base'
+            size={80}
+            style={{ marginRight: '140px' }}
+          />
           <LabelsWrapper>{this.labels}</LabelsWrapper>
           <IconsWrapper>{this.icons}</IconsWrapper>
         </FooterBar>

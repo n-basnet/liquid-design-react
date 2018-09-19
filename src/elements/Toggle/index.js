@@ -5,7 +5,7 @@ import { path, isEmpty } from 'ramda'
 import { rgba } from 'polished'
 
 import { cursorValue } from '~/utils/styling'
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const TOGGLE_WIDTH = 60
@@ -113,8 +113,8 @@ export const Toggle = ({ icons, onClick, ...props }) => (
     role='button'
     {...props}
   >
-    {icons[0] && <Icon name={icons[0]} size={ICON_SIZE} />}
-    {icons[1] && <Icon name={icons[1]} size={ICON_SIZE} />}
+    {icons[0] && <Glyph name={icons[0]} size={ICON_SIZE} />}
+    {icons[1] && <Glyph name={icons[1]} size={ICON_SIZE} />}
   </ToggleWrapper>
 )
 

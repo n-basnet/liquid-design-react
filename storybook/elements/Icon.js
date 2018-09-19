@@ -4,52 +4,74 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 import { without } from 'ramda'
+import styled from 'styled-components'
 
 import {
-  getBackgroundWrapper,
   includeComponentInPropTable,
+  getBackgroundWrapper,
   getPropTablesExcludeList,
 } from '../helpers'
-import IconWithTheme, { Icon } from '~/elements/Icon'
+import IconComponent, { IconProvider, Icon, Glyph } from '~/elements/Icon'
 import iconsList from '~/elements/Icon/iconsList'
-
-const GLYPHS = [
-  'arrowTop',
-  'bell',
-  'checkboxFilled',
-  'close',
-  'exportFile',
-  'radioButton',
-  'preferences',
-  'info',
-]
 
 const OMIT_ICONS = [
   'circleX',
-  'star',
+  'information',
+  'logo',
   'starHalf',
-  'dot',
   'dotHalf',
-  'arrowRight',
   'warning',
-  'checkboxEmpty',
   'infoCircle',
-  'heart',
-  'search',
+  'infoFilled',
   'dots',
+  'service',
 ]
 
-const SORTED_ICON_NAMES = Object.keys(iconsList).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
-const ICONS_LIST = without(OMIT_ICONS, SORTED_ICON_NAMES)
-const ICONS = without(GLYPHS, ICONS_LIST)
+const ICONS_LIST = Object.keys(iconsList['stroke']).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+const GLYPHS_LIST = without(
+  OMIT_ICONS,
+  Object.keys(iconsList['glyphs']).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+)
 
-const IconSet = ({ iconList, iconProps }) => (
+const getProperIconTheme = (name, iconProps, isGlyph, isFilled, props) => {
+  const colorsMap = {
+    progressBarDisabled: '#F3F3F7',
+    progressBarComingUp: '#D5D5D9',
+    radioButtonEmpty: '#E9E9ED',
+    favorite: '#CF1B48',
+  }
+  return (
+    <IconComponent
+      isGlyph={isGlyph}
+      isFilled={isFilled}
+      name={name}
+      onClick={() => action('click on icon')(name)}
+      color={colorsMap[name]}
+      {...iconProps}
+    />
+  )
+}
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const IconWrapper = styled.div`
+  width: ${props => (props.isOneColumn ? '25%' : '50%')};
+  display: inline-block;
+  text-align: center;
+  min-width: 120px;
+  margin: 15px auto;
+`
+
+const IconSet = ({ iconList, iconProps, isOneColumn, isGlyph, isFilled }) => (
   <Fragment>
     {iconList.map((name, i) => (
-      <div key={i} style={{ display: 'inline-block', margin: '10px', width: '130px' }}>
-        <IconWithTheme name={name} onClick={() => action('click on icon')(name)} {...iconProps} />
+      <IconWrapper isOneColumn={isOneColumn} key={i}>
+        {getProperIconTheme(name, iconProps, isGlyph, isFilled)}
         <div>{name}</div>
-      </div>
+      </IconWrapper>
     ))}
   </Fragment>
 )
@@ -57,34 +79,76 @@ const IconSet = ({ iconList, iconProps }) => (
 IconSet.propTypes = {
   iconList: PropTypes.arrayOf(PropTypes.string).isRequired,
   iconProps: PropTypes.object,
+  isOneColumn: PropTypes.bool,
+  isGlyph: PropTypes.bool,
+  isFilled: PropTypes.bool,
 }
 
 IconSet.defaultProps = {
   iconProps: {},
+  isOneColumn: false,
+  isGlyph: false,
+  isFilled: false,
+}
+
+const IconsListDisplayed = ({ isOneColumn, ...props }) => (
+  <Wrapper>
+    <div style={{ flex: 1 }}>
+      <IconSet {...props} isOneColumn={isOneColumn} />
+    </div>
+    {!isOneColumn && (
+      <div style={{ flex: 1 }}>
+        <IconSet {...props} isFilled />
+      </div>
+    )}
+  </Wrapper>
+)
+
+IconsListDisplayed.propTypes = {
+  iconNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isOneColumn: PropTypes.bool,
+}
+
+IconsListDisplayed.defaultProps = {
+  isOneColumn: false,
 }
 
 storiesOf('Elements/Icon', module)
   .addDecorator(getBackgroundWrapper())
+  .addDecorator(includeComponentInPropTable(IconProvider))
   .addParameters({
     info: {
       maxPropObjectKeys: 0,
-      propTablesExclude: getPropTablesExcludeList([IconSet]),
+      propTablesExclude: getPropTablesExcludeList([
+        IconSet,
+        Icon,
+        IconComponent,
+        IconsListDisplayed,
+        Glyph,
+      ]),
+      excludedPropTypes: ['isGlyph'],
     },
   })
   .add('single Icon', () => (
-    <Icon size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })} name='bottle' />
+    <IconComponent
+      size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
+      name='bottle'
+    />
   ))
-  .addDecorator(includeComponentInPropTable(Icon, { name: 'board' }))
+  .add('default', () => <IconsListDisplayed iconList={ICONS_LIST} />)
+  .add('secondary color', () => (
+    <IconsListDisplayed iconProps={{ secondary: true }} iconList={ICONS_LIST} />
+  ))
+  .add('alternative color', () => (
+    <IconsListDisplayed iconProps={{ color: 'sensitiveGrey.darker' }} iconList={ICONS_LIST} />
+  ))
+  .add('custom color', () => (
+    <IconsListDisplayed iconProps={{ color: '#3bff00' }} iconList={ICONS_LIST} />
+  ))
   .addParameters({
     info: {
-      source: false,
-      propTablesExclude: getPropTablesExcludeList([IconSet]),
+      propTablesExclude: getPropTablesExcludeList([IconSet, Icon, IconsListDisplayed, Glyph]),
+      excludedPropTypes: ['isFilled'],
     },
   })
-  .add('default', () => <IconSet iconList={ICONS} />)
-  .add('secondary color', () => <IconSet iconList={ICONS} iconProps={{ secondary: true }} />)
-  .add('alternative color', () => (
-    <IconSet iconList={ICONS} iconProps={{ color: 'sensitiveGrey.darker' }} />
-  ))
-  .add('custom color', () => <IconSet iconList={ICONS} iconProps={{ color: '#3bff00' }} />)
-  .add('glyphs', () => <IconSet iconList={GLYPHS} />)
+  .add('glyphs', () => <IconsListDisplayed isOneColumn isGlyph iconList={GLYPHS_LIST} />)

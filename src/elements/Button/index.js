@@ -5,7 +5,7 @@ import ButtonWrapper from '~/elements/Button/Wrappers/Button'
 import GhostWrapper from '~/elements/Button/Wrappers/Ghost'
 import ButtonLabel from '~/elements/Button/Labels/Button'
 import GhostLabel from '~/elements/Button/Labels/Ghost'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const Button = ({
@@ -37,7 +37,7 @@ export const Button = ({
   return (
     <WrapperComponent {...wrapperProps}>
       {icon && (
-        <Icon
+        <Glyph
           name={icon}
           size={isGhost ? (size === 'big' ? 18 : 16) : 24}
           style={!isGhost && label ? { marginLeft: '28px' } : {}}

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 
 const ModalHeaderWrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ const ModalHeaderWrapper = styled.div`
 const ModalHeader = ({ label, onClose }) => (
   <ModalHeaderWrapper>
     <div>{label}</div>
-    <Icon name='close' size={20} onClick={onClose} />
+    <Glyph name='close' size={20} onClick={onClose} />
   </ModalHeaderWrapper>
 )
 

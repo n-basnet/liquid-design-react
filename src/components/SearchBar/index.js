@@ -5,7 +5,7 @@ import { isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Input, { INPUT_CLASSNAME } from '~/components/aux/Input'
 import Ellipsis from '~/components/aux/Ellipsis'
 import { media } from '~/utils/styling'
@@ -220,7 +220,7 @@ export class SearchBar extends PureComponent {
         className={cx(getClassName(SearchBar), className)}
         {...props}
       >
-        <Icon name='search' size={24} />
+        <Glyph name='search' size={24} />
         <Input
           type='text'
           placeholder={PLACEHOLDER_TEXT}

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { TagWrapper } from '~/elements/Tag/TagWrapper'
 import { Label } from '~/elements/Tag/Label'
 import Ellipsis from '~/components/aux/Ellipsis'
@@ -13,7 +13,7 @@ export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...
       <Label disabled={disabled} outline={outline}>
         <Ellipsis>{label}</Ellipsis>
       </Label>
-      <Icon
+      <Glyph
         outline={outline}
         name={icon}
         style={{ margin: '0 2px' }}

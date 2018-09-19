@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
 
 const StyledStep = styled.div`
@@ -40,7 +40,7 @@ const StyledStep = styled.div`
 
 const Step = ({ isHalfIcon, dots, ...props }) => (
   <StyledStep {...props} dots={dots}>
-    <Icon
+    <Glyph
       name={`${dots ? 'dot' : 'star'}${isHalfIcon ? 'Half' : ''}`}
       size={20}
       color={props.rated ? '' : 'sensitiveGrey.darker'}

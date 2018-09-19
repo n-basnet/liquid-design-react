@@ -1,5 +1,5 @@
 import Link from '.'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Link', () => {
@@ -20,7 +20,7 @@ describe('Link', () => {
   it('renders a correct icon', () => {
     expect(
       getLinkWrapper()
-        .find(Icon)
+        .find(Glyph)
         .prop('name')
     ).toEqual(defaultProps.icon)
   })

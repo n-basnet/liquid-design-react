@@ -1,6 +1,6 @@
 import Footer from '.'
 import Label from '~/elements/Label'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import Headline from '~/elements/Headline'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
@@ -10,11 +10,11 @@ describe('Footer', () => {
     headlineText: 'Get started today and bring your business idea to life.',
     labelsTexts: ['Label Text', 'Label Text', 'Label Text'],
     iconsNamesAndActions: [
-      { name: 'circleX', onClick: onClickMock },
-      { name: 'circleX', onClick: onClickMock },
-      { name: 'circleX', onClick: onClickMock },
+      { name: 'close', onClick: onClickMock },
+      { name: 'close', onClick: onClickMock },
+      { name: 'close', onClick: onClickMock },
     ],
-    mainIconName: 'circleX',
+    mainIconName: 'close',
   }
   const getFooterWrapper = getWrapper(Footer, defaultProps)
 
@@ -32,7 +32,7 @@ describe('Footer', () => {
   })
 
   it('renders proper icon', () => {
-    const firstIcon = wrapper.find(Icon).first()
+    const firstIcon = wrapper.find(Glyph).first()
     const firstIconName = defaultProps.iconsNamesAndActions[0]['name']
 
     expect(firstIcon.prop('name')).toEqual(firstIconName)

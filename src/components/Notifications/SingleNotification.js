@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { pick, filter } from 'ramda'
 
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import {
   NOTIFICATION_TYPES,
   NOTIFICATION_CONFIG,
@@ -78,10 +78,10 @@ const SingleNotification = props => {
     <SingleNotificationWrapper>
       <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)}>
         <SingleNotificationLeftInnerWrapper>
-          {iconName && <Icon color={iconColor} name={iconName} size={isInfo ? 16 : 20} />}
+          {iconName && <Glyph color={iconColor} name={iconName} size={isInfo ? 16 : 20} />}
           <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>{text}</TextWrapper>
         </SingleNotificationLeftInnerWrapper>
-        <Icon color={iconColor} name='close' size={20} onClick={getRemoveHandler(id)} />
+        <Glyph color={iconColor} name='close' size={20} onClick={getRemoveHandler(id)} />
       </SingleNotificationInnerWrapper>
     </SingleNotificationWrapper>
   )

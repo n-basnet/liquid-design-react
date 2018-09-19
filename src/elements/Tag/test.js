@@ -1,4 +1,4 @@
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import Tag from '.'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
@@ -20,14 +20,14 @@ describe('Tag', () => {
   it('renders a "close" icon by default', () => {
     expect(
       getTagWrapper()
-        .find(Icon)
+        .find(Glyph)
         .prop('name')
     ).toEqual('close')
   })
 
   it('handles icon click event', () => {
     getTagWrapper()
-      .find(Icon)
+      .find(Glyph)
       .simulate('click')
     expect(defaultProps.onIconClick).toBeCalled()
   })

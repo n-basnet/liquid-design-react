@@ -5,7 +5,7 @@ import { find, values } from 'ramda'
 import cx from 'classnames'
 
 import Tooltip, { TOOLTIP_WRAPPER_CLASSNAME } from '~/components/Tooltip'
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import FlyOutContent from '~/components/FlyOut/FlyOutContent'
 import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
 import { cursorValue } from '~/utils/styling'
@@ -172,7 +172,7 @@ export default class FlyOut extends PureComponent {
               disabled={disabled}
             >
               {!alignLeft && this.renderLabel()}
-              <Icon name='dots' size={iconSize} color={disabled ? 'black.base' : undefined} />
+              <Glyph name='dots' size={iconSize} color={disabled ? 'black.base' : undefined} />
               {alignLeft && this.renderLabel()}
             </TooltipTriggerWrapper>
           )}

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { getPosition, getArrowStyle } from '~/components/Tooltip/utils'
 import { WALLS, WALLS_KEYS, SIDES, SIDES_KEYS } from '~/components/Tooltip/consts'
 import { hasCSSFilters } from '~/utils/featureDetects'
@@ -106,7 +106,7 @@ export class Tooltip extends PureComponent {
     const { isHovered } = this.state
     const { children, wall, side, contentStyle, customTrigger, className, ...props } = this.props
     const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
-    const iconName = `info${isHovered || isTooltipOpen ? 'Filled' : 'Circle'}`
+    const iconName = `tooltip${isHovered || isTooltipOpen ? 'Filled' : 'Empty'}`
     return (
       <TooltipWrapper
         isOpen={isTooltipOpen}
@@ -119,7 +119,7 @@ export class Tooltip extends PureComponent {
         {customTrigger ? (
           customTrigger(this.toggle)
         ) : (
-          <Icon name={iconName} onClick={this.toggle} />
+          <Glyph name={iconName} onClick={this.toggle} />
         )}
         {isTooltipOpen && (
           <TooltipContentWrapper

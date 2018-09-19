@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -74,14 +74,14 @@ export const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard, ...props 
     <Fragment>
       {icon &&
         !isIconOnRight && (
-        <Icon color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
+        <Glyph color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
       )}
       <BadgeTextWrapper padLeft={icon && !isIconOnRight} isOnCard={isOnCard}>
         {text}
       </BadgeTextWrapper>
       {icon &&
         isIconOnRight && (
-        <Icon
+        <Glyph
           color='black.base'
           size={14}
           name={icon}

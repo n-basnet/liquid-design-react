@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { ListHead } from '~/elements/List/ListHead'
 import { ListItem } from '~/elements/List/ListItem'
 import attachClassName from '~/components/aux/hoc/attachClassName'
@@ -17,7 +17,7 @@ export const List = ({
   ...props
 }) => {
   const getItemIcon = isActive => (
-    <Icon color={`${isActive ? 'primary' : 'richBlack'}.base`} name={icon} size={16} />
+    <Glyph color={`${isActive ? 'primary' : 'richBlack'}.base`} name={icon} size={16} />
   )
   const ListItems = items.map((item, index) => {
     const isActive = index === activeItemIndex

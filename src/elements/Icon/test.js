@@ -5,7 +5,7 @@ import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Icon', () => {
-  const defaultProps = { name: 'close' }
+  const defaultProps = { name: 'bottle' }
   const getIconWrapper = getWrapper(Icon, defaultProps)
 
   const EXPECTED_SIZE = `${DEFAULT_SIZE}${DEFAULT_UNIT}`

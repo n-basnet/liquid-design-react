@@ -1,6 +1,6 @@
 import Button from '.'
 import ButtonLabel from '~/elements/Button/Labels/Button'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Button', () => {
@@ -23,7 +23,7 @@ describe('Button', () => {
   it('renders an icon', () => {
     expect(
       getButtonWrapper()
-        .find(Icon)
+        .find(Glyph)
         .prop('name')
     ).toEqual(defaultProps.icon)
   })

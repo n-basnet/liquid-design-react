@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { cursorValue } from '~/utils/styling'
-import { default as Icon, ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const CheckboxWrapper = styled.div`
@@ -92,7 +92,7 @@ export class Checkbox extends PureComponent {
         {...props}
       >
         <Input type='checkbox' checked={this.isChecked()} readOnly />
-        <Icon
+        <Glyph
           name={`checkbox${iconVersion}`}
           color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
         />
