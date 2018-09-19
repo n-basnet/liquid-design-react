@@ -6,7 +6,7 @@ import { media } from '~/utils/styling'
 import ModalHeader from '~/components/Modal/ModalHeader'
 
 const ModalContentWrapper = styled.div`
-  padding: 20px;
+  padding: 20px 30px;
   ${media.min.phone`
     padding: 35px 50px 50px;
   `};

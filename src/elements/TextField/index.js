@@ -5,15 +5,8 @@ import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
 import GenericInput from '~/components/aux/Input'
-
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
-
-const FORM_INPUT_CLASSNAME_BASE = `${GLOBAL_CSS_PREFIX}FormInput`
-export const FORM_INPUT_CLASSNAMES = {
-  BASE: FORM_INPUT_CLASSNAME_BASE,
-  SINGLE: `${FORM_INPUT_CLASSNAME_BASE}--single`,
-  MULTILINE: `${FORM_INPUT_CLASSNAME_BASE}--multiline`,
-}
 
 const InputWrapper = styled.div`
   display: inline-block;
@@ -78,9 +71,9 @@ export default class TextField extends React.Component {
     return (
       <InputWrapper
         style={style}
-        className={cx(FORM_INPUT_CLASSNAMES.BASE, {
-          [FORM_INPUT_CLASSNAMES.MULTILINE]: multiline,
-          [FORM_INPUT_CLASSNAMES.SINGLE]: !multiline,
+        className={cx(TEXT_FIELD_CLASSNAMES.BASE, {
+          [TEXT_FIELD_CLASSNAMES.MULTILINE]: multiline,
+          [TEXT_FIELD_CLASSNAMES.SINGLE]: !multiline,
         })}
       >
         {label && (
@@ -100,4 +93,11 @@ export default class TextField extends React.Component {
       </InputWrapper>
     )
   }
+}
+
+const TEXT_FIELD_CLASSNAME_BASE = getClassName(TextField)
+export const TEXT_FIELD_CLASSNAMES = {
+  BASE: TEXT_FIELD_CLASSNAME_BASE,
+  SINGLE: `${TEXT_FIELD_CLASSNAME_BASE}--single`,
+  MULTILINE: `${TEXT_FIELD_CLASSNAME_BASE}--multiline`,
 }

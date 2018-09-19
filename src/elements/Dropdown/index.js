@@ -4,7 +4,7 @@ import { rgba } from 'polished'
 import { pick, isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import OptionsGroup, { OPTIONS_GROUP_CLASSNAME } from '~/elements/Dropdown/OptionsGroup'
 import Ellipsis from '~/components/aux/Ellipsis'
 import { cursorValue, media } from '~/utils/styling'
@@ -197,7 +197,7 @@ export class Dropdown extends PureComponent {
               {activeOption ? activeOption.name : label}
             </Ellipsis>
           )}
-          <Icon
+          <Glyph
             name='arrowTop'
             className={ARROW_ICON_CLASSNAME}
             size={20}

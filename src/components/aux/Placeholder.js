@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import PlaceholderSVGImage from '~/assets/svgIllustrations/placeholder.svg'
 import PlaceholderSVGImageWhite from '~/assets/svgIllustrations/placeholder-white.svg'
 
-const Placeholder = ({ size, white }) => {
+const Placeholder = ({ size, white, style, ...props }) => {
   const SVGImage = white ? PlaceholderSVGImageWhite : PlaceholderSVGImage
   return (
     <SVGImage
@@ -12,7 +12,10 @@ const Placeholder = ({ size, white }) => {
       height={`${size}px`}
       style={{
         borderRadius: '50%',
+        overflow: 'hidden',
+        ...style,
       }}
+      {...props}
     />
   )
 }
@@ -20,11 +23,13 @@ const Placeholder = ({ size, white }) => {
 Placeholder.propTypes = {
   size: PropTypes.number,
   white: PropTypes.bool,
+  style: PropTypes.object,
 }
 
 Placeholder.defaultProps = {
   size: 150,
   white: false,
+  style: {},
 }
 
 export default Placeholder

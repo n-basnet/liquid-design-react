@@ -10,9 +10,14 @@ import {
   getPropTablesExcludeList,
   includeComponentInPropTable,
 } from '../helpers'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
+import Placeholder from '~/components/aux/Placeholder'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 import Button from '~/elements/Button'
+import { media } from '~/utils/styling'
+
+const BUTTON_WRAPPER_CLASSNAME = 'buttonWrapper'
 
 const ModalPresentation = styled.div`
   text-align: center;
@@ -34,12 +39,44 @@ const ModalCTAPresentation = styled(ModalPresentation)`
   h1 {
     margin-bottom: -4px;
   }
-  > div {
-    margin: 25px 0 -10px 0;
+  .${BUTTON_WRAPPER_CLASSNAME} {
+    margin: 15px 0 -20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    ${media.max.phone`
+      flex-direction: column;
+      margin-bottom: 10px;
+    `};
   }
   button {
-    margin: 0 10px;
+    margin: 10px;
   }
+`
+
+const ModalTextFieldPresentation = styled(ModalCTAPresentation)`
+  h1 {
+    margin-bottom: -2px;
+  }
+  input {
+    font-size: 16px;
+  }
+  .${TEXT_FIELD_CLASSNAMES.BASE} {
+    margin-top: 6px;
+    ${media.customMin(500)`
+      width: 400px;
+    `};
+  }
+  .${BUTTON_WRAPPER_CLASSNAME} {
+    display: block;
+  }
+  ${media.customMin(500)`
+    .${BUTTON_WRAPPER_CLASSNAME} {
+      text-align: right;
+      margin: -14px 66px -20px auto;
+    }
+  `};
 `
 
 export const Presentation = {
@@ -53,9 +90,31 @@ export const Presentation = {
     <ModalCTAPresentation>
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
-      <div>
-        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
+      <div className={BUTTON_WRAPPER_CLASSNAME}>
         <Button label='Button Text' size='big' onClick={() => {}} />
+        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
+      </div>
+    </ModalCTAPresentation>
+  ),
+  WithTextField: () => (
+    <ModalTextFieldPresentation>
+      <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
+      <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
+      <TextField grey placeholder='Add Placeholder Text here' />
+      <div className={BUTTON_WRAPPER_CLASSNAME}>
+        <Button label='Text' appearance='ghost' onClick={() => {}} />
+        <Button label='Text' onClick={() => {}} />
+      </div>
+    </ModalTextFieldPresentation>
+  ),
+  WithGraphic: () => (
+    <ModalCTAPresentation>
+      <Placeholder style={{ marginBottom: '20px' }} />
+      <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
+      <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
+      <div className={BUTTON_WRAPPER_CLASSNAME}>
+        <Button label='Button Text' size='big' onClick={() => {}} />
+        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
       </div>
     </ModalCTAPresentation>
   ),
@@ -92,30 +151,30 @@ export class ModalApp extends PureComponent {
   }
 }
 
+const defaultProps = {
+  open: false,
+  theme: THEMES[DEFAULT_THEME_NAME],
+  children: '',
+  onClose: () => {},
+}
+
+const getParams = () => ({
+  info: {
+    propTablesExclude: getPropTablesExcludeList([
+      Presentation.Simple,
+      Presentation.WithCTA,
+      Presentation.WithTextField,
+      Presentation.WithGraphic,
+      EnhancedModal,
+      ModalApp,
+    ]),
+  },
+})
+
 storiesOf('Components/Modal', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(
-    includeComponentInPropTable(Modal, {
-      open: false,
-      theme: THEMES[DEFAULT_THEME_NAME],
-      children: '',
-      onClose: () => {},
-    })
-  )
-  .addParameters({
-    info: {
-      propTables: [],
-      propTablesExclude: getPropTablesExcludeList([Presentation.Simple, ModalApp, EnhancedModal]),
-    },
-  })
-  .add('simple', () => (
-    <div style={{ height: '400px' }}>
-      <style>{'#storybook-theme-wrapper {display: none}'}</style>
-      <EnhancedModal label='Header Label' open onClose={action('close modal')}>
-        <Presentation.Simple />
-      </EnhancedModal>
-    </div>
-  ))
+  .addDecorator(includeComponentInPropTable(Modal, defaultProps))
+  .addParameters(getParams())
   .add('usage in app', () => <ModalApp />, {
     info: {
       text: `
@@ -151,3 +210,18 @@ storiesOf('Components/Modal', module)
   `,
     },
   })
+
+storiesOf('Components/Modal', module)
+  .addParameters(getParams())
+  .addDecorator(storyFn => (
+    <div style={{ height: '400px' }}>
+      <style>{'#storybook-theme-wrapper {display: none}'}</style>
+      <EnhancedModal label='Header Label' open onClose={action('close modal')}>
+        {storyFn()}
+      </EnhancedModal>
+    </div>
+  ))
+  .add('simple', () => <Presentation.Simple />)
+  .add('with CTA', () => <Presentation.WithCTA />)
+  .add('with TextField', () => <Presentation.WithTextField />)
+  .add('with Graphic', () => <Presentation.WithGraphic />)

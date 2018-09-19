@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 import { media } from '~/utils/styling'
 
-import TextField, { FORM_INPUT_CLASSNAMES } from '~/elements/TextField'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -17,14 +17,14 @@ const getDefaultProps = () => ({
 })
 
 const TextFieldStoryWrapper = styled.div`
-  .${FORM_INPUT_CLASSNAMES.SINGLE} {
+  .${TEXT_FIELD_CLASSNAMES.SINGLE} {
     width: 300px;
   }
-  .${FORM_INPUT_CLASSNAMES.MULTILINE} {
+  .${TEXT_FIELD_CLASSNAMES.MULTILINE} {
     width: 350px;
   }
   ${media.customMax(500)`
-    .${FORM_INPUT_CLASSNAMES.BASE} {
+    .${TEXT_FIELD_CLASSNAMES.BASE} {
       width: 100%;
     }
   `};

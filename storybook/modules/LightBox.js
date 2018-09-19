@@ -18,26 +18,23 @@ const getDefaultProps = (open = true) => ({
   children: '',
 })
 
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([
+      Presentation.Simple,
+      Presentation.WithCTA,
+      Presentation.WithTextField,
+      Presentation.WithGraphic,
+      ModalApp,
+      EnhancedLightBox,
+    ]),
+  },
+}
+
 storiesOf('Modules/LightBox', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(LightBox, getDefaultProps(false)))
-  .addParameters({
-    info: {
-      propTablesExclude: getPropTablesExcludeList([
-        Presentation.WithCTA,
-        ModalApp,
-        EnhancedLightBox,
-      ]),
-    },
-  })
-  .add('simple', () => (
-    <div style={{ height: '400px' }}>
-      <style>{'#storybook-theme-wrapper {display: none}'}</style>
-      <EnhancedLightBox {...getDefaultProps()}>
-        <Presentation.WithCTA />
-      </EnhancedLightBox>
-    </div>
-  ))
+  .addParameters(params)
   .add('usage in app', () => <ModalApp Component={EnhancedLightBox} buttonText='Open LightBox' />, {
     info: {
       text: `
@@ -73,3 +70,16 @@ storiesOf('Modules/LightBox', module)
   `,
     },
   })
+
+storiesOf('Modules/LightBox', module)
+  .addParameters(params)
+  .addDecorator(storyFn => (
+    <div style={{ height: '400px' }}>
+      <style>{'#storybook-theme-wrapper {display: none}'}</style>
+      <EnhancedLightBox {...getDefaultProps()}>{storyFn()}</EnhancedLightBox>
+    </div>
+  ))
+  .add('simple', () => <Presentation.Simple />)
+  .add('with CTA', () => <Presentation.WithCTA />)
+  .add('with TextField', () => <Presentation.WithTextField />)
+  .add('with Graphic', () => <Presentation.WithGraphic />)

@@ -9,16 +9,18 @@ import ModalContent from '~/components/Modal/ModalContent'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const TRANSITION_DURATION = 200
+const MODAL_MARGIN = 20
 
 const getReactModalContentStyle = theme => ({
   padding: 0,
   border: 'none',
   bottom: 'auto',
-  top: '20px',
+  top: `${MODAL_MARGIN}px`,
   left: '0',
   right: '0',
-  margin: 'auto auto 20px',
-  width: 'calc(100vw - 40px)',
+  margin: `auto auto ${MODAL_MARGIN}px`,
+  width: `calc(100vw - ${MODAL_MARGIN}px)`,
+  maxHeight: `calc(100vh - ${MODAL_MARGIN * 2}px)`,
   maxWidth: '650px',
   boxShadow: theme.doubleBoxShadow,
 })
@@ -35,7 +37,11 @@ const modalOverlayDefaults = css`
 
 const modalOverlayCloseState = css`
   opacity: 0;
-  transform: translateY(20px);
+  transform: none;
+
+  .ReactModal__Content {
+    transform: translateY(20px);
+  }
 `
 
 export const Modal = ({ open, overlayAuxClassName, reactModalProps, ...props }) => (
@@ -60,14 +66,20 @@ const MODAL_OVERLAY_CLASSNAME = getClassName(Modal)
 
 injectGlobal`
   .${MODAL_OVERLAY_CLASSNAME}.ReactModal__Overlay {
-    transition: all ${TRANSITION_DURATION}ms ease-in-out;
     ${modalOverlayDefaults}
     ${modalOverlayCloseState}
+    &,
+    .ReactModal__Content {
+      transition: all ${TRANSITION_DURATION}ms ease-in-out;
+    }
   }
 
   .${MODAL_OVERLAY_CLASSNAME}.ReactModal__Overlay--after-open{
     opacity: 1;
     transform: none;
+    .ReactModal__Content {
+      transform: none;
+    }
   }
 
   .${MODAL_OVERLAY_CLASSNAME}.ReactModal__Overlay--before-close{
