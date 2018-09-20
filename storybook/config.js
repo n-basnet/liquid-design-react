@@ -17,6 +17,7 @@ const runStorybookConfig = async () => {
   })
 
   function loadStories() {
+    require('./introStory.js')
     MODULES.map(({ name, type, hasIndexFile }) => {
       require(`./${type}s/${hasIndexFile ? `${name}/index` : name}.js`)
     })
