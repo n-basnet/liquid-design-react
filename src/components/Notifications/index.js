@@ -94,4 +94,6 @@ class Notifications extends PureComponent {
   }
 }
 
+export { SingleNotification }
+
 export default Notifications

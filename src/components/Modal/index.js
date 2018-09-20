@@ -101,4 +101,6 @@ Modal.defaultProps = {
   overlayAuxClassName: null,
 }
 
+export { ModalContent }
+
 export default withTheme(Modal)

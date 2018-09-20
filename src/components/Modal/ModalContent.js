@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import { media } from '~/utils/styling'
 import ModalHeader from '~/components/Modal/ModalHeader'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const ModalContentWrapper = styled.div`
   padding: 20px 30px;
@@ -30,4 +31,6 @@ ModalContent.defaultProps = {
   label: ModalHeader.defaultProps.label,
 }
 
-export default ModalContent
+const { Component } = attachClassName(ModalContent)
+
+export default Component

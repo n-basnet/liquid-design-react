@@ -156,7 +156,6 @@
   },
   "files": [
     "dist",
-    "src",
     "README.md"
   ],
   "husky": {
