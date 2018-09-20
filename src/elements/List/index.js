@@ -1,10 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import { Glyph } from '~/elements/Icon'
 import { ListHead } from '~/elements/List/ListHead'
 import { ListItem } from '~/elements/List/ListItem'
 import attachClassName from '~/components/aux/hoc/attachClassName'
+
+const ListWrapper = styled.ul`
+  max-width: 300px;
+  padding: 0;
+  margin: 0;
+`
 
 export const List = ({
   activeItemIndex,
@@ -37,13 +44,13 @@ export const List = ({
   })
 
   return (
-    <ul {...props}>
+    <ListWrapper {...props}>
       <ListHead grey={grey}>
         {icon && getItemIcon()}
         {listHead}
       </ListHead>
       {ListItems}
-    </ul>
+    </ListWrapper>
   )
 }
 

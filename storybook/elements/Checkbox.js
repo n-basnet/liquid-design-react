@@ -22,5 +22,5 @@ storiesOf('Elements/Checkbox', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedCheckbox]),
     },
   })
-  .add('default', () => <Checkbox {...defaultProps} />)
-  .add('disabled', () => <Checkbox disabled {...defaultProps} />)
+  .add('default', () => <EnhancedCheckbox {...defaultProps} />)
+  .add('disabled', () => <EnhancedCheckbox disabled {...defaultProps} />)

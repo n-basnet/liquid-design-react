@@ -1,49 +1,45 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import uniqid from 'uniqid'
 
 import InputWrapper from '~/elements/RadioButton/InputWrapper'
 import RadioButtonWrapper from '~/elements/RadioButton/RadioButtonWrapper'
 import LabelWrapper from '~/elements/RadioButton/LabelWrapper'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
 
-class RadioButton extends PureComponent {
+export class RadioButton extends PureComponent {
   static propTypes = {
-    disabled: PropTypes.bool,
     label: PropTypes.string.isRequired,
-    name: PropTypes.string,
-    selected: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
+    isSelected: false,
     disabled: false,
-    name: 'radioButton',
+    onClick: () => {},
+  }
+
+  componentWillMount() {
+    this.id = getClassName({ name: uniqid() })
   }
 
   render() {
-    const { disabled, name, selected, label, value, onClick, ...props } = this.props
-    const id = `${name}-${value}`
+    const { disabled, isSelected, label, onClick, ...props } = this.props
 
-    /* additional props in RadioButtonWrapper are required for the Firefox and Edge, which do not currently support :before for input fields */
+    // additional props in RadioButtonWrapper are required for the Firefox and Edge, which do not currently support :before for input fields
 
     return (
-      <RadioButtonWrapper
-        disabled={disabled}
-        isChecked={selected === value}
-        value={value}
-        {...props}
-      >
+      <RadioButtonWrapper disabled={disabled} isChecked={isSelected} {...props}>
         <InputWrapper
-          disabled={disabled}
-          id={id}
-          isChecked={selected === value}
-          name={name}
           type='radio'
-          value={value}
+          id={this.id}
+          isSelected={isSelected}
           onClick={onClick}
+          disabled={disabled}
         />
-        <LabelWrapper disabled={disabled} htmlFor={id}>
+        <LabelWrapper disabled={disabled} htmlFor={this.id}>
           {label}
         </LabelWrapper>
       </RadioButtonWrapper>

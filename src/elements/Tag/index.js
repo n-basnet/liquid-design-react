@@ -9,18 +9,16 @@ import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...props }) => (
   <TagWrapper disabled={disabled} outline={outline} {...props}>
-    <div>
-      <Label disabled={disabled} outline={outline}>
-        <Ellipsis>{label}</Ellipsis>
-      </Label>
-      <Glyph
-        outline={outline}
-        name={icon}
-        style={{ margin: '0 2px' }}
-        size={iconSize}
-        onClick={onIconClick}
-      />
-    </div>
+    <Label disabled={disabled} outline={outline}>
+      <Ellipsis>{label}</Ellipsis>
+    </Label>
+    <Glyph
+      outline={outline}
+      name={icon}
+      style={{ marginRight: '2px' }}
+      size={iconSize}
+      onClick={onIconClick}
+    />
   </TagWrapper>
 )
 

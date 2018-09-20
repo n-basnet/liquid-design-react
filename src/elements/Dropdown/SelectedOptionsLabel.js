@@ -10,7 +10,7 @@ const SelectedItem = ({ name, handleRemove }) => (
   <Tag
     label={name}
     onClick={stopClickPropagation}
-    style={{ paddingRight: '3px', paddingBottom: '2px' }}
+    style={{ marginRight: '3px', marginBottom: '2px' }}
     iconSize={12}
     onIconClick={handleRemove}
   />

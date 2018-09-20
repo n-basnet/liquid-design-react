@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 
-import { FlyOut } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import FlyOut from '~/components/FlyOut'
+import { getBackgroundWrapper, getTextKnob, getPropTablesExcludeList } from '../helpers'
 
 const getOptions = () => [
   {
@@ -43,6 +43,11 @@ const getHeadline = () => getTextKnob({ defaultText: 'Headline', name: 'headline
 
 storiesOf('Components/FlyOut', module)
   .addDecorator(getBackgroundWrapper())
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList(),
+    },
+  })
   .add('right aligned', () => (
     <div style={{ marginLeft: '120px' }}>
       <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} />

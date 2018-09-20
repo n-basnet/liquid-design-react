@@ -5,18 +5,18 @@ import styled, { css } from 'styled-components'
 import { getBackgroundImage } from '~/utils/styling'
 import { TypographicQuote } from '~/components/Quote/TypographicQuote'
 import attachClassName from '~/components/aux/hoc/attachClassName'
+import BlockquoteWrapper from '~/components/Quote/BlockquoteWrapper'
 
-const QuoteWrapper = styled.blockquote`
-  display: inline-block;
+const QuoteWrapper = styled(BlockquoteWrapper)`
   max-width: 300px;
-  margin: 0;
-  padding: 25px;
 `
 
 export const ImageWrapper = styled.div`
   ${getBackgroundImage};
+  max-width: 100%;
+  max-height: 100%;
   width: 200px;
-  min-height: 200px;
+  height: 200px;
   margin: 0 auto 10px auto;
   border-radius: 50%;
 `

@@ -2,7 +2,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedQuote, Quote } from '~/components/Quote'
-import { getTextKnob, getPropTablesExcludeList, includeComponentInPropTable } from '../helpers'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
+} from '../helpers'
 
 const getAuthor = () => getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
 const getImagePath = () =>
@@ -39,9 +44,9 @@ const defaultProps = {
 const propTableDecorator = includeComponentInPropTable(Quote, defaultProps)
 
 storiesOf('Components/Quote/Default Quote', module)
+  .addDecorator(getBackgroundWrapper())
   .addDecorator(propTableDecorator)
   .addParameters(params)
-
   .add('default', () => (
     <EnhancedQuote
       author={getAuthor()}
@@ -52,9 +57,9 @@ storiesOf('Components/Quote/Default Quote', module)
   ))
 
 storiesOf('Components/Quote/Typographic Quote', module)
+  .addDecorator(getBackgroundWrapper())
   .addDecorator(propTableDecorator)
   .addParameters(params)
-
   .add('Big', () => (
     <EnhancedQuote
       author={getAuthor()}

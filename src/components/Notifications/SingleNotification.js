@@ -10,15 +10,19 @@ import {
   NOTIFICATION_WRAPPER_PADDING,
 } from '~/components/Notifications/consts'
 import { media } from '~/utils/styling'
+import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const getNotificationType = props =>
   Object.keys(filter(v => !!v, pick(NOTIFICATION_TYPES, props)))[0]
 
-const getBackgroundColor = ({ theme, ...props }, hover = false) => {
+const getBackgroundColor = ({ theme, color, ...props }, hover = false) => {
+  if (color) {
+    return color
+  }
   const type = getNotificationType(props)
-  const color = type ? NOTIFICATION_CONFIG[type].color : 'primary'
+  const colorName = type ? NOTIFICATION_CONFIG[type].color : 'primary'
 
-  return theme.colors[color][hover ? 'dark' : 'base']
+  return theme.colors[colorName][hover ? 'dark' : 'base']
 }
 
 const getIconName = props => {
@@ -71,12 +75,12 @@ const SingleNotificationLeftInnerWrapper = styled.div`
 `
 
 const SingleNotification = props => {
-  const { text, isInfo, id, getRemoveHandler } = props
+  const { text, isInfo, id, getRemoveHandler, ...passedProps } = props
   const iconName = getIconName(props)
   const iconColor = `${getColor(props)}.base`
   return (
     <SingleNotificationWrapper>
-      <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)}>
+      <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)} {...passedProps}>
         <SingleNotificationLeftInnerWrapper>
           {iconName && <Glyph color={iconColor} name={iconName} size={isInfo ? 16 : 20} />}
           <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>{text}</TextWrapper>
@@ -102,4 +106,6 @@ SingleNotification.defaultProps = {
   isInfo: false,
 }
 
-export default SingleNotification
+const { Component } = attachClassName(SingleNotification)
+
+export default Component

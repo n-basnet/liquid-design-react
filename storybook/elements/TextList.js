@@ -1,7 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { getTextKnob, includeComponentInPropTable, getPropTablesExcludeList } from '../helpers'
+import {
+  getTextKnob,
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
 import { default as EnhancedTextList, TextList } from '~/elements/TextList'
 
 const getListItem = id => ({
@@ -48,11 +53,8 @@ const getDefaultProps = () => ({
 })
 
 storiesOf('Elements/TextList', module)
+  .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(TextList, getDefaultProps()))
   .addParameters(params)
   .add('numbered list', () => <EnhancedTextList {...getDefaultProps()} />)
-
-storiesOf('Elements/TextList', module)
-  .addDecorator(includeComponentInPropTable(TextList, getDefaultProps()))
-  .addParameters(params)
   .add('bullet list', () => <EnhancedTextList {...getDefaultProps()} listType='bullet' />)

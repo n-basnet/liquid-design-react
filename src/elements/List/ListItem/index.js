@@ -6,7 +6,7 @@ import { cursorValue } from '~/utils/styling'
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
-  max-width: 300px;
+  max-width: 100%;
   min-height: 50px;
   padding: 10px 15px;
   list-style: none;

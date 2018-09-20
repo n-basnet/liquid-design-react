@@ -83,6 +83,14 @@ storiesOf('Components/Notifications', module)
       ))}
     </SingleNotificationsWrapper>
   ))
+  .add('custom color', () => (
+    <SingleNotificationsWrapper>
+      <SingleNotification
+        {...getDefaultSingleNotificationProps(0)}
+        color={getTextKnob({ name: 'color', defaultText: '#5AB98F' })}
+      />
+    </SingleNotificationsWrapper>
+  ))
   .addDecorator(includeComponentInPropTable(Notifications))
   .add('usage in app', () => <NotificationApp />, {
     info: {

@@ -22,7 +22,7 @@ export default styled.div`
     !props.disabled &&
           css`
             border-color: ${props =>
-    props.isChecked ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
+    props.isSelected ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
           `}
       }
   }
@@ -45,7 +45,7 @@ export default styled.div`
         `}
       ${props =>
     !props.disabled &&
-        props.isChecked &&
+        props.isSelected &&
         css`
           border: 7px solid ${props.theme.colors.primary.base};
         `};

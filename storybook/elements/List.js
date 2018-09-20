@@ -3,12 +3,17 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { times } from '~/utils/aux'
-import { getTextKnob, includeComponentInPropTable, getPropTablesExcludeList } from '../helpers'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  includeComponentInPropTable,
+  getPropTablesExcludeList,
+} from '../helpers'
 import { default as EnhancedList, List } from '~/elements/List'
 
-const getListHead = () => getTextKnob({ name: 'listHead', defaultText: 'List head 01' })
+const getListHead = () => getTextKnob({ name: 'list head', defaultText: 'List head 01' })
 
-const getListItem = id => getTextKnob({ name: `listItem ${id}`, defaultText: 'List 01' })
+const getListItem = id => getTextKnob({ name: `list item ${id}`, defaultText: 'List 01' })
 
 const getItems = () => times(5).map(getListItem)
 
@@ -26,6 +31,7 @@ const params = {
 }
 
 storiesOf('Elements/List/list with icons', module)
+  .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(List, getDefaultProps()))
   .addParameters(params)
   .add('transparent', () => <EnhancedList {...getDefaultProps()} />)
@@ -34,6 +40,7 @@ storiesOf('Elements/List/list with icons', module)
   .add('disabled', () => <EnhancedList disabledItemIndex={1} {...getDefaultProps()} />)
 
 storiesOf('Elements/List/list without icons', module)
+  .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(List, getDefaultProps()))
   .addParameters(params)
   .add('transparent', () => <EnhancedList {...getDefaultProps(false)} />)

@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-const QuoteWrapper = styled.blockquote`
-  display: inline-block;
-  padding: 25px;
+import BlockquoteWrapper from '~/components/Quote/BlockquoteWrapper'
+
+const QuoteWrapper = styled(BlockquoteWrapper)`
   ${props => css`
     max-width: ${props.big ? '500px' : '385px'};
   `};

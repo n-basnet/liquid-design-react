@@ -5,7 +5,7 @@ import { ICON_CLASSNAME } from '~/elements/Icon'
 export const ListHead = styled.div`
   display: flex;
   align-items: center;
-  max-width: 300px;
+  max-width: 100%;
   min-height: 50px;
   padding: 10px 15px;
   border-radius: 6px 6px 0 0;

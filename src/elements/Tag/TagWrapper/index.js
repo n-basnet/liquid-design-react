@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { cursorValue } from '~/utils/styling'
+import { ICON_CLASSNAME } from '~/elements/Icon'
 
 const tagBackground = ({ disabled, theme: { colors }, outline }) => {
   if (disabled) {
@@ -17,59 +18,56 @@ export const tagColor = ({ outline, disabled, theme: { colors } }) => {
 }
 
 export const TagWrapper = styled.div`
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
   min-width: 100px;
   max-width: 100%;
-  > div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 24px;
-    border-radius: 12px;
-    ${cursorValue};
-    ${props => css`
-      background-color: ${tagBackground(props)};
-      transition: ${props.theme.transition};
-      ${props.outline &&
-        css`
-          border: 2px solid
-            ${!props.disabled
+  padding: 4px 0;
+  border-radius: 12px;
+  ${cursorValue};
+  ${props => css`
+    background-color: ${tagBackground(props)};
+    transition: ${props.theme.transition};
+    ${props.outline &&
+      css`
+        border: 2px solid
+          ${!props.disabled
     ? props.theme.colors.primary.base
     : props.theme.colors.sensitiveGrey.darker};
-          &:hover {
-            border-color: ${!props.disabled && props.theme.colors.primary.dark};
-          }
-        `};
+        &:hover {
+          border-color: ${!props.disabled && props.theme.colors.primary.dark};
+        }
+      `};
+    ${!props.outline &&
+      css`
+        border: none;
+      `};
+    &:hover {
       ${!props.outline &&
         css`
-          border: none;
+          background-color: ${!props.disabled && props.theme.colors.primary.dark};
+          color: ${props.theme.colors.primary.dark};
         `};
-      &:hover {
-        ${!props.outline &&
-          css`
-            background-color: ${!props.disabled && props.theme.colors.primary.dark};
-            color: ${props.theme.colors.primary.dark};
-          `};
-        ${!props.disabled &&
-          props.outline &&
-          css`
-            span {
-              ${props => css`
-                color: ${props.theme.colors.primary.dark};
-              `};
-            }
-            svg {
-              fill: ${props.theme.colors.primary.dark};
-            }
-          `};
-      }
-      svg {
-        fill: ${tagColor(props)};
-        ${!props.disabled &&
-          css`
-            cursor: pointer;
-          `};
-      }
-    `};
-  }
+      ${!props.disabled &&
+        props.outline &&
+        css`
+          span {
+            ${props => css`
+              color: ${props.theme.colors.primary.dark};
+            `};
+          }
+          .${ICON_CLASSNAME} svg {
+            fill: ${props.theme.colors.primary.dark};
+          }
+        `};
+    }
+    .${ICON_CLASSNAME} svg {
+      fill: ${tagColor(props)};
+      ${!props.disabled &&
+        css`
+          cursor: pointer;
+        `};
+    }
+  `};
 `

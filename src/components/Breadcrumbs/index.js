@@ -1,13 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
+const BreadcrumbsWrapper = styled.div`
+  display: inline-block;
+`
+
 export const Breadcrumbs = ({ items, active, ...props }) => (
-  <div {...props}>
+  <BreadcrumbsWrapper {...props}>
     {items.map((v, i) => <SingleBreadcrumb key={i} active={i === active} {...v} />)}
-  </div>
+  </BreadcrumbsWrapper>
 )
 
 Breadcrumbs.propTypes = {
