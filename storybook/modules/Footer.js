@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import { Footer } from '~'
-import { getTextKnob } from '../helpers'
+import { getTextKnob, getSnippetTemplate } from '../helpers'
 
 const getFooterText = () =>
   getTextKnob({
@@ -19,11 +19,26 @@ const iconsNamesAndActions = [
   { name: 'circleX', onClick: action('click') },
 ]
 
-storiesOf('Modules/Footer', module).add('default', () => (
+storiesOf('Modules/Footer', module).add(
+  'default',
+  () => (
+    <Footer
+      headlineText={getFooterText()}
+      iconsNamesAndActions={iconsNamesAndActions}
+      labelsTexts={labelsTexts}
+      mainIconName={mainIconName}
+    />
+  ),
+  getSnippetTemplate(`
   <Footer
-    headlineText={getFooterText()}
-    iconsNamesAndActions={iconsNamesAndActions}
-    labelsTexts={labelsTexts}
-    mainIconName={mainIconName}
+    headlineText="Get started today and bring your business idea to …"
+    iconsNamesAndActions={[
+      {name: 'circleX',onClick: onClickHandler},
+      {name: 'circleX',onClick: onClickHandler},
+      {name: 'circleX',onClick: onClickHandler},
+    ]}
+    labelsTexts={['Label Text','Label Text','Label Text']}
+    mainIconName="circleX"
   />
-))
+  `)
+)

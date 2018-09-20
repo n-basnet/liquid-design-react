@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 
+import { getBackgroundWrapper, getTextKnob, getSnippetTemplate } from '../helpers'
 import FlyOut from '~/components/FlyOut'
-import { getBackgroundWrapper, getTextKnob, getPropTablesExcludeList } from '../helpers'
 
 const getOptions = () => [
   {
@@ -38,48 +38,107 @@ const getOptions = () => [
   },
 ]
 
+const getFlyoutSnippet = props => `
+  <FlyOut
+    name="Headline"
+    options={[
+      {name: 'Option 1',onClick: onClickHandler},
+      {name: 'Option 2',options: [
+        {name: 'Sub Option 1',onClick: onClickHandler},
+        {name: 'Sub Option 2',onClick: onClickHandler},
+        {name: 'Sub Option 3',onClick: onClickHandler},
+      ]},
+      {name: 'Option 3',onClick: onClickHandler}
+    ]}${props || ``}
+  />
+`
+
 const getLabel = () => getTextKnob({ defaultText: 'Flyout Label', name: 'label' })
 const getHeadline = () => getTextKnob({ defaultText: 'Headline', name: 'headline' })
 
 storiesOf('Components/FlyOut', module)
   .addDecorator(getBackgroundWrapper())
-  .addParameters({
-    info: {
-      propTablesExclude: getPropTablesExcludeList(),
-    },
-  })
-  .add('right aligned', () => (
-    <div style={{ marginLeft: '120px' }}>
-      <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} />
-    </div>
-  ))
-  .add('left aligned', () => (
-    <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />
-  ))
-  .add('right aligned disabled', () => (
-    <div style={{ marginLeft: '120px' }}>
-      <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} disabled />
-    </div>
-  ))
-  .add('left aligned disabled', () => (
-    <FlyOut disabled name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />
-  ))
-  .add('center aligned', () => (
-    <div style={{ marginLeft: '120px' }}>
-      <FlyOut name={getHeadline()} options={getOptions()} />
-    </div>
-  ))
-  .add('center aligned disabled', () => (
-    <div style={{ marginLeft: '120px' }}>
-      <FlyOut disabled name={getHeadline()} options={getOptions()} />
-    </div>
-  ))
-  .add('forced width', () => (
-    <FlyOut
-      name={getHeadline()}
-      options={getOptions()}
-      label={getLabel()}
-      alignLeft
-      width={number('width', 200, { range: true, min: 100, max: 600, step: 1 })}
-    />
-  ))
+  .add(
+    'right aligned',
+    () => (
+      <div style={{ marginLeft: '120px' }}>
+        <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} />
+      </div>
+    ),
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    label="Flyout Label"`)
+    )
+  )
+  .add(
+    'left aligned',
+    () => <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />,
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    label="Flyout Label"
+    alignLeft`)
+    )
+  )
+  .add(
+    'right aligned disabled',
+    () => (
+      <div style={{ marginLeft: '120px' }}>
+        <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} disabled />
+      </div>
+    ),
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    label="Flyout Label"
+    disabled`)
+    )
+  )
+  .add(
+    'left aligned disabled',
+    () => (
+      <FlyOut disabled name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />
+    ),
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    label="Flyout Label"
+    alignLeft
+    disabled`)
+    )
+  )
+  .add(
+    'center aligned',
+    () => (
+      <div style={{ marginLeft: '120px' }}>
+        <FlyOut name={getHeadline()} options={getOptions()} />
+      </div>
+    ),
+    getSnippetTemplate(getFlyoutSnippet())
+  )
+  .add(
+    'center aligned disabled',
+    () => (
+      <div style={{ marginLeft: '120px' }}>
+        <FlyOut disabled name={getHeadline()} options={getOptions()} />
+      </div>
+    ),
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    disabled`)
+    )
+  )
+  .add(
+    'forced width',
+    () => (
+      <FlyOut
+        name={getHeadline()}
+        options={getOptions()}
+        label={getLabel()}
+        alignLeft
+        width={number('width', 200, { range: true, min: 100, max: 600, step: 1 })}
+      />
+    ),
+    getSnippetTemplate(
+      getFlyoutSnippet(`
+    alignLeft
+    width={200}`)
+    )
+  )

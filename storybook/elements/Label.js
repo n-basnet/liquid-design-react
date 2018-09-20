@@ -6,6 +6,7 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getTextKnob,
+  getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedLabel, Label } from '~/elements/Label'
 
@@ -22,4 +23,12 @@ storiesOf('Elements/Label', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedLabel]),
     },
   })
-  .add('default', () => <EnhancedLabel {...getDefaultProps()} />)
+  .add(
+    'default',
+    () => <EnhancedLabel {...getDefaultProps()} />,
+    getSnippetTemplate(`
+  <Label>
+    Label Text
+  </Label>
+  `)
+  )

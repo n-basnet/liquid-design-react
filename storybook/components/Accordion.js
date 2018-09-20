@@ -7,6 +7,7 @@ import {
   getPropTablesExcludeList,
   placeholderText,
   includeComponentInPropTable,
+  getSnippetTemplate,
 } from '../helpers'
 
 const defaultProps = {
@@ -22,11 +23,39 @@ storiesOf('Components/Accordion', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedAccordion]),
     },
   })
-  .add('default single', () => <EnhancedAccordion {...defaultProps} />)
-  .add('default stacked', () => (
-    <section>
-      <EnhancedAccordion {...defaultProps} />
-      <EnhancedAccordion {...defaultProps} />
-      <EnhancedAccordion {...defaultProps} />
-    </section>
-  ))
+  .add(
+    'default single',
+    () => <EnhancedAccordion {...defaultProps} />,
+    getSnippetTemplate(`
+  <Accordion
+    content="lorem ipsum dolor sit amet, consectetur adipiscing…"
+    title="Section title"
+  />
+  `)
+  )
+  .add(
+    'default stacked',
+    () => (
+      <section>
+        <EnhancedAccordion {...defaultProps} />
+        <EnhancedAccordion {...defaultProps} />
+        <EnhancedAccordion {...defaultProps} />
+      </section>
+    ),
+    getSnippetTemplate(`
+  <section>
+    <Accordion
+      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
+      title="Section title"
+    />
+    <Accordion
+      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
+      title="Section title"
+    />
+    <Accordion
+      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
+      title="Section title"
+    />
+  </section>
+  `)
+  )

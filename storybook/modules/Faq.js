@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Faq } from '~'
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import { getBackgroundWrapper, getTextKnob, getSnippetTemplate } from '../helpers'
 import { times } from '~/utils/aux'
 
 const headlinesTexts = {
@@ -31,4 +31,17 @@ const faqContent = getFaqContent()
 
 storiesOf('Modules/Faq', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '1016px' } }))
-  .add('default', () => <Faq faqContent={faqContent} headlinesTexts={headlinesTexts} />)
+  .add(
+    'default',
+    () => <Faq faqContent={faqContent} headlinesTexts={headlinesTexts} />,
+    getSnippetTemplate(`
+    <Faq
+      faqContent={[
+        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
+        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
+        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
+      ]}
+      headlinesTexts={{primary: 'Insert Headline',secondary: 'We've been around for 350 years, yet our majority …'}}
+    />
+    `)
+  )

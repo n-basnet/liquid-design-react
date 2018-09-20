@@ -6,6 +6,7 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedCheckbox, Checkbox } from '~/elements/Checkbox'
 
@@ -13,6 +14,10 @@ const defaultProps = {
   label: 'Checkbox text',
   onChange: action('checkbox click'),
 }
+
+const getCheckboxSnippet = props => `
+  <Checkbox ${props || ``}label="Checkbox text" onChange={onChangeHandler} />
+`
 
 storiesOf('Elements/Checkbox', module)
   .addDecorator(getBackgroundWrapper())
@@ -22,5 +27,9 @@ storiesOf('Elements/Checkbox', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedCheckbox]),
     },
   })
-  .add('default', () => <EnhancedCheckbox {...defaultProps} />)
-  .add('disabled', () => <EnhancedCheckbox disabled {...defaultProps} />)
+  .add('default', () => <Checkbox {...defaultProps} />, getSnippetTemplate(getCheckboxSnippet()))
+  .add(
+    'disabled',
+    () => <Checkbox disabled {...defaultProps} />,
+    getSnippetTemplate(getCheckboxSnippet('disabled '))
+  )

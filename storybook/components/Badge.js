@@ -2,10 +2,31 @@ import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedBadge, Badge } from '~/components/Badge'
-import { getBackgroundWrapper, includeComponentInPropTable, getTextKnob } from '../helpers'
+import {
+  getBackgroundWrapper,
+  includeComponentInPropTable,
+  getTextKnob,
+  getSnippetTemplate,
+} from '../helpers'
 
 const defaultText = 'Delivery in 3-4 days'
 const defaultProps = { text: getTextKnob({ defaultText }) }
+
+const getBadgeSnippet = props => `
+  <Badge text="Delivery in 3-4 days" ${props || ``} />
+`
+
+const getOnCardBadgeSnippet = props => `
+  <div style={{
+    position: 'relative',
+    maxWidth: '300px',
+    height: '50px',
+    marginLeft: '40px',
+    marginBottom: '50px',
+  }}>
+    <Badge text="Delivery in 3-4 days" onCard icon="circleX" ${props || ``} />
+  </div>
+`
 
 storiesOf('Components/Badge', module)
   .addDecorator(getBackgroundWrapper())
@@ -15,9 +36,17 @@ storiesOf('Components/Badge', module)
       propTablesExclude: [EnhancedBadge, Fragment],
     },
   })
-  .add('default', () => <EnhancedBadge {...defaultProps} />)
-  .add('disabled', () => <EnhancedBadge {...defaultProps} disabled />)
-  .add('default and icon', () => <EnhancedBadge {...defaultProps} icon='circleX' />)
+  .add('default', () => <EnhancedBadge {...defaultProps} />, getSnippetTemplate(getBadgeSnippet()))
+  .add(
+    'disabled',
+    () => <EnhancedBadge {...defaultProps} disabled />,
+    getSnippetTemplate(getBadgeSnippet('disabled'))
+  )
+  .add(
+    'default and icon',
+    () => <EnhancedBadge {...defaultProps} icon='circleX' />,
+    getSnippetTemplate(getBadgeSnippet('icon="circleX"'))
+  )
   .addDecorator(storyFn => (
     <div
       style={{
@@ -31,13 +60,23 @@ storiesOf('Components/Badge', module)
       {storyFn()}
     </div>
   ))
-  .add('on a ContentCard', () => <EnhancedBadge {...defaultProps} isOnCard icon='circleX' />)
-  .add('on a ContentCard - disabled', () => (
-    <EnhancedBadge {...defaultProps} isOnCard disabled icon='circleX' />
-  ))
-  .add('on a ContentCard - right icon', () => (
-    <EnhancedBadge {...defaultProps} isOnCard isIconOnRight icon='circleX' />
-  ))
-  .add('on a ContentCard - right icon disabled', () => (
-    <EnhancedBadge {...defaultProps} isOnCard isIconOnRight disabled icon='circleX' />
-  ))
+  .add(
+    'on a ContentCard',
+    () => <EnhancedBadge {...defaultProps} isOnCard icon='circleX' />,
+    getSnippetTemplate(getOnCardBadgeSnippet())
+  )
+  .add(
+    'on a ContentCard - disabled',
+    () => <EnhancedBadge {...defaultProps} isOnCard disabled icon='circleX' />,
+    getSnippetTemplate(getOnCardBadgeSnippet('disabled'))
+  )
+  .add(
+    'on a ContentCard - right icon',
+    () => <EnhancedBadge {...defaultProps} isOnCard isIconOnRight icon='circleX' />,
+    getSnippetTemplate(getOnCardBadgeSnippet('iconOnRight'))
+  )
+  .add(
+    'on a ContentCard - right icon disabled',
+    () => <EnhancedBadge {...defaultProps} isOnCard isIconOnRight disabled icon='circleX' />,
+    getSnippetTemplate(getOnCardBadgeSnippet('iconOnRight disabled'))
+  )

@@ -64,5 +64,14 @@ export const getStoriesByVersions = ({ versions, subversions }) => {
   return pairs
 }
 
+export const getSnippetTemplate = (snippet, description) => ({
+  info: {
+    text: `${description || ``}
+  ~~~js
+  ${snippet}
+  ~~~
+`,
+  },
+})
 export const getStoryMDLink = (name, { type = 'Elements', storyName } = {}) =>
   `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(storyName || name)})`

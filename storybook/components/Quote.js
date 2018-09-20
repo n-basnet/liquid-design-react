@@ -7,6 +7,7 @@ import {
   getTextKnob,
   getPropTablesExcludeList,
   includeComponentInPropTable,
+  getSnippetTemplate,
 } from '../helpers'
 
 const getAuthor = () => getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
@@ -41,38 +42,64 @@ const defaultProps = {
   author: getAuthor(),
   quotation: getQuotation(),
 }
+
+const getQuoteSnippet = props => `
+  <Quote
+    author="Neville Brody"
+    ${props || ``}
+    source="http://merck.design"
+    quotation="Digital design is like painting, except the paint …"
+  />
+`
+
 const propTableDecorator = includeComponentInPropTable(Quote, defaultProps)
 
 storiesOf('Components/Quote/Default Quote', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(propTableDecorator)
   .addParameters(params)
-  .add('default', () => (
-    <EnhancedQuote
-      author={getAuthor()}
-      imagePath={getImagePath()}
-      source={getSource()}
-      quotation={getQuotation()}
-    />
-  ))
+
+  .add(
+    'default',
+    () => (
+      <EnhancedQuote
+        author={getAuthor()}
+        imagePath={getImagePath()}
+        source={getSource()}
+        quotation={getQuotation()}
+      />
+    ),
+    getSnippetTemplate(
+      getQuoteSnippet(`imagePath="https://swh-826d.kxcdn.com/wp-content/uploads/2011…"`)
+    )
+  )
 
 storiesOf('Components/Quote/Typographic Quote', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(propTableDecorator)
   .addParameters(params)
-  .add('Big', () => (
-    <EnhancedQuote
-      author={getAuthor()}
-      big
-      source={getSource()}
-      quotation={getQuotationForTypographicQuote()}
-    />
-  ))
-  .add('Small', () => (
-    <EnhancedQuote
-      author={getAuthor()}
-      small
-      source={getSource()}
-      quotation={getQuotationForTypographicQuote()}
-    />
-  ))
+
+  .add(
+    'Big',
+    () => (
+      <EnhancedQuote
+        author={getAuthor()}
+        big
+        source={getSource()}
+        quotation={getQuotationForTypographicQuote()}
+      />
+    ),
+    getSnippetTemplate(getQuoteSnippet('big'))
+  )
+  .add(
+    'Small',
+    () => (
+      <EnhancedQuote
+        author={getAuthor()}
+        small
+        source={getSource()}
+        quotation={getQuotationForTypographicQuote()}
+      />
+    ),
+    getSnippetTemplate(getQuoteSnippet('small'))
+  )

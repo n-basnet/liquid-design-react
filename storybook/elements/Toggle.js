@@ -6,6 +6,7 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedToggle, Toggle } from '~/elements/Toggle'
 
@@ -26,30 +27,26 @@ class ToggleApp extends React.Component {
   }
 }
 
-const sourceCodeInfo = {
-  info: {
-    text: `
-      Toggles are used to select one out of two available options or to switch between two states.
+const toggleSnippet = {
+  description: `
+  Toggles are used to select one out of two available options or to switch between two states.
 
-      Usage:
-      ~~~js
-      class ToggleApp extends React.Component {
-        state = {
-          isActive: false,
-        }
-        toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
-        render() {
-          return (
-            <Toggle
-              isActive={this.state.isActive}
-              onClick={this.toggle}
-            />
-          )
-        }
-      }
-      ~~~
-    `,
-  },
+  Usage:`,
+  getSnippet: props => `
+  class ToggleApp extends React.Component {
+    state = {
+      isActive: false,
+    }
+    toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
+    render() {
+      return (
+        <Toggle
+          isActive={this.state.isActive}
+          onClick={onClickHandler}${props || ``}
+        />
+      )
+    }
+  }`,
 }
 
 storiesOf('Elements/Toggle', module)
@@ -60,9 +57,36 @@ storiesOf('Elements/Toggle', module)
       propTablesExclude: getPropTablesExcludeList([ToggleApp, EnhancedToggle]),
     },
   })
-  .add('default', () => <ToggleApp />, sourceCodeInfo)
-  .add('with icons', () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />)
-  .add('with icons disabled', () => (
-    <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />
-  ))
-  .add('disabled', () => <EnhancedToggle disabled />)
+  .add(
+    'default',
+    () => <ToggleApp />,
+    getSnippetTemplate(toggleSnippet.getSnippet(), toggleSnippet.description)
+  )
+  .add(
+    'with icons',
+    () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />,
+    getSnippetTemplate(
+      toggleSnippet.getSnippet(`
+          icons={['circleX', 'circleX']}`),
+      toggleSnippet.description
+    )
+  )
+  .add(
+    'with icons disabled',
+    () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />,
+    getSnippetTemplate(
+      toggleSnippet.getSnippet(`
+          icons={['circleX', 'circleX']}
+          disabled`),
+      toggleSnippet.description
+    )
+  )
+  .add(
+    'disabled',
+    () => <EnhancedToggle disabled />,
+    getSnippetTemplate(
+      toggleSnippet.getSnippet(`
+          disabled`),
+      toggleSnippet.description
+    )
+  )

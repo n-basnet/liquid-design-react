@@ -11,6 +11,7 @@ import {
   getPropTablesExcludeList,
   includeComponentInPropTable,
   formatList,
+  getSnippetTemplate,
 } from '../helpers'
 
 const DEFAULT_TEXT = 'Notification text'
@@ -65,6 +66,32 @@ const propTablesExclude = getPropTablesExcludeList([
   SingleNotificationsWrapper,
 ])
 
+const sourceCode = {
+  description: `Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.\n
+  Notication types can be set via boolean props: ${formatList(NOTIFICATION_TYPES)}.\n
+  Usage: call \`Notification\`'s \`addNotification\` method via a ref:`,
+
+  notificationSnippet: `
+class NotificationApp extends PureComponent {
+  createNotification = () => {
+    this.notificationsRef.addNotification({ text: 'Some info', isInfo: true })
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.createNotification}>add info</button>
+        <Notifications
+          ref={v => {
+            this.notificationsRef = v
+          }}
+        />
+      </div>
+    )
+  }
+}
+`,
+}
+
 storiesOf('Components/Notifications', module)
   .addParameters({
     info: {
@@ -92,34 +119,8 @@ storiesOf('Components/Notifications', module)
     </SingleNotificationsWrapper>
   ))
   .addDecorator(includeComponentInPropTable(Notifications))
-  .add('usage in app', () => <NotificationApp />, {
-    info: {
-      text: `
-    Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.
-
-    Notication types can be set via boolean props: ${formatList(NOTIFICATION_TYPES)}.
-
-    Usage: call \`Notification\`'s \`addNotification\` method via a ref:
-
-    ~~~js
-    class NotificationApp extends PureComponent {
-      createNotification = () => {
-        this.notificationsRef.addNotification({ text: 'Some info', isInfo: true })
-      }
-      render() {
-        return (
-          <div>
-            <button onClick={this.createNotification}>add info</button>
-            <Notifications
-              ref={v => {
-                this.notificationsRef = v
-              }}
-            />
-          </div>
-        )
-      }
-    }
-    ~~~
-  `,
-    },
-  })
+  .add(
+    'usage in app',
+    () => <NotificationApp />,
+    getSnippetTemplate(sourceCode.notificationSnippet, sourceCode.description)
+  )

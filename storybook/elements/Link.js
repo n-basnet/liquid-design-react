@@ -6,6 +6,7 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getTextKnob,
+  getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedLink, Link } from '~/elements/Link'
 
@@ -23,4 +24,12 @@ storiesOf('Elements/Link', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedLink]),
     },
   })
-  .add('default', () => <EnhancedLink {...getDefaultProps()} />)
+  .add(
+    'default',
+    () => <EnhancedLink {...getDefaultProps()} />,
+    getSnippetTemplate(`
+  <Link>
+    Text
+  </Link>
+  `)
+  )

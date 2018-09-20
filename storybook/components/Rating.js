@@ -8,6 +8,7 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 
 const firstRating = 2.5
@@ -81,7 +82,13 @@ storiesOf('Components/Rating', module)
       propTablesExclude: getPropTablesExcludeList([RatingApp, EnhancedRating]),
     },
   })
-  .add('single', () => <EnhancedRating />)
+  .add(
+    'single',
+    () => <EnhancedRating />,
+    getSnippetTemplate(`
+  <Rating />
+    `)
+  )
   .add('default', () => (
     <RatingApp steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })} />
   ))

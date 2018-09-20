@@ -9,6 +9,7 @@ import {
   getPropTablesExcludeList,
   getTextKnob,
   getStoriesByVersions,
+  getSnippetTemplate,
 } from '../helpers'
 
 const getDefaultProps = () => ({
@@ -30,6 +31,10 @@ const TextFieldStoryWrapper = styled.div`
   `};
 `
 
+const getTextFieldSnippet = props => `
+  <TextField placeholder="Add Placeholder Text here" label="Text Area label" ${props || ``} />
+`
+
 const STORIES = getStoriesByVersions({
   versions: [
     { name: 'grey', props: { grey: true } },
@@ -48,6 +53,9 @@ const STORIES = getStoriesByVersions({
 })
 
 STORIES.map(({ name, props }) => {
+  const propsSnippet = Object.keys(props)
+    .map(prop => (prop === 'validate' ? `validate={validateHandler}` : prop))
+    .join(' ')
   storiesOf('Elements/TextField', module)
     .addDecorator(storyFn => <TextFieldStoryWrapper>{storyFn()}</TextFieldStoryWrapper>)
     .addDecorator(getBackgroundWrapper())
@@ -56,5 +64,9 @@ STORIES.map(({ name, props }) => {
         propTablesExclude: getPropTablesExcludeList([TextFieldStoryWrapper]),
       },
     })
-    .add(name, () => <TextField {...getDefaultProps()} {...props} />)
+    .add(
+      name,
+      () => <TextField {...getDefaultProps()} {...props} />,
+      getSnippetTemplate(getTextFieldSnippet(propsSnippet))
+    )
 })

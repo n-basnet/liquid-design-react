@@ -9,6 +9,7 @@ import {
   getBackgroundWrapper,
   getTextKnob,
   includeComponentInPropTable,
+  getSnippetTemplate,
 } from '../helpers'
 import { media } from '~/utils/styling'
 
@@ -53,6 +54,16 @@ const getDefaultProps = () => ({
   labels: getLabels(),
 })
 
+const getContentCardSnippet = props => `
+  <ContentCard
+    title="Title Name"
+    labels={[
+      {name: 'Label 1',value: 'Value / Number 1'},
+      {name: 'Label 2',value: 'Value / Number 2'},
+    ]}${props || ``}
+  />
+`
+
 storiesOf('Components/ContentCard', module)
   .addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>)
   .addDecorator(getBackgroundWrapper({ color: 'dark' }))
@@ -62,7 +73,11 @@ storiesOf('Components/ContentCard', module)
       propTablesExclude: getPropTablesExcludeList([StoryWrapper, EnhancedContentCard]),
     },
   })
-  .add('default', () => <EnhancedContentCard {...getDefaultProps()} />)
+  .add(
+    'default',
+    () => <EnhancedContentCard {...getDefaultProps()} />,
+    getSnippetTemplate(getContentCardSnippet())
+  )
   .add('multiple', () => (
     <Fragment>
       <EnhancedContentCard {...getDefaultProps()} />
@@ -70,52 +85,102 @@ storiesOf('Components/ContentCard', module)
       <EnhancedContentCard {...getDefaultProps()} />
     </Fragment>
   ))
-  .add('default with image', () => (
-    <EnhancedContentCard
-      imagePath={getTextKnob({
-        name: 'image',
-        defaultText: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
-      })}
-      {...getDefaultProps()}
-    />
-  ))
-  .add('stacked', () => <EnhancedContentCard {...getDefaultProps()} stacked />)
-  .add('active', () => <EnhancedContentCard {...getDefaultProps()} active />)
-  .add('with description and featured', () => (
-    <EnhancedContentCard
-      {...getDefaultProps()}
-      description={getTextKnob({
-        placeholderTextLength: 15,
-      })}
-      featured={getTextKnob({
-        name: 'featured text',
-        defaultText: 'e.g. Amount, etc.',
-      })}
-    />
-  ))
-  .add('with badge', () => (
-    <EnhancedContentCard
-      {...getDefaultProps()}
-      badge={{
-        text: getTextKnob({ defaultText }),
-      }}
-    />
-  ))
-  .add('with badge with icon', () => (
-    <EnhancedContentCard
-      {...getDefaultProps()}
-      badge={{
-        text: getTextKnob({ defaultText }),
-        icon: 'star',
-      }}
-    />
-  ))
-  .add('with badge with icon on the right side', () => (
-    <EnhancedContentCard
-      {...getDefaultProps()}
-      badge={{
-        text: getTextKnob({ defaultText }),
-        iconRight: 'star',
-      }}
-    />
-  ))
+  .add(
+    'default with image',
+    () => (
+      <EnhancedContentCard
+        imagePath={getTextKnob({
+          name: 'image',
+          defaultText: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
+        })}
+        {...getDefaultProps()}
+      />
+    ),
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    imagePath="https://images.unsplash.com/photo-1521028640727-38…"`)
+    )
+  )
+  .add(
+    'stacked',
+    () => <EnhancedContentCard {...getDefaultProps()} stacked />,
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    stacked`)
+    )
+  )
+  .add(
+    'active',
+    () => <EnhancedContentCard {...getDefaultProps()} active />,
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    active`)
+    )
+  )
+  .add(
+    'with description and featured',
+    () => (
+      <EnhancedContentCard
+        {...getDefaultProps()}
+        description={getTextKnob({
+          placeholderTextLength: 15,
+        })}
+        featured={getTextKnob({
+          name: 'featured text',
+          defaultText: 'e.g. Amount, etc.',
+        })}
+      />
+    ),
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    description="lorem ipsum dolor sit amet, consectetur adipiscing…"
+    featured="e.g. Amount, etc."`)
+    )
+  )
+  .add(
+    'with badge',
+    () => (
+      <EnhancedContentCard
+        {...getDefaultProps()}
+        badge={{
+          text: getTextKnob({ defaultText }),
+        }}
+      />
+    ),
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    badge={{text: 'Delivery in 3-4 days'}}`)
+    )
+  )
+  .add(
+    'with badge with icon',
+    () => (
+      <EnhancedContentCard
+        {...getDefaultProps()}
+        badge={{
+          text: getTextKnob({ defaultText }),
+          icon: 'star',
+        }}
+      />
+    ),
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    badge={{text: 'Delivery in 3-4 days',icon: 'star'}}`)
+    )
+  )
+  .add(
+    'with badge with icon on the right side',
+    () => (
+      <EnhancedContentCard
+        {...getDefaultProps()}
+        badge={{
+          text: getTextKnob({ defaultText }),
+          iconRight: 'star',
+        }}
+      />
+    ),
+    getSnippetTemplate(
+      getContentCardSnippet(`
+    badge={{text: 'Delivery in 3-4 days',iconRight: 'star'}}`)
+    )
+  )

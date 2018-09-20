@@ -6,8 +6,13 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedFavorite, Favorite } from '~/elements/Favorite'
+
+const getFavoriteSnippet = props => `
+  <Favorite ${props || ``} onChange={onChangeHandler} />
+`
 
 storiesOf('Elements/Favorite', module)
   .addDecorator(getBackgroundWrapper())
@@ -17,6 +22,18 @@ storiesOf('Elements/Favorite', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedFavorite]),
     },
   })
-  .add('default', () => <EnhancedFavorite onChange={action('toggle favorite')} />)
-  .add('disabled', () => <EnhancedFavorite disabled />)
-  .add('active', () => <EnhancedFavorite active onChange={action('toggle favorite')} />)
+  .add(
+    'default',
+    () => <EnhancedFavorite onChange={action('toggle favorite')} />,
+    getSnippetTemplate(getFavoriteSnippet())
+  )
+  .add(
+    'disabled',
+    () => <EnhancedFavorite disabled />,
+    getSnippetTemplate(getFavoriteSnippet('disabled'))
+  )
+  .add(
+    'active',
+    () => <EnhancedFavorite active onChange={action('toggle favorite')} />,
+    getSnippetTemplate(getFavoriteSnippet('active'))
+  )

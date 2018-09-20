@@ -8,6 +8,7 @@ import {
   getPropTablesExcludeList,
   includeComponentInPropTable,
   getTextKnob,
+  getSnippetTemplate,
 } from '../helpers'
 import { times } from '~/utils/aux'
 
@@ -20,6 +21,18 @@ const getOptions = () =>
     return { text, onClick: action(`click on ${text}`) }
   })
 
+const getSearchBarSnippet = props => `
+  <Searchbar
+    handleSubmit={handleSubmitMethod}
+    options={[
+      {text: 'Search Result 1', onClick: onClickHandler},
+      {text: 'Search Result 2', onClick: onClickHandler},
+      {text: 'Search Result 3', onClick: onClickHandler},
+      {text: 'Search Result 4', onClick: onClickHandler},
+    ]}${props || ``}
+  />
+`
+
 storiesOf('Components/SearchBar', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(SearchBar))
@@ -29,11 +42,33 @@ storiesOf('Components/SearchBar', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedSearchBar]),
     },
   })
-  .add('default', () => (
-    <EnhancedSearchBar handleSubmit={action('submit')} options={getOptions()} />
-  ))
-  .add('ghost', () => (
-    <EnhancedSearchBar ghost handleSubmit={action('submit')} options={getOptions()} />
-  ))
-  .add('disabled', () => <EnhancedSearchBar disabled />)
-  .add('disabled ghost', () => <EnhancedSearchBar disabled ghost />)
+  .add(
+    'default',
+    () => <EnhancedSearchBar handleSubmit={action('submit')} options={getOptions()} />,
+    getSnippetTemplate(getSearchBarSnippet())
+  )
+  .add(
+    'ghost',
+    () => <EnhancedSearchBar ghost handleSubmit={action('submit')} options={getOptions()} />,
+    getSnippetTemplate(
+      getSearchBarSnippet(`
+    ghost`)
+    )
+  )
+  .add(
+    'disabled',
+    () => <EnhancedSearchBar disabled />,
+    getSnippetTemplate(
+      getSearchBarSnippet(`
+    disabled`)
+    )
+  )
+  .add(
+    'disabled ghost',
+    () => <EnhancedSearchBar disabled ghost />,
+    getSnippetTemplate(
+      getSearchBarSnippet(`
+    disabled
+    ghost`)
+    )
+  )

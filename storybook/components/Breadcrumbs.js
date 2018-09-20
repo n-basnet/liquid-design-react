@@ -8,6 +8,7 @@ import {
   getTextKnob,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 import { times } from '~/utils/aux'
 
@@ -48,6 +49,16 @@ class BreadcrumbsApp extends PureComponent {
   }
 }
 
+const getBreadcrumbsSnippet = props => `
+  <Breadcrumbs
+    items={[
+      {name: 'Breadcrumb 1',onClick: onClickHandler},
+      {name: 'Breadcrumb 2',onClick: onClickHandler},
+      {name: 'Breadcrumb 3',onClick: onClickHandler},
+    ]} ${props || ``}
+  />
+`
+
 storiesOf('Components/Breadcrumbs', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(Breadcrumbs))
@@ -56,7 +67,30 @@ storiesOf('Components/Breadcrumbs', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedBreadcrumbs, BreadcrumbsApp]),
     },
   })
-  .add('default', () => <EnhancedBreadcrumbs items={getItems()} />)
-  .add('active', () => <EnhancedBreadcrumbs items={getItems()} active={1} />)
-  .add('disabled', () => <EnhancedBreadcrumbs items={getItems({ disabled: true })} />)
+  .add(
+    'default',
+    () => <EnhancedBreadcrumbs items={getItems()} />,
+    getSnippetTemplate(getBreadcrumbsSnippet())
+  )
+  .add(
+    'active',
+    () => <EnhancedBreadcrumbs items={getItems()} active={1} />,
+    getSnippetTemplate(
+      getBreadcrumbsSnippet(`
+    active={1}`)
+    )
+  )
+  .add(
+    'disabled',
+    () => <EnhancedBreadcrumbs items={getItems({ disabled: true })} />,
+    getSnippetTemplate(`
+  <Breadcrumbs
+    items={[
+      {name: 'Breadcrumb 1',onClick: onClickHandler},
+      {name: 'Breadcrumb 2',disabled: true},
+      {name: 'Breadcrumb 3',onClick: onClickHandler},
+    ]}
+  />
+`)
+  )
   .add('interactive', () => <BreadcrumbsApp />)

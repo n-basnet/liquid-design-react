@@ -10,6 +10,7 @@ import {
   includeComponentInPropTable,
   getBackgroundWrapper,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 import IconComponent, { IconProvider, Icon, Glyph } from '~/elements/Icon'
 import iconsList from '~/elements/Icon/iconsList'
@@ -129,12 +130,32 @@ storiesOf('Elements/Icon', module)
       excludedPropTypes: ['isGlyph'],
     },
   })
-  .add('single Icon', () => (
-    <IconComponent
-      size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
-      name='bottle'
-    />
-  ))
+  .addDecorator(includeComponentInPropTable(Icon, { name: 'board' }))
+  .add(
+    'single Icon',
+    () => (
+      <IconComponent
+        size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
+        name='bottle'
+      />
+    ),
+    getSnippetTemplate(`
+  <Icon size={25} name="bottle" />
+  `)
+  )
+  .add(
+    'single Glyph',
+    () => (
+      <IconComponent
+        size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
+        isGlyph
+        name='calendar'
+      />
+    ),
+    getSnippetTemplate(`
+  <Glyph size={25} name="calendar" />
+  `)
+  )
   .add('default', () => <IconsListDisplayed iconList={ICONS_LIST} />)
   .add('secondary color', () => (
     <IconsListDisplayed iconProps={{ secondary: true }} iconList={ICONS_LIST} />

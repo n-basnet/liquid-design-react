@@ -179,7 +179,6 @@ storiesOf('Components/Modal', module)
     info: {
       text: `
     Modals provide additional information in another layer. Modals can be closed manually by the user. Modals should be used sparingly.
-
     ~~~js
     class ModalApp extends PureComponent {
       state = {

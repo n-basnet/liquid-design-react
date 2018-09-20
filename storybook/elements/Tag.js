@@ -5,11 +5,16 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
   getTextKnob,
 } from '../helpers'
 import { default as EnhancedTag, Tag } from '~/elements/Tag'
 
 const getDefaultProps = () => ({ label: getTextKnob({ defaultText: 'Tag Label' }) })
+
+const getToggleSnippet = props => `
+  <Tag label="Tag Label" ${props || ``}/>
+`
 
 storiesOf('Elements/Tag', module)
   .addDecorator(getBackgroundWrapper())
@@ -19,7 +24,23 @@ storiesOf('Elements/Tag', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedTag]),
     },
   })
-  .add('solid', () => <EnhancedTag {...getDefaultProps()} />)
-  .add('solid disabled', () => <EnhancedTag disabled {...getDefaultProps()} />)
-  .add('outline', () => <EnhancedTag {...getDefaultProps()} outline />)
-  .add('outline disabled', () => <EnhancedTag disabled {...getDefaultProps()} outline />)
+  .add(
+    'solid',
+    () => <EnhancedTag {...getDefaultProps()} />,
+    getSnippetTemplate(getToggleSnippet())
+  )
+  .add(
+    'solid disabled',
+    () => <EnhancedTag disabled {...getDefaultProps()} />,
+    getSnippetTemplate(getToggleSnippet('disabled '))
+  )
+  .add(
+    'outline',
+    () => <EnhancedTag {...getDefaultProps()} outline />,
+    getSnippetTemplate(getToggleSnippet('outline '))
+  )
+  .add(
+    'outline disabled',
+    () => <EnhancedTag disabled {...getDefaultProps()} outline />,
+    getSnippetTemplate(getToggleSnippet('outline disabled '))
+  )
