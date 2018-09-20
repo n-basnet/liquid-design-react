@@ -69,7 +69,10 @@ const ModalTextFieldPresentation = styled(ModalCTAPresentation)`
     `};
   }
   .${BUTTON_WRAPPER_CLASSNAME} {
-    display: block;
+    flex-direction: column-reverse;
+    ${media.customMin(500)`
+      display: block;
+    `};
   }
   ${media.customMin(500)`
     .${BUTTON_WRAPPER_CLASSNAME} {
