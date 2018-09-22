@@ -4,7 +4,11 @@ import styled from 'styled-components'
 
 const LabelWrapper = styled.div`
   text-align: left;
+  &:first-child {
+    margin-right: 15px;
+  }
   &:nth-child(2) {
+    margin-left: 15px;
     text-align: right;
   }
   margin-top: 19px;

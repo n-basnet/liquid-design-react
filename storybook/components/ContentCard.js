@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
-import styled from 'styled-components'
 
-import { default as EnhancedContentCard, ContentCard } from '~/components/ContentCard'
-import { CARD_CLASSNAME } from '~/elements/Card'
+import {
+  default as EnhancedContentCard,
+  ContentCard,
+  CONTENT_CARD_CLASSNAME,
+} from '~/components/ContentCard'
 import {
   getPropTablesExcludeList,
   getBackgroundWrapper,
@@ -11,15 +13,7 @@ import {
   includeComponentInPropTable,
   getSnippetTemplate,
 } from '../helpers'
-import { media } from '~/utils/styling'
-
-const StoryWrapper = styled.div`
-  ${media.min.phone`
-    .${CARD_CLASSNAME} {
-      min-width: 300px;
-    }
-  `};
-`
+import { times } from '~/utils/aux'
 
 const defaultText = 'Delivery in 3-4 days'
 
@@ -63,28 +57,21 @@ const getContentCardSnippet = props => `
     ]}${props || ``}
   />
 `
+const params = {
+  info: {
+    propTablesExclude: getPropTablesExcludeList([EnhancedContentCard]),
+  },
+}
 
 storiesOf('Components/ContentCard', module)
-  .addDecorator(storyFn => <StoryWrapper>{storyFn()}</StoryWrapper>)
   .addDecorator(getBackgroundWrapper({ color: 'dark' }))
   .addDecorator(includeComponentInPropTable(ContentCard, getDefaultProps()))
-  .addParameters({
-    info: {
-      propTablesExclude: getPropTablesExcludeList([StoryWrapper, EnhancedContentCard]),
-    },
-  })
+  .addParameters(params)
   .add(
     'default',
     () => <EnhancedContentCard {...getDefaultProps()} />,
     getSnippetTemplate(getContentCardSnippet())
   )
-  .add('multiple', () => (
-    <Fragment>
-      <EnhancedContentCard {...getDefaultProps()} />
-      <EnhancedContentCard {...getDefaultProps()} />
-      <EnhancedContentCard {...getDefaultProps()} />
-    </Fragment>
-  ))
   .add(
     'default with image',
     () => (
@@ -183,4 +170,48 @@ storiesOf('Components/ContentCard', module)
       getContentCardSnippet(`
     badge={{text: 'Delivery in 3-4 days',iconRight: 'star'}}`)
     )
+  )
+
+storiesOf('Components/ContentCard', module)
+  .addDecorator(getBackgroundWrapper({ color: 'dark', padding: '0' }))
+  .addDecorator(includeComponentInPropTable(ContentCard, getDefaultProps()))
+  .addParameters(params)
+  .add(
+    'multiple',
+    () => (
+      <Fragment>
+        <link
+          rel='stylesheet'
+          href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+          integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm'
+          crossOrigin='anonymous'
+        />
+        <style>{`
+          .${CONTENT_CARD_CLASSNAME} {
+            width: 100%;
+            max-width: none;
+            min-width: 230px;
+          }
+          .container-fluid {
+            max-width: 1200px;
+          }
+        `}</style>
+        <div className='container-fluid py-4'>
+          <div className='row'>
+            {times(9).map(v => (
+              <div key={v} className='col-md-4 col-sm-6 d-flex justify-content-center my-2 px-2'>
+                <EnhancedContentCard {...getDefaultProps()} style={{ margin: 0 }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </Fragment>
+    ),
+    {
+      info: {
+        text: `
+    This example uses [Bootstarp grid](https://getbootstrap.com/docs/4.0/layout/grid/) to show how a layout system might be used to display multiple cards.
+  `,
+      },
+    }
   )

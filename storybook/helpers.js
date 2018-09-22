@@ -9,8 +9,8 @@ const BACKGROUND_COLORS = {
 }
 
 const BackgroundWrapper = styled.div`
-  padding: 40px 40px 20px;
   ${props => css`
+    padding: ${props.padding || '40px 40px 20px'};
     background-color: ${BACKGROUND_COLORS[props.color] || '#fff'};
   `};
 `

@@ -117,6 +117,8 @@ ContentCard.defaultProps = {
   badge: null,
 }
 
-const { Component } = attachClassName(ContentCard)
+const { Component, globalClassName } = attachClassName(ContentCard)
+
+export const CONTENT_CARD_CLASSNAME = globalClassName
 
 export default Component
