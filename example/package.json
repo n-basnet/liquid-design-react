@@ -6,7 +6,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "liquid-design-react": "link:.."
+    "@liquid-design/liquid-design-react": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",

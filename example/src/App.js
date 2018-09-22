@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ContentCard, Theme } from 'liquid-design-react'
+import { ContentCard, Theme } from '@liquid-design/liquid-design-react'
 
 class App extends Component {
   render() {

@@ -1,0 +1,41 @@
+image: node:latest
+
+# This folder is cached between builds
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - npm i -g yarn
+  - yarn
+
+stages:
+  - test
+  - publish-package
+  - deploy-docs
+
+test:
+  stage: test
+  script: yarn test
+
+lint:
+  stage: test
+  script: yarn lint
+
+publish_package:
+  stage: publish-package
+  script: yarn semantic-release || true
+  only:
+    - master
+
+pages:
+  stage: deploy-docs
+  script:
+    - yarn storybook:build
+    - mkdir public
+    - mv out/* public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master

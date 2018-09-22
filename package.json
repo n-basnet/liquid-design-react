@@ -1,6 +1,6 @@
 {
-  "name": "@netguru-team-m/liquid-design-react",
-  "version": "1.5.0",
+  "name": "@liquid-design/liquid-design-react",
+  "version": "1.0.0",
   "description": "",
   "author": "",
   "license": "MIT",
@@ -52,6 +52,7 @@
     "@commitlint/config-conventional": "^7.0.1",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.1",
+    "@semantic-release/gitlab": "^3.0.2",
     "@storybook/addon-actions": "^4.0.0-alpha.12",
     "@storybook/addon-info": "^4.0.0-alpha.12",
     "@storybook/addon-knobs": "^3.4.8",
@@ -71,7 +72,6 @@
     "babel-preset-stage-0": "^6.24.1",
     "camelcase": "^5.0.0",
     "commitizen": "^2.10.1",
-    "condition-circle": "^2.0.1",
     "conventional-changelog-cli": "^2.0.1",
     "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
@@ -112,12 +112,12 @@
     "svgo": "^1.0.5"
   },
   "release": {
-    "branch": "production",
+    "branch": "master",
     "verifyConditions": [
-      "condition-circle",
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      "@semantic-release/git"
+      "@semantic-release/git",
+      "@semantic-release/gitlab"
     ],
     "prepare": [
       {
@@ -131,9 +131,16 @@
           "package.json",
           "CHANGELOG.md"
         ],
-        "message": "chore(release): ${nextRelease.version} \n\n${nextRelease.notes}"
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/gitlab"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "config": {
     "commitizen": {
@@ -184,10 +191,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/netguru/Merck-React.git"
-  },
-  "publishConfig": {
-    "access": "restricted"
+    "url": "https://gitlab.com/liquid-design/liquid-design-react.git"
   },
   "prettier": {
     "printWidth": 100

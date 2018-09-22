@@ -38,5 +38,4 @@ External CSS (i.e. `animate.css` animations) is imported as string (`raw-loader`
 
 ## releasing/publishing
 
-Automated with [semantic-release](https://github.com/semantic-release/semantic-release). To publish new version, push `production` branch to the repo after merging master to it. `semantic-release` on CI will take it from there.
-One caveat though: after a release, `production` will be one commit ahead of master (consisting of `package.json` and `CHANGELOG.md` updates) - but as the master is protected, a PR is needed to sync `master` with `production`. CI will open a PR (using [hub](https://hub.github.com/)), but it will have to be approved and handled by a developer on GitHub.
+Automated with [semantic-release](https://github.com/semantic-release/semantic-release). New releases will be published after pushing/merging to `master`. Because of how `semantic-release` works (analysing commit massages to compute the next version number), merge commits should be avoided (or at least the commit message should be following the conventional commit messages standard) and only fast-forward merges to master permitted.

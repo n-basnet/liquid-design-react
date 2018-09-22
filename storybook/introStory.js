@@ -44,7 +44,7 @@ storiesOf('Intro', module)
   Install the package via npm:
 
   ~~~~bash
-  $ npm i liquid-design-react
+  $ npm i @liquid-design/liquid-design-react
   ~~~~
 
   Then, wrap the root of your application with the \`Theme\` component to provide typographic defaults and global styles.
@@ -52,7 +52,7 @@ storiesOf('Intro', module)
   ~~~js
   import React, { Component } from 'react'
 
-  import { Badge, Theme } from 'liquid-design-react'
+  import { Badge, Theme } from '@liquid-design/liquid-design-react'
 
   class Example extends Component {
     render() {
