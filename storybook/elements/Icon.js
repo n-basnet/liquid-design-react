@@ -25,6 +25,8 @@ const OMIT_ICONS = [
   'infoCircle',
   'infoFilled',
   'dots',
+  'minus',
+  'plus',
   'service',
 ]
 

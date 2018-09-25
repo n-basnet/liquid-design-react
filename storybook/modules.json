@@ -116,6 +116,10 @@
     "type": "component"
   },
   {
+    "name": "Slider",
+    "type": "component"
+  },
+  {
     "name": "TextField",
     "type": "element"
   },

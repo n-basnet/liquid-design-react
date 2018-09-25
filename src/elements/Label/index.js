@@ -24,6 +24,11 @@ export const Label = props => <LabelWrapper {...props} />
 
 Label.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.object,
+}
+
+Label.defaultProps = {
+  style: null,
 }
 
 const { Component } = attachClassName(Label)
