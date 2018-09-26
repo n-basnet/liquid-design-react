@@ -30,6 +30,7 @@
   "dependencies": {
     "animate.css": "^3.6.1",
     "classnames": "^2.2.6",
+    "date-fns": "^1.29.0",
     "polished": "^1.9.2",
     "ramda": "^0.25.0",
     "rc-slider": "^8.6.1",

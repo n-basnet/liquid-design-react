@@ -135,5 +135,9 @@
     "name": "Forms",
     "type": "module",
     "hasIndexFile": true
+  },
+  {
+    "name": "Calendar",
+    "type": "module"
   }
 ]
