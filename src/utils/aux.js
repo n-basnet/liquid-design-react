@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
+import { filter } from 'ramda'
 
 export const times = n => Object.keys([...Array(n)]).map(v => parseInt(v))
 
@@ -23,3 +24,5 @@ export const getSVGImageURLString = (string, { dimensions }) => {
   )
   return `data:image/svg+xml,${encodeURIComponent(string)}`
 }
+
+export const getFirstTruthyKeyName = props => Object.keys(filter(v => !!v, props))[0]

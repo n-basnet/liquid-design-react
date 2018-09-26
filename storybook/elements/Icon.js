@@ -108,7 +108,6 @@ const IconsListDisplayed = ({ isOneColumn, ...props }) => (
 )
 
 IconsListDisplayed.propTypes = {
-  iconNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   isOneColumn: PropTypes.bool,
 }
 
@@ -121,14 +120,7 @@ storiesOf('Elements/Icon', module)
   .addDecorator(includeComponentInPropTable(IconProvider))
   .addParameters({
     info: {
-      maxPropObjectKeys: 0,
-      propTablesExclude: getPropTablesExcludeList([
-        IconSet,
-        Icon,
-        IconComponent,
-        IconsListDisplayed,
-        Glyph,
-      ]),
+      propTablesExclude: getPropTablesExcludeList([IconSet, IconComponent, IconsListDisplayed]),
       excludedPropTypes: ['isGlyph'],
     },
   })
