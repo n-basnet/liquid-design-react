@@ -88,7 +88,8 @@ export class Tooltip extends PureComponent {
   state = {
     isOpen: false,
   }
-  toggle = () => {
+  toggle = e => {
+    if (e) e.preventDefault()
     this.setState(
       ({ isOpen }) => ({ isOpen: !isOpen }),
       () => {
@@ -113,6 +114,7 @@ export class Tooltip extends PureComponent {
         isHovered={isHovered}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        onTouchStart={this.toggle}
         className={cx(getClassName(Tooltip), className)}
         {...props}
       >
