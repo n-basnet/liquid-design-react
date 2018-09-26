@@ -143,5 +143,9 @@
   {
     "name": "StepProgressBar",
     "type": "component"
+  },
+  {
+    "name": "LinearProgressBar",
+    "type": "component"
   }
 ]

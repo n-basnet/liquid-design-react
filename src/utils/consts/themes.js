@@ -96,8 +96,8 @@ const themeBaseColors = {
     darkest: COLORS.VIBRANT_GREEN_DARKEST,
   },
   richRed: {
-    lightest: COLORS.LIGHTEST,
-    lighter: COLORS.LIGHTER,
+    lightest: COLORS.RICH_RED_LIGHTEST,
+    lighter: COLORS.RICH_RED_LIGHTER,
     light: COLORS.RICH_RED_LIGHT,
     base: COLORS.RICH_RED,
     dark: COLORS.RICH_RED_DARK,
@@ -148,6 +148,7 @@ const getTheme = ({ primary, secondary }, props = {}) => ({
       darker: COLORS[`${primary}_DARKER`],
     },
     secondary: {
+      lightest: COLORS[`${secondary}_LIGHTEST`],
       base: COLORS[secondary],
       dark: COLORS[`${secondary}_DARK`],
     },
