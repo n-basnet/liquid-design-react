@@ -1,3 +1,3 @@
 import React from 'react'
 
-module.exports = () => <svg />
+module.exports = props => <svg {...props} />

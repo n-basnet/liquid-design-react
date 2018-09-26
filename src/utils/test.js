@@ -1,6 +1,7 @@
 import { values, filter, flatten } from 'ramda'
 
 import { THEMES } from './consts/themes'
+import { getFirstTruthyKeyName } from '~/utils/aux'
 
 describe('consts', () => {
   it('all colors have a base value', () => {
@@ -10,4 +11,10 @@ describe('consts', () => {
 
     expect(flatten(invalidColors)).toEqual([])
   })
+})
+
+it('getFirstTruthyKeyName', () => {
+  const trueType = 'isSquare'
+  const props = { [trueType]: true, isRectangular: null, someProp: 42 }
+  expect(getFirstTruthyKeyName(props)).toEqual(trueType)
 })

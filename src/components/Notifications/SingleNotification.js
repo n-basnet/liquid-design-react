@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { pick, filter } from 'ramda'
+import { pick } from 'ramda'
 
 import { Glyph } from '~/elements/Icon'
 import {
@@ -11,9 +11,9 @@ import {
 } from '~/components/Notifications/consts'
 import { media } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
+import { getFirstTruthyKeyName } from '~/utils/aux'
 
-export const getNotificationType = props =>
-  Object.keys(filter(v => !!v, pick(NOTIFICATION_TYPES, props)))[0]
+const getNotificationType = props => getFirstTruthyKeyName(pick(NOTIFICATION_TYPES, props))
 
 const getBackgroundColor = ({ theme, color, ...props }, hover = false) => {
   if (color) {

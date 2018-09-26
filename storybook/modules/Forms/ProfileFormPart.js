@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions'
 
 import { TextField, Headline, Button } from '~'
 import { HEADLINE_CLASSNAME } from '~/elements/Headline'
-import Placeholder from '~/components/aux/Placeholder'
+import Placeholder from '~/elements/Placeholder'
 import { media } from '~/utils/styling'
 import { FIELDS_PROFILE_TOP, MOBILE_BREAKPOINT } from './consts'
 import FlexRowsWrapper from './FlexRowsWrapper'
@@ -45,7 +45,7 @@ const ProfileFormPart = ({ fieldProps }) => (
   <ProfileFormPartWrapper>
     <FlexRowsWrapper style={{ marginBottom: '-3px' }}>
       <div className={CLASSNAMES.placeholderWrapper}>
-        <Placeholder size={120} white />
+        <Placeholder size={120} isCircularWhite={!fieldProps.grey} />
       </div>
       <FlexRowsWrapper nested className={CLASSNAMES.nameFieldsWrapper}>
         {[FIELDS_PROFILE_TOP.firstName, FIELDS_PROFILE_TOP.lastName].map((field, i) => (

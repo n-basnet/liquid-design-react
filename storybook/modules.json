@@ -147,5 +147,9 @@
   {
     "name": "LinearProgressBar",
     "type": "component"
+  },
+  {
+    "name": "Graphics",
+    "type": "element"
   }
 ]

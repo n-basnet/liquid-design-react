@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { getBackgroundImage } from '~/utils/styling'
 import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
-import Placeholder from '~/components/aux/Placeholder'
+import Placeholder from '~/elements/Placeholder'
 import Label from '~/components/ContentCard/Label'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 

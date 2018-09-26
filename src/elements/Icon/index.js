@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, withTheme } from 'styled-components'
 import { path } from 'ramda'
+import cx from 'classnames'
 
 import iconsList from '~/elements/Icon/iconsList'
 import { DEFAULT_THEME } from '~/utils/consts/themes'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
+
+export const ICON_CLASSNAME = getClassName({ name: 'Icon' })
 
 export const IconWrapper = styled.div`
   display: inline-block;
@@ -43,6 +46,7 @@ export const IconProvider = ({
   onClick,
   isFilled,
   isGlyph,
+  className,
   ...props
 }) => {
   const SVGIconComponent = isGlyph
@@ -62,6 +66,7 @@ export const IconProvider = ({
         width: `${size}${unit}`,
         height: `${size}${unit}`,
       }}
+      className={cx(className, ICON_CLASSNAME)}
       {...props}
     >
       <SVGIconComponent />
@@ -87,6 +92,7 @@ IconProvider.propTypes = {
   /** Size unit */
   unit: PropTypes.string,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 }
 
 IconProvider.defaultProps = {
@@ -96,15 +102,12 @@ IconProvider.defaultProps = {
   color: '',
   unit: DEFAULT_UNIT,
   onClick: null,
+  className: null,
   isFilled: false,
   isGlyph: false,
 }
 
-const { Component, globalClassName } = attachClassName(IconProvider)
+export const Glyph = props => <IconProvider isGlyph {...props} />
+export const Icon = props => <IconProvider {...props} />
 
-export const Glyph = props => <Component isGlyph {...props} />
-export const Icon = props => <Component {...props} />
-
-export const ICON_CLASSNAME = globalClassName
-
-export default withTheme(Component)
+export default withTheme(IconProvider)

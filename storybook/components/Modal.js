@@ -11,7 +11,7 @@ import {
   includeComponentInPropTable,
 } from '../helpers'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
-import Placeholder from '~/components/aux/Placeholder'
+import Placeholder from '~/elements/Placeholder'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 import Button from '~/elements/Button'

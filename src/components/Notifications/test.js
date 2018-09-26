@@ -3,7 +3,6 @@ import { mount } from 'enzyme'
 
 import Theme from '~/Theme'
 import Notifications from '.'
-import { getNotificationType } from './SingleNotification'
 import { NOTIFICATION_TYPES } from './consts'
 import { everyComponentTestSuite } from '~/utils/testUtils'
 
@@ -81,17 +80,6 @@ describe('Notifications', () => {
     expect(notificationsRef.state.items).toHaveLength(1)
     jest.runAllTimers()
     expect(notificationsRef.state.items).toHaveLength(1)
-  })
-
-  it('getNotificationType helper', () => {
-    const type = 'isError'
-    expect(
-      getNotificationType({
-        [type]: true,
-        isReminder: false,
-        somethingElse: 42,
-      })
-    ).toEqual(type)
   })
 
   everyComponentTestSuite(getNotificationsWrapper, Notifications, 'Notifications')
