@@ -197,6 +197,8 @@ import dotHalf from '~/assets/svgIcons/glyphs/dotHalf.svg'
 import dots from '~/assets/svgIcons/glyphs/dots.svg'
 import goods from '~/assets/svgIcons/glyphs/goods.svg'
 import info from '~/assets/svgIcons/glyphs/info.svg'
+import infoFilled from '~/assets/svgIcons/glyphs/infoFilled.svg'
+import infoM from '~/assets/svgIcons/glyphs/infoM.svg'
 import infoCircle from '~/assets/svgIcons/glyphs/infoCircle.svg'
 import logo from '~/assets/svgIcons/glyphs/logo.svg'
 import radioButton from '~/assets/svgIcons/glyphs/radioButton.svg'
@@ -204,6 +206,7 @@ import rental from '~/assets/svgIcons/glyphs/rental.svg'
 import service from '~/assets/svgIcons/glyphs/service.svg'
 import starHalf from '~/assets/svgIcons/glyphs/starHalf.svg'
 import warning from '~/assets/svgIcons/glyphs/warning.svg'
+import warningM from '~/assets/svgIcons/glyphs/warningM.svg'
 
 export default {
   stroke: {
@@ -401,6 +404,8 @@ export default {
     dots,
     goods,
     info,
+    infoFilled,
+    infoM,
     infoCircle,
     logo,
     radioButton,
@@ -408,5 +413,6 @@ export default {
     service,
     starHalf,
     warning,
+    warningM,
   },
 }

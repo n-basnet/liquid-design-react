@@ -17,13 +17,14 @@ import iconsList from '~/elements/Icon/iconsList'
 
 const OMIT_ICONS = [
   'circleX',
-  'information',
   'logo',
   'starHalf',
   'dotHalf',
   'warning',
+  'warningM',
   'infoCircle',
   'infoFilled',
+  'infoM',
   'dots',
   'minus',
   'plus',

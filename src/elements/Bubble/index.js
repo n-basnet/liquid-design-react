@@ -42,8 +42,8 @@ export const Label = styled.span`
 export const Bubble = ({ disabled, isInfo, label, isWarning, ...props }) => (
   <BubbleWrapper disabled={disabled} isInfo={isInfo} isWarning={isWarning} {...props}>
     {label && <Label>{label.toString().length > 2 ? 99 : label}</Label>}
-    {isInfo && <Glyph color='white.base' name='info' size={16} />}
-    {isWarning && <Glyph color='white.base' name='warning' size={16} />}
+    {isInfo && <Glyph color='white.base' name='infoM' size={16} />}
+    {isWarning && <Glyph color='white.base' name='warningM' size={16} />}
   </BubbleWrapper>
 )
 

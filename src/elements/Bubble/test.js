@@ -30,14 +30,14 @@ describe('Bubble', () => {
   })
 
   it('renders the correct icon for the info bubble', () => {
-    const icon = 'info'
+    const icon = 'infoM'
     const wrapper = getBubbleWrapper({ isInfo: true })
 
     expect(wrapper.find(Glyph).prop('name')).toEqual(icon)
   })
 
   it('renders the correct icon for the warning bubble', () => {
-    const icon = 'warning'
+    const icon = 'warningM'
     const wrapper = getBubbleWrapper({ isWarning: true })
 
     expect(wrapper.find(Glyph).prop('name')).toEqual(icon)

@@ -305,7 +305,7 @@ export class Bowl extends PureComponent {
             </g>
           </g>
         </svg>
-        {this.displayIcon() && <Glyph name='warning' color='richRed.base' />}
+        {this.displayIcon() && <Glyph name='warningM' color='richRed.base' />}
       </BowlWrapper>
     )
   }

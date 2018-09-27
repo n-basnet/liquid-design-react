@@ -82,7 +82,7 @@ const SingleNotification = props => {
     <SingleNotificationWrapper>
       <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)} {...passedProps}>
         <SingleNotificationLeftInnerWrapper>
-          {iconName && <Glyph color={iconColor} name={iconName} size={isInfo ? 16 : 20} />}
+          {iconName && <Glyph color={iconColor} name={iconName} size={20} />}
           <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>{text}</TextWrapper>
         </SingleNotificationLeftInnerWrapper>
         <Glyph color={iconColor} name='close' size={20} onClick={getRemoveHandler(id)} />
