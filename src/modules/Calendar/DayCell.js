@@ -6,7 +6,7 @@ import dateFns from 'date-fns'
 import { isEmpty, isNil } from 'ramda'
 
 import { media } from '~/utils/styling'
-import Icon, { ICON_CLASSNAME } from '~/elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 
 const DayCellWrapper = styled.div`
   display: inline-block;
@@ -225,10 +225,9 @@ export class DayCell extends PureComponent {
         </DayContainer>
         {this.hasAppointments() ? (
           <Fragment>
-            <Icon
+            <Glyph
               name='dot'
               size={6}
-              isGlyph
               color={dateFns.isPast(day) || isOutOfMonth ? 'sensitiveGrey.darkest' : undefined}
             />
             <Overlay

@@ -13,7 +13,7 @@ import {
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import Placeholder from '~/elements/Placeholder'
 import { default as EnhancedModal, Modal } from '~/components/Modal'
-import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
+import { DEFAULT_THEME } from '~/utils/consts/themes'
 import Button from '~/elements/Button'
 import { media } from '~/utils/styling'
 
@@ -156,7 +156,7 @@ export class ModalApp extends PureComponent {
 
 const defaultProps = {
   open: false,
-  theme: THEMES[DEFAULT_THEME_NAME],
+  theme: DEFAULT_THEME,
   children: '',
   onClose: () => {},
 }

@@ -1,6 +1,6 @@
 import { path } from 'ramda'
 
-import { default as Icon, IconWrapper, DEFAULT_SIZE, DEFAULT_UNIT } from '.'
+import Icon, { DEFAULT_SIZE, DEFAULT_UNIT } from '.'
 import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
@@ -10,8 +10,8 @@ describe('Icon', () => {
 
   const EXPECTED_SIZE = `${DEFAULT_SIZE}${DEFAULT_UNIT}`
   it(`sets default size of ${EXPECTED_SIZE}`, () => {
-    const wrapper = getIconWrapper().find(IconWrapper)
-    expect(wrapper.prop('dimensions').width).toEqual(EXPECTED_SIZE)
+    const wrapper = getIconWrapper().find('svg')
+    expect(wrapper.prop('width')).toEqual(EXPECTED_SIZE)
   })
 
   it('handles click event', () => {
@@ -23,26 +23,26 @@ describe('Icon', () => {
 
   it('handles theme colors', () => {
     ;['black.base', 'richBlue.dark'].map(color => {
-      const wrapper = getIconWrapper({ color }).find(IconWrapper)
-      expect(wrapper.prop('svgFill')).toEqual(path(color.split('.'), DEFAULT_THEME.colors))
+      const wrapper = getIconWrapper({ color }).find('svg')
+      expect(wrapper.prop('fill')).toEqual(path(color.split('.'), DEFAULT_THEME.colors))
     })
   })
 
   it('handles custom colors', () => {
     ;['#243cdb', '#33c622'].map(color => {
-      const wrapper = getIconWrapper({ color }).find(IconWrapper)
-      expect(wrapper.prop('svgFill')).toEqual(color)
+      const wrapper = getIconWrapper({ color }).find('svg')
+      expect(wrapper.prop('fill')).toEqual(color)
     })
   })
 
   it('assigns primary color by default', () => {
-    const wrapper = getIconWrapper().find(IconWrapper)
-    expect(wrapper.prop('svgFill')).toEqual(DEFAULT_THEME.colors.primary.base)
+    const wrapper = getIconWrapper().find('svg')
+    expect(wrapper.prop('fill')).toEqual(DEFAULT_THEME.colors.primary.base)
   })
 
   it('assigns secondary color', () => {
-    const wrapper = getIconWrapper({ secondary: true }).find(IconWrapper)
-    expect(wrapper.prop('svgFill')).toEqual(DEFAULT_THEME.colors.secondary.base)
+    const wrapper = getIconWrapper({ secondary: true }).find('svg')
+    expect(wrapper.prop('fill')).toEqual(DEFAULT_THEME.colors.secondary.base)
   })
 
   it('handles invalid name', () => {

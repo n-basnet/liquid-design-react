@@ -7,7 +7,7 @@ import { isEmpty, isNil, find } from 'ramda'
 import { times } from '~/utils/aux'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { media } from '~/utils/styling'
-import Icon from '~/elements/Icon'
+import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
 import attachClassName from '~/components/aux/hoc/attachClassName'
@@ -89,7 +89,6 @@ const MonthYearWrapper = styled.div`
       letter-spacing: 0.2px
       line-height: 1.25;
       font-size: 12px;
-      
     `};
     input {
       padding: 6.7px 7.6px 5.7px 10px;
@@ -274,7 +273,7 @@ export class Calendar extends PureComponent {
       <CalendarWrapper {...this.props}>
         <Navigation>
           <IconWrapper onClick={this.prevMonth}>
-            <Icon name='arrowLeft' size={25} isGlyph />
+            <Glyph name='arrowLeft' size={25} />
           </IconWrapper>
           <MonthYearWrapper>
             <MonthName>{dateFns.format(this.state.currentMonth, 'MMM')}</MonthName>
@@ -287,7 +286,7 @@ export class Calendar extends PureComponent {
             />
           </MonthYearWrapper>
           <IconWrapper onClick={this.nextMonth}>
-            <Icon name='arrowRight' size={25} isGlyph />
+            <Glyph name='arrowRight' size={25} />
           </IconWrapper>
         </Navigation>
         <section>

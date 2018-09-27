@@ -43,7 +43,7 @@ const Step = ({ isHalfIcon, dots, ...props }) => (
     <Glyph
       name={`${dots ? 'dot' : 'star'}${isHalfIcon ? 'Half' : ''}`}
       size={20}
-      color={props.rated ? '' : 'sensitiveGrey.darker'}
+      color={props.rated ? undefined : 'sensitiveGrey.darker'}
     />
   </StyledStep>
 )

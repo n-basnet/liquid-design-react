@@ -5,12 +5,16 @@ import { path } from 'ramda'
 import cx from 'classnames'
 
 import iconsList from '~/elements/Icon/iconsList'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 export const ICON_CLASSNAME = getClassName({ name: 'Icon' })
 
-export const IconWrapper = styled.div`
+const getFill = ({ theme, color, secondary }) =>
+  path(color.split('.'), theme.colors) ||
+  color ||
+  theme.colors[secondary ? 'secondary' : 'primary'].base
+
+const IconWrapper = styled.div`
   display: inline-block;
   position: relative;
   ${props => css`
@@ -18,13 +22,11 @@ export const IconWrapper = styled.div`
       css`
         cursor: pointer;
       `};
-    &,
+
+    width: ${props.dimensions.width};
+    height: ${props.dimensions.height};
+
     svg {
-      width: ${props.dimensions.width};
-      height: ${props.dimensions.height};
-    }
-    svg {
-      fill: ${props.svgFill};
       position: absolute;
       top: 0;
       left: 0;
@@ -35,56 +37,36 @@ export const IconWrapper = styled.div`
 export const DEFAULT_SIZE = 24
 export const DEFAULT_UNIT = 'px'
 
-// exported separately for testing and storybook (without `withTheme` decorator)
-export const IconProvider = ({
-  name,
-  size,
-  theme,
-  secondary,
-  color,
-  unit,
-  onClick,
-  isFilled,
-  isGlyph,
-  className,
-  ...props
-}) => {
-  const SVGIconComponent = isGlyph
-    ? iconsList.glyphs[name]
-    : isFilled ? iconsList.filled[name] : iconsList.stroke[name]
+export const Icon = ({ name, size, unit, onClick, isFilled, className, ...props }) => {
+  const SVGIconComponent =
+    iconsList.glyphs[name] || (isFilled ? iconsList.filled[name] : iconsList.stroke[name])
   if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }
-  const alternativeColor = path(color.split('.'), theme.colors) || color
-  const fill = alternativeColor || theme.colors[secondary ? 'secondary' : 'primary'].base
+  const dimensions = {
+    width: `${size}${unit}`,
+    height: `${size}${unit}`,
+  }
 
   return (
     <IconWrapper
-      svgFill={fill}
       onClick={onClick}
-      dimensions={{
-        width: `${size}${unit}`,
-        height: `${size}${unit}`,
-      }}
+      dimensions={dimensions}
       className={cx(className, ICON_CLASSNAME)}
       {...props}
     >
-      <SVGIconComponent />
+      <SVGIconComponent fill={getFill(props)} {...dimensions} />
     </IconWrapper>
   )
 }
 
-IconProvider.propTypes = {
+Icon.propTypes = {
   /** Name of the icon. Refer to docs for a full list of available icons */
   name: PropTypes.string.isRequired,
-  /** Check if the Icon is glyph. */
-  isGlyph: PropTypes.bool,
   /** Check if the Icon is filled. */
   isFilled: PropTypes.bool,
   /** Icon's side dimension (by default in pixels - see `unit` prop) */
   size: PropTypes.number,
-  /** (provided by `styled-components` via withTheme decorator) */
-  theme: PropTypes.object,
   /** Use the theme's secondary color. Theme's primary color is the default. */
   secondary: PropTypes.bool,
   /** A different color - either from the theme (can be a path, like `primary.dark`) or a custom one (if not found in the theme) */
@@ -95,19 +77,16 @@ IconProvider.propTypes = {
   className: PropTypes.string,
 }
 
-IconProvider.defaultProps = {
+Icon.defaultProps = {
   size: DEFAULT_SIZE,
-  theme: DEFAULT_THEME,
   secondary: false,
   color: '',
   unit: DEFAULT_UNIT,
   onClick: null,
   className: null,
   isFilled: false,
-  isGlyph: false,
 }
 
-export const Glyph = props => <IconProvider isGlyph {...props} />
-export const Icon = props => <IconProvider {...props} />
+export const Glyph = withTheme(Icon)
 
-export default withTheme(IconProvider)
+export default withTheme(Icon)
