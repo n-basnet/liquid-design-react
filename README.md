@@ -11,7 +11,3 @@ You can find it [here](https://liquid-design.gitlab.io/liquid-design-react).
 ## Contributing
 
 see [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## License
-
-MIT ©
