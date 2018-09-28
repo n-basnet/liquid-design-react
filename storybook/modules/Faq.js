@@ -1,8 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { Faq } from '~'
-import { getBackgroundWrapper, getTextKnob, getSnippetTemplate } from '../helpers'
+import { default as EnhancedFaq, Faq } from '~/modules/Faq'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  getSnippetTemplate,
+  getPropTablesExcludeList,
+} from '../helpers'
 import { times } from '~/utils/aux'
 
 const headlinesTexts = {
@@ -31,9 +36,15 @@ const faqContent = getFaqContent()
 
 storiesOf('Modules/Faq', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '1016px' } }))
+  .addParameters({
+    info: {
+      propTables: [Faq],
+      propTablesExclude: getPropTablesExcludeList([EnhancedFaq]),
+    },
+  })
   .add(
     'default',
-    () => <Faq faqContent={faqContent} headlinesTexts={headlinesTexts} />,
+    () => <EnhancedFaq faqContent={faqContent} headlinesTexts={headlinesTexts} />,
     getSnippetTemplate(`
     <Faq
       faqContent={[
@@ -41,7 +52,7 @@ storiesOf('Modules/Faq', module)
         {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
         {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
       ]}
-      headlinesTexts={{primary: 'Insert Headline',secondary: 'We've been around for 350 years, yet our majority …'}}
+      headlinesTexts={{primary: 'Insert Headline', secondary: 'We have been around for 350 years, yet our majority …'}}
     />
     `)
   )

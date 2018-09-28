@@ -6,7 +6,7 @@ import Accordion from '~/components/Accordion'
 import COLORS from '~/utils/consts/colors'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
-class Faq extends PureComponent {
+export class Faq extends PureComponent {
   static propTypes = {
     faqContent: PropTypes.array.isRequired,
     headlinesTexts: PropTypes.object.isRequired,

@@ -61,7 +61,7 @@ storiesOf('Elements/Radio Button', module)
   .add(
     'default',
     () => <EnhancedRadioButton {...getDefaultProps()} />,
-    getSnippetTemplate(getRadioButtonSnippet('selected="radioTwo"'))
+    getSnippetTemplate(getRadioButtonSnippet('selected="radioOne"'))
   )
   .add(
     'active',
@@ -73,4 +73,40 @@ storiesOf('Elements/Radio Button', module)
     () => <EnhancedRadioButton disabled {...getDefaultProps()} />,
     getSnippetTemplate(getRadioButtonSnippet('disabled'))
   )
-  .add('stateful', () => <RadioButtonApp />)
+  .add('stateful', () => <RadioButtonApp />, {
+    info: {
+      text: `
+      Instead of using Radio Button's internal state, it is possible to provide an external state. See the example below:
+
+      ~~~js
+      class RadioButtonApp extends PureComponent {
+        state = {
+          selectedValue: VALUES[0],
+        }
+
+        getSelectHandler = selectedValue => () => {
+          this.setState({ selectedValue })
+        }
+
+        render() {
+          const { selectedValue } = this.state
+
+          return (
+            <div>
+              {VALUES.map(value => (
+                <EnhancedRadioButton
+                  key={value}
+                  isSelected={selectedValue === value}
+                  onClick={this.getSelectHandler(value)}
+                  label='Radio Button Label'
+                  style={{ display: 'block' }}
+                />
+              ))}
+            </div>
+          )
+        }
+      }
+      ~~~
+    `,
+    },
+  })

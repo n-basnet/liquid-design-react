@@ -94,7 +94,7 @@ const SearchBarWrapper = styled.div`
   `};
 `
 
-const Header = ({
+export const Header = ({
   buttonIcon,
   buttonLabel,
   buttonOnClick,

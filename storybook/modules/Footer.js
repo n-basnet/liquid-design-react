@@ -2,8 +2,8 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Footer } from '~'
-import { getTextKnob, getSnippetTemplate } from '../helpers'
+import { default as EnhancedFooter, Footer } from '~/modules/Footer'
+import { getTextKnob, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
 
 const getFooterText = () =>
   getTextKnob({
@@ -19,17 +19,7 @@ const iconsNamesAndActions = [
   { name: 'circleX', onClick: action('click') },
 ]
 
-storiesOf('Modules/Footer', module).add(
-  'default',
-  () => (
-    <Footer
-      headlineText={getFooterText()}
-      iconsNamesAndActions={iconsNamesAndActions}
-      labelsTexts={labelsTexts}
-      mainIconName={mainIconName}
-    />
-  ),
-  getSnippetTemplate(`
+const getFooterSnippet = () => `
   <Footer
     headlineText="Get started today and bring your business idea to …"
     iconsNamesAndActions={[
@@ -40,5 +30,24 @@ storiesOf('Modules/Footer', module).add(
     labelsTexts={['Label Text','Label Text','Label Text']}
     mainIconName="circleX"
   />
-  `)
-)
+`
+
+storiesOf('Modules/Footer', module)
+  .addParameters({
+    info: {
+      propTables: [Footer],
+      propTablesExclude: getPropTablesExcludeList([EnhancedFooter]),
+    },
+  })
+  .add(
+    'default',
+    () => (
+      <EnhancedFooter
+        headlineText={getFooterText()}
+        iconsNamesAndActions={iconsNamesAndActions}
+        labelsTexts={labelsTexts}
+        mainIconName={mainIconName}
+      />
+    ),
+    getSnippetTemplate(getFooterSnippet())
+  )

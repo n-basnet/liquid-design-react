@@ -2,17 +2,23 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Header } from '~'
-import { getTextKnob, getSnippetTemplate } from '../helpers'
+import { default as EnhancedHeader, Header } from '~/modules/Header'
+import { getTextKnob, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
 
 const buttonIcon = 'circleX'
 const getHeaderText = () => getTextKnob({ name: 'headerText', defaultText: 'Room 01' })
 const getButtonLabel = () => getTextKnob({ name: 'buttonLabel', defaultText: 'Text' })
 
 storiesOf('Modules/Headers', module)
+  .addParameters({
+    info: {
+      propTables: [Header],
+      propTablesExclude: getPropTablesExcludeList([EnhancedHeader]),
+    },
+  })
   .add(
     'default',
-    () => <Header />,
+    () => <EnhancedHeader />,
     getSnippetTemplate(`
   <Header />
   `)
@@ -20,7 +26,7 @@ storiesOf('Modules/Headers', module)
   .add(
     'with icons',
     () => (
-      <Header
+      <EnhancedHeader
         withIcons
         notificationOnClick={action('click')}
         infoOnClick={action('click')}
@@ -38,14 +44,14 @@ storiesOf('Modules/Headers', module)
   )
   .add(
     'with text',
-    () => <Header withText labelOne={getHeaderText()} labelTwo={getHeaderText()} />,
+    () => <EnhancedHeader withText labelOne={getHeaderText()} labelTwo={getHeaderText()} />,
     getSnippetTemplate(`
   <Header withText labelOne="Room 01" labelTwo="Room 01"/>`)
   )
   .add(
     'with button',
     () => (
-      <Header
+      <EnhancedHeader
         withButton
         buttonIcon={buttonIcon}
         buttonLabel={getButtonLabel()}
@@ -53,11 +59,11 @@ storiesOf('Modules/Headers', module)
       />
     ),
     getSnippetTemplate(`
-  <Header
-    withButton
-    buttonIcon="circleX"
-    buttonLabel="Text"
-    buttonOnClick={onClickHandler}
-  />
-  `)
+      <Header
+        withButton
+        buttonIcon="circleX"
+        buttonLabel="Text"
+        buttonOnClick={onClickHandler}
+      />
+    `)
   )

@@ -11,7 +11,7 @@ import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
-class Footer extends PureComponent {
+export class Footer extends PureComponent {
   static propTypes = {
     headlineText: PropTypes.string,
     iconsNamesAndActions: PropTypes.arrayOf(
