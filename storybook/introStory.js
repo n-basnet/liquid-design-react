@@ -5,10 +5,13 @@ import styled from 'styled-components'
 import { getBackgroundWrapper, getPropTablesExcludeList } from './helpers'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 
 const Heading = styled.h1`
   margin: 0;
 `
+
+const themeList = Object.keys(THEMES)
 
 const BADGE_CLASS_NAME = getClassName({ name: 'Badge' })
 
@@ -108,6 +111,20 @@ storiesOf('Intro', module)
     ~~~~
 
     will render the \`data-test-id\` attribute to the DOM element rendered by \`Badge\`.
+
+    ##  Theming
+
+    Theme wrapper has \`themeName\` prop in which you can pass one of themes to use with the library. \n
+    Themes list: \`${themeList.map(theme => ` ${theme}`)}\` \n
+    The default theme is \`${DEFAULT_THEME_NAME}\` \n
+
+    ~~~~js
+    <Theme themeName='${DEFAULT_THEME_NAME}'>
+      <Badge text='Hello' />
+    </Theme>
+    ~~~~
+
+
     `,
     },
   })
