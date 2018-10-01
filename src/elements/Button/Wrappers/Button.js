@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { bgColorSelector, colorSelector, iconOpacitySelector } from '~/elements/Button/utils'
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, ieStyles } from '~/utils/styling'
 
 export const widthSelector = props =>
   props.label ? '93px' : props.size === 'big' ? '50px' : '40px'
@@ -44,9 +44,9 @@ export default styled.button`
         cursor: pointer;
       `}
   `};
-  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  ${ieStyles(`
     line-height: 1;
-  }
+  `)};
   &:active span,
   &:focus span {
     position: relative;

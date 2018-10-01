@@ -29,6 +29,17 @@ const OMIT_ICONS = [
   'minus',
   'plus',
   'service',
+  'facebook',
+  'slack',
+  'snapchat',
+  'mail',
+  'salesforce',
+  'twitter',
+  'skype',
+  'linkeding',
+  'teams',
+  'flickr',
+  'xing',
 ]
 
 const ICONS_LIST = Object.keys(iconsList['stroke']).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))

@@ -52,6 +52,11 @@ export const safariStyles = styleString =>
           ${styleString};
         }
       `
+export const ieStyles = styleString => css`
+  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    ${styleString};
+  }
+`
 
 export const disableTextSelectionBackground = css`
   *::selection {

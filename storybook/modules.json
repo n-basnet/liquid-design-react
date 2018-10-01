@@ -137,6 +137,10 @@
     "hasIndexFile": true
   },
   {
+    "name": "SocialShare",
+    "type": "component"
+  },
+  {
     "name": "Calendar",
     "type": "module"
   },

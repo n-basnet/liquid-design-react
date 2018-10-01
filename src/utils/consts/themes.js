@@ -137,6 +137,42 @@ const themeBaseColors = {
   auxGrey: {
     base: COLORS.AUX_GREY,
   },
+  facebook: {
+    base: COLORS.SOCIAL_FACEBOOK,
+  },
+  slack: {
+    base: COLORS.SOCIAL_SLACK,
+  },
+  instagram: {
+    base: COLORS.SOCIAL_INSTAGRAM,
+  },
+  mail: {
+    base: COLORS.SOCIAL_MAIL,
+  },
+  snapchat: {
+    base: COLORS.SOCIAL_SNAPCHAT,
+  },
+  salesforce: {
+    base: COLORS.SOCIAL_SALESFORCE,
+  },
+  twitter: {
+    base: COLORS.SOCIAL_TWITTER,
+  },
+  skype: {
+    base: COLORS.SOCIAL_SKYPE,
+  },
+  linkedin: {
+    base: COLORS.SOCIAL_LINKEDIN,
+  },
+  teams: {
+    base: COLORS.SOCIAL_TEAMS,
+  },
+  flickr: {
+    base: COLORS.SOCIAL_FLICKR,
+  },
+  xing: {
+    base: COLORS.SOCIAL_XING,
+  },
 }
 
 const getTheme = ({ primary, secondary }, props = {}) => ({

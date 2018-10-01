@@ -206,6 +206,18 @@ import rental from '~/assets/svgIcons/glyphs/rental.svg'
 import service from '~/assets/svgIcons/glyphs/service.svg'
 import starHalf from '~/assets/svgIcons/glyphs/starHalf.svg'
 import warning from '~/assets/svgIcons/glyphs/warning.svg'
+import facebook from '~/assets/svgIcons/glyphs/social/facebook.svg'
+import slack from '~/assets/svgIcons/glyphs/social/slack.svg'
+import instagram from '~/assets/svgIcons/glyphs/social/instagram.svg'
+import mail from '~/assets/svgIcons/glyphs/social/mail.svg'
+import snapchat from '~/assets/svgIcons/glyphs/social/snapchat.svg'
+import salesforce from '~/assets/svgIcons/glyphs/social/salesforce.svg'
+import twitter from '~/assets/svgIcons/glyphs/social/twitter.svg'
+import skype from '~/assets/svgIcons/glyphs/social/skype.svg'
+import linkedin from '~/assets/svgIcons/glyphs/social/linkedin.svg'
+import teams from '~/assets/svgIcons/glyphs/social/teams.svg'
+import flickr from '~/assets/svgIcons/glyphs/social/flickr.svg'
+import xing from '~/assets/svgIcons/glyphs/social/xing.svg'
 import warningM from '~/assets/svgIcons/glyphs/warningM.svg'
 
 export default {
@@ -413,6 +425,18 @@ export default {
     service,
     starHalf,
     warning,
+    facebook,
+    slack,
+    instagram,
+    mail,
+    snapchat,
+    salesforce,
+    twitter,
+    skype,
+    linkedin,
+    teams,
+    flickr,
+    xing,
     warningM,
   },
 }
