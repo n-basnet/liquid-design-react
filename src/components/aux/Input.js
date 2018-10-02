@@ -188,9 +188,11 @@ class Input extends PureComponent {
       errorMessage,
       width: resizedWidth,
       className,
+      isFocused,
       ...props
     } = this.props
-    const { focused, height } = this.state
+    const { height } = this.state
+    const focused = isFocused !== null ? isFocused : this.state.focused
     const TextFieldWrapper = multiline ? TextAreaWrapper : InputWrapper
 
     const width = resizedWidth || TEXTFIELD_DEFAULT_WIDTH
@@ -251,6 +253,8 @@ Input.propTypes = {
   /** from `react-resize-detector` decorator */
   width: PropTypes.number,
   className: PropTypes.string,
+  /** force focused state */
+  isFocused: PropTypes.bool,
 }
 
 Input.defaultProps = {
@@ -265,6 +269,7 @@ Input.defaultProps = {
   errorMessage: null,
   width: null,
   className: null,
+  isFocused: null,
 }
 
 const { Component, globalClassName } = attachClassName(Input)

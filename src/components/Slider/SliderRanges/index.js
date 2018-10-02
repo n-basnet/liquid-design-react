@@ -13,11 +13,11 @@ const SliderRanges = styled.span`
   }
 `
 
-export const SliderMin = SliderRanges.extend`
+export const SliderMin = styled(SliderRanges)`
   padding-right: 20px;
 `
 
-export const SliderMax = SliderRanges.extend`
+export const SliderMax = styled(SliderRanges)`
   padding-left: 20px;
 `
 

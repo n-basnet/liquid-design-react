@@ -9,3 +9,10 @@ export const getOrCreateDOMNode = id => {
     return node
   }
 }
+
+export const handleClickIfNotSelectingText = handler => {
+  const selection = window.getSelection && window.getSelection()
+  if (!selection || selection.type !== 'Range') {
+    handler()
+  }
+}

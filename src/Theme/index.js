@@ -31,8 +31,6 @@ export const Base = styled.div`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -moz-user-focus: ignore;
-    -moz-user-select: none;
     -ms-overflow-style: none;
   }
 `

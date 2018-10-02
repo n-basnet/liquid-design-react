@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { media } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
+import { handleClickIfNotSelectingText } from '~/utils/dom'
 
 const AccordionWrapper = styled.div`
   cursor: pointer;
@@ -87,7 +88,7 @@ export class Accordion extends PureComponent {
     isOpen: DEFAULT_IS_OPEN_VALUE,
   }
 
-  toggleAccordion = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  toggle = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
 
   render() {
     const { children, title, isOpen, ...props } = this.props
@@ -95,12 +96,17 @@ export class Accordion extends PureComponent {
     const isAccordionOpen = isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
 
     return (
-      <AccordionWrapper isOpen={isAccordionOpen} onClick={this.toggleAccordion} {...props}>
-        <SectionTitle isOpen={isAccordionOpen}>
+      <AccordionWrapper isOpen={isAccordionOpen} {...props}>
+        <SectionTitle isOpen={isAccordionOpen} onClick={this.toggle}>
           <Glyph name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
-        <SectionContent isOpen={isAccordionOpen}>{children}</SectionContent>
+        <SectionContent
+          isOpen={isAccordionOpen}
+          onClick={() => handleClickIfNotSelectingText(this.toggle)}
+        >
+          {children}
+        </SectionContent>
       </AccordionWrapper>
     )
   }

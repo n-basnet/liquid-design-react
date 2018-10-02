@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { path, isEmpty } from 'ramda'
 import { rgba } from 'polished'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, disableMozTextSelection } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -103,6 +103,8 @@ const ToggleWrapper = styled.div`
     css`
       opacity: 0.5;
     `};
+
+  ${disableMozTextSelection};
 `
 
 export const Toggle = ({ icons, onClick, ...props }) => (

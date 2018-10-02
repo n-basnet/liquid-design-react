@@ -1,18 +1,18 @@
-import SearchBar, { PLACEHOLDER_TEXT, ResultWrapper } from '.'
+import SearchBar, { DEFAULT_PLACEHOLDER_TEXT, ResultWrapper } from '.'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('SearchBar', () => {
   let wrapper
   let getInput
   const query = 'Search result'
-  const OPTIONS = [{ text: `${query} 1` }, { text: `${query} 1` }]
+  const OPTIONS = [`${query} 1`, `${query} 1`]
   const getSearchBarWrapper = getWrapper(SearchBar, { options: OPTIONS })
   beforeEach(() => {
     wrapper = getSearchBarWrapper()
     getInput = () => wrapper.find('input')
   })
   it('renders placeholder text', () => {
-    expect(getInput().prop('placeholder')).toEqual(PLACEHOLDER_TEXT)
+    expect(getInput().prop('placeholder')).toEqual(DEFAULT_PLACEHOLDER_TEXT)
   })
   it('updates value', () => {
     expect(getInput().prop('value')).toEqual('')
@@ -27,7 +27,7 @@ describe('SearchBar', () => {
         .find(ResultWrapper)
         .first()
         .text()
-    ).toEqual(OPTIONS[0].text)
+    ).toEqual(OPTIONS[0])
     expect(wrapper.find(ResultWrapper).length).toEqual(OPTIONS.length)
 
     getInput().simulate('change', {

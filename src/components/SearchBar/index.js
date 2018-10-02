@@ -23,7 +23,7 @@ const getBackgroundColor = (ghost, color) =>
     background-color: ${color};
   `
 
-export const PLACEHOLDER_TEXT = 'Search…'
+export const DEFAULT_PLACEHOLDER_TEXT = 'Search…'
 
 const SearchBarWrapper = styled.form`
   position: relative;
@@ -47,6 +47,14 @@ const SearchBarWrapper = styled.form`
     props.disabled &&
       css`
         opacity: 1;
+      `};
+    ${props =>
+    props.hasResults &&
+      css`
+        overflow: visible;
+        &:after {
+          border-radius: 0;
+        }
       `};
     input {
       min-width: 250px;
@@ -147,72 +155,61 @@ export const ResultWrapper = styled.div`
   `};
 `
 
-const DEFAULT_RESULTS = []
+const EMPTY_RESULTS = []
 
 export class SearchBar extends PureComponent {
   static propTypes = {
-    /** handler for submitting the form with Return key */
-    handleSubmit: PropTypes.func,
+    onSubmit: PropTypes.func,
     disabled: PropTypes.bool,
     /** ghost styling */
     ghost: PropTypes.bool,
     /** options for search results */
-    options: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        onClick: PropTypes.func,
-      })
-    ),
+    options: PropTypes.arrayOf(PropTypes.string),
+    placeholder: PropTypes.string,
     className: PropTypes.string,
   }
   static defaultProps = {
-    /** handler for submitting a query */
-    handleSubmit: () => {},
+    onSubmit: () => {},
     disabled: false,
     ghost: false,
     options: [],
+    placeholder: DEFAULT_PLACEHOLDER_TEXT,
     className: null,
   }
   state = {
     value: '',
     focused: false,
-    results: DEFAULT_RESULTS,
+    results: EMPTY_RESULTS,
   }
-  getSubmitHandler = handler => e => {
-    e.preventDefault()
+  handleSubmit = (e, value = this.state.value) => {
+    e && e.preventDefault()
     if (!this.props.disabled) {
-      handler(this.state.value)
-      this.setInputValue(this.state.value, DEFAULT_RESULTS)
+      this.props.onSubmit(value)
+      this.setInputValue(value)
+      this.hideResults()
     }
   }
-  setInputValue = (value, resultsOverride) => {
-    if (!this.props.disabled) {
-      const regexp = value && new RegExp(value, 'i')
-      const updatedResults = value
-        ? this.props.options.filter(v => regexp.test(v.text))
-        : DEFAULT_RESULTS
-      this.setState({
-        value,
-        results: resultsOverride || updatedResults,
-      })
-    }
+  setInputValue = value => {
+    const regexp = new RegExp(value, 'i')
+    const results =
+      value.length > 0 ? this.props.options.filter(v => regexp.test(v)) : EMPTY_RESULTS
+    this.setState({
+      value,
+      results,
+    })
   }
+  hideResults = () => this.setState({ results: EMPTY_RESULTS })
   getInputFocusHandler = focused => () => this.setState({ focused })
-  triggerResultHandler = (handler, value) => {
-    handler && handler()
-    this.setInputValue(value, DEFAULT_RESULTS)
-  }
-  getResultKeyDownHandler = (handler, value) => e =>
-    e.key === 'Enter' && this.triggerResultHandler(handler, value)
-  getResultOnClickHandler = (handler, value) => () => this.triggerResultHandler(handler, value)
-  handleClickOutside = () => this.setInputValue(this.state.value, DEFAULT_RESULTS)
+  getResultOnClickHandler = value => () => this.handleSubmit(null, value)
+  getResultKeyDownHandler = value => e => e.key === 'Enter' && this.handleSubmit(null, value)
+  handleClickOutside = this.hideResults
   render() {
-    const { handleSubmit, disabled, ghost, className, ...props } = this.props
+    const { onSubmit, disabled, placeholder, ghost, className, ...props } = this.props
     const { focused, value, results } = this.state
     const hasResults = !isEmpty(this.state.results)
     return (
       <SearchBarWrapper
-        onSubmit={this.getSubmitHandler(handleSubmit)}
+        onSubmit={this.handleSubmit}
         focused={hasResults || focused}
         hasResults={hasResults}
         disabled={disabled}
@@ -222,24 +219,24 @@ export class SearchBar extends PureComponent {
       >
         <Glyph name='search' size={24} />
         <Input
-          type='text'
-          placeholder={PLACEHOLDER_TEXT}
+          placeholder={placeholder}
           value={value}
           disabled={disabled}
+          isFocused={hasResults || null}
           onChange={this.setInputValue}
           onFocus={this.getInputFocusHandler(true)}
           onBlur={this.getInputFocusHandler(false)}
         />
         <ResultsWrapper>
-          {results.map((v, i) => (
+          {results.map((resultText, i) => (
             <ResultWrapper
               tabIndex='0'
               role='button'
               key={i}
-              onClick={this.getResultOnClickHandler(v.onClick, v.text)}
-              onKeyDown={this.getResultKeyDownHandler(v.onClick, v.text)}
+              onClick={this.getResultOnClickHandler(resultText)}
+              onKeyDown={this.getResultKeyDownHandler(resultText)}
             >
-              <Ellipsis>{v.text}</Ellipsis>
+              <Ellipsis>{resultText}</Ellipsis>
             </ResultWrapper>
           ))}
         </ResultsWrapper>

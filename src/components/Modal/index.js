@@ -19,8 +19,8 @@ const getReactModalContentStyle = theme => ({
   left: '0',
   right: '0',
   margin: `auto auto ${MODAL_MARGIN}px`,
-  width: `calc(100vw - ${MODAL_MARGIN}px)`,
-  maxHeight: `calc(100vh - ${MODAL_MARGIN * 2}px)`,
+  width: `calc(100% - ${MODAL_MARGIN}px)`,
+  maxHeight: `calc(100% - ${MODAL_MARGIN * 2}px)`,
   maxWidth: '650px',
   boxShadow: theme.doubleBoxShadow,
 })

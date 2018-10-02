@@ -6,50 +6,54 @@ import { default as EnhancedSearchBar, SearchBar } from '~/components/SearchBar'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
-  includeComponentInPropTable,
   getTextKnob,
   getSnippetTemplate,
 } from '../helpers'
 import { times } from '~/utils/aux'
 
 const getOptions = () =>
-  times(4).map(v => {
-    const text = getTextKnob({
+  times(4).map(v =>
+    getTextKnob({
       defaultText: `Search Result ${v + 1}`,
       name: `result ${v + 1}`,
     })
-    return { text, onClick: action(`click on ${text}`) }
-  })
+  )
 
 const getSearchBarSnippet = props => `
-  <Searchbar
-    handleSubmit={handleSubmitMethod}
+  <SearchBar
+    onSubmit={handleSubmit}
     options={[
-      {text: 'Search Result 1', onClick: onClickHandler},
-      {text: 'Search Result 2', onClick: onClickHandler},
-      {text: 'Search Result 3', onClick: onClickHandler},
-      {text: 'Search Result 4', onClick: onClickHandler},
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
     ]}${props || ``}
   />
 `
 
+const getDefaultProps = () => ({
+  onSubmit: action('submit'),
+  placeholder: getTextKnob({ defaultText: 'Search…', name: 'placeholder' }),
+  options: getOptions(),
+})
+
 storiesOf('Components/SearchBar', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(SearchBar))
   .addParameters({
     info: {
-      source: false,
       propTablesExclude: getPropTablesExcludeList([EnhancedSearchBar]),
+      propTables: [SearchBar],
+      excludedPropTypes: ['className'],
     },
   })
   .add(
     'default',
-    () => <EnhancedSearchBar handleSubmit={action('submit')} options={getOptions()} />,
+    () => <EnhancedSearchBar {...getDefaultProps()} />,
     getSnippetTemplate(getSearchBarSnippet())
   )
   .add(
     'ghost',
-    () => <EnhancedSearchBar ghost handleSubmit={action('submit')} options={getOptions()} />,
+    () => <EnhancedSearchBar ghost {...getDefaultProps()} />,
     getSnippetTemplate(
       getSearchBarSnippet(`
     ghost`)

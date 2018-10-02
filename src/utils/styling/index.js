@@ -80,3 +80,8 @@ export const customWebKitScrollBar = css`
     `};
   }
 `
+
+export const disableMozTextSelection = css`
+  -moz-user-focus: ignore;
+  -moz-user-select: none;
+`

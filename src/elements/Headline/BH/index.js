@@ -11,56 +11,56 @@ const H = styled.div`
   `};
 `
 
-export const XBH1 = H.extend`
+export const XBH1 = styled(H)`
   line-height: 1.1;
   ${props => css`
     font-size: ${props.theme.fontSize.xh1};
   `};
 `
 
-export const XBH2 = H.extend`
+export const XBH2 = styled(H)`
   ${props => css`
     font-size: ${props.theme.fontSize.xh2};
   `};
 `
 
-export const XBH3 = H.extend`
+export const XBH3 = styled(H)`
   ${props => css`
     font-size: ${props.theme.fontSize.xh3};
   `};
 `
 
-export const BH1 = H.withComponent('h1').extend`
+export const BH1 = styled(H.withComponent('h1'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh1};
   `};
 `
 
-export const BH2 = H.withComponent('h2').extend`
+export const BH2 = styled(H.withComponent('h2'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh2};
   `};
 `
 
-export const BH3 = H.withComponent('h3').extend`
+export const BH3 = styled(H.withComponent('h3'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh3};
   `};
 `
 
-export const BH4 = H.withComponent('h4').extend`
+export const BH4 = styled(H.withComponent('h4'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh4};
   `};
 `
 
-export const BH5 = H.withComponent('h5').extend`
+export const BH5 = styled(H.withComponent('h5'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh5};
   `};
 `
 
-export const BH6 = H.withComponent('h6').extend`
+export const BH6 = styled(H.withComponent('h6'))`
   ${props => css`
     font-size: ${props.theme.fontSize.bh6};
   `};
