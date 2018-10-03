@@ -18,4 +18,3 @@ ENV LETSENCRYPT_EMAIL devops-team@netguru.co
 ## Copy build/ folder to new image
 COPY --from=builder /app/out /app/dist
 RUN ls /app/dist
-COPY nginx-staging.conf /etc/nginx/nginx.conf

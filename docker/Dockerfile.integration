@@ -16,4 +16,3 @@ FROM nginx:alpine as app
 COPY --from=builder /app/out /app/dist
 RUN ls /app/dist
 COPY nginx-integration.conf /etc/nginx/nginx.conf
-COPY .htpasswd /etc/nginx/.htpasswd
