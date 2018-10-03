@@ -34,6 +34,7 @@ export default styled.button`
         `};
     }
     .${ICON_CLASSNAME} {
+      margin: 0 auto;
       svg {
         fill: ${colorSelector(props)};
         opacity: ${props.disabled ? iconOpacitySelector(props) : 1};
