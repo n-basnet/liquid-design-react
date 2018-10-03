@@ -88,8 +88,7 @@ export class Tooltip extends PureComponent {
   state = {
     isOpen: false,
   }
-  toggle = e => {
-    if (e) e.preventDefault()
+  toggle = () => {
     this.setState(
       ({ isOpen }) => ({ isOpen: !isOpen }),
       () => {
@@ -97,8 +96,9 @@ export class Tooltip extends PureComponent {
       }
     )
   }
-  handleMouseEnter = () => this.setState({ isHovered: true })
-  handleMouseLeave = () => this.setState({ isHovered: false })
+  /** setTimeout hack is to call toggle function firstly instead of handleMouseEnter on safari ios **/
+  handleMouseEnter = () => setTimeout(() => this.setState({ isHovered: true }), 0)
+  setHoverToFalse = () => this.setState({ isHovered: false })
   handleClickOutside = () => {
     this.setState({ isOpen: false })
     this.props.onToggle && this.props.onToggle(false)
@@ -113,8 +113,8 @@ export class Tooltip extends PureComponent {
         isOpen={isTooltipOpen}
         isHovered={isHovered}
         onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onTouchStart={this.toggle}
+        onMouseLeave={this.setHoverToFalse}
+        onTouchStart={this.setHoverToFalse}
         className={cx(getClassName(Tooltip), className)}
         {...props}
       >
