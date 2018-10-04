@@ -3,14 +3,15 @@ import PropTypes from 'prop-types'
 import styled, { css, injectGlobal, ThemeProvider } from 'styled-components'
 
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
-import MerckWebFontWoff2 from '~/assets/fonts/MerckWeb-Regular.woff2'
-import MerckWebFontWoff from '~/assets/fonts/MerckWeb-Regular.woff'
+import { M_FONT_NAME } from '~/utils/consts'
+import MWebFontWoff2 from '~/assets/fonts/MWeb-Regular.woff2'
+import MWebFontWoff from '~/assets/fonts/MWeb-Regular.woff'
 
 injectGlobal`
   @font-face {
-    font-family: 'Merck';
-    src: url(${MerckWebFontWoff2}) format('woff2'),
-         url(${MerckWebFontWoff}) format('woff');
+    font-family: ${M_FONT_NAME};
+    src: url(${MWebFontWoff2}) format('woff2'),
+         url(${MWebFontWoff}) format('woff');
     font-weight: normal;
     font-style: normal;
   }

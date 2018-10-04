@@ -1,33 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { pick, path } from 'ramda'
 
 import attachClassName from '~/components/aux/hoc/attachClassName'
 import { cursorValue } from '~/utils/styling'
-import { getFirstTruthyKeyName } from '~/utils/aux'
-
-const getBackgroundColor = props => {
-  const showOverdue = props.isOverdue && !props.disabled
-  return path(
-    showOverdue
-      ? [props.useThemeColors ? 'secondary' : 'richRed', 'lightest']
-      : ['sensitiveGrey', 'base'],
-    props.theme.colors
-  )
-}
-
-const getBarColor = props => {
-  const colorsMap = {
-    disabled: ['sensitiveGrey', 'darker'],
-    isOverdue: [props.useThemeColors ? 'secondary' : 'richRed', 'base'],
-  }
-  const defaultColor = [props.useThemeColors ? 'primary' : 'vibrantGreen', 'base']
-  return path(
-    colorsMap[getFirstTruthyKeyName(pick(Object.keys(colorsMap), props))] || defaultColor,
-    props.theme.colors
-  )
-}
+import { getColors } from '~/utils/progressBars'
 
 const getBarWidth = props => (props.isFull ? 100 : props.displayValue)
 
@@ -46,11 +23,11 @@ const LinearProgressBarWrapper = styled.div`
   }
   ${props => css`
     ${cursorValue};
-    background-color: ${getBackgroundColor(props)};
+    background-color: ${getColors(props).background};
     &:before,
     &:after {
       transition: ${props.theme.transition};
-      background-color: ${getBarColor(props)};
+      background-color: ${getColors(props).main};
     }
     &:before {
       left: 0;

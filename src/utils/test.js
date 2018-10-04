@@ -17,4 +17,6 @@ it('getFirstTruthyKeyName', () => {
   const trueType = 'isSquare'
   const props = { [trueType]: true, isRectangular: null, someProp: 42 }
   expect(getFirstTruthyKeyName(props)).toEqual(trueType)
+
+  expect(getFirstTruthyKeyName({ someFalsyKey: false })).toBe(undefined)
 })

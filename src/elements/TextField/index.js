@@ -57,9 +57,7 @@ export default class TextField extends React.Component {
     disabled: false,
     multiline: false,
   }
-  componentWillMount() {
-    this.id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
-  }
+  id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
   getErrorMessage = () => {
     const { validate, value } = this.props
     const validationResult = validate(value)

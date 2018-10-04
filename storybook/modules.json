@@ -153,6 +153,10 @@
     "type": "component"
   },
   {
+    "name": "CircularProgressBar",
+    "type": "component"
+  },
+  {
     "name": "Graphics",
     "type": "element"
   }

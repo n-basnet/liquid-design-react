@@ -1,11 +1,13 @@
 import styled, { css } from 'styled-components'
 
+import { M_FONT_NAME } from '~/utils/consts'
+
 const H = styled.div`
   margin: 0;
   line-height: 1.15;
   text-transform: uppercase;
   ${props => css`
-    font-family: Merck;
+    font-family: ${M_FONT_NAME};
     font-weight: ${props.theme.fontWeight.regular};
     color: ${props.theme.colors.richBlue.base};
   `};

@@ -21,9 +21,7 @@ export class RadioButton extends PureComponent {
     onClick: () => {},
   }
 
-  componentWillMount() {
-    this.id = getClassName({ name: uniqid() })
-  }
+  id = getClassName({ name: uniqid() })
 
   render() {
     const { disabled, isSelected, label, onClick, ...props } = this.props

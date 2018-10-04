@@ -25,4 +25,4 @@ export const getSVGImageURLString = (string, { dimensions }) => {
   return `data:image/svg+xml,${encodeURIComponent(string)}`
 }
 
-export const getFirstTruthyKeyName = props => Object.keys(filter(v => !!v, props))[0]
+export const getFirstTruthyKeyName = props => Object.keys(filter(Boolean, props))[0]
