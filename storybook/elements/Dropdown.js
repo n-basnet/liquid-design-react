@@ -1,10 +1,15 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { without, append } from 'ramda'
 import uniqid from 'uniqid'
 
-import { getBackgroundWrapper, getTextKnob } from '../helpers'
+import {
+  getPropTablesExcludeList,
+  includeComponentInPropTable,
+  getBackgroundWrapper,
+  getTextKnob,
+} from '../helpers'
 import { times } from '~/utils/aux'
 import { default as EnhancedDropdown, Dropdown } from '~/elements/Dropdown'
 
@@ -56,22 +61,20 @@ class MultiselectDropdown extends React.Component {
   }
 }
 
-const getInfoMD = (modifier, code) => ({
+const getInfoMD = props => ({
   info: {
     text: `
   Dropdowns or select fields enable the user to select one option from a list of multiple options. The selection of an option can affect other form elements on the same page/screen.
 
   Usage:
 
-  ~~~js ${code ||
-    `
-  const OPTIONS = [
-    {name: 'Option 1', id: '1'},
-    {name: 'Option 2', id: '2'},
-  ]
+  ~~~js ${`
   <Dropdown
     label='Dropdown label'
-    options={OPTIONS}${modifier || ''}
+    options={[
+      {name: 'Option 1', id: '1'},
+      {name: 'Option 2', id: '2'},
+    ]}${props || ''}
   >`}
   ~~~
 `,
@@ -82,18 +85,10 @@ storiesOf('Elements/Dropdown', module)
   .addDecorator(getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }))
   .addParameters({
     info: {
-      source: false,
-      propTablesExclude: [MultiselectDropdown, EnhancedDropdown, Fragment],
+      propTablesExclude: getPropTablesExcludeList([MultiselectDropdown, EnhancedDropdown]),
     },
   })
-  .addDecorator(storyFn => (
-    <Fragment>
-      <div style={{ display: 'none' }}>
-        <Dropdown label='label' />
-      </div>
-      {storyFn()}
-    </Fragment>
-  ))
+  .addDecorator(includeComponentInPropTable(Dropdown, { label: 'label' }))
   .add('default', () => <EnhancedDropdown {...getDefaultProps()} />, getInfoMD())
   .add(
     'active',

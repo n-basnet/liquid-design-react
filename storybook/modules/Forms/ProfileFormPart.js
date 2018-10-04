@@ -24,6 +24,7 @@ const ProfileFormPartWrapper = styled.div`
   }
   .${CLASSNAMES.buttonWrapper} {
     text-align: right;
+    margin: 24px auto;
   }
   ${media.customMin(MOBILE_BREAKPOINT)`
     .${CLASSNAMES.placeholderWrapper} {

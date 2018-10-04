@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 import { pick, isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
+import cx from 'classnames'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import OptionsGroup, { OPTIONS_GROUP_CLASSNAME } from '~/elements/Dropdown/OptionsGroup'
@@ -10,11 +11,12 @@ import Ellipsis from '~/components/aux/Ellipsis'
 import { cursorValue, media } from '~/utils/styling'
 import { dropdownPropTypes, dropdownDefaultProps, SHARED_PROPS } from '~/elements/Dropdown/props'
 import SelectedOptionsLabel from '~/elements/Dropdown/SelectedOptionsLabel'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 const ICON_MOBILE_SCALE = 1.27
 
 const ARROW_ICON_CLASSNAME = `${ICON_CLASSNAME}Arrow`
+export const DROPDOWN_CLASSNAME = getClassName({ name: 'Dropdown' })
 
 const getInnerWrapperStyle = props => {
   const boxShadow = props.theme[props.isExpanded ? 'doubleBoxShadow' : 'boxShadow']
@@ -169,6 +171,7 @@ export class Dropdown extends PureComponent {
       multiselect,
       selectedOptionsIds,
       onOptionDeselect,
+      className,
       ...props
     } = this.props
     const { isExpanded } = this.state
@@ -176,7 +179,13 @@ export class Dropdown extends PureComponent {
     const hasSelectedOptions = multiselect && !isEmpty(selectedOptionsIds)
     const activeOption = this.getActiveOption()
     return (
-      <DropdownWrapper isExpanded={isExpanded} disabled={disabled} inline={inline} {...props}>
+      <DropdownWrapper
+        isExpanded={isExpanded}
+        disabled={disabled}
+        inline={inline}
+        className={cx(className, DROPDOWN_CLASSNAME)}
+        {...props}
+      >
         <DropdownTriggerWrapper
           hasValue={activeOption}
           inline={inline}
@@ -217,8 +226,4 @@ export class Dropdown extends PureComponent {
   }
 }
 
-const { Component, globalClassName } = enhanceWithClickOutside(attachClassName(Dropdown))
-
-export const DROPDOWN_CLASSNAME = globalClassName
-
-export default Component
+export default enhanceWithClickOutside(Dropdown)

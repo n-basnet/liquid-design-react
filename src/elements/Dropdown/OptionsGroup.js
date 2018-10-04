@@ -59,7 +59,7 @@ export const ResultWrapper = styled.div`
   padding: 9px 15px ${PADDING_BOTTOM.DESKTOP}px;
   ${disableTextSelectionBackground};
   ${media.max.phone`
-    padding: 12px ${PADDING_BOTTOM.MOBILE}px 10px;
+    padding: 12px ${PADDING_BOTTOM.MOBILE}px 10px 15px;
   `};
   ${props => css`
     border-bottom: ${BORDER_WIDTH}px solid ${props.theme.colors.sensitiveGrey.base};

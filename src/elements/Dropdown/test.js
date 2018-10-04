@@ -1,4 +1,4 @@
-import { default as Dropdown, DropdownTriggerWrapper } from '~/elements/Dropdown'
+import Dropdown, { DropdownTriggerWrapper } from '~/elements/Dropdown'
 import { ResultWrapper } from '~/elements/Dropdown/OptionsGroup'
 import Tag from '~/elements/Tag'
 import { Input } from '~/elements/Checkbox'

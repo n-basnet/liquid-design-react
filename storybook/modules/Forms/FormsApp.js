@@ -32,6 +32,7 @@ const BottomSectionWrapper = FlexRowsWrapper.extend`
   margin-top: 5px;
   align-items: center;
   > div {
+    margin-bottom: 20px;
     &:last-child {
       text-align: right;
     }
@@ -47,7 +48,6 @@ const BottomSectionWrapper = FlexRowsWrapper.extend`
   ${props => css`
     .${CHECKBOX_CLASSNAMES.BASE} {
       margin-top: 2px;
-      margin-left: -3px;
     }
     .${CHECKBOX_CLASSNAMES.UNCHECKED} svg {
       fill: ${props.theme.colors.sensitiveGrey.darker};
