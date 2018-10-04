@@ -4,32 +4,75 @@ import styled, { css } from 'styled-components'
 import { path } from 'ramda'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import Heart from '~/assets/svgSprites/heart.svg'
 import { cursorValue } from '~/utils/styling'
-import { spriteAnimation } from '~/utils/styling/animations'
+import { scaleUpDown, beamAnimation } from '~/elements/Favorite/animations'
 import attachClassName from '~/components/aux/hoc/attachClassName'
-import { getReactElementString } from '~/utils/aux'
+import { times } from '~/utils/aux'
+import { easing } from '~/utils/styling/animations'
+
+const getFill = props =>
+  path(props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darker'], props.theme.colors)
+
+const getHoverFill = props =>
+  path(props.isActive ? ['richRed', 'dark'] : ['primary', 'base'], props.theme.colors)
+
+export const ANIMATION_DURATION = 500
+const SIZE = 24
+const BEAM_THICKNESS = 2
+const BEAMS_AMOUNT = 7
+const BEAM_DEG_OFFSET = 360 / BEAMS_AMOUNT
+
+const BeamsContainer = styled.div`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: -2px;
+  left: 0;
+  transform: rotate(${BEAMS_AMOUNT % 2 !== 0 ? 360 / BEAMS_AMOUNT / 4 : 0}deg);
+`
+
+const Beam = styled.div`
+  position: absolute;
+  top: calc(50% - ${BEAM_THICKNESS / 2}px);
+  left: calc(50% - ${BEAM_THICKNESS / 2}px);
+  height: ${BEAM_THICKNESS}px;
+  width: 80%;
+  transform-origin: ${BEAM_THICKNESS / 2}px ${BEAM_THICKNESS / 2}px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    left: 80%;
+    opacity: 0;
+    overflow: hidden;
+    border-radius: ${BEAM_THICKNESS}px;
+    ${props => css`
+      background-color: ${props.theme.colors.richRed.base};
+      ${props.isAnimating &&
+        css`
+          animation: ${beamAnimation} ${ANIMATION_DURATION}ms infinite ${easing.inOutQuad};
+        `};
+    `};
+  }
+
+  ${times(BEAMS_AMOUNT).map(
+    i =>
+      `&:nth-child(${i}) {
+    transform: rotate(${i * BEAM_DEG_OFFSET}deg);
+    }`
+  )};
+`
 
 export const FavoriteWrapper = styled.div`
   display: inline-block;
   position: relative;
+  width: ${SIZE}px;
+  height: ${SIZE}px;
+
   ${props => css`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
-
-    .${ICON_CLASSNAME} svg {
-      fill: ${path(
-    props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darker'],
-    props.theme.colors
-  )};
-      transition: ${props.theme.transition};
-    }
-
-    ${props.isAnimating &&
-      css`
-        .${ICON_CLASSNAME} {
-          opacity: 0;
-        }
-      `};
 
     ${props.disabled
     ? css`
@@ -38,44 +81,23 @@ export const FavoriteWrapper = styled.div`
     : css`
           &:hover {
             .${ICON_CLASSNAME} svg {
-              fill: ${path(
-    props.isActive ? ['richRed', 'dark'] : ['primary', 'base'],
-    props.theme.colors
-  )};
+              fill: ${getHoverFill(props)};
             }
           }
         `};
+
+    .${ICON_CLASSNAME} svg {
+      position: relative;
+      z-index: 1;
+      fill: ${getFill(props)};
+      transition: ${props.theme.transition};
+
+      ${props.isAnimating &&
+        css`
+          animation: ${scaleUpDown} ${ANIMATION_DURATION}ms ${easing.inOutQuad};
+        `};
+    }
   `};
-`
-
-export const ANIMATION_DURATION = 500
-const SPRITESHEET_SCALE_FACTOR = 5
-const HEART_ANIMATION_SPRITESHEET_STRING = getReactElementString(Heart)
-
-const SPRITESHEET_DIMENSIONS_DATA = HEART_ANIMATION_SPRITESHEET_STRING.match(
-  /viewBox="0 0 (\d*) (\d*)"/
-)
-
-const AnimationWrapper = styled.div`
-  position: absolute;
-  top: -19px;
-  left: -19px;
-  pointer-events: none;
-
-  ${props =>
-    spriteAnimation({
-      // SVG will be not be loaded in test env, so let's check if the regex matched
-      dimensions: SPRITESHEET_DIMENSIONS_DATA
-        ? [
-          SPRITESHEET_DIMENSIONS_DATA[1] / SPRITESHEET_SCALE_FACTOR,
-          SPRITESHEET_DIMENSIONS_DATA[2] / SPRITESHEET_SCALE_FACTOR,
-        ]
-        : [0, 0],
-      backgroundImageString: HEART_ANIMATION_SPRITESHEET_STRING,
-      duration: ANIMATION_DURATION,
-      steps: [3, 4],
-      isAnimating: props.isAnimating,
-    })};
 `
 
 export class Favorite extends PureComponent {
@@ -114,11 +136,13 @@ export class Favorite extends PureComponent {
         disabled={disabled}
         onClick={this.handleClick}
         isAnimating={isAnimating}
-        isActive={isActive || active}
+        isActive={isActive || active || isAnimating}
         {...props}
       >
-        <Glyph name='favorite' />
-        <AnimationWrapper isAnimating={isAnimating} />
+        <Glyph name='favorite' size={SIZE} />
+        <BeamsContainer>
+          {times(BEAMS_AMOUNT).map(i => <Beam isAnimating={isAnimating} key={i} />)}
+        </BeamsContainer>
       </FavoriteWrapper>
     )
   }

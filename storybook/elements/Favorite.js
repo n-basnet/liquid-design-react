@@ -10,8 +10,8 @@ import {
 } from '../helpers'
 import { default as EnhancedFavorite, Favorite } from '~/elements/Favorite'
 
-const getFavoriteSnippet = props => `
-  <Favorite ${props || ``} onChange={onChangeHandler} />
+const getFavoriteSnippet = (props = '') => `
+  <Favorite ${props}onChange={onChangeHandler} />
 `
 
 storiesOf('Elements/Favorite', module)
@@ -30,10 +30,10 @@ storiesOf('Elements/Favorite', module)
   .add(
     'disabled',
     () => <EnhancedFavorite disabled />,
-    getSnippetTemplate(getFavoriteSnippet('disabled'))
+    getSnippetTemplate(getFavoriteSnippet('disabled '))
   )
   .add(
     'active',
     () => <EnhancedFavorite active onChange={action('toggle favorite')} />,
-    getSnippetTemplate(getFavoriteSnippet('active'))
+    getSnippetTemplate(getFavoriteSnippet('active '))
   )

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { Glyph } from '~/elements/Icon'
-import { fadeIn } from '~/utils/styling/animations'
+import { scaleUp } from '~/utils/styling/animations'
 import { cursorValue } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -27,7 +27,7 @@ const BubbleWrapper = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  animation: ${fadeIn} 0.22s ease-in-out;
+  animation: ${scaleUp} 0.22s ease-in-out;
 `
 
 export const Label = styled.span`
