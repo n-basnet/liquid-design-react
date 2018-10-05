@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, injectGlobal, ThemeProvider } from 'styled-components'
 
-import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
+import { THEMES, DEFAULT_THEME_NAME, getCustomTheme } from '~/utils/consts/themes'
 import { M_FONT_NAME } from '~/utils/consts'
 import MWebFontWoff2 from '~/assets/fonts/MWeb-Regular.woff2'
 import MWebFontWoff from '~/assets/fonts/MWeb-Regular.woff'
@@ -36,8 +36,8 @@ export const Base = styled.div`
   }
 `
 
-const Theme = ({ themeName, ...props }) => (
-  <ThemeProvider theme={THEMES[themeName]}>
+const Theme = ({ themeName, customTheme, ...props }) => (
+  <ThemeProvider theme={customTheme ? getCustomTheme(themeName, customTheme) : THEMES[themeName]}>
     <Fragment>
       <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' />
       <Base {...props} />
@@ -47,11 +47,35 @@ const Theme = ({ themeName, ...props }) => (
 
 Theme.propTypes = {
   themeName: PropTypes.oneOf(Object.keys(THEMES)),
+  customTheme: PropTypes.shape({
+    colors: PropTypes.objectOf(
+      PropTypes.shape({
+        lightest: PropTypes.string,
+        lighter: PropTypes.string,
+        light: PropTypes.string,
+        base: PropTypes.string,
+        dark: PropTypes.string,
+        darker: PropTypes.string,
+        darkest: PropTypes.string,
+      })
+    ),
+    zIndex: PropTypes.objectOf(PropTypes.number),
+    fontSize: PropTypes.objectOf(PropTypes.string),
+    fontWeight: PropTypes.objectOf(PropTypes.string),
+    fontFamily: PropTypes.string,
+    borderRadius: PropTypes.string,
+    transition: PropTypes.string,
+    boxShadow: PropTypes.string,
+    doubleBoxShadowSmall: PropTypes.string,
+    doubleBoxShadowSmallHover: PropTypes.string,
+    doubleBoxShadow: PropTypes.string,
+  }),
   children: PropTypes.node.isRequired,
 }
 
 Theme.defaultProps = {
   themeName: DEFAULT_THEME_NAME,
+  customTheme: null,
 }
 
 export default Theme

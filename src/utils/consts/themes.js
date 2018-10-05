@@ -1,4 +1,5 @@
 import { rgba } from 'polished'
+import { mergeDeepRight } from 'ramda'
 
 import COLORS from '~/utils/consts/colors'
 
@@ -218,6 +219,9 @@ export const THEMES = {
     { hasWhiteText: true }
   ),
 }
+
+export const getCustomTheme = (themeName, customTheme) =>
+  mergeDeepRight(THEMES[themeName], customTheme)
 
 export const DEFAULT_THEME_NAME = 'vibrantCyan'
 export const DEFAULT_THEME = THEMES[DEFAULT_THEME_NAME]
