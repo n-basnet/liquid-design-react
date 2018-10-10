@@ -28,14 +28,10 @@ publish_package:
   only:
     - master
 
-pages:
+deploy_docs:
   stage: deploy-docs
   script:
     - yarn storybook:build
-    - mkdir public
-    - mv out/* public
-  artifacts:
-    paths:
-      - public
+    - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME
   only:
     - master
