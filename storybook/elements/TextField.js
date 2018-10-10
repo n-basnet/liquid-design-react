@@ -32,7 +32,8 @@ const TextFieldStoryWrapper = styled.div`
 `
 
 const getTextFieldSnippet = props => `
-  <TextField placeholder="Add Placeholder Text here" label="Text Area label" ${props || ``} />
+  <TextField placeholder="Add Placeholder Text here" label="Text Area label" onChange={onChangeHandler} ${props ||
+    ``} />
 `
 
 const STORIES = getStoriesByVersions({

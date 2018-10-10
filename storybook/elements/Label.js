@@ -15,6 +15,8 @@ const getDefaultProps = () => ({
   children: getTextKnob({ defaultText }),
 })
 
+const labelDescription = `\`Label\` component renders a \`<div>\` tag. It can be used with different components in the library like graphs, but not as HTML \`<label>\` element.`
+
 storiesOf('Elements/Label', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(Label))
@@ -26,9 +28,12 @@ storiesOf('Elements/Label', module)
   .add(
     'default',
     () => <EnhancedLabel {...getDefaultProps()} />,
-    getSnippetTemplate(`
+    getSnippetTemplate(
+      `
   <Label>
     Label Text
   </Label>
-  `)
+  `,
+      labelDescription
+    )
   )

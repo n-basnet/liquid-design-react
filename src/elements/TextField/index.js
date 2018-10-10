@@ -47,6 +47,7 @@ export default class TextField extends React.Component {
     style: PropTypes.object,
     disabled: PropTypes.bool,
     multiline: PropTypes.bool,
+    onChange: PropTypes.func,
   }
   static defaultProps = {
     value: undefined,
@@ -56,6 +57,7 @@ export default class TextField extends React.Component {
     style: {},
     disabled: false,
     multiline: false,
+    onChange: () => {},
   }
   id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
   getErrorMessage = () => {
@@ -65,7 +67,7 @@ export default class TextField extends React.Component {
     return hasErrorMessage ? validationResult : null
   }
   render() {
-    const { value, label, required, style, multiline, ...props } = this.props
+    const { value, label, required, style, multiline, onChange, ...props } = this.props
     return (
       <InputWrapper
         style={style}
@@ -86,6 +88,7 @@ export default class TextField extends React.Component {
           value={value}
           multiline={multiline}
           id={this.id}
+          onChange={onChange}
           {...props}
         />
       </InputWrapper>

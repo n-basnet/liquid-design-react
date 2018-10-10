@@ -77,6 +77,14 @@ storiesOf('Intro', module)
 
     The components' styles can be customised via props or CSS:
 
+    #### via \`className\` prop:
+
+    every component accepts \`className\` prop to add custom classes.
+
+    ~~~~js
+    <Badge text='Hello' className='new-class' />
+    ~~~~
+
     #### via \`style\` prop:
 
     ~~~~js
@@ -104,7 +112,7 @@ storiesOf('Intro', module)
     <Badge text='Hello' onClick={clickHandler} />
     ~~~~
 
-    will attach the click handler to \`Badge\` component, and:
+    will attach the click handler to \`Badge\` component.
 
     ~~~~js
     <Badge text='Hello' data-test-id={42} />
