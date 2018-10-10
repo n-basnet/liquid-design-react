@@ -97,7 +97,9 @@ class Slider extends PureComponent {
             value={value}
             onChange={this.updateValue}
           >
-            <Tooltip value={value}>{value}</Tooltip>
+            <Tooltip max={max} value={value}>
+              {value}
+            </Tooltip>
           </RcSlider>
           <SliderMax disabled={disabled} withIcon={withIcon}>
             {withIcon ? (

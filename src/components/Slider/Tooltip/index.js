@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Tooltip = styled.div`
   position: absolute;
-  left: ${props => props.value}%;
+  left: ${props => props.value / props.max * 100}%;
   bottom: 26px;
   transform: translate(-50%);
   display: flex;
