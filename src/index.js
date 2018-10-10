@@ -41,3 +41,4 @@ export { default as CircularProgressBar } from '~/components/CircularProgressBar
 export { default as WarningLabel } from '~/elements/WarningLabel'
 export { default as Bowl } from '~/elements/Bowl'
 export { default as Placeholder } from '~/elements/Placeholder'
+export { default as Logo } from '~/elements/Logo'

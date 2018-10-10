@@ -6,6 +6,7 @@ import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import Button from '~/elements/Button'
 import SearchBar from '~/components/SearchBar'
+import { LOGO_CLASSNAME } from '~/elements/Logo'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
 import LabelsWrapper from '~/modules/Header/LabelsWrapper'
 import { media } from '~/utils/styling'
@@ -93,6 +94,13 @@ const SearchBarWrapper = styled.div`
     padding-left: 0;
   `};
 `
+const LogoContainer = styled.div`
+  .${LOGO_CLASSNAME} {
+    margin-bottom: -4px;
+    margin-right: 19px;
+    margin-left: 19px;
+  }
+`
 
 export const Header = ({
   buttonIcon,
@@ -108,15 +116,11 @@ export const Header = ({
   notificationOnClick,
   infoOnClick,
   settingsOnClick,
+  logoComponent,
   ...props
 }) => (
   <HeaderWrapper {...props}>
-    <Glyph
-      color='secondary.base'
-      name='logo'
-      size={42}
-      style={{ marginRight: '19px', marginLeft: '19px' }}
-    />
+    <LogoContainer>{logoComponent}</LogoContainer>
     <SearchBarWrapper>
       <SearchBar ghost options={searchBarOptions} handleSubmit={searchBarHandleSubmit} />
     </SearchBarWrapper>
@@ -170,6 +174,7 @@ Header.propTypes = {
     })
   ),
   settingsOnClick: PropTypes.func,
+  logoComponent: PropTypes.node,
 }
 
 Header.defaultProps = {
@@ -186,6 +191,7 @@ Header.defaultProps = {
   notificationOnClick: null,
   infoOnClick: null,
   settingsOnClick: null,
+  logoComponent: null,
 }
 
 const { Component } = attachClassName(Header)
