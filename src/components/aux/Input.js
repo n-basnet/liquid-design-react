@@ -130,6 +130,7 @@ const TextAreaWrapper = styled(InputWrapper)`
 const getTextField = multiline => styled[multiline ? 'textarea' : 'input']`
   background: none;
   padding: 0;
+  margin: 0;
   border: 0;
   font: inherit;
   outline: none;
