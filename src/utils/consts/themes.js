@@ -37,6 +37,7 @@ const themeBase = {
   doubleBoxShadowSmallHover: `0 4px 6px 0 rgba(133, 133, 133, 0.64), 0 2px 5px 0 rgba(114, 117, 117, 0.12)`,
   doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
   zIndex: {
+    tabs: 10,
     tooltips: 9,
   },
 }
