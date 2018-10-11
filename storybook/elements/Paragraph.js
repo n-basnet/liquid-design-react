@@ -7,24 +7,17 @@ import {
   getPropTablesExcludeList,
   getTextKnob,
   getSnippetTemplate,
+  getCustomPlaceholderText,
 } from '../helpers'
 import { default as EnhancedParagraph, Paragraph } from '~/elements/Paragraph'
 
-const defaultText = `We've been around for 350 years, yet our majority owners are still the
-descendants of Friedrich Jacob Merck, the man who founded our company in Darmstadt, Germany in 1668.
-Since then, we have become a truly global company, with 52,000 employees in 66 countries working on
-breakthrough solutions and technologies.`
-
 const getDefaultProps = () => ({
-  children: getTextKnob({ defaultText }),
+  children: getTextKnob({ defaultText: getCustomPlaceholderText() }),
 })
 
 const getParagraphSnippet = type => `
   <Paragraph${type ? ` type="${type}"` : ``}>
-    We've been around for 350 years, yet our majority owners are still the
-    descendants of Friedrich Jacob Merck, the man who founded our company in Darmstadt, Germany in 1668.
-    Since then, we have become a truly global company, with 52,000 employees in 66 countries working on
-    breakthrough solutions and technologies.
+    ${getCustomPlaceholderText()}
   </Paragraph>
   `
 
@@ -97,7 +90,7 @@ storiesOf('Elements/Paragraph', module)
     'Paragraph with a Link',
     () => (
       <EnhancedParagraph>
-        {getTextKnob({ defaultText })} <a>Read More</a>
+        {getDefaultProps().children} <a>Read More</a>
       </EnhancedParagraph>
     ),
     getSnippetTemplate(`

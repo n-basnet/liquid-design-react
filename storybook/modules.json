@@ -167,5 +167,10 @@
   {
     "name": "Logo",
     "type": "element"
+  },
+  {
+    "name": "Table",
+    "type": "component",
+    "hasIndexFile": true
   }
 ]

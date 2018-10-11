@@ -11,7 +11,7 @@ import PlaceholderRectangular from '~/assets/svgIllustrations/placeholder/rectan
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 import { getFirstTruthyKeyName } from '~/utils/aux'
 
-const PLACEHOLDER_CLASSNAME = getClassName({ name: 'Placeholder' })
+export const PLACEHOLDER_CLASSNAME = getClassName({ name: 'Placeholder' })
 
 const PlaceholderImages = {
   isCircularWhite: PlaceholderCircularWhite,

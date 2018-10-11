@@ -37,7 +37,9 @@ const getTextFieldSnippet = props => `
 `
 
 const STORIES = getStoriesByVersions({
+  joinString: ' - ',
   versions: [
+    { name: 'default', props: {} },
     { name: 'grey', props: { grey: true } },
     { name: 'grey multiline', props: { multiline: true, grey: true } },
     { name: 'multiline', props: { multiline: true } },

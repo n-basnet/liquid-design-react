@@ -37,19 +37,15 @@ const storybookFileTemplate = ({ name, type }) =>
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import {
-  getBackgroundWrapper,
-  includeComponentInPropTable,
-  getPropTablesExcludeList,
-} from '../helpers'
+import { getBackgroundWrapper, getPropTablesExcludeList } from '../helpers'
 import { default as Enhanced${name}, ${name} } from '~/${type}s/${name}'
 
 storiesOf('${formatTypeString(type)}/${name}', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(${name}))
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([Enhanced${name}]),
+      propTables: [${name}],
     },
   })
   .add('default', () => (

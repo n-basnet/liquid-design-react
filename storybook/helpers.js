@@ -30,6 +30,16 @@ export const includeComponentInPropTable = (Component, props = {}) => storyFn =>
 )
 
 export const placeholderText = amount => loremIpsum(amount, 'w')
+export const getCustomPlaceholderText = () =>
+  "We've been around for 350 years, yet our majority owners are still the descendants of Friedrich Jacob Merck, the man who founded our company in Darmstadt, Germany in 1668. Since then, we have become a truly global company, with 52,000 employees in 66 countries working on breakthrough solutions and technologies."
+
+export const getDeterministicPlaceholderText = (seed, maxAmount = 3) => {
+  const words = placeholderText(seed).split(' ')
+  return words
+    .slice(Math.max(words.length - maxAmount, 0))
+    .join(' ')
+    .replace(',', '')
+}
 
 export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLength = 30 } = {}) =>
   text(name, defaultText || placeholderText(placeholderTextLength))
@@ -38,10 +48,9 @@ export const formatList = list => list.map(v => `\`${v}\``).join(', ')
 
 export const getPropTablesExcludeList = (list = []) => [Fragment, BackgroundWrapper, ...list]
 
-export const getStoriesByVersions = ({ versions, subversions }) => {
-  const DEFAULT_VERSION = { name: 'default' }
-  const VERSIONS = [DEFAULT_VERSION, ...versions]
-  const SUBVERSIONS = [DEFAULT_VERSION, ...subversions]
+export const getStoriesByVersions = ({ versions, subversions, joinString = ' ' }) => {
+  const VERSIONS = versions
+  const SUBVERSIONS = [{ name: '', props: {} }, ...subversions]
   const pairs = []
   VERSIONS.map((versionObject, i) => {
     const version = versionObject.name
@@ -52,11 +61,11 @@ export const getStoriesByVersions = ({ versions, subversions }) => {
         ...(versionObject.props || {}),
         ...(subversionObject.props || {}),
       }
-      const subversionName = !isSame && subversionObject !== DEFAULT_VERSION && subversion
+      const subversionName = !isSame && subversion
       pairs.push({
         version,
         subversion: subversionName,
-        name: `${version}${subversionName ? ` - ${subversionName}` : ''}`,
+        name: `${version}${subversionName ? `${joinString}${subversionName}` : ''}`,
         props,
       })
     })
@@ -68,7 +77,7 @@ export const getSnippetTemplate = (snippet, description) => ({
   info: {
     text: `${description || ``}
   ~~~js
-  ${snippet}
+  ${snippet.trim()}
   ~~~
 `,
   },

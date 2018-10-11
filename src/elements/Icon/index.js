@@ -31,6 +31,8 @@ const IconWrapper = styled.div`
       top: 0;
       left: 0;
     }
+
+    ${css([props.styledCSS])};
   `};
 `
 
@@ -75,16 +77,19 @@ Icon.propTypes = {
   unit: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  /** styling to be passed to `styled-components` instance */
+  styledCSS: PropTypes.array,
 }
 
 Icon.defaultProps = {
+  isFilled: false,
   size: DEFAULT_SIZE,
   secondary: false,
   color: '',
   unit: DEFAULT_UNIT,
   onClick: null,
   className: null,
-  isFilled: false,
+  styledCSS: [],
 }
 
 export const Glyph = withTheme(Icon)

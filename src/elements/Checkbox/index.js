@@ -21,7 +21,6 @@ export const CheckboxWrapper = styled.div`
     `};
   .${ICON_CLASSNAME} svg {
     transition: fill 200ms;
-    border-radius: 8px;
     &:hover {
       ${props =>
     !props.disabled &&
@@ -53,6 +52,7 @@ export class Checkbox extends PureComponent {
     isChecked: PropTypes.bool,
     label: PropTypes.string,
     onChange: PropTypes.func,
+    iconSize: PropTypes.number,
     className: PropTypes.string,
   }
 
@@ -61,6 +61,7 @@ export class Checkbox extends PureComponent {
     isChecked: undefined,
     label: null,
     onChange: null,
+    iconSize: 24,
     className: null,
   }
 
@@ -89,7 +90,7 @@ export class Checkbox extends PureComponent {
   }
 
   render() {
-    const { disabled, label, className, ...props } = this.props
+    const { disabled, label, className, iconSize, ...props } = this.props
     const { hover } = this.state
     const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
 
@@ -98,6 +99,7 @@ export class Checkbox extends PureComponent {
         className={cx(className, {
           [CHECKBOX_CLASSNAMES.UNCHECKED]: !this.isChecked(),
           [CHECKBOX_CLASSNAMES.CHECKED]: this.isChecked(),
+          [CHECKBOX_CLASSNAMES.HOVER]: hover,
         })}
         disabled={disabled}
         checked={this.isChecked()}
@@ -112,8 +114,9 @@ export class Checkbox extends PureComponent {
         <Glyph
           name={`checkbox${iconVersion}`}
           color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
+          size={iconSize}
         />
-        <Label disabled={disabled}>{label}</Label>
+        {label && <Label disabled={disabled}>{label}</Label>}
       </CheckboxWrapper>
     )
   }
@@ -124,6 +127,7 @@ export const CHECKBOX_CLASSNAMES = {
   BASE: CHECKBOX_CLASSNAME_BASE,
   UNCHECKED: `${CHECKBOX_CLASSNAME_BASE}--unchecked`,
   CHECKED: `${CHECKBOX_CLASSNAME_BASE}--checked`,
+  HOVER: `${CHECKBOX_CLASSNAME_BASE}--hover`,
 }
 
 const { Component, globalClassName } = attachClassName(Checkbox)
