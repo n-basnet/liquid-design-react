@@ -6,6 +6,7 @@ import {
   getBackgroundWrapper,
   includeComponentInPropTable,
   getPropTablesExcludeList,
+  getSnippetTemplate,
 } from '../helpers'
 const sampleDate1 = new Date()
 const sampleDate2 = new Date()
@@ -24,47 +25,32 @@ storiesOf('Modules/Calendar', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedCalendar]),
     },
   })
-  .add('default', () => <EnhancedCalendar />, {
-    info: {
-      text: `
-      ~~~js
-          <Calendar />
-      ~~~
-      `,
-    },
-  })
-  .add('with custom start of week', () => <EnhancedCalendar startOfWeek={1} />, {
-    info: {
-      text: `
-      ~~~js
-          <Calendar startOfWeek={1}/>
-      ~~~
-      `,
-    },
-  })
-  .add('with appointments', () => <EnhancedCalendar appointments={sampleAppointments} />, {
-    info: {
-      text: `
-      ~~~js
-          <Calendar 
-          appointments={
-            {
-              'Tue Sep 18 2018 18:21:37 GMT+0300 (Eastern European Summer Time)': [
-                {
-                  time: '13:00',
-                  description: 'meeting with Charlie'
-                }
-              ],
-              'Wed Sep 12 2018 18:24:41 GMT+0300 (Eastern European Summer Time)': [
-                {
-                  time: '10:00',
-                  description: 'meeting with Brian'
-                }
-              ]
-            }
+  .add('default', () => <EnhancedCalendar />, getSnippetTemplate(`<Calendar />`))
+  .add(
+    'with custom start of week',
+    () => <EnhancedCalendar startOfWeek={1} />,
+    getSnippetTemplate(`<Calendar startOfWeek={1}/>`)
+  )
+  .add(
+    'with appointments',
+    () => <EnhancedCalendar appointments={sampleAppointments} />,
+    getSnippetTemplate(`
+  <Calendar
+    appointments={
+      {
+        'Tue Sep 18 2018 18:21:37 GMT+0300 (Eastern European Summer Time)': [
+          {
+            time: '13:00',
+            description: 'meeting with Charlie'
           }
-          />
-      ~~~
-      `,
-    },
-  })
+        ],
+        'Wed Sep 12 2018 18:24:41 GMT+0300 (Eastern European Summer Time)': [
+          {
+            time: '10:00',
+            description: 'meeting with Brian'
+          }
+        ]
+      }
+    }
+  />`)
+  )

@@ -1,6 +1,7 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import RcSlider from 'rc-slider'
+import cx from 'classnames'
 
 import SliderWrapper from '~/components/Slider/SliderWrapper'
 import Handle from '~/components/Slider/Handle'
@@ -8,30 +9,38 @@ import { Tooltip } from '~/components/Slider/Tooltip'
 import { SliderMax, SliderMin, SliderButton } from '~/components/Slider/SliderRanges'
 import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
+
+const SLIDER_CLASSNAME = getClassName({ name: 'Slider' })
 
 class Slider extends PureComponent {
   static propTypes = {
     defaultValue: PropTypes.number,
     disabled: PropTypes.bool,
-    withIcon: PropTypes.bool,
+    /** Display plus and minus buttons */
+    withButtons: PropTypes.bool,
+    /** Label to display above the slider */
     label: PropTypes.node,
     max: PropTypes.number,
     min: PropTypes.number,
     step: PropTypes.number,
+    /** For external control */
     value: PropTypes.number,
     onChange: PropTypes.func,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
-    defaultValue: 50,
+    defaultValue: 0,
     disabled: false,
-    withIcon: false,
+    withButtons: false,
     label: null,
     max: 100,
     min: 0,
     step: 1,
     value: null,
     onChange: null,
+    className: null,
   }
 
   state = {
@@ -40,15 +49,15 @@ class Slider extends PureComponent {
 
   decreaseValue = () => {
     this.state.value > this.props.min &&
-      this.setState(prevState => ({
-        value: this.state.value - this.props.step,
+      this.setState(({ value }) => ({
+        value: value - this.props.step,
       }))
   }
 
   increaseValue = () => {
     this.state.value < this.props.max &&
-      this.setState(prevState => ({
-        value: this.state.value + this.props.step,
+      this.setState(({ value }) => ({
+        value: value + this.props.step,
       }))
   }
 
@@ -58,21 +67,31 @@ class Slider extends PureComponent {
     })
 
   render() {
-    const { defaultValue, disabled, withIcon, min, max, label, step } = this.props
+    const {
+      defaultValue,
+      disabled,
+      withButtons,
+      min,
+      max,
+      label,
+      step,
+      className,
+      ...props
+    } = this.props
     let { value } = this.state
     if (this.props.value !== null) {
       value = this.props.value
     }
 
     return (
-      <Fragment>
+      <div className={cx(className, SLIDER_CLASSNAME)} {...props}>
         {label && <Label style={{ opacity: disabled && 0.5 }}>{label}</Label>}
         <SliderWrapper disabled={disabled}>
-          <SliderMin disabled={disabled} withIcon={withIcon}>
-            {withIcon ? (
+          <SliderMin disabled={disabled} withButtons={withButtons}>
+            {withButtons ? (
               <SliderButton
                 disabled={disabled}
-                withIcon={withIcon}
+                withButtons={withButtons}
                 onClick={disabled ? null : this.decreaseValue}
               >
                 <Glyph
@@ -101,11 +120,11 @@ class Slider extends PureComponent {
               {value}
             </Tooltip>
           </RcSlider>
-          <SliderMax disabled={disabled} withIcon={withIcon}>
-            {withIcon ? (
+          <SliderMax disabled={disabled} withButtons={withButtons}>
+            {withButtons ? (
               <SliderButton
                 disabled={disabled}
-                withIcon={withIcon}
+                withButtons={withButtons}
                 onClick={disabled ? null : this.increaseValue}
               >
                 <Glyph
@@ -120,7 +139,7 @@ class Slider extends PureComponent {
             )}
           </SliderMax>
         </SliderWrapper>
-      </Fragment>
+      </div>
     )
   }
 }

@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
@@ -18,6 +19,14 @@ const BackgroundWrapper = styled.div`
 export const getBackgroundWrapper = (props = {}) => storyFn => (
   <BackgroundWrapper {...props}>{storyFn()}</BackgroundWrapper>
 )
+
+// addon-info does not handle Fragment well in `propTablesExclude`
+// https://github.com/storybooks/addon-jsx/issues/34#issuecomment-377270299
+export const Fragment = ({ children }) => children
+Fragment.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+Fragment.displayName = 'React.Fragment'
 
 export const includeComponentInPropTable = (Component, props = {}) => storyFn => (
   <Fragment>

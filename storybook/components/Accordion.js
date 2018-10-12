@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedAccordion, Accordion } from '~/components/Accordion'
+import { times } from '~/utils/aux'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -15,6 +16,11 @@ const defaultProps = {
   children: placeholderText(72),
 }
 
+const getAccordionSnippet = () => `
+  <Accordion title="Section title">
+    lorem ipsum dolor sit amet, consectetur adipiscing…
+  </Accordion>`
+
 storiesOf('Components/Accordion', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(Accordion, defaultProps))
@@ -26,11 +32,7 @@ storiesOf('Components/Accordion', module)
   .add(
     'default single',
     () => <EnhancedAccordion {...defaultProps} />,
-    getSnippetTemplate(`
-      <Accordion title="Section title">
-        lorem ipsum dolor sit amet, consectetur adipiscing…
-      </Accordion>
-  `)
+    getSnippetTemplate(getAccordionSnippet())
   )
   .add(
     'default stacked',
@@ -42,16 +44,9 @@ storiesOf('Components/Accordion', module)
       </section>
     ),
     getSnippetTemplate(`
-      <section>
-        <Accordion title="Section title">
-          lorem ipsum dolor sit amet, consectetur adipiscing…
-        </Accordion>
-        <Accordion title="Section title">
-          lorem ipsum dolor sit amet, consectetur adipiscing…
-        </Accordion>
-        <Accordion title="Section title">
-          lorem ipsum dolor sit amet, consectetur adipiscing…
-        </Accordion>
-      </section>
-    `)
+  <section>${times(3)
+    .map(getAccordionSnippet)
+    .join(' ')}
+  </section>
+  `)
   )

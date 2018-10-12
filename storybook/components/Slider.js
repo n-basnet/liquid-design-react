@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
@@ -16,78 +16,52 @@ const getLabel = () =>
     defaultText: 'Slider label',
   })
 
-class SliderApp extends Component {
-  state = {
-    value: 48,
-  }
-
-  updateValue = value => this.setState(prevState => ({ value }))
-
-  render() {
-    return <Slider value={this.state.value} withIcon onChange={this.updateValue} />
-  }
-}
-
 const getSliderSnippet = props => `
-  <Slider ${props || ``} label={getLabel()} onChange={action('onChange')} />
+  <Slider ${props || ``} />
 `
 
-storiesOf('Components/Slider', module)
+const params = {
+  info: {
+    propTables: [Slider],
+    propTablesExclude: getPropTablesExcludeList([]),
+    excludedPropTypes: ['className'],
+  },
+}
+
+storiesOf('Components/Slider/with buttons', module)
   .addDecorator(getBackgroundWrapper({ style: { maxWidth: '330px' } }))
-  .addParameters({
-    info: {
-      propTables: [Slider],
-      propTablesExclude: getPropTablesExcludeList([SliderApp]),
-    },
-  })
+  .addParameters(params)
   .add(
-    'with label default',
+    'default',
+    () => <Slider withButtons onChange={action('onChange')} />,
+    getSnippetTemplate(getSliderSnippet('withButtons'))
+  )
+  .add(
+    'with default value',
+    () => <Slider defaultValue={48} withButtons onChange={action('onChange')} />,
+    getSnippetTemplate(getSliderSnippet('defaultValue={48} withButtons'))
+  )
+  .add(
+    'disabled',
+    () => <Slider disabled withButtons onChange={action('onChange')} />,
+    getSnippetTemplate(getSliderSnippet('disabled withButtons'))
+  )
+
+storiesOf('Components/Slider/with label', module)
+  .addDecorator(getBackgroundWrapper({ style: { maxWidth: '330px' } }))
+  .addParameters(params)
+  .add(
+    'default',
     () => <Slider defaultValue={0} label={getLabel()} onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={0}'))
+    getSnippetTemplate(getSliderSnippet("label='Slider label'"))
   )
   .add(
-    'with label selected',
+    'with default value',
     () => <Slider defaultValue={48} label={getLabel()} onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={48} '))
+    getSnippetTemplate(getSliderSnippet("defaultValue={48} label='Slider label'"))
   )
   .add(
-    'with label disabled',
+    'disabled',
     () => <Slider defaultValue={0} disabled label={getLabel()} onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={0} disabled'))
+    getSnippetTemplate(getSliderSnippet("label='Slider label' disabled"))
   )
-  .add(
-    'without label default',
-    () => <Slider defaultValue={0} withIcon onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={0} withIcon'))
-  )
-  .add(
-    'without label selected',
-    () => <Slider defaultValue={48} withIcon onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={48} withIcon'))
-  )
-  .add(
-    'without label disabled',
-    () => <Slider defaultValue={0} disabled withIcon onChange={action('onChange')} />,
-    getSnippetTemplate(getSliderSnippet('defaultValue={0} disabled withIcon'))
-  )
-  .add('slider with provided external state', () => <SliderApp />, {
-    info: {
-      text: `
-    Instead of using Slider's internal state, it is possible to provide an external state through the value prop. See the example below:
-
-    ~~~js
-    class SliderApp extends Component {
-      state = {
-        value: 48,
-      }
-
-      updateValue = value => this.setState(prevState => ({ value }))
-
-      render() {
-        return <Slider value={this.state.value} withIcon onChange={this.updateValue} />
-      }
-    }
-    ~~~
-  `,
-    },
-  })

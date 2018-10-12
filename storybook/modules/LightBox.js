@@ -48,7 +48,7 @@ storiesOf('Modules/LightBox', module)
       openLightBox = () => {
         this.setState({ open: true })
       }
-      closeModal = () => {
+      closeLightBox = () => {
         this.setState({ open: false })
       }
       render() {

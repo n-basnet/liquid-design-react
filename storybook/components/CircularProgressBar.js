@@ -15,6 +15,7 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getTextKnob,
+  getSnippetTemplate,
 } from '../helpers'
 import getProgressBarApp from './ProgressBarApp'
 
@@ -34,6 +35,11 @@ const CircularProgressBarStoryWrapper = styled.div`
   }
 `
 
+const getCodeSnippet = props =>
+  getSnippetTemplate(`
+  <CircularProgressBar ${props} />
+`)
+
 storiesOf('Components/CircularProgressBar', module)
   .addDecorator(getBackgroundWrapper())
   .addDecorator(includeComponentInPropTable(CircularProgressBar, { theme: DEFAULT_THEME }))
@@ -50,7 +56,23 @@ storiesOf('Components/CircularProgressBar', module)
   .addDecorator(storyFn => (
     <CircularProgressBarStoryWrapper>{storyFn()}</CircularProgressBarStoryWrapper>
   ))
-  .add('default', () => <CircularProgressBarApp {...getDefaultProps()} />)
-  .add('overdue', () => <CircularProgressBarApp {...getDefaultProps()} defaultValue={150} />)
-  .add('disabled', () => <CircularProgressBarApp {...getDefaultProps()} disabled />)
-  .add('using theme colors', () => <CircularProgressBarApp {...getDefaultProps()} useThemeColors />)
+  .add(
+    'default',
+    () => <CircularProgressBarApp {...getDefaultProps()} />,
+    getCodeSnippet(`value={50}`)
+  )
+  .add(
+    'overdue',
+    () => <CircularProgressBarApp {...getDefaultProps()} defaultValue={150} />,
+    getCodeSnippet(`value={150}`)
+  )
+  .add(
+    'disabled',
+    () => <CircularProgressBarApp {...getDefaultProps()} disabled />,
+    getCodeSnippet(`value={50} disabled`)
+  )
+  .add(
+    'using theme colors',
+    () => <CircularProgressBarApp {...getDefaultProps()} useThemeColors />,
+    getCodeSnippet(`value={50} useThemeColors`)
+  )

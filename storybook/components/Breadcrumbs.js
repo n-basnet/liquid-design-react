@@ -52,9 +52,9 @@ class BreadcrumbsApp extends PureComponent {
 const getBreadcrumbsSnippet = props => `
   <Breadcrumbs
     items={[
-      {name: 'Breadcrumb 1',onClick: onClickHandler},
-      {name: 'Breadcrumb 2',onClick: onClickHandler},
-      {name: 'Breadcrumb 3',onClick: onClickHandler},
+      { content: 'Breadcrumb 1', onClick: onClickHandler },
+      { content: 'Breadcrumb 2', onClick: onClickHandler },
+      { content: 'Breadcrumb 3', onClick: onClickHandler },
     ]} ${props || ``}
   />
 `
@@ -86,9 +86,9 @@ storiesOf('Components/Breadcrumbs', module)
     getSnippetTemplate(`
   <Breadcrumbs
     items={[
-      {name: 'Breadcrumb 1',onClick: onClickHandler},
-      {name: 'Breadcrumb 2',disabled: true},
-      {name: 'Breadcrumb 3',onClick: onClickHandler},
+      { content: 'Breadcrumb 1', onClick: onClickHandler },
+      { content: 'Breadcrumb 2', disabled: true },
+      { content: 'Breadcrumb 3', onClick: onClickHandler },
     ]}
   />
 `)

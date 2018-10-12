@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react'
 
 import {
   getBackgroundWrapper,
-  includeComponentInPropTable,
   getPropTablesExcludeList,
   getTextKnob,
   getSnippetTemplate,
@@ -19,10 +18,10 @@ const labelDescription = `\`Label\` component renders a \`<div>\` tag. It can be
 
 storiesOf('Elements/Label', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(Label))
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([EnhancedLabel]),
+      propTables: [Label],
     },
   })
   .add(

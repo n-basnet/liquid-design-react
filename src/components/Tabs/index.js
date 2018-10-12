@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+import cx from 'classnames'
 
 import { tabsPropTypes, tabsDefaultProps } from '~/components/Tabs/propTypes'
 import TabHead from '~/components/Tabs/TabHead'
 import TabContent from '~/components/Tabs/TabContent'
 import { media } from '~/utils/styling'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
+
+const TABS_CLASSNAME = getClassName({ name: 'Tabs' })
 
 const TabsWrapper = styled.div`
   ${process.env.NODE_ENV === 'test'
@@ -75,7 +79,7 @@ class Tabs extends Component {
     tabsData: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
-        content: PropTypes.string,
+        content: PropTypes.node,
       })
     ).isRequired,
     disabledIndexes: PropTypes.arrayOf(PropTypes.number),
@@ -94,6 +98,7 @@ class Tabs extends Component {
      * will equal to 100vw - 40px
      */
     mobileSafariGap: PropTypes.string,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
@@ -101,6 +106,7 @@ class Tabs extends Component {
     disabledIndexes: [],
     mobileSafariViewportWidth: 100,
     mobileSafariGap: null,
+    className: null,
   }
 
   state = {
@@ -114,7 +120,7 @@ class Tabs extends Component {
         id={index}
         disabled={this.props.disabledIndexes.indexOf(index) !== -1}
         key={`${index}-${tab.name}`}
-        onClick={this.selectTab}
+        onClick={this.getTabClickHandler(index)}
         selectedTabId={this.state.selectedTabId}
         lastTabId={this.props.tabsData.length - 1}
       >
@@ -129,15 +135,23 @@ class Tabs extends Component {
       </TabContent>
     ))
 
-  selectTab = event => this.setState({ selectedTabId: parseInt(event.target.id) })
+  getTabClickHandler = selectedTabId => () => this.setState({ selectedTabId })
 
   render() {
-    const { appearance, mobileSafariViewportWidth, mobileSafariGap } = this.props
+    const {
+      appearance,
+      mobileSafariViewportWidth,
+      mobileSafariGap,
+      className,
+      ...props
+    } = this.props
 
     return (
       <TabsWrapper
         mobileSafariViewportWidth={mobileSafariViewportWidth}
         mobileSafariGap={mobileSafariGap}
+        className={cx(className, TABS_CLASSNAME)}
+        {...props}
       >
         <TabHeadsWrapper appearance={appearance}>
           <ScrollBarHack>{this.renderTabHeads()}</ScrollBarHack>

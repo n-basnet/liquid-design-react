@@ -6,121 +6,94 @@ import { times } from '~/utils/aux'
 import {
   getBackgroundWrapper,
   getTextKnob,
-  includeComponentInPropTable,
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
 import { default as EnhancedList, List } from '~/elements/List'
 
-const getListHead = () => getTextKnob({ name: 'list head', defaultText: 'List head 01' })
+const getListHead = () => getTextKnob({ name: 'list head', defaultText: 'List head' })
 
-const getListItem = id => getTextKnob({ name: `list item ${id}`, defaultText: 'List 01' })
-
-const getItems = () => times(5).map(getListItem)
-
-const getDefaultProps = (withIcons = true) => ({
-  ...(withIcons && { icon: 'star' }),
-  items: getItems(),
-  listHead: getListHead(),
-  onClick: action('click'),
+const getListItem = withIcon => index => ({
+  name: getTextKnob({
+    name: `list item ${index + 1}`,
+    defaultText: `List item ${index + 1}`,
+  }),
+  onClick: action(`click item ${index + 1}`),
+  ...(withIcon && { iconName: 'star' }),
 })
 
-const getListWithIconsSnippet = props => `
-  <List
-    icon="star"
-    items={[
-      'List 01',
-      'List 01',
-      'List 01',
-      …
-    ]}
-    listHead="List head 01"
-    onClick={onClickHandler}${props || ``}
-  />
-`
-const getListWithoutIconsSnippet = props => `
+const getDefaultProps = (withIcon = true) => ({
+  items: times(5).map(getListItem(withIcon)),
+  listHead: { name: getListHead(), ...(withIcon && { iconName: 'star' }) },
+})
+
+const getSnippet = (props, withIcon) => `
   <List
     items={[
-      'List 01',
-      'List 01',
-      'List 01',
-      …
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
     ]}
-    listHead="List head 01"
-    onClick={onClickHandler}${props || ``}
+    listHead={{ name: 'List head'${withIcon ? `, iconName: 'star'` : ''} }}${
+  props
+    ? `
+    ${props}`
+    : ''
+}
   />
 `
 
 const params = {
   info: {
     propTablesExclude: getPropTablesExcludeList([EnhancedList]),
+    propTables: [List],
   },
 }
 
-storiesOf('Elements/List/list with icons', module)
+storiesOf('Elements/List', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(List, getDefaultProps()))
   .addParameters(params)
   .add(
-    'transparent',
-    () => <EnhancedList {...getDefaultProps()} />,
-    getSnippetTemplate(getListWithIconsSnippet())
-  )
-  .add(
-    'grey',
-    () => <EnhancedList grey {...getDefaultProps()} />,
-    getSnippetTemplate(
-      getListWithIconsSnippet(`
-    grey`)
-    )
-  )
-  .add(
-    'active',
-    () => <EnhancedList activeItemIndex={1} {...getDefaultProps()} />,
-    getSnippetTemplate(
-      getListWithIconsSnippet(`
-    activeItemIndex={1}`)
-    )
-  )
-  .add(
-    'disabled',
-    () => <EnhancedList disabledItemIndex={1} {...getDefaultProps()} />,
-    getSnippetTemplate(
-      getListWithIconsSnippet(`
-    disabledItemIndex={1}`)
-    )
-  )
-
-storiesOf('Elements/List/list without icons', module)
-  .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(List, getDefaultProps()))
-  .addParameters(params)
-  .add(
-    'transparent',
+    'default',
     () => <EnhancedList {...getDefaultProps(false)} />,
-    getSnippetTemplate(getListWithoutIconsSnippet())
+    getSnippetTemplate(getSnippet())
   )
   .add(
     'grey',
     () => <EnhancedList grey {...getDefaultProps(false)} />,
-    getSnippetTemplate(
-      getListWithoutIconsSnippet(`
-    grey`)
-    )
+    getSnippetTemplate(getSnippet(`grey`))
   )
   .add(
     'active',
     () => <EnhancedList activeItemIndex={1} {...getDefaultProps(false)} />,
-    getSnippetTemplate(
-      getListWithoutIconsSnippet(`
-    activeItemIndex={1}`)
-    )
+    getSnippetTemplate(getSnippet(`activeItemIndex={1}`))
   )
   .add(
     'disabled',
     () => <EnhancedList disabledItemIndex={1} {...getDefaultProps(false)} />,
-    getSnippetTemplate(
-      getListWithoutIconsSnippet(`
-    disabledItemIndex={1}`)
-    )
+    getSnippetTemplate(getSnippet(`disabledItemIndex={1}`))
+  )
+
+storiesOf('Elements/List/with icons', module)
+  .addDecorator(getBackgroundWrapper())
+  .addParameters(params)
+  .add(
+    'default',
+    () => <EnhancedList {...getDefaultProps()} />,
+    getSnippetTemplate(getSnippet(null, true))
+  )
+  .add(
+    'grey',
+    () => <EnhancedList grey {...getDefaultProps()} />,
+    getSnippetTemplate(getSnippet(`grey`, true))
+  )
+  .add(
+    'active',
+    () => <EnhancedList activeItemIndex={1} {...getDefaultProps()} />,
+    getSnippetTemplate(getSnippet(`activeItemIndex={1}`, true))
+  )
+  .add(
+    'disabled',
+    () => <EnhancedList disabledItemIndex={1} {...getDefaultProps()} />,
+    getSnippetTemplate(getSnippet(`disabledItemIndex={1}`, true))
   )

@@ -75,7 +75,7 @@ const getInfoMD = props => ({
       {name: 'Option 1', id: '1'},
       {name: 'Option 2', id: '2'},
     ]}${props || ''}
-  >`}
+  />`}
   ~~~
 `,
   },

@@ -26,6 +26,7 @@ Tag.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.string,
   label: PropTypes.node,
+  /** Outine styling */
   outline: PropTypes.bool,
   onIconClick: PropTypes.func,
   iconSize: PropTypes.number,

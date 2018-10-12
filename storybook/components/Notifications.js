@@ -97,6 +97,7 @@ storiesOf('Components/Notifications', module)
     info: {
       source: false,
       propTablesExclude,
+      excludedPropTypes: ['className'],
     },
   })
   .add('single', () => (

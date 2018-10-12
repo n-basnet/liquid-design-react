@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 
@@ -7,6 +7,7 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getSnippetTemplate,
+  Fragment,
 } from '../helpers'
 import {
   default as EnhancedLinearProgressBar,

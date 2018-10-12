@@ -42,7 +42,7 @@ class RadioButtonApp extends PureComponent {
 }
 
 const getRadioButtonSnippet = props => `
-  <RadioButton ${props || ``} label="Radio Button Label" value="radioOne" />
+  <RadioButton ${props ? `${props} ` : ``}label="Radio Button Label" />
 `
 
 const getDefaultProps = isSelected => ({
@@ -61,52 +61,41 @@ storiesOf('Elements/Radio Button', module)
   .add(
     'default',
     () => <EnhancedRadioButton {...getDefaultProps()} />,
-    getSnippetTemplate(getRadioButtonSnippet('selected="radioOne"'))
+    getSnippetTemplate(getRadioButtonSnippet())
   )
   .add(
     'active',
     () => <EnhancedRadioButton {...getDefaultProps(true)} />,
-    getSnippetTemplate(getRadioButtonSnippet('selected="radioOne"'))
+    getSnippetTemplate(getRadioButtonSnippet(`isSelected`))
   )
   .add(
     'disabled',
     () => <EnhancedRadioButton disabled {...getDefaultProps()} />,
     getSnippetTemplate(getRadioButtonSnippet('disabled'))
   )
-  .add('stateful', () => <RadioButtonApp />, {
-    info: {
-      text: `
-      Instead of using Radio Button's internal state, it is possible to provide an external state. See the example below:
-
-      ~~~js
-      class RadioButtonApp extends PureComponent {
-        state = {
-          selectedValue: VALUES[0],
-        }
-
-        getSelectHandler = selectedValue => () => {
-          this.setState({ selectedValue })
-        }
-
-        render() {
-          const { selectedValue } = this.state
-
-          return (
-            <div>
-              {VALUES.map(value => (
-                <EnhancedRadioButton
-                  key={value}
-                  isSelected={selectedValue === value}
-                  onClick={this.getSelectHandler(value)}
-                  label='Radio Button Label'
-                  style={{ display: 'block' }}
-                />
-              ))}
-            </div>
-          )
-        }
-      }
-      ~~~
-    `,
-    },
-  })
+  .add(
+    'stateful',
+    () => <RadioButtonApp />,
+    getSnippetTemplate(`
+  class RadioButtonApp extends PureComponent {
+    state = {
+      selectedValue: 0,
+    }
+    getSelectHandler = selectedValue => () => this.setState({ selectedValue })
+    render() {
+      return (
+        <div>
+          {[0, 1].map(value => (
+            <RadioButton
+              key={value}
+              isSelected={this.state.selectedValue === value}
+              onClick={this.getSelectHandler(value)}
+              label='Radio Button Label'
+            />
+          ))}
+        </div>
+      )
+    }
+  }
+    `)
+  )

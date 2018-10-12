@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const NumberedList = styled.ol`
+export default styled.ol`
   font-size: 18px;
   padding-left: 20px;
   line-height: 1.75;

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Tabs } from '~'
@@ -7,6 +7,7 @@ import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
   getSnippetTemplate,
+  Fragment,
 } from '../helpers'
 
 const getTabData = id => ({
@@ -31,8 +32,17 @@ const getTabsData = () => [
 const disabledIndexes = [1, 2]
 
 const getTabsSnippet = props => `
-  <Tabs ${props ||
-    ``} tabsData={getTabsData()} disabledIndexes={disabledIndexes} mobileSafariGap='80px' />
+  <Tabs
+    tabsData={[
+      { name: 'Tab 1', content: 'Tab 1 content' },
+      { name: 'Tab 2', content: 'Tab 2 content' },
+    ]}${
+  props
+    ? `
+    ${props}`
+    : ''
+}
+  />
 `
 
 storiesOf('Components/Tabs', module)
@@ -54,6 +64,7 @@ storiesOf('Components/Tabs', module)
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([getBackgroundWrapper]),
+      excludedPropTypes: ['className'],
     },
   })
   .add(
@@ -61,7 +72,7 @@ storiesOf('Components/Tabs', module)
     () => (
       <Tabs tabsData={getTabsData()} disabledIndexes={disabledIndexes} mobileSafariGap='80px' />
     ),
-    getSnippetTemplate(getTabsSnippet('defaultValue={0}'))
+    getSnippetTemplate(getTabsSnippet())
   )
   .add(
     'bar',

@@ -11,7 +11,7 @@ import {
 import { default as EnhancedFavorite, Favorite } from '~/elements/Favorite'
 
 const getFavoriteSnippet = (props = '') => `
-  <Favorite ${props}onChange={onChangeHandler} />
+  <Favorite ${props}/>
 `
 
 storiesOf('Elements/Favorite', module)

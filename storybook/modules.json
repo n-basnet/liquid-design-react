@@ -1,22 +1,10 @@
 [
   {
+    "name": "Accordion",
+    "type": "component"
+  },
+  {
     "name": "Badge",
-    "type": "component"
-  },
-  {
-    "name": "ContentCard",
-    "type": "component"
-  },
-  {
-    "name": "Card",
-    "type": "element"
-  },
-  {
-    "name": "Icon",
-    "type": "element"
-  },
-  {
-    "name": "Rating",
     "type": "component"
   },
   {
@@ -28,107 +16,27 @@
     "type": "element"
   },
   {
-    "name": "Quote",
-    "type": "component"
+    "name": "Button",
+    "type": "element"
   },
   {
-    "name": "Notifications",
-    "type": "component"
+    "name": "Calendar",
+    "type": "module"
   },
   {
-    "name": "Modal",
-    "type": "component"
+    "name": "Card",
+    "type": "element"
   },
   {
     "name": "Checkbox",
     "type": "element"
   },
   {
-    "name": "Tooltip",
+    "name": "CircularProgressBar",
     "type": "component"
   },
   {
-    "name": "Headline",
-    "type": "element"
-  },
-  {
-    "name": "Paragraph",
-    "type": "element"
-  },
-  {
-    "name": "Label",
-    "type": "element"
-  },
-  {
-    "name": "Link",
-    "type": "element"
-  },
-  {
-    "name": "Accordion",
-    "type": "component"
-  },
-  {
-    "name": "Button",
-    "type": "element"
-  },
-  {
-    "name": "Tag",
-    "type": "element"
-  },
-  {
-    "name": "List",
-    "type": "element"
-  },
-  {
-    "name": "TextList",
-    "type": "element"
-  },
-  {
-    "name": "Footer",
-    "type": "module"
-  },
-  {
-    "name": "Favorite",
-    "type": "element"
-  },
-  {
-    "name": "Faq",
-    "type": "module"
-  },
-  {
-    "name": "RadioButton",
-    "type": "element"
-  },
-  {
-    "name": "SearchBar",
-    "type": "component"
-  },
-  {
-    "name": "Header",
-    "type": "module"
-  },
-  {
-    "name": "Toggle",
-    "type": "element"
-  },
-  {
-    "name": "FlyOut",
-    "type": "component"
-  },
-  {
-    "name": "Slider",
-    "type": "component"
-  },
-  {
-    "name": "TextField",
-    "type": "element"
-  },
-  {
-    "name": "LightBox",
-    "type": "module"
-  },
-  {
-    "name": "Tabs",
+    "name": "ContentCard",
     "type": "component"
   },
   {
@@ -136,32 +44,60 @@
     "type": "element"
   },
   {
+    "name": "Faq",
+    "type": "module"
+  },
+  {
+    "name": "Favorite",
+    "type": "element"
+  },
+  {
+    "name": "FlyOut",
+    "type": "component"
+  },
+  {
+    "name": "Footer",
+    "type": "module"
+  },
+  {
     "name": "Forms",
     "type": "module",
     "hasIndexFile": true
   },
   {
-    "name": "SocialShare",
-    "type": "component"
+    "name": "Graphics",
+    "type": "element"
   },
   {
-    "name": "Calendar",
+    "name": "Header",
     "type": "module"
   },
   {
-    "name": "StepProgressBar",
-    "type": "component"
+    "name": "Headline",
+    "type": "element"
+  },
+  {
+    "name": "Icon",
+    "type": "element"
+  },
+  {
+    "name": "Label",
+    "type": "element"
+  },
+  {
+    "name": "LightBox",
+    "type": "module"
   },
   {
     "name": "LinearProgressBar",
     "type": "component"
   },
   {
-    "name": "CircularProgressBar",
-    "type": "component"
+    "name": "Link",
+    "type": "element"
   },
   {
-    "name": "Graphics",
+    "name": "List",
     "type": "element"
   },
   {
@@ -169,8 +105,72 @@
     "type": "element"
   },
   {
+    "name": "Modal",
+    "type": "component"
+  },
+  {
+    "name": "Notifications",
+    "type": "component"
+  },
+  {
+    "name": "Paragraph",
+    "type": "element"
+  },
+  {
+    "name": "Quote",
+    "type": "component"
+  },
+  {
+    "name": "RadioButton",
+    "type": "element"
+  },
+  {
+    "name": "Rating",
+    "type": "component"
+  },
+  {
+    "name": "SearchBar",
+    "type": "component"
+  },
+  {
+    "name": "Slider",
+    "type": "component"
+  },
+  {
+    "name": "SocialShare",
+    "type": "component"
+  },
+  {
+    "name": "StepProgressBar",
+    "type": "component"
+  },
+  {
     "name": "Table",
     "type": "component",
     "hasIndexFile": true
+  },
+  {
+    "name": "Tabs",
+    "type": "component"
+  },
+  {
+    "name": "Tag",
+    "type": "element"
+  },
+  {
+    "name": "TextField",
+    "type": "element"
+  },
+  {
+    "name": "TextList",
+    "type": "element"
+  },
+  {
+    "name": "Toggle",
+    "type": "element"
+  },
+  {
+    "name": "Tooltip",
+    "type": "component"
   }
 ]

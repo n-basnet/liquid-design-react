@@ -5,6 +5,12 @@ const camelcase = require('camelcase')
 const storybookModules = require('../storybook/modules.json')
 const fileTemplates = require('./addComponentTemplates.js')
 
+const sortBy = key => (a, b) => {
+  if (a[key] < b[key]) return -1
+  if (a[key] > b[key]) return 1
+  return 0
+}
+
 const COMPONENT_TYPES = ['component', 'element', 'module']
 const QUESTIONS = [
   {
@@ -69,6 +75,8 @@ export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
   )
 
   // add to storybook
-  const newStorybookModules = [...storybookModules, { name: canonisedName, type }]
+  const newStorybookModules = [...storybookModules, { name: canonisedName, type }].sort(
+    sortBy('name')
+  )
   saveFile('storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
 })

@@ -6,12 +6,12 @@ import * as H from '~/elements/Headline/H'
 import * as BH from '~/elements/Headline/BH'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
-export const Headline = ({ children, className, type, ...props }) => {
-  const HEADLINES = {
-    ...H,
-    ...BH,
-  }
+const HEADLINES = {
+  ...H,
+  ...BH,
+}
 
+export const Headline = ({ children, className, type, ...props }) => {
   const HeadlineComponent = HEADLINES[type]
 
   return (
@@ -21,9 +21,11 @@ export const Headline = ({ children, className, type, ...props }) => {
   )
 }
 
+export const HEADLINE_TYPES = Object.keys(HEADLINES)
+
 Headline.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(HEADLINE_TYPES),
   style: PropTypes.object,
   className: PropTypes.string,
 }

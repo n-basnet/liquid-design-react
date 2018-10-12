@@ -29,24 +29,17 @@ class ToggleApp extends React.Component {
 
 const toggleSnippet = {
   description: `
-  Toggles are used to select one out of two available options or to switch between two states.
-
-  Usage:`,
+  Toggles are used to select one out of two available options or to switch between two states.`,
   getSnippet: props => `
-  class ToggleApp extends React.Component {
-    state = {
-      isActive: false,
-    }
-    toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
-    render() {
-      return (
-        <Toggle
-          isActive={this.state.isActive}
-          onClick={onClickHandler}${props || ``}
-        />
-      )
-    }
-  }`,
+  <Toggle
+    isActive
+    onClick={onClickHandler}${
+  props
+    ? `
+    ${props}`
+    : ``
+}
+  />`,
 }
 
 storiesOf('Elements/Toggle', module)
@@ -66,8 +59,7 @@ storiesOf('Elements/Toggle', module)
     'with icons',
     () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />,
     getSnippetTemplate(
-      toggleSnippet.getSnippet(`
-          icons={['circleX', 'circleX']}`),
+      toggleSnippet.getSnippet(`icons={['circleX', 'circleX']}`),
       toggleSnippet.description
     )
   )
@@ -75,18 +67,13 @@ storiesOf('Elements/Toggle', module)
     'with icons disabled',
     () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />,
     getSnippetTemplate(
-      toggleSnippet.getSnippet(`
-          icons={['circleX', 'circleX']}
-          disabled`),
+      toggleSnippet.getSnippet(`icons={['circleX', 'circleX']}
+    disabled`),
       toggleSnippet.description
     )
   )
   .add(
     'disabled',
     () => <EnhancedToggle disabled />,
-    getSnippetTemplate(
-      toggleSnippet.getSnippet(`
-          disabled`),
-      toggleSnippet.description
-    )
+    getSnippetTemplate(toggleSnippet.getSnippet(`disabled`), toggleSnippet.description)
   )

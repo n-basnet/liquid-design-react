@@ -3,7 +3,12 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
 
-import { getBackgroundWrapper, getTextKnob, getSnippetTemplate } from '../helpers'
+import {
+  getBackgroundWrapper,
+  getTextKnob,
+  getSnippetTemplate,
+  getPropTablesExcludeList,
+} from '../helpers'
 import FlyOut from '~/components/FlyOut'
 
 const getOptions = () => [
@@ -42,13 +47,16 @@ const getFlyoutSnippet = props => `
   <FlyOut
     name="Headline"
     options={[
-      {name: 'Option 1',onClick: onClickHandler},
-      {name: 'Option 2',options: [
-        {name: 'Sub Option 1',onClick: onClickHandler},
-        {name: 'Sub Option 2',onClick: onClickHandler},
-        {name: 'Sub Option 3',onClick: onClickHandler},
-      ]},
-      {name: 'Option 3',onClick: onClickHandler}
+      { name: "Option 1" },
+      {
+        name: "Option 2",
+        options: [
+          { name: "Sub Option 1" },
+          { name: "Sub Option 2" },
+          { name: "Sub Option 3" }
+        ]
+      },
+      { name: "Option 3" }
     ]}${props || ``}
   />
 `
@@ -58,6 +66,12 @@ const getHeadline = () => getTextKnob({ defaultText: 'Headline', name: 'headline
 
 storiesOf('Components/FlyOut', module)
   .addDecorator(getBackgroundWrapper())
+  .addParameters({
+    info: {
+      propTablesExclude: getPropTablesExcludeList([]),
+      excludedPropTypes: ['className'],
+    },
+  })
   .add(
     'right aligned',
     () => (

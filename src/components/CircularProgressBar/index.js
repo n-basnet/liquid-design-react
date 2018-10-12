@@ -79,6 +79,7 @@ CircularProgressBar.propTypes = {
   value: PropTypes.number,
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  /** By default, green & red will be used. Use this option to use primary & secondary theme color instead. */
   useThemeColors: PropTypes.bool,
   className: PropTypes.string,
 }

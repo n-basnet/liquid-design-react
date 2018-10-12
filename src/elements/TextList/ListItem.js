@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export const ListItem = ({ name, children }) => (
+const ListItem = ({ name, children }) => (
   <li>
     {name}
     {children}
@@ -16,3 +16,5 @@ ListItem.propTypes = {
 ListItem.defaultProps = {
   children: null,
 }
+
+export default ListItem

@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { getTextKnob } from '../../helpers'
 import { action } from '@storybook/addon-actions'
 
 import { TextField, Headline, Checkbox, Button } from '~'
@@ -12,6 +11,7 @@ import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
 import FlexRowsWrapper from './FlexRowsWrapper'
 import ProfileFormPart from './ProfileFormPart'
 import { media } from '~/utils/styling'
+import { getTextKnob, Fragment } from '../../helpers'
 
 const FormAppContainer = styled.div`
   .${HEADLINE_CLASSNAME}--H2 {

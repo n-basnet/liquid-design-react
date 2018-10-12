@@ -71,10 +71,13 @@ export const SocialShare = ({ hasLabel, type, ...props }) => (
 SocialShare.propTypes = {
   type: PropTypes.oneOf(Object.keys(labelMap)).isRequired,
   hasLabel: PropTypes.bool,
+  // just to be explicit about the possiblity of a click handler
+  onClick: PropTypes.func,
 }
 
 SocialShare.defaultProps = {
   hasLabel: false,
+  onClick: null,
 }
 
 const { Component } = attachClassName(SocialShare)

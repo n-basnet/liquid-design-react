@@ -23,11 +23,11 @@ const getFooterSnippet = () => `
   <Footer
     headlineContent="Get started today and bring your business idea to …"
     iconsNamesAndActions={[
-      {name: 'circleX',onClick: onClickHandler},
-      {name: 'circleX',onClick: onClickHandler},
-      {name: 'circleX',onClick: onClickHandler},
+      { name: "circleX", onClick: onClickHandler },
+      { name: "circleX", onClick: onClickHandler },
+      { name: "circleX", onClick: onClickHandler },
     ]}
-    labelsTexts={['Label Text','Label Text','Label Text']}
+    labelsTexts={["Label Text", "Label Text", "Label Text"]}
     mainIconName="circleX"
   />
 `

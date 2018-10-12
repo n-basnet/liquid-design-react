@@ -16,7 +16,7 @@ const defaultProps = {
 }
 
 const getCheckboxSnippet = props => `
-  <Checkbox ${props || ``}label="Checkbox text" onChange={onChangeHandler} />
+  <Checkbox ${props || ``}label='Checkbox text' onChange={onChangeHandler} />
 `
 
 storiesOf('Elements/Checkbox', module)
@@ -25,6 +25,7 @@ storiesOf('Elements/Checkbox', module)
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([EnhancedCheckbox]),
+      excludedPropTypes: ['className'],
     },
   })
   .add('default', () => <Checkbox {...defaultProps} />, getSnippetTemplate(getCheckboxSnippet()))

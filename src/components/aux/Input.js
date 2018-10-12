@@ -171,8 +171,9 @@ class Input extends PureComponent {
     focused: false,
     height: TEXTFIELD_MIN_HEIGHT,
   }
-  getFocusStateHandler = (focused, callback) => () => {
-    this.setState({ focused }, () => callback(focused))
+  getFocusStateHandler = (focused, callback) => event => {
+    event.persist()
+    this.setState({ focused }, () => callback(event))
   }
   ComponentName = getTextField(this.props.multiline)
   handleResize = (_, { size }) => this.setState({ height: size.height })

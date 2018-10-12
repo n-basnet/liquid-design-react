@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { action } from '@storybook/addon-actions'
 
@@ -6,7 +6,7 @@ import Table, { TABLE_CLASSNAME } from '~/components/Table'
 import { PLACEHOLDER_CLASSNAME } from '~/elements/Placeholder'
 import { times } from '~/utils/aux'
 
-import { getCustomPlaceholderText } from '../../helpers'
+import { getCustomPlaceholderText, Fragment } from '../../helpers'
 import { NameCell, RegularCell, ColumnCell, RowInfoWrapper } from './cells'
 
 const COLUMNS_AMOUNT = 4

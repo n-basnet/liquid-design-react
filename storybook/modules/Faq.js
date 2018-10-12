@@ -46,13 +46,25 @@ storiesOf('Modules/Faq', module)
     'default',
     () => <EnhancedFaq faqContent={faqContent} headlinesTexts={headlinesTexts} />,
     getSnippetTemplate(`
-    <Faq
-      faqContent={[
-        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
-        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
-        {content: 'lorem ipsum dolor sit amet, consectetur adipiscing…',title: 'Section title'},
-      ]}
-      headlinesTexts={{primary: 'Insert Headline', secondary: 'We have been around for 350 years, yet our majority …'}}
-    />
+  <Faq
+    faqContent={[
+      {
+        content: "lorem ipsum dolor sit amet, consectetur adipiscing…",
+        title: "Section title",
+      },
+      {
+        content: "lorem ipsum dolor sit amet, consectetur adipiscing…",
+        title: "Section title",
+      },
+      {
+        content: "lorem ipsum dolor sit amet, consectetur adipiscing…",
+        title: "Section title",
+      },
+    ]}
+    headlinesTexts={{
+      primary: "Insert Headline",
+      secondary: "We have been around for 350 years, yet our majority …",
+    }}
+  />
     `)
   )

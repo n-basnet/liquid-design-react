@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const BulletList = styled.ul`
+export default styled.ul`
   font-size: 18px;
   li {
     line-height: 1.75;

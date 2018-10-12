@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
@@ -8,6 +8,7 @@ import {
   includeComponentInPropTable,
   formatList,
   placeholderText,
+  getSnippetTemplate,
 } from '../helpers'
 import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
 import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
@@ -52,23 +53,27 @@ storiesOf('Components/Tooltip', module)
   .addParameters({
     info: {
       source: false,
+      excludedPropTypes: ['className'],
       propTablesExclude: getPropTablesExcludeList([
         WrappedTooltip,
         ContentWrapper,
         Wrapper,
         GroupWrapper,
         SampleContent,
-        Fragment,
       ]),
     },
   })
-  .add('open', () => (
-    <div style={{ paddingBottom: '180px' }}>
-      <WrappedTooltip isOpen>
-        <SampleContent />
-      </WrappedTooltip>
-    </div>
-  ))
+  .add(
+    'open',
+    () => (
+      <div style={{ paddingBottom: '180px' }}>
+        <WrappedTooltip isOpen>
+          <SampleContent />
+        </WrappedTooltip>
+      </div>
+    ),
+    getSnippetTemplate(`<Tooltip isOpen>Tooltip content</Tooltip>`)
+  )
   .add(
     'default',
     () => (

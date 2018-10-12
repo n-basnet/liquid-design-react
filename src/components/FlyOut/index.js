@@ -7,7 +7,6 @@ import cx from 'classnames'
 import Tooltip, { TOOLTIP_WRAPPER_CLASSNAME } from '~/components/Tooltip'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import FlyOutContent from '~/components/FlyOut/FlyOutContent'
-import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
 import { cursorValue } from '~/utils/styling'
 import { hasCSSFilters } from '~/utils/featureDetects'
 import withResizeListener from '~/components/aux/hoc/withResizeListener'
@@ -84,18 +83,26 @@ const FlyOutWrapper = styled.div`
 @withResizeListener
 export default class FlyOut extends PureComponent {
   static propTypes = {
-    name: flyOutPropTypes.name,
-    options: flyOutPropTypes.options,
+    // copied in components/FlyOut/propTypes to be displayed in prop table
+    name: PropTypes.string,
+    // copied in components/FlyOut/propTypes to be displayed in prop table
+    options: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        onClick: PropTypes.func,
+      })
+    ),
     label: PropTypes.node,
     alignLeft: PropTypes.bool,
     disabled: PropTypes.bool,
+    /** Force width */
     width: PropTypes.number,
     className: PropTypes.string,
   }
 
   static defaultProps = {
-    name: flyOutDefaultProps.name,
-    options: flyOutDefaultProps.options,
+    name: null,
+    options: [],
     label: null,
     alignLeft: false,
     disabled: false,

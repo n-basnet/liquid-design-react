@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedBadge, Badge } from '~/components/Badge'
@@ -7,6 +7,7 @@ import {
   includeComponentInPropTable,
   getTextKnob,
   getSnippetTemplate,
+  getPropTablesExcludeList,
 } from '../helpers'
 
 const defaultText = 'Delivery in 3-4 days'
@@ -33,7 +34,7 @@ storiesOf('Components/Badge', module)
   .addDecorator(includeComponentInPropTable(Badge, defaultProps))
   .addParameters({
     info: {
-      propTablesExclude: [EnhancedBadge, Fragment],
+      propTablesExclude: getPropTablesExcludeList([EnhancedBadge]),
     },
   })
   .add('default', () => <EnhancedBadge {...defaultProps} />, getSnippetTemplate(getBadgeSnippet()))

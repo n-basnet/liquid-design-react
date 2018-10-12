@@ -1,11 +1,13 @@
 import React from 'react'
-import { shallow } from 'enzyme'
 import RcSlider from 'rc-slider'
+import { shallow } from 'enzyme'
 
 import Slider from '.'
 import Label from '~/elements/Label'
 import { SliderMax, SliderMin, SliderButton } from '~/components/Slider/SliderRanges'
+import { Tooltip } from '~/components/Slider/Tooltip'
 import { Glyph } from '~/elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Slider', () => {
   const defaultValue = 50
@@ -15,9 +17,16 @@ describe('Slider', () => {
   const minIconName = 'minus'
   const maxIconName = 'plus'
   const step = 1
-  const wrapper = shallow(<Slider label={label} step={step} withIcon />)
+
+  const defaultProps = {
+    label,
+    step,
+  }
+
+  const getSliderWrapper = getWrapper(Slider, defaultProps)
 
   it('renders the label', () => {
+    const wrapper = getSliderWrapper()
     expect(
       wrapper
         .find(Label)
@@ -27,76 +36,68 @@ describe('Slider', () => {
   })
 
   it('renders the min value', () => {
-    const wrapper = shallow(<Slider min={min} />)
-    expect(
-      wrapper
-        .find(SliderMin)
-        .children()
-        .text()
-    ).toBe(min.toString())
+    const wrapper = getSliderWrapper({ min })
+    expect(wrapper.find(SliderMin).text()).toBe(min.toString())
   })
 
   it('renders the max value', () => {
-    const wrapper = shallow(<Slider max={max} />)
-    expect(
-      wrapper
-        .find(SliderMax)
-        .children()
-        .text()
-    ).toBe(max.toString())
+    const wrapper = getSliderWrapper({ max })
+    expect(wrapper.find(SliderMax).text()).toBe(max.toString())
   })
 
-  it('renders the min icon', () => {
+  it('renders the min and max icons', () => {
+    const wrapper = getSliderWrapper({ withButtons: true })
     expect(
       wrapper
         .find(SliderMin)
         .find(Glyph)
         .prop('name')
-    ).toEqual(minIconName)
-  })
-
-  it('renders the max icon', () => {
+    ).toBe(minIconName)
     expect(
       wrapper
         .find(SliderMax)
         .find(Glyph)
         .prop('name')
-    ).toEqual(maxIconName)
+    ).toBe(maxIconName)
   })
 
-  it('has a state "value" decreased after the minus is clicked', () => {
+  it('updates value after the minus is clicked', () => {
+    const wrapper = getSliderWrapper({ withButtons: true, defaultValue })
     const decrementResult = defaultValue - step
-    const wrapper = shallow(
-      <Slider defaultValue={defaultValue} label={label} step={step} withIcon />
-    )
 
     wrapper
       .find(SliderMin)
       .find(SliderButton)
       .simulate('click')
-    expect(wrapper.state('value')).toEqual(decrementResult)
+    expect(wrapper.find(Tooltip).text()).toBe(decrementResult.toString())
   })
 
-  it('has a state "value" increased after the plus is clicked', () => {
+  it('updates value after the plus is clicked', () => {
     const incrementedValue = defaultValue + step
-    const wrapper = shallow(
-      <Slider defaultValue={defaultValue} label={label} step={step} withIcon />
-    )
+    const wrapper = getSliderWrapper({ withButtons: true, defaultValue })
 
     wrapper
       .find(SliderMax)
       .find(SliderButton)
       .simulate('click')
-    expect(wrapper.state('value')).toEqual(incrementedValue)
+    expect(wrapper.find(Tooltip).text()).toBe(incrementedValue.toString())
   })
 
-  it('updates the state "value" on change', () => {
-    const valueChange = step
+  it('updates the value on change', () => {
+    const updatedValue = defaultValue + step
     const wrapper = shallow(
-      <Slider defaultValue={defaultValue} label={label} step={step} withIcon />
+      <Slider defaultValue={defaultValue} label={label} step={step} withButtons />
     )
 
-    wrapper.find(RcSlider).simulate('change', defaultValue + valueChange)
-    expect(wrapper.state('value')).toBe(defaultValue + valueChange)
+    wrapper.find(RcSlider).simulate('change', updatedValue)
+    expect(wrapper.state('value')).toBe(updatedValue)
+    expect(
+      wrapper
+        .find(Tooltip)
+        .children()
+        .text()
+    ).toBe(updatedValue.toString())
   })
+
+  everyComponentTestSuite(getSliderWrapper, Slider, 'Slider')
 })

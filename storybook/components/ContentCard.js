@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 
@@ -13,6 +13,7 @@ import {
   getTextKnob,
   includeComponentInPropTable,
   getSnippetTemplate,
+  Fragment,
 } from '../helpers'
 import { times } from '~/utils/aux'
 
@@ -53,8 +54,8 @@ const getContentCardSnippet = props => `
   <ContentCard
     title="Title Name"
     labels={[
-      {name: 'Label 1',value: 'Value / Number 1'},
-      {name: 'Label 2',value: 'Value / Number 2'},
+      { name: 'Label 1', value: 'Value / Number 1' },
+      { name: 'Label 2', value: 'Value / Number 2' },
     ]}${props || ``}
   />
 `
@@ -117,7 +118,7 @@ const getContentCardAppSnippet = props => `
     }
     render () {
       const { isCardActive } = this.state
-      
+
       return (
         <ContentCard active={isCardActive} onClick={this.toggleCardActive}${props || ``} />
       )

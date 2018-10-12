@@ -17,28 +17,26 @@ export const List = ({
   activeItemIndex,
   disabledItemIndex,
   grey,
-  icon,
   items = [],
   listHead,
-  onClick,
   ...props
 }) => {
-  const getItemIcon = isActive => (
-    <Glyph color={`${isActive ? 'primary' : 'richBlack'}.base`} name={icon} size={16} />
+  const getItemIcon = (name, isActive) => (
+    <Glyph color={`${isActive ? 'primary' : 'richBlack'}.base`} name={name} size={16} />
   )
-  const ListItems = items.map((item, index) => {
+  const ListItems = items.map(({ name, iconName, onClick }, index) => {
     const isActive = index === activeItemIndex
+    const isDisabled = index === disabledItemIndex
     return (
       <ListItem
+        key={index}
         active={isActive}
         disabled={index === disabledItemIndex}
         grey={grey}
-        icon={icon}
-        key={index}
-        onClick={index !== disabledItemIndex ? () => onClick(index) : undefined}
+        onClick={!isDisabled && onClick ? onClick : undefined}
       >
-        {icon && getItemIcon(isActive)}
-        <span>{item}</span>
+        {iconName && getItemIcon(iconName, isActive)}
+        <span>{name}</span>
       </ListItem>
     )
   })
@@ -46,8 +44,8 @@ export const List = ({
   return (
     <ListWrapper {...props}>
       <ListHead grey={grey}>
-        {icon && getItemIcon()}
-        {listHead}
+        {listHead.iconName && getItemIcon(listHead.iconName)}
+        {listHead.name}
       </ListHead>
       {ListItems}
     </ListWrapper>
@@ -55,23 +53,27 @@ export const List = ({
 }
 
 List.propTypes = {
+  listHead: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    iconName: PropTypes.string,
+  }).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      iconName: PropTypes.string,
+      onClick: PropTypes.func,
+    })
+  ),
   activeItemIndex: PropTypes.number,
   disabledItemIndex: PropTypes.number,
   grey: PropTypes.bool,
-  icon: PropTypes.string,
-  items: PropTypes.array,
-  listHead: PropTypes.string,
-  onClick: PropTypes.func,
 }
 
 List.defaultProps = {
+  items: [],
   activeItemIndex: null,
   disabledItemIndex: null,
   grey: false,
-  icon: null,
-  items: PropTypes.array,
-  listHead: null,
-  onClick: null,
 }
 
 const { Component } = attachClassName(List)

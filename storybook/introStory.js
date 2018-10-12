@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
@@ -23,23 +23,23 @@ storiesOf('Intro', module)
     },
   })
   .addDecorator(storyFn => (
-    <Fragment>
+    <div>
       <style>{`
       #storybook-theme-wrapper {
         display: none;
       }
     `}</style>
       {storyFn()}
-    </Fragment>
+    </div>
   ))
   .add('About', () => (
-    <Fragment>
+    <div>
       <Heading>liquid-design-react</Heading>
       <div>
         Liquid Design System components for React. Design System and Component Kit to create
         beautifull applications.
       </div>
-    </Fragment>
+    </div>
   ))
   .add('Quick Start', () => <Heading>Quick Start</Heading>, {
     info: {
@@ -131,10 +131,10 @@ storiesOf('Intro', module)
       <Badge text='Hello' />
     </Theme>
     ~~~~
-    
+
     If you want to use your custom theme or to change some params in one of themes provided by library you can pass \`customTheme\` prop to Theme wrapper.
     \`customTheme\` should be an object with a specific shape which will be merged with default theme or theme selected by providing \`themeName\` prop.
-    It can contain either all or only some of the following fields: 
+    It can contain either all or only some of the following fields:
 
     ~~~~js
     const customThemeObj = {

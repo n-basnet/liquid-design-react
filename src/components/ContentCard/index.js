@@ -98,7 +98,7 @@ ContentCard.propTypes = {
   stacked: PropTypes.bool,
   /** active style - with drop shadow */
   active: PropTypes.bool,
-  /** Badge component props, to be attached to the element's bottom */
+  /** Badge component props, to be attached to the element's bottom part */
   badge: PropTypes.shape({
     children: PropTypes.node.isRequired,
     icon: PropTypes.string,

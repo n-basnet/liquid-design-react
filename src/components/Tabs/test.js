@@ -1,30 +1,26 @@
-import React from 'react'
-import { mount, shallow } from 'enzyme'
-
 import Tabs from '.'
 import TabHead from '~/components/Tabs/TabHead'
 import TabContent from '~/components/Tabs/TabContent'
-import Theme from '~/Theme'
+import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Tabs', () => {
-  const content = [
-    {
-      id: 1,
-      name: 'Tab Head 1',
-      content: 'Tab Content 1',
-    },
-    {
-      id: 2,
-      name: 'Tab Head 2',
-      content: 'Tab Head 2',
-    },
-  ]
+  const defaultProps = {
+    tabsData: [
+      {
+        id: 1,
+        name: 'Tab Head 1',
+        content: 'Tab Content 1',
+      },
+      {
+        id: 2,
+        name: 'Tab Head 2',
+        content: 'Tab Head 2',
+      },
+    ],
+  }
+  const getDropdownWrapper = getWrapper(Tabs, defaultProps)
 
-  const wrapper = mount(
-    <Theme>
-      <Tabs tabsData={content} />
-    </Theme>
-  )
+  const wrapper = getDropdownWrapper()
 
   it('renders 2 tab heads', () => {
     expect(wrapper.find(TabHead).length).toBe(2)
@@ -40,7 +36,7 @@ describe('Tabs', () => {
         .find(TabHead)
         .first()
         .text()
-    ).toEqual(content[0]['name'])
+    ).toEqual(defaultProps.tabsData[0]['name'])
   })
 
   it('renders a tab content text correctly', () => {
@@ -49,11 +45,8 @@ describe('Tabs', () => {
         .find(TabContent)
         .first()
         .text()
-    ).toEqual(content[0]['content'])
+    ).toEqual(defaultProps.tabsData[0]['content'])
   })
 
-  it('has an initial state "selectedTabId" equal to 0', () => {
-    const TabsWrapper = shallow(<Tabs tabsData={content} />)
-    expect(TabsWrapper.state().selectedTabId).toBe(0)
-  })
+  everyComponentTestSuite(getDropdownWrapper, Tabs, 'Tabs')
 })

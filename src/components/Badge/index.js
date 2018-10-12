@@ -98,13 +98,13 @@ export const Badge = ({ children, icon, isIconOnRight, disabled, isOnCard, ...pr
 )
 
 Badge.propTypes = {
-  /** text to be displayed in the Badge */
   children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
+  /** Name of the icon to be displayed alongside the badge content */
   icon: PropTypes.string,
   /** By default, icon will be placed on the left side. Use this prop to override this behaviour */
   isIconOnRight: PropTypes.bool,
-  /** Special kind of badge to be displayed on a ContentCard component */
+  /** Special kind of badge styling to be used when displayed on a ContentCard component */
   isOnCard: PropTypes.bool,
 }
 

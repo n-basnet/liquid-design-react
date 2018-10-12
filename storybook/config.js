@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { configureActions } from '@storybook/addon-actions'
 import { withInfo } from '@storybook/addon-info'
@@ -7,6 +7,7 @@ import { setOptions } from '@storybook/addon-options'
 
 import MODULES from './modules.json'
 import ThemeWrapper from './ThemeWrapper'
+import { Fragment } from './helpers'
 
 const runStorybookConfig = async () => {
   configureActions()
@@ -31,7 +32,6 @@ const runStorybookConfig = async () => {
         inline: true,
         header: false,
         source: false,
-        propTablesExclude: [Fragment],
       })
     )
   }

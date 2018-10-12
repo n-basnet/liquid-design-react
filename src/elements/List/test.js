@@ -2,14 +2,13 @@ import List from '.'
 import { ListItem } from '~/elements/List/ListItem'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
-const items = ['item 1', 'item 2', 'item 3']
+const items = [{ name: 'item 1', onClick: jest.fn() }, { name: 'item 2' }, { name: 'item 3' }]
 
 describe('List', () => {
   const defaultProps = {
-    onClick: jest.fn(),
     grey: true,
-    icon: 'star',
     items,
+    listHead: { name: 'List Head' },
     activeItemIndex: 1,
     disabledItemIndex: 2,
   }
@@ -26,7 +25,7 @@ describe('List', () => {
         .find(ListItem)
         .first()
         .text()
-    ).toEqual(items[0])
+    ).toEqual(items[0].name)
   })
 
   it('renders an active ListItem', () => {
@@ -46,11 +45,12 @@ describe('List', () => {
   })
 
   it('calls a function when clicked', () => {
+    const index = 0
     getListWrapper()
       .find(ListItem)
-      .first()
+      .at(index)
       .simulate('click')
-    expect(defaultProps.onClick).toBeCalled()
+    expect(items[index].onClick).toBeCalled()
   })
 
   everyComponentTestSuite(getListWrapper, List, 'List')

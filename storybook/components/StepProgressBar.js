@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
@@ -8,6 +8,7 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getSnippetTemplate,
+  Fragment,
 } from '../helpers'
 import { default as EnhancedStepProgressBar, StepProgressBar } from '~/components/StepProgressBar'
 import Button from '~/elements/Button'
@@ -72,10 +73,10 @@ const getSnippet = (propsString = '', disabledSteps) =>
   <StepProgressBar
     current={1}
     steps={[
-      {name: 'Step label 1'},
-      {name: 'Step label 2'},
-      {name: 'Step label 3'${disabledSteps ? ', disabled: true' : ''}},
-      {name: 'Step label 4'${disabledSteps ? ', disabled: true' : ''}},
+      { name: 'Step label 1' },
+      { name: 'Step label 2' },
+      { name: 'Step label 3'${disabledSteps ? ', disabled: true' : ' '}},
+      { name: 'Step label 4'${disabledSteps ? ', disabled: true' : ' '}},
     ]}${propsString}
   />
 `)

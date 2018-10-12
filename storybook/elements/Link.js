@@ -3,7 +3,6 @@ import { storiesOf } from '@storybook/react'
 
 import {
   getBackgroundWrapper,
-  includeComponentInPropTable,
   getPropTablesExcludeList,
   getTextKnob,
   getSnippetTemplate,
@@ -18,10 +17,10 @@ const getDefaultProps = () => ({
 
 storiesOf('Elements/Link', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(Link))
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([EnhancedLink]),
+      propTables: [Link],
     },
   })
   .add(
