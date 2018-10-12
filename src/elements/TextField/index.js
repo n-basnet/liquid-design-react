@@ -36,7 +36,7 @@ const getInputStyle = multiline => css`
 export default class TextField extends React.Component {
   static propTypes = {
     value: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     required: PropTypes.bool,
     /**
       Takes the value string as input.

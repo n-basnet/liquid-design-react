@@ -9,7 +9,7 @@ import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassN
 
 export class RadioButton extends PureComponent {
   static propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.node.isRequired,
     isSelected: PropTypes.bool,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,

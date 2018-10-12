@@ -14,7 +14,7 @@ class Slider extends PureComponent {
     defaultValue: PropTypes.number,
     disabled: PropTypes.bool,
     withIcon: PropTypes.bool,
-    label: PropTypes.string,
+    label: PropTypes.node,
     max: PropTypes.number,
     min: PropTypes.number,
     step: PropTypes.number,

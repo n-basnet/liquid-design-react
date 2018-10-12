@@ -7,7 +7,7 @@ import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 describe('Footer', () => {
   const onClickMock = jest.fn()
   const defaultProps = {
-    headlineText: 'Get started today and bring your business idea to life.',
+    headlineContent: 'Get started today and bring your business idea to life.',
     labelsTexts: ['Label Text', 'Label Text', 'Label Text'],
     iconsNamesAndActions: [
       { name: 'close', onClick: onClickMock },
@@ -21,7 +21,7 @@ describe('Footer', () => {
   const wrapper = getFooterWrapper()
 
   it('renders footer heading correctly', () => {
-    expect(wrapper.find(Headline).text()).toEqual(defaultProps.headlineText)
+    expect(wrapper.find(Headline).text()).toEqual(defaultProps.headlineContent)
   })
 
   it('renders proper label', () => {

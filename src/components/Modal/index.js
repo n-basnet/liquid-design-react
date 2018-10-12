@@ -32,7 +32,6 @@ const modalOverlayDefaults = css`
   left: 0px;
   right: 0px;
   bottom: 0px;
-  background-color: rgba(255, 255, 255, 0.75);
 `
 
 const modalOverlayCloseState = css`

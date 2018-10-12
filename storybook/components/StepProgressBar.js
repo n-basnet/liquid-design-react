@@ -51,16 +51,15 @@ class StepProgressBarApp extends PureComponent {
         />
         {isControlledExternally && (
           <ButtonsContainer>
+            <Button disabled={current < 0} onClick={() => this.updateCurrent(current - 1)}>
+              {current === 0 ? 'reset' : 'previous'}
+            </Button>
             <Button
-              label={current === 0 ? 'reset' : 'previous'}
-              disabled={current < 0}
-              onClick={() => this.updateCurrent(current - 1)}
-            />
-            <Button
-              label={current >= steps.length - 1 ? 'complete' : 'next'}
               disabled={current >= steps.length}
               onClick={() => this.updateCurrent(current + 1)}
-            />
+            >
+              {current >= steps.length - 1 ? 'complete' : 'next'}
+            </Button>
           </ButtonsContainer>
         )}
       </Fragment>

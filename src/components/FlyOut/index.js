@@ -86,7 +86,7 @@ export default class FlyOut extends PureComponent {
   static propTypes = {
     name: flyOutPropTypes.name,
     options: flyOutPropTypes.options,
-    label: PropTypes.string,
+    label: PropTypes.node,
     alignLeft: PropTypes.bool,
     disabled: PropTypes.bool,
     width: PropTypes.number,

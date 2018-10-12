@@ -28,7 +28,7 @@ const FormAppContainer = styled.div`
   }
 `
 
-const BottomSectionWrapper = FlexRowsWrapper.extend`
+const BottomSectionWrapper = styled(FlexRowsWrapper)`
   margin-top: 5px;
   align-items: center;
   > div {
@@ -121,8 +121,10 @@ const FormApp = ({
         </div>
         <div>
           <Fragment>
-            <Button size='big' appearance='ghost' label='Cancel' onClick={action('click cancel')} />
-            <Button label={acceptButtonText} onClick={action('click accept')} />
+            <Button size='big' appearance='ghost' onClick={action('click cancel')}>
+              Cancel
+            </Button>
+            <Button onClick={action('click accept')}>{acceptButtonText}</Button>
           </Fragment>
         </div>
       </BottomSectionWrapper>

@@ -1,31 +1,39 @@
+import React from 'react'
 import Button from '.'
-import ButtonLabel from '~/elements/Button/Labels/Button'
 import { Glyph } from '~/elements/Icon'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Button', () => {
   const defaultProps = {
-    label: 'Some label',
-    icon: 'star',
+    children: 'Some text',
     onClick: jest.fn(),
   }
   const getButtonWrapper = getWrapper(Button, defaultProps)
 
-  it('renders a label', () => {
+  it('renders text', () => {
     expect(
       getButtonWrapper()
-        .find(ButtonLabel)
-        .children()
+        .find(Button)
         .text()
-    ).toEqual(defaultProps.label)
+    ).toEqual(defaultProps.children)
+  })
+
+  it('renders HTML elements', () => {
+    const ButtonContent = () => (
+      <div>
+        some <i>content</i>
+      </div>
+    )
+    expect(getButtonWrapper({ children: <ButtonContent /> }).find(ButtonContent)).toHaveLength(1)
   })
 
   it('renders an icon', () => {
+    const iconName = 'star'
     expect(
-      getButtonWrapper()
+      getButtonWrapper({ icon: iconName })
         .find(Glyph)
         .prop('name')
-    ).toEqual(defaultProps.icon)
+    ).toEqual(iconName)
   })
 
   it('calls a function when clicked', () => {

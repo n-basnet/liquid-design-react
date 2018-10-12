@@ -94,8 +94,12 @@ export const Presentation = {
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button label='Button Text' size='big' onClick={() => {}} />
-        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
+        <Button size='big' onClick={() => {}}>
+          Button Text
+        </Button>
+        <Button appearance='secondary' size='big' onClick={() => {}}>
+          Cancel Text
+        </Button>
       </div>
     </ModalCTAPresentation>
   ),
@@ -105,8 +109,10 @@ export const Presentation = {
       <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
       <TextField grey placeholder='Add Placeholder Text here' />
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button label='Text' appearance='ghost' onClick={() => {}} />
-        <Button label='Text' onClick={() => {}} />
+        <Button appearance='ghost' onClick={() => {}}>
+          Text
+        </Button>
+        <Button onClick={() => {}}>Text</Button>
       </div>
     </ModalTextFieldPresentation>
   ),
@@ -116,8 +122,12 @@ export const Presentation = {
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button label='Button Text' size='big' onClick={() => {}} />
-        <Button label='Cancel Text' appearance='secondary' size='big' onClick={() => {}} />
+        <Button size='big' onClick={() => {}}>
+          Button Text
+        </Button>
+        <Button appearance='secondary' size='big' onClick={() => {}}>
+          Cancel Text
+        </Button>
       </div>
     </ModalCTAPresentation>
   ),

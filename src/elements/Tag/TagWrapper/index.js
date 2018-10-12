@@ -23,26 +23,17 @@ export const TagWrapper = styled.div`
   align-items: center;
   min-width: 100px;
   max-width: 100%;
-  padding: 4px 0;
-  border-radius: 12px;
+  padding: 2px 0;
+  border-radius: 16px;
   ${cursorValue};
   ${props => css`
     background-color: ${tagBackground(props)};
     transition: ${props.theme.transition};
-    ${props.outline &&
-      css`
-        border: 2px solid
-          ${!props.disabled
-    ? props.theme.colors.primary.base
-    : props.theme.colors.sensitiveGrey.darker};
-        &:hover {
-          border-color: ${!props.disabled && props.theme.colors.primary.dark};
-        }
-      `};
-    ${!props.outline &&
-      css`
-        border: none;
-      `};
+    border: 2px solid
+      ${!props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darker};
+    &:hover {
+      border-color: ${!props.disabled && props.theme.colors.primary.dark};
+    }
     &:hover {
       ${!props.outline &&
         css`

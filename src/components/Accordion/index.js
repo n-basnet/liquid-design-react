@@ -75,7 +75,7 @@ const DEFAULT_IS_OPEN_VALUE = null
 
 export class Accordion extends PureComponent {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
     isOpen: PropTypes.bool,
   }

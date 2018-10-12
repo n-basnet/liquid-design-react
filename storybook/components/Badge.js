@@ -10,10 +10,10 @@ import {
 } from '../helpers'
 
 const defaultText = 'Delivery in 3-4 days'
-const defaultProps = { text: getTextKnob({ defaultText }) }
+const defaultProps = { children: getTextKnob({ defaultText }) }
 
 const getBadgeSnippet = props => `
-  <Badge text="Delivery in 3-4 days" ${props || ``} />
+  <Badge${props ? ` ${props}` : ``}>Delivery in 3-4 days</Badge>
 `
 
 const getOnCardBadgeSnippet = props => `
@@ -24,7 +24,7 @@ const getOnCardBadgeSnippet = props => `
     marginLeft: '40px',
     marginBottom: '50px',
   }}>
-    <Badge text="Delivery in 3-4 days" onCard icon="circleX" ${props || ``} />
+    <Badge onCard icon="circleX" ${props ? ` ${props}` : ``}>Delivery in 3-4 days</>
   </div>
 `
 

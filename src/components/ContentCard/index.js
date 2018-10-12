@@ -58,12 +58,14 @@ export const ContentCard = ({
   stacked,
   active,
   badge,
+  onClick,
   ...props
 }) => (
   <Card
     active={active}
     stacked={stacked}
     css={badge && 'position: relative; padding-bottom: 34px'}
+    onClick={onClick}
     hasCenteredText
     {...props}
   >
@@ -77,12 +79,9 @@ export const ContentCard = ({
       {labels.map((label, i) => <Label {...label} key={i} />)}
     </LabelsWrapper>
     {badge && (
-      <Badge
-        icon={badge.icon || badge.iconRight}
-        isIconOnRight={!!badge.iconRight}
-        text={badge.text}
-        isOnCard
-      />
+      <Badge icon={badge.icon || badge.iconRight} isIconOnRight={Boolean(badge.iconRight)} isOnCard>
+        {badge.children}
+      </Badge>
     )}
   </Card>
 )
@@ -101,10 +100,11 @@ ContentCard.propTypes = {
   active: PropTypes.bool,
   /** Badge component props, to be attached to the element's bottom */
   badge: PropTypes.shape({
-    text: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
     icon: PropTypes.string,
     iconRight: PropTypes.string,
   }),
+  onClick: PropTypes.func,
 }
 
 ContentCard.defaultProps = {
@@ -115,6 +115,7 @@ ContentCard.defaultProps = {
   stacked: false,
   active: false,
   badge: null,
+  onClick: () => {},
 }
 
 const { Component, globalClassName } = attachClassName(ContentCard)

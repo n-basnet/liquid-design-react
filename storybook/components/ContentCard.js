@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 
 import {
@@ -57,9 +58,75 @@ const getContentCardSnippet = props => `
     ]}${props || ``}
   />
 `
+
+class ContentCardApp extends PureComponent {
+  static propTypes = {
+    amount: PropTypes.number,
+    withBootstrap: PropTypes.bool,
+  }
+  static defaultProps = {
+    amount: null,
+    withBootstrap: false,
+  }
+  state = {
+    cardActiveIndex: null,
+    isCardActive: false,
+  }
+  setCardActiveIndex = index => {
+    this.setState({ cardActiveIndex: index })
+  }
+  toggleCardActive = () => {
+    this.setState(({ isCardActive }) => ({ isCardActive: !isCardActive }))
+  }
+  render() {
+    const { cardActiveIndex, isCardActive } = this.state
+    const { amount, withBootstrap, ...props } = this.props
+    return times(amount).map(
+      index =>
+        withBootstrap ? (
+          <div key={index} className='col-md-4 col-sm-6 d-flex justify-content-center my-2 px-2'>
+            <EnhancedContentCard
+              {...getDefaultProps()}
+              active={index === cardActiveIndex}
+              style={{ margin: 0 }}
+              onClick={() => this.setCardActiveIndex(index)}
+              {...props}
+            />
+          </div>
+        ) : (
+          <EnhancedContentCard
+            {...getDefaultProps()}
+            key={index}
+            style={{ margin: 0 }}
+            active={isCardActive}
+            onClick={this.toggleCardActive}
+            {...props}
+          />
+        )
+    )
+  }
+}
+
+const getContentCardAppSnippet = props => `
+  class ContentCardApp extends PureComponent {
+    state = {
+      isCardActive: false
+    }
+    toggleCardActive = () => {
+      this.setState(({isCardActive}) => ({isCardActive: !isCardActive}))
+    }
+    render () {
+      const { isCardActive } = this.state
+      
+      return (
+        <ContentCard active={isCardActive} onClick={this.toggleCardActive}${props || ``} />
+      )
+    }
+  }
+`
 const params = {
   info: {
-    propTablesExclude: getPropTablesExcludeList([EnhancedContentCard]),
+    propTablesExclude: getPropTablesExcludeList([EnhancedContentCard, ContentCardApp]),
   },
 }
 
@@ -69,30 +136,30 @@ storiesOf('Components/ContentCard', module)
   .addParameters(params)
   .add(
     'default',
-    () => <EnhancedContentCard {...getDefaultProps()} />,
-    getSnippetTemplate(getContentCardSnippet())
+    () => <ContentCardApp amount={1} />,
+    getSnippetTemplate(getContentCardAppSnippet())
   )
   .add(
     'default with image',
     () => (
-      <EnhancedContentCard
+      <ContentCardApp
+        amount={1}
         imagePath={getTextKnob({
           name: 'image',
           defaultText: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
         })}
-        {...getDefaultProps()}
       />
     ),
     getSnippetTemplate(
-      getContentCardSnippet(`
+      getContentCardAppSnippet(`
     imagePath="https://images.unsplash.com/photo-1521028640727-38…"`)
     )
   )
   .add(
     'stacked',
-    () => <EnhancedContentCard {...getDefaultProps()} stacked />,
+    () => <ContentCardApp stacked />,
     getSnippetTemplate(
-      getContentCardSnippet(`
+      getContentCardAppSnippet(`
     stacked`)
     )
   )
@@ -107,8 +174,8 @@ storiesOf('Components/ContentCard', module)
   .add(
     'with description and featured',
     () => (
-      <EnhancedContentCard
-        {...getDefaultProps()}
+      <ContentCardApp
+        amount={1}
         description={getTextKnob({
           placeholderTextLength: 15,
         })}
@@ -119,7 +186,7 @@ storiesOf('Components/ContentCard', module)
       />
     ),
     getSnippetTemplate(
-      getContentCardSnippet(`
+      getContentCardAppSnippet(`
     description="lorem ipsum dolor sit amet, consectetur adipiscing…"
     featured="e.g. Amount, etc."`)
     )
@@ -127,48 +194,48 @@ storiesOf('Components/ContentCard', module)
   .add(
     'with badge',
     () => (
-      <EnhancedContentCard
-        {...getDefaultProps()}
+      <ContentCardApp
+        amount={1}
         badge={{
-          text: getTextKnob({ defaultText }),
+          children: getTextKnob({ defaultText }),
         }}
       />
     ),
     getSnippetTemplate(
-      getContentCardSnippet(`
-    badge={{text: 'Delivery in 3-4 days'}}`)
+      getContentCardAppSnippet(`
+    badge={{children: 'Delivery in 3-4 days'}}`)
     )
   )
   .add(
     'with badge with icon',
     () => (
-      <EnhancedContentCard
-        {...getDefaultProps()}
+      <ContentCardApp
+        amount={1}
         badge={{
-          text: getTextKnob({ defaultText }),
+          children: getTextKnob({ defaultText }),
           icon: 'star',
         }}
       />
     ),
     getSnippetTemplate(
-      getContentCardSnippet(`
-    badge={{text: 'Delivery in 3-4 days',icon: 'star'}}`)
+      getContentCardAppSnippet(`
+    badge={{children: 'Delivery in 3-4 days',icon: 'star'}}`)
     )
   )
   .add(
     'with badge with icon on the right side',
     () => (
-      <EnhancedContentCard
-        {...getDefaultProps()}
+      <ContentCardApp
+        amount={1}
         badge={{
-          text: getTextKnob({ defaultText }),
+          children: getTextKnob({ defaultText }),
           iconRight: 'star',
         }}
       />
     ),
     getSnippetTemplate(
-      getContentCardSnippet(`
-    badge={{text: 'Delivery in 3-4 days',iconRight: 'star'}}`)
+      getContentCardAppSnippet(`
+    badge={{children: 'Delivery in 3-4 days',iconRight: 'star'}}`)
     )
   )
 
@@ -198,11 +265,7 @@ storiesOf('Components/ContentCard', module)
         `}</style>
         <div className='container-fluid py-4'>
           <div className='row'>
-            {times(9).map(v => (
-              <div key={v} className='col-md-4 col-sm-6 d-flex justify-content-center my-2 px-2'>
-                <EnhancedContentCard {...getDefaultProps()} style={{ margin: 0 }} />
-              </div>
-            ))}
+            <ContentCardApp amount={9} withBootstrap />
           </div>
         </div>
       </Fragment>

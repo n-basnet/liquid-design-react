@@ -11,13 +11,18 @@ const getStackedHoverBoxShadow = theme => `
   6px 8px 4px ${rgba(theme.colors.black.base, 0.05)},
   6px 16px 20px ${rgba(theme.colors.black.base, 0.1)}
 `
+const getStackedActiveBoxShadow = theme => `
+  6px 30px 40px ${rgba(theme.colors.black.base, 0.2)},
+  6px 2px 4px ${rgba(theme.colors.black.base, 0.05)}
+`
 
-const getStackedBoxShadow = (theme, hover) => `
+const getStackedBoxShadow = (theme, hover, active) => `
   1px 1px 0 0 ${theme.colors.auxGrey.base},
   3px 3px 0 0 ${theme.colors.white.base},
   4px 4px 0 0 ${theme.colors.auxGrey.base},
   6px 6px 0 0 ${theme.colors.white.base}
   ${hover ? `, ${getStackedHoverBoxShadow(theme)}` : ''}
+  ${active ? `, ${getStackedActiveBoxShadow(theme)}` : ''}
 `
 
 const CardWrapper = styled.div`
@@ -37,6 +42,13 @@ const CardWrapper = styled.div`
       &:hover {
         box-shadow: ${getStackedBoxShadow(props.theme, true)};
       }
+      ${props.active &&
+        css`
+          box-shadow: ${getStackedBoxShadow(props.theme, false, true)};
+          &:hover {
+            box-shadow: ${getStackedBoxShadow(props.theme, false, true)};
+          }
+        `};
     `};
   ${props =>
     props.hasCenteredText &&
@@ -68,12 +80,14 @@ Card.propTypes = {
   active: PropTypes.bool,
   /** stacked style - suggesting multiple items */
   stacked: PropTypes.bool,
+  onClick: PropTypes.func,
 }
 
 Card.defaultProps = {
   hasCenteredText: false,
   active: false,
   stacked: false,
+  onClick: () => {},
 }
 
 const { Component, globalClassName } = attachClassName(Card)

@@ -13,7 +13,7 @@ import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export class Footer extends PureComponent {
   static propTypes = {
-    headlineText: PropTypes.string,
+    headlineContent: PropTypes.node,
     iconsNamesAndActions: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
@@ -25,7 +25,7 @@ export class Footer extends PureComponent {
   }
 
   static defaultProps = {
-    headlineText: 'Text',
+    headlineContent: null,
     iconsNamesAndActions: null,
     labelsTexts: null,
     mainIconName: null,
@@ -55,11 +55,11 @@ export class Footer extends PureComponent {
   ))
 
   render() {
-    const { headlineText, mainIconName, ...props } = this.props
+    const { headlineContent, mainIconName, ...props } = this.props
 
     return (
       <FooterWrapper {...props}>
-        <Headline size='H1'>{headlineText}</Headline>
+        <Headline size='H1'>{headlineContent}</Headline>
         <HorizontalLine />
         <FooterBar>
           <Glyph

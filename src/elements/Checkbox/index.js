@@ -50,7 +50,7 @@ export class Checkbox extends PureComponent {
     disabled: PropTypes.bool,
     /** for controlling the checkbox externally - if undefined, the checkbox will use internal state */
     isChecked: PropTypes.bool,
-    label: PropTypes.string,
+    label: PropTypes.node,
     onChange: PropTypes.func,
     iconSize: PropTypes.number,
     className: PropTypes.string,

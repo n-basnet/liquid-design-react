@@ -15,7 +15,7 @@ export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...
     <Glyph
       outline={outline}
       name={icon}
-      style={{ marginRight: '2px' }}
+      style={{ marginRight: '-4px' }}
       size={iconSize}
       onClick={onIconClick}
     />
@@ -25,7 +25,7 @@ export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...
 Tag.propTypes = {
   disabled: PropTypes.bool,
   icon: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.node,
   outline: PropTypes.bool,
   onIconClick: PropTypes.func,
   iconSize: PropTypes.number,

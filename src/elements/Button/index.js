@@ -14,7 +14,7 @@ export const Button = ({
   disabled,
   icon,
   isIconOnRight,
-  label,
+  children,
   size,
   onClick,
   ...props
@@ -24,7 +24,7 @@ export const Button = ({
     appearance,
     disabled,
     isIconOnRight,
-    label,
+    children,
     size,
     onClick,
     ...props,
@@ -40,36 +40,39 @@ export const Button = ({
         <Glyph
           name={icon}
           size={isGhost ? (size === 'big' ? 18 : 16) : 24}
-          style={!isGhost && label ? { marginLeft: '28px' } : {}}
+          style={!isGhost && children ? { marginLeft: '28px' } : {}}
         />
       )}
-      {label && (
+      {children && (
         <LabelComponent appearance={appearance} disabled={disabled} icon={icon} size={size}>
-          {label}
+          {children}
         </LabelComponent>
       )}
     </WrapperComponent>
   )
 }
 
+const APPEARANCE_VALUES = ['primary', 'secondary', 'highlight', 'ghost']
+
 Button.defaultProps = {
   active: false,
   appearance: 'primary',
   disabled: false,
+  /** icon name to be displayed along Button content */
   icon: null,
   isIconOnRight: false,
-  label: null,
+  children: null,
   size: 'small',
   onClick: null,
 }
 
 Button.propTypes = {
   active: PropTypes.bool,
-  appearance: PropTypes.string,
+  appearance: PropTypes.oneOf(APPEARANCE_VALUES),
   disabled: PropTypes.bool,
   icon: PropTypes.string,
   isIconOnRight: PropTypes.bool,
-  label: PropTypes.string,
+  children: PropTypes.node,
   size: PropTypes.string,
   onClick: PropTypes.func,
 }

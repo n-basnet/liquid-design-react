@@ -143,12 +143,9 @@ export const Header = ({
     )}
     {withButton && (
       <ButtonWrapper>
-        <Button
-          appearance='secondary'
-          icon={buttonIcon}
-          label={buttonLabel}
-          onClick={buttonOnClick}
-        />
+        <Button appearance='secondary' icon={buttonIcon} onClick={buttonOnClick}>
+          {buttonLabel}
+        </Button>
         <Button appearance='secondary' icon={buttonIcon} onClick={buttonOnClick} />
       </ButtonWrapper>
     )}

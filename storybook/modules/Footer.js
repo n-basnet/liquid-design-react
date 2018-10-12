@@ -7,7 +7,7 @@ import { getTextKnob, getSnippetTemplate, getPropTablesExcludeList } from '../he
 
 const getFooterText = () =>
   getTextKnob({
-    name: 'headlineText',
+    name: 'headlineContent',
     defaultText: 'Get started today and bring your business idea to life.',
   })
 const mainIconName = 'circleX'
@@ -21,7 +21,7 @@ const iconsNamesAndActions = [
 
 const getFooterSnippet = () => `
   <Footer
-    headlineText="Get started today and bring your business idea to …"
+    headlineContent="Get started today and bring your business idea to …"
     iconsNamesAndActions={[
       {name: 'circleX',onClick: onClickHandler},
       {name: 'circleX',onClick: onClickHandler},
@@ -43,7 +43,7 @@ storiesOf('Modules/Footer', module)
     'default',
     () => (
       <EnhancedFooter
-        headlineText={getFooterText()}
+        headlineContent={getFooterText()}
         iconsNamesAndActions={iconsNamesAndActions}
         labelsTexts={labelsTexts}
         mainIconName={mainIconName}

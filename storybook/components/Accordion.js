@@ -27,10 +27,9 @@ storiesOf('Components/Accordion', module)
     'default single',
     () => <EnhancedAccordion {...defaultProps} />,
     getSnippetTemplate(`
-  <Accordion
-    content="lorem ipsum dolor sit amet, consectetur adipiscing…"
-    title="Section title"
-  />
+      <Accordion title="Section title">
+        lorem ipsum dolor sit amet, consectetur adipiscing…
+      </Accordion>
   `)
   )
   .add(
@@ -43,19 +42,16 @@ storiesOf('Components/Accordion', module)
       </section>
     ),
     getSnippetTemplate(`
-  <section>
-    <Accordion
-      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
-      title="Section title"
-    />
-    <Accordion
-      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
-      title="Section title"
-    />
-    <Accordion
-      content="lorem ipsum dolor sit amet, consectetur adipiscing…"
-      title="Section title"
-    />
-  </section>
-  `)
+      <section>
+        <Accordion title="Section title">
+          lorem ipsum dolor sit amet, consectetur adipiscing…
+        </Accordion>
+        <Accordion title="Section title">
+          lorem ipsum dolor sit amet, consectetur adipiscing…
+        </Accordion>
+        <Accordion title="Section title">
+          lorem ipsum dolor sit amet, consectetur adipiscing…
+        </Accordion>
+      </section>
+    `)
   )

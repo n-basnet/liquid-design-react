@@ -62,7 +62,7 @@ const ProfileFormPart = ({ fieldProps }) => (
         <TextField {...fieldProps} {...FIELDS_PROFILE_TOP.password} />
       </div>
       <div className={CLASSNAMES.buttonWrapper}>
-        <Button label='Change' onClick={action('change')} />
+        <Button onClick={action('change')}>Change</Button>
       </div>
     </FlexRowsWrapper>
     <Headline type='H6'>{getTextKnob({ defaultText: 'Adress', name: 'address' })}</Headline>

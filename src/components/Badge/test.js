@@ -3,7 +3,7 @@ import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
 describe('Badge', () => {
   const text = 'Some text'
-  const getBadgeWrapper = getWrapper(Badge, { text })
+  const getBadgeWrapper = getWrapper(Badge, { children: text })
 
   it('displays text', () => {
     expect(

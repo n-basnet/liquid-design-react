@@ -69,7 +69,7 @@ const BadgeTextWrapper = styled.span`
 /**
  * Badges symbolize special properties of an item or person. Badges provide a short overview about that property and its value.
  */
-export const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard, ...props }) => (
+export const Badge = ({ children, icon, isIconOnRight, disabled, isOnCard, ...props }) => (
   <BadgeWrapper disabled={disabled} isOnCard={isOnCard} {...props}>
     <Fragment>
       {icon &&
@@ -77,7 +77,7 @@ export const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard, ...props 
         <Glyph color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
       )}
       <BadgeTextWrapper padLeft={icon && !isIconOnRight} isOnCard={isOnCard}>
-        {text}
+        {children}
       </BadgeTextWrapper>
       {icon &&
         isIconOnRight && (
@@ -99,7 +99,7 @@ export const Badge = ({ text, icon, isIconOnRight, disabled, isOnCard, ...props 
 
 Badge.propTypes = {
   /** text to be displayed in the Badge */
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
   icon: PropTypes.string,
   /** By default, icon will be placed on the left side. Use this prop to override this behaviour */

@@ -92,7 +92,7 @@ const SingleNotification = props => {
 }
 
 SingleNotification.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.node.isRequired,
   id: PropTypes.string.isRequired,
   getRemoveHandler: PropTypes.func.isRequired,
   isReminder: PropTypes.bool,
