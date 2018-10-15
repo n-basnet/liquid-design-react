@@ -1,39 +1,43 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import dateFns from 'date-fns'
 
 import { default as EnhancedCalendar, Calendar } from '~/modules/Calendar'
 import {
   getBackgroundWrapper,
-  includeComponentInPropTable,
   getPropTablesExcludeList,
   getSnippetTemplate,
+  isStorybookLokiBuild,
 } from '../helpers'
-const sampleDate1 = new Date()
-const sampleDate2 = new Date()
-sampleDate1.setDate(sampleDate1.getDate() + 1).toString()
-sampleDate2.setDate(sampleDate2.getDate() - 5).toString()
+
+const today = isStorybookLokiBuild() ? new Date(2018, 10, 10) : new Date()
+
+const defaultProps = {
+  today,
+}
+
 const sampleAppointments = {
-  [sampleDate1]: [{ time: '13:00', description: 'meeting with Charlie' }],
-  [sampleDate2]: [{ time: '10:00', description: 'meeting with Brian' }],
+  [dateFns.addDays(today, -5)]: [{ time: '13:00', description: 'meeting with Charlie' }],
+  [dateFns.addDays(today, 1)]: [{ time: '10:00', description: 'meeting with Brian' }],
 }
 
 storiesOf('Modules/Calendar', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(Calendar))
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([EnhancedCalendar]),
+      propTables: [Calendar],
     },
   })
-  .add('default', () => <EnhancedCalendar />, getSnippetTemplate(`<Calendar />`))
+  .add('default', () => <EnhancedCalendar {...defaultProps} />, getSnippetTemplate(`<Calendar />`))
   .add(
     'with custom start of week',
-    () => <EnhancedCalendar startOfWeek={1} />,
+    () => <EnhancedCalendar {...defaultProps} startOfWeek={1} />,
     getSnippetTemplate(`<Calendar startOfWeek={1}/>`)
   )
   .add(
     'with appointments',
-    () => <EnhancedCalendar appointments={sampleAppointments} />,
+    () => <EnhancedCalendar {...defaultProps} appointments={sampleAppointments} />,
     getSnippetTemplate(`
   <Calendar
     appointments={

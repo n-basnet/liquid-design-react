@@ -141,7 +141,6 @@ const DaysRow = styled.div`
   `};
 `
 const yearRegexp = /^[\d]{4}$/
-const today = new Date()
 
 export class Calendar extends PureComponent {
   static propTypes = {
@@ -154,19 +153,22 @@ export class Calendar extends PureComponent {
     /** object of appointments where keys are date strings in ISO 8601 format and values are arrays of objects with shape
      * { time: 'string with time', description: 'appointment description string'} */
     appointments: PropTypes.object,
+    /** the day marked as the current day */
+    today: PropTypes.instanceOf(Date),
   }
   static defaultProps = {
     defaultSelectedDate: null,
     onSelect: () => {},
     startOfWeek: 0,
     appointments: {},
+    today: new Date(),
   }
   state = {
-    currentMonth: this.props.defaultSelectedDate || today,
+    currentMonth: this.props.defaultSelectedDate || this.props.today,
     selectedDate: this.props.defaultSelectedDate,
     yearValue: this.props.defaultSelectedDate
       ? dateFns.format(this.props.defaultSelectedDate, 'YYYY')
-      : dateFns.format(today, 'YYYY'),
+      : dateFns.format(this.props.today, 'YYYY'),
   }
 
   nextMonth = () => {
@@ -221,7 +223,7 @@ export class Calendar extends PureComponent {
 
   buildDaysGrid() {
     const { currentMonth, selectedDate } = this.state
-    const { appointments, startOfWeek } = this.props
+    const { appointments, startOfWeek, today } = this.props
 
     const countOfWeekDays = 7
     const monthStart = dateFns.startOfMonth(currentMonth)
@@ -239,7 +241,7 @@ export class Calendar extends PureComponent {
       times(countOfWeekDays).forEach(index => {
         const dayClone = day
         const isOutOfMonth = !dateFns.isSameMonth(day, monthStart)
-        const isCurrent = dateFns.isToday(day)
+        const isCurrent = dateFns.isSameDay(day, today)
         const isSelected = dateFns.isSameDay(day, selectedDate)
         const dayInDaysWithAppointments =
           daysWithAppointments && find(item => dateFns.isSameDay(item, day))(daysWithAppointments)
@@ -249,6 +251,7 @@ export class Calendar extends PureComponent {
           <DayCell
             key={day}
             day={day}
+            today={today}
             isOutOfMonth={isOutOfMonth}
             isCurrent={isCurrent}
             isSelected={isSelected}

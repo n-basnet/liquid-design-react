@@ -93,3 +93,5 @@ export const getSnippetTemplate = (snippet, description) => ({
 })
 export const getStoryMDLink = (name, { type = 'Elements', storyName } = {}) =>
   `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(storyName || name)})`
+
+export const isStorybookLokiBuild = () => process.env.STORYBOOK_LOKI_BUILD

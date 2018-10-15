@@ -2,14 +2,16 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import SVG from 'svg.js'
 import uniqid from 'uniqid'
+import cx from 'classnames'
 import styled from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
 import { SVG_VIEWPORT_WIDTH, SVG_GRADIENT_COLORS } from '~/elements/Bowl/consts'
 import { getSVGFillCoordinates } from '~/elements/Bowl/helpers'
 
 const MAIN_SVG_CLASSNAME = getClassName({ name: 'BowlMainElement' })
+const BOWL_CLASSNAME = getClassName({ name: 'Bowl' })
 
 const BowlWrapper = styled.div`
   display: inline-block;
@@ -35,7 +37,20 @@ const BowlWrapper = styled.div`
   }
 `
 
-export class Bowl extends PureComponent {
+export default class Bowl extends PureComponent {
+  static propTypes = {
+    animationDuration: PropTypes.number,
+    percent: PropTypes.number,
+    width: PropTypes.number,
+    className: PropTypes.string,
+  }
+
+  static defaultProps = {
+    animationDuration: 3000,
+    percent: 50,
+    width: 180,
+    className: null,
+  }
   state = {
     key: 0,
   }
@@ -49,7 +64,7 @@ export class Bowl extends PureComponent {
   }
   reset = () => this.setState({ key: uniqid() }, this.runAnimation)
   runAnimation() {
-    if (!SVG || this.displayIcon()) {
+    if (!SVG || this.displayIcon() || process.env.STORYBOOK_LOKI_BUILD) {
       // SVG does not work without browser (in test env)
       return
     }
@@ -282,11 +297,11 @@ export class Bowl extends PureComponent {
   displayIcon = () => this.props.percent === 0
 
   render() {
-    const { animationDuration, percent, width, ...props } = this.props
+    const { animationDuration, percent, width, className, ...props } = this.props
     const { key } = this.state
 
     return (
-      <BowlWrapper {...props} key={key}>
+      <BowlWrapper className={cx(className, BOWL_CLASSNAME)} {...props} key={key}>
         <svg
           width={`${width}px`}
           viewBox={`0 0 ${SVG_VIEWPORT_WIDTH} ${SVG_VIEWPORT_WIDTH}`}
@@ -310,19 +325,3 @@ export class Bowl extends PureComponent {
     )
   }
 }
-
-Bowl.propTypes = {
-  animationDuration: PropTypes.number,
-  percent: PropTypes.number,
-  width: PropTypes.number,
-}
-
-Bowl.defaultProps = {
-  animationDuration: 3000,
-  percent: 50,
-  width: 180,
-}
-
-const { Component } = attachClassName(Bowl)
-
-export default Component

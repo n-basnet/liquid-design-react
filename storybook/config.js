@@ -7,7 +7,7 @@ import { setOptions } from '@storybook/addon-options'
 
 import MODULES from './modules.json'
 import ThemeWrapper from './ThemeWrapper'
-import { Fragment } from './helpers'
+import { Fragment, isStorybookLokiBuild } from './helpers'
 
 const runStorybookConfig = async () => {
   configureActions()
@@ -24,7 +24,7 @@ const runStorybookConfig = async () => {
     })
   }
 
-  if (process.env.STORYBOOK_LOKI_BUILD) {
+  if (isStorybookLokiBuild()) {
     import('loki/configure-react')
   } else {
     addDecorator(

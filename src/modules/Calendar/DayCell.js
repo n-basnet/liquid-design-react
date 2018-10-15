@@ -167,6 +167,7 @@ export class DayCell extends PureComponent {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
     day: PropTypes.instanceOf(Date).isRequired,
+    today: PropTypes.instanceOf(Date).isRequired,
     isOutOfMonth: PropTypes.bool,
     isCurrent: PropTypes.bool,
     isSelected: PropTypes.bool,
@@ -204,7 +205,16 @@ export class DayCell extends PureComponent {
   }
 
   render() {
-    const { isSelected, isCurrent, isFirst, isLast, isOutOfMonth, appointments, day } = this.props
+    const {
+      isSelected,
+      isCurrent,
+      isFirst,
+      isLast,
+      isOutOfMonth,
+      appointments,
+      today,
+      day,
+    } = this.props
     const { isHovered, isOverlayOpen } = this.state
     const dayFormat = 'D'
     const formattedDate = dateFns.format(day, dayFormat)
@@ -228,7 +238,9 @@ export class DayCell extends PureComponent {
             <Glyph
               name='dot'
               size={6}
-              color={dateFns.isPast(day) || isOutOfMonth ? 'sensitiveGrey.darkest' : undefined}
+              color={
+                dateFns.isBefore(day, today) || isOutOfMonth ? 'sensitiveGrey.darkest' : undefined
+              }
             />
             <Overlay
               appointments={appointments}

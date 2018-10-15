@@ -8,13 +8,9 @@ import EnhancedWarningLabel, {
   WARNING_LABELS_FILES,
   DEFAULT_WIDTH,
 } from '~/elements/WarningLabel'
-import EnhancedBowl, { Bowl } from '~/elements/Bowl'
+import Bowl from '~/elements/Bowl'
 import EnhancedPlaceholder, { Placeholder } from '~/elements/Placeholder'
-import {
-  getBackgroundWrapper,
-  includeComponentInPropTable,
-  getPropTablesExcludeList,
-} from '../helpers'
+import { getBackgroundWrapper, getPropTablesExcludeList } from '../helpers'
 import { media } from '~/utils/styling'
 
 const WarningLabelsGroupWrapper = styled.div`
@@ -36,10 +32,11 @@ const WarningLabelWrapper = styled.div`
   `};
 `
 
-const getParams = components => ({
+const getParams = (excludedComponents, includedComponents) => ({
   info: {
-    propTablesExclude: getPropTablesExcludeList(components),
+    propTablesExclude: getPropTablesExcludeList(excludedComponents),
     excludedPropTypes: ['style', 'theme', 'className'],
+    propTables: includedComponents,
   },
 })
 
@@ -58,8 +55,7 @@ const getCodeSnippet = code => ({
 
 storiesOf('Elements/Graphics/Placeholder', module)
   .addDecorator(getBackgroundWrapper())
-  .addParameters(getParams([EnhancedPlaceholder]))
-  .addDecorator(includeComponentInPropTable(Placeholder))
+  .addParameters(getParams([EnhancedPlaceholder], [Placeholder]))
   .add(
     'default',
     () => <EnhancedPlaceholder width={getNumberKnob(150)} />,
@@ -84,12 +80,11 @@ storiesOf('Elements/Graphics/Placeholder', module)
 
 storiesOf('Elements/Graphics', module)
   .addDecorator(getBackgroundWrapper())
-  .addParameters(getParams([EnhancedBowl]))
-  .addDecorator(includeComponentInPropTable(Bowl))
+  .addParameters(getParams([], [Bowl]))
   .add(
     'Bowl',
     () => (
-      <EnhancedBowl
+      <Bowl
         percent={number('percent', 50, { range: true, min: 0, max: 100, step: 1 })}
         width={getNumberKnob(180)}
       />
@@ -99,8 +94,12 @@ storiesOf('Elements/Graphics', module)
 
 storiesOf('Elements/Graphics', module)
   .addDecorator(getBackgroundWrapper())
-  .addParameters(getParams([WarningLabelsGroupWrapper, WarningLabelWrapper, EnhancedWarningLabel]))
-  .addDecorator(includeComponentInPropTable(WarningLabel, { name: 'Flammable' }))
+  .addParameters(
+    getParams(
+      [WarningLabelsGroupWrapper, WarningLabelWrapper, EnhancedWarningLabel],
+      [WarningLabel]
+    )
+  )
   .add(
     'Warning Labels',
     () => (
