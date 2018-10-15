@@ -29,7 +29,7 @@ export class RadioButton extends PureComponent {
     // additional props in RadioButtonWrapper are required for the Firefox and Edge, which do not currently support :before for input fields
 
     return (
-      <RadioButtonWrapper disabled={disabled} isChecked={isSelected} {...props}>
+      <RadioButtonWrapper disabled={disabled} isSelected={isSelected} {...props}>
         <InputWrapper
           type='radio'
           id={this.id}
