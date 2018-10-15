@@ -33,6 +33,9 @@ const ModalPresentation = styled.div`
     line-height: 28px;
     margin-bottom: 19px;
   }
+  svg {
+    overflow: hidden;
+  }
 `
 
 const ModalCTAPresentation = styled(ModalPresentation)`

@@ -7,6 +7,7 @@ import {
   ContentCard,
   CONTENT_CARD_CLASSNAME,
 } from '~/components/ContentCard'
+import { PLACEHOLDER_CLASSNAME } from '~/elements/Placeholder'
 import {
   getPropTablesExcludeList,
   getBackgroundWrapper,
@@ -259,6 +260,10 @@ storiesOf('Components/ContentCard', module)
             width: 100%;
             max-width: none;
             min-width: 230px;
+          }
+          /* IE/Edge fix */
+          .${PLACEHOLDER_CLASSNAME} {
+            max-height: 150px;
           }
           .container-fluid {
             max-width: 1200px;

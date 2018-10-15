@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { bgColorSelector, colorSelector, iconOpacitySelector } from '~/elements/Button/utils'
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue, ieStyles } from '~/utils/styling'
+import { cursorValue, ieStyles, safariStyles } from '~/utils/styling'
 
 export const widthSelector = props =>
   props.label ? '93px' : props.size === 'big' ? '50px' : '40px'
@@ -34,7 +34,9 @@ export default styled.button`
         `};
     }
     .${ICON_CLASSNAME} {
-      margin: 0 auto;
+      ${safariStyles(`
+        margin: 0 auto;
+      `)};
       svg {
         fill: ${colorSelector(props)};
         opacity: ${props.disabled ? iconOpacitySelector(props) : 1};
