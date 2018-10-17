@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
@@ -19,6 +19,25 @@ const getLabel = () =>
 const getSliderSnippet = props => `
   <Slider ${props || ``} />
 `
+const getSliderAppSnipepet = props => `
+  class SliderApp extends Component {
+    state = {
+      value: 50
+    }
+
+    onChangeHandler = (value) => this.setState({value})
+
+    render() {
+      return (
+        <Slider
+          withButtons
+          value={this.state.value}
+          onChange={this.onChangeHandler}
+        />
+      )
+    }
+  }
+`
 
 const params = {
   info: {
@@ -26,6 +45,18 @@ const params = {
     propTablesExclude: getPropTablesExcludeList([]),
     excludedPropTypes: ['className'],
   },
+}
+
+class SliderApp extends Component {
+  state = {
+    value: 50,
+  }
+
+  onChangeHandler = value => this.setState({ value })
+
+  render() {
+    return <Slider withButtons value={this.state.value} onChange={this.onChangeHandler} />
+  }
 }
 
 storiesOf('Components/Slider/with buttons', module)
@@ -45,6 +76,11 @@ storiesOf('Components/Slider/with buttons', module)
     'disabled',
     () => <Slider disabled withButtons onChange={action('onChange')} />,
     getSnippetTemplate(getSliderSnippet('disabled withButtons'))
+  )
+  .add(
+    'with provided external state',
+    () => <SliderApp />,
+    getSnippetTemplate(getSliderAppSnipepet())
   )
 
 storiesOf('Components/Slider/with label', module)

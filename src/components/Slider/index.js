@@ -44,21 +44,31 @@ class Slider extends PureComponent {
   }
 
   state = {
-    value: this.props.defaultValue,
+    value: this.props.value || this.props.defaultValue,
   }
 
   decreaseValue = () => {
     this.state.value > this.props.min &&
-      this.setState(({ value }) => ({
-        value: value - this.props.step,
-      }))
+      this.setState(
+        ({ value }) => ({
+          value: value - this.props.step,
+        }),
+        () => {
+          this.props.onChange && this.props.onChange(this.state.value)
+        }
+      )
   }
 
   increaseValue = () => {
     this.state.value < this.props.max &&
-      this.setState(({ value }) => ({
-        value: value + this.props.step,
-      }))
+      this.setState(
+        ({ value }) => ({
+          value: value + this.props.step,
+        }),
+        () => {
+          this.props.onChange && this.props.onChange(this.state.value)
+        }
+      )
   }
 
   updateValue = value =>
