@@ -124,6 +124,7 @@ const ResultsWrapper = styled.div`
     box-shadow: ${props.theme.boxShadow};
     border-bottom-left-radius: ${props.theme.borderRadius};
     border-bottom-right-radius: ${props.theme.borderRadius};
+    z-index: ${props.theme.zIndex.searchbarResults};
   `};
 `
 

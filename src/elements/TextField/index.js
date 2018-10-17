@@ -48,6 +48,8 @@ export default class TextField extends React.Component {
     disabled: PropTypes.bool,
     multiline: PropTypes.bool,
     onChange: PropTypes.func,
+    /** custom className for input or textarea itself */
+    inputClassName: PropTypes.string,
   }
   static defaultProps = {
     value: undefined,
@@ -58,6 +60,7 @@ export default class TextField extends React.Component {
     disabled: false,
     multiline: false,
     onChange: () => {},
+    inputClassName: null,
   }
   id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
   getErrorMessage = () => {
@@ -67,7 +70,16 @@ export default class TextField extends React.Component {
     return hasErrorMessage ? validationResult : null
   }
   render() {
-    const { value, label, required, style, multiline, onChange, ...props } = this.props
+    const {
+      value,
+      label,
+      required,
+      style,
+      multiline,
+      onChange,
+      inputClassName,
+      ...props
+    } = this.props
     return (
       <InputWrapper
         style={style}
@@ -77,7 +89,7 @@ export default class TextField extends React.Component {
         })}
       >
         {label && (
-          <LabelWrapper htmlFor={this.id}>
+          <LabelWrapper htmlFor={this.id} className={TEXT_FIELD_CLASSNAMES.LABEL}>
             {label}
             {required ? '*' : ''}
           </LabelWrapper>
@@ -89,6 +101,7 @@ export default class TextField extends React.Component {
           multiline={multiline}
           id={this.id}
           onChange={onChange}
+          inputClassName={inputClassName}
           {...props}
         />
       </InputWrapper>
@@ -101,4 +114,5 @@ export const TEXT_FIELD_CLASSNAMES = {
   BASE: TEXT_FIELD_CLASSNAME_BASE,
   SINGLE: `${TEXT_FIELD_CLASSNAME_BASE}--single`,
   MULTILINE: `${TEXT_FIELD_CLASSNAME_BASE}--multiline`,
+  LABEL: `${TEXT_FIELD_CLASSNAME_BASE}__label`,
 }

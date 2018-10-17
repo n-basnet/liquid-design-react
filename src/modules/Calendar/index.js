@@ -10,6 +10,7 @@ import { media } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
+import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
@@ -90,7 +91,7 @@ const MonthYearWrapper = styled.div`
       line-height: 1.25;
       font-size: 12px;
     `};
-    input {
+    .${INPUT_SINGLELINE_CLASSNAME} {
       padding: 6.7px 7.6px 5.7px 10px;
       transition: none;
       ${media.max.phone`

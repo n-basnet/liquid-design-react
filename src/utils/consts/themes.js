@@ -39,6 +39,7 @@ const themeBase = {
   zIndex: {
     tabs: 10,
     tooltips: 9,
+    searchbarResults: 1,
   },
 }
 

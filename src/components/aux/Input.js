@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { ResizableBox } from 'react-resizable'
 import { withResizeDetector } from 'react-resize-detector'
+import cx from 'classnames'
 
 import { cursorValue, media } from '~/utils/styling'
 import { getReactElementString, getSVGImageURLString } from '~/utils/aux'
@@ -189,6 +190,7 @@ class Input extends PureComponent {
       errorMessage,
       width: resizedWidth,
       className,
+      inputClassName,
       isFocused,
       ...props
     } = this.props
@@ -220,6 +222,8 @@ class Input extends PureComponent {
       width,
     }
 
+    const inputGlobalClassName = multiline ? INPUT_MULTILINE_CLASSNAME : INPUT_SINGLELINE_CLASSNAME
+
     return (
       <Fragment>
         <TextFieldWrapper {...textFieldWrapperProps} className={className}>
@@ -229,6 +233,7 @@ class Input extends PureComponent {
               onFocus={this.getFocusStateHandler(true, onFocus)}
               onBlur={this.getFocusStateHandler(false, onBlur)}
               {...!multiline && { type }}
+              className={cx(inputGlobalClassName, inputClassName)}
               styleTemplateString={styleTemplateString}
               grey={grey}
               {...props}
@@ -254,6 +259,7 @@ Input.propTypes = {
   /** from `react-resize-detector` decorator */
   width: PropTypes.number,
   className: PropTypes.string,
+  inputClassName: PropTypes.string,
   /** force focused state */
   isFocused: PropTypes.bool,
 }
@@ -270,11 +276,14 @@ Input.defaultProps = {
   errorMessage: null,
   width: null,
   className: null,
+  inputClassName: null,
   isFocused: null,
 }
 
 const { Component, globalClassName } = attachClassName(Input)
 
 export const INPUT_CLASSNAME = globalClassName
+export const INPUT_SINGLELINE_CLASSNAME = `${globalClassName}__input`
+export const INPUT_MULTILINE_CLASSNAME = `${globalClassName}__textarea`
 
 export default Component
