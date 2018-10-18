@@ -74,7 +74,7 @@ const SearchBarWrapper = styled.div`
       color: white;
     }
     ${media.max.phone`
-      min-width: 150px;
+      min-width: 150px !important;
       max-width: 150px;
     `};
   }
