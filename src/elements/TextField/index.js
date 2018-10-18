@@ -33,53 +33,54 @@ const getInputStyle = multiline => css`
   `};
 `
 
+const DEFAULT_VALUE = undefined
+
 export default class TextField extends React.Component {
   static propTypes = {
+    /** If not provided, the underlying `input` will be an uncontrolled one. */
     value: PropTypes.string,
+    /** Label to display above the text field. */
     label: PropTypes.node,
-    required: PropTypes.bool,
     /**
-      Takes the value string as input.
-      Should return either `true` or a string - in the latter case,
-      the field is treated as invalid and string displayed as error message
+      A function that takes the value string as input.
+      Should return either `true` or a react node - in the latter case,
+      the field is treated as invalid and returned node displayed as error message.
     */
     validate: PropTypes.func,
-    style: PropTypes.object,
-    disabled: PropTypes.bool,
+    /**
+      For more complicated use cases, i.e. when using a forms library such as `redux-form`,
+      it may be more useful to just set the error message explicitly.
+    */
+    error: PropTypes.node,
+    /** A multiline TextField will render a resizeable `textarea` HTML element. */
     multiline: PropTypes.bool,
+    /** Change handler. Will receive the input string as argument. */
     onChange: PropTypes.func,
     /** custom className for input or textarea itself */
     inputClassName: PropTypes.string,
+    disabled: PropTypes.bool,
+    style: PropTypes.object,
   }
   static defaultProps = {
-    value: undefined,
+    value: DEFAULT_VALUE,
     label: null,
-    required: false,
     validate: () => true,
-    style: {},
-    disabled: false,
+    error: null,
     multiline: false,
     onChange: () => {},
     inputClassName: null,
+    disabled: false,
+    style: {},
   }
   id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
   getErrorMessage = () => {
     const { validate, value } = this.props
-    const validationResult = validate(value)
-    const hasErrorMessage = typeof validationResult === 'string'
+    const validationResult = validate(value === DEFAULT_VALUE ? '' : value)
+    const hasErrorMessage = validationResult !== true
     return hasErrorMessage ? validationResult : null
   }
   render() {
-    const {
-      value,
-      label,
-      required,
-      style,
-      multiline,
-      onChange,
-      inputClassName,
-      ...props
-    } = this.props
+    const { value, label, style, multiline, onChange, inputClassName, error, ...props } = this.props
     return (
       <InputWrapper
         style={style}
@@ -91,11 +92,10 @@ export default class TextField extends React.Component {
         {label && (
           <LabelWrapper htmlFor={this.id} className={TEXT_FIELD_CLASSNAMES.LABEL}>
             {label}
-            {required ? '*' : ''}
           </LabelWrapper>
         )}
         <GenericInput
-          errorMessage={this.getErrorMessage()}
+          errorMessage={error || this.getErrorMessage()}
           styleTemplateString={getInputStyle(multiline)}
           value={value}
           multiline={multiline}

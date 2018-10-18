@@ -32,8 +32,16 @@ const TextFieldStoryWrapper = styled.div`
 `
 
 const getTextFieldSnippet = props => `
-  <TextField placeholder="Add Placeholder Text here" label="Text Area label" onChange={onChangeHandler} ${props ||
-    ``} />
+  <TextField
+    placeholder="Add Placeholder Text here"
+    label="Text Area label"
+    onChange={onChangeHandler}${
+  props
+    ? `
+    ${props}`
+    : ''
+}
+  />
 `
 
 const STORIES = getStoriesByVersions({
@@ -57,7 +65,7 @@ const STORIES = getStoriesByVersions({
 
 STORIES.map(({ name, props }) => {
   const propsSnippet = Object.keys(props)
-    .map(prop => (prop === 'validate' ? `validate={validateHandler}` : prop))
+    .map(prop => (prop === 'validate' ? `error={errorMessage}` : prop))
     .join(' ')
   storiesOf('Elements/TextField', module)
     .addDecorator(storyFn => <TextFieldStoryWrapper>{storyFn()}</TextFieldStoryWrapper>)
@@ -65,6 +73,7 @@ STORIES.map(({ name, props }) => {
     .addParameters({
       info: {
         propTablesExclude: getPropTablesExcludeList([TextFieldStoryWrapper]),
+        excludedPropTypes: ['style'],
       },
     })
     .add(

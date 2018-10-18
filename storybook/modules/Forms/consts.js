@@ -31,30 +31,30 @@ export const FIELDS_GENERIC = [
 export const FIELDS_REGISTER = [
   {
     required: true,
-    label: 'First Name',
+    label: 'First Name*',
     placeholder: 'Add your Name here',
   },
   {
     required: true,
-    label: 'Last Name',
+    label: 'Last Name*',
     placeholder: 'Add your Name here',
   },
   {
     required: true,
-    label: 'E-Mail Address',
+    label: 'E-Mail Address*',
     type: 'email',
     placeholder: 'john.doe@internet.com',
     style: { width: '100%' },
   },
   {
     required: true,
-    label: 'Password',
+    label: 'Password*',
     type: 'password',
     placeholder: 'at least 8 characters',
   },
   {
     required: true,
-    label: 'Confirm Password',
+    label: 'Confirm Password*',
     type: 'password',
     placeholder: 'at least 8 characters',
   },
@@ -63,14 +63,14 @@ export const FIELDS_REGISTER = [
 export const FIELDS_LOGIN = [
   {
     required: true,
-    label: 'E-Mail Address',
+    label: 'E-Mail Address*',
     type: 'email',
     placeholder: 'john.doe@internet.com',
     style: { width: '100%' },
   },
   {
     required: true,
-    label: 'Password',
+    label: 'Password*',
     type: 'password',
     placeholder: 'Enter your password',
     style: { width: '100%' },

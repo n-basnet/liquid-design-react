@@ -73,7 +73,9 @@ const InputWrapper = styled.div`
     `};
 `
 
-const ErrorMessageWrapper = styled.div`
+const ErrorMessageWrapper = styled.div.attrs({
+  'data-test': 'error-wrapper',
+})`
   font-size: 12px;
   margin-top: 5px;
   ${props => css`
@@ -255,7 +257,7 @@ Input.propTypes = {
   grey: PropTypes.bool,
   multiline: PropTypes.bool,
   disabled: PropTypes.bool,
-  errorMessage: PropTypes.string,
+  errorMessage: PropTypes.node,
   /** from `react-resize-detector` decorator */
   width: PropTypes.number,
   className: PropTypes.string,

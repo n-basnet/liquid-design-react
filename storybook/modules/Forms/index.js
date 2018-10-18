@@ -12,6 +12,7 @@ import {
 import { media } from '~/utils/styling'
 
 import FormsApp from './FormsApp'
+import FormsWithExternalLibApp, { storyInfo, propTablesExclude } from './FormsWithExternalLibApp'
 
 const getFormAppComponent = ({ type, onWhiteBackground, isProfile }) => {
   const formApps = {
@@ -66,10 +67,10 @@ const getBackgroundWrapperDecorator = backgroundColor =>
     styleCSSString,
   })
 
-const getParameters = () => ({
+const getParameters = (propTablesExclude = []) => ({
   info: {
     source: false,
-    propTablesExclude: getPropTablesExcludeList([FormsApp]),
+    propTablesExclude: getPropTablesExcludeList([FormsApp, ...propTablesExclude]),
   },
 })
 
@@ -104,3 +105,8 @@ storiesOf('Modules/Forms/Examples (White)', module)
     getFormAppComponent({ type: 'profile', isProfile: true, onWhiteBackground: true }),
     getInfoMD()
   )
+
+storiesOf('Modules/Forms/using a form library', module)
+  .addParameters(getParameters(propTablesExclude))
+  .addDecorator(getBackgroundWrapperDecorator('#fff'))
+  .add('with react-final-form', FormsWithExternalLibApp, storyInfo)
