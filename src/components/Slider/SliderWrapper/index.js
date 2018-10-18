@@ -25,6 +25,9 @@ const SliderWrapper = styled.div`
       background: ${props => props.theme.colors.sensitiveGrey.darker};
     }
   }
+  .rc-slider-handle:focus {
+    box-shadow: none;
+  }
 `
 
 export default SliderWrapper
