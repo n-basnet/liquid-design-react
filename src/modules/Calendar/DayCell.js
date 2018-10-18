@@ -7,6 +7,20 @@ import { isEmpty, isNil } from 'ramda'
 
 import { media } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
+import FORMATS from './consts'
+
+const getRangeBeforeStyles = props => css`
+  background-color: ${props.theme.colors.white.base};
+  content: '';
+  width: 25px;
+  height: 31px;
+  position: absolute;
+  top: 0;
+  ${media.max.phone`
+    width: 15px;
+    height: 21px;
+  `};
+`
 
 const DayCellWrapper = styled.div`
   display: inline-block;
@@ -21,6 +35,29 @@ const DayCellWrapper = styled.div`
         `};
     }
   }
+  ${props =>
+    props.isWithinRange &&
+    css`
+      background-color: ${props.theme.colors.primary.lightest};
+    `};
+  ${props =>
+    props.isStartOfRange &&
+    !props.isOutOfMonth &&
+    css`
+      &:before {
+        ${getRangeBeforeStyles(props)};
+        left: 0;
+      }
+    `};
+  ${props =>
+    props.isEndOfRange &&
+    !props.isOutOfMonth &&
+    css`
+      &:before {
+        ${getRangeBeforeStyles(props)};
+        right: 0;
+      }
+    `};
   ${props =>
     (props.isHovered || props.isSelected) &&
     css`
@@ -48,6 +85,30 @@ const DayCellWrapper = styled.div`
         `};
       }
     `};
+  ${props =>
+    props.isFirst &&
+    css`
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      padding-left: 0;
+      margin-left: 9px;
+      ${media.max.phone`
+        margin-left: 6.1px;
+      `};
+    `};
+  ${props =>
+    props.isLast &&
+    css`
+      ${media.max.phone`
+      margin-left: -1px;
+    `};
+    `};
+  ${props =>
+    ((props.isEndOfRange && props.isOutOfMonth) || props.isLast) &&
+    css`
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    `};
   ${media.max.phone`
     padding: 0 6.1px;
   `};
@@ -67,6 +128,7 @@ export const DayContainer = styled.div`
   width: 31px;
   height: 31px;
   cursor: pointer;
+  position: relative;
 
   ${media.max.phone`
     font-size: 12px;
@@ -74,7 +136,7 @@ export const DayContainer = styled.div`
     letter-spacing: 0.2px;
     width: 21px;
     height: 21px;
-    padding-top: 1.5px;
+    padding-top: 1px;
   `};
   ${props => css`
     border-radius: ${props.theme.borderRadius};
@@ -90,7 +152,7 @@ export const DayContainer = styled.div`
         `};
   `};
   ${props =>
-    props.isSelected || (!props.isOutOfMonth && props.isHovered)
+    (props.isSelected && !props.isOutOfMonth) || (!props.isOutOfMonth && props.isHovered)
       ? css`
           color: ${props.theme.colors.white.base};
           border-color: ${props.theme.colors.primary.base};
@@ -174,6 +236,12 @@ export class DayCell extends PureComponent {
     appointments: PropTypes.array,
     isFirst: PropTypes.bool,
     isLast: PropTypes.bool,
+    rangeMode: PropTypes.bool,
+    isWithinRange: PropTypes.bool,
+    isStartOfRange: PropTypes.bool,
+    isEndOfRange: PropTypes.bool,
+    onMouseEnter: PropTypes.func,
+    onMouseLeave: PropTypes.func,
   }
   static defaultProps = {
     isOutOfMonth: false,
@@ -182,6 +250,12 @@ export class DayCell extends PureComponent {
     appointments: null,
     isFirst: false,
     isLast: false,
+    rangeMode: false,
+    isWithinRange: false,
+    isStartOfRange: false,
+    isEndOfRange: false,
+    onMouseEnter: () => {},
+    onMouseLeave: () => {},
   }
   state = {
     isHovered: false,
@@ -192,8 +266,25 @@ export class DayCell extends PureComponent {
   handleClickOutside = () => {
     this.setState({ isOverlayOpen: false, isHovered: false })
   }
-  handleMouseEnter = () => this.setState({ isHovered: true })
-  handleMouseLeave = () => this.setState({ isHovered: false })
+  isHandlingHover = componentName => {
+    return (
+      (this.props.rangeMode && componentName === 'DayCellWrapper') ||
+      (!this.props.rangeMode && componentName === 'DayContainer')
+    )
+  }
+
+  handleMouseEnter = componentName => {
+    if (this.isHandlingHover(componentName)) {
+      this.setState({ isHovered: true })
+      this.props.onMouseEnter()
+    }
+  }
+  handleMouseLeave = componentName => {
+    if (this.isHandlingHover(componentName)) {
+      this.setState({ isHovered: false })
+      this.props.onMouseLeave()
+    }
+  }
   toggleOverlayVisibility = () =>
     this.setState(({ isOverlayOpen }) => ({ isOverlayOpen: !isOverlayOpen }))
   cellClickHandler = () => {
@@ -211,16 +302,32 @@ export class DayCell extends PureComponent {
       isFirst,
       isLast,
       isOutOfMonth,
+      isWithinRange,
+      isStartOfRange,
+      isEndOfRange,
       appointments,
       today,
       day,
     } = this.props
     const { isHovered, isOverlayOpen } = this.state
-    const dayFormat = 'D'
-    const formattedDate = dateFns.format(day, dayFormat)
+    const formattedDate = dateFns.format(day, FORMATS.MONTH_DAY_FORMAT)
 
     return (
-      <DayCellWrapper isHovered={isHovered} isSelected={isSelected} isOverlayOpen={isOverlayOpen}>
+      <DayCellWrapper
+        isHovered={isHovered}
+        isSelected={isSelected}
+        isOverlayOpen={isOverlayOpen}
+        isWithinRange={isWithinRange}
+        isStartOfRange={isStartOfRange}
+        isEndOfRange={isEndOfRange}
+        isOutOfMonth={isOutOfMonth}
+        isFirst={isFirst}
+        isLast={isLast}
+        onMouseEnter={() => this.handleMouseEnter('DayCellWrapper')}
+        onMouseLeave={() => {
+          this.handleMouseLeave('DayCellWrapper')
+        }}
+      >
         <DayContainer
           isHovered={isHovered}
           isSelected={isSelected}
@@ -228,8 +335,12 @@ export class DayCell extends PureComponent {
           isFirst={isFirst}
           isOutOfMonth={isOutOfMonth}
           onClick={this.cellClickHandler}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
+          onMouseEnter={() => {
+            this.handleMouseEnter('DayContainer')
+          }}
+          onMouseLeave={() => {
+            this.handleMouseLeave('DayContainer')
+          }}
         >
           {formattedDate}
         </DayContainer>

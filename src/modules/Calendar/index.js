@@ -11,6 +11,7 @@ import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
 import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
+import FORMATS from '~/modules/Calendar/consts'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
@@ -145,10 +146,15 @@ const yearRegexp = /^[\d]{4}$/
 
 export class Calendar extends PureComponent {
   static propTypes = {
-    /** date selected by default */
-    defaultSelectedDate: PropTypes.instanceOf(Date),
-    /** handler for date selection */
-    onSelect: PropTypes.func,
+    /** start date in range mode and single date in single mode. Should be passed from containing component even if first value is null */
+    selectedStartDate: PropTypes.instanceOf(Date),
+    /** end date in a range mode. Should be passed from containing component even if first value is null when range mode is enabled */
+    selectedEndDate: PropTypes.instanceOf(Date),
+    /** handler for start date selection */
+    onStartDateSelect: PropTypes.func.isRequired,
+    /** handler for end date selection, required in range mode */
+    onEndDateSelect: PropTypes.func,
+    rangeMode: PropTypes.bool,
     /** number of week day to be the first, 0 is Sunday */
     startOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
     /** object of appointments where keys are date strings in ISO 8601 format and values are arrays of objects with shape
@@ -156,34 +162,45 @@ export class Calendar extends PureComponent {
     appointments: PropTypes.object,
     /** the day marked as the current day */
     today: PropTypes.instanceOf(Date),
+    /** indicates that selection of date is started (start date is selected, end date is not). Use it if you need more control over range selection functionality */
+    isSelectingRange: PropTypes.bool,
   }
   static defaultProps = {
-    defaultSelectedDate: null,
-    onSelect: () => {},
+    selectedStartDate: null,
+    selectedEndDate: null,
+    onStartDateSelect: () => {},
+    onEndDateSelect: () => {},
+    rangeMode: false,
     startOfWeek: 0,
     appointments: {},
     today: new Date(),
+    isSelectingRange: null,
   }
   state = {
-    currentMonth: this.props.defaultSelectedDate || this.props.today,
-    selectedDate: this.props.defaultSelectedDate,
-    yearValue: this.props.defaultSelectedDate
-      ? dateFns.format(this.props.defaultSelectedDate, 'YYYY')
-      : dateFns.format(this.props.today, 'YYYY'),
+    currentMonth: this.props.selectedStartDate || this.props.today,
+    yearValue: this.props.selectedStartDate
+      ? dateFns.format(this.props.selectedStartDate, FORMATS.YEAR_FORMAT)
+      : dateFns.format(this.props.today, FORMATS.YEAR_FORMAT),
+    isSelectingRange: false,
+    supposedLastDate: null,
   }
-
+  hasOuterSelectionIndicator = () => this.props.isSelectingRange !== null
   nextMonth = () => {
     this.setState({
       currentMonth: dateFns.addMonths(this.state.currentMonth, 1),
     })
-    this.setState(({ currentMonth }) => ({ yearValue: dateFns.format(currentMonth, 'YYYY') }))
+    this.setState(({ currentMonth }) => ({
+      yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT),
+    }))
   }
 
   prevMonth = () => {
     this.setState({
       currentMonth: dateFns.subMonths(this.state.currentMonth, 1),
     })
-    this.setState(({ currentMonth }) => ({ yearValue: dateFns.format(currentMonth, 'YYYY') }))
+    this.setState(({ currentMonth }) => ({
+      yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT),
+    }))
   }
 
   changeYear = year => {
@@ -196,18 +213,43 @@ export class Calendar extends PureComponent {
   handleYearInputBlur = () => {
     const { yearValue, currentMonth } = this.state
     if (!yearValue.match(yearRegexp)) {
-      this.setState({ yearValue: dateFns.format(currentMonth, 'YYYY') })
+      this.setState({ yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT) })
     }
   }
 
+  handleFirstSelect = date => {
+    const { onStartDateSelect, onEndDateSelect, rangeMode } = this.props
+    onStartDateSelect(date)
+    if (rangeMode) {
+      onEndDateSelect(null)
+    }
+    if (rangeMode && !this.hasOuterSelectionIndicator()) {
+      this.setState({ isSelectingRange: true })
+    }
+  }
+  handleLastSelect = date => {
+    const { selectedStartDate, onEndDateSelect, onStartDateSelect } = this.props
+    this.setState({ supposedLastDate: null })
+    if (!this.hasOuterSelectionIndicator()) {
+      this.setState({ isSelectingRange: false })
+    }
+    if (dateFns.isAfter(date, selectedStartDate)) {
+      onEndDateSelect(date)
+    } else {
+      onStartDateSelect(date)
+      onEndDateSelect(selectedStartDate)
+    }
+  }
   onDateSelection = (date, monthStart) => {
     if (!dateFns.isSameMonth(date, monthStart)) return
-    this.setState({ selectedDate: date })
-    this.props.onSelect(date)
+    if (this.props.isSelectingRange || this.state.isSelectingRange) {
+      this.handleLastSelect(date)
+    } else {
+      this.handleFirstSelect(date)
+    }
   }
 
   buildWeekDays() {
-    const daysFormat = 'ddd'
     const countOfWeekDays = 7
 
     const dayToStart = dateFns.startOfWeek(this.state.currentMonth, {
@@ -216,15 +258,23 @@ export class Calendar extends PureComponent {
 
     const dayNames = times(countOfWeekDays).map(index => (
       <WeekDay key={index}>
-        {dateFns.format(dateFns.addDays(dayToStart, index), daysFormat)}
+        {dateFns.format(dateFns.addDays(dayToStart, index), FORMATS.WEEK_DAY_FORMAT)}
       </WeekDay>
     ))
     return dayNames
   }
 
   buildDaysGrid() {
-    const { currentMonth, selectedDate } = this.state
-    const { appointments, startOfWeek, today } = this.props
+    const { currentMonth, supposedLastDate, isSelectingRange: isSelectingRangeOwn } = this.state
+    const {
+      appointments,
+      startOfWeek,
+      rangeMode,
+      selectedStartDate,
+      selectedEndDate,
+      isSelectingRange,
+      today,
+    } = this.props
 
     const countOfWeekDays = 7
     const monthStart = dateFns.startOfMonth(currentMonth)
@@ -243,25 +293,74 @@ export class Calendar extends PureComponent {
         const dayClone = day
         const isOutOfMonth = !dateFns.isSameMonth(day, monthStart)
         const isCurrent = dateFns.isSameDay(day, today)
-        const isSelected = dateFns.isSameDay(day, selectedDate)
+        const isSelected =
+          dateFns.isSameDay(day, selectedStartDate) ||
+          dateFns.isSameDay(day, selectedEndDate) ||
+          dateFns.isSameDay(day, supposedLastDate)
+        const isWithinRange = () => {
+          const endDateToCompare = supposedLastDate || selectedEndDate
+          const hasBothDates = selectedStartDate && endDateToCompare
+          const isInSequentialRange =
+            dateFns.isAfter(endDateToCompare, selectedStartDate) &&
+            dateFns.isWithinRange(day, selectedStartDate, endDateToCompare)
+          const isInReverseRange =
+            dateFns.isBefore(endDateToCompare, selectedStartDate) &&
+            dateFns.isWithinRange(day, endDateToCompare, selectedStartDate)
+          const result = rangeMode && hasBothDates && (isInSequentialRange || isInReverseRange)
+          return Boolean(result)
+        }
+        const isStartOfRange =
+          rangeMode &&
+          ((dateFns.isSameDay(day, selectedStartDate) &&
+            ((supposedLastDate && dateFns.isBefore(day, supposedLastDate)) ||
+              (selectedEndDate && dateFns.isBefore(day, selectedEndDate)))) ||
+            ((supposedLastDate || selectedEndDate) &&
+              (dateFns.isSameDay(day, supposedLastDate) ||
+                dateFns.isSameDay(day, selectedEndDate)) &&
+              dateFns.isBefore(day, selectedStartDate)))
+        const isEndOfRange =
+          rangeMode &&
+          ((dateFns.isSameDay(day, selectedStartDate) &&
+            (supposedLastDate || selectedEndDate) &&
+            (dateFns.isAfter(day, supposedLastDate) || dateFns.isAfter(day, selectedEndDate))) ||
+            (supposedLastDate &&
+              dateFns.isSameDay(day, supposedLastDate) &&
+              dateFns.isAfter(day, selectedStartDate)) ||
+            (selectedEndDate && dateFns.isSameDay(day, selectedEndDate)))
         const dayInDaysWithAppointments =
           daysWithAppointments && find(item => dateFns.isSameDay(item, day))(daysWithAppointments)
         const currentAppointments =
           dayInDaysWithAppointments && appointments[dayInDaysWithAppointments]
+        const handleMouseEnter = () => {
+          if (rangeMode && (isSelectingRange || isSelectingRangeOwn)) {
+            this.setState({ supposedLastDate: dayClone })
+          }
+        }
+        const handleMouseLeave = () => {
+          if (rangeMode && (isSelectingRange || isSelectingRangeOwn)) {
+            this.setState({ supposedLastDate: null })
+          }
+        }
         days.push(
           <DayCell
             key={day}
             day={day}
             today={today}
             isOutOfMonth={isOutOfMonth}
+            isWithinRange={isWithinRange()}
             isCurrent={isCurrent}
             isSelected={isSelected}
+            isStartOfRange={isStartOfRange}
+            isEndOfRange={isEndOfRange}
+            rangeMode={rangeMode}
             appointments={currentAppointments || null}
             isFirst={index === 0}
             isLast={index === 6}
             onClick={() => {
               this.onDateSelection(dayClone, monthStart)
             }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           />
         )
         day = dateFns.addDays(day, 1)
@@ -280,7 +379,7 @@ export class Calendar extends PureComponent {
             <Glyph name='arrowLeft' size={25} />
           </IconWrapper>
           <MonthYearWrapper>
-            <MonthName>{dateFns.format(this.state.currentMonth, 'MMM')}</MonthName>
+            <MonthName>{dateFns.format(this.state.currentMonth, FORMATS.MONTH_FORMAT)}</MonthName>
             <TextField
               grey
               value={this.state.yearValue}

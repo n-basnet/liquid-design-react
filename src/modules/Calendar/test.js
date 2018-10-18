@@ -5,8 +5,8 @@ import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
 
 describe('Calendar', () => {
   const defaultProps = {
-    defaultSelectedDate: new Date(2018, 10, 10),
-    onSelect: jest.fn(),
+    selectedStartDate: new Date(2018, 10, 10),
+    onStartDateSelect: jest.fn(),
   }
   const getCalendarWrapper = getWrapper(Calendar, defaultProps)
   it('renders calendar', () => {
@@ -15,7 +15,7 @@ describe('Calendar', () => {
   })
   it('renders correct month', () => {
     const wrapper = getCalendarWrapper()
-    expect(wrapper.find(MonthName).text()).toEqual('Nov')
+    expect(wrapper.find(MonthName).text()).toBe('Nov')
   })
   it('renders calendar with weeks starting from specified day if it provided', () => {
     const wrapper = getCalendarWrapper({ startOfWeek: 1 })
@@ -24,7 +24,7 @@ describe('Calendar', () => {
         .find(WeekDay)
         .at(0)
         .text()
-    ).toEqual('Mon')
+    ).toBe('Mon')
   })
   it('changes the month', () => {
     const wrapper = getCalendarWrapper()
@@ -32,7 +32,7 @@ describe('Calendar', () => {
       .find(IconWrapper)
       .at(0)
       .simulate('click')
-    expect(wrapper.find(MonthName).text()).toEqual('Oct')
+    expect(wrapper.find(MonthName).text()).toBe('Oct')
     expect(
       wrapper
         .find(DayCell)
@@ -42,7 +42,7 @@ describe('Calendar', () => {
   })
   it('renders correct year', () => {
     const wrapper = getCalendarWrapper()
-    expect(wrapper.find(TextField).prop('value')).toEqual('2018')
+    expect(wrapper.find(TextField).prop('value')).toBe('2018')
   })
   it('changes the year if passed value is 4 digits', () => {
     const wrapper = getCalendarWrapper()
@@ -56,7 +56,7 @@ describe('Calendar', () => {
         .find(DayCell)
         .at(0)
         .text()
-    ).toEqual('29')
+    ).toBe('29')
   })
   it('does not change a year if passed value is not 4 digits', () => {
     const wrapper = getCalendarWrapper()
@@ -69,36 +69,61 @@ describe('Calendar', () => {
       .find(TextField)
       .find('input')
       .simulate('blur')
-    expect(wrapper.find(TextField).prop('value')).toEqual('2018')
+    expect(wrapper.find(TextField).prop('value')).toBe('2018')
     expect(
       wrapper
         .find(DayCell)
         .at(0)
         .text()
-    ).toEqual('28')
+    ).toBe('28')
   })
   it('allows to select date', () => {
-    const wrapper = getCalendarWrapper()
+    let defaultDate = new Date(2018, 10, 10)
+    const changeDate = jest.fn(date => (defaultDate = date))
+    const wrapper = getCalendarWrapper({
+      selectedStartDate: defaultDate,
+      onStartDateSelect: changeDate,
+    })
     wrapper
       .find(DayCell)
       .at(20)
       .find(DayContainer)
       .simulate('click')
-    expect(
-      wrapper
-        .find(DayCell)
-        .at(20)
-        .prop('isSelected')
-    ).toEqual(true)
+    expect(defaultDate).toEqual(new Date(2018, 10, 17))
   })
-  it('handles onSelect prop', () => {
+  it('handles onStartDateSelect prop', () => {
     const wrapper = getCalendarWrapper()
     wrapper
       .find(DayCell)
       .at(20)
       .find(DayContainer)
       .simulate('click')
-    expect(defaultProps.onSelect).toBeCalled()
+    expect(defaultProps.onStartDateSelect).toBeCalled()
+  })
+  it('allows to select range', () => {
+    let defaultStartDate = new Date(2018, 10, 10)
+    let defaultEndDate = new Date(2018, 10, 10)
+    const changeStartDate = jest.fn(date => (defaultStartDate = date))
+    const changeEndDate = jest.fn(date => (defaultEndDate = date))
+    const wrapper = getCalendarWrapper({
+      selectedStartDate: defaultStartDate,
+      selectedEndDate: defaultEndDate,
+      onStartDateSelect: changeStartDate,
+      onEndDateSelect: changeEndDate,
+      rangeMode: true,
+    })
+    wrapper
+      .find(DayCell)
+      .at(20)
+      .find(DayContainer)
+      .simulate('click')
+    wrapper
+      .find(DayCell)
+      .at(23)
+      .find(DayContainer)
+      .simulate('click')
+    expect(defaultStartDate).toEqual(new Date(2018, 10, 17))
+    expect(defaultEndDate).toEqual(new Date(2018, 10, 20))
   })
   everyComponentTestSuite(getCalendarWrapper, Calendar, 'Calendar')
 })
