@@ -176,5 +176,9 @@
   {
     "name": "DatePicker",
     "type": "module"
+  },
+  {
+    "name": "Navigation",
+    "type": "module"
   }
 ]
