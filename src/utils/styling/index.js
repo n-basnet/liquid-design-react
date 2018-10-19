@@ -58,6 +58,12 @@ export const ieStyles = styleString => css`
   }
 `
 
+export const touchDeviceHoverStyles = styleString => css`
+  @media (hover: none), (pointer: coarse) {
+    ${styleString};
+  }
+`
+
 export const disableTextSelectionBackground = css`
   *::selection {
     background: rgba(255, 255, 255, 0);

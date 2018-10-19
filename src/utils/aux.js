@@ -26,3 +26,6 @@ export const getSVGImageURLString = (string, { dimensions }) => {
 }
 
 export const getFirstTruthyKeyName = props => Object.keys(filter(Boolean, props))[0]
+
+export const isSupportingTouch = () =>
+  'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0

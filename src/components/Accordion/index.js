@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { media } from '~/utils/styling'
+import { media, touchDeviceHoverStyles } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 import { handleClickIfNotSelectingText } from '~/utils/dom'
+import { isSupportingTouch } from '~/utils/aux'
 
 const AccordionWrapper = styled.div`
   cursor: pointer;
@@ -13,12 +14,12 @@ const AccordionWrapper = styled.div`
     margin-top: -1px;
     border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
     transition: ${props.theme.transition};
+    ${props.isHovered &&
+      css`
+        background-color: ${props.theme.colors.sensitiveGrey.base};
+        ${touchDeviceHoverStyles(`background-color: ${props.theme.colors.white.base};`)};
+      `};
   `};
-  &:hover {
-    ${props => css`
-      background-color: ${props.theme.colors.sensitiveGrey.base};
-    `};
-  }
 `
 
 export const SectionTitle = styled.div`
@@ -41,11 +42,12 @@ export const SectionTitle = styled.div`
     css`
       color: ${props.theme.colors.primary.base};
     `};
-  &:hover {
-    ${props => css`
+  ${props =>
+    props.isHovered &&
+    css`
       color: ${props.theme.colors.primary.base};
+      ${touchDeviceHoverStyles('color: initial;')};
     `};
-  }
   .${ICON_CLASSNAME} svg {
     transition: 0.22s all ease-in-out;
     ${props => css`
@@ -86,18 +88,32 @@ export class Accordion extends PureComponent {
 
   state = {
     isOpen: DEFAULT_IS_OPEN_VALUE,
+    isHovered: false,
   }
 
   toggle = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  activateHover = () => {
+    if (!isSupportingTouch()) {
+      this.setState({ isHovered: true })
+    }
+  }
+  deactivateHover = () => this.setState({ isHovered: false })
 
   render() {
     const { children, title, isOpen, ...props } = this.props
+    const { isHovered } = this.state
 
     const isAccordionOpen = isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
 
     return (
-      <AccordionWrapper isOpen={isAccordionOpen} {...props}>
-        <SectionTitle isOpen={isAccordionOpen} onClick={this.toggle}>
+      <AccordionWrapper
+        isOpen={isAccordionOpen}
+        isHovered={isHovered}
+        onMouseEnter={this.activateHover}
+        onMouseLeave={this.deactivateHover}
+        {...props}
+      >
+        <SectionTitle isOpen={isAccordionOpen} isHovered={isHovered} onClick={this.toggle}>
           <Glyph name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
