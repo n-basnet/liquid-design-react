@@ -87,6 +87,7 @@ export const ResultWrapper = styled.div`
     }
     .${CHECKBOX_CLASSNAME} {
       margin-top: -2px;
+      margin-right: 7px;
       svg {
         transition: ${props.theme.transition};
         fill: ${props.theme.colors.sensitiveGrey.dark};
