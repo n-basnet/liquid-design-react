@@ -13,25 +13,17 @@ const ListWrapper = styled.ul`
   margin: 0;
 `
 
-export const List = ({
-  activeItemIndex,
-  disabledItemIndex,
-  grey,
-  items = [],
-  listHead,
-  ...props
-}) => {
+export const List = ({ activeItemIndex, grey, items = [], listHead, ...props }) => {
   const getItemIcon = (name, isActive) => (
     <Glyph color={`${isActive ? 'primary' : 'richBlack'}.base`} name={name} size={16} />
   )
-  const ListItems = items.map(({ name, iconName, onClick }, index) => {
+  const ListItems = items.map(({ name, iconName, onClick, isDisabled }, index) => {
     const isActive = index === activeItemIndex
-    const isDisabled = index === disabledItemIndex
     return (
       <ListItem
         key={index}
         active={isActive}
-        disabled={index === disabledItemIndex}
+        disabled={isDisabled}
         grey={grey}
         onClick={!isDisabled && onClick ? onClick : undefined}
       >
@@ -65,14 +57,12 @@ List.propTypes = {
     })
   ),
   activeItemIndex: PropTypes.number,
-  disabledItemIndex: PropTypes.number,
   grey: PropTypes.bool,
 }
 
 List.defaultProps = {
   items: [],
   activeItemIndex: null,
-  disabledItemIndex: null,
   grey: false,
 }
 

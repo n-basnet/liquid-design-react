@@ -2,7 +2,11 @@ import List from '.'
 import { ListItem } from '~/elements/List/ListItem'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
 
-const items = [{ name: 'item 1', onClick: jest.fn() }, { name: 'item 2' }, { name: 'item 3' }]
+const items = [
+  { name: 'item 1', onClick: jest.fn() },
+  { name: 'item 2', isDisabled: true },
+  { name: 'item 3' },
+]
 
 describe('List', () => {
   const defaultProps = {
@@ -10,7 +14,6 @@ describe('List', () => {
     items,
     listHead: { name: 'List Head' },
     activeItemIndex: 1,
-    disabledItemIndex: 2,
   }
   const getListWrapper = getWrapper(List, defaultProps)
 
@@ -37,10 +40,12 @@ describe('List', () => {
   })
 
   it('renders a disabled ListItem', () => {
+    const index = 1
     expect(
       getListWrapper()
         .find(ListItem)
-        .get(defaultProps.disabledItemIndex).props.disabled
+        .at(index)
+        .props().disabled
     ).toBe(true)
   })
 

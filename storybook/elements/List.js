@@ -13,25 +13,28 @@ import { default as EnhancedList, List } from '~/elements/List'
 
 const getListHead = () => getTextKnob({ name: 'list head', defaultText: 'List head' })
 
-const getListItem = withIcon => index => ({
+const getListItem = (withIcon, disabled) => index => ({
   name: getTextKnob({
     name: `list item ${index + 1}`,
     defaultText: `List item ${index + 1}`,
   }),
   onClick: action(`click item ${index + 1}`),
   ...(withIcon && { iconName: 'star' }),
+  isDisabled: disabled && index === 1,
 })
 
-const getDefaultProps = (withIcon = true) => ({
-  items: times(5).map(getListItem(withIcon)),
+const getDefaultProps = (withIcon = true, disabled = false) => ({
+  items: times(5).map(getListItem(withIcon, disabled)),
   listHead: { name: getListHead(), ...(withIcon && { iconName: 'star' }) },
 })
 
-const getSnippet = (props, withIcon) => `
+const getSnippet = (props, withIcon, disabled) => `
   <List
     items={[
       { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''}${
+  disabled ? `, isDisabled: 'true'` : ''
+} },
       { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
     ]}
     listHead={{ name: 'List head'${withIcon ? `, iconName: 'star'` : ''} }}${
@@ -70,8 +73,8 @@ storiesOf('Elements/List', module)
   )
   .add(
     'disabled',
-    () => <EnhancedList disabledItemIndex={1} {...getDefaultProps(false)} />,
-    getSnippetTemplate(getSnippet(`disabledItemIndex={1}`))
+    () => <EnhancedList {...getDefaultProps(false, true)} />,
+    getSnippetTemplate(getSnippet(null, null, true))
   )
 
 storiesOf('Elements/List/with icons', module)
@@ -94,6 +97,6 @@ storiesOf('Elements/List/with icons', module)
   )
   .add(
     'disabled',
-    () => <EnhancedList disabledItemIndex={1} {...getDefaultProps()} />,
-    getSnippetTemplate(getSnippet(`disabledItemIndex={1}`, true))
+    () => <EnhancedList {...getDefaultProps(false, true)} />,
+    getSnippetTemplate(getSnippet(true, true))
   )
