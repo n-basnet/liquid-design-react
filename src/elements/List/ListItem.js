@@ -5,10 +5,9 @@ import { cursorValue } from '~/utils/styling'
 
 export const ListItem = styled.li`
   display: flex;
-  align-items: center;
   max-width: 100%;
   min-height: 50px;
-  padding: 10px 15px;
+  padding: 12px 15px;
   list-style: none;
   font-size: 14px;
   line-height: 1.75;
@@ -59,6 +58,8 @@ export const ListItem = styled.li`
       `};
     .${ICON_CLASSNAME} {
       margin-right: 10px;
+      margin-top: 4px;
+      min-width: 16px;
       ${props =>
     props.active &&
         css`
