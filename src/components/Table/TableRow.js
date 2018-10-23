@@ -59,7 +59,10 @@ const TableRow = ({
   const getClickHandler = () => {
     const { rowConfigCell } = getCellsAndRowInfo(cellsInfo)
     if (!disabled && (rowConfigCell || displayCheckbox)) {
-      const type = rowConfigCell.rowInfo ? TABLE_ROW_STATES.isExpanded : TABLE_ROW_STATES.isSelected
+      const type =
+        rowConfigCell && rowConfigCell.rowInfo
+          ? TABLE_ROW_STATES.isExpanded
+          : TABLE_ROW_STATES.isSelected
 
       return () => handleStateChange(type)
     }

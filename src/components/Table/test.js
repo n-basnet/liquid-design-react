@@ -52,6 +52,11 @@ describe('Table', () => {
     expect(onChange.mock.calls[0][0]).toMatchObject({ rowState: {}, rowConfig: {} })
   })
 
+  it('renders a selectable table', () => {
+    const wrapper = getTableWrapper({ isSelectable: true })
+    expect(wrapper.find('table').first().length).toBe(1)
+  })
+
   describe('utils', () => {
     it('getCellsAndRowInfo', () => {
       const configCell = {
