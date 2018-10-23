@@ -18,7 +18,6 @@ export const ColumnCell = id => <span>Column {(id + 1).toString().padStart(2, '0
 
 const NameCellWrapper = styled.span`
   display: flex;
-  align-items: center;
 `
 
 export const NameCell = ({ rowIndex, withMoreContent, withImages }) => (
@@ -30,8 +29,8 @@ export const NameCell = ({ rowIndex, withMoreContent, withImages }) => (
       />
     )}
     <span>
-      {withMoreContent && <Label>label {rowIndex}</Label>}
-      <strong>Name {rowIndex}</strong> Info
+      {withMoreContent && <Label>label {rowIndex + 1}</Label>}
+      <strong>Name {rowIndex + 1}</strong> Info
     </span>
   </NameCellWrapper>
 )

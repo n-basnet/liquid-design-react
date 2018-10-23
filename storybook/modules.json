@@ -150,6 +150,15 @@
     "hasIndexFile": true
   },
   {
+    "name": "Table",
+    "type": "component",
+    "hasIndexFile": true
+  },
+  {
+    "name": "TablePagination",
+    "type": "component"
+  },
+  {
     "name": "Tabs",
     "type": "component"
   },

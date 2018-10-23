@@ -1,14 +1,15 @@
 import { getSnippetTemplate } from '../../helpers'
 
 const getRowSnippet = ({ withRowContent }, name) =>
-  withRowContent ? `, {rowInfo: 'Some additional info about ${name}.'}` : ''
+  withRowContent ? `, { rowInfo: 'Some additional info about ${name}.' }` : ''
 
 export const DISABLED_ROW_INDEXES = [7]
 
 export const getSnippet = (props, tableProps) => {
-  const propsSnippet = Object.keys(tableProps)
-    .map(prop => (prop === 'size' ? `size='${tableProps.size}'` : prop))
-    .join(' ')
+  const propsSnippet = Object.keys(tableProps).map(
+    prop => (prop === 'size' ? `size='${tableProps.size}'` : prop)
+  ).join(`
+    `)
 
   return getSnippetTemplate(
     `

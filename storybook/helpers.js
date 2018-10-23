@@ -4,9 +4,12 @@ import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
 
+import COLORS from '~/utils/consts/colors'
+
 const BACKGROUND_COLORS = {
   dark: '#e9e9e8',
   grey: '#f9f9fc',
+  sensitiveGrey: COLORS.SENSITIVE_GREY,
 }
 
 const BackgroundWrapper = styled.div`

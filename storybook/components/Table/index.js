@@ -17,15 +17,24 @@ const STORIES = getStoriesByVersions({
     { name: 'Large', props: { size: 'large', withMoreContent: true } },
   ],
   subversions: [
-    { name: 'with checkboxes', props: { isSelectable: true } },
+    { name: 'selectable', props: { isSelectable: true } },
     { name: 'with row content', props: { withRowContent: true } },
     { name: 'with images', props: { withImages: true } },
+    { name: 'with pagination', props: { withPagination: true } },
+    { name: 'with pagination below table', props: { withPagination: true, paginationBelow: true } },
+    { name: 'selectable with pagination', props: { withPagination: true, isSelectable: true } },
   ],
 })
 
 STORIES.map(({ name, props = {} }) => {
   const tableProps = omit(['withMoreContent', 'withRowContent', 'withImages'], props)
   const [groupName, storyName] = name.split(joinString)
+
+  // filter generated stories
+  if (props.withImages && props.size !== 'large') {
+    return
+  }
+
   storiesOf(`Components/Table/${groupName}`, module)
     .addDecorator(getBackgroundWrapper())
     .addParameters({
@@ -36,7 +45,7 @@ STORIES.map(({ name, props = {} }) => {
       },
     })
     .add(
-      storyName || 'simple',
+      storyName || 'default',
       () => (
         <TableApp {...tableProps} passedProps={props} disabledRowsIndexes={DISABLED_ROW_INDEXES} />
       ),

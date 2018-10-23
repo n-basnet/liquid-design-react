@@ -10,7 +10,6 @@ import { getCustomPlaceholderText, Fragment } from '../../helpers'
 import { NameCell, RegularCell, ColumnCell, RowInfoWrapper } from './cells'
 
 const COLUMNS_AMOUNT = 4
-const ROWS_AMOUNT = 10
 
 const onChange = action('row change')
 
@@ -40,9 +39,13 @@ const getDefaultProps = ({ rowsAmount, columnsAmount }, props) => ({
 export default class extends PureComponent {
   static propTypes = {
     passedProps: PropTypes.object.isRequired,
+    withPagination: PropTypes.bool,
+  }
+  static defaultProps = {
+    withPagination: false,
   }
   state = {
-    rowsAmount: ROWS_AMOUNT,
+    rowsAmount: this.props.withPagination ? 100 : 10,
     columnsAmount: COLUMNS_AMOUNT,
   }
   addOrSubstractRow = add => () =>
@@ -59,6 +62,9 @@ export default class extends PureComponent {
         <style>{`
           .${TABLE_CLASSNAME} tr:not([disabled]):hover .${PLACEHOLDER_CLASSNAME} g:nth-child(2) use {
             fill: #f3f3f7;
+          }
+          .${TABLE_CLASSNAME}--large tbody .${TABLE_CLASSNAME}AuxCell {
+            padding-top: 31px;
           }
         `}</style>
         <Table {...props} rows={rows} columns={columns} />

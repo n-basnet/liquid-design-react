@@ -4,7 +4,12 @@ import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
 import TableCell from '~/components/Table/TableCell'
-import { getCellsAndRowInfo, TABLE_ROW_STATES } from '~/components/Table/utils'
+import {
+  getCellsAndRowInfo,
+  TABLE_ROW_STATES,
+  AUX_CELL_CLASSNAME,
+  getTableCellYPadding,
+} from '~/components/Table/utils'
 import { getAuxComponent } from '~/components/Table/tableIcons'
 import { cursorValue } from '~/utils/styling'
 
@@ -34,6 +39,10 @@ const RowWrapper = styled.tr`
           background-color: ${props.theme.colors.sensitiveGrey.dark};
         }
       `};
+    .${AUX_CELL_CLASSNAME} {
+      padding-top: ${getTableCellYPadding(props.size)};
+      padding-right: 5px;
+    }
   `};
 `
 
@@ -63,7 +72,7 @@ const TableRow = ({
     })
     return (
       Component && (
-        <td>
+        <td className={AUX_CELL_CLASSNAME}>
           <Component
             {...displayCheckbox && {
               isChecked: rowState.isSelected,
@@ -84,7 +93,12 @@ const TableRow = ({
 
   return (
     <Fragment>
-      <RowWrapper onClick={getClickHandler()} isExpanded={rowState.isExpanded} disabled={disabled}>
+      <RowWrapper
+        onClick={getClickHandler()}
+        isExpanded={rowState.isExpanded}
+        disabled={disabled}
+        size={size}
+      >
         {renderAuxComponent()}
         {cells.map((value, i) => (
           <TableCell innerRef={ref => getRef(ref, i)} key={i} size={size}>
@@ -107,11 +121,17 @@ TableRow.propTypes = {
   cellsInfo: PropTypes.array.isRequired,
   displayRowInfoArrow: PropTypes.bool.isRequired,
   displayCheckbox: PropTypes.bool.isRequired,
-  getRef: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
   size: PropTypes.string.isRequired,
-  handleStateChange: PropTypes.func.isRequired,
   rowState: PropTypes.object.isRequired,
+  getRef: PropTypes.func,
+  handleStateChange: PropTypes.func,
+  disabled: PropTypes.bool,
+}
+
+TableRow.defaultProps = {
+  getRef: () => {},
+  handleStateChange: () => {},
+  disabled: false,
 }
 
 export default TableRow

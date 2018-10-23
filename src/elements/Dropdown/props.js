@@ -11,7 +11,7 @@ export const optionDefaultProps = PropTypes.shape({
 })
 
 export const dropdownPropTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   defaultValue: PropTypes.shape(optionPropType),
   disabled: PropTypes.bool,
   inline: PropTypes.bool,
@@ -20,6 +20,8 @@ export const dropdownPropTypes = {
   options: PropTypes.arrayOf(PropTypes.shape(optionPropType)),
   onOptionDeselect: PropTypes.func,
   onSubmit: PropTypes.func,
+  /** Id of selected option - for controlling the state externally. */
+  value: PropTypes.string,
 }
 
 export const dropdownDefaultProps = {
@@ -32,6 +34,7 @@ export const dropdownDefaultProps = {
   options: [],
   onOptionDeselect: () => {},
   onSubmit: () => {},
+  value: null,
 }
 
 export const SHARED_PROPS = ['options', 'inline', 'multiselect', 'selectedOptionsIds']

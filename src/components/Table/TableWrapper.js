@@ -7,17 +7,17 @@ import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
 const getCheckboxTranslateOffset = size => {
   switch (size) {
     case SIZES.small:
-      return '27px, 3px'
+      return '27px, 0px'
     default:
-      return '22px, 3px'
+      return '22px, 0px'
   }
 }
 const getArrowTranslateOffset = size => {
   switch (size) {
     case SIZES.small:
-      return '23px, 3px'
+      return '23px, -2px'
     default:
-      return '22px, 3px'
+      return '22px, -2px'
   }
 }
 const getTransformOffset = (type, size) =>
@@ -47,16 +47,17 @@ export default styled.table`
       height: 1px;
       background-color: ${props.theme.colors.white.base};
     };
+
     td,
     th {
+      vertical-align: top;
       .${CheckboxClassName} {
         transform: translate(${getTransformOffset('Checkbox', props.size)});
       }
-    }
-    td,
-    th {
       .${ArrowClassName} {
         transform: translate(${getTransformOffset('Arrow', props.size)});
+
+        height: 20px;
       }
     }
 

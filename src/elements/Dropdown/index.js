@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
-import { pick, isEmpty } from 'ramda'
+import { pick, find, isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
@@ -17,6 +17,7 @@ const ICON_MOBILE_SCALE = 1.27
 
 const ARROW_ICON_CLASSNAME = `${ICON_CLASSNAME}Arrow`
 export const DROPDOWN_CLASSNAME = getClassName({ name: 'Dropdown' })
+export const DROPDOWN_TRIGGER_CLASSNAME = getClassName({ name: 'DropdownTrigger' })
 
 const getInnerWrapperStyle = props => {
   const boxShadow = props.theme[props.isExpanded ? 'doubleBoxShadow' : 'boxShadow']
@@ -150,8 +151,12 @@ export class Dropdown extends PureComponent {
     if (this.props.multiselect) {
       return
     }
+    const activeOption = this.getActiveOption()
+    const hasReselectedSameOption = activeOption && option.id === activeOption.id
+    // if the state is internal, reselecting is resetting
+    const submittedOption = !this.props.value && hasReselectedSameOption ? null : option
     this.setState({
-      submittedOption: option,
+      submittedOption,
       isExpanded: false,
       wasSubmitted: true,
     })
@@ -159,7 +164,12 @@ export class Dropdown extends PureComponent {
   }
   getActiveOption = () => {
     const { submittedOption, wasSubmitted } = this.state
-    const { defaultValue } = this.props
+    const { defaultValue, value, options } = this.props
+    // handling external control
+    const activeOptionFromValue = value && find(({ id }) => id === value, options)
+    if (activeOptionFromValue) {
+      return activeOptionFromValue
+    }
     return submittedOption || (!wasSubmitted && defaultValue) || null
   }
   render() {
@@ -187,6 +197,7 @@ export class Dropdown extends PureComponent {
         {...props}
       >
         <DropdownTriggerWrapper
+          className={DROPDOWN_TRIGGER_CLASSNAME}
           hasValue={activeOption}
           inline={inline}
           onClick={triggerToggle}

@@ -30,10 +30,9 @@ export const Placeholder = ({ width, height, theme, className, style, ...props }
     <PlaceholderComponent
       width={`${width}px`}
       style={{
-        ...(type.indexOf('isCircular') >= 0 && { borderRadius: '50%' }),
         maxWidth: '100%',
         height: height || 'auto',
-        ...(type.indexOf('White') === -1 &&
+        ...(type.indexOf('Circular') === -1 &&
           theme && { backgroundColor: theme.colors.sensitiveGrey.base }),
         ...style,
       }}

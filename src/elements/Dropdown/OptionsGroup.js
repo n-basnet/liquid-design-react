@@ -115,8 +115,8 @@ export const ResultWrapper = styled.div`
 
 const getKeyDownHandler = handler => e => e.key === 'Enter' && handler && handler()
 
-const getOptionActionHandler = (option, submitHandler, reset) => () => {
-  submitHandler && submitHandler(reset ? null : option)
+const getOptionActionHandler = (option, submitHandler) => () => {
+  submitHandler && submitHandler(option)
   option.onClick && option.onClick(option)
 }
 
@@ -131,7 +131,7 @@ const OptionsGroup = ({
   <OptionsWrapper inline={inline} className={OPTIONS_GROUP_CLASSNAME}>
     {options.map(option => {
       const isSelected = selectedOption === option || contains(option.id, selectedOptionsIds)
-      const handleAction = getOptionActionHandler(option, submitHandler, isSelected)
+      const handleAction = getOptionActionHandler(option, submitHandler)
       return (
         <ResultWrapper
           tabIndex='0'

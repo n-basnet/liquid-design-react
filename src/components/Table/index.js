@@ -1,8 +1,21 @@
 import React, { PureComponent } from 'react'
+import ReactResizeDetector from 'react-resize-detector'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import uniqid from 'uniqid'
-import { assoc, findIndex, update, equals, assocPath, any, all, omit, values } from 'ramda'
+import {
+  contains,
+  prop,
+  assoc,
+  findIndex,
+  update,
+  equals,
+  assocPath,
+  any,
+  all,
+  omit,
+  values,
+} from 'ramda'
 
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 import TableRow from '~/components/Table/TableRow'
@@ -18,11 +31,13 @@ import {
   SIZES,
   findConfigCell,
   TABLE_ROW_STATES,
+  AUX_CELL_CLASSNAME,
 } from '~/components/Table/utils'
+import TablePagination from '~/components/TablePagination'
 
 export const TABLE_CLASSNAME = getClassName({ name: 'Table' })
 
-const INITIAL_SORTING_COLUMN_INDEX = null
+const INITIAL_SORTING_COLUMN_INDEX = undefined
 
 export default class Table extends PureComponent {
   static propTypes = {
@@ -53,6 +68,17 @@ export default class Table extends PureComponent {
     size: PropTypes.oneOf(Object.keys(SIZES)),
     disabledRowsIndexes: PropTypes.arrayOf(PropTypes.number),
     className: PropTypes.string,
+    /** Display `TablePagination` above the table. */
+    withPagination: PropTypes.bool,
+    /** Default values for `TablePagination`. */
+    paginationDefaults: PropTypes.shape({
+      currentPage: PropTypes.number,
+      itemsPerPageAmount: PropTypes.number,
+    }),
+    /** For `itemsPerPageOptions` prop on `TablePagination`. */
+    paginationItemsPerPageOptions: PropTypes.array,
+    /** By default, pagination will be placed above the table - use this prop to change it's placement to below the table */
+    paginationBelow: PropTypes.bool,
   }
   static defaultProps = {
     columns: [],
@@ -62,13 +88,21 @@ export default class Table extends PureComponent {
     size: SIZES.small,
     disabledRowsIndexes: [],
     className: '',
+    withPagination: false,
+    paginationDefaults: {
+      currentPage: 1,
+      itemsPerPageAmount: 10,
+    },
+    paginationItemsPerPageOptions: TablePagination.defaultProps.itemsPerPageOptions,
+    paginationBelow: false,
   }
   state = {
     rows: [],
     disabledRowsIds: [],
     sortModes: this.props.columns.map(v => DEFAULT_SORT_MODE),
     sortingColumnIndex: INITIAL_SORTING_COLUMN_INDEX,
-    rowWidth: null,
+    paginationCurrentPage: this.props.paginationDefaults.currentPage,
+    paginationPerPage: this.props.paginationDefaults.itemsPerPageAmount,
   }
   componentDidMount() {
     this.recomputeState(this.props)
@@ -80,6 +114,7 @@ export default class Table extends PureComponent {
     }
   }
 
+  tableElementHTMLId = getClassName({ name: `Table--${uniqid()}` })
   tableRefs = {}
 
   recomputeState = (
@@ -108,12 +143,13 @@ export default class Table extends PureComponent {
           index => index < rowsWithIds.length && rowsWithIds[index].id
         ),
       },
-      this.sortRows
+      this.updateSorting
     )
   }
 
   getCurrentSortMode = () =>
     this.state.sortModes[this.state.sortingColumnIndex] || DEFAULT_SORT_MODE
+
   getNewSortMode = newSortingColumnIndex => {
     const modes = values(SORT_MODES)
     const newIndex = modes.indexOf(this.state.sortModes[newSortingColumnIndex]) + 1
@@ -121,30 +157,25 @@ export default class Table extends PureComponent {
     return modes[newIndex >= modes.length ? newIndex % modes.length : newIndex]
   }
 
-  sortRows = newSortingColumnIndex => {
-    const { sortModes, rows } = this.state
-    const currentSortMode = this.getCurrentSortMode()
+  updateSorting = newSortingColumnIndex => {
+    const { sortModes } = this.state
     const shouldUpdateSort = newSortingColumnIndex !== undefined
     const newSortMode = shouldUpdateSort
       ? this.getNewSortMode(newSortingColumnIndex)
-      : currentSortMode
+      : this.getCurrentSortMode()
     const sortingColumnIndex = shouldUpdateSort
       ? newSortingColumnIndex
       : this.state.sortingColumnIndex
+
     this.setState({
-      rows: getSortedRows({
-        sortingColumnIndex,
-        newSortMode,
-        rows,
-        tableRefs: this.tableRefs,
-      }),
       sortingColumnIndex,
       sortModes: sortModes.map(
+        // resetting all other columns' sort modes
         (v, index) => (index === sortingColumnIndex ? newSortMode : DEFAULT_SORT_MODE)
       ),
     })
   }
-  getSortChangeHandler = sortingColumnIndex => () => this.sortRows(sortingColumnIndex)
+  getSortChangeHandler = sortingColumnIndex => () => this.updateSorting(sortingColumnIndex)
 
   handleRowOnChange = ({ cells, state }) => {
     const configCell = findConfigCell(cells)
@@ -157,8 +188,6 @@ export default class Table extends PureComponent {
     const rowIndex = findIndex(v => v.id === id, rows)
     const row = rows[rowIndex]
 
-    this.updateRowWidth()
-
     const value = row.state[type]
     const updatedRowState = { ...row.state, [type]: !value }
     this.setState(
@@ -170,13 +199,16 @@ export default class Table extends PureComponent {
       }
     )
   }
-  getNonDisabledRows = () => this.state.rows.filter(({ id }) => !this.isRowDisabled(id))
-  areAllRowStateOfTypeTrue = type => all(v => !!v.state[type], this.getNonDisabledRows())
-  areAnyRowStateOfTypeTrue = type => any(v => !!v.state[type], this.getNonDisabledRows())
+  getNonDisabledVisibleRows = () =>
+    this.getVisibleRows().filter(({ id }) => !this.isRowDisabled(id))
+  areAllRowStateOfTypeTrue = type => all(v => !!v.state[type], this.getNonDisabledVisibleRows())
+  areAnyRowStateOfTypeTrue = type => any(v => !!v.state[type], this.getNonDisabledVisibleRows())
+
   getGlobalChangeHandler = type => arg => {
     const { rows } = this.state
 
-    this.updateRowWidth()
+    const visibleRows = this.getVisibleRows()
+    const visibleRowsIds = visibleRows.map(prop('id'))
 
     const newValue =
       type === TABLE_ROW_STATES.isSelected
@@ -185,17 +217,16 @@ export default class Table extends PureComponent {
 
     this.setState(
       {
-        rows: rows.map(row =>
-          assoc(
+        rows: rows.map(row => {
+          const shouldUpdateRow = !this.isRowDisabled(row.id) && contains(row.id, visibleRowsIds)
+          return assoc(
             'state',
-            { ...row.state, ...(!this.isRowDisabled(row.id) && { [type]: !newValue }) },
+            { ...row.state, ...(shouldUpdateRow && { [type]: !newValue }) },
             row
           )
-        ),
+        }),
       },
-      () => {
-        this.state.rows.map(this.handleRowOnChange)
-      }
+      () => visibleRows.map(this.handleRowOnChange)
     )
   }
   renderGlobalHandlerComponent = () => {
@@ -204,7 +235,7 @@ export default class Table extends PureComponent {
 
     const Component = getAuxComponent({ rowInfoArrow: hasRowInfo, checkbox: isSelectable, size })
     return Component ? (
-      <th width={AUX_CELL_WIDTH}>
+      <th width={AUX_CELL_WIDTH} className={AUX_CELL_CLASSNAME}>
         <Component
           {...isSelectable && {
             onChange: this.getGlobalChangeHandler(TABLE_ROW_STATES.isSelected),
@@ -219,73 +250,147 @@ export default class Table extends PureComponent {
     ) : null
   }
 
-  isRowDisabled = id => this.state.disabledRowsIds.indexOf(id) >= 0
+  isRowDisabled = id => contains(id, this.state.disabledRowsIds)
 
-  // rows with rowInfo will try to expand the table on opening
-  updateRowWidth = () => {
-    const { hasRowInfo } = this.state
-    if (hasRowInfo) {
-      this.setState({ rowWidth: this.tableHeadRef.getBoundingClientRect().width })
+  handlePaginationChange = paginationCurrentPage =>
+    this.setState({ paginationCurrentPage }, this.updateSorting)
+  handlePaginationItemsPerPageAmountChange = paginationPerPage =>
+    this.setState({ paginationPerPage }, this.updateSorting)
+
+  // return the subset of rows that should be displayed on the current page
+  getRowsForCurrentPage = rows => {
+    const { withPagination } = this.props
+    const { paginationCurrentPage, paginationPerPage } = this.state
+    return withPagination
+      ? rows.slice(
+        (paginationCurrentPage - 1) * paginationPerPage,
+        paginationCurrentPage * paginationPerPage
+      )
+      : rows
+  }
+  getVisibleRows = () => {
+    const { rows, sortingColumnIndex } = this.state
+
+    // sort all rows, not just currently visible
+    const sortedRows = getSortedRows({
+      sortingColumnIndex,
+      sortMode: this.getCurrentSortMode(),
+      rows,
+      tableRefs: this.tableRefs,
+    })
+
+    // of these sorted rows, return only the rows for current page
+    return this.getRowsForCurrentPage(sortedRows)
+  }
+
+  renderWrappedTablePagination = () => {
+    const { rows, paginationCurrentPage, paginationPerPage } = this.state
+    const { columns, withPagination, paginationItemsPerPageOptions, paginationBelow } = this.props
+
+    const tablePaginationProps = {
+      currentPage: paginationCurrentPage,
+      itemsPerPageAmount: paginationPerPage,
+      itemsCount: rows.length,
+      itemsPerPageOptions: paginationItemsPerPageOptions,
+      onChange: this.handlePaginationChange,
+      onItemsPerPageAmountChange: this.handlePaginationItemsPerPageAmountChange,
+      isDisplayedBelowTable: paginationBelow,
+      style: { [`margin${paginationBelow ? 'Top' : 'Bottom'}`]: '10px' },
     }
+
+    // in order to be of the same width as the table,
+    // pagination is wrapped in a single full-width column
+    return withPagination ? (
+      <thead>
+        <tr>
+          <td colSpan={columns.length + 1}>
+            <TablePagination {...tablePaginationProps} />
+          </td>
+        </tr>
+      </thead>
+    ) : null
   }
 
   render() {
-    const { rows, hasRowInfo, sortModes, rowWidth } = this.state
+    const { hasRowInfo, sortModes } = this.state
     const {
       columns,
       className,
       isSortable,
       isSelectable,
       disabledRowsIndexes,
+      size,
+      withPagination,
+      paginationItemsPerPageOptions,
+      paginationBelow,
       ...props
     } = this.props
 
+    const rowProps = {
+      displayRowInfoArrow: hasRowInfo,
+      displayCheckbox: isSelectable,
+      size: size,
+    }
+
     return (
-      <TableContainer
-        {...omit(['columns', 'rows'], props)}
-        width={rowWidth}
-        className={cx(TABLE_CLASSNAME, className)}
-      >
-        <TableWrapper>
-          <TableHead
-            innerRef={v => {
-              this.tableHeadRef = v
-            }}
-          >
-            <tr>
-              {this.renderGlobalHandlerComponent()}
-              {columns.map((columnNode, i) => (
-                <TableHeadCell
-                  key={i}
-                  sortRowsHandler={this.getSortChangeHandler(i)}
-                  isSortable={isSortable}
-                  sortMode={sortModes[i]}
-                  size={props.size}
-                >
-                  {columnNode}
-                </TableHeadCell>
+      <ReactResizeDetector handleWidth resizableElementId={this.tableElementHTMLId}>
+        <TableContainer
+          {...omit(['columns', 'rows'], props)}
+          className={cx(TABLE_CLASSNAME, `${TABLE_CLASSNAME}--${size}`, className)}
+        >
+          <TableWrapper id={this.tableElementHTMLId} size={size}>
+            {!paginationBelow && this.renderWrappedTablePagination()}
+            <TableHead size={size}>
+              <tr>
+                {this.renderGlobalHandlerComponent()}
+                {columns.map((columnNode, i) => (
+                  <TableHeadCell
+                    key={i}
+                    sortChangeHandler={this.getSortChangeHandler(i)}
+                    isSortable={isSortable}
+                    sortMode={sortModes[i]}
+                    size={size}
+                  >
+                    {columnNode}
+                  </TableHeadCell>
+                ))}
+              </tr>
+            </TableHead>
+            <tbody>
+              {this.getVisibleRows().map(({ cells, id, state }) => (
+                <TableRow
+                  key={id}
+                  disabled={this.isRowDisabled(id)}
+                  cellsInfo={cells}
+                  rowState={state}
+                  handleStateChange={this.getRowStateChangeHandler(id)}
+                  {...rowProps}
+                />
               ))}
-            </tr>
-          </TableHead>
-          <tbody>
-            {rows.map(({ cells, id, state }, i) => (
-              <TableRow
-                key={id}
-                getRef={(ref, cellIndex) => {
-                  this.tableRefs = assocPath([id, cellIndex], ref, this.tableRefs)
-                }}
-                disabled={this.isRowDisabled(id)}
-                cellsInfo={cells}
-                displayRowInfoArrow={hasRowInfo}
-                displayCheckbox={isSelectable}
-                size={props.size}
-                rowState={state}
-                handleStateChange={this.getRowStateChangeHandler(id)}
-              />
-            ))}
-          </tbody>
-        </TableWrapper>
-      </TableContainer>
+            </tbody>
+
+            {/*
+              Rendering a hidden table with all rows to get their content,
+              in order to sort based on all rows, not just currently visible.
+            */}
+            <tbody style={{ display: 'none' }}>
+              {this.state.rows.map(({ cells, id, state }) => (
+                <TableRow
+                  key={`row-copy-${id}`}
+                  cellsInfo={cells}
+                  rowState={state}
+                  getRef={(ref, cellIndex) => {
+                    this.tableRefs = assocPath([id, cellIndex], ref, this.tableRefs)
+                  }}
+                  {...rowProps}
+                />
+              ))}
+            </tbody>
+
+            {paginationBelow && this.renderWrappedTablePagination()}
+          </TableWrapper>
+        </TableContainer>
+      </ReactResizeDetector>
     )
   }
 }
