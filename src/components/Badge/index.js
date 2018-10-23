@@ -102,7 +102,9 @@ Badge.propTypes = {
   disabled: PropTypes.bool,
   /** Name of the icon to be displayed alongside the badge content */
   icon: PropTypes.string,
-  /** By default, icon will be placed on the left side. Use this prop to override this behaviour */
+  /** By default, icon will be placed on the left side. Use this prop to override this behaviour.
+   * Important! Works with 'isOnCard' prop only
+   */
   isIconOnRight: PropTypes.bool,
   /** Special kind of badge styling to be used when displayed on a ContentCard component */
   isOnCard: PropTypes.bool,

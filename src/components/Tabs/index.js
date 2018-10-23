@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import { tabsPropTypes, tabsDefaultProps } from '~/components/Tabs/propTypes'
 import TabHead from '~/components/Tabs/TabHead'
 import TabContent from '~/components/Tabs/TabContent'
 import { media } from '~/utils/styling'
@@ -75,7 +74,7 @@ const ScrollBarHack = styled.div`
 
 class Tabs extends Component {
   static propTypes = {
-    appearance: tabsPropTypes.appearance,
+    appearance: PropTypes.oneOf(['sticky', 'bar']),
     tabsData: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string,
@@ -102,7 +101,7 @@ class Tabs extends Component {
   }
 
   static defaultProps = {
-    appearance: tabsDefaultProps.appearance,
+    appearance: 'sticky',
     disabledIndexes: [],
     mobileSafariViewportWidth: 100,
     mobileSafariGap: null,

@@ -88,7 +88,7 @@ injectGlobal`
 
 Modal.propTypes = {
   open: PropTypes.bool.isRequired,
-  /** props to be passed to `react-modal` */
+  /** props to be passed to `react-modal`. Check the documentation for more: https://github.com/reactjs/react-modal#api-documentation */
   reactModalProps: PropTypes.object,
   /** additional classname for `react-modal` overlay */
   overlayAuxClassName: PropTypes.string,

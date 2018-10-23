@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { tabsPropTypes, tabsDefaultProps } from '~/components/Tabs/propTypes'
+import { tabsPropTypes } from '~/components/Tabs/propTypes'
 import { cursorValue } from '~/utils/styling'
 
 const TabHeadWrapper = styled.div`
@@ -76,7 +76,7 @@ const TabHead = ({ appearance, children, id, disabled, selectedTabId, lastTabId,
 )
 
 TabHead.propTypes = {
-  appearance: tabsPropTypes.appearance,
+  appearance: PropTypes.oneOf(['sticky', 'bar']),
   // eslint-disable-next-line react/require-default-props
   children: tabsPropTypes.children,
   disabled: PropTypes.bool,
@@ -89,7 +89,7 @@ TabHead.propTypes = {
 }
 
 TabHead.defaultProps = {
-  appearance: tabsDefaultProps.appearance,
+  appearance: 'sticky',
   disabled: false,
 }
 

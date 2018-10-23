@@ -58,7 +58,6 @@ Button.defaultProps = {
   active: false,
   appearance: 'primary',
   disabled: false,
-  /** icon name to be displayed along Button content */
   icon: null,
   isIconOnRight: false,
   children: null,
@@ -70,7 +69,9 @@ Button.propTypes = {
   active: PropTypes.bool,
   appearance: PropTypes.oneOf(APPEARANCE_VALUES),
   disabled: PropTypes.bool,
+  /** icon name to be displayed along Button content */
   icon: PropTypes.string,
+  /** Important! isIconOnRight prop with ghost button type only */
   isIconOnRight: PropTypes.bool,
   children: PropTypes.node,
   size: PropTypes.string,
