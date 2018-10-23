@@ -9,7 +9,6 @@ import { Glyph } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const Button = ({
-  active,
   appearance,
   disabled,
   icon,
@@ -20,7 +19,6 @@ export const Button = ({
   ...props
 }) => {
   const wrapperProps = {
-    active,
     appearance,
     disabled,
     isIconOnRight,
@@ -44,7 +42,7 @@ export const Button = ({
         />
       )}
       {children && (
-        <LabelComponent appearance={appearance} disabled={disabled} icon={icon} size={size}>
+        <LabelComponent appearance={appearance} disabled={disabled} hasIcon={!!icon} size={size}>
           {children}
         </LabelComponent>
       )}
@@ -53,20 +51,9 @@ export const Button = ({
 }
 
 const APPEARANCE_VALUES = ['primary', 'secondary', 'highlight', 'ghost']
-
-Button.defaultProps = {
-  active: false,
-  appearance: 'primary',
-  disabled: false,
-  icon: null,
-  isIconOnRight: false,
-  children: null,
-  size: 'small',
-  onClick: null,
-}
+const SIZE_VALUES = ['small', 'big']
 
 Button.propTypes = {
-  active: PropTypes.bool,
   appearance: PropTypes.oneOf(APPEARANCE_VALUES),
   disabled: PropTypes.bool,
   /** icon name to be displayed along Button content */
@@ -74,8 +61,18 @@ Button.propTypes = {
   /** Important! isIconOnRight prop with ghost button type only */
   isIconOnRight: PropTypes.bool,
   children: PropTypes.node,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(SIZE_VALUES),
   onClick: PropTypes.func,
+}
+
+Button.defaultProps = {
+  appearance: 'primary',
+  disabled: false,
+  icon: null,
+  isIconOnRight: false,
+  children: null,
+  size: 'small',
+  onClick: null,
 }
 
 const { Component, globalClassName } = attachClassName(Button)

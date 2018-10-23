@@ -27,7 +27,7 @@ export default styled.button`
         css`
           background-color: ${bgColorSelector(props, 'dark')};
         `}}
-    &:active {
+    &:focus {
       ${!props.disabled &&
         css`
           background-color: ${bgColorSelector(props, 'darker')};
@@ -50,7 +50,7 @@ export default styled.button`
   ${ieStyles(`
     line-height: 1;
   `)};
-  &:active span,
+  &:focus span,
   &:focus span {
     position: relative;
     top: 0px;

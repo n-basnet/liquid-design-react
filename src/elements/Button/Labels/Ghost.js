@@ -10,14 +10,6 @@ export default styled.div`
     font-weight: ${props.theme.fontWeight.bold};
     color: ${props.disabled
     ? props.theme.colors.sensitiveGrey.darker
-    : props.icon ? props.theme.colors.richBlack.base : props.theme.colors.primary.base};
-    &:active {
-      ${!props.disabled &&
-        css`
-          font-weight: ${props.theme.fontWeight.black};
-          text-decoration: none;
-          color: ${props.icon && props.theme.colors.primary.base};
-        `};
-    }
+    : props.theme.colors[props.hasIcon ? 'richBlack' : 'primary'].base};
   `};
 `

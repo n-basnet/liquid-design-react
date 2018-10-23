@@ -14,7 +14,8 @@ export default styled.button`
   ${props => css`
     flex-direction: ${props.isIconOnRight ? 'row-reverse' : 'row'};
     ${cursorValue};
-    &:hover {
+    &:hover,
+    &:focus {
       div {
         ${!props.disabled &&
           css`
