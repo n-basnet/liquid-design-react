@@ -98,8 +98,13 @@ const BottomSectionWrapper = styled(FlexRowsWrapper)`
     .${CHECKBOX_CLASSNAMES.BASE} {
       margin-top: 2px;
     }
-    .${CHECKBOX_CLASSNAMES.UNCHECKED} svg {
-      fill: ${props.theme.colors.sensitiveGrey.darker};
+    .${CHECKBOX_CLASSNAMES.UNCHECKED} {
+      svg {
+        fill: ${props.theme.colors.sensitiveGrey.darker};
+      }
+      &:hover svg {
+        fill: ${props.theme.colors.primary.base};
+      }
     }
   `};
 `
