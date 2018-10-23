@@ -213,8 +213,8 @@ export class DatePicker extends PureComponent {
     } = this.state
     const textFieldPlaceholder = format.toLowerCase()
     return (
-      <DatePickerWrapper className={cx(getClassName(DatePicker), className)} {...props}>
-        <InputWrapper disabled={disabled}>
+      <DatePickerWrapper className={cx(DATE_PICKER_CLASSNAMES.BASE, className)} {...props}>
+        <InputWrapper disabled={disabled} className={DATE_PICKER_CLASSNAMES.INPUT_WRAPPER}>
           <TextField
             grey
             placeholder={textFieldPlaceholder}
@@ -249,7 +249,10 @@ export class DatePicker extends PureComponent {
           ) : null}
         </InputWrapper>
         {withCalendar ? (
-          <CalendarContainer isOpen={isCalendarOpen}>
+          <CalendarContainer
+            isOpen={isCalendarOpen}
+            className={DATE_PICKER_CLASSNAMES.CALENDAR_CONTAINER}
+          >
             <Calendar
               onStartDateSelect={this.handleStartSelectFromCalendar}
               onEndDateSelect={this.handleEndSelectFromCalendar}
@@ -264,6 +267,13 @@ export class DatePicker extends PureComponent {
       </DatePickerWrapper>
     )
   }
+}
+
+const classNameBase = getClassName(DatePicker)
+export const DATE_PICKER_CLASSNAMES = {
+  BASE: classNameBase,
+  INPUT_WRAPPER: `${classNameBase}__Input`,
+  CALENDAR_CONTAINER: `${classNameBase}__Calendar`,
 }
 
 export default enhanceWithClickOutside(DatePicker)

@@ -14,7 +14,7 @@ import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
 import FORMATS from '~/modules/Calendar/consts'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
-const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
+export const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
 const CalendarWrapper = styled.section`
   width: 400px;
   padding: 20px 17px 13px;

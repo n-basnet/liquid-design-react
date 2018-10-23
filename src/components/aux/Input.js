@@ -73,8 +73,9 @@ const InputWrapper = styled.div`
     `};
 `
 
-const ErrorMessageWrapper = styled.div.attrs({
+const getErrorMessageWrapper = () => styled.div.attrs({
   'data-test': 'error-wrapper',
+  className: INPUT_ERROR_CLASSNAME,
 })`
   font-size: 12px;
   margin-top: 5px;
@@ -225,6 +226,7 @@ class Input extends PureComponent {
     }
 
     const inputGlobalClassName = multiline ? INPUT_MULTILINE_CLASSNAME : INPUT_SINGLELINE_CLASSNAME
+    const ErrorMessageWrapper = getErrorMessageWrapper()
 
     return (
       <Fragment>
@@ -285,7 +287,8 @@ Input.defaultProps = {
 const { Component, globalClassName } = attachClassName(Input)
 
 export const INPUT_CLASSNAME = globalClassName
-export const INPUT_SINGLELINE_CLASSNAME = `${globalClassName}__input`
-export const INPUT_MULTILINE_CLASSNAME = `${globalClassName}__textarea`
+export const INPUT_SINGLELINE_CLASSNAME = `${INPUT_CLASSNAME}__input`
+export const INPUT_MULTILINE_CLASSNAME = `${INPUT_CLASSNAME}__textarea`
+export const INPUT_ERROR_CLASSNAME = `${INPUT_CLASSNAME}__input-error`
 
 export default Component

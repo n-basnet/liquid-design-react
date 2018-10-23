@@ -6,13 +6,9 @@ import { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import { ICON_CLASSNAME } from '~/elements/Icon'
 
 export const DatePickerWrapper = styled.section`
-  width: 400px;
-  height: 125px;
   position: relative;
-  ${media.max.phone`
-    width: 280px;
-  `};
 `
+
 export const InputWrapper = styled.section`
   display: flex;
   .${TEXT_FIELD_CLASSNAMES.BASE} {
@@ -46,6 +42,7 @@ export const InputWrapper = styled.section`
 
 export const CalendarContainer = styled.section`
   position: absolute;
+  z-index: 1;
   top: 68px;
   display: ${props => (props.isOpen ? 'block' : 'none')};
 `

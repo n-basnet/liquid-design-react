@@ -3,28 +3,77 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { action } from '@storybook/addon-actions'
 
-import { TextField, Headline, Checkbox, Button } from '~'
+import { Headline, Checkbox, Button } from '~'
 import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
 import { BUTTON_CLASSNAME } from '~/elements/Button'
 import { HEADLINE_CLASSNAME } from '~/elements/Headline'
+import { ICON_CLASSNAME } from '~/elements/Icon'
+import { INPUT_CLASSNAME, INPUT_ERROR_CLASSNAME } from '~/components/aux/Input'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
+import DatePicker, { DATE_PICKER_CLASSNAMES } from '~/modules/DatePicker'
+import { YEAR_INPUT_CLASSNAME } from '~/modules/Calendar'
+import { media } from '~/utils/styling'
+
 import FlexRowsWrapper from './FlexRowsWrapper'
 import ProfileFormPart from './ProfileFormPart'
-import { media } from '~/utils/styling'
+import { MOBILE_BREAKPOINT, FIELD_TYPES } from './consts'
 import { getTextKnob, Fragment } from '../../helpers'
 
 const FormAppContainer = styled.div`
   .${HEADLINE_CLASSNAME}--H2 {
     margin-bottom: 45px;
   }
-  input,
-  textarea {
-    font-size: 16px;
+  .${INPUT_CLASSNAME}:not(.${YEAR_INPUT_CLASSNAME}) {
+    input,
+    textarea {
+      font-size: 16px;
+      padding-bottom: 10px;
+      padding-top: 8px;
+    }
   }
   .${DROPDOWN_CLASSNAME} {
     min-width: 0;
     width: 100%;
     margin-bottom: 20px;
+  }
+  .${DATE_PICKER_CLASSNAMES.CALENDAR_CONTAINER} {
+    right: 34px;
+    ${media.max.phone`
+      right: 20px;
+    `};
+  }
+  .${INPUT_ERROR_CLASSNAME} {
+    position: absolute;
+  }
+  .${DATE_PICKER_CLASSNAMES.INPUT_WRAPPER} {
+    > section:first-child {
+      justify-content: space-between;
+    }
+    .${INPUT_CLASSNAME}:not(.${YEAR_INPUT_CLASSNAME}) input {
+      font-size: 14px;
+      padding-bottom: 11px;
+      padding-top: 9px;
+      ${props =>
+    !props.grey &&
+        css`
+          background-color: ${props.theme.colors.white.base};
+        `}
+    }
+    .${TEXT_FIELD_CLASSNAMES.BASE} {
+      width: 100%;
+      ${media.customMin(MOBILE_BREAKPOINT)`
+        width: 190px;
+      `};
+    }
+    .${ICON_CLASSNAME} {
+      top: 33px;
+      &,
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 `
 
@@ -89,23 +138,23 @@ const FormApp = ({
     grey: onWhiteBackground,
   }
   return (
-    <FormAppContainer>
+    <FormAppContainer grey={onWhiteBackground}>
       <Headline type='H2'>{getTextKnob({ defaultText: headerText })}</Headline>
 
       {isProfile && <ProfileFormPart fieldProps={fieldProps} />}
 
       <FlexRowsWrapper>
         {fields.map(({ type, ...field }, i) => {
-          if (type === 'select') {
+          if (type === FIELD_TYPES.DATE_PICKER) {
+            return <DatePicker key={i} withCalendar />
+          } else if (type === FIELD_TYPES.SELECT) {
             return (
               <div key={i}>
                 <Dropdown {...field} />
               </div>
             )
           } else {
-            return (
-              <TextField key={i} style={field.style} {...fieldProps} {...field} type={field.type} />
-            )
+            return <TextField key={i} style={field.style} {...fieldProps} {...field} type={type} />
           }
         })}
       </FlexRowsWrapper>

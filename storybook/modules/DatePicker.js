@@ -1,13 +1,17 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import {
   getBackgroundWrapper,
   includeComponentInPropTable,
-  getPropTablesExcludeList,
   getSnippetTemplate,
+  Fragment,
 } from '../helpers'
-import { default as EnhancedDatePicker, DatePicker } from '~/modules/DatePicker'
+import {
+  default as EnhancedDatePicker,
+  DATE_PICKER_CLASSNAMES,
+  DatePicker,
+} from '~/modules/DatePicker'
 
 const getDatePickerSnippet = props => `
   <DatePicker ${props || ``} />
@@ -22,7 +26,10 @@ storiesOf('Modules/DatePicker', module)
         {`
           #storybook-main-element > div .language-js {
             overflow: hidden !important;
-          })
+          }
+          .${DATE_PICKER_CLASSNAMES.BASE} {
+            height: 125px;
+          }
         `}
       </style>
       {storyFn()}
@@ -31,7 +38,7 @@ storiesOf('Modules/DatePicker', module)
   .addDecorator(includeComponentInPropTable(DatePicker))
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker]),
+      propTables: [DatePicker],
     },
   })
   .add('default', () => <EnhancedDatePicker />, getSnippetTemplate(getDatePickerSnippet()))
