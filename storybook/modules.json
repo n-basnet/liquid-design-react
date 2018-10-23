@@ -178,6 +178,14 @@
     "type": "module"
   },
   {
+    "name": "Graphics",
+    "type": "element"
+  },
+  {
+    "name": "Pagination",
+    "type": "component"
+  },
+  {
     "name": "Navigation",
     "type": "module"
   }
