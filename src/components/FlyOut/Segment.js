@@ -68,7 +68,7 @@ export default class Segment extends PureComponent {
   static propTypes = {
     ...flyOutPropTypes,
     style: PropTypes.object,
-    sumIndex: PropTypes.number,
+    depthIndex: PropTypes.number.isRequired,
     isLast: PropTypes.bool,
     isTopLevel: PropTypes.bool,
     onClick: PropTypes.func,
@@ -76,7 +76,6 @@ export default class Segment extends PureComponent {
   static defaultProps = {
     ...flyOutDefaultProps,
     style: {},
-    sumIndex: null,
     isLast: false,
     isTopLevel: false,
     onClick: null,
@@ -90,8 +89,11 @@ export default class Segment extends PureComponent {
     this.props.onClick && this.props.onClick()
   }
   handleKeyDown = e => e.key === 'Enter' && this.handleClick()
+
+  calculateIndentationPadding = depthIndex => ({ paddingLeft: `${depthIndex * 10 + 15}px` })
+
   render() {
-    const { name, options, style, sumIndex, isLast, isTopLevel } = this.props
+    const { name, options, style, depthIndex, isLast, isTopLevel } = this.props
     const { isExpanded } = this.state
 
     return (
@@ -112,9 +114,9 @@ export default class Segment extends PureComponent {
         {isExpanded &&
           options.map((option, i) => (
             <Segment
-              style={{ paddingLeft: `${sumIndex * 25}px` }}
+              style={this.calculateIndentationPadding(depthIndex)}
               key={i}
-              sumIndex={i + sumIndex}
+              depthIndex={depthIndex + 1}
               {...option}
             />
           ))}

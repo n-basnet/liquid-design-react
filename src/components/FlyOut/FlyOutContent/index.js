@@ -25,7 +25,13 @@ class FlyOutContent extends PureComponent {
           <Ellipsis>{name}</Ellipsis>
         </SegmentWrapper>
         {options.map((option, i) => (
-          <Segment sumIndex={i} isTopLevel isLast={i === options.length - 1} {...option} key={i} />
+          <Segment
+            depthIndex={1}
+            isTopLevel
+            isLast={i === options.length - 1}
+            {...option}
+            key={i}
+          />
         ))}
       </FlyOutContentWrapper>
     )
