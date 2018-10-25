@@ -26,6 +26,18 @@ const DayCellWrapper = styled.div`
   display: inline-block;
   position: relative;
   padding: 0 9px;
+  .${ICON_CLASSNAME} {
+    position: absolute;
+    left: 25.8px;
+    ${media.max.phone`
+      left: 46%;
+    `};
+  }
+  &:first-child {
+    .${ICON_CLASSNAME} {
+      left: 12.8px;
+    }
+  }
   &:last-child {
     padding-right: 0;
     .${ICON_CLASSNAME} {
@@ -112,13 +124,6 @@ const DayCellWrapper = styled.div`
   ${media.max.phone`
     padding: 0 6.1px;
   `};
-  .${ICON_CLASSNAME} {
-    position: absolute;
-    left: 25.8px;
-    ${media.max.phone`
-      left: 46%;
-    `};
-  }
 `
 export const DayContainer = styled.div`
   font-size: 16px;
