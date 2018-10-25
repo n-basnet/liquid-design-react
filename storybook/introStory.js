@@ -61,7 +61,7 @@ storiesOf('Intro', module)
     render() {
       return (
         <Theme>
-          <Badge text='Hello' />
+          <Badge>Hello</Badge>
         </Theme>
       )
     }
@@ -82,13 +82,17 @@ storiesOf('Intro', module)
     every component accepts \`className\` prop to add custom classes.
 
     ~~~~js
-    <Badge text='Hello' className='new-class' />
+    <Badge className='new-class'>
+      Hello
+    </Badge>
     ~~~~
 
     #### via \`style\` prop:
 
     ~~~~js
-    <Badge text='Hello' style={{width: '500px'}} />
+    <Badge style={{width: '500px'}}>
+      Hello
+    </Badge>
     ~~~~
 
     #### via CSS:
@@ -101,7 +105,7 @@ storiesOf('Intro', module)
         width: 500px;
       }
     \`}</style>
-    <Badge text='Hello' />
+    <Badge>Hello</Badge>
     ~~~~
 
     ## Custom props
@@ -109,13 +113,17 @@ storiesOf('Intro', module)
     All additional props will be passed to the component, i.e:
 
     ~~~~js
-    <Badge text='Hello' onClick={clickHandler} />
+    <Badge onClick={clickHandler}>
+      Hello
+    </Badge>
     ~~~~
 
     will attach the click handler to \`Badge\` component.
 
     ~~~~js
-    <Badge text='Hello' data-test-id={42} />
+    <Badge data-test-id={42}>
+      Hello
+    </Badge>
     ~~~~
 
     will render the \`data-test-id\` attribute to the DOM element rendered by \`Badge\`.
@@ -128,7 +136,7 @@ storiesOf('Intro', module)
 
     ~~~~js
     <Theme themeName='${DEFAULT_THEME_NAME}'>
-      <Badge text='Hello' />
+      <Badge>Hello</Badge>
     </Theme>
     ~~~~
 
@@ -192,7 +200,7 @@ storiesOf('Intro', module)
     }
 
     <Theme customTheme={customThemeObj}>
-      <Badge text='Hello' />
+      <Badge>Hello</Badge>
     </Theme>
     ~~~~
     `,
