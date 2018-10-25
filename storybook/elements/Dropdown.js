@@ -1,65 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
-import { without, append } from 'ramda'
-import uniqid from 'uniqid'
-
 import {
+  getDefaultDropdownProps,
   getPropTablesExcludeList,
-  includeComponentInPropTable,
   getBackgroundWrapper,
-  getTextKnob,
+  MultiselectDropdownStateWrapper,
 } from '../helpers'
-import { times } from '~/utils/aux'
-import { default as EnhancedDropdown, Dropdown } from '~/elements/Dropdown'
-
-const getOptions = (onClick, amount = 4) =>
-  times(amount).map(v => ({
-    name: getTextKnob({
-      name: `option ${v + 1}`,
-      defaultText: `Option ${v + 1}`,
-    }),
-    id: uniqid(),
-    onClick,
-  }))
-
-const getDefaultProps = () => ({
-  label: getTextKnob({ defaultText: 'Dropdown Label' }),
-  options: getOptions(),
-  onSubmit: action('submit'),
-})
-
-class MultiselectDropdown extends React.Component {
-  state = {
-    selectedOptionsIds: [],
-    options: [],
-  }
-  componentDidMount() {
-    this.setState({ options: getOptions(this.handleClick, 10) })
-  }
-  handleClick = ({ id }) => {
-    const isSelected = this.state.selectedOptionsIds.indexOf(id) >= 0
-    this[isSelected ? 'handleRemove' : 'handleAdd'](id)
-  }
-  updateSelectedOptionsIds = transformation =>
-    this.setState(({ selectedOptionsIds }) => ({
-      selectedOptionsIds: transformation(selectedOptionsIds),
-    }))
-  handleAdd = id => this.updateSelectedOptionsIds(append(id))
-  handleRemove = id => this.updateSelectedOptionsIds(without([id]))
-  render() {
-    return (
-      <EnhancedDropdown
-        label={getTextKnob({ defaultText: 'Dropdown Label' })}
-        options={this.state.options}
-        selectedOptionsIds={this.state.selectedOptionsIds}
-        onOptionDeselect={this.handleRemove}
-        multiselect
-        {...this.props}
-      />
-    )
-  }
-}
+import Dropdown from '~/elements/Dropdown'
+import { DropdownProvider } from '~/elements/aux/DropdownProvider'
 
 const getInfoMD = props => ({
   info: {
@@ -81,62 +29,70 @@ const getInfoMD = props => ({
   },
 })
 
+const defautProps = getDefaultDropdownProps({ defaultText: 'Dropdown Label' })
+
 storiesOf('Elements/Dropdown', module)
   .addDecorator(getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }))
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([MultiselectDropdown, EnhancedDropdown]),
+      propTablesExclude: getPropTablesExcludeList([
+        MultiselectDropdownStateWrapper,
+        DropdownProvider,
+      ]),
+      propTables: [Dropdown],
+      excludedPropTypes: ['className', 'nameForClassName', 'render'],
     },
   })
-  .addDecorator(includeComponentInPropTable(Dropdown, { label: 'label' }))
-  .add('default', () => <EnhancedDropdown {...getDefaultProps()} />, getInfoMD())
+  .add('default', () => <Dropdown {...defautProps} />, getInfoMD())
   .add(
     'active',
-    () => {
-      const props = getDefaultProps()
-      return <EnhancedDropdown {...props} defaultValue={props.options[0]} />
-    },
+    () => <Dropdown {...defautProps} defaultValue={defautProps.options[0]} />,
     getInfoMD(`
     defaultValue={OPTIONS[0]}`)
   )
   .add(
     'disabled',
-    () => <EnhancedDropdown {...getDefaultProps()} disabled />,
+    () => <Dropdown {...defautProps} disabled />,
     getInfoMD(`
     disabled`)
   )
   .add(
     'inline',
-    () => <EnhancedDropdown {...getDefaultProps()} inline />,
+    () => <Dropdown {...defautProps} inline />,
     getInfoMD(`
     inline`)
   )
   .add(
     'inline active',
-    () => {
-      const props = getDefaultProps()
-      return <EnhancedDropdown {...props} inline defaultValue={props.options[0]} />
-    },
+    () => <Dropdown {...defautProps} inline defaultValue={defautProps.options[0]} />,
     getInfoMD(`
     inline
     defaultValue={OPTIONS[0]}`)
   )
   .add(
     'inline disabled',
-    () => <EnhancedDropdown {...getDefaultProps()} inline disabled />,
+    () => <Dropdown {...defautProps} inline disabled />,
     getInfoMD(`
     inline disabled`)
   )
   .add(
     'multiselect',
-    () => <MultiselectDropdown />,
+    () => (
+      <MultiselectDropdownStateWrapper>
+        <Dropdown {...defautProps} multiselect />
+      </MultiselectDropdownStateWrapper>
+    ),
     getInfoMD(`
     multiselect
     selectedOptionsIds={['1']}`)
   )
   .add(
     'multiselect inline',
-    () => <MultiselectDropdown inline />,
+    () => (
+      <MultiselectDropdownStateWrapper>
+        <Dropdown {...defautProps} multiselect inline />
+      </MultiselectDropdownStateWrapper>
+    ),
     getInfoMD(`
     multiselect
     inline
@@ -144,7 +100,11 @@ storiesOf('Elements/Dropdown', module)
   )
   .add(
     'multiselect disabled',
-    () => <MultiselectDropdown disabled />,
+    () => (
+      <MultiselectDropdownStateWrapper>
+        <Dropdown {...defautProps} multiselect disabled />
+      </MultiselectDropdownStateWrapper>
+    ),
     getInfoMD(`
     multiselect
     selectedOptionsIds={['1']}`)

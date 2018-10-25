@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import { filter } from 'ramda'
+import { filter, contains } from 'ramda'
 
 export const times = n => Object.keys([...Array(n)]).map(v => parseInt(v))
 
@@ -29,3 +29,5 @@ export const getFirstTruthyKeyName = props => Object.keys(filter(Boolean, props)
 
 export const isSupportingTouch = () =>
   'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
+
+export const getItemsWithIds = (array, ids) => array.filter(({ id }) => contains(id, ids))

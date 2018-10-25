@@ -3,16 +3,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { pick, contains } from 'ramda'
+import { contains } from 'ramda'
 
 import { media, customWebKitScrollBar, disableTextSelectionBackground } from '~/utils/styling'
 import Checkbox, { CHECKBOX_CLASSNAME } from '~/elements/Checkbox'
-import {
-  dropdownPropTypes,
-  dropdownDefaultProps,
-  optionPropType,
-  SHARED_PROPS,
-} from '~/elements/Dropdown/props'
+import { optionPropType } from '~/elements/aux/OptionsGroupProps'
 import Ellipsis from '~/components/aux/Ellipsis'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
@@ -22,7 +17,7 @@ const OptionsWrapper = styled.div`
   position: absolute;
   z-index: 1;
   width: 100%;
-  max-height: 165px;
+  max-height: 167px;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: auto;
@@ -102,14 +97,8 @@ export const ResultWrapper = styled.div`
           fill: ${props.theme.colors.primary.base};
         }
       `};
-    ${props.multiselect &&
-      css`
-        padding: 8px 9px 9px;
-      `};
-    ${props.inline &&
-      css`
-        padding-left: ${props.multiselect ? 15 : 20}px;
-      `};
+    padding: ${props.multiselect && `8px 9px 9px`};
+    padding-left: ${props.multiselect ? `15px` : `20px`};
   `};
 `
 
@@ -123,6 +112,7 @@ const getOptionActionHandler = (option, submitHandler) => () => {
 const OptionsGroup = ({
   options,
   inline,
+  isFilter,
   multiselect,
   selectedOptionsIds,
   submitHandler,
@@ -142,6 +132,7 @@ const OptionsGroup = ({
           multiselect={multiselect}
           isSelected={isSelected}
           inline={inline}
+          isFilter={isFilter}
         >
           {multiselect && <Checkbox isChecked={isSelected} />}
           <Ellipsis>{option.name}</Ellipsis>
@@ -154,12 +145,18 @@ const OptionsGroup = ({
 OptionsGroup.propTypes = {
   submitHandler: PropTypes.func,
   selectedOption: PropTypes.shape(optionPropType),
-  ...pick(SHARED_PROPS, dropdownPropTypes),
+  options: PropTypes.arrayOf(PropTypes.shape(optionPropType)),
+  inline: PropTypes.bool,
+  multiselect: PropTypes.bool,
+  selectedOptionsIds: PropTypes.arrayOf(PropTypes.string),
 }
 OptionsGroup.defaultProps = {
   submitHandler: () => {},
   selectedOption: {},
-  ...pick(SHARED_PROPS, dropdownDefaultProps),
+  options: [],
+  inline: false,
+  multiselect: false,
+  selectedOptionsIds: [],
 }
 
 export default OptionsGroup

@@ -1,14 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import styled from 'styled-components'
+
 import DropdownWrapper from '~/elements/aux/DropdownProvider/DropdownWrapper'
 import DropdownTriggerWrapper from '~/elements/aux/DropdownProvider/DropdownTriggerWrapper'
 import DropdownProvider from '~/elements/aux/DropdownProvider'
 
-const Dropdown = props => (
+const IconWrapper = styled.div`
+  margin-right: 0;
+  margin-left: -2px;
+  margin-bottom: -4px;
+`
+
+const Filter = props => (
   <DropdownProvider
     {...props}
-    className={DROPDOWN_CLASSNAME}
+    nameForClassName='Filter'
+    inline
+    isFilter
     render={({
       isExpanded,
       wrapperProps,
@@ -18,26 +27,25 @@ const Dropdown = props => (
       renderGlyph,
       renderOptionsGroup,
     }) => (
-      <DropdownWrapper {...wrapperProps}>
-        <DropdownTriggerWrapper {...triggerWrapperProps}>
+      <DropdownWrapper {...wrapperProps} inline isFilter>
+        <DropdownTriggerWrapper {...triggerWrapperProps} inline isFilter>
           {renderLabelContent()}
-          {renderGlyph()}
+          <IconWrapper>{renderGlyph({ name: 'filter', size: 24 })}</IconWrapper>
         </DropdownTriggerWrapper>
-        {renderOptionsGroup()}
+        {renderOptionsGroup({ inline: true, isFilter: true })}
       </DropdownWrapper>
     )}
   />
 )
 
-Dropdown.propTypes = {
-  label: PropTypes.string,
+Filter.propTypes = {
+  label: PropTypes.string.isRequired,
   defaultValue: PropTypes.shape({
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     onClick: PropTypes.func,
   }),
   disabled: PropTypes.bool,
-  inline: PropTypes.bool,
   multiselect: PropTypes.bool,
   /** For controlling the state of multiselect version. */
   selectedOptionsIds: PropTypes.arrayOf(PropTypes.string),
@@ -54,11 +62,10 @@ Dropdown.propTypes = {
   value: PropTypes.string,
 }
 
-Dropdown.defaultProps = {
+Filter.defaultProps = {
   label: null,
   defaultValue: null,
   disabled: false,
-  inline: false,
   multiselect: false,
   selectedOptionsIds: [],
   options: [],
@@ -67,6 +74,4 @@ Dropdown.defaultProps = {
   value: null,
 }
 
-export const DROPDOWN_CLASSNAME = getClassName(Dropdown)
-
-export default Dropdown
+export default Filter

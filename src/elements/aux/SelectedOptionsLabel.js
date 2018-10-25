@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { optionPropType, optionDefaultProps } from '~/elements/Dropdown/props'
+import { optionPropType } from '~/elements/aux/OptionsGroupProps'
 import Tag from '~/elements/Tag'
 
 const stopClickPropagation = e => e.stopPropagation()
@@ -20,7 +20,9 @@ SelectedItem.propTypes = {
   ...optionPropType,
   handleRemove: PropTypes.func.isRequired,
 }
-SelectedItem.defaultProps = { ...optionDefaultProps }
+SelectedItem.defaultProps = {
+  onClick: () => {},
+}
 
 const SelectedOptionsLabelWrapper = styled.div`
   max-width: calc(100% - 25px);
