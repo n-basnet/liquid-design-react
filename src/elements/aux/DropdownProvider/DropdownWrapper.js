@@ -46,13 +46,14 @@ export default styled.div`
   display: inline-block;
   font-size: 14px;
   line-height: 1.7;
-
   ${props =>
     props.inline &&
     media.max.phone`
     min-width: 190px;
   `};
-
+  ${media.max.phone`
+    width: 100%;
+  `};
   ${props => css`
     color: ${rgba(props.theme.colors.richBlack.base, props.disabled ? 0.15 : 1)};
     transition: ${props.theme.transition};
