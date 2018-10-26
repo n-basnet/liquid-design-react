@@ -12,11 +12,9 @@ const getTransformValue = ({ isExpanded, isFilter }, isMobile) =>
         transform: translateY(-2px);
       `
     : css`
-        transform: rotate(${isExpanded ? 0 : 180}deg) translateY(${isExpanded ? -2 : 2}px);
+        transform: rotate(${isExpanded ? 0 : 180}deg);
         ${media.max.phone`
-      transform: scale(${ICON_MOBILE_SCALE}) rotate(${isExpanded ? 0 : 180}deg) translateY(${
-  isExpanded ? -1 : 1
-}px);
+      transform: scale(${ICON_MOBILE_SCALE}) rotate(${isExpanded ? 0 : 180}deg);
     `};
       `
 
@@ -78,9 +76,6 @@ export default styled.div`
       margin-right: 2px;
       transition: ${props.theme.transition};
       ${getTransformValue(props)};
-      ${media.max.phone`
-        margin-left: 10px;
-      `};
     }
 
     ${

@@ -9,12 +9,12 @@ const getActiveState = props => css`
 
 export default styled.div`
   display: ${props => (props.isFilter ? 'flex' : 'inline-flex')};
+  align-items: flex-start;
   width: 100%;
   line-height: 26px;
   border-bottom: 1px solid transparent;
   ${props => css`
     justify-content: ${props.inline ? 'flex-end' : 'space-between'};
-    align-items: center;
     padding: ${props.inline ? '8px 15px 7px 15px' : '6px 11px 5px 15px'};
     ${media.max.phone`
       padding: ${
