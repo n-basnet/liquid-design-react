@@ -19,25 +19,25 @@ const getListItem = (withIcon, disabled) => index => ({
     defaultText: `List item ${index + 1}`,
   }),
   onClick: action(`click item ${index + 1}`),
-  ...(withIcon && { iconName: 'star' }),
+  ...(withIcon && { iconName: 'placeholder' }),
   isDisabled: disabled && index === 1,
 })
 
 const getDefaultProps = (withIcon = true, disabled = false) => ({
   items: times(5).map(getListItem(withIcon, disabled)),
-  listHead: { name: getListHead(), ...(withIcon && { iconName: 'star' }) },
+  listHead: { name: getListHead(), ...(withIcon && { iconName: 'placeholder' }) },
 })
 
 const getSnippet = (props, withIcon, disabled) => `
   <List
     items={[
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''}${
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''}${
   disabled ? `, isDisabled: 'true'` : ''
 } },
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'star'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''} },
     ]}
-    listHead={{ name: 'List head'${withIcon ? `, iconName: 'star'` : ''} }}${
+    listHead={{ name: 'List head'${withIcon ? `, iconName: 'placeholder'` : ''} }}${
   props
     ? `
     ${props}`
