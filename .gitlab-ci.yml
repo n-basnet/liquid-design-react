@@ -24,8 +24,7 @@ lint:
 
 publish_package:
   stage: publish-package
-  # script: yarn semantic-release || true
-  script: echo "TODO: publish package to private registry"
+  script: echo "TODO publish package to private registry"
   only:
     - master
 
