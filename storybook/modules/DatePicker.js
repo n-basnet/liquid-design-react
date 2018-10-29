@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react'
 import {
   getBackgroundWrapper,
   includeComponentInPropTable,
+  getPropTablesExcludeList,
   getSnippetTemplate,
   Fragment,
 } from '../helpers'
@@ -39,6 +40,7 @@ storiesOf('Modules/DatePicker', module)
   .addParameters({
     info: {
       propTables: [DatePicker],
+      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker]),
     },
   })
   .add('default', () => <EnhancedDatePicker />, getSnippetTemplate(getDatePickerSnippet()))
