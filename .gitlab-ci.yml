@@ -32,6 +32,7 @@ deploy_docs:
   stage: deploy-docs
   script:
     - yarn storybook:build
-    - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME
+    - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME_MERCK
+    - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME_EMD
   only:
     - master
