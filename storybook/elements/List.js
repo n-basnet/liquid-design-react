@@ -97,6 +97,6 @@ storiesOf('Elements/List/with icons', module)
   )
   .add(
     'disabled',
-    () => <EnhancedList {...getDefaultProps(false, true)} />,
+    () => <EnhancedList {...getDefaultProps(true, true)} />,
     getSnippetTemplate(getSnippet(true, true))
   )
