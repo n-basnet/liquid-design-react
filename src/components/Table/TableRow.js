@@ -41,7 +41,6 @@ const RowWrapper = styled.tr`
       `};
     .${AUX_CELL_CLASSNAME} {
       padding-top: ${getTableCellYPadding(props.size)};
-      padding-right: 5px;
     }
   `};
 `

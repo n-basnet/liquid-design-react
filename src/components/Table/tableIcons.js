@@ -54,7 +54,7 @@ export const getAuxComponent = ({ rowInfoArrow, checkbox, size }) => {
   return (
     Component &&
     (props => (
-      <div className={getTableAuxComponentClassName(componentName)}>
+      <div className={getTableAuxComponentClassName(componentName)} style={{ paddingRight: '8px' }}>
         <Component {...props} />
       </div>
     ))
