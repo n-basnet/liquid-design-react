@@ -120,7 +120,6 @@ export class DropdownProvider extends PureComponent {
       isFilter,
       ...props
     } = this.props
-    console.log({ isFilter })
 
     const { isExpanded } = this.state
     const triggerToggle = disabled ? undefined : this.toggle
