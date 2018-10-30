@@ -37,7 +37,7 @@ storiesOf('Intro', module)
       <Heading>liquid-design-react</Heading>
       <div>
         Liquid Design System components for React. Design System and Component Kit to create
-        beautifull applications.
+        beautiful applications.
       </div>
     </div>
   ))
