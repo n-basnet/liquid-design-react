@@ -20,6 +20,15 @@ const getRangeBeforeStyles = props => css`
     width: 15px;
     height: 21px;
   `};
+  ${props.isEndOfRange &&
+    props.isFirst &&
+    !props.isStartOfRange &&
+    css`
+      ${media.max.phone`
+        left: 0;
+        width: 35px;
+      `};
+    `};
 `
 
 const DayCellWrapper = styled.div`
@@ -328,6 +337,7 @@ export class DayCell extends PureComponent {
         isOutOfMonth={isOutOfMonth}
         isFirst={isFirst}
         isLast={isLast}
+        onClick={this.cellClickHandler}
         onMouseEnter={() => this.handleMouseEnter('DayCellWrapper')}
         onMouseLeave={() => {
           this.handleMouseLeave('DayCellWrapper')
