@@ -7,6 +7,7 @@ import url from 'rollup-plugin-url'
 import string from 'rollup-plugin-string'
 
 import pkg from './package.json'
+const { getSVGOConfig } = require('./scripts/getSVGOConfig')
 
 const MAX_INLINE_FILE_SIZE_KB = 100
 
@@ -30,7 +31,9 @@ export default {
     }),
     resolve(),
     commonjs(),
-    reactSvg(),
+    reactSvg({
+      svgo: getSVGOConfig(),
+    }),
     url({
       limit: MAX_INLINE_FILE_SIZE_KB * 1024,
       include: ['**/*.woff', '**/*.woff2'],

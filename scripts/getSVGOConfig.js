@@ -1,6 +1,8 @@
 /**
- * svgo config to be shared between the SVG optimisation script and Storybook
+ * svgo config to be shared between the SVG optimisation script, rollup config, and Storybook
  */
+
+const { GLOBAL_CSS_PREFIX } = require('../src/utils/consts/index')
 
 const getSVGOConfig = ({ forIcons } = {}) => {
   const plugins = [
@@ -19,7 +21,7 @@ const getSVGOConfig = ({ forIcons } = {}) => {
           toString() {
             this.counter = this.counter || 0
 
-            return `id-${this.counter++}`
+            return `${GLOBAL_CSS_PREFIX}svg--id-${this.counter++}`
           },
         },
       },
