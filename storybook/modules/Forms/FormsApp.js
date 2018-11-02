@@ -24,18 +24,21 @@ const FormAppContainer = styled.div`
   .${HEADLINE_CLASSNAME}--H2 {
     margin-bottom: 45px;
   }
+  .${TEXT_FIELD_CLASSNAMES.BASE} {
+    margin-bottom: 20px;;
+  }
   .${INPUT_CLASSNAME}:not(.${YEAR_INPUT_CLASSNAME}) {
     input,
     textarea {
       font-size: 16px;
-      padding-bottom: 10px;
-      padding-top: 8px;
+      padding: 8px 15px 10px;
     }
   }
   .${DROPDOWN_CLASSNAME} {
     min-width: 0;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 23px;
+    margin-top: 6px;
   }
   .${DATE_PICKER_CLASSNAMES.CALENDAR_CONTAINER} {
     right: 34px;
@@ -52,8 +55,8 @@ const FormAppContainer = styled.div`
     }
     .${INPUT_CLASSNAME}:not(.${YEAR_INPUT_CLASSNAME}) input {
       font-size: 14px;
-      padding-bottom: 11px;
-      padding-top: 9px;
+      padding-bottom: 14px;
+      padding-top: 7px;
       ${props =>
     !props.grey &&
         css`
@@ -67,7 +70,8 @@ const FormAppContainer = styled.div`
       `};
     }
     .${ICON_CLASSNAME} {
-      top: 33px;
+      top: 30px;
+      right: -13px;
       &,
       svg {
         width: 24px;
@@ -78,7 +82,6 @@ const FormAppContainer = styled.div`
 `
 
 const BottomSectionWrapper = styled(FlexRowsWrapper)`
-  margin-top: 5px;
   align-items: center;
   > div {
     margin-bottom: 20px;
