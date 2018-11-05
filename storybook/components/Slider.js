@@ -39,14 +39,6 @@ const getSliderAppSnipepet = props => `
   }
 `
 
-const params = {
-  info: {
-    propTables: [Slider],
-    propTablesExclude: getPropTablesExcludeList([]),
-    excludedPropTypes: ['className'],
-  },
-}
-
 class SliderApp extends Component {
   state = {
     value: 50,
@@ -57,6 +49,14 @@ class SliderApp extends Component {
   render() {
     return <Slider withButtons value={this.state.value} onChange={this.onChangeHandler} />
   }
+}
+
+const params = {
+  info: {
+    propTables: [Slider],
+    propTablesExclude: getPropTablesExcludeList([SliderApp]),
+    excludedPropTypes: ['className'],
+  },
 }
 
 storiesOf('Components/Slider/with buttons', module)

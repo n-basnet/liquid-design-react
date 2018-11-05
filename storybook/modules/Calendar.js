@@ -61,7 +61,7 @@ storiesOf('Modules/Calendar', module)
   .addDecorator(getBackgroundWrapper())
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([EnhancedCalendar]),
+      propTablesExclude: getPropTablesExcludeList([EnhancedCalendar, CalendarApp]),
       propTables: [Calendar],
     },
   })
@@ -73,11 +73,11 @@ storiesOf('Modules/Calendar', module)
     state = {
       selectedDate: null
     }
-  
+
     handleStartDateChange = date => {
       this.setState({ selectedStartDate: date })
     }
-  
+
     render() {
       const { selectedStartDate } = this.state
 
@@ -99,11 +99,11 @@ storiesOf('Modules/Calendar', module)
     state = {
       selectedDate: null
     }
-  
+
     handleStartDateChange = date => {
       this.setState({ selectedStartDate: date })
     }
-  
+
     render() {
       const { selectedStartDate } = this.state
 
@@ -140,13 +140,13 @@ storiesOf('Modules/Calendar', module)
             }
           ]
         }
-      } 
+      }
     }
-  
+
     handleStartDateChange = date => {
       this.setState({ selectedStartDate: date })
     }
-  
+
     render() {
       const { selectedStartDate, appointments } = this.state
 
@@ -170,14 +170,14 @@ storiesOf('Modules/Calendar', module)
       selectedStartDate: null,
       selectedEndDate: null,
     }
-  
+
     handleStartDateChange = date => {
       this.setState({ selectedStartDate: date })
     }
     handleEndDateChange = date => {
       this.setState({ selectedEndDate: date })
     }
-  
+
     render() {
       const { selectedStartDate, selectedEndDate } = this.state
       return (
