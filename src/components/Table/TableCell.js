@@ -17,9 +17,9 @@ const TdWrapper = styled.td`
   `};
   ${props =>
     props.isInfoCell &&
-    // prevents expanding the table columns on IE/Edge
+    // prevents a bug in Chrome
     css`
-      width: 0;
+      width: 100%;
     `};
 `
 

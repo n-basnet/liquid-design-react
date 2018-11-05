@@ -7,6 +7,11 @@ export const TablePaginationWrapper = styled.div`
   justify-content: space-between;
   font-size: 12px;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: scroll;
+  > div {
+    flex-shrink: 0;
+  }
   ${props => css`
     background-color: ${props.theme.colors.white.base};
     ${props.isDisplayedBelowTable

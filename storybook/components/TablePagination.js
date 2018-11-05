@@ -34,8 +34,6 @@ storiesOf('Components/TablePagination', module)
     <div
       style={{
         paddingBottom: '270px',
-        maxWidth: '100%',
-        overflow: 'scroll',
       }}
     >
       {storyFn()}

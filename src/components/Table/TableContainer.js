@@ -18,6 +18,8 @@ const TableContainerWrapper = styled.div`
   ${widthFromProps};
   overflow-x: scroll;
   overflow-y: hidden;
+  -ms-overflow-style: auto;
+
   .${TABLE_PAGINATION_CLASSNAME} {
     position: relative;
     z-index: 1;
