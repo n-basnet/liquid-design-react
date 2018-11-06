@@ -113,7 +113,7 @@ export class Checkbox extends PureComponent {
         <Input type='checkbox' checked={this.isChecked()} readOnly />
         <Glyph
           name={`checkbox${iconVersion}`}
-          color={!hover && !this.isChecked() ? 'sensitiveGrey.base' : undefined}
+          color={!hover && !this.isChecked() ? 'sensitiveGrey.darker' : undefined}
           size={iconSize}
         />
         {label && <Label disabled={disabled}>{label}</Label>}
