@@ -3,15 +3,17 @@ import styled from 'styled-components'
 import { media } from '~/utils/styling'
 
 export default styled.div`
-  flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
-  ${media.max.tablet`
-  flex-direction: column;
-      padding: 50px 0;
-    `};
-  ${media.max.phone`
-  flex-direction: column;
-      padding: 25px 0;
-    `};
+  padding: 25px 0;
+  ${media.min.phone`
+    padding: 50px 0;
+  `};
+  ${media.min.desktop`
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    padding: 0;
+  `};
 `
