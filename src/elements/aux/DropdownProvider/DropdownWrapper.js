@@ -52,7 +52,7 @@ export default styled.div`
     min-width: 190px;
   `};
   ${media.max.phone`
-    width: 100%;
+    max-width: 100%;
   `};
   ${props => css`
     color: ${rgba(props.theme.colors.richBlack.base, props.disabled ? 0.15 : 1)};
