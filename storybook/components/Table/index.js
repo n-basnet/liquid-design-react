@@ -20,6 +20,9 @@ const STORIES = getStoriesByVersions({
     { name: 'selectable', props: { isSelectable: true } },
     { name: 'with row content', props: { withRowContent: true } },
     { name: 'with images', props: { withImages: true } },
+    { name: 'with pagination', props: { withPagination: true } },
+    { name: 'with pagination below table', props: { withPagination: true, paginationBelow: true } },
+    { name: 'selectable with pagination', props: { withPagination: true, isSelectable: true } },
   ],
 })
 
@@ -38,13 +41,7 @@ STORIES.map(({ name, props = {} }) => {
       info: {
         propTablesExclude: getPropTablesExcludeList([TableApp]),
         propTables: [Table],
-        excludedPropTypes: [
-          'className',
-          'withPagination',
-          'paginationDefaults',
-          'paginationItemsPerPageOptions',
-          'paginationBelow',
-        ],
+        excludedPropTypes: ['className'],
       },
     })
     .add(

@@ -40,6 +40,10 @@
     "type": "component"
   },
   {
+    "name": "DatePicker",
+    "type": "module"
+  },
+  {
     "name": "Dropdown",
     "type": "element"
   },
@@ -161,6 +165,10 @@
     "name": "Table",
     "type": "component",
     "hasIndexFile": true
+  },
+  {
+    "name": "TablePagination",
+    "type": "component"
   },
   {
     "name": "Tag",
