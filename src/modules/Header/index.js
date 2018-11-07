@@ -5,11 +5,11 @@ import styled from 'styled-components'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import Button from '~/elements/Button'
-import SearchBar from '~/components/SearchBar'
+import SearchBar, { RESULT_WRAPPER_CLASSNAME } from '~/components/SearchBar'
 import { LOGO_CLASSNAME } from '~/elements/Logo'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
 import LabelsWrapper from '~/modules/Header/LabelsWrapper'
-import { media } from '~/utils/styling'
+import { media, safariStyles } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const IconsWrapper = styled.div`
@@ -60,7 +60,27 @@ const IEfix = styled.div`
 const SearchBarWrapper = styled.div`
   flex: 1;
   padding-left: 8px;
+  .${RESULT_WRAPPER_CLASSNAME} {
+    top: 50px;
+    ${safariStyles(`
+      top: 52px;
+    `)};
+    ${media.max.phone`
+      top: 55px;
+      ${safariStyles(`
+        top: 57px;
+      `)}
+    `};
+  }
   .${ICON_CLASSNAME} {
+    ${safariStyles(`
+      top: 11px;
+    `)};
+    ${media.max.phone`
+      ${safariStyles(`
+        top: 16px;
+      `)}
+    `};
     svg {
       width: 20px;
       height: 20px;
@@ -75,7 +95,7 @@ const SearchBarWrapper = styled.div`
     }
     ${media.max.phone`
       min-width: 150px !important;
-      max-width: 150px;
+      max-width: 160px;
     `};
   }
   &:hover {
@@ -90,9 +110,6 @@ const SearchBarWrapper = styled.div`
       }
     }
   }
-  ${media.max.phone`
-    padding-left: 0;
-  `};
 `
 const LogoContainer = styled.div`
   .${LOGO_CLASSNAME} {

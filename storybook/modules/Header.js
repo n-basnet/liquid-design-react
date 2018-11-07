@@ -11,6 +11,13 @@ const buttonIcon = 'circleX'
 const getHeaderText = () => getTextKnob({ name: 'headerText', defaultText: 'Room 01' })
 const getButtonLabel = () => getTextKnob({ name: 'buttonLabel', defaultText: 'Text' })
 
+const searchBarOptions = [
+  'Search Result 1',
+  'Search Result 2',
+  'Search Result 3',
+  'Search Result 4',
+]
+
 storiesOf('Modules/Headers', module)
   .addParameters({
     info: {
@@ -20,9 +27,15 @@ storiesOf('Modules/Headers', module)
   })
   .add(
     'default',
-    () => <EnhancedHeader logoComponent={LogoComponent} />,
+    () => <EnhancedHeader searchBarOptions={searchBarOptions} logoComponent={LogoComponent} />,
     getSnippetTemplate(`
   <Header
+    searchBarOptions={[
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
+    ]}
     logoComponent={<Logo />}
   />
   `)
@@ -31,6 +44,7 @@ storiesOf('Modules/Headers', module)
     'with icons',
     () => (
       <EnhancedHeader
+        searchBarOptions={searchBarOptions}
         logoComponent={LogoComponent}
         withIcons
         notificationOnClick={action('click')}
@@ -40,6 +54,12 @@ storiesOf('Modules/Headers', module)
     ),
     getSnippetTemplate(`
   <Header
+    searchBarOptions={[
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
+    ]}
     logoComponent={<Logo />}
     withIcons
     notificationOnClick={onClickHandler}
@@ -52,6 +72,7 @@ storiesOf('Modules/Headers', module)
     'with text',
     () => (
       <EnhancedHeader
+        searchBarOptions={searchBarOptions}
         logoComponent={LogoComponent}
         withText
         labelOne={getHeaderText()}
@@ -60,6 +81,12 @@ storiesOf('Modules/Headers', module)
     ),
     getSnippetTemplate(`
   <Header
+    searchBarOptions={[
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
+    ]}
     logoComponent={<Logo />}
     withText
     labelOne="Room 01"
@@ -70,6 +97,7 @@ storiesOf('Modules/Headers', module)
     'with button',
     () => (
       <EnhancedHeader
+        searchBarOptions={searchBarOptions}
         logoComponent={LogoComponent}
         withButton
         buttonIcon={buttonIcon}
@@ -79,6 +107,12 @@ storiesOf('Modules/Headers', module)
     ),
     getSnippetTemplate(`
   <Header
+    searchBarOptions={[
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
+    ]}
     logoComponent={<Logo />}
     withButton
     buttonIcon="circleX"

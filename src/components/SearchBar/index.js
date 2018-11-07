@@ -156,6 +156,8 @@ export const ResultWrapper = styled.div`
   `};
 `
 
+export const RESULT_WRAPPER_CLASSNAME = getClassName(ResultWrapper)
+
 const EMPTY_RESULTS = []
 
 export class SearchBar extends PureComponent {
@@ -228,7 +230,7 @@ export class SearchBar extends PureComponent {
           onFocus={this.getInputFocusHandler(true)}
           onBlur={this.getInputFocusHandler(false)}
         />
-        <ResultsWrapper>
+        <ResultsWrapper className={RESULT_WRAPPER_CLASSNAME}>
           {results.map((resultText, i) => (
             <ResultWrapper
               tabIndex='0'
