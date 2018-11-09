@@ -99,6 +99,7 @@
     "loki": "^0.13.0",
     "object-assign": "^4.1.1",
     "prettier-standard": "^8.0.1",
+    "prop-types": "^15.6.2",
     "raw-loader": "^0.5.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
