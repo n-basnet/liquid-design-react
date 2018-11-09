@@ -39,4 +39,7 @@ export default {
       include: '**/*.css',
     }),
   ],
+  watch: {
+    chokidar: false,
+  },
 }
