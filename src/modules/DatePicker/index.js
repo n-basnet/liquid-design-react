@@ -11,7 +11,9 @@ import Calendar from '~/modules/Calendar'
 import TextField from '~/elements/TextField'
 import { Glyph } from '~/elements/Icon'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
 
+const today = new Date()
 export class DatePicker extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
@@ -77,6 +79,10 @@ export class DatePicker extends PureComponent {
     endDateWasInUse: false,
     isCalendarOpen: false,
     isSelectingRange: false,
+    currentMonth: this.props.defaultStartDate || today,
+    calendarYear: this.props.defaultStartDate
+      ? dateFns.format(this.props.defaultStartDate, 'YYYY')
+      : dateFns.format(today, 'YYYY'),
   }
   componentDidMount() {
     const { format } = this.props
@@ -86,6 +92,21 @@ export class DatePicker extends PureComponent {
       formatSeparator: currentSeparator,
       formatRegExp: formatRegexp,
     })
+  }
+  changeCurrentMonth = date => {
+    this.setState({ currentMonth: date, calendarYear: dateFns.format(date, 'YYYY') })
+  }
+  changeCalendarYear = value => {
+    this.setState({ calendarYear: value })
+    if (value.match(YEAR_FORMAT_REGEXP)) {
+      this.setState(({ currentMonth }) => ({ currentMonth: dateFns.setYear(currentMonth, value) }))
+    }
+  }
+  blurCalendarYear = () => {
+    const { calendarYear, currentMonth } = this.state
+    if (!calendarYear.match(YEAR_FORMAT_REGEXP)) {
+      this.setState({ calendarYear: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT) })
+    }
   }
   validateStartDate = value => {
     if (!this.state.startDateWasInUse) return true
@@ -115,7 +136,10 @@ export class DatePicker extends PureComponent {
       : this.props.dateValidationError
   }
   handleClickOutside = () => {
-    this.setState({ isCalendarOpen: false })
+    this.setState(({ startDate }) => ({
+      isCalendarOpen: false,
+      currentMonth: startDate || today,
+    }))
   }
   handleInputChange = (value, valueName) => {
     const { formatSeparator, endDate } = this.state
@@ -135,12 +159,19 @@ export class DatePicker extends PureComponent {
       const parsedValue = dateFns.parse(toCommonFormat(value, format, this.state.formatSeparator))
       this.setState({
         [isStartDateInput ? 'startDate' : 'endDate']: parsedValue,
-        isSelectingRange: isStartDateInput && (!endDate || dateFns.isAfter(parsedValue, endDate)),
+        isSelectingRange:
+          rangeMode && isStartDateInput && (!endDate || dateFns.isAfter(parsedValue, endDate)),
       })
       if (isStartDateInput && dateFns.isAfter(parsedValue, endDate)) {
         this.setState({
           endDate: null,
           endDateInputValue: '',
+        })
+      }
+      if (isStartDateInput) {
+        this.setState({
+          currentMonth: parsedValue,
+          calendarYear: dateFns.format(parsedValue, FORMATS.YEAR_FORMAT),
         })
       }
       if (!isStartDateInput || !rangeMode) {
@@ -162,6 +193,7 @@ export class DatePicker extends PureComponent {
     this.setState({
       startDate: date,
       startDateInputValue: dateFns.format(date, this.props.format),
+      currentMonth: date,
     })
     if (this.props.rangeMode) {
       this.setState({ isSelectingRange: true })
@@ -210,6 +242,8 @@ export class DatePicker extends PureComponent {
       startDate,
       endDate,
       isSelectingRange,
+      currentMonth,
+      calendarYear,
     } = this.state
     const textFieldPlaceholder = format.toLowerCase()
     return (
@@ -260,6 +294,11 @@ export class DatePicker extends PureComponent {
               selectedEndDate={endDate}
               isSelectingRange={isSelectingRange}
               rangeMode={rangeMode}
+              currentMonth={currentMonth}
+              changeCurrentMonth={this.changeCurrentMonth}
+              yearInputValue={calendarYear}
+              changeYearInputValue={this.changeCalendarYear}
+              blurYearInput={this.blurCalendarYear}
               {...calendarProps}
             />
           </CalendarContainer>

@@ -6,12 +6,13 @@ import { isEmpty, isNil, find } from 'ramda'
 
 import { times } from '~/utils/aux'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
 import { media } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
 import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
-import FORMATS from '~/modules/Calendar/consts'
+
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
@@ -142,7 +143,6 @@ const DaysRow = styled.div`
     margin-left: 7px;
   `};
 `
-const yearRegexp = /^[\d]{4}$/
 
 export class Calendar extends PureComponent {
   static propTypes = {
@@ -164,6 +164,16 @@ export class Calendar extends PureComponent {
     today: PropTypes.instanceOf(Date),
     /** indicates that selection of date is started (start date is selected, end date is not). Use it if you need more control over range selection functionality */
     isSelectingRange: PropTypes.bool,
+    /** provides currentMonth from outer component instead of Calendar's internal one. Can be used if you need to change current month view not only by default Calendar functionalty but also via some other actions */
+    currentMonth: PropTypes.instanceOf(Date),
+    /** handler for changes of currentMonth provided by outer component */
+    changeCurrentMonth: PropTypes.func,
+    /** provides year from outer component instead of Calendar's internal one. Can be used if you need to change year value in input not only by default Calendar functionalty but also via some other actions */
+    yearInputValue: PropTypes.string,
+    /** handler for changes of year value in input provided by outer component */
+    changeYearInputValue: PropTypes.func,
+    /** handler for blur on year input */
+    blurYearInput: PropTypes.func,
   }
   static defaultProps = {
     selectedStartDate: null,
@@ -175,6 +185,11 @@ export class Calendar extends PureComponent {
     appointments: {},
     today: new Date(),
     isSelectingRange: null,
+    currentMonth: null,
+    changeCurrentMonth: null,
+    yearInputValue: null,
+    changeYearInputValue: null,
+    blurYearInput: () => {},
   }
   state = {
     currentMonth: this.props.selectedStartDate || this.props.today,
@@ -185,36 +200,49 @@ export class Calendar extends PureComponent {
     supposedLastDate: null,
   }
   hasOuterSelectionIndicator = () => this.props.isSelectingRange !== null
-  nextMonth = () => {
-    this.setState({
-      currentMonth: dateFns.addMonths(this.state.currentMonth, 1),
-    })
-    this.setState(({ currentMonth }) => ({
-      yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT),
-    }))
+  hasOuterCurrentMonth = () => Boolean(this.props.currentMonth)
+  hasOuterYearValue = () => Boolean(this.props.yearInputValue)
+  updateOuterCurrentMonth = date => {
+    if (this.hasOuterCurrentMonth()) {
+      this.props.changeCurrentMonth(date)
+    }
   }
-
-  prevMonth = () => {
+  updateOuterYearValue = year => {
+    if (this.hasOuterYearValue()) {
+      const formattedYear = year instanceof Date ? dateFns.format(year, FORMATS.YEAR_FORMAT) : year
+      this.props.changeYearInputValue(formattedYear)
+    }
+  }
+  changeMonth = isPrevious => {
+    const dateFnsMethodName = isPrevious ? 'subMonths' : 'addMonths'
+    const newMonth = this.hasOuterCurrentMonth()
+      ? dateFns[dateFnsMethodName](this.props.currentMonth, 1)
+      : dateFns[dateFnsMethodName](this.state.currentMonth, 1)
     this.setState({
-      currentMonth: dateFns.subMonths(this.state.currentMonth, 1),
+      currentMonth: newMonth,
     })
     this.setState(({ currentMonth }) => ({
       yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT),
     }))
+    this.updateOuterCurrentMonth(newMonth)
+    this.updateOuterYearValue(newMonth)
   }
 
   changeYear = year => {
     this.setState({ yearValue: year })
-    if (year.match(yearRegexp)) {
+    if (year.match(YEAR_FORMAT_REGEXP)) {
       this.setState(({ currentMonth }) => ({ currentMonth: dateFns.setYear(currentMonth, year) }))
+      this.updateOuterCurrentMonth(dateFns.setYear(this.state.currentMonth, year))
     }
+    this.updateOuterYearValue(year)
   }
 
   handleYearInputBlur = () => {
     const { yearValue, currentMonth } = this.state
-    if (!yearValue.match(yearRegexp)) {
+    if (!yearValue.match(YEAR_FORMAT_REGEXP)) {
       this.setState({ yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT) })
     }
+    this.props.blurYearInput()
   }
 
   handleFirstSelect = date => {
@@ -265,7 +293,11 @@ export class Calendar extends PureComponent {
   }
 
   buildDaysGrid() {
-    const { currentMonth, supposedLastDate, isSelectingRange: isSelectingRangeOwn } = this.state
+    const {
+      currentMonth: currentMonthOwn,
+      supposedLastDate,
+      isSelectingRange: isSelectingRangeOwn,
+    } = this.state
     const {
       appointments,
       startOfWeek,
@@ -274,10 +306,11 @@ export class Calendar extends PureComponent {
       selectedEndDate,
       isSelectingRange,
       today,
+      currentMonth,
     } = this.props
-
+    const currentMonthValue = currentMonth || currentMonthOwn
     const countOfWeekDays = 7
-    const monthStart = dateFns.startOfMonth(currentMonth)
+    const monthStart = dateFns.startOfMonth(currentMonthValue)
     const monthEnd = dateFns.endOfMonth(monthStart)
     const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: startOfWeek })
     const endDate = dateFns.endOfWeek(monthEnd, { weekStartsOn: startOfWeek })
@@ -372,23 +405,25 @@ export class Calendar extends PureComponent {
   }
 
   render() {
+    const currentMonthValue = this.props.currentMonth || this.state.currentMonth
+    const yearValue = this.props.yearInputValue || this.state.yearValue
     return (
       <CalendarWrapper {...this.props}>
         <Navigation>
-          <IconWrapper onClick={this.prevMonth}>
+          <IconWrapper onClick={() => this.changeMonth(true)}>
             <Glyph name='arrowLeft' size={25} />
           </IconWrapper>
           <MonthYearWrapper>
-            <MonthName>{dateFns.format(this.state.currentMonth, FORMATS.MONTH_FORMAT)}</MonthName>
+            <MonthName>{dateFns.format(currentMonthValue, FORMATS.MONTH_FORMAT)}</MonthName>
             <TextField
               grey
-              value={this.state.yearValue}
+              value={yearValue}
               onChange={this.changeYear}
               onBlur={this.handleYearInputBlur}
               className={YEAR_INPUT_CLASSNAME}
             />
           </MonthYearWrapper>
-          <IconWrapper onClick={this.nextMonth}>
+          <IconWrapper onClick={() => this.changeMonth()}>
             <Glyph name='arrowRight' size={25} />
           </IconWrapper>
         </Navigation>

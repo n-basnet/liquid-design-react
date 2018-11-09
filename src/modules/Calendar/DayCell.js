@@ -6,8 +6,8 @@ import dateFns from 'date-fns'
 import { isEmpty, isNil } from 'ramda'
 
 import { media } from '~/utils/styling'
+import { FORMATS } from '~/utils/consts/dates'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import FORMATS from './consts'
 
 const getRangeBeforeStyles = props => css`
   background-color: ${props.theme.colors.white.base};
