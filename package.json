@@ -24,6 +24,7 @@
     "storybook:start": "BABEL_ENV=main start-storybook -s ./storybook/public -p 9001 -c storybook",
     "storybook:build": "BABEL_ENV=main build-storybook -s ./storybook/public -c storybook -o out",
     "storybook:build-loki": "STORYBOOK_LOKI_BUILD=1 npm run storybook:build",
+    "s3-deploy": "s3-deploy",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
