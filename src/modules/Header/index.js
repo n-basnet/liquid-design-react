@@ -113,6 +113,7 @@ export const Header = ({
   withText,
   searchBarHandleSubmit,
   searchBarOptions,
+  searchBarPlaceholder,
   notificationOnClick,
   infoOnClick,
   settingsOnClick,
@@ -122,7 +123,12 @@ export const Header = ({
   <HeaderWrapper {...props}>
     <LogoContainer>{logoComponent}</LogoContainer>
     <SearchBarWrapper>
-      <SearchBar ghost options={searchBarOptions} handleSubmit={searchBarHandleSubmit} />
+      <SearchBar
+        ghost
+        options={searchBarOptions}
+        handleSubmit={searchBarHandleSubmit}
+        placeholder={searchBarPlaceholder}
+      />
     </SearchBarWrapper>
     <IEfix />
     {withIcons && (
@@ -170,6 +176,7 @@ Header.propTypes = {
       onClick: PropTypes.func,
     })
   ),
+  searchBarPlaceholder: PropTypes.string,
   settingsOnClick: PropTypes.func,
   logoComponent: PropTypes.node,
 }
@@ -185,6 +192,7 @@ Header.defaultProps = {
   withText: false,
   searchBarOptions: [],
   searchBarHandleSubmit: null,
+  searchBarPlaceholder: 'Search…',
   notificationOnClick: null,
   infoOnClick: null,
   settingsOnClick: null,
