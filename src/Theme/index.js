@@ -15,6 +15,10 @@ injectGlobal`
     font-weight: normal;
     font-style: normal;
   }
+  body { 
+    margin: 0; 
+    padding: 0; 
+  }
 `
 
 export const Base = styled.div`
