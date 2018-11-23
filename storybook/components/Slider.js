@@ -8,7 +8,7 @@ import {
   getTextKnob,
   getSnippetTemplate,
   getPropTablesExcludeList,
-} from '../helpers.js'
+} from '../helpers'
 
 const getLabel = () =>
   getTextKnob({

@@ -31,3 +31,5 @@ export const isSupportingTouch = () =>
   'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 
 export const getItemsWithIds = (array, ids) => array.filter(({ id }) => contains(id, ids))
+
+export const getElementModular = (index, array) => array[index % array.length]

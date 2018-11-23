@@ -77,6 +77,10 @@
     "type": "element"
   },
   {
+    "name": "Graphics",
+    "type": "element"
+  },
+  {
     "name": "Header",
     "type": "module"
   },
@@ -117,6 +121,10 @@
     "type": "component"
   },
   {
+    "name": "Navigation",
+    "type": "module"
+  },
+  {
     "name": "Notifications",
     "type": "component"
   },
@@ -150,6 +158,10 @@
   },
   {
     "name": "SocialShare",
+    "type": "component"
+  },
+  {
+    "name": "StackedBarChart",
     "type": "component"
   },
   {
@@ -189,13 +201,5 @@
   {
     "name": "Tooltip",
     "type": "component"
-  },
-  {
-    "name": "Graphics",
-    "type": "element"
-  },
-  {
-    "name": "Navigation",
-    "type": "module"
   }
 ]

@@ -3,10 +3,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text } from '@storybook/addon-knobs'
-import { action } from '@storybook/addon-actions'
-import { without, append } from 'ramda'
-import uniqid from 'uniqid'
-import { times } from '~/utils/aux'
 
 import COLORS from '~/utils/consts/colors'
 
@@ -89,64 +85,6 @@ export const getStoriesByVersions = ({ versions, subversions, joinString = ' ' }
   return pairs
 }
 
-export const getDropdownOptions = (onClick, amount = 4) =>
-  times(amount).map(v => ({
-    name: getTextKnob({
-      name: `option ${v + 1}`,
-      defaultText: `Option ${v + 1}`,
-    }),
-    id: uniqid(),
-    onClick,
-  }))
-
-export const getDefaultDropdownProps = ({ defaultText }) => ({
-  label: getTextKnob({ defaultText }),
-  options: getDropdownOptions(),
-  onSubmit: action('submit'),
-})
-
-export class MultiselectDropdownStateWrapper extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  }
-  state = {
-    selectedOptionsIds: [],
-    options: [],
-  }
-  componentDidMount() {
-    this.setState({ options: getDropdownOptions(this.handleClick, 10) })
-  }
-  handleClick = ({ id }) => {
-    const isSelected = this.state.selectedOptionsIds.indexOf(id) >= 0
-    this[isSelected ? 'handleRemove' : 'handleAdd'](id)
-  }
-  updateSelectedOptionsIds = transformation =>
-    this.setState(({ selectedOptionsIds }) => ({
-      selectedOptionsIds: transformation(selectedOptionsIds),
-    }))
-  handleAdd = id => this.updateSelectedOptionsIds(append(id))
-  handleRemove = id => this.updateSelectedOptionsIds(without([id]))
-
-  render() {
-    const { children } = this.props
-    const { options, selectedOptionsIds } = this.state
-
-    if (!children) {
-      return null
-    }
-
-    return React.Children.map(children, (child, index) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child, {
-          options,
-          selectedOptionsIds,
-          onOptionDeselect: this.handleRemove,
-        })
-      }
-    })
-  }
-}
-
 export const getSnippetTemplate = (snippet, description) => ({
   info: {
     text: `${description || ``}
@@ -160,3 +98,53 @@ export const getStoryMDLink = (name, { type = 'Elements', storyName } = {}) =>
   `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(storyName || name)})`
 
 export const isStorybookLokiBuild = () => process.env.STORYBOOK_LOKI_BUILD
+export const toUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)
+
+const prependStringToEachLine = (prependString, string) =>
+  string
+    .split(/\r?\n/)
+    .map(line => `${prependString}${line}`)
+    .join(`\n`)
+
+export const objectToJSXAttrs = (
+  object,
+  config = {
+    lineJoin: `
+    `,
+  }
+) => {
+  const FN_MARKER = '__function'
+  return Object.keys(object)
+    .reduce((string, key) => {
+      const value = object[key]
+      const getKeyAttribute = content => `${key}={${content}}`
+      switch (typeof value) {
+        case 'boolean':
+          string += value ? key : getKeyAttribute('false')
+          break
+        case 'string':
+          string += getKeyAttribute(`'${value}'`)
+          break
+        case 'number':
+          string += getKeyAttribute(`${value}`)
+          break
+        case 'object':
+          string += getKeyAttribute(
+            prependStringToEachLine(
+              '    ',
+              JSON.stringify(
+                value,
+                (key, val) => (typeof val === 'function' ? `${key}${FN_MARKER}` : val),
+                2
+              )
+            )
+              .replace(/"([\w]*)":/g, '$1:')
+              .replace(new RegExp(`"(\\w*)${FN_MARKER}"`, 'g'), '$1')
+              .trim()
+          )
+          break
+      }
+      return `${string}${config.lineJoin}`
+    }, '')
+    .trim()
+}

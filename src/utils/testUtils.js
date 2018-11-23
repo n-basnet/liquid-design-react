@@ -14,8 +14,9 @@ export const everyComponentTestSuite = (getWrapperFn, Component, name) => {
     expect(getComponentWrapper({ style }).html()).toMatch(`opacity: ${style.opacity}`)
   })
   it('passes an arbitratry prop', () => {
-    const props = { data: 42 }
-    expect(getComponentWrapper(props).html()).toMatch(`data="${props.data}"`)
+    const propName = 'data-test-prop'
+    const props = { [propName]: 42 }
+    expect(getComponentWrapper(props).html()).toMatch(`${propName}="${props[propName]}"`)
   })
 }
 

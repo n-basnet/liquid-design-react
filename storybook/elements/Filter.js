@@ -1,12 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import {
-  getDefaultDropdownProps,
-  getPropTablesExcludeList,
-  getBackgroundWrapper,
-  MultiselectDropdownStateWrapper,
-} from '../helpers'
+import { getPropTablesExcludeList, getBackgroundWrapper } from '../helpers'
+import { getDefaultDropdownProps, MultiselectDropdownStateWrapper } from '../helpers/dropdown'
 import Filter from '~/elements/Filter'
 import { DropdownProvider } from '~/elements/aux/DropdownProvider'
 
