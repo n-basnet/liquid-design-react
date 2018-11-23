@@ -209,7 +209,11 @@ export class DatePicker extends PureComponent {
       isSelectingRange: !date,
     })
   }
-  handleStartDateBlur = () => this.setState({ startDateWasInUse: true })
+  handleStartDateBlur = () => {
+    if (this.state.startDateInputValue) {
+      this.setState({ startDateWasInUse: true })
+    }
+  }
   handleEndDateBlur = () => this.setState({ endDateWasInUse: true })
   openCalendar = () => {
     if (this.props.withCalendar) {

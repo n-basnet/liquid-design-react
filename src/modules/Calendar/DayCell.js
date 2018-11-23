@@ -175,14 +175,14 @@ export const DayContainer = styled.div`
         `
       : props.isCurrent
         ? css`
-            color: ${props.theme.colors.primary.base};
-            border-color: ${props.theme.colors.primary.base};
-          `
+          color: ${props.theme.colors.primary.base};
+          border-color: ${props.theme.colors.primary.base};
+        `
         : props.isOutOfMonth
           ? css`
-              color: ${props.theme.colors.richBlack.lightest};
-              cursor: not-allowed;
-            `
+          color: ${props.theme.colors.richBlack.lightest};
+          cursor: not-allowed;
+        `
           : css``};
 `
 
@@ -198,7 +198,13 @@ const OverlayWrapper = styled.div`
     border-radius: ${props.theme.borderRadius};
     z-index: ${props.theme.zIndex.tooltips};
     display: ${props.isOpen ? 'block' : 'none'};
+    ${props.theme.hasWhiteText &&
+      css`
+        color: ${props.theme.colors.white.base};
+      `};
+    }
   `};
+
   ${props =>
     props.isFirst
       ? css`
@@ -206,11 +212,11 @@ const OverlayWrapper = styled.div`
         `
       : props.isLast
         ? css`
-            right: -40%;
-          `
+          right: -40%;
+        `
         : css`
-            right: -125%;
-          `};
+          right: -125%;
+        `};
 `
 const TextRow = styled.div`
   white-space: nowrap;
@@ -349,7 +355,6 @@ export class DayCell extends PureComponent {
           isCurrent={isCurrent}
           isFirst={isFirst}
           isOutOfMonth={isOutOfMonth}
-          onClick={this.cellClickHandler}
           onMouseEnter={() => {
             this.handleMouseEnter('DayContainer')
           }}

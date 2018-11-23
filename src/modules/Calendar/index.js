@@ -12,7 +12,7 @@ import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
 import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
-
+import { isTouchDevice } from '~/utils/featureDetects'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 export const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
@@ -268,7 +268,7 @@ export class Calendar extends PureComponent {
       onEndDateSelect(selectedStartDate)
     }
   }
-  onDateSelection = (date, monthStart) => {
+  getDateSelectionHandler = (date, monthStart) => () => {
     if (!dateFns.isSameMonth(date, monthStart)) return
     if (this.props.isSelectingRange || this.state.isSelectingRange) {
       this.handleLastSelect(date)
@@ -374,6 +374,12 @@ export class Calendar extends PureComponent {
             this.setState({ supposedLastDate: null })
           }
         }
+
+        const mouseProps = {
+          onMouseEnter: handleMouseEnter,
+          onMouseLeave: handleMouseLeave,
+        }
+
         days.push(
           <DayCell
             key={day}
@@ -389,11 +395,8 @@ export class Calendar extends PureComponent {
             appointments={currentAppointments || null}
             isFirst={index === 0}
             isLast={index === 6}
-            onClick={() => {
-              this.onDateSelection(dayClone, monthStart)
-            }}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onClick={this.getDateSelectionHandler(dayClone, monthStart)}
+            {...!isTouchDevice() && mouseProps}
           />
         )
         day = dateFns.addDays(day, 1)

@@ -8,7 +8,7 @@ import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
 import { BUTTON_CLASSNAME } from '~/elements/Button'
 import { HEADLINE_CLASSNAME } from '~/elements/Headline'
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { INPUT_CLASSNAME, INPUT_ERROR_CLASSNAME } from '~/components/aux/Input'
+import { INPUT_CLASSNAME } from '~/components/aux/Input'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
 import DatePicker, { DATE_PICKER_CLASSNAMES } from '~/modules/DatePicker'
@@ -25,7 +25,7 @@ const FormAppContainer = styled.div`
     margin-bottom: 45px;
   }
   .${TEXT_FIELD_CLASSNAMES.BASE} {
-    margin-bottom: 20px;;
+    margin-bottom: 20px;
   }
   .${INPUT_CLASSNAME}:not(.${YEAR_INPUT_CLASSNAME}) {
     input,
@@ -45,9 +45,6 @@ const FormAppContainer = styled.div`
     ${media.max.phone`
       right: 20px;
     `};
-  }
-  .${INPUT_ERROR_CLASSNAME} {
-    position: absolute;
   }
   .${DATE_PICKER_CLASSNAMES.INPUT_WRAPPER} {
     > section:first-child {

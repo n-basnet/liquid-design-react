@@ -16,8 +16,11 @@ const EXPAND_IMAGE_SIDE = 10
 const TEXTFIELD_MIN_HEIGHT = 200
 const TEXTFIELD_DEFAULT_WIDTH = 350
 
-const InputWrapper = styled.div`
+const RelativeWrapper = styled.div`
   position: relative;
+`
+
+const InputWrapper = styled(RelativeWrapper)`
   overflow: hidden;
   font-size: 16px;
 
@@ -77,6 +80,7 @@ const getErrorMessageWrapper = () => styled.div.attrs({
   'data-test': 'error-wrapper',
   className: INPUT_ERROR_CLASSNAME,
 })`
+  position: absolute;
   font-size: 12px;
   margin-top: 5px;
   ${props => css`
@@ -230,7 +234,7 @@ class Input extends PureComponent {
     const ErrorMessageWrapper = getErrorMessageWrapper()
 
     return (
-      <Fragment>
+      <RelativeWrapper>
         <TextFieldWrapper {...textFieldWrapperProps} className={className}>
           <AuxWrapper {...auxWrapperProps}>
             <this.ComponentName
@@ -246,7 +250,7 @@ class Input extends PureComponent {
           </AuxWrapper>
         </TextFieldWrapper>
         {errorMessage && <ErrorMessageWrapper>{errorMessage}</ErrorMessageWrapper>}
-      </Fragment>
+      </RelativeWrapper>
     )
   }
 }
