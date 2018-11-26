@@ -6,7 +6,7 @@ export const getBackgroundImage = ({ src }) => css`
   background-size: cover;
 `
 
-const SCREEN_SIZES = {
+export const SCREEN_SIZES = {
   desktop: 992,
   tablet: 768,
   phone: 576,

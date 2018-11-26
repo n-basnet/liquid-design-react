@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
-import { text } from '@storybook/addon-knobs'
+import { text, number } from '@storybook/addon-knobs'
 
 import COLORS from '~/utils/consts/colors'
 
@@ -55,6 +55,8 @@ export const getDeterministicPlaceholderText = (seed, maxAmount = 3) => {
 
 export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLength = 30 } = {}) =>
   text(name, defaultText || placeholderText(placeholderTextLength))
+
+export const getNumberKnob = ({ name = 'value', defaultValue } = {}) => number(name, defaultValue)
 
 export const formatList = list => list.map(v => `\`${v}\``).join(', ')
 

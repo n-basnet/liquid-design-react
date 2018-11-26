@@ -105,6 +105,10 @@
     "type": "component"
   },
   {
+    "name": "LineGraph",
+    "type": "component"
+  },
+  {
     "name": "Link",
     "type": "element"
   },
