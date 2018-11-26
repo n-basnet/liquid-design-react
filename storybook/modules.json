@@ -8,6 +8,10 @@
     "type": "component"
   },
   {
+    "name": "BarChart",
+    "type": "component"
+  },
+  {
     "name": "Breadcrumbs",
     "type": "component"
   },

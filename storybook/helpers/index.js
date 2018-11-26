@@ -100,6 +100,12 @@ export const getStoryMDLink = (name, { type = 'Elements', storyName } = {}) =>
   `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(storyName || name)})`
 
 export const isStorybookLokiBuild = () => process.env.STORYBOOK_LOKI_BUILD
+
+export const randomInRange = (min, max, returnInt = true) => {
+  const num = Math.random() * (max - min + 1) + min
+  return returnInt ? Math.round(num) : num
+}
+
 export const toUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)
 
 const prependStringToEachLine = (prependString, string) =>

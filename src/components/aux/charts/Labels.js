@@ -6,7 +6,7 @@ import { isEmpty, pick, contains } from 'ramda'
 import { media } from '~/utils/styling'
 
 const LabelsWrapper = styled.div`
-  margin-top: 18px;
+  margin-top: 23px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
