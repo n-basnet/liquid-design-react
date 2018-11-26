@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { BARS_WRAPPER_HEIGHT, TICKS_OFFSET, TICKS_PADDING } from '~/components/BarChart/consts'
+import {
+  BARS_WRAPPER_HEIGHT,
+  TICKS_OFFSET,
+  TICKS_PADDING,
+  TICKS_LINE_HEIGHT,
+} from '~/components/BarChart/consts'
 import { getTicks } from '~/components/BarChart/utils'
-
-const lineHeight = 16
 
 const YTicksContainer = styled.div`
   position: absolute;
@@ -25,8 +28,8 @@ const SpreadWrapper = styled.div`
 const TickValuesWrapper = styled(SpreadWrapper)`
   position: absolute;
   left: 0;
-  top: -${lineHeight / 2}px;
-  height: calc(100% + ${lineHeight}px);
+  top: -${TICKS_LINE_HEIGHT / 2}px;
+  height: calc(100% + ${TICKS_LINE_HEIGHT}px);
 `
 
 const TickLinesWrapper = styled(SpreadWrapper)`

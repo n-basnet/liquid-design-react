@@ -1,6 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
+import { default as EnhancedBarChart, BarChart } from '~/components/BarChart'
+import { times } from '~/utils/aux'
 import {
   randomInRange,
   getBackgroundWrapper,
@@ -8,19 +10,11 @@ import {
   getSnippetTemplate,
   objectToJSXAttrs,
 } from '../helpers'
-import { default as EnhancedBarChart, BarChart } from '~/components/BarChart'
-import { times } from '~/utils/aux'
-
-const valueFormatter = num =>
-  `${`${num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&.')}`
-    .replace(/\.(\d\d)$/, `,$1`)
-    .replace(/\.00$/, '')} EUR`
-
-const yTickFormatter = value => (value === 0 ? value : `${value / 1000}k`)
+import { currencyFormatter, thousandsFormatter } from '../helpers/charts'
 
 const getDefaultProps = () => ({
-  valueFormatter,
-  yTickFormatter,
+  valueFormatter: currencyFormatter,
+  yTickFormatter: thousandsFormatter,
   data: times(10).map(i => ({
     values: times(5).map(k => ({
       value: i === 0 && k === 0 ? 0 : randomInRange(35, 165) * 1000 + Math.random(),
@@ -52,7 +46,7 @@ storiesOf('Components/BarChart', module)
   })
   .add(
     'default',
-    () => <BarChart {...defaultProps} />,
+    () => <EnhancedBarChart {...defaultProps} />,
     getSnippetTemplate(
       `<BarChart
     ${objectToJSXAttrs({ ...defaultProps, data: slimData })}

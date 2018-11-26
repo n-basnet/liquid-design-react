@@ -14,3 +14,4 @@ export const BARS_WRAPPER_HEIGHT = 244
 
 export const TICKS_OFFSET = 35
 export const TICKS_PADDING = 50
+export const TICKS_LINE_HEIGHT = 16

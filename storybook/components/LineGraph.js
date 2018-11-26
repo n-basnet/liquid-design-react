@@ -90,20 +90,13 @@ storiesOf('Components/LineGraph', module)
   .add(
     'default',
     () => (
-      <LineGraph
+      <EnhancedLineGraph
         data={getData()}
-        chartWidth={getNumberKnob({ name: 'chartWidth', defaultValue: 1000 })}
         chartHeight={getNumberKnob({ name: 'chartHeight', defaultValue: 400 })}
         labelsAxisX={['17.Oct.2018', '08.Nov.2018']}
-        mobileLabelsAxisX={['17.Oct.2018', '08.Nov.2018']}
         tickFormatAxisX={['KW 21', 'KW 22', 'KW 23', 'KW 24']}
         tickValuesAxisX={[1, 8, 15, 22]}
-        tickFormatAxisY={v =>
-          `${v
-            .toFixed(0)
-            .replace('.', ',')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, '.')} EUR`
-        }
+        tickFormatAxisY={v => `${v} EUR`}
       />
     ),
     {
@@ -129,22 +122,19 @@ storiesOf('Components/LineGraph', module)
       <LineGraph
         data={data}
         labelsAxisX={['17.Oct.2018', '08.Nov.2018']}
-        mobileLabelsAxisX={['17.Oct.2018', '08.Nov.2018']}
         tickFormatAxisX={['KW 21', 'KW 22', 'KW 23', 'KW 22']}
         tickValuesAxisX={[1, 7, 14, 21]}
         tickCountAxisY={12}
-        unit='ml'
       />
     ~~~
 
-    Customized variant with explicit domain for Axis X, mobile height set to 50% and Y axis has custom formatting function (to currency).
+    Customized variant with explicit domain for Axis X and Y axis with custom formatting function (to currency).
     The Line Graph code snippet can looks like this:
     ~~~js
       <LineGraph
         ....
         domainAxisY={[-2000, 7000]}
-        mobileChartHeightAmount={0.6}
-        tickFormatAxisY={v => parseToCurrency(v, '$')}
+        tickFormatAxisY={parseToCurrency}
       />
     ~~~
     `,

@@ -52,7 +52,8 @@ const Tooltip = styled.div`
           `}
     width: 0;
     height: ${TOOLTIP_ARROW_SIZE}px;
-    bottom: -${TOOLTIP_ARROW_SIZE * 2}px;
+    bottom: -${TOOLTIP_ARROW_SIZE}px;
+    box-sizing: border-box;
     margin: auto;
     border-top: ${TOOLTIP_ARROW_SIZE}px solid ${props => props.theme.colors.white.base};
     border-right: ${TOOLTIP_ARROW_SIZE}px solid transparent;

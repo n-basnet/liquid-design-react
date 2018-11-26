@@ -1,6 +1,6 @@
 import BarChart from '.'
 import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { defaultValueTickFormatter } from '~/components/BarChart/utils'
+import { defaultFormatter } from '~/utils/charts'
 
 const label1 = {
   name: 'Some label',
@@ -61,7 +61,7 @@ describe('BarChart', () => {
       acc += val.value
       return acc
     }, 0)
-    expect(sums.at(firstIndex).text()).toMatch(String(defaultValueTickFormatter(computedSum)))
+    expect(sums.at(firstIndex).text()).toMatch(String(defaultFormatter(computedSum)))
   })
 
   everyComponentTestSuite(getBarChartWrapper, BarChart, 'BarChart')

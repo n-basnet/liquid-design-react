@@ -7,18 +7,15 @@ import attachClassName from '~/components/aux/hoc/attachClassName'
 import BarGroupsWrapper from '~/components/BarChart/BarGroupsWrapper'
 import YTicks from '~/components/BarChart/YTicks'
 import Labels from '~/components/aux/charts/Labels'
-import {
-  recomputeData,
-  defaultYTickFormatter,
-  defaultValueTickFormatter,
-  isMobile,
-} from '~/components/BarChart/utils'
-import { TICKS_OFFSET } from '~/components/BarChart/consts'
+import { recomputeData, isMobile } from '~/components/BarChart/utils'
+import { defaultFormatter } from '~/utils/charts'
+import { TICKS_OFFSET, TICKS_LINE_HEIGHT } from '~/components/BarChart/consts'
 
 const BarChartWrapper = styled.div`
   position: relative;
   display: inline-block;
   max-width: 100%;
+  margin-top: ${TICKS_LINE_HEIGHT}px;
   padding-left: ${TICKS_OFFSET}px;
 `
 
@@ -54,8 +51,8 @@ export class BarChart extends PureComponent {
     topOffset: PropTypes.number,
   }
   static defaultProps = {
-    yTickFormatter: defaultYTickFormatter,
-    valueFormatter: defaultValueTickFormatter,
+    yTickFormatter: defaultFormatter,
+    valueFormatter: defaultFormatter,
     topOffset: 20,
   }
   state = {

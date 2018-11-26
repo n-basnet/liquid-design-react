@@ -53,7 +53,4 @@ export const recomputeData = data => {
   }
 }
 
-export const defaultYTickFormatter = value => value
-export const defaultValueTickFormatter = value => value
-
 export const isMobile = () => window.innerWidth <= SCREEN_SIZES.phone
