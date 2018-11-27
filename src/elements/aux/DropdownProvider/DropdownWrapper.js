@@ -76,6 +76,9 @@ export default styled.div`
       margin-right: 2px;
       transition: ${props.theme.transition};
       ${getTransformValue(props)};
+      ${media.max.phone`
+        margin-left: 10px;
+      `};
     }
 
     ${
