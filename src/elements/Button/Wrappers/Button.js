@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { bgColorSelector, colorSelector, iconOpacitySelector } from '~/elements/Button/utils'
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue, ieStyles, safariStyles } from '~/utils/styling'
+import { nonTouchDevicesHoverStyles, cursorValue, ieStyles, safariStyles } from '~/utils/styling'
 
 export const widthSelector = props =>
   props.label ? '93px' : props.size === 'big' ? '50px' : '40px'
@@ -22,12 +22,11 @@ export default styled.button`
     transition: ${props.theme.transition};
     outline: none;
     ${cursorValue};
-    &:hover {
-      ${!props.disabled &&
-        css`
-          background-color: ${bgColorSelector(props, 'dark')};
-        `}}
-    &:focus {
+    ${!props.disabled &&
+      nonTouchDevicesHoverStyles(`
+        background-color: ${bgColorSelector(props, 'dark')};
+      `)}
+    &:active {
       ${!props.disabled &&
         css`
           background-color: ${bgColorSelector(props, 'darker')};
@@ -50,10 +49,13 @@ export default styled.button`
   ${ieStyles(`
     line-height: 1;
   `)};
-  &:focus span,
-  &:focus span {
+  &:active span,
+  &:active span {
     position: relative;
     top: 0px;
     left: 0px;
+  }
+  &::-moz-focus-inner {
+    border: 0;
   }
 `

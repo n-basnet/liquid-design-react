@@ -2,13 +2,9 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import {
-  getBackgroundWrapper,
-  getTextKnob,
-  includeComponentInPropTable,
-  getPropTablesExcludeList,
-} from '../helpers'
-import { default as EnhancedLightBox, LightBox } from '~/modules/LightBox'
+import { getBackgroundWrapper, getTextKnob, getPropTablesExcludeList } from '../helpers'
+import EnhancedLightBox from '~/modules/LightBox'
+import { Modal } from '~/components/Modal'
 import { Presentation, ModalApp } from '../components/Modal'
 
 const getDefaultProps = (open = true) => ({
@@ -20,6 +16,7 @@ const getDefaultProps = (open = true) => ({
 
 const params = {
   info: {
+    propTables: [Modal],
     propTablesExclude: getPropTablesExcludeList([
       Presentation.Simple,
       Presentation.WithCTA,
@@ -33,12 +30,12 @@ const params = {
 
 storiesOf('Modules/LightBox', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(LightBox, getDefaultProps(false)))
   .addParameters(params)
   .add('usage in app', () => <ModalApp Component={EnhancedLightBox} buttonText='Open LightBox' />, {
     info: {
       text: `
     Lightboxes are used to set the users focus on a certain interface element, usually an enlarged graphic or photograph. It’s also possible to display other modules within a lightbox as modals.
+    \`LightBox\` reuses \`Modal\` component, so the props are the same (see props table below).
 
     ~~~js
     class LightBoxApp extends PureComponent {

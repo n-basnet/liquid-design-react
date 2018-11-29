@@ -9,12 +9,13 @@ import SearchBar, { RESULT_WRAPPER_CLASSNAME } from '~/components/SearchBar'
 import { LOGO_CLASSNAME } from '~/elements/Logo'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
 import LabelsWrapper from '~/modules/Header/LabelsWrapper'
-import { media, safariStyles } from '~/utils/styling'
+import { media, safariStyles, disableMozTextSelection } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
 const IconsWrapper = styled.div`
   padding: 0 21px;
   line-height: 0;
+  ${disableMozTextSelection};
   .${ICON_CLASSNAME} {
     :not(:last-child) {
       margin-right: 30px;

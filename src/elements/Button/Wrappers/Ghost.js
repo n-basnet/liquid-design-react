@@ -15,7 +15,7 @@ export default styled.button`
     flex-direction: ${props.isIconOnRight ? 'row-reverse' : 'row'};
     ${cursorValue};
     &:hover,
-    &:focus {
+    &:active {
       div {
         ${!props.disabled &&
           css`
@@ -43,4 +43,7 @@ export default styled.button`
       }
     }
   `};
+  &::-moz-focus-inner {
+    border: 0;
+  }
 `

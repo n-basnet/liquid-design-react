@@ -1,5 +1,7 @@
 import { css } from 'styled-components'
 
+import { isTouchDevice } from '~/utils/featureDetects'
+
 export const getBackgroundImage = ({ src }) => css`
   background-image: url(${src});
   background-position: center;
@@ -63,6 +65,14 @@ export const touchDeviceHoverStyles = styleString => css`
     ${styleString};
   }
 `
+
+export const nonTouchDevicesHoverStyles = styleString =>
+  !isTouchDevice() &&
+  css`
+    &:hover {
+      ${styleString}
+    }
+  `
 
 export const disableTextSelectionBackground = css`
   *::selection {
