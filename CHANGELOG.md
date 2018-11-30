@@ -1,4 +1,41 @@
-# 1.0.0 (2018-10-23)
+<a name="1.4.0"></a>
+# [1.4.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.0.0...v1.4.0) (2018-10-29)
+
+
+### Bug Fixes
+
+* calendar appointment dot misplacement fix ([c1e5a8d](https://gitlab.com/liquid-design/liquid-design-react/commit/c1e5a8d))
+* changed icon vertical alignment in list ([a529127](https://gitlab.com/liquid-design/liquid-design-react/commit/a529127))
+* checkbox in form story hover ([7f18f9b](https://gitlab.com/liquid-design/liquid-design-react/commit/7f18f9b))
+* fix filter on ie wrapping bug ([02489c8](https://gitlab.com/liquid-design/liquid-design-react/commit/02489c8))
+* fixed circular placeholder icon and optimised couple of svgs ([4ba0af1](https://gitlab.com/liquid-design/liquid-design-react/commit/4ba0af1))
+* flyout indentation ([4157f44](https://gitlab.com/liquid-design/liquid-design-react/commit/4157f44))
+* missing icon in disabled list ([fbf66cc](https://gitlab.com/liquid-design/liquid-design-react/commit/fbf66cc))
+* optimise & updated id's in svg illustrations ([45431d4](https://gitlab.com/liquid-design/liquid-design-react/commit/45431d4))
+* remove console.log ([a2e5a56](https://gitlab.com/liquid-design/liquid-design-react/commit/a2e5a56))
+* removed empty component proptypes from storybook ([13c268f](https://gitlab.com/liquid-design/liquid-design-react/commit/13c268f))
+* safari mobile label alignment button fix ([ac10803](https://gitlab.com/liquid-design/liquid-design-react/commit/ac10803))
+* table bugfix ([c8cf317](https://gitlab.com/liquid-design/liquid-design-react/commit/c8cf317))
+* table styling ([267427a](https://gitlab.com/liquid-design/liquid-design-react/commit/267427a))
+
+
+### Features
+
+* add datepicker to forms ([a3eccfe](https://gitlab.com/liquid-design/liquid-design-react/commit/a3eccfe))
+* add Filters ([e54df40](https://gitlab.com/liquid-design/liquid-design-react/commit/e54df40))
+* hide Table stories with TablePagination ([2f7e8d6](https://gitlab.com/liquid-design/liquid-design-react/commit/2f7e8d6))
+* replaced checkboxFilled icon with new one ([c1659e8](https://gitlab.com/liquid-design/liquid-design-react/commit/c1659e8))
+* temporarily hide DatePicker, TablePagination, Tabs ([85d2267](https://gitlab.com/liquid-design/liquid-design-react/commit/85d2267))
+
+
+### BREAKING CHANGES
+
+* new checkboxFilled icon
+
+
+
+<a name="1.0.0"></a>
+# [1.0.0](https://gitlab.com/liquid-design/liquid-design-react/compare/228651b...v1.0.0) (2018-10-23)
 
 
 * [MER-316] calendars simple (#116) ([e50fcd0](https://gitlab.com/liquid-design/liquid-design-react/commit/e50fcd0)), closes [#116](https://gitlab.com/liquid-design/liquid-design-react/issues/116)
@@ -7,8 +44,8 @@
 ### Bug Fixes
 
 * assorted bugfixes ([ed7fe72](https://gitlab.com/liquid-design/liquid-design-react/commit/ed7fe72))
-* assorted fixes ([7717356](https://gitlab.com/liquid-design/liquid-design-react/commit/7717356))
 * assorted fixes ([108a4ab](https://gitlab.com/liquid-design/liquid-design-react/commit/108a4ab))
+* assorted fixes ([7717356](https://gitlab.com/liquid-design/liquid-design-react/commit/7717356))
 * assorted fixes ([1151cd5](https://gitlab.com/liquid-design/liquid-design-react/commit/1151cd5))
 * assorted fixes and refactors ([1bc3ea4](https://gitlab.com/liquid-design/liquid-design-react/commit/1bc3ea4))
 * assorted IE/Edge bugs ([2a6e6b5](https://gitlab.com/liquid-design/liquid-design-react/commit/2a6e6b5))
@@ -21,7 +58,6 @@
 * fix Icon not handling theme colors ([3bd659c](https://gitlab.com/liquid-design/liquid-design-react/commit/3bd659c))
 * fix stateful radio button ([8f75982](https://gitlab.com/liquid-design/liquid-design-react/commit/8f75982))
 * fixed 'i' and '!' icons in components to be consistent with designs ([423ca62](https://gitlab.com/liquid-design/liquid-design-react/commit/423ca62))
-* fixed mobile double tapping tooltip issue ([03beed3](https://gitlab.com/liquid-design/liquid-design-react/commit/03beed3))
 * fixed safari tooltip click bug ([c345504](https://gitlab.com/liquid-design/liquid-design-react/commit/c345504))
 * handle changed default Icon size ([add0bf7](https://gitlab.com/liquid-design/liquid-design-react/commit/add0bf7))
 * hotfixes ([9ea9fd6](https://gitlab.com/liquid-design/liquid-design-react/commit/9ea9fd6))
@@ -45,14 +81,14 @@
 * **accordion:** modify padding ([9e55a8f](https://gitlab.com/liquid-design/liquid-design-react/commit/9e55a8f))
 * **button:** fix font bug ([0a46adb](https://gitlab.com/liquid-design/liquid-design-react/commit/0a46adb))
 * **ci:** hub command fix ([03235b4](https://gitlab.com/liquid-design/liquid-design-react/commit/03235b4))
-* **headline:** modify the headline ([0808892](https://gitlab.com/liquid-design/liquid-design-react/commit/0808892))
+* **headline:** modify the headline  ([0808892](https://gitlab.com/liquid-design/liquid-design-react/commit/0808892))
 * **loki:** investigate and fix loki differences ([2f6aaba](https://gitlab.com/liquid-design/liquid-design-react/commit/2f6aaba))
 * **slider:** fix tooltip issue ([#160](https://gitlab.com/liquid-design/liquid-design-react/issues/160)) ([a5e50c5](https://gitlab.com/liquid-design/liquid-design-react/commit/a5e50c5))
 * **storybook:** add storybook fixes ([dfd3478](https://gitlab.com/liquid-design/liquid-design-react/commit/dfd3478))
-* **storybook:** import Loki config only if needed ([2a62521](https://gitlab.com/liquid-design/liquid-design-react/commit/2a62521))
 * tweaks for Card, Badge components ([1b695a9](https://gitlab.com/liquid-design/liquid-design-react/commit/1b695a9))
 * tweaks in Card, Badge ([333b41b](https://gitlab.com/liquid-design/liquid-design-react/commit/333b41b))
 * update Breadcrumbs component ([2124867](https://gitlab.com/liquid-design/liquid-design-react/commit/2124867))
+* **storybook:** import Loki config only if needed ([2a62521](https://gitlab.com/liquid-design/liquid-design-react/commit/2a62521))
 * **storybook:** source displaying ([4019158](https://gitlab.com/liquid-design/liquid-design-react/commit/4019158))
 * **themes:** white text color on secondary bg in richPurple theme ([39281fa](https://gitlab.com/liquid-design/liquid-design-react/commit/39281fa))
 
@@ -61,11 +97,11 @@
 
 * **accordion:** create an accordion ([37db2e0](https://gitlab.com/liquid-design/liquid-design-react/commit/37db2e0))
 * **bubble:** add animation ([#27](https://gitlab.com/liquid-design/liquid-design-react/issues/27)) ([84b8440](https://gitlab.com/liquid-design/liquid-design-react/commit/84b8440))
-* **button:** create a button component ([91cdb60](https://gitlab.com/liquid-design/liquid-design-react/commit/91cdb60))
+* **button:** create a button component  ([91cdb60](https://gitlab.com/liquid-design/liquid-design-react/commit/91cdb60))
 * **checkbox:** create a checkbox ([cb50b1a](https://gitlab.com/liquid-design/liquid-design-react/commit/cb50b1a))
 * **ci:** create pull request after publishing package ([d461ccd](https://gitlab.com/liquid-design/liquid-design-react/commit/d461ccd))
 * **components:** add Notifications component ([5383911](https://gitlab.com/liquid-design/liquid-design-react/commit/5383911))
-* **components:** add Tag component ([13b6361](https://gitlab.com/liquid-design/liquid-design-react/commit/13b6361))
+* **components:** add Tag component  ([13b6361](https://gitlab.com/liquid-design/liquid-design-react/commit/13b6361))
 * **components/Badge:** set up Badge component ([228651b](https://gitlab.com/liquid-design/liquid-design-react/commit/228651b))
 * add Breadcrumbs component ([bc511ae](https://gitlab.com/liquid-design/liquid-design-react/commit/bc511ae))
 * add Card component ([1ac0535](https://gitlab.com/liquid-design/liquid-design-react/commit/1ac0535))
@@ -79,7 +115,6 @@
 * add font antialiasing to global styles ([c6ad028](https://gitlab.com/liquid-design/liquid-design-react/commit/c6ad028))
 * add Forms module ([22b72db](https://gitlab.com/liquid-design/liquid-design-react/commit/22b72db))
 * add LinearProgressBar ([88cc981](https://gitlab.com/liquid-design/liquid-design-react/commit/88cc981))
-* add logos ([00ad123](https://gitlab.com/liquid-design/liquid-design-react/commit/00ad123))
 * add minimum width to Card component ([f51b225](https://gitlab.com/liquid-design/liquid-design-react/commit/f51b225))
 * add Modal component ([c6d715e](https://gitlab.com/liquid-design/liquid-design-react/commit/c6d715e))
 * add Modal examples ([d7e22ad](https://gitlab.com/liquid-design/liquid-design-react/commit/d7e22ad))
@@ -97,8 +132,7 @@
 * add Table, TablePagination ([6b7cb68](https://gitlab.com/liquid-design/liquid-design-react/commit/6b7cb68))
 * add TextField element ([daa2141](https://gitlab.com/liquid-design/liquid-design-react/commit/daa2141))
 * add Toggle component ([cbba82a](https://gitlab.com/liquid-design/liquid-design-react/commit/cbba82a))
-* added and updated icons and glyphs ([30307ee](https://gitlab.com/liquid-design/liquid-design-react/commit/30307ee))
-* added social shares ([6e7fc61](https://gitlab.com/liquid-design/liquid-design-react/commit/6e7fc61))
+* added and updated icons and glyphs  ([30307ee](https://gitlab.com/liquid-design/liquid-design-react/commit/30307ee))
 * allow different component types when using addComponent script ([17a578e](https://gitlab.com/liquid-design/liquid-design-react/commit/17a578e))
 * assorted tweaks ([2921092](https://gitlab.com/liquid-design/liquid-design-react/commit/2921092))
 * Badge - handle icon and disabled props ([2d7f8fe](https://gitlab.com/liquid-design/liquid-design-react/commit/2d7f8fe))
@@ -117,25 +151,25 @@
 * replace sprite Favorite animation with programmatic one ([6dd6862](https://gitlab.com/liquid-design/liquid-design-react/commit/6dd6862))
 * styling cursor for disabled states ([8cd19b4](https://gitlab.com/liquid-design/liquid-design-react/commit/8cd19b4))
 * SVG optimisation ([6d88228](https://gitlab.com/liquid-design/liquid-design-react/commit/6d88228))
-* tweak TextField ([844222a](https://gitlab.com/liquid-design/liquid-design-react/commit/844222a))
 * update Card, ContentCard components ([80bfc43](https://gitlab.com/liquid-design/liquid-design-react/commit/80bfc43))
-* **quote:** create a quote component ([#32](https://gitlab.com/liquid-design/liquid-design-react/issues/32)) ([fd5d3eb](https://gitlab.com/liquid-design/liquid-design-react/commit/fd5d3eb))
-* update Icon ([6079655](https://gitlab.com/liquid-design/liquid-design-react/commit/6079655))
 * **elements:** add bubble component ([d01d20b](https://gitlab.com/liquid-design/liquid-design-react/commit/d01d20b))
-* **elements:** create Paragraph, Label and Link ([794e8a2](https://gitlab.com/liquid-design/liquid-design-react/commit/794e8a2))
+* **elements:** create Paragraph, Label and Link  ([794e8a2](https://gitlab.com/liquid-design/liquid-design-react/commit/794e8a2))
 * **faq:** create faq ([6ffaacd](https://gitlab.com/liquid-design/liquid-design-react/commit/6ffaacd))
 * **footer:** create a footer ([c5d9fed](https://gitlab.com/liquid-design/liquid-design-react/commit/c5d9fed))
 * **header:** create a header ([c2d6bb0](https://gitlab.com/liquid-design/liquid-design-react/commit/c2d6bb0))
+* use Theme for global styles ([a7c4e40](https://gitlab.com/liquid-design/liquid-design-react/commit/a7c4e40))
 * **list:** create a list component ([dc63c65](https://gitlab.com/liquid-design/liquid-design-react/commit/dc63c65))
 * **quote:** create a quote component ([#25](https://gitlab.com/liquid-design/liquid-design-react/issues/25)) ([f7f07ed](https://gitlab.com/liquid-design/liquid-design-react/commit/f7f07ed))
+* **quote:** create a quote component ([#32](https://gitlab.com/liquid-design/liquid-design-react/issues/32)) ([fd5d3eb](https://gitlab.com/liquid-design/liquid-design-react/commit/fd5d3eb))
+* tweak TextField ([844222a](https://gitlab.com/liquid-design/liquid-design-react/commit/844222a))
 * **quote:** create a quote component ([#47](https://gitlab.com/liquid-design/liquid-design-react/issues/47)) ([ff66555](https://gitlab.com/liquid-design/liquid-design-react/commit/ff66555))
+* update Icon ([6079655](https://gitlab.com/liquid-design/liquid-design-react/commit/6079655))
 * **radiobutton:** create a radiobutton ([e83773e](https://gitlab.com/liquid-design/liquid-design-react/commit/e83773e))
 * **slider:** create a slider ([d539639](https://gitlab.com/liquid-design/liquid-design-react/commit/d539639))
 * **storybook:** change name, link and favicon ([4b3e825](https://gitlab.com/liquid-design/liquid-design-react/commit/4b3e825))
 * **tabs:** create tabs ([cf4b29e](https://gitlab.com/liquid-design/liquid-design-react/commit/cf4b29e))
 * **Theme:** set up basic Theme implementation ([3315c44](https://gitlab.com/liquid-design/liquid-design-react/commit/3315c44))
 * **theming:** add all themes and theme select in storybook ([3ed5d99](https://gitlab.com/liquid-design/liquid-design-react/commit/3ed5d99))
-* use Theme for global styles ([a7c4e40](https://gitlab.com/liquid-design/liquid-design-react/commit/a7c4e40))
 
 
 ### Performance Improvements
@@ -150,6 +184,26 @@
 
 ### BREAKING CHANGES
 
+* - Slider props:
+  - withIcon -> withButtons
+  - default value -> 0 instead of 50
+- List:
+  - remove icon, onClick props
+  - change items prop to array of {name, iconName?, onClick?}
+  - change listHead prop to {name, iconName?}
+- TextList:
+  - in items prop.- remove id key
+
+Other changes:
+- storybook
+  - update code snippets etc;
+  - sort stories by name
+  - polyfill Fragment for addon-info, in order to remove console warning
+- update new component template to use propTable
+- fix SVG files
+- update Loki refs
+
+MER-360
 * dates-fns library, new components for Calendar and DatePicker
 
 * feat: added basic calendar layout
@@ -338,4 +392,5 @@ MER-316
 
 MER-316
 
-# 1.0.0 (2018-09-18)
+
+
