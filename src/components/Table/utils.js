@@ -1,21 +1,10 @@
-import { path, isEmpty, find, reject } from 'ramda'
-import isReact from 'is-react'
+import { prop } from 'ramda'
 import naturalSort from 'javascript-natural-sort'
 
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 export const AUX_CELL_CLASSNAME = getClassName({ name: 'TableAuxCell' })
 export const AUX_CELL_WIDTH = 30
-
-const isConfigCell = cell =>
-  typeof cell !== 'string' && typeof cell !== 'number' && !isReact.compatible(cell)
-
-export const findConfigCell = cells => find(isConfigCell, cells)
-
-export const getCellsAndRowInfo = cells => ({
-  cells: reject(isConfigCell, cells),
-  rowConfigCell: findConfigCell(cells),
-})
 
 export const SORT_MODES = {
   ascending: 'ASCENDING',
@@ -31,29 +20,34 @@ export const SIZES = {
 
 export const DEFAULT_SORT_MODE = SORT_MODES.unsorted
 
-export const sort = {
-  [SORT_MODES.ascending]: (a, b) => naturalSort(a.text, b.text),
-  [SORT_MODES.descending]: (a, b) => naturalSort(b.text, a.text),
-  [SORT_MODES.unsorted]: (a, b) => a.originalIndex - b.originalIndex,
-}
+export const getSortingObject = fn => ({
+  [SORT_MODES.ascending]: (a, b) => fn(a.stringValue, b.stringValue),
+  [SORT_MODES.descending]: (a, b) => fn(b.stringValue, a.stringValue),
+  [SORT_MODES.unsorted]: (a, b) => a.initialIndex - b.initialIndex,
+})
 
-export const getSortedRows = ({ sortingColumnIndex = 0, sortMode, rows, tableRefs }) => {
-  if (isEmpty(tableRefs)) {
+export const getSortedRows = ({ sortMode, sortingColumnIndex, rows, columns }) => {
+  if (sortingColumnIndex === undefined) {
     return rows
   }
+  const sortingColumn = columns[sortingColumnIndex]
+  const sortingFunction = prop('sortMethod', sortingColumn) || naturalSort
+  const sortingFn = getSortingObject(sortingFunction)[sortMode]
   return rows
-    .map(({ id: rowId, originalIndex }, index) => {
-      // with pagination, a cell might not be in tableRefs before the sorting,
-      // so it will be sorted two times - first with '' as text, then - after the ref is there - with actual content
-      const cellNode = path([rowId, sortingColumnIndex], tableRefs)
-      const text = cellNode ? cellNode.innerText : ''
+    .map(({ id, initialIndex, cells }, index) => {
+      let stringValue = ''
+      const cell = sortingColumn && sortingColumn.accessor(cells)
+      if (cell) {
+        stringValue = typeof cell === 'object' ? prop('value', cell) : cell
+      }
+
       return {
-        text,
-        originalIndex,
+        stringValue,
+        initialIndex,
         index,
       }
     })
-    .sort(sort[sortMode])
+    .sort(sortingFn)
     .map(({ index }) => rows[index])
 }
 
@@ -70,3 +64,5 @@ export const getTableCellYPadding = size =>
     [SIZES.medium]: '14px',
     [SIZES.large]: '21px',
   }[size])
+
+export const renderNode = (node, props) => (typeof node === 'function' ? node(props) : node)

@@ -58,7 +58,7 @@ export default class TablePagination extends PureComponent {
     // go to last possible page if exceeded page count (e.g. by updating the itemsPerPageAmount)
     const { onChange, currentPage } = this.props
     const pagesSum = this.getPagesSum()
-    if (currentPage > pagesSum) {
+    if (pagesSum > 0 && currentPage > pagesSum) {
       onChange(pagesSum)
     }
   }

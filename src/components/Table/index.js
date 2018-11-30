@@ -3,19 +3,7 @@ import ReactResizeDetector from 'react-resize-detector'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import uniqid from 'uniqid'
-import {
-  contains,
-  prop,
-  assoc,
-  findIndex,
-  update,
-  equals,
-  assocPath,
-  any,
-  all,
-  omit,
-  values,
-} from 'ramda'
+import { contains, prop, assoc, findIndex, update, equals, any, all, omit, values } from 'ramda'
 
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 import TableRow from '~/components/Table/TableRow'
@@ -29,9 +17,9 @@ import {
   SORT_MODES,
   AUX_CELL_WIDTH,
   SIZES,
-  findConfigCell,
   TABLE_ROW_STATES,
   AUX_CELL_CLASSNAME,
+  renderNode,
 } from '~/components/Table/utils'
 import TablePagination from '~/components/TablePagination'
 
@@ -41,27 +29,24 @@ const INITIAL_SORTING_COLUMN_INDEX = undefined
 
 export default class Table extends PureComponent {
   static propTypes = {
-    columns: PropTypes.arrayOf(PropTypes.node),
-    /**
-      Array of rows of table cells (strings or React components). If an object found in a row array, it will be treated as config object,
-      with the following keys handled:
-      - `rowInfo`: additional information to be displayed on cliking on a row
-      - `isDefaultChecked`: if Table is `isSelectable`, this will be the default value for the row's checkbox
-      - `onChange`: fired on row change - the argument passed will be an object:
-        `{rowConfig: <original config object>, rowState: <updated state>}`
-    */
+    /** Array of column objects. */
+    columns: PropTypes.arrayOf(
+      PropTypes.shape({
+        header: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
+        accessor: PropTypes.func.isRequired,
+        cellRenderer: PropTypes.func,
+        sortMethod: PropTypes.func,
+        onSort: PropTypes.func,
+      })
+    ).isRequired,
+    /** Array of row objects. */
     rows: PropTypes.arrayOf(
-      PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.node,
-          PropTypes.shape({
-            rowInfo: PropTypes.node,
-            isDefaultChecked: PropTypes.bool,
-            onChange: PropTypes.func,
-          }),
-        ])
-      )
-    ),
+      PropTypes.shape({
+        rowInfo: PropTypes.node,
+        isDefaultChecked: PropTypes.bool,
+        onChange: PropTypes.func,
+      })
+    ).isRequired,
     isSortable: PropTypes.bool,
     isSelectable: PropTypes.bool,
     /** Either `small`, `medium`, or `large`. */
@@ -108,39 +93,35 @@ export default class Table extends PureComponent {
     this.recomputeState(this.props)
   }
   componentDidUpdate(prevProps) {
-    // cannot use memoization, because the sorting depends on DOM content (state update not only operating on data)
     if (!equals(this.props.rows, prevProps.rows)) {
       this.recomputeState(this.props, this.state)
     }
   }
 
   tableElementHTMLId = getClassName({ name: `Table--${uniqid()}` })
-  tableRefs = {}
 
   recomputeState = (
     { columns, rows, disabledRowsIndexes, isSelectable },
     { sortingColumnIndex } = { sortingColumnIndex: INITIAL_SORTING_COLUMN_INDEX }
   ) => {
-    const rowsWithIds = rows.map((cells, originalIndex) => {
-      const configCell = findConfigCell(cells)
-      const initialState = configCell
-        ? {
-          ...(isSelectable && { isSelected: configCell.isDefaultChecked || false }),
-        }
-        : {}
-      return {
-        cells,
-        state: initialState,
-        id: uniqid(),
-        originalIndex,
-      }
-    })
+    const preparedRows = rows.map((cells, initialIndex) => ({
+      cells,
+      state: {
+        ...(isSelectable && { isSelected: cells.isDefaultChecked || false }),
+      },
+      id: uniqid(),
+      initialIndex,
+    }))
+
+    const { sortModes } = this.state
+
     this.setState(
       {
-        rows: rowsWithIds,
-        hasRowInfo: any(row => any(cell => !!cell.rowInfo, row), rows),
+        rows: preparedRows,
+        sortModes,
+        hasRowInfo: any(row => !!row.cells.rowInfo, preparedRows),
         disabledRowsIds: disabledRowsIndexes.map(
-          index => index < rowsWithIds.length && rowsWithIds[index].id
+          index => index < preparedRows.length && preparedRows[index].id
         ),
       },
       this.updateSorting
@@ -157,39 +138,40 @@ export default class Table extends PureComponent {
     return modes[newIndex >= modes.length ? newIndex % modes.length : newIndex]
   }
 
-  updateSorting = newSortingColumnIndex => {
+  updateSorting = sortingColumnIndex => {
+    const { columns } = this.props
     const { sortModes } = this.state
-    const shouldUpdateSort = newSortingColumnIndex !== undefined
-    const newSortMode = shouldUpdateSort
-      ? this.getNewSortMode(newSortingColumnIndex)
-      : this.getCurrentSortMode()
-    const sortingColumnIndex = shouldUpdateSort
-      ? newSortingColumnIndex
-      : this.state.sortingColumnIndex
+    const shouldUpdateSort = sortingColumnIndex !== undefined
+    if (!shouldUpdateSort) {
+      return
+    }
+
+    const sortMode = this.getNewSortMode(sortingColumnIndex)
+    const sortColumn = columns[sortingColumnIndex]
+    if (sortColumn.onSort) {
+      sortColumn.onSort({ sortColumn, sortMode })
+    }
 
     this.setState({
       sortingColumnIndex,
       sortModes: sortModes.map(
         // resetting all other columns' sort modes
-        (v, index) => (index === sortingColumnIndex ? newSortMode : DEFAULT_SORT_MODE)
+        (v, index) => (index === sortingColumnIndex ? sortMode : DEFAULT_SORT_MODE)
       ),
     })
   }
   getSortChangeHandler = sortingColumnIndex => () => this.updateSorting(sortingColumnIndex)
 
-  handleRowOnChange = ({ cells, state }) => {
-    const configCell = findConfigCell(cells)
-    if (configCell && configCell.onChange) {
-      configCell.onChange({ rowState: state, rowConfig: configCell })
-    }
-  }
+  handleRowOnChange = ({ cells, state: rowState }) =>
+    cells.onChange && cells.onChange({ rowState, cells })
+
   getRowStateChangeHandler = id => type => {
     const { rows } = this.state
     const rowIndex = findIndex(v => v.id === id, rows)
     const row = rows[rowIndex]
 
     const value = row.state[type]
-    const updatedRowState = { ...row.state, [type]: !value }
+    const updatedRowState = { ...row.state, ...(type && { [type]: !value }) }
     this.setState(
       {
         rows: update(rowIndex, { ...row, state: updatedRowState }, rows),
@@ -270,13 +252,19 @@ export default class Table extends PureComponent {
   }
   getVisibleRows = () => {
     const { rows, sortingColumnIndex } = this.state
+    const { columns } = this.props
 
+    // prevent internal sorting
+    const isSortedExternally = sortingColumnIndex >= 0 && columns[sortingColumnIndex].onSort
+    if (isSortedExternally) {
+      return rows
+    }
     // sort all rows, not just currently visible
     const sortedRows = getSortedRows({
       sortingColumnIndex,
       sortMode: this.getCurrentSortMode(),
+      columns,
       rows,
-      tableRefs: this.tableRefs,
     })
 
     // of these sorted rows, return only the rows for current page
@@ -314,7 +302,6 @@ export default class Table extends PureComponent {
   render() {
     const { hasRowInfo, sortModes } = this.state
     const {
-      columns,
       className,
       isSortable,
       isSelectable,
@@ -323,13 +310,14 @@ export default class Table extends PureComponent {
       withPagination,
       paginationItemsPerPageOptions,
       paginationBelow,
+      columns,
       ...props
     } = this.props
 
     const rowProps = {
       displayRowInfoArrow: hasRowInfo,
-      displayCheckbox: isSelectable,
-      size: size,
+      isSelectable,
+      size,
     }
 
     return (
@@ -343,7 +331,7 @@ export default class Table extends PureComponent {
             <TableHead size={size}>
               <tr>
                 {this.renderGlobalHandlerComponent()}
-                {columns.map((columnNode, i) => (
+                {columns.map((column, i) => (
                   <TableHeadCell
                     key={i}
                     sortChangeHandler={this.getSortChangeHandler(i)}
@@ -351,7 +339,7 @@ export default class Table extends PureComponent {
                     sortMode={sortModes[i]}
                     size={size}
                   >
-                    {columnNode}
+                    {renderNode(column.header, column)}
                   </TableHeadCell>
                 ))}
               </tr>
@@ -361,27 +349,11 @@ export default class Table extends PureComponent {
                 <TableRow
                   key={id}
                   disabled={this.isRowDisabled(id)}
+                  accessors={columns.map(prop('accessor'))}
+                  renderers={columns.map(prop('cellRenderer'))}
                   cellsInfo={cells}
                   rowState={state}
                   handleStateChange={this.getRowStateChangeHandler(id)}
-                  {...rowProps}
-                />
-              ))}
-            </tbody>
-
-            {/*
-              Rendering a hidden table with all rows to get their content,
-              in order to sort based on all rows, not just currently visible.
-            */}
-            <tbody style={{ display: 'none' }}>
-              {this.state.rows.map(({ cells, id, state }) => (
-                <TableRow
-                  key={`row-copy-${id}`}
-                  cellsInfo={cells}
-                  rowState={state}
-                  getRef={(ref, cellIndex) => {
-                    this.tableRefs = assocPath([id, cellIndex], ref, this.tableRefs)
-                  }}
                   {...rowProps}
                 />
               ))}

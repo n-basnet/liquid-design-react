@@ -1,47 +1,20 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { action } from '@storybook/addon-actions'
 
 import Table, { TABLE_CLASSNAME } from '~/components/Table'
+import { Fragment } from '../../helpers'
 import { PLACEHOLDER_CLASSNAME } from '~/elements/Placeholder'
-import { times } from '~/utils/aux'
-
-import { getCustomPlaceholderText, Fragment } from '../../helpers'
-import { NameCell, RegularCell, ColumnCell, RowInfoWrapper } from './cells'
+import { getDefaultProps } from './utils'
 
 const COLUMNS_AMOUNT = 4
 
-const onChange = action('row change')
-
-const getRow = ({ withRowContent, rowIndex, ...props }) => [
-  <NameCell rowIndex={rowIndex} {...props} />,
-  ...times(COLUMNS_AMOUNT - 1).map(i => (
-    <RegularCell placeholderSeed={(i + 1) * rowIndex + 1} {...props} />
-  )),
-  {
-    onChange,
-    // every second one selected
-    ...(props.isSelectable &&
-      rowIndex % 2 === 0 && {
-      isDefaultChecked: true,
-    }),
-    ...(withRowContent && {
-      rowInfo: <RowInfoWrapper>{getCustomPlaceholderText()}</RowInfoWrapper>,
-    }),
-  },
-]
-
-const getDefaultProps = ({ rowsAmount, columnsAmount }, props) => ({
-  columns: times(columnsAmount).map(ColumnCell),
-  rows: times(rowsAmount).map(rowIndex => getRow({ ...props, rowIndex })),
-})
-
 export default class extends PureComponent {
   static propTypes = {
-    passedProps: PropTypes.object.isRequired,
+    passedProps: PropTypes.object,
     withPagination: PropTypes.bool,
   }
   static defaultProps = {
+    passedProps: {},
     withPagination: false,
   }
   state = {

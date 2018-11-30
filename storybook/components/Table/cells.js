@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Placeholder from '~/elements/Placeholder'
-import { getDeterministicPlaceholderText } from '../../helpers'
 
 const Label = styled.span`
   display: block;
@@ -14,13 +13,28 @@ const Label = styled.span`
   `};
 `
 
-export const ColumnCell = id => <span>Column {(id + 1).toString().padStart(2, '0')}</span>
+export const RegularCell = ({ value, label, withMoreContent }) => (
+  <span>
+    {withMoreContent && <Label>{label}</Label>}
+    {value}
+  </span>
+)
+
+RegularCell.propTypes = {
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  withMoreContent: PropTypes.bool,
+}
+
+RegularCell.defaultProps = {
+  withMoreContent: false,
+}
 
 const NameCellWrapper = styled.span`
   display: flex;
 `
 
-export const NameCell = ({ rowIndex, withMoreContent, withImages }) => (
+export const NameCell = ({ value, auxText, label, withMoreContent, withImages }) => (
   <NameCellWrapper>
     {withImages && (
       <Placeholder
@@ -29,40 +43,22 @@ export const NameCell = ({ rowIndex, withMoreContent, withImages }) => (
       />
     )}
     <span>
-      {withMoreContent && <Label>label {rowIndex + 1}</Label>}
-      <strong>Name {rowIndex + 1}</strong> Info
+      {withMoreContent && <Label>{label}</Label>}
+      <strong>{value}</strong> {auxText}
     </span>
   </NameCellWrapper>
 )
 
 NameCell.propTypes = {
-  rowIndex: PropTypes.number.isRequired,
-  withMoreContent: PropTypes.bool,
+  ...RegularCell.propTypes,
+  auxText: PropTypes.string,
   withImages: PropTypes.bool,
 }
 
 NameCell.defaultProps = {
-  withMoreContent: false,
+  ...RegularCell.defaultProps,
+  auxText: null,
   withImages: false,
-}
-
-export const RegularCell = ({ placeholderSeed, withMoreContent }) => {
-  const labelContent = getDeterministicPlaceholderText(placeholderSeed, 2)
-  const textContent = getDeterministicPlaceholderText(placeholderSeed + 10)
-  return (
-    <span>
-      {withMoreContent && <Label>{labelContent}</Label>}
-      {textContent}
-    </span>
-  )
-}
-RegularCell.propTypes = {
-  placeholderSeed: PropTypes.number.isRequired,
-  withMoreContent: PropTypes.bool,
-}
-
-RegularCell.defaultProps = {
-  withMoreContent: false,
 }
 
 // -webkit-text-size-adjust - for mobile safari (https://stackoverflow.com/a/5540312)

@@ -8,21 +8,23 @@ export const TablePaginationWrapper = styled.div`
   font-size: 12px;
   white-space: nowrap;
   max-width: 100%;
-  overflow: scroll;
   > div {
     flex-shrink: 0;
   }
   ${props => css`
-    background-color: ${props.theme.colors.white.base};
-    ${props.isDisplayedBelowTable
+    &,
+    > div {
+      background-color: ${props.theme.colors.white.base};
+      ${props.isDisplayedBelowTable
     ? css`
-          border-bottom-left-radius: ${props.theme.borderRadius};
-          border-bottom-right-radius: ${props.theme.borderRadius};
-        `
+            border-bottom-left-radius: ${props.theme.borderRadius};
+            border-bottom-right-radius: ${props.theme.borderRadius};
+          `
     : css`
-          border-top-left-radius: ${props.theme.borderRadius};
-          border-top-right-radius: ${props.theme.borderRadius};
-        `};
+            border-top-left-radius: ${props.theme.borderRadius};
+            border-top-right-radius: ${props.theme.borderRadius};
+          `};
+    }
   `};
 `
 

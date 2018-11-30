@@ -1,18 +1,24 @@
+import { prop } from 'ramda'
+import naturalSort from 'javascript-natural-sort'
+
 import Table from '.'
 import TableContainer from '~/components/Table/TableContainer'
-import { getCellsAndRowInfo, sort, SORT_MODES } from '~/components/Table/utils'
+import { getSortingObject, SORT_MODES } from '~/components/Table/utils'
 import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
 import { times } from '~/utils/aux'
-
-// unfortunately sorting can't be tested because it relies on .innerText, which is not supported in jsdom
 
 describe('Table', () => {
   const rowsAmount = 5
   const colsAmount = 3
-  const rows = times(rowsAmount).map(row => times(colsAmount).map(col => `Row Content ${row}`))
-  const columns = times(colsAmount).map(col => `Column Name ${col}`)
-  const defaultProps = { rows, columns }
 
+  const columns = times(colsAmount).map(col => {
+    const header = `Column ${col}`
+    return { header, accessor: prop(header) }
+  })
+  const rows = times(rowsAmount).map(rowIndex =>
+    columns.reduce((acc, col) => ({ ...acc, [col.header]: `Row Content ${rowIndex}` }), {})
+  )
+  const defaultProps = { rows, columns }
   const getTableWrapper = getWrapper(Table, defaultProps)
 
   it('renders HTML table elements', () => {
@@ -37,19 +43,20 @@ describe('Table', () => {
         .find('tbody td')
         .first()
         .text()
-    ).toBe(rows[0][0])
+    ).toBe(rows[0][columns[0].header])
   })
 
   it('handles row onChange callback', () => {
     const onChange = jest.fn()
-    const wrapper = getTableWrapper({ columns, rows: [...rows, [...rows[0], { onChange }]] })
+    const copiedRow = rows[0]
+    const wrapper = getTableWrapper({ columns, rows: [...rows, { ...copiedRow, onChange }] })
     wrapper
       .find('tbody')
       .first()
       .find('tr')
       .last()
       .simulate('click')
-    expect(onChange.mock.calls[0][0]).toMatchObject({ rowState: {}, rowConfig: {} })
+    expect(onChange.mock.calls[0][0]).toMatchObject({ rowState: {}, cells: copiedRow })
   })
 
   it('renders a selectable table', () => {
@@ -58,44 +65,32 @@ describe('Table', () => {
   })
 
   describe('utils', () => {
-    it('getCellsAndRowInfo', () => {
-      const configCell = {
-        onChange: jest.fn(),
-      }
-      const stringCells = ['Some cell content 0', 'Some cell content 1']
-      const { cells, rowConfigCell } = getCellsAndRowInfo([...stringCells, configCell])
-      expect(cells).toEqual(stringCells)
-      expect(rowConfigCell).toEqual(configCell)
-
-      expect(getCellsAndRowInfo(cells)).toEqual({ cells: stringCells, rowConfigCell: undefined })
-      expect(getCellsAndRowInfo([])).toEqual({ cells: [], rowConfigCell: undefined })
-    })
-
-    it('sort', () => {
+    it('sort with naturalSort', () => {
       const data = [
         {
-          text: 'Text 1',
+          stringValue: 'Text 1',
         },
         {
-          text: 'Text 2',
+          stringValue: 'Text 2',
         },
         {
-          text: 'Text 0',
+          stringValue: 'Text 0',
         },
       ]
       const dataSortedAscending = [
         {
-          text: 'Text 0',
+          stringValue: 'Text 0',
         },
         {
-          text: 'Text 1',
+          stringValue: 'Text 1',
         },
         {
-          text: 'Text 2',
+          stringValue: 'Text 2',
         },
       ]
-      expect(data.sort(sort[SORT_MODES.ascending])).toEqual(dataSortedAscending)
-      expect(data.sort(sort[SORT_MODES.descending])).toEqual(dataSortedAscending.reverse())
+      const sortingObject = getSortingObject(naturalSort)
+      expect(data.sort(sortingObject[SORT_MODES.ascending])).toEqual(dataSortedAscending)
+      expect(data.sort(sortingObject[SORT_MODES.descending])).toEqual(dataSortedAscending.reverse())
     })
   })
 
