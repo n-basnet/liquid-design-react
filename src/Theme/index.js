@@ -4,6 +4,7 @@ import styled, { css, injectGlobal, ThemeProvider } from 'styled-components'
 
 import { THEMES, DEFAULT_THEME_NAME, getCustomTheme } from '~/utils/consts/themes'
 import { M_FONT_NAME } from '~/utils/consts'
+import { disableWebkitTapHightlight } from '~/utils/styling'
 import MWebFontWoff2 from '~/assets/fonts/MWeb-Regular.woff2'
 import MWebFontWoff from '~/assets/fonts/MWeb-Regular.woff'
 import { isTouchDevice } from '~/utils/featureDetects'
@@ -32,8 +33,8 @@ export const Base = styled.div`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -ms-overflow-style: none;
+    ${disableWebkitTapHightlight};
   }
 `
 

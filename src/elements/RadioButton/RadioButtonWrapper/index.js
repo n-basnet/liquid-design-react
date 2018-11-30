@@ -2,11 +2,8 @@ import styled, { css } from 'styled-components'
 
 import { cursorValue, safariStyles } from '~/utils/styling'
 
-/*
-additional :before on RadioButtonWrapper is required for the Firefox and Edge, which do not currently support :before for input fields
-also, @supports (-webkit-marquee-repetition:infinite) and (object-fit:fill) is meant to avoid displaying :before twice on Safari
--webkit-tap-highlight-color: rgba(255, 255, 255, 0); prevents blue highlight while clicking on mobile devices
-*/
+// additional :before on RadioButtonWrapper is required for the Firefox and Edge,
+// which do not currently support :before for input fields
 
 export default styled.div`
   display: inline-block;
@@ -55,7 +52,7 @@ export default styled.div`
     }
     ${safariStyles(`
       :before {
-          display: none;
+        display: none;
       }
     `)}
 

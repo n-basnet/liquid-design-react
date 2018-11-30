@@ -7,6 +7,7 @@ import cx from 'classnames'
 import { Base } from '~/Theme'
 import ModalContent from '~/components/Modal/ModalContent'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { disableWebkitTapHightlight } from '~/utils/styling'
 
 const TRANSITION_DURATION = 200
 const MODAL_MARGIN = 20
@@ -70,6 +71,7 @@ injectGlobal`
     &,
     .ReactModal__Content {
       transition: all ${TRANSITION_DURATION}ms ease-in-out;
+      ${disableWebkitTapHightlight};
     }
   }
 

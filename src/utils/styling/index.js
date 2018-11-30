@@ -101,3 +101,7 @@ export const disableMozTextSelection = css`
   -moz-user-focus: ignore;
   -moz-user-select: none;
 `
+
+export const disableWebkitTapHightlight = css`
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+`
