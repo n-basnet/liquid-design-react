@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { media } from '~/utils/styling'
+import { isChromeBrowser } from '~/utils/featureDetects'
 import { getTableCellYPadding, CELL_MIN_WIDTH } from '~/components/Table/utils'
 
 const TdWrapper = styled.td`
@@ -17,9 +18,9 @@ const TdWrapper = styled.td`
   `};
   ${props =>
     props.isInfoCell &&
-    // prevents a bug in Chrome
+    // prevents a bug with parsing cell widths
     css`
-      width: 100%;
+      width: ${isChromeBrowser() ? '100%' : '0'};
     `};
 `
 

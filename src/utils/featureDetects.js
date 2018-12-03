@@ -12,3 +12,6 @@ export const hasCSSFilters = () => {
 }
 
 export const isTouchDevice = () => 'ontouchstart' in document.documentElement
+
+// MS Edge also has a window.chrome object, but w/out csi
+export const isChromeBrowser = () => !!(window.chrome && window.chrome.csi)
