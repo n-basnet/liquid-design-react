@@ -9,7 +9,7 @@ import {
   NOTIFICATION_CONFIG,
   NOTIFICATION_WRAPPER_PADDING,
 } from '~/components/Notifications/consts'
-import { media } from '~/utils/styling'
+import { media, nonTouchDevicesHoverStyles } from '~/utils/styling'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 import { getFirstTruthyKeyName } from '~/utils/aux'
 
@@ -59,9 +59,9 @@ const SingleNotificationInnerWrapper = styled.div`
     box-shadow: ${props.theme.boxShadow};
     transition: ${props.theme.transition};
     font-weight: ${props.theme.fontWeight.black};
-    &:hover {
+    ${nonTouchDevicesHoverStyles(`
       background-color: ${getBackgroundColor(props, true)};
-    }
+    `)}
   `};
 `
 

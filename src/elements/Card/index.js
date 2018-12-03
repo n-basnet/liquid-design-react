@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
+
 import attachClassName from '~/components/aux/hoc/attachClassName'
+import { nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 const CARD_WIDTH = 300
-const getCardPadding = cardWidth => cardWidth * 8 / 100
+const getCardPadding = cardWidth => (cardWidth * 8) / 100
 
 const getStackedHoverBoxShadow = theme => `
   6px 8px 4px ${rgba(theme.colors.black.base, 0.05)},
@@ -39,15 +41,15 @@ const CardWrapper = styled.div`
     props.stacked &&
     css`
       box-shadow: ${getStackedBoxShadow(props.theme)};
-      &:hover {
+      ${nonTouchDevicesHoverStyles(`
         box-shadow: ${getStackedBoxShadow(props.theme, true)};
-      }
+      `)}
       ${props.active &&
         css`
           box-shadow: ${getStackedBoxShadow(props.theme, false, true)};
-          &:hover {
+          ${nonTouchDevicesHoverStyles(`
             box-shadow: ${getStackedBoxShadow(props.theme, false, true)};
-          }
+          `)}
         `};
     `};
   ${props =>
@@ -63,11 +65,9 @@ const CardWrapper = styled.div`
   ${props =>
     !props.active &&
     !props.stacked &&
-    css`
-      &:hover {
-        box-shadow: ${props.theme.boxShadow};
-      }
-    `};
+    nonTouchDevicesHoverStyles(`
+      box-shadow: ${props.theme.boxShadow};
+    `)};
   ${props => props.css && css([props.css])};
 `
 

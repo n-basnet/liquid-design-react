@@ -7,7 +7,7 @@ import cx from 'classnames'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { getPosition, getArrowStyle } from '~/components/Tooltip/utils'
 import { WALLS, WALLS_KEYS, SIDES, SIDES_KEYS } from '~/components/Tooltip/consts'
-import { hasCSSFilters } from '~/utils/featureDetects'
+import { hasCSSFilters, isTouchDevice } from '~/utils/featureDetects'
 import { getClassName } from '~/components/aux/hoc/attachClassName'
 
 export const TOOLTIP_WRAPPER_CLASSNAME = getClassName({ name: 'TooltipWrapper' })
@@ -87,6 +87,7 @@ export class Tooltip extends PureComponent {
   }
   state = {
     isOpen: false,
+    isHovered: false,
   }
   toggle = () => {
     this.setState(
@@ -96,8 +97,7 @@ export class Tooltip extends PureComponent {
       }
     )
   }
-  /** setTimeout hack is to call toggle function firstly instead of handleMouseEnter on safari ios **/
-  handleMouseEnter = () => setTimeout(() => this.setState({ isHovered: true }), 0)
+  handleMouseEnter = () => this.setState({ isHovered: true })
   setHoverToFalse = () => this.setState({ isHovered: false })
   handleClickOutside = () => {
     this.setState({ isOpen: false })
@@ -108,15 +108,17 @@ export class Tooltip extends PureComponent {
     const { children, wall, side, contentStyle, customTrigger, className, ...props } = this.props
     const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
     const iconName = `tooltip${isHovered || isTooltipOpen ? 'Filled' : 'Empty'}`
+    const nonTouchProps = {
+      onMouseEnter: this.handleMouseEnter,
+      onMouseLeave: this.setHoverToFalse,
+    }
     return (
       <TooltipWrapper
+        {...props}
         isOpen={isTooltipOpen}
         isHovered={isHovered}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.setHoverToFalse}
-        onTouchStart={this.setHoverToFalse}
+        {...!isTouchDevice() && nonTouchProps}
         className={cx(getClassName(Tooltip), className)}
-        {...props}
       >
         {customTrigger ? (
           customTrigger(this.toggle)

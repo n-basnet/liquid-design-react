@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { path } from 'ramda'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { scaleUpDown, beamAnimation } from '~/elements/Favorite/animations'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 import { times } from '~/utils/aux'
@@ -78,13 +78,11 @@ export const FavoriteWrapper = styled.div`
     ? css`
           opacity: 0.5;
         `
-    : css`
-          &:hover {
-            .${ICON_CLASSNAME} svg {
-              fill: ${getHoverFill(props)};
-            }
-          }
-        `};
+    : nonTouchDevicesHoverStyles(`
+      .${ICON_CLASSNAME} svg {
+        fill: ${getHoverFill(props)};
+      }
+    `)};
 
     .${ICON_CLASSNAME} svg {
       position: relative;

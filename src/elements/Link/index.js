@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
+import { nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
 import attachClassName from '~/components/aux/hoc/attachClassName'
 
@@ -15,11 +16,10 @@ const LinkWrapper = styled.a`
   ${props => css`
     color: ${props.theme.colors.primary.base};
   `};
-  &:hover {
+  ${nonTouchDevicesHoverStyles(`
     text-decoration: underline;
-  }
+  `)}
   &:active {
-    text-decoration: none;
     font-weight: ${props => props.theme.fontWeight.black};
   }
 `

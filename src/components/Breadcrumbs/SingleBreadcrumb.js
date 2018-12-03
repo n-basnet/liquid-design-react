@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 const StyledSingleBreadcrumb = styled.div`
   display: inline-block;
@@ -19,11 +19,9 @@ const StyledSingleBreadcrumb = styled.div`
 
   ${props => css`
     ${!props.disabled &&
-      css`
-        &:hover {
-          color: ${props.theme.colors.primary.base};
-        }
-      `};
+      nonTouchDevicesHoverStyles(`
+      color: ${props.theme.colors.primary.base};
+    `)}
     ${props.active &&
       css`
         padding-right: 0;

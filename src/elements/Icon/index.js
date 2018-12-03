@@ -39,7 +39,7 @@ const IconWrapper = styled.div`
 export const DEFAULT_SIZE = 24
 export const DEFAULT_UNIT = 'px'
 
-export const Icon = ({ name, size, unit, onClick, isFilled, className, ...props }) => {
+export const Icon = ({ name, size, unit, onClick, isFilled, className, noFill, ...props }) => {
   const SVGIconComponent =
     iconsList.glyphs[name] || (isFilled ? iconsList.filled[name] : iconsList.stroke[name])
   if (SVGIconComponent === undefined) {
@@ -50,6 +50,11 @@ export const Icon = ({ name, size, unit, onClick, isFilled, className, ...props 
     height: `${size}${unit}`,
   }
 
+  const svgProps = {
+    ...dimensions,
+    ...(!noFill && { fill: getFill(props) }),
+  }
+
   return (
     <IconWrapper
       onClick={onClick}
@@ -57,7 +62,7 @@ export const Icon = ({ name, size, unit, onClick, isFilled, className, ...props 
       className={cx(className, ICON_CLASSNAME)}
       {...props}
     >
-      <SVGIconComponent fill={getFill(props)} {...dimensions} />
+      <SVGIconComponent {...svgProps} />
     </IconWrapper>
   )
 }
@@ -77,6 +82,7 @@ Icon.propTypes = {
   unit: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  noFill: PropTypes.bool,
   /** styling to be passed to `styled-components` instance */
   styledCSS: PropTypes.array,
 }
@@ -89,6 +95,7 @@ Icon.defaultProps = {
   unit: DEFAULT_UNIT,
   onClick: null,
   className: null,
+  noFill: false,
   styledCSS: [],
 }
 

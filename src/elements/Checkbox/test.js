@@ -29,14 +29,5 @@ describe('Checkbox', () => {
     expect(wrapper.find(Glyph).prop('name')).toEqual('checkboxEmpty')
   })
 
-  it('updates Icon color on hover', () => {
-    const wrapper = getCheckboxWrapper()
-    expect(wrapper.find(Glyph).prop('color')).toBeDefined()
-    wrapper.find(Checkbox).simulate('mouseenter')
-    expect(wrapper.find(Glyph).prop('color')).not.toBeDefined()
-    wrapper.find(Checkbox).simulate('mouseleave')
-    expect(wrapper.find(Glyph).prop('color')).toBeDefined()
-  })
-
   everyComponentTestSuite(getCheckboxWrapper, Checkbox, 'Checkbox')
 })

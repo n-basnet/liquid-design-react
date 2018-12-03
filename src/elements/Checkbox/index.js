@@ -3,9 +3,14 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
+
+const getFill = ({ theme, checked }) => {
+  const { colors } = theme
+  return checked ? colors.primary.base : colors.sensitiveGrey.darker
+}
 
 export const CheckboxWrapper = styled.div`
   display: inline-flex;
@@ -21,15 +26,18 @@ export const CheckboxWrapper = styled.div`
     `};
   .${ICON_CLASSNAME} svg {
     transition: fill 200ms;
-    &:hover {
-      ${props =>
-    !props.disabled &&
-        props.checked &&
-        css`
-          fill: ${props.theme.colors.primary.dark};
-        `};
-    }
+    fill: ${getFill};
   }
+  ${props =>
+    !props.disabled &&
+    css`
+      ${nonTouchDevicesHoverStyles(`
+        .${ICON_CLASSNAME} svg {
+          fill: ${props.theme.colors.primary.base};
+        }
+      `)}
+      }
+  `}
 `
 
 export const Input = styled.input`
@@ -111,11 +119,7 @@ export class Checkbox extends PureComponent {
         {...props}
       >
         <Input type='checkbox' checked={this.isChecked()} readOnly />
-        <Glyph
-          name={`checkbox${iconVersion}`}
-          color={!hover && !this.isChecked() ? 'sensitiveGrey.darker' : undefined}
-          size={iconSize}
-        />
+        <Glyph name={`checkbox${iconVersion}`} noFill size={iconSize} />
         {label && <Label disabled={disabled}>{label}</Label>}
       </CheckboxWrapper>
     )

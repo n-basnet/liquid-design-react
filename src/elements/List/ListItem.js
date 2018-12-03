@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 export const ListItem = styled.li`
   display: flex;
@@ -18,28 +18,22 @@ export const ListItem = styled.li`
   ${props => css`
     border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
     ${cursorValue}
-    &:hover {
-      ${!props.disabled &&
-        props.onClick &&
-        css`
-          background-color: ${props.grey
-    ? props.theme.colors.sensitiveGrey.dark
-    : props.theme.colors.white};
-          color: ${props.theme.colors.primary.base};
-          font-weight: ${props.theme.fontWeight.black};
-          transition: ${props.theme.transition};
-          .${ICON_CLASSNAME} {
-            svg {
-              fill: ${props.theme.colors.primary.base};
-            }
-          }
-          ${props.onClick &&
-            !props.disabled &&
-            css`
-              cursor: pointer;
-            `};
-        `};
-    }
+    ${!props.disabled &&
+      props.onClick &&
+      nonTouchDevicesHoverStyles(`
+      background-color: ${
+  props.grey ? props.theme.colors.sensitiveGrey.dark : props.theme.colors.white
+};
+      color: ${props.theme.colors.primary.base};
+      font-weight: ${props.theme.fontWeight.black};
+      transition: ${props.theme.transition};
+      .${ICON_CLASSNAME} {
+        svg {
+          fill: ${props.theme.colors.primary.base};
+        }
+      }
+      cursor: pointer;
+    `)}
     ${props.active &&
       css`
         font-weight: ${props.theme.fontWeight.black};

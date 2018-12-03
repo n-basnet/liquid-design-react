@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { ICON_CLASSNAME } from '~/elements/Icon'
 
 const tagBackground = ({ disabled, theme: { colors }, outline }) => {
@@ -30,29 +30,29 @@ export const TagWrapper = styled.div`
     background-color: ${tagBackground(props)};
     transition: ${props.theme.transition};
     border: 2px solid
-      ${!props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darker};
-    &:hover {
-      border-color: ${!props.disabled && props.theme.colors.primary.dark};
-    }
-    &:hover {
-      ${!props.outline &&
-        css`
-          background-color: ${!props.disabled && props.theme.colors.primary.dark};
-          color: ${props.theme.colors.primary.dark};
-        `};
-      ${!props.disabled &&
-        props.outline &&
-        css`
+      ${
+  !props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darker
+};
+    ${!props.disabled &&
+      nonTouchDevicesHoverStyles(`
+      border-color: ${props.theme.colors.primary.dark};
+      ${
+  props.outline
+    ? `
           span {
-            ${props => css`
-              color: ${props.theme.colors.primary.dark};
-            `};
+            color: ${props.theme.colors.primary.dark};
           }
           .${ICON_CLASSNAME} svg {
             fill: ${props.theme.colors.primary.dark};
           }
-        `};
-    }
+        `
+    : `
+        background-color: ${!props.disabled && props.theme.colors.primary.dark};
+        color: ${props.theme.colors.primary.dark};
+      `
+};
+
+    `)}
     .${ICON_CLASSNAME} svg {
       fill: ${tagColor(props)};
       ${!props.disabled &&
