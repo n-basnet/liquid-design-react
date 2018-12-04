@@ -9,15 +9,23 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
   objectToJSXAttrs,
+  isStorybookLokiBuild,
 } from '../helpers'
 import { currencyFormatter, thousandsFormatter } from '../helpers/charts'
+
+const getValue = (i, k) =>
+  i === 0 && k === 0
+    ? 0
+    : isStorybookLokiBuild()
+      ? i * k
+      : randomInRange(35, 165) * 1000 + Math.random()
 
 const getDefaultProps = () => ({
   valueFormatter: currencyFormatter,
   yTickFormatter: thousandsFormatter,
   data: times(10).map(i => ({
     values: times(5).map(k => ({
-      value: i === 0 && k === 0 ? 0 : randomInRange(35, 165) * 1000 + Math.random(),
+      value: getValue(i, k),
       label: {
         name: `Label ${k + 1}`,
       },
