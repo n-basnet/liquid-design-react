@@ -32,6 +32,8 @@ deploy_docs:
   stage: deploy-docs
   script:
     - yarn storybook:build
+    # fix until this yarn issue is resolved - https://github.com/yarnpkg/yarn/issues/6753
+    - npm i -D s3-deploy
     - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME_MERCK
     - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID yarn s3-deploy './out/**' --cwd './out/' --region $AWS_REGION --bucket $BUCKET_NAME_EMD
   only:
