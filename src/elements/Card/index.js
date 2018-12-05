@@ -32,6 +32,8 @@ const CardWrapper = styled.div`
   margin: 10px;
   padding: ${getCardPadding(CARD_WIDTH)}px;
   max-width: ${CARD_WIDTH}px;
+  min-width: 200px;
+  width: 100%;
   ${props =>
     props.active &&
     css`

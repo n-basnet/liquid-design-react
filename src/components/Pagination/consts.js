@@ -6,3 +6,4 @@ export const STATES = {
 }
 
 export const ICON_SIZE = 18
+export const NUMBER_SIZE = 24

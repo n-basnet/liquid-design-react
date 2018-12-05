@@ -6,11 +6,10 @@ import attachClassName from '~/components/aux/hoc/attachClassName'
 import { Glyph } from '~/elements/Icon'
 import { cursorValue, media } from '~/utils/styling'
 import { times } from '~/utils/aux'
-
-import { ICON_SIZE, STATES } from './consts'
+import { NUMBER_SIZE, ICON_SIZE, STATES } from './consts'
 
 export const PaginationWrapper = styled.div`
-  height: 24px;
+  height: ${NUMBER_SIZE}px;
   display: flex;
   ${props => css`
     div {
@@ -20,10 +19,11 @@ export const PaginationWrapper = styled.div`
   `};
 `
 const ArrowIconWrapper = styled.div`
+  flex: 0 0 ${NUMBER_SIZE * 2}px;
   display: flex;
   div {
-    width: 24px;
-    height: 24px;
+    width: ${NUMBER_SIZE}px;
+    height: ${NUMBER_SIZE}px;
     svg {
       top: 50%;
       left: 50%;
@@ -72,16 +72,17 @@ const ArrowIconWrapper = styled.div`
 
 const PaginationNumber = styled.div`
   font-size: 14px;
-  min-width: 24px;
-  height: 24px;
+  flex: 0 0 ${NUMBER_SIZE}px;
+  height: ${NUMBER_SIZE}px;
   padding: 0 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  line-height: ${NUMBER_SIZE}px;
   margin-left: 10px;
-  margin-right: ${props => (props.isLast ? '10' : '0')}px;
-  opacity: ${props => (props.disabled ? '0.5' : '1')};
-  ${media.max.phone`
+  margin-right: ${props => (props.isLast ? 10 : 0)}px;
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
+  ${props =>
+    !props.isTruncated &&
+    media.max.phone`
     margin-left: 7.5px;
     margin-right: ${props => (props.isLast ? '7.5' : '0')}px;
   `};
@@ -98,14 +99,12 @@ const PaginationNumber = styled.div`
     props.isTruncated &&
     css`
       pointer-events: none;
-      margin-right: 7px;
-      margin-left: 15.5px;
+      margin-right: 0;
+      margin-left: 0;
       min-width: 9px;
-      span {
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        padding-right: 0;
-      }
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding-right: 0;
 ]    `};
   ${props =>
     props.isActive &&
@@ -257,7 +256,7 @@ export class Pagination extends PureComponent {
                 paginationNumberAmount > 4 && activePageIndex + 1 >= 1000
               }
             >
-              {this.shouldTruncate(index) ? <span>...</span> : <span>{item + 1}</span>}
+              {this.shouldTruncate(index) ? '...' : item + 1}
             </PaginationNumber>
           ))}
           <ArrowIconWrapper isOnRight disabled={disabled || isRightArrowDisabled}>
