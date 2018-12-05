@@ -28,10 +28,7 @@ publish_package:
   script:
     - npm config set registry http:$NPM_REGISTRY_URL
     - npm config set always-auth true
-    - npm config set $NPM_REGISTRY_URL:_password $NPM_REGISTRY_PASSWORD
-    - npm config set $NPM_REGISTRY_URL:username $NPM_REGISTRY_USERNAME
-    - npm config set $NPM_REGISTRY_URL:email $NPM_REGISTRY_EMAIL
-    - npm config set $NPM_REGISTRY_URL:always-auth true
+    - npm config set $NPM_REGISTRY_URL:_authToken $NPM_TOKEN
     - yarn semantic-release || true
 
   only:
