@@ -169,10 +169,6 @@
     "type": "component"
   },
   {
-    "name": "StackedBarChart",
-    "type": "component"
-  },
-  {
     "name": "StepProgressBar",
     "type": "component"
   },
