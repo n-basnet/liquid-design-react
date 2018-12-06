@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles, disbleMozTapTextBackground } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
 
@@ -51,6 +51,7 @@ export const Label = styled.label`
   ${props => css`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
   `};
+  ${disbleMozTapTextBackground}
 `
 
 export class Checkbox extends PureComponent {

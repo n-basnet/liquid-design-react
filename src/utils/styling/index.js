@@ -105,3 +105,10 @@ export const disableMozTextSelection = css`
 export const disableWebkitTapHightlight = css`
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 `
+
+export const disbleMozTapTextBackground = css`
+  &:hover,
+  &:active {
+    background: rgba(255, 255, 255, 0);
+  }
+`
