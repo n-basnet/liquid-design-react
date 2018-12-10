@@ -1,8 +1,9 @@
 {
   "name": "@liquid-design/liquid-design-react",
   "version": "1.4.0",
-  "description": "",
-  "author": "",
+  "description": "React UI component library for the Liquid Design System of Merck KGaA, Darmstadt, Germany",
+  "author": "User Experience Strategy & Design unit, part of the Chief Digital Organization at Merck KGaA, Darmstadt, Germany",
+  "license": "SEE LICENSE IN LICENSE.md",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
