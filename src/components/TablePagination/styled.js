@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 export const TablePaginationWrapper = styled.div`
   display: flex;
@@ -56,13 +56,11 @@ export const ClickableSection = styled.div.attrs({
     border-left: 1px solid ${props.theme.colors.sensitiveGrey.base};
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
   `};
-  &:hover {
-    ${props =>
+  ${props =>
     !props.disabled &&
-      css`
-        background-color: ${props.theme.colors.sensitiveGrey.dark};
-      `};
-  }
+    nonTouchDevicesHoverStyles(`
+      background-color: ${props.theme.colors.sensitiveGrey.dark};
+    `)};
   &:last-child {
     padding-right: 19px;
     ${props =>

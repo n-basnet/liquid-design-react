@@ -13,7 +13,7 @@ import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
 import DatePicker, { DATE_PICKER_CLASSNAMES } from '~/modules/DatePicker'
 import { YEAR_INPUT_CLASSNAME } from '~/modules/Calendar'
-import { media } from '~/utils/styling'
+import { media, nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 import FlexRowsWrapper from './FlexRowsWrapper'
 import ProfileFormPart from './ProfileFormPart'
@@ -105,9 +105,11 @@ const BottomSectionWrapper = styled(FlexRowsWrapper)`
       svg {
         fill: ${props.theme.colors.sensitiveGrey.darker};
       }
-      &:hover svg {
-        fill: ${props.theme.colors.primary.base};
-      }
+      ${nonTouchDevicesHoverStyles(`
+        svg {
+          fill: ${props.theme.colors.primary.base};
+        }
+      `)}
     }
   `};
 `

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { getTableAuxComponentClassName } from '~/components/Table/tableIcons'
 import { SIZES } from '~/components/Table/utils'
 import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
+import { nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 const getCheckboxTranslateOffset = size => {
   switch (size) {
@@ -68,11 +69,11 @@ export default styled.table`
     }
 
     tbody tr:not([disabled]) {
-      &:hover {
+      ${nonTouchDevicesHoverStyles(`
         .${CHECKBOX_CLASSNAMES.BASE} svg {
           fill: ${props.theme.colors.primary.base};
         }
-      }
+      `)}
     }
     .${CHECKBOX_CLASSNAMES.UNCHECKED}:not(.${CHECKBOX_CLASSNAMES.HOVER}) svg {
       fill: ${props.theme.colors.sensitiveGrey.darker};
