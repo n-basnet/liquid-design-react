@@ -45,6 +45,9 @@ const FormAppContainer = styled.div`
     ${media.max.phone`
       right: 20px;
     `};
+    .${TEXT_FIELD_CLASSNAMES.BASE} {
+      margin-bottom: 0;
+    }
   }
   .${DATE_PICKER_CLASSNAMES.INPUT_WRAPPER} {
     > section:first-child {

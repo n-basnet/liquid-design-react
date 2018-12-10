@@ -5,7 +5,6 @@ import dateFns from 'date-fns'
 import { isEmpty, isNil, find } from 'ramda'
 
 import { times } from '~/utils/aux'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
 import { media } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
@@ -13,9 +12,10 @@ import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
 import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
 import { isTouchDevice } from '~/utils/featureDetects'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
 
-export const YEAR_INPUT_CLASSNAME = `${GLOBAL_CSS_PREFIX}YearInput`
+export const YEAR_INPUT_CLASSNAME = getClassName({ name: `YearInput` })
+
 const CalendarWrapper = styled.section`
   width: 400px;
   padding: 20px 17px 13px;

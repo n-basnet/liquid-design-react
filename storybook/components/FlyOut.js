@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { number } from '@storybook/addon-knobs'
+import styled from 'styled-components'
 
 import {
   getBackgroundWrapper,
@@ -10,6 +11,10 @@ import {
   getPropTablesExcludeList,
 } from '../helpers'
 import FlyOut from '~/components/FlyOut'
+
+const RightAlignedWrapper = styled.div`
+  float: right;
+`
 
 const getOptions = () => [
   {
@@ -65,19 +70,19 @@ const getLabel = () => getTextKnob({ defaultText: 'Flyout Label', name: 'label' 
 const getHeadline = () => getTextKnob({ defaultText: 'Headline', name: 'headline' })
 
 storiesOf('Components/FlyOut', module)
-  .addDecorator(getBackgroundWrapper())
+  .addDecorator(getBackgroundWrapper({ style: { marginBottom: '40px', maxWidth: '400px' } }))
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([]),
+      propTablesExclude: getPropTablesExcludeList([RightAlignedWrapper]),
       excludedPropTypes: ['className'],
     },
   })
   .add(
     'right aligned',
     () => (
-      <div style={{ marginLeft: '120px' }}>
+      <RightAlignedWrapper>
         <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} />
-      </div>
+      </RightAlignedWrapper>
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
@@ -96,9 +101,9 @@ storiesOf('Components/FlyOut', module)
   .add(
     'right aligned disabled',
     () => (
-      <div style={{ marginLeft: '120px' }}>
+      <RightAlignedWrapper>
         <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} disabled />
-      </div>
+      </RightAlignedWrapper>
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
