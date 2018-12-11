@@ -26,9 +26,6 @@ lint:
 publish_package:
   stage: publish-package
   script:
-    - npm config set registry http:$NPM_REGISTRY_URL
-    - npm config set always-auth true
-    - npm config set $NPM_REGISTRY_URL:_authToken $NPM_TOKEN
     - yarn semantic-release || true
 
   only:
