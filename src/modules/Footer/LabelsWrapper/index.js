@@ -13,7 +13,7 @@ export default styled.div`
   ${media.min.desktop`
     flex-direction: row;
     align-items: center;
-    flex: 1;
+    flex-grow: 1;
     padding: 0;
   `};
 `

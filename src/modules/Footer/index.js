@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
@@ -9,7 +10,14 @@ import FooterBar from '~/modules/Footer/FooterBar'
 import Headline from '~/elements/Headline'
 import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/aux/hoc/attachClassName'
+
+const FOOTER_CLASSNAMES = {
+  BASE: getClassName({ name: 'Footer' }),
+  FOOTER_BAR: getClassName({ name: 'Footer__FooterBar' }),
+  LABELS_WRAPPER: getClassName({ name: 'Footer__LabelsWrapper' }),
+  HORIZONTAL_LINE: getClassName({ name: 'Footer__HorizontalLine' }),
+}
 
 export class Footer extends PureComponent {
   static propTypes = {
@@ -22,6 +30,7 @@ export class Footer extends PureComponent {
     ),
     labelsTexts: PropTypes.arrayOf(PropTypes.string),
     mainIconName: PropTypes.string,
+    className: PropTypes.string,
   }
 
   static defaultProps = {
@@ -29,6 +38,7 @@ export class Footer extends PureComponent {
     iconsNamesAndActions: null,
     labelsTexts: null,
     mainIconName: null,
+    className: null,
   }
 
   labels = this.props.labelsTexts.map((labelText, index) => (
@@ -55,20 +65,20 @@ export class Footer extends PureComponent {
   ))
 
   render() {
-    const { headlineContent, mainIconName, ...props } = this.props
+    const { headlineContent, mainIconName, className, ...props } = this.props
 
     return (
-      <FooterWrapper {...props}>
+      <FooterWrapper {...props} className={cx(className, FOOTER_CLASSNAMES.BASE)}>
         <Headline size='H1'>{headlineContent}</Headline>
-        <HorizontalLine />
-        <FooterBar>
+        <HorizontalLine className={FOOTER_CLASSNAMES.HORIZONTAL_LINE} />
+        <FooterBar className={FOOTER_CLASSNAMES.FOOTER_BAR}>
           <Glyph
             name={mainIconName}
             color='black.base'
             size={80}
             style={{ marginRight: '140px' }}
           />
-          <LabelsWrapper>{this.labels}</LabelsWrapper>
+          <LabelsWrapper className={FOOTER_CLASSNAMES.LABELS_WRAPPER}>{this.labels}</LabelsWrapper>
           <IconsWrapper>{this.icons}</IconsWrapper>
         </FooterBar>
       </FooterWrapper>
@@ -76,6 +86,4 @@ export class Footer extends PureComponent {
   }
 }
 
-const { Component } = attachClassName(Footer)
-
-export default Component
+export default Footer
