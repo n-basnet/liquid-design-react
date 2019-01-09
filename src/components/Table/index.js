@@ -13,6 +13,7 @@ import { TableHead, TableHeadCell } from '~/components/Table/TableHead'
 import { getAuxComponent } from '~/components/Table/tableIcons'
 import {
   getSortedRows,
+  columnIndex,
   DEFAULT_SORT_MODE,
   SORT_MODES,
   AUX_CELL_WIDTH,
@@ -64,6 +65,8 @@ export default class Table extends PureComponent {
     paginationItemsPerPageOptions: PropTypes.array,
     /** By default, pagination will be placed above the table - use this prop to change it's placement to below the table */
     paginationBelow: PropTypes.bool,
+    order: PropTypes.oneOf(Object.keys(SORT_MODES)),
+    orderBy: PropTypes.string,
   }
   static defaultProps = {
     columns: [],
@@ -80,12 +83,16 @@ export default class Table extends PureComponent {
     },
     paginationItemsPerPageOptions: TablePagination.defaultProps.itemsPerPageOptions,
     paginationBelow: false,
+    order: 'unsorted',
+    orderBy: undefined,
   }
   state = {
     rows: [],
     disabledRowsIds: [],
-    sortModes: this.props.columns.map(v => DEFAULT_SORT_MODE),
-    sortingColumnIndex: INITIAL_SORTING_COLUMN_INDEX,
+    sortModes: this.props.columns.map(column => {
+      return column.header === this.props.orderBy ? SORT_MODES[this.props.order] : DEFAULT_SORT_MODE
+    }),
+    sortingColumnIndex: columnIndex(this.props.orderBy, this.props.columns),
     paginationCurrentPage: this.props.paginationDefaults.currentPage,
     paginationPerPage: this.props.paginationDefaults.itemsPerPageAmount,
   }

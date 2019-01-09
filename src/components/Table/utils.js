@@ -1,4 +1,4 @@
-import { prop } from 'ramda'
+import { prop, findIndex, propEq } from 'ramda'
 import naturalSort from 'javascript-natural-sort'
 
 import { getClassName } from '~/components/aux/hoc/attachClassName'
@@ -66,3 +66,5 @@ export const getTableCellYPadding = size =>
   }[size])
 
 export const renderNode = (node, props) => (typeof node === 'function' ? node(props) : node)
+
+export const columnIndex = (header, columns) => findIndex(propEq('header', header), columns)
