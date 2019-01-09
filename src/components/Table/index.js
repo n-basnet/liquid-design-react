@@ -65,8 +65,10 @@ export default class Table extends PureComponent {
     paginationItemsPerPageOptions: PropTypes.array,
     /** By default, pagination will be placed above the table - use this prop to change it's placement to below the table */
     paginationBelow: PropTypes.bool,
-    order: PropTypes.oneOf(Object.keys(SORT_MODES)),
+    /** Specify a column header to be sorted by default, this value will be compared with the column.header value. */
     orderBy: PropTypes.string,
+    /** Specify what sorting mode to use when defining a default sorted column <'ascending', 'descending', 'unsorted'> */
+    order: PropTypes.oneOf(Object.keys(SORT_MODES)),
   }
   static defaultProps = {
     columns: [],
@@ -83,8 +85,8 @@ export default class Table extends PureComponent {
     },
     paginationItemsPerPageOptions: TablePagination.defaultProps.itemsPerPageOptions,
     paginationBelow: false,
-    order: 'unsorted',
     orderBy: undefined,
+    order: 'unsorted',
   }
   state = {
     rows: [],
