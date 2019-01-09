@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { pathOr } from 'ramda'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import Label from '~/elements/Label'
 import Button from '~/elements/Button'
+import Headline from '~/elements/Headline'
 import SearchBar, { RESULT_WRAPPER_CLASSNAME } from '~/components/SearchBar'
 import { LOGO_CLASSNAME } from '~/elements/Logo'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
@@ -27,6 +29,11 @@ const IconsWrapper = styled.div`
   ${media.max.phone`
     padding: 0 10px 0 0;
   `};
+`
+
+const HeadlineWrapper = styled.div`
+  padding: 0 ${pathOr(60, ['theme', 'main', 'padding'])}px;
+  color: white;
 `
 
 const ButtonWrapper = styled.div`
@@ -126,9 +133,12 @@ export const Header = ({
   buttonOnClick,
   labelOne,
   labelTwo,
+  title,
   withButton,
   withIcons,
   withText,
+  withSearch,
+  withTitle,
   searchBarHandleSubmit,
   searchBarOptions,
   notificationOnClick,
@@ -139,9 +149,16 @@ export const Header = ({
 }) => (
   <HeaderWrapper {...props}>
     <LogoContainer>{logoComponent}</LogoContainer>
-    <SearchBarWrapper>
-      <SearchBar ghost options={searchBarOptions} handleSubmit={searchBarHandleSubmit} />
-    </SearchBarWrapper>
+    {withTitle && (
+      <HeadlineWrapper>
+        <Headline type='H5'>{title}</Headline>
+      </HeadlineWrapper>
+    )}
+    {withSearch && (
+      <SearchBarWrapper>
+        <SearchBar ghost options={searchBarOptions} handleSubmit={searchBarHandleSubmit} />
+      </SearchBarWrapper>
+    )}
     <IEfix />
     {withIcons && (
       <IconsWrapper>
@@ -176,9 +193,12 @@ Header.propTypes = {
   buttonOnClick: PropTypes.func,
   labelOne: PropTypes.string,
   labelTwo: PropTypes.string,
+  title: PropTypes.string,
   withButton: PropTypes.bool,
   withIcons: PropTypes.bool,
   withText: PropTypes.bool,
+  withSearch: PropTypes.bool,
+  withTitle: PropTypes.bool,
   notificationOnClick: PropTypes.func,
   infoOnClick: PropTypes.func,
   searchBarHandleSubmit: PropTypes.func,
@@ -198,9 +218,12 @@ Header.defaultProps = {
   buttonOnClick: null,
   labelOne: null,
   labelTwo: null,
+  title: null,
   withButton: false,
   withIcons: false,
   withText: false,
+  withSearch: true,
+  withTitle: false,
   searchBarOptions: [],
   searchBarHandleSubmit: null,
   notificationOnClick: null,

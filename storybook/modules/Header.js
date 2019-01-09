@@ -121,3 +121,26 @@ storiesOf('Modules/Headers', module)
   />
     `)
   )
+  .add(
+    'with title and hidden search',
+    () => (
+      <EnhancedHeader
+        withSearch={false}
+        withTitle
+        title='Header Title'
+        searchBarOptions={searchBarOptions}
+        logoComponent={LogoComponent}
+      />
+    ),
+    getSnippetTemplate(`
+  <Header
+    searchBarOptions={[
+      'Search Result 1',
+      'Search Result 2',
+      'Search Result 3',
+      'Search Result 4',
+    ]}
+    logoComponent={<Logo />}
+  />
+  `)
+  )
