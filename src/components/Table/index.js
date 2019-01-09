@@ -291,7 +291,7 @@ export default class Table extends PureComponent {
     return withPagination ? (
       <thead>
         <tr>
-          <td colSpan={columns.length + 1}>
+          <td colSpan={columns.length}>
             <TablePagination {...tablePaginationProps} />
           </td>
         </tr>
