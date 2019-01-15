@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { media, touchDeviceHoverStyles } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import { handleClickIfNotSelectingText } from '~/utils/dom'
-import { isSupportingTouch } from '~/utils/aux'
+import { isSupportingTouch } from '~/utils/misc'
 
 const AccordionWrapper = styled.div`
   cursor: pointer;

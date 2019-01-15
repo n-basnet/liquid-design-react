@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const LinkWrapper = styled.a`
   display: inline-block;

@@ -1,7 +1,7 @@
 import { prop } from 'ramda'
 import naturalSort from 'javascript-natural-sort'
 
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const AUX_CELL_CLASSNAME = getClassName({ name: 'TableAuxCell' })
 export const AUX_CELL_WIDTH = 30

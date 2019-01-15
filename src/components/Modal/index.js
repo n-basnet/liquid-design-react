@@ -6,7 +6,7 @@ import cx from 'classnames'
 
 import { Base } from '~/Theme'
 import ModalContent from '~/components/Modal/ModalContent'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { disableWebkitTapHightlight } from '~/utils/styling'
 
 const TRANSITION_DURATION = 200

@@ -4,8 +4,8 @@ import uniqid from 'uniqid'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import GenericInput from '~/components/aux/Input'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import GenericInput from '~/components/misc/Input'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 
 const InputWrapper = styled.div`

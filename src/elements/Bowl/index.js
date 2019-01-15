@@ -6,7 +6,7 @@ import cx from 'classnames'
 import styled from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { SVG_VIEWPORT_WIDTH, SVG_GRADIENT_COLORS } from '~/elements/Bowl/consts'
 import { getSVGFillCoordinates } from '~/elements/Bowl/helpers'
 
@@ -75,7 +75,7 @@ export default class Bowl extends PureComponent {
     const amplitude = 1.3
     const period = 300
     const xspacing = 10
-    const dx = 2 * Math.PI / period * xspacing
+    const dx = ((2 * Math.PI) / period) * xspacing
     const pathGen = x =>
       0.7 * Math.sin(4 * x + 7) +
       2 * Math.sin(0.9 * x) +

@@ -4,13 +4,13 @@ import { find, isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/aux/hoc/attachClassName'
-import { getItemsWithIds } from '~/utils/aux'
-import Ellipsis from '~/components/aux/Ellipsis'
-import SelectedOptionsLabel from '~/elements/aux/SelectedOptionsLabel'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { getItemsWithIds } from '~/utils/misc'
+import Ellipsis from '~/components/misc/Ellipsis'
+import SelectedOptionsLabel from '~/elements/misc/SelectedOptionsLabel'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import OptionsGroup from '~/elements/aux/OptionsGroup'
-import ActiveOption from '~/elements/aux/ActiveOption'
+import OptionsGroup from '~/elements/misc/OptionsGroup'
+import ActiveOption from '~/elements/misc/ActiveOption'
 
 export const DROPDOWN_ICON_CLASSNAME = `${ICON_CLASSNAME}DropdownIcon`
 export const DROPDOWN_TRIGGER_CLASSNAME = getClassName({ name: 'DropdownTrigger' })

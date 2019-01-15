@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import COLORS from '~/utils/consts/colors'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import LineGraphWrapper from '~/components/LineGraph/LineGraphWrapper'
 import { defaultFormatter } from '~/utils/charts'
 import Graph from '~/components/LineGraph/Graph'

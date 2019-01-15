@@ -1,7 +1,7 @@
 import { values, filter, flatten } from 'ramda'
 
 import { THEMES } from './consts/themes'
-import { getFirstTruthyKeyName } from '~/utils/aux'
+import { getFirstTruthyKeyName } from '~/utils/misc'
 
 describe('consts', () => {
   it('all colors have a base value', () => {

@@ -5,7 +5,7 @@ import { path } from 'ramda'
 import cx from 'classnames'
 
 import iconsList from '~/elements/Icon/iconsList'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const ICON_CLASSNAME = getClassName({ name: 'Icon' })
 

@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import DropdownWrapper from '~/elements/aux/DropdownProvider/DropdownWrapper'
-import DropdownTriggerWrapper from '~/elements/aux/DropdownProvider/DropdownTriggerWrapper'
-import DropdownProvider from '~/elements/aux/DropdownProvider'
+import DropdownWrapper from '~/elements/misc/DropdownProvider/DropdownWrapper'
+import DropdownTriggerWrapper from '~/elements/misc/DropdownProvider/DropdownTriggerWrapper'
+import DropdownProvider from '~/elements/misc/DropdownProvider'
 
 const IconWrapper = styled.div`
   margin-right: 0;

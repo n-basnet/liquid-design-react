@@ -7,7 +7,7 @@ import Card from '~/elements/Card'
 import Badge from '~/components/Badge'
 import Placeholder from '~/elements/Placeholder'
 import Label from '~/components/ContentCard/Label'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const ImageWrapper = styled.div`
   ${getBackgroundImage};
@@ -76,7 +76,9 @@ export const ContentCard = ({
     {imagePath ? <ImageWrapper src={imagePath} /> : <Placeholder />}
     {featured && <FeaturedWrapper>{featured}</FeaturedWrapper>}
     <LabelsWrapper featured={featured}>
-      {labels.map((label, i) => <Label {...label} key={i} />)}
+      {labels.map((label, i) => (
+        <Label {...label} key={i} />
+      ))}
     </LabelsWrapper>
     {badge && (
       <Badge icon={badge.icon || badge.iconRight} isIconOnRight={Boolean(badge.iconRight)} isOnCard>

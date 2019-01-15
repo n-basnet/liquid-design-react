@@ -5,7 +5,7 @@ import cx from 'classnames'
 import uniqid from 'uniqid'
 import { contains, prop, assoc, findIndex, update, equals, any, all, omit, values } from 'ramda'
 
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import TableRow from '~/components/Table/TableRow'
 import TableWrapper from '~/components/Table/TableWrapper'
 import TableContainer from '~/components/Table/TableContainer'

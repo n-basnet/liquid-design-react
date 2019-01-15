@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import { nonTouchDevicesHoverStyles } from '~/utils/styling'
 
 const CARD_WIDTH = 300

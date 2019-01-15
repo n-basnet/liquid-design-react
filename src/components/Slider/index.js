@@ -9,7 +9,7 @@ import { Tooltip } from '~/components/Slider/Tooltip'
 import { SliderMax, SliderMin, SliderButton } from '~/components/Slider/SliderRanges'
 import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const SLIDER_CLASSNAME = getClassName({ name: 'Slider' })
 

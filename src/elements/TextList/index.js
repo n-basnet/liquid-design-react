@@ -5,7 +5,7 @@ import BulletList from '~/elements/TextList/BulletList'
 import NumberedList from '~/elements/TextList/NumberedList'
 import ListItem from '~/elements/TextList/ListItem'
 import { NUMBERED_LIST, BULLETED_LIST } from '~/elements/TextList/consts.js'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 export const TextList = ({ items, listType, ...props }) => {
   const ListComponent = listType === BULLETED_LIST ? BulletList : NumberedList

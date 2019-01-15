@@ -5,7 +5,7 @@ import Table from '.'
 import TableContainer from '~/components/Table/TableContainer'
 import { getSortingObject, SORT_MODES } from '~/components/Table/utils'
 import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 describe('Table', () => {
   const rowsAmount = 5

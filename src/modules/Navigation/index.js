@@ -2,7 +2,7 @@ import React from 'react'
 import { arrayOf, bool, func, node, number, shape, string } from 'prop-types'
 import styled from 'styled-components'
 
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import NavigationLink from '~/modules/Navigation/NavigationLink'
 import NavigationIcon from '~/modules/Navigation/NavigationIcon'
 
@@ -43,11 +43,9 @@ const NavigationTitle = styled.div`
 export const Navigation = ({ activeTabIndex, title, tabs, iconName, iconUrl, ...rest }) => (
   <NavigationWrapper {...rest}>
     <NavigationBody>
-      {tabs
-        .slice(0, MAX_VISIBLE_TABS)
-        .map((link, index) => (
-          <NavigationLink {...link} key={index} index={index} active={index === activeTabIndex} />
-        ))}
+      {tabs.slice(0, MAX_VISIBLE_TABS).map((link, index) => (
+        <NavigationLink {...link} key={index} index={index} active={index === activeTabIndex} />
+      ))}
     </NavigationBody>
     <NavigationFooter>
       <NavigationIcon iconName={iconName} iconUrl={iconUrl} />

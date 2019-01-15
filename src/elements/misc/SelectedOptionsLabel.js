@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { optionPropType } from '~/elements/aux/OptionsGroupProps'
+import { optionPropType } from '~/elements/misc/OptionsGroupProps'
 import Tag from '~/elements/Tag'
 
 const stopClickPropagation = e => e.stopPropagation()

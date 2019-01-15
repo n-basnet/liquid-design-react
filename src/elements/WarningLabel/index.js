@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import CompressedGas from '~/assets/svgIllustrations/warningLabels/CompressedGas.svg'
 import Corrosive from '~/assets/svgIllustrations/warningLabels/Corrosive.svg'
 import EnvironmentalHazard from '~/assets/svgIllustrations/warningLabels/EnvironmentalHazard.svg'

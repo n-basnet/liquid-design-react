@@ -10,8 +10,8 @@ import {
   NOTIFICATION_WRAPPER_PADDING,
 } from '~/components/Notifications/consts'
 import { media, nonTouchDevicesHoverStyles } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
-import { getFirstTruthyKeyName } from '~/utils/aux'
+import attachClassName from '~/components/misc/hoc/attachClassName'
+import { getFirstTruthyKeyName } from '~/utils/misc'
 
 const getNotificationType = props => getFirstTruthyKeyName(pick(NOTIFICATION_TYPES, props))
 

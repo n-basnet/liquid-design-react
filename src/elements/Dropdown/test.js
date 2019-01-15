@@ -1,6 +1,6 @@
 import Dropdown from '~/elements/Dropdown'
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
-import DropdownProvider from '~/elements/aux/DropdownProvider'
+import DropdownProvider from '~/elements/misc/DropdownProvider'
 import { Glyph } from '~/elements/Icon'
 
 describe('Dropdown', () => {

@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { Glyph } from '~/elements/Icon'
 import { scaleUp } from '~/utils/styling/animations'
 import { cursorValue } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const bgColorSelector = props => {
   const { theme, isInfo, isWarning, disabled } = props

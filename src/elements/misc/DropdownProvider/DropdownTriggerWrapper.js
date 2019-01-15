@@ -20,7 +20,9 @@ export default styled.div`
       padding: ${
   props.isFilter
     ? '11px 13px 4px 13px'
-    : props.inline ? '11px 20px 10px 15px' : '11px 12px 10px 15px'
+    : props.inline
+      ? '11px 20px 10px 15px'
+      : '11px 12px 10px 15px'
 };
     `};
     ${props.hasValue && getActiveState};

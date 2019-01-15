@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components'
 
 import Segment, { SegmentWrapper } from '~/components/FlyOut/Segment'
 import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
-import Ellipsis from '~/components/aux/Ellipsis'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import Ellipsis from '~/components/misc/Ellipsis'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const FlyOutContentWrapper = styled.div`
   overflow: hidden;

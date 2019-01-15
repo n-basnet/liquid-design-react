@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { ieStyles } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const DEFAULT_GLYPH_SIZE = 40
 

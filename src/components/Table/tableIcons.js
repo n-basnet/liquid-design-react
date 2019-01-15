@@ -4,7 +4,7 @@ import { css, withTheme } from 'styled-components'
 
 import { Glyph } from '~/elements/Icon'
 import Checkbox from '~/elements/Checkbox'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const getStyledCSS = iconProps => css`
   ${props => css`

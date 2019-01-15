@@ -1,6 +1,6 @@
 import { path, pick } from 'ramda'
 
-import { getFirstTruthyKeyName } from '~/utils/aux'
+import { getFirstTruthyKeyName } from '~/utils/misc'
 
 const getBarColor = props => {
   const colorsMap = {

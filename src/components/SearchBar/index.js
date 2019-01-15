@@ -6,10 +6,10 @@ import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
 import { Glyph } from '~/elements/Icon'
-import Input from '~/components/aux/Input'
-import Ellipsis from '~/components/aux/Ellipsis'
+import Input from '~/components/misc/Input'
+import Ellipsis from '~/components/misc/Ellipsis'
 import { media } from '~/utils/styling'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import SearchBarWrapper from '~/components/SearchBar/SearchBarWrapper'
 
 export const DEFAULT_PLACEHOLDER_TEXT = 'Search…'

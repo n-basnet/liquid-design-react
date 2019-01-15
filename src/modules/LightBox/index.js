@@ -3,7 +3,7 @@ import { rgba } from 'polished'
 import { withTheme } from 'styled-components'
 
 import Modal from '~/components/Modal'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const LightBoxStyles = withTheme(({ theme }) => (
   <style>

@@ -10,7 +10,7 @@ import { LOGO_CLASSNAME } from '~/elements/Logo'
 import HeaderWrapper from '~/modules/Header/HeaderWrapper'
 import LabelsWrapper from '~/modules/Header/LabelsWrapper'
 import { media, safariStyles, disableMozTextSelection } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const IconsWrapper = styled.div`
   padding: 0 21px;

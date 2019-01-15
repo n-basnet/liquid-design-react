@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import * as H from '~/elements/Headline/H'
 import * as BH from '~/elements/Headline/BH'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const HEADLINES = {
   ...H,

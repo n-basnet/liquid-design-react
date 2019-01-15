@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { Glyph } from '~/elements/Icon'
 import { TEXT } from '~/components/TablePagination/consts'
 import {
@@ -14,7 +14,7 @@ import {
   Separator,
 } from '~/components/TablePagination/styled'
 import DropdownSection from '~/components/TablePagination/DropdownSection'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const getNumberOption = num => ({
   name: num.toString(),

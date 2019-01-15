@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { media } from '~/utils/styling'
-import { INPUT_CLASSNAME } from '~/components/aux/Input'
+import { INPUT_CLASSNAME } from '~/components/misc/Input'
 import { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import { ICON_CLASSNAME } from '~/elements/Icon'
 

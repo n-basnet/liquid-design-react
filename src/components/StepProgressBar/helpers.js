@@ -1,6 +1,6 @@
 import { pick, path } from 'ramda'
 
-import { getFirstTruthyKeyName } from '~/utils/aux'
+import { getFirstTruthyKeyName } from '~/utils/misc'
 
 const glyphNameSuffixMap = {
   done: 'CheckMark',

@@ -8,8 +8,8 @@ import PlaceholderCircular from '~/assets/svgIllustrations/placeholder/circular.
 import PlaceholderCircularWhite from '~/assets/svgIllustrations/placeholder/circular-white.svg'
 import PlaceholderSquare from '~/assets/svgIllustrations/placeholder/square.svg'
 import PlaceholderRectangular from '~/assets/svgIllustrations/placeholder/rectangular.svg'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
-import { getFirstTruthyKeyName } from '~/utils/aux'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { getFirstTruthyKeyName } from '~/utils/misc'
 
 export const PLACEHOLDER_CLASSNAME = getClassName({ name: 'Placeholder' })
 

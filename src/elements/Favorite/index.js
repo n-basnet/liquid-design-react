@@ -6,8 +6,8 @@ import { path } from 'ramda'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
 import { scaleUpDown, beamAnimation } from '~/elements/Favorite/animations'
-import attachClassName from '~/components/aux/hoc/attachClassName'
-import { times } from '~/utils/aux'
+import attachClassName from '~/components/misc/hoc/attachClassName'
+import { times } from '~/utils/misc'
 import { easing } from '~/utils/styling/animations'
 
 const getFill = props =>
@@ -139,7 +139,9 @@ export class Favorite extends PureComponent {
       >
         <Glyph name='favorite' size={SIZE} />
         <BeamsContainer>
-          {times(BEAMS_AMOUNT).map(i => <Beam isAnimating={isAnimating} key={i} />)}
+          {times(BEAMS_AMOUNT).map(i => (
+            <Beam isAnimating={isAnimating} key={i} />
+          ))}
         </BeamsContainer>
       </FavoriteWrapper>
     )

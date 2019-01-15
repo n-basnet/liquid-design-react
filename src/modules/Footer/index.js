@@ -10,7 +10,7 @@ import FooterBar from '~/modules/Footer/FooterBar'
 import Headline from '~/elements/Headline'
 import { Glyph } from '~/elements/Icon'
 import Label from '~/elements/Label'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const FOOTER_CLASSNAMES = {
   BASE: getClassName({ name: 'Footer' }),

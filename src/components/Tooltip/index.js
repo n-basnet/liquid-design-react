@@ -8,7 +8,7 @@ import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { getPosition, getArrowStyle } from '~/components/Tooltip/utils'
 import { WALLS, WALLS_KEYS, SIDES, SIDES_KEYS } from '~/components/Tooltip/consts'
 import { hasCSSFilters, isTouchDevice } from '~/utils/featureDetects'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const TOOLTIP_WRAPPER_CLASSNAME = getClassName({ name: 'TooltipWrapper' })
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css, withTheme } from 'styled-components'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { M_FONT_NAME } from '~/utils/consts'
 import ProgressBarSVG from '~/components/CircularProgressBar/ProgressBarSVG'
 import { getColors } from '~/utils/progressBars'

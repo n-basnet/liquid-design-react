@@ -2,7 +2,7 @@ import uniqid from 'uniqid'
 import { find, pluck, head, prop, uniqBy } from 'ramda'
 
 import { DEFAULT_COLORS } from '~/components/BarChart/consts'
-import { times, getElementModular } from '~/utils/aux'
+import { times, getElementModular } from '~/utils/misc'
 import { SCREEN_SIZES } from '~/utils/styling'
 
 const getLabels = data =>

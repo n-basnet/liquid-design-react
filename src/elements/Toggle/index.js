@@ -6,7 +6,7 @@ import { rgba } from 'polished'
 
 import { cursorValue, disableMozTextSelection } from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const TOGGLE_WIDTH = 60
 const TOGGLE_HEIGHT = 35
@@ -47,7 +47,9 @@ const ToggleWrapper = styled.div`
     transition: ${props.theme.transition};
     background-color: ${props.hasIcons
     ? props.theme.colors.sensitiveGrey.base
-    : props.disabled ? rgba(props.theme.colors.sensitiveGrey.base, 0.5) : getActiveColor(props)};
+    : props.disabled
+      ? rgba(props.theme.colors.sensitiveGrey.base, 0.5)
+      : getActiveColor(props)};
     &:after {
       width: ${getKnobWidth(props)}px;
       height: ${getKnobHeight(props)}px;

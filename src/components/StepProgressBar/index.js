@@ -6,7 +6,7 @@ import cx from 'classnames'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { getGlyphName, getColor } from '~/components/StepProgressBar/helpers'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { cursorValue } from '~/utils/styling'
 
 const STEP_PROGRESS_BAR_CLASSNAME = getClassName({ name: 'StepProgressBar' })

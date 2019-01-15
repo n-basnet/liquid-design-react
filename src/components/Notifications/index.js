@@ -13,7 +13,7 @@ import { Base } from '~/Theme'
 import SingleNotification from '~/components/Notifications/SingleNotification'
 import { NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
 import { getOrCreateDOMNode } from '~/utils/dom'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const DEFAULT_AUTO_REMOVE_TIMEOUT = 3000
 const ANIMATION_DURATION = 200

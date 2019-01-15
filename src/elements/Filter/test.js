@@ -1,6 +1,6 @@
 import Filter from '~/elements/Filter'
 import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import DropdownProvider from '~/elements/aux/DropdownProvider'
+import DropdownProvider from '~/elements/misc/DropdownProvider'
 import { Glyph } from '~/elements/Icon'
 
 describe('Filter', () => {

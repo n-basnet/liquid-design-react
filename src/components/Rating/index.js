@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import Step from '~/components/Rating/Step'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 export const roundToNearest = (value, number = 0.5) => {
   const remainder = value % number

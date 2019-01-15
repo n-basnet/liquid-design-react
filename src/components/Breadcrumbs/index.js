@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const BreadcrumbsWrapper = styled.div`
   display: inline-block;
@@ -11,7 +11,9 @@ const BreadcrumbsWrapper = styled.div`
 
 export const Breadcrumbs = ({ items, active, ...props }) => (
   <BreadcrumbsWrapper {...props}>
-    {items.map((v, i) => <SingleBreadcrumb key={i} active={i === active} {...v} />)}
+    {items.map((v, i) => (
+      <SingleBreadcrumb key={i} active={i === active} {...v} />
+    ))}
   </BreadcrumbsWrapper>
 )
 

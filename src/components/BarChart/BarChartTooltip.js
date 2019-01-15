@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
 
-import { SingleLabel } from '~/components/aux/charts/Labels'
+import { SingleLabel } from '~/components/misc/charts/Labels'
 
 const TOOLTIP_WIDTH = 175
 const TOOLTIP_HEIGHT = 68

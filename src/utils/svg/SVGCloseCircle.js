@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withTheme } from 'styled-components'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const ROTATION_ORIGIN = '0 0'
 const CLOSE_CIRCLE_RADIUS = 10

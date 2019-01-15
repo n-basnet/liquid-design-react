@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import BarGroup from '~/components/BarChart/BarGroup'
-import withHoverLine from '~/components/aux/hoc/withHoverLine'
+import withHoverLine from '~/components/misc/hoc/withHoverLine'
 import { BARS_WRAPPER_HEIGHT, TICKS_PADDING } from '~/components/BarChart/consts'
 
 const BarGroupsContainer = styled.div`

@@ -6,7 +6,7 @@ import GhostWrapper from '~/elements/Button/Wrappers/Ghost'
 import ButtonLabel from '~/elements/Button/Labels/Button'
 import GhostLabel from '~/elements/Button/Labels/Ghost'
 import { Glyph } from '~/elements/Icon'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 export const Button = ({
   appearance,

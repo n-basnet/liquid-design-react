@@ -7,9 +7,9 @@ import { contains } from 'ramda'
 
 import { media, customWebKitScrollBar, disableTextSelectionBackground } from '~/utils/styling'
 import Checkbox, { CHECKBOX_CLASSNAME } from '~/elements/Checkbox'
-import { optionPropType } from '~/elements/aux/OptionsGroupProps'
-import Ellipsis from '~/components/aux/Ellipsis'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { optionPropType } from '~/elements/misc/OptionsGroupProps'
+import Ellipsis from '~/components/misc/Ellipsis'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const OPTIONS_GROUP_CLASSNAME = getClassName({ name: 'OptionsGroup' })
 

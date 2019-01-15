@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Glyph } from '~/elements/Icon'
 import { ListHead } from '~/elements/List/ListHead'
 import { ListItem } from '~/elements/List/ListItem'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const ListWrapper = styled.ul`
   max-width: 300px;

@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 
 import Theme from '~/Theme'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const everyComponentTestSuite = (getWrapperFn, Component, name) => {
   const getComponentWrapper = props => getWrapperFn(props).find(Component)

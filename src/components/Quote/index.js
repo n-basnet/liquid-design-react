@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { getBackgroundImage } from '~/utils/styling'
 import { TypographicQuote } from '~/components/Quote/TypographicQuote'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import BlockquoteWrapper from '~/components/Quote/BlockquoteWrapper'
 
 const QuoteWrapper = styled(BlockquoteWrapper)`

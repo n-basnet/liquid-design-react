@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
 import { cursorValue, media } from '~/utils/styling'
-import { OPTIONS_GROUP_CLASSNAME } from '~/elements/aux/OptionsGroup'
-import { DROPDOWN_ICON_CLASSNAME } from '~/elements/aux/DropdownProvider'
+import { OPTIONS_GROUP_CLASSNAME } from '~/elements/misc/OptionsGroup'
+import { DROPDOWN_ICON_CLASSNAME } from '~/elements/misc/DropdownProvider'
 
 const ICON_MOBILE_SCALE = 1.27
 const getTransformValue = ({ isExpanded, isFilter }, isMobile) =>

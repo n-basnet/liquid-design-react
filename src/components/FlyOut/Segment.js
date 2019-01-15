@@ -5,7 +5,7 @@ import { isEmpty } from 'ramda'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
-import Ellipsis from '~/components/aux/Ellipsis'
+import Ellipsis from '~/components/misc/Ellipsis'
 
 export const SegmentWrapper = styled.div`
   display: flex;

@@ -2,10 +2,10 @@ import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import { Glyph } from '~/elements/Icon'
 import { cursorValue, media } from '~/utils/styling'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import { NUMBER_SIZE, ICON_SIZE, STATES } from './consts'
 
 export const PaginationWrapper = styled.div`

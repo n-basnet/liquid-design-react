@@ -10,7 +10,7 @@ import DATEPICKER_CONSTS from './consts'
 import Calendar from '~/modules/Calendar'
 import TextField from '~/elements/TextField'
 import { Glyph } from '~/elements/Icon'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
 
 const today = new Date()

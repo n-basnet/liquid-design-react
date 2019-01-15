@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { cursorValue } from '~/utils/styling'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 const BadgeWrapper = styled.div`
   ${props => css`
@@ -72,15 +72,13 @@ const BadgeTextWrapper = styled.span`
 export const Badge = ({ children, icon, isIconOnRight, disabled, isOnCard, ...props }) => (
   <BadgeWrapper disabled={disabled} isOnCard={isOnCard} {...props}>
     <Fragment>
-      {icon &&
-        !isIconOnRight && (
+      {icon && !isIconOnRight && (
         <Glyph color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
       )}
       <BadgeTextWrapper padLeft={icon && !isIconOnRight} isOnCard={isOnCard}>
         {children}
       </BadgeTextWrapper>
-      {icon &&
-        isIconOnRight && (
+      {icon && isIconOnRight && (
         <Glyph
           color='black.base'
           size={14}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Headline from '~/elements/Headline'
 import Accordion from '~/components/Accordion'
 import COLORS from '~/utils/consts/colors'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 export class Faq extends PureComponent {
   static propTypes = {

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { INPUT_CLASSNAME } from '~/components/aux/Input'
+import { INPUT_CLASSNAME } from '~/components/misc/Input'
 import { media } from '~/utils/styling'
 
 const getIconColorStyles = props => css`
@@ -88,18 +88,18 @@ export default styled.form`
           `
     : props.focused
       ? css`
-              ${!props.ghost &&
-                css`
-                  box-shadow: ${props.theme.boxShadow};
-                `};
-              ${getIconColorStyles};
-            `
+            ${!props.ghost &&
+              css`
+                box-shadow: ${props.theme.boxShadow};
+              `};
+            ${getIconColorStyles};
+          `
       : css`
-              &:hover {
-                ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
-                ${getIconColorStyles};
-              }
-            `
+            &:hover {
+              ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
+              ${getIconColorStyles};
+            }
+          `
 };
         };
   `};

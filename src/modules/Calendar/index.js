@@ -4,15 +4,15 @@ import styled, { css } from 'styled-components'
 import dateFns from 'date-fns'
 import { isEmpty, isNil, find } from 'ramda'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
 import { media } from '~/utils/styling'
 import { Glyph } from '~/elements/Icon'
 import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
 import DayCell from '~/modules/Calendar/DayCell'
-import { INPUT_SINGLELINE_CLASSNAME } from '~/components/aux/Input'
+import { INPUT_SINGLELINE_CLASSNAME } from '~/components/misc/Input'
 import { isTouchDevice } from '~/utils/featureDetects'
-import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export const YEAR_INPUT_CLASSNAME = getClassName({ name: `YearInput` })
 

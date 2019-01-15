@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
 import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
-import { DROPDOWN_TRIGGER_CLASSNAME } from '~/elements/aux/DropdownProvider'
-import { OPTIONS_GROUP_CLASSNAME } from '~/elements/aux/OptionsGroup'
+import { DROPDOWN_TRIGGER_CLASSNAME } from '~/elements/misc/DropdownProvider'
+import { OPTIONS_GROUP_CLASSNAME } from '~/elements/misc/OptionsGroup'
 import { ICON_CLASSNAME } from '~/elements/Icon'
-import { optionPropType } from '~/elements/aux/OptionsGroupProps'
+import { optionPropType } from '~/elements/misc/OptionsGroupProps'
 import { ClickableSection } from '~/components/TablePagination/styled'
 import { media } from '~/utils/styling'
 

@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import { cursorValue, nonTouchDevicesHoverStyles, disbleMozTapTextBackground } from '~/utils/styling'
+import {
+  cursorValue,
+  nonTouchDevicesHoverStyles,
+  disbleMozTapTextBackground,
+} from '~/utils/styling'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const getFill = ({ theme, checked }) => {
   const { colors } = theme

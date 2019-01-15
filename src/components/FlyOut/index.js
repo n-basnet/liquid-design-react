@@ -9,8 +9,8 @@ import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import FlyOutContent from '~/components/FlyOut/FlyOutContent'
 import { cursorValue } from '~/utils/styling'
 import { hasCSSFilters } from '~/utils/featureDetects'
-import withResizeListener from '~/components/aux/hoc/withResizeListener'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import withResizeListener from '~/components/misc/hoc/withResizeListener'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 
 const WIDTHS = {
   max: 500,
@@ -133,7 +133,9 @@ export default class FlyOut extends PureComponent {
       const centerAlignedRemainingSpace = Math.min(windowWidth - center, center) * 2
       const remainingSpace = this.isCenterAligned()
         ? centerAlignedRemainingSpace
-        : this.props.alignLeft ? windowWidth - left : right
+        : this.props.alignLeft
+          ? windowWidth - left
+          : right
 
       this.setState({
         tooltipWidth: find(width => width <= remainingSpace, values(widthsArray)),
@@ -156,7 +158,9 @@ export default class FlyOut extends PureComponent {
     const iconSize = this.isCenterAligned() ? 20 : 15
     const tooltipTranslateX = this.isCenterAligned()
       ? `translateX(50%) translateX(-${iconSize}px)`
-      : alignLeft ? 'translateX(-7px)' : 'translateX(6px)'
+      : alignLeft
+        ? 'translateX(-7px)'
+        : 'translateX(6px)'
     return (
       <FlyOutWrapper
         alignCenter={this.isCenterAligned()}

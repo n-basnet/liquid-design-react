@@ -5,7 +5,7 @@ import uniqid from 'uniqid'
 import InputWrapper from '~/elements/RadioButton/InputWrapper'
 import RadioButtonWrapper from '~/elements/RadioButton/RadioButtonWrapper'
 import LabelWrapper from '~/elements/RadioButton/LabelWrapper'
-import attachClassName, { getClassName } from '~/components/aux/hoc/attachClassName'
+import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
 
 export class RadioButton extends PureComponent {
   static propTypes = {

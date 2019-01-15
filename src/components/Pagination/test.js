@@ -2,7 +2,7 @@ import React from 'react'
 import Pagination, { PaginationWrapper } from '.'
 
 import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const children = times(400).map(item => <div key={item} />)
 

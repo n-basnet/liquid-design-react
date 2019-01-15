@@ -6,9 +6,9 @@ import { withResizeDetector } from 'react-resize-detector'
 import cx from 'classnames'
 
 import { cursorValue, media } from '~/utils/styling'
-import { getReactElementString, getSVGImageURLString } from '~/utils/aux'
+import { getReactElementString, getSVGImageURLString } from '~/utils/misc'
 import TextareaExpand from '~/assets/svgIllustrations/textarea-expand.svg'
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 import { isTouchDevice } from '~/utils/featureDetects'
 
 const BOTTOM_BORDER_HEIGHT = 2

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
-import DropdownWrapper from '~/elements/aux/DropdownProvider/DropdownWrapper'
-import DropdownTriggerWrapper from '~/elements/aux/DropdownProvider/DropdownTriggerWrapper'
-import DropdownProvider from '~/elements/aux/DropdownProvider'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
+import DropdownWrapper from '~/elements/misc/DropdownProvider/DropdownWrapper'
+import DropdownTriggerWrapper from '~/elements/misc/DropdownProvider/DropdownTriggerWrapper'
+import DropdownProvider from '~/elements/misc/DropdownProvider'
 
 const Dropdown = props => (
   <DropdownProvider
