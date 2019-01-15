@@ -1,3 +1,10 @@
+## [1.0.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.0.0...v1.0.1) (2019-01-15)
+
+
+### Bug Fixes
+
+* rename aux dirs and files as aux is a reserved name on Windows ([6e7074f](https://gitlab.com/liquid-design/liquid-design-react/commit/6e7074f)), closes [#1](https://gitlab.com/liquid-design/liquid-design-react/issues/1)
+
 # 1.0.0 (2018-12-12)
 
 
