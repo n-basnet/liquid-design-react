@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedBarChart, BarChart } from '~/components/BarChart'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import {
   randomInRange,
   getBackgroundWrapper,

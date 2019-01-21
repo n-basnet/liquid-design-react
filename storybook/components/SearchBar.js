@@ -9,7 +9,7 @@ import {
   getTextKnob,
   getSnippetTemplate,
 } from '../helpers'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const getOptions = () =>
   times(4).map(v =>

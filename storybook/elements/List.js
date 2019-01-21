@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import {
   getBackgroundWrapper,
   getTextKnob,

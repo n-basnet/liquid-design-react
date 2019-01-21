@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { default as EnchancedPagination, Pagination } from '~/components/Pagination'
 
 import { getBackgroundWrapper, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const children = times(10000).map((item, index) => <div key={index}>{item}</div>)
 

@@ -5,7 +5,7 @@ const jsFileTemplate = ({ name }) =>
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import attachClassName from '~/components/aux/hoc/attachClassName'
+import attachClassName from '~/components/misc/hoc/attachClassName'
 
 export const ${name} = ({...props}) =>
   <div {...props}>

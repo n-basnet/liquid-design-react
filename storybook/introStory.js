@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
 import { getBackgroundWrapper, getPropTablesExcludeList } from './helpers'
-import { getClassName } from '~/components/aux/hoc/attachClassName'
+import { getClassName } from '~/components/misc/hoc/attachClassName'
 import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
 

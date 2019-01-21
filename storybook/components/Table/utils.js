@@ -2,7 +2,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { values, zipObj, prop } from 'ramda'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import {
   getSnippetTemplate,
   getCustomPlaceholderText,

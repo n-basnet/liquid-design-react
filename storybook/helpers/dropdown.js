@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { without, append } from 'ramda'
 import uniqid from 'uniqid'
 
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import { getTextKnob } from '.'
 
 export const getDropdownOptions = (onClick, amount = 4) =>

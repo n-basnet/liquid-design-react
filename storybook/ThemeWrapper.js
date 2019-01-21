@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Theme } from '~'
 import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
-import { camelCaseToHuman } from '~/utils/aux'
+import { camelCaseToHuman } from '~/utils/misc'
 
 const themeNames = Object.keys(THEMES)
 

@@ -12,7 +12,7 @@ import {
 } from '../helpers'
 import { default as EnhancedStepProgressBar, StepProgressBar } from '~/components/StepProgressBar'
 import Button from '~/elements/Button'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const getDefaultProps = () => ({
   steps: times(4).map(v => ({

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { getPropTablesExcludeList, getBackgroundWrapper } from '../helpers'
 import { getDefaultDropdownProps, MultiselectDropdownStateWrapper } from '../helpers/dropdown'
 import Filter from '~/elements/Filter'
-import { DropdownProvider } from '~/elements/aux/DropdownProvider'
+import { DropdownProvider } from '~/elements/misc/DropdownProvider'
 
 const getInfoMD = props => ({
   info: {

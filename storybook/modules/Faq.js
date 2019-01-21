@@ -8,7 +8,7 @@ import {
   getSnippetTemplate,
   getPropTablesExcludeList,
 } from '../helpers'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const headlinesTexts = {
   primary: getTextKnob({

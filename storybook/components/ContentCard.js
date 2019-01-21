@@ -16,7 +16,7 @@ import {
   getSnippetTemplate,
   Fragment,
 } from '../helpers'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const defaultText = 'Delivery in 3-4 days'
 
@@ -83,28 +83,27 @@ class ContentCardApp extends PureComponent {
   render() {
     const { cardActiveIndex, isCardActive } = this.state
     const { amount, withBootstrap, ...props } = this.props
-    return times(amount).map(
-      index =>
-        withBootstrap ? (
-          <div key={index} className='col-md-4 col-sm-6 d-flex justify-content-center my-2 px-2'>
-            <EnhancedContentCard
-              {...getDefaultProps()}
-              active={index === cardActiveIndex}
-              style={{ margin: 0 }}
-              onClick={() => this.setCardActiveIndex(index)}
-              {...props}
-            />
-          </div>
-        ) : (
+    return times(amount).map(index =>
+      withBootstrap ? (
+        <div key={index} className='col-md-4 col-sm-6 d-flex justify-content-center my-2 px-2'>
           <EnhancedContentCard
             {...getDefaultProps()}
-            key={index}
+            active={index === cardActiveIndex}
             style={{ margin: 0 }}
-            active={isCardActive}
-            onClick={this.toggleCardActive}
+            onClick={() => this.setCardActiveIndex(index)}
             {...props}
           />
-        )
+        </div>
+      ) : (
+        <EnhancedContentCard
+          {...getDefaultProps()}
+          key={index}
+          style={{ margin: 0 }}
+          active={isCardActive}
+          onClick={this.toggleCardActive}
+          {...props}
+        />
+      )
     )
   }
 }

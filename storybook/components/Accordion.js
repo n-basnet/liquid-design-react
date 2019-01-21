@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { default as EnhancedAccordion, Accordion } from '~/components/Accordion'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,

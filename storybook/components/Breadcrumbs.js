@@ -10,7 +10,7 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { times } from '~/utils/aux'
+import { times } from '~/utils/misc'
 
 const getItems = (modifier = {}) => [
   {
