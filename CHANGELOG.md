@@ -1,3 +1,16 @@
+# [1.1.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.0.1...v1.1.0) (2019-02-05)
+
+
+### Bug Fixes
+
+* pagination fix on table with 100% width ([93e9200](https://gitlab.com/liquid-design/liquid-design-react/commit/93e9200))
+* rename aux dirs and files as aux is a reserved name on Windows ([aad1f30](https://gitlab.com/liquid-design/liquid-design-react/commit/aad1f30)), closes [#1](https://gitlab.com/liquid-design/liquid-design-react/issues/1)
+
+
+### Features
+
+* searchBarPlaceholder property for 'Header' module ([52761ed](https://gitlab.com/liquid-design/liquid-design-react/commit/52761ed))
+
 ## [1.0.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.0.0...v1.0.1) (2019-01-15)
 
 
