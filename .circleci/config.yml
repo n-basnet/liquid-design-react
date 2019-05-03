@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/ruby:2.5-node
+    - image: circleci/ruby:2.6-node
 
 version: 2
 jobs:
