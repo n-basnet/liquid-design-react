@@ -1,0 +1,36 @@
+{
+  "packageRules": [
+    {
+      "packagePatterns": [ "eslint" ],
+      "groupName": "eslint"
+    },
+    {
+      "packagePatterns": [ "babel" ],
+      "groupName": "babel"
+    },
+    {
+      "packagePatterns": [ "react" ],
+      "groupName": "react"
+    },
+    {
+      "packagePatterns": [ "rollup" ],
+      "groupName": "rollup"
+    },
+    {
+      "packagePatterns": [ "@storybook" ],
+      "groupName": "storybook"
+    },
+    {
+      "packagePatterns": [ "@commitlint" ],
+      "groupName": "commitlint"
+    },
+    {
+      "packagePatterns": [ "@semantic-release", "semantic-release" ],
+      "groupName": "semantic-release"
+    },
+    {
+      "packagePatterns": [ "enzyme" ],
+      "groupName": "enzyme"
+    }
+  ]
+}
