@@ -9,7 +9,7 @@
       "groupName": "babel"
     },
     {
-      "packagePatterns": [ "react" ],
+      "packagePatterns": [ "react", "enzyme" ],
       "groupName": "react"
     },
     {
@@ -27,10 +27,6 @@
     {
       "packagePatterns": [ "@semantic-release", "semantic-release" ],
       "groupName": "semantic-release"
-    },
-    {
-      "packagePatterns": [ "enzyme" ],
-      "groupName": "enzyme"
     }
   ]
 }
