@@ -79,7 +79,7 @@
     "conventional-changelog-cli": "2.0.21",
     "cross-env": "5.2.0",
     "enzyme": "3.9.0",
-    "enzyme-adapter-react-16": "1.12.1",
+    "enzyme-adapter-react-16": "1.13.0",
     "enzyme-to-json": "3.3.5",
     "eslint": "4.19.1",
     "eslint-config-standard": "11.0.0",
