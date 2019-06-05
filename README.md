@@ -12,3 +12,9 @@ You can find it [here](http://docs.merck.design).
 ## Contributing
 
 see [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Terms of Use
+
+see [TERMS_OF_USE.md](TERMS_OF_USE.md)
+
+Please note that the security of the platform/project at which you are using Liquid Design System, or parts of it, are not the responsibility of the providers of this design system.
