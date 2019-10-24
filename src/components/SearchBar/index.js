@@ -93,9 +93,10 @@ export class SearchBar extends PureComponent {
     }
   }
   setInputValue = value => {
-    const regexp = new RegExp(value, 'i')
     const results =
-      value.length > 0 ? this.props.options.filter(v => regexp.test(v)) : EMPTY_RESULTS
+      (typeof value === 'string' && value.trim().length) ? this.props.options.filter(v => {
+        return v.toLowerCase().indexOf(value.toLowerCase().trim()) !== -1
+      }) : EMPTY_RESULTS
     this.setState({
       value,
       results,
