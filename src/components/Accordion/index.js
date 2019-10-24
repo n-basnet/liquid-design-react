@@ -5,7 +5,6 @@ import styled, { css } from 'styled-components'
 import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
 import { media, touchDeviceHoverStyles } from '~/utils/styling'
 import attachClassName from '~/components/misc/hoc/attachClassName'
-import { handleClickIfNotSelectingText } from '~/utils/dom'
 import { isSupportingTouch } from '~/utils/misc'
 
 const AccordionWrapper = styled.div`
@@ -91,7 +90,9 @@ export class Accordion extends PureComponent {
     isHovered: false,
   }
 
-  toggle = () => this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  toggle = () => {
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }))
+  }
   activateHover = () => {
     if (!isSupportingTouch()) {
       this.setState({ isHovered: true })
@@ -99,7 +100,7 @@ export class Accordion extends PureComponent {
   }
   deactivateHover = () => this.setState({ isHovered: false })
 
-  render() {
+  render () {
     const { children, title, isOpen, ...props } = this.props
     const { isHovered } = this.state
 
@@ -117,12 +118,7 @@ export class Accordion extends PureComponent {
           <Glyph name='arrowTop' size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
-        <SectionContent
-          isOpen={isAccordionOpen}
-          onClick={() => handleClickIfNotSelectingText(this.toggle)}
-        >
-          {children}
-        </SectionContent>
+        <SectionContent isOpen={isAccordionOpen}>{children}</SectionContent>
       </AccordionWrapper>
     )
   }
