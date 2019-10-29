@@ -13,6 +13,7 @@ export const Button = ({
   disabled,
   icon,
   isIconOnRight,
+  isIconFilled,
   children,
   size,
   onClick,
@@ -39,6 +40,7 @@ export const Button = ({
           name={icon}
           size={isGhost ? (size === 'big' ? 18 : 16) : 24}
           style={!isGhost && children ? { marginLeft: '28px' } : {}}
+          isFilled={isIconFilled}
         />
       )}
       {children && (
@@ -60,6 +62,7 @@ Button.propTypes = {
   icon: PropTypes.string,
   /** Important! isIconOnRight prop with ghost button type only */
   isIconOnRight: PropTypes.bool,
+  isIconFilled: PropTypes.bool,
   children: PropTypes.node,
   size: PropTypes.oneOf(SIZE_VALUES),
   onClick: PropTypes.func,
@@ -70,6 +73,7 @@ Button.defaultProps = {
   disabled: false,
   icon: null,
   isIconOnRight: false,
+  isIconFilled: false,
   children: null,
   size: 'small',
   onClick: null,
