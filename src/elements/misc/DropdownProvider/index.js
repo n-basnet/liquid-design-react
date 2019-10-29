@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { find, isEmpty } from 'ramda'
+import { find, innerJoin, symmetricDifferenceWith, prop, eqBy, isEmpty, without } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
@@ -39,6 +39,7 @@ export class DropdownProvider extends PureComponent {
       })
     ),
     onOptionDeselect: PropTypes.func,
+    onOptionSelect: PropTypes.func,
     onSubmit: PropTypes.func,
     nameForClassName: PropTypes.string,
     /** Id of selected option - for controlling the state externally. */
@@ -56,6 +57,7 @@ export class DropdownProvider extends PureComponent {
     selectedOptionsIds: [],
     options: [],
     onOptionDeselect: () => {},
+    onOptionSelect: () => {},
     onSubmit: () => {},
     nameForClassName: null,
     value: null,
@@ -71,8 +73,18 @@ export class DropdownProvider extends PureComponent {
   handleClickOutside = () => this.setState({ isExpanded: false })
   handleSubmit = option => {
     if (this.props.multiselect) {
+      const { selectedOptionsIds, options } = this.props
+      const previouslyActiveOptions = innerJoin((o, id) => o.id === id, options, selectedOptionsIds)
+      const currentActiveOptions = symmetricDifferenceWith(eqBy(prop('id')), previouslyActiveOptions, [option])
+      this.props.onSubmit && this.props.onSubmit(currentActiveOptions)
+      if (currentActiveOptions.length > previouslyActiveOptions.length) {
+        this.props.onOptionSelect && this.props.onOptionSelect(option)
+      } else {
+        this.props.onOptionDeselect && this.props.onOptionDeselect(option)
+      }
       return
     }
+
     const activeOption = this.getActiveOption()
     const hasReselectedSameOption = activeOption && option.id === activeOption.id
     // if the state is internal, reselecting is resetting
@@ -82,7 +94,12 @@ export class DropdownProvider extends PureComponent {
       isExpanded: false,
       wasSubmitted: true,
     })
-    this.props.onSubmit && this.props.onSubmit(option)
+    this.props.onSubmit && this.props.onSubmit(submittedOption)
+    if (submittedOption) {
+      this.props.onOptionSelect && this.props.onOptionSelect(submittedOption)
+    } else {
+      this.props.onOptionDeselect && this.props.onOptionDeselect(activeOption)
+    }
   }
   getActiveOption = () => {
     const { submittedOption, wasSubmitted } = this.state
@@ -106,7 +123,7 @@ export class DropdownProvider extends PureComponent {
       activeOption.name
     )
 
-  render() {
+  render () {
     const {
       disabled,
       multiselect,
@@ -115,7 +132,9 @@ export class DropdownProvider extends PureComponent {
       nameForClassName,
       render,
       options,
+      onSubmit,
       onOptionDeselect,
+      onOptionSelect,
       label,
       isFilter,
       ...props
@@ -157,7 +176,10 @@ export class DropdownProvider extends PureComponent {
       renderLabelContent: () =>
         hasSelectedOptions ? (
           <SelectedOptionsLabel
-            handleRemove={onOptionDeselect}
+            handleRemove={option => {
+              onSubmit(getItemsWithIds(options, without(option.id, selectedOptionsIds)))
+              onOptionDeselect(option)
+            }}
             items={getItemsWithIds(options, selectedOptionsIds)}
           />
         ) : (

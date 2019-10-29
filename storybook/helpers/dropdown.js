@@ -21,6 +21,8 @@ export const getDefaultDropdownProps = ({ defaultText }) => ({
   label: getTextKnob({ defaultText }),
   options: getDropdownOptions(),
   onSubmit: action('submit'),
+  onOptionSelect: action('optionSelect'),
+  onOptionDeselect: action('optionDeselect'),
 })
 
 export class MultiselectDropdownStateWrapper extends React.Component {
@@ -31,7 +33,7 @@ export class MultiselectDropdownStateWrapper extends React.Component {
     selectedOptionsIds: [],
     options: [],
   }
-  componentDidMount() {
+  componentDidMount () {
     this.setState({ options: getDropdownOptions(this.handleClick, 10) })
   }
   handleClick = ({ id }) => {
@@ -45,7 +47,7 @@ export class MultiselectDropdownStateWrapper extends React.Component {
   handleAdd = id => this.updateSelectedOptionsIds(append(id))
   handleRemove = id => this.updateSelectedOptionsIds(without([id]))
 
-  render() {
+  render () {
     const { children } = this.props
     const { options, selectedOptionsIds } = this.state
 
@@ -58,7 +60,14 @@ export class MultiselectDropdownStateWrapper extends React.Component {
         return React.cloneElement(child, {
           options,
           selectedOptionsIds,
-          onOptionDeselect: this.handleRemove,
+          onOptionDeselect: (option) => {
+            this.handleRemove(option.id)
+            action('optionDeselect')(option)
+          },
+          onOptionSelect: (option) => {
+            this.handleAdd(option.id)
+            action('optionSelect')(option)
+          },
         })
       }
     })

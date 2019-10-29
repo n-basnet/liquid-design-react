@@ -49,6 +49,7 @@ Dropdown.propTypes = {
     })
   ),
   onOptionDeselect: PropTypes.func,
+  onOptionSelect: PropTypes.func,
   onSubmit: PropTypes.func,
   /** Id of selected option - for controlling the state externally. */
   value: PropTypes.string,
@@ -63,6 +64,7 @@ Dropdown.defaultProps = {
   selectedOptionsIds: [],
   options: [],
   onOptionDeselect: () => {},
+  onOptionSelect: () => {},
   onSubmit: () => {},
   value: null,
 }

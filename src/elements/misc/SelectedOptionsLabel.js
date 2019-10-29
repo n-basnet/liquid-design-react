@@ -34,7 +34,7 @@ const SelectedOptionsLabelWrapper = styled.div`
 const SelectedOptionsLabel = ({ items, handleRemove }) => (
   <SelectedOptionsLabelWrapper>
     {items.map(item => (
-      <SelectedItem key={item.id} {...item} handleRemove={() => handleRemove(item.id)} />
+      <SelectedItem key={item.id} {...item} handleRemove={() => handleRemove(item)} />
     ))}
   </SelectedOptionsLabelWrapper>
 )
