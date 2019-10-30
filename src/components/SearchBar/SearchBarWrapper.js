@@ -34,13 +34,11 @@ export default styled.form`
     `};
   }
   .${INPUT_CLASSNAME} {
-    ${props =>
-    props.disabled &&
+    ${props => props.disabled &&
       css`
         opacity: 1;
       `};
-    ${props =>
-    props.hasResults &&
+    ${props => props.hasResults &&
       css`
         overflow: visible;
         &:after {
@@ -56,11 +54,11 @@ export default styled.form`
       `};
       ${props =>
     !props.disabled &&
-        css`
-          &:hover::placeholder {
-            color: ${props.theme.colors.primary.base};
-          }
-        `};
+    css`
+      &:hover::placeholder {
+        color: ${props.theme.colors.primary.base};
+      }
+    `};
     }
   }
   ${props => css`
@@ -68,39 +66,36 @@ export default styled.form`
     transition: ${props.theme.transition};
     .${ICON_CLASSNAME} svg {
       transition: ${props.theme.transition};
-      fill: ${props.theme.colors.sensitiveGrey.darker};
+      fill: ${props.theme.colors.richBlack.lightest};
     };
     ${
   props.hasResults || props.ghost
     ? css`
-            border-top-left-radius: ${props.theme.borderRadius};
-            border-top-right-radius: ${props.theme.borderRadius};
-          `
+        border-top-left-radius: ${props.theme.borderRadius};
+        border-top-right-radius: ${props.theme.borderRadius};
+      `
     : css`
-            overflow: hidden;
-            border-radius: ${props.theme.borderRadius};
-          `
-};
-    ${
-  props.disabled
+        overflow: hidden;
+        border-radius: ${props.theme.borderRadius};
+      `};
+    ${props.disabled
     ? css`
-            opacity: 0.5;
-          `
+          opacity: 0.5;
+        `
     : props.focused
       ? css`
-            ${!props.ghost &&
-              css`
-                box-shadow: ${props.theme.boxShadow};
-              `};
-            ${getIconColorStyles};
-          `
+          ${!props.ghost &&
+            css`
+              box-shadow: ${props.theme.boxShadow};
+            `};
+          ${getIconColorStyles};
+        `
       : css`
-            &:hover {
-              ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
-              ${getIconColorStyles};
-            }
-          `
-};
-        };
+          &:hover {
+            ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
+            ${getIconColorStyles};
+          }
+        `};
+      };
   `};
 `

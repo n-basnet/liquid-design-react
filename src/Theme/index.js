@@ -39,11 +39,11 @@ export const Base = styled.div`
 `
 
 class Theme extends PureComponent {
-  componentDidMount() {
+  componentDidMount () {
     // fixes mobile Safari handling of pseudo classes on elements (https://stackoverflow.com/a/41217194)
-    isTouchDevice() && document.addEventListener('touchstart', function() {}, false)
+    isTouchDevice() && document.addEventListener('touchstart', function () {}, false)
   }
-  render() {
+  render () {
     const { themeName, customTheme, ...props } = this.props
     return (
       <ThemeProvider

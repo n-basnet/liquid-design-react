@@ -13,7 +13,7 @@ import attachClassName, { getClassName } from '~/components/misc/hoc/attachClass
 
 const getFill = ({ theme, checked }) => {
   const { colors } = theme
-  return checked ? colors.primary.base : colors.sensitiveGrey.darker
+  return checked ? colors.primary.base : colors.sensitiveGrey.darkest
 }
 
 export const CheckboxWrapper = styled.div`
@@ -102,7 +102,7 @@ export class Checkbox extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     const { disabled, label, className, iconSize, ...props } = this.props
     const { hover } = this.state
     const iconVersion = this.isChecked() ? 'Filled' : 'Empty'

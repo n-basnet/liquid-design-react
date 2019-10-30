@@ -11,7 +11,7 @@ export const ListHead = styled.div`
   font-size: 16px;
   line-height: 1.75;
   ${props => css`
-    border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
+    border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darkest};
     font-weight: ${props.theme.fontWeight.black};
     ${props.grey &&
       css`

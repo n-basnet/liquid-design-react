@@ -11,7 +11,7 @@ import { times } from '~/utils/misc'
 import { easing } from '~/utils/styling/animations'
 
 const getFill = props =>
-  path(props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darker'], props.theme.colors)
+  path(props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darkest'], props.theme.colors)
 
 const getHoverFill = props =>
   path(props.isActive ? ['richRed', 'dark'] : ['primary', 'base'], props.theme.colors)
@@ -126,7 +126,7 @@ export class Favorite extends PureComponent {
       }, ANIMATION_DURATION)
     })
   }
-  render() {
+  render () {
     const { disabled, active, ...props } = this.props
     const { isAnimating, isActive } = this.state
     return (

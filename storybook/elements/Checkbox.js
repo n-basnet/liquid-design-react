@@ -34,3 +34,8 @@ storiesOf('Elements/Checkbox', module)
     () => <Checkbox disabled {...defaultProps} />,
     getSnippetTemplate(getCheckboxSnippet('disabled '))
   )
+  .add(
+    'disabled and checked',
+    () => <Checkbox isChecked disabled {...defaultProps} />,
+    getSnippetTemplate(getCheckboxSnippet('disabled '))
+  )

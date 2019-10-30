@@ -84,7 +84,7 @@ export class DatePicker extends PureComponent {
       ? dateFns.format(this.props.defaultStartDate, 'YYYY')
       : dateFns.format(today, 'YYYY'),
   }
-  componentDidMount() {
+  componentDidMount () {
     const { format } = this.props
     const currentSeparator = getSeparator(format)
     const formatRegexp = getFormatRegexp(format)
@@ -227,7 +227,7 @@ export class DatePicker extends PureComponent {
     }
   }
 
-  render() {
+  render () {
     const {
       className,
       format,
@@ -281,7 +281,7 @@ export class DatePicker extends PureComponent {
             <Glyph
               name='calendar'
               size={18}
-              color={disabled ? 'sensitiveGrey.darker' : undefined}
+              color={disabled ? 'sensitiveGrey.darkest' : undefined}
               onClick={this.toggleCalendar}
             />
           ) : null}

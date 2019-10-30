@@ -17,7 +17,6 @@ const bgColorSelector = props => {
 
 const BubbleWrapper = styled.div`
   ${props => css`
-    opacity: ${props.disabled ? 0.5 : 1};
     background-color: ${bgColorSelector(props)};
   `};
   ${cursorValue};

@@ -5,7 +5,7 @@ import { ICON_CLASSNAME } from '~/elements/Icon'
 
 const tagBackground = ({ disabled, theme: { colors }, outline }) => {
   if (disabled) {
-    return outline ? colors.white.base : colors.sensitiveGrey.darker
+    return outline ? colors.white.base : colors.sensitiveGrey.darkest
   } else {
     return outline ? colors.white.base : colors.primary.base
   }
@@ -13,7 +13,7 @@ const tagBackground = ({ disabled, theme: { colors }, outline }) => {
 
 export const tagColor = ({ outline, disabled, theme: { colors } }) => {
   if (outline) {
-    return disabled ? colors.sensitiveGrey.darker : colors.primary.base
+    return disabled ? colors.sensitiveGrey.darkest : colors.primary.base
   } else return colors.white.base
 }
 
@@ -31,7 +31,7 @@ export const TagWrapper = styled.div`
     transition: ${props.theme.transition};
     border: 2px solid
       ${
-  !props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darker
+  !props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darkest
 };
     ${!props.disabled &&
       nonTouchDevicesHoverStyles(`

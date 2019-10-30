@@ -16,7 +16,7 @@ export const ListItem = styled.li`
     border: none;
   }
   ${props => css`
-    border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darker};
+    border-bottom: 1px solid ${props.theme.colors.sensitiveGrey.darkest};
     ${cursorValue}
     ${!props.disabled &&
       props.onClick &&

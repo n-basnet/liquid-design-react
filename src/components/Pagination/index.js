@@ -31,17 +31,17 @@ const ArrowIconWrapper = styled.div`
     }
     ${props =>
     !props.disabled &&
-      css`
-        &:hover {
-          ${media.min.tablet`
-            background-color: ${props.theme.colors.primary.dark};
-            svg {
-              fill: ${props.theme.colors.white.base};
-            }
-          `};
+    css`
+      &:hover {
+        ${media.min.tablet`
+          background-color: ${props.theme.colors.primary.dark};
+          svg {
+            fill: ${props.theme.colors.white.base};
           }
+        `};
         }
-      `};
+      }
+    `};
     ${props => css`
       ${cursorValue({ ...props, defaultValue: 'pointer' })};
       svg {
@@ -51,22 +51,22 @@ const ArrowIconWrapper = styled.div`
   }
     ${props =>
     props.isOnLeft &&
-      css`
-        div:first-child {
-          svg {
-            left: 11px;
-          }
+    css`
+      div:first-child {
+        svg {
+          left: 11px;
         }
-      `};
+      }
+    `};
     ${props =>
     props.isOnRight &&
-      css`
-        div:last-child {
-          svg {
-            right: 11px;
-          }
+    css`
+      div:last-child {
+        svg {
+          right: 11px;
         }
-      `};
+      }
+    `};
   }
 `
 
@@ -79,7 +79,6 @@ const PaginationNumber = styled.div`
   line-height: ${NUMBER_SIZE}px;
   margin-left: 10px;
   margin-right: ${props => (props.isLast ? 10 : 0)}px;
-  opacity: ${props => (props.disabled ? 0.5 : 1)};
   ${props =>
     !props.isTruncated &&
     media.max.phone`
@@ -125,6 +124,11 @@ const PaginationNumber = styled.div`
     props.areItemsOverHundredInPaginationItems &&
     css`
       padding: 0 4px;
+    `};
+  ${props =>
+    props.disabled &&
+    css`
+      color: ${props.theme.colors.sensitiveGrey.darkest};
     `};
   ${props =>
     props.disabled &&
@@ -214,7 +218,7 @@ export class Pagination extends PureComponent {
     return activePageIndex < lastPageIndex - 1 && index === paginationItems.length - 1
   }
 
-  render() {
+  render () {
     const { activePageIndex } = this.state
     const { disabled, paginationNumberAmount, ...props } = this.props
 

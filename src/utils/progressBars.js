@@ -4,7 +4,7 @@ import { getFirstTruthyKeyName } from '~/utils/misc'
 
 const getBarColor = props => {
   const colorsMap = {
-    disabled: ['sensitiveGrey', 'darker'],
+    disabled: ['sensitiveGrey', 'darkest'],
     isOverdue: [props.useThemeColors ? 'secondary' : 'richRed', 'base'],
   }
   const defaultColor = [props.useThemeColors ? 'primary' : 'vibrantGreen', 'base']

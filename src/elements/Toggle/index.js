@@ -22,10 +22,10 @@ const getWidth = props => (props.hasIcons ? TOGGLE_WIDTH_ICONS : TOGGLE_WIDTH)
 const getKnobWidth = props => (props.hasIcons ? TOGGLE_KNOB_WIDTH_ICONS : TOGGLE_KNOB_SIDE)
 const getKnobHeight = props => (props.hasIcons ? TOGGLE_KNOB_HEIGHT_ICONS : TOGGLE_KNOB_SIDE)
 const getActiveColor = props =>
-  path(props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'base'], props.theme.colors)
+  path(props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'dark'], props.theme.colors)
 const getKnobColor = props =>
   props.disabled && props.hasIcons
-    ? props.theme.colors.sensitiveGrey.darker
+    ? props.theme.colors.sensitiveGrey.darkest
     : props.theme.colors[props.hasIcons ? 'primary' : 'white'].base
 const getIconOffset = props => getKnobWidth(props) / 2 - ICON_SIZE / 2 + TOGGLE_KNOB_PAD
 
@@ -48,7 +48,7 @@ const ToggleWrapper = styled.div`
     background-color: ${props.hasIcons
     ? props.theme.colors.sensitiveGrey.base
     : props.disabled
-      ? rgba(props.theme.colors.sensitiveGrey.base, 0.5)
+      ? rgba(props.theme.colors.sensitiveGrey.darker, 0.5)
       : getActiveColor(props)};
     &:after {
       width: ${getKnobWidth(props)}px;
@@ -86,13 +86,13 @@ const ToggleWrapper = styled.div`
         .${ICON_CLASSNAME} {
           &:nth-child(1) svg {
             fill: ${path(
-    props.isActive ? ['sensitiveGrey', 'darker'] : ['white', 'base'],
+    props.isActive ? ['sensitiveGrey', 'darkest'] : ['white', 'base'],
     props.theme.colors
   )};
           }
           &:nth-child(2) svg {
             fill: ${path(
-    props.isActive ? ['white', 'base'] : ['sensitiveGrey', 'darker'],
+    props.isActive ? ['white', 'base'] : ['sensitiveGrey', 'darkest'],
     props.theme.colors
   )};
           }

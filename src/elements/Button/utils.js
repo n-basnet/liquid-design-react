@@ -6,6 +6,9 @@ export const bgColorSelector = (props, shade) => {
     secondary: 'sensitiveGrey',
     highlight: 'vibrantYellow',
   }
+  if (props.appearance === 'secondary' && props.disabled) {
+    return props.theme.colors.sensitiveGrey.light
+  }
   return props.theme.colors[colorsMap[props.appearance]][shade]
 }
 
@@ -13,7 +16,7 @@ export const colorSelector = props => {
   const colorsMap = {
     primary: ['white', 'base'],
     highlight: ['richBlack', 'base'],
-    secondary: props.disabled ? ['sensitiveGrey', 'darker'] : ['primary', 'base'],
+    secondary: props.disabled ? ['sensitiveGrey', 'darkest'] : ['primary', 'base'],
   }
   return path(colorsMap[props.appearance], props.theme.colors)
 }
@@ -31,7 +34,7 @@ export const opacitySelector = props => {
 export const iconOpacitySelector = props => {
   const opacityMap = {
     primary: '0.5',
-    secondary: '0.3',
+    secondary: '0.5',
     highlight: '0.3',
   }
 

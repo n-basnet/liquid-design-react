@@ -29,11 +29,11 @@ const StyledStep = styled.div`
       path ${!props.dots && '+ path'} {
         fill: ${props.theme.colors.primary[props.hovered ? 'dark' : 'base']};
       }
-      ${props =>
+    ${props =>
     props.hovered &&
-        css`
-          fill: ${props.theme.colors.primary.dark};
-        `};
+    css`
+      fill: ${props.theme.colors.primary.dark};
+    `};
     `};
   }
 `
@@ -43,7 +43,7 @@ const Step = ({ isHalfIcon, dots, ...props }) => (
     <Glyph
       name={`${dots ? 'dot' : 'star'}${isHalfIcon ? 'Half' : ''}`}
       size={20}
-      color={props.rated ? undefined : 'sensitiveGrey.darker'}
+      color={props.rated ? undefined : 'sensitiveGrey.darkest'}
     />
   </StyledStep>
 )

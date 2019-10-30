@@ -76,7 +76,7 @@ class Slider extends PureComponent {
       this.props.onChange && this.props.onChange(value)
     })
 
-  render() {
+  render () {
     const {
       defaultValue,
       disabled,
@@ -106,7 +106,7 @@ class Slider extends PureComponent {
               >
                 <Glyph
                   disabled={disabled}
-                  color={disabled ? 'sensitiveGrey.darker' : 'primary.base'}
+                  color={disabled ? 'sensitiveGrey.darkest' : 'primary.base'}
                   size={24}
                   name={'minus'}
                   style={{ marginRight: '-5px', marginBottom: '-1.5px' }}
@@ -138,7 +138,7 @@ class Slider extends PureComponent {
                 onClick={disabled ? null : this.increaseValue}
               >
                 <Glyph
-                  color={disabled ? 'sensitiveGrey.darker' : 'primary.base'}
+                  color={disabled ? 'sensitiveGrey.darkest' : 'primary.base'}
                   size={24}
                   name={'plus'}
                   style={{ marginBottom: '-2px', marginLeft: '-5px' }}

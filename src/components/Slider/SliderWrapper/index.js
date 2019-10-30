@@ -16,13 +16,13 @@ const SliderWrapper = styled.div`
   }
   .rc-slider-rail {
     height: 2px;
-    background: ${props => props.theme.colors.sensitiveGrey.darker};
+    background: ${props => props.theme.colors.sensitiveGrey.darkest};
   }
   .rc-slider-disabled {
     background-color: transparent;
     opacity: 0.5;
     .rc-slider-track {
-      background: ${props => props.theme.colors.sensitiveGrey.darker};
+      background: ${props => props.theme.colors.sensitiveGrey.darkest};
     }
   }
   .rc-slider-handle:focus {

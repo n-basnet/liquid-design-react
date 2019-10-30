@@ -10,13 +10,15 @@ const StyledHandle = styled.div`
   width: 24px;
   height: 24px;
   background-color: ${props => props.theme.colors.white.base};
-  border: 1px solid ${props => props.theme.colors.sensitiveGrey.darker};
+  border: 1px solid ${props => props.theme.colors.sensitiveGrey.darkest};
   border-radius: 50%;
   transition: ${props => props.theme.transition};
   box-shadow: ${props =>
     props.disabled
       ? 'none'
-      : props.dragging ? props.theme.doubleBoxShadowSmallHover : props.theme.doubleBoxShadowSmall};
+      : props.dragging
+        ? props.theme.doubleBoxShadowSmallHover
+        : props.theme.doubleBoxShadowSmall};
   & :hover {
     box-shadow: ${props => !props.disabled && props.theme.doubleBoxShadowSmallHover};
   }
