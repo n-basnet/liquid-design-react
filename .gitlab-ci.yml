@@ -26,7 +26,7 @@ lint:
 publish_package:
   stage: publish-package
   script:
-    - yarn semantic-release || true
+    - yarn semantic-release
 
   only:
     - master
