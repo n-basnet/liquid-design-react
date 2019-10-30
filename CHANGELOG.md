@@ -1,3 +1,14 @@
+## [1.1.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.2...v1.1.3) (2019-10-30)
+
+
+### Bug Fixes
+
+* **accordion:** accordion children click causing to close the accordion ([a196e74](https://gitlab.com/liquid-design/liquid-design-react/commit/a196e74)), closes [#7](https://gitlab.com/liquid-design/liquid-design-react/issues/7)
+* **button:** Add prop to Button element allowing to use filled icons in buttons ([26eef74](https://gitlab.com/liquid-design/liquid-design-react/commit/26eef74)), closes [#3](https://gitlab.com/liquid-design/liquid-design-react/issues/3)
+* **colors:** increase gray colors contrast for readability ([9cb95f8](https://gitlab.com/liquid-design/liquid-design-react/commit/9cb95f8))
+* **filter:** callbacks onOptionDeselect, onOptionSelect, onSubmit not working consistently ([850bfc3](https://gitlab.com/liquid-design/liquid-design-react/commit/850bfc3)), closes [#4](https://gitlab.com/liquid-design/liquid-design-react/issues/4) [#5](https://gitlab.com/liquid-design/liquid-design-react/issues/5)
+* **search:** Search bar component not allowing special characters ([ac3cc15](https://gitlab.com/liquid-design/liquid-design-react/commit/ac3cc15)), closes [#9](https://gitlab.com/liquid-design/liquid-design-react/issues/9)
+
 # [1.1.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.0.1...v1.1.0) (2019-02-05)
 
 
