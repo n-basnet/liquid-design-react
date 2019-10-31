@@ -177,7 +177,7 @@ export class Pagination extends PureComponent {
 
   getLastPageIndex = () => {
     const { children, itemsPerPage } = this.props
-    return children.length / itemsPerPage - 1
+    return Math.ceil(children.length / itemsPerPage) - 1
   }
 
   getPageItems = () => {
