@@ -1,3 +1,10 @@
+## [1.1.4](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.3...v1.1.4) (2019-10-31)
+
+
+### Bug Fixes
+
+* **pagination:** Invalid array length ([fd3e274](https://gitlab.com/liquid-design/liquid-design-react/commit/fd3e274)), closes [#11](https://gitlab.com/liquid-design/liquid-design-react/issues/11)
+
 ## [1.1.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.2...v1.1.3) (2019-10-30)
 
 
