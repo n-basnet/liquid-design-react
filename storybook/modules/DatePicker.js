@@ -6,12 +6,12 @@ import {
   includeComponentInPropTable,
   getPropTablesExcludeList,
   getSnippetTemplate,
-  Fragment,
+  Fragment
 } from '../helpers'
 import {
   default as EnhancedDatePicker,
   DATE_PICKER_CLASSNAMES,
-  DatePicker,
+  DatePicker
 } from '~/modules/DatePicker'
 
 const getDatePickerSnippet = props => `
@@ -40,8 +40,8 @@ storiesOf('Modules/DatePicker', module)
   .addParameters({
     info: {
       propTables: [DatePicker],
-      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker]),
-    },
+      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker])
+    }
   })
   .add('default', () => <EnhancedDatePicker />, getSnippetTemplate(getDatePickerSnippet()))
   .add(
@@ -71,7 +71,14 @@ storiesOf('Modules/DatePicker', module)
   )
   .add(
     'range mode with calendar',
-    () => <EnhancedDatePicker rangeMode withCalendar />,
+    () => (
+      <EnhancedDatePicker
+        rangeMode
+        withCalendar
+        onStartDateChange={() => console.log('Start Date changed')}
+        onEndDateChange={() => console.log('End Date changed')}
+      />
+    ),
     getSnippetTemplate(getDatePickerSnippet('rangeMode withCalendar'))
   )
   .add(

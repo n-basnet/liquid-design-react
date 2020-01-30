@@ -45,7 +45,7 @@ export class DatePicker extends PureComponent {
     /** error message which is shown when input value didn't pass validation */
     dateValidationError: PropTypes.string,
     /** error message which is shown when end date input value is not after the start date value */
-    endDateValidationError: PropTypes.string,
+    endDateValidationError: PropTypes.string
   }
   static defaultProps = {
     disabled: false,
@@ -61,7 +61,7 @@ export class DatePicker extends PureComponent {
     className: null,
     calendarProps: {},
     dateValidationError: DATEPICKER_CONSTS.DATE_FORMAT_ERROR_MESSAGE,
-    endDateValidationError: DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE,
+    endDateValidationError: DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE
   }
 
   state = {
@@ -82,7 +82,7 @@ export class DatePicker extends PureComponent {
     currentMonth: this.props.defaultStartDate || today,
     calendarYear: this.props.defaultStartDate
       ? dateFns.format(this.props.defaultStartDate, 'YYYY')
-      : dateFns.format(today, 'YYYY'),
+      : dateFns.format(today, 'YYYY')
   }
   componentDidMount () {
     const { format } = this.props
@@ -90,7 +90,7 @@ export class DatePicker extends PureComponent {
     const formatRegexp = getFormatRegexp(format)
     this.setState({
       formatSeparator: currentSeparator,
-      formatRegExp: formatRegexp,
+      formatRegExp: formatRegexp
     })
   }
   changeCurrentMonth = date => {
@@ -119,12 +119,12 @@ export class DatePicker extends PureComponent {
     const formattedValue = toCommonFormat(value, format, formatSeparator)
     return this.commonInputValidate(value) === true
       ? checkEndDateWithStartDate(
-        formattedValue,
-        startDate,
-        startDateInputValue,
-        format,
-        endDateValidationError
-      )
+          formattedValue,
+          startDate,
+          startDateInputValue,
+          format,
+          endDateValidationError
+        )
       : this.commonInputValidate(value)
   }
   commonInputValidate = value => {
@@ -138,7 +138,7 @@ export class DatePicker extends PureComponent {
   handleClickOutside = () => {
     this.setState(({ startDate }) => ({
       isCalendarOpen: false,
-      currentMonth: startDate || today,
+      currentMonth: startDate || today
     }))
   }
   handleInputChange = (value, valueName) => {
@@ -160,18 +160,18 @@ export class DatePicker extends PureComponent {
       this.setState({
         [isStartDateInput ? 'startDate' : 'endDate']: parsedValue,
         isSelectingRange:
-          rangeMode && isStartDateInput && (!endDate || dateFns.isAfter(parsedValue, endDate)),
+          rangeMode && isStartDateInput && (!endDate || dateFns.isAfter(parsedValue, endDate))
       })
       if (isStartDateInput && dateFns.isAfter(parsedValue, endDate)) {
         this.setState({
           endDate: null,
-          endDateInputValue: '',
+          endDateInputValue: ''
         })
       }
       if (isStartDateInput) {
         this.setState({
           currentMonth: parsedValue,
-          calendarYear: dateFns.format(parsedValue, FORMATS.YEAR_FORMAT),
+          calendarYear: dateFns.format(parsedValue, FORMATS.YEAR_FORMAT)
         })
       }
       if (!isStartDateInput || !rangeMode) {
@@ -193,8 +193,9 @@ export class DatePicker extends PureComponent {
     this.setState({
       startDate: date,
       startDateInputValue: dateFns.format(date, this.props.format),
-      currentMonth: date,
+      currentMonth: date
     })
+    this.handleInputChange(dateFns.format(date, this.props.format), 'startDateInputValue')
     if (this.props.rangeMode) {
       this.setState({ isSelectingRange: true })
     } else {
@@ -206,8 +207,11 @@ export class DatePicker extends PureComponent {
       endDate: date,
       endDateInputValue: date ? dateFns.format(date, this.props.format) : '',
       isCalendarOpen: !date,
-      isSelectingRange: !date,
+      isSelectingRange: !date
     })
+    if (date != null) {
+      this.handleInputChange(dateFns.format(date, this.props.format), 'endDateInputValue')
+    }
   }
   handleStartDateBlur = () => {
     if (this.state.startDateInputValue) {
@@ -247,7 +251,7 @@ export class DatePicker extends PureComponent {
       endDate,
       isSelectingRange,
       currentMonth,
-      calendarYear,
+      calendarYear
     } = this.state
     const textFieldPlaceholder = format.toLowerCase()
     return (
@@ -316,7 +320,7 @@ const classNameBase = getClassName(DatePicker)
 export const DATE_PICKER_CLASSNAMES = {
   BASE: classNameBase,
   INPUT_WRAPPER: `${classNameBase}__Input`,
-  CALENDAR_CONTAINER: `${classNameBase}__Calendar`,
+  CALENDAR_CONTAINER: `${classNameBase}__Calendar`
 }
 
 export default enhanceWithClickOutside(DatePicker)
