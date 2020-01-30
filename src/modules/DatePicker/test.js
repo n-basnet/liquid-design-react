@@ -1,6 +1,7 @@
 import DatePicker from '.'
 import { toCommonFormat, getSeparator, getFormatRegexp, checkEndDateWithStartDate } from './utils'
 import DATEPICKER_CONSTS from './consts'
+import DayCell, { DayContainer } from '../Calendar/DayCell'
 import TextField from '~/elements/TextField'
 import Calendar from '~/modules/Calendar'
 import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
@@ -8,7 +9,7 @@ import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
 describe('DatePicker', () => {
   const defaultProps = {
     onStartDateChange: jest.fn(),
-    format: DATEPICKER_CONSTS.DEFAULT_FORMAT,
+    format: DATEPICKER_CONSTS.DEFAULT_FORMAT
   }
   const getDatePickerWrapper = getWrapper(DatePicker, defaultProps)
 
@@ -41,6 +42,16 @@ describe('DatePicker', () => {
   it('renders Calendar in withCalendar mode', () => {
     const wrapper = getDatePickerWrapper({ withCalendar: true })
     expect(wrapper.find(Calendar)).toBeTruthy()
+  })
+  it('calls onStartDateChange prop if a date is selected in range/withCalendar mode', () => {
+    const wrapper = getDatePickerWrapper({ withCalendar: true, rangeMode: true })
+    wrapper
+      .find(Calendar)
+      .find(DayCell)
+      .at(20)
+      .find(DayContainer)
+      .simulate('click')
+    expect(defaultProps.onStartDateChange).toBeCalled()
   })
 
   everyComponentTestSuite(getDatePickerWrapper, DatePicker, 'DatePicker')
