@@ -16,14 +16,17 @@ chunkArray.forEach(path => {
   input[name] = path
 })
 
-const config = Object.assign({
-  input,
-  output: [
-    {
-      dir: 'dist/es',
-      format: 'es',
-    },
-  ],
-}, configCommon)
+const config = Object.assign(
+  {
+    input,
+    output: [
+      {
+        dir: 'dist/es',
+        format: 'es',
+      },
+    ],
+  },
+  configCommon,
+)
 
 export default config
