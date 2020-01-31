@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 import { number } from '@storybook/addon-knobs'
 
-import { default as EnhancedRating, Rating } from '~/components/Rating'
+import EnhancedRating, { Rating } from '../../src/components/Rating'
 import {
   getBackgroundWrapper,
   includeComponentInPropTable,
@@ -22,10 +22,12 @@ class RatingApp extends PureComponent {
     dots: Rating.propTypes.dots,
     steps: Rating.propTypes.steps,
   }
+
   static defaultProps = {
     dots: Rating.defaultProps.dots,
     steps: Rating.defaultProps.steps,
   }
+
   state = {
     rating: firstRating,
     ratingsSum: firstRating,
@@ -33,24 +35,27 @@ class RatingApp extends PureComponent {
     lastRating: null,
     disabled: false,
   }
+
   addRating = newRating => {
     const { ratingsSum, ratingsAmount } = this.state
     const newRatingAmount = ratingsAmount + 1
     const newRatingSum = newRating + ratingsSum
 
     this.setState({
-      rating: Math.round(newRatingSum / newRatingAmount * 100) / 100,
+      rating: Math.round((newRatingSum / newRatingAmount) * 100) / 100,
       ratingsSum: newRatingSum,
       ratingsAmount: newRatingAmount,
       lastRating: newRating,
     })
   }
+
   toggleDisabled = () => {
     this.setState(({ disabled }) => ({
       disabled: !disabled,
       ...(!disabled && { lastRating: null }),
     }))
   }
+
   render() {
     const { rating, lastRating, ratingsAmount, disabled } = this.state
     const { dots, steps } = this.props
@@ -68,7 +73,11 @@ class RatingApp extends PureComponent {
         />
         <SectionText>ratings #: {ratingsAmount}</SectionText>
         disabled:
-        <input type='checkbox' checked={disabled} onClick={this.toggleDisabled} />
+        <input
+          type="checkbox"
+          checked={disabled}
+          onClick={this.toggleDisabled}
+        />
       </div>
     )
   }
@@ -87,9 +96,11 @@ storiesOf('Components/Rating', module)
     () => <EnhancedRating />,
     getSnippetTemplate(`
   <Rating />
-    `)
+    `),
   )
   .add('default', () => (
-    <RatingApp steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })} />
+    <RatingApp
+      steps={number('steps', 5, { range: true, min: 1, max: 10, step: 1 })}
+    />
   ))
   .add('dots', () => <RatingApp dots />)

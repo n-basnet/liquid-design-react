@@ -3,18 +3,24 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { path } from 'ramda'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
-import { scaleUpDown, beamAnimation } from '~/elements/Favorite/animations'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { times } from '~/utils/misc'
-import { easing } from '~/utils/styling/animations'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { cursorValue, nonTouchDevicesHoverStyles } from '../../utils/styling'
+import { scaleUpDown, beamAnimation } from '../../elements/Favorite/animations'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { times } from '../../utils/misc'
+import { easing } from '../../utils/styling/animations'
 
 const getFill = props =>
-  path(props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darkest'], props.theme.colors)
+  path(
+    props.isActive ? ['richRed', 'base'] : ['sensitiveGrey', 'darkest'],
+    props.theme.colors,
+  )
 
 const getHoverFill = props =>
-  path(props.isActive ? ['richRed', 'dark'] : ['primary', 'base'], props.theme.colors)
+  path(
+    props.isActive ? ['richRed', 'dark'] : ['primary', 'base'],
+    props.theme.colors,
+  )
 
 export const ANIMATION_DURATION = 500
 const SIZE = 24
@@ -52,7 +58,8 @@ const Beam = styled.div`
       background-color: ${props.theme.colors.richRed.base};
       ${props.isAnimating &&
         css`
-          animation: ${beamAnimation} ${ANIMATION_DURATION}ms infinite ${easing.inOutQuad};
+          animation: ${beamAnimation} ${ANIMATION_DURATION}ms infinite
+            ${easing.inOutQuad};
         `};
     `};
   }
@@ -61,7 +68,7 @@ const Beam = styled.div`
     i =>
       `&:nth-child(${i}) {
     transform: rotate(${i * BEAM_DEG_OFFSET}deg);
-    }`
+    }`,
   )};
 `
 
@@ -75,10 +82,10 @@ export const FavoriteWrapper = styled.div`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
 
     ${props.disabled
-    ? css`
+      ? css`
           opacity: 0.5;
         `
-    : nonTouchDevicesHoverStyles(`
+      : nonTouchDevicesHoverStyles(`
       .${ICON_CLASSNAME} svg {
         fill: ${getHoverFill(props)};
       }
@@ -104,15 +111,18 @@ export class Favorite extends PureComponent {
     active: PropTypes.bool,
     onChange: PropTypes.func,
   }
+
   static defaultProps = {
     disabled: false,
     active: false,
     onChange: () => {},
   }
+
   state = {
     isAnimating: false,
     isActive: false,
   }
+
   handleClick = () => {
     if (this.state.isAnimating || this.props.disabled) {
       return
@@ -126,7 +136,8 @@ export class Favorite extends PureComponent {
       }, ANIMATION_DURATION)
     })
   }
-  render () {
+
+  render() {
     const { disabled, active, ...props } = this.props
     const { isAnimating, isActive } = this.state
     return (
@@ -137,7 +148,7 @@ export class Favorite extends PureComponent {
         isActive={isActive || active || isAnimating}
         {...props}
       >
-        <Glyph name='favorite' size={SIZE} />
+        <Glyph name="favorite" size={SIZE} />
         <BeamsContainer>
           {times(BEAMS_AMOUNT).map(i => (
             <Beam isAnimating={isAnimating} key={i} />

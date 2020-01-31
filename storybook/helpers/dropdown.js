@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { without, append } from 'ramda'
 import uniqid from 'uniqid'
 
-import { times } from '~/utils/misc'
+import { times } from '../../src/utils/misc'
 import { getTextKnob } from '.'
 
 export const getDropdownOptions = (onClick, amount = 4) =>
@@ -29,25 +29,30 @@ export class MultiselectDropdownStateWrapper extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
   }
+
   state = {
     selectedOptionsIds: [],
     options: [],
   }
-  componentDidMount () {
+
+  componentDidMount() {
     this.setState({ options: getDropdownOptions(this.handleClick, 10) })
   }
+
   handleClick = ({ id }) => {
     const isSelected = this.state.selectedOptionsIds.indexOf(id) >= 0
     this[isSelected ? 'handleRemove' : 'handleAdd'](id)
   }
+
   updateSelectedOptionsIds = transformation =>
     this.setState(({ selectedOptionsIds }) => ({
       selectedOptionsIds: transformation(selectedOptionsIds),
     }))
+
   handleAdd = id => this.updateSelectedOptionsIds(append(id))
   handleRemove = id => this.updateSelectedOptionsIds(without([id]))
 
-  render () {
+  render() {
     const { children } = this.props
     const { options, selectedOptionsIds } = this.state
 
@@ -60,11 +65,11 @@ export class MultiselectDropdownStateWrapper extends React.Component {
         return React.cloneElement(child, {
           options,
           selectedOptionsIds,
-          onOptionDeselect: (option) => {
+          onOptionDeselect: option => {
             this.handleRemove(option.id)
             action('optionDeselect')(option)
           },
-          onOptionSelect: (option) => {
+          onOptionSelect: option => {
             this.handleAdd(option.id)
             action('optionSelect')(option)
           },

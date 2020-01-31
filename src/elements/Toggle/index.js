@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components'
 import { path, isEmpty } from 'ramda'
 import { rgba } from 'polished'
 
-import { cursorValue, disableMozTextSelection } from '~/utils/styling'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { cursorValue, disableMozTextSelection } from '../../utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const TOGGLE_WIDTH = 60
 const TOGGLE_HEIGHT = 35
@@ -19,15 +19,21 @@ const TOGGLE_KNOB_HEIGHT_ICONS = 36
 const ICON_SIZE = 22
 
 const getWidth = props => (props.hasIcons ? TOGGLE_WIDTH_ICONS : TOGGLE_WIDTH)
-const getKnobWidth = props => (props.hasIcons ? TOGGLE_KNOB_WIDTH_ICONS : TOGGLE_KNOB_SIDE)
-const getKnobHeight = props => (props.hasIcons ? TOGGLE_KNOB_HEIGHT_ICONS : TOGGLE_KNOB_SIDE)
+const getKnobWidth = props =>
+  props.hasIcons ? TOGGLE_KNOB_WIDTH_ICONS : TOGGLE_KNOB_SIDE
+const getKnobHeight = props =>
+  props.hasIcons ? TOGGLE_KNOB_HEIGHT_ICONS : TOGGLE_KNOB_SIDE
 const getActiveColor = props =>
-  path(props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'dark'], props.theme.colors)
+  path(
+    props.isActive ? ['primary', 'base'] : ['sensitiveGrey', 'dark'],
+    props.theme.colors,
+  )
 const getKnobColor = props =>
   props.disabled && props.hasIcons
     ? props.theme.colors.sensitiveGrey.darkest
     : props.theme.colors[props.hasIcons ? 'primary' : 'white'].base
-const getIconOffset = props => getKnobWidth(props) / 2 - ICON_SIZE / 2 + TOGGLE_KNOB_PAD
+const getIconOffset = props =>
+  getKnobWidth(props) / 2 - ICON_SIZE / 2 + TOGGLE_KNOB_PAD
 
 const ToggleWrapper = styled.div`
   position: relative;
@@ -46,8 +52,8 @@ const ToggleWrapper = styled.div`
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
     transition: ${props.theme.transition};
     background-color: ${props.hasIcons
-    ? props.theme.colors.sensitiveGrey.base
-    : props.disabled
+      ? props.theme.colors.sensitiveGrey.base
+      : props.disabled
       ? rgba(props.theme.colors.sensitiveGrey.darker, 0.5)
       : getActiveColor(props)};
     &:after {
@@ -56,15 +62,17 @@ const ToggleWrapper = styled.div`
       transition: ${props.theme.transition};
       background-color: ${getKnobColor(props)};
       ${props.disabled
-    ? css`
+        ? css`
             opacity: 0.7;
           `
-    : css`
+        : css`
             box-shadow: 0 4px 8px 0 ${rgba(props.theme.colors.black.base, 0.05)};
           `};
       ${props.isActive &&
         css`
-          transform: translateX(${getWidth(props) - getKnobWidth(props) - TOGGLE_KNOB_PAD * 2}px);
+          transform: translateX(
+            ${getWidth(props) - getKnobWidth(props) - TOGGLE_KNOB_PAD * 2}px
+          );
         `};
     }
     ${props.hasIcons &&
@@ -86,15 +94,15 @@ const ToggleWrapper = styled.div`
         .${ICON_CLASSNAME} {
           &:nth-child(1) svg {
             fill: ${path(
-    props.isActive ? ['sensitiveGrey', 'darkest'] : ['white', 'base'],
-    props.theme.colors
-  )};
+              props.isActive ? ['sensitiveGrey', 'darkest'] : ['white', 'base'],
+              props.theme.colors,
+            )};
           }
           &:nth-child(2) svg {
             fill: ${path(
-    props.isActive ? ['white', 'base'] : ['sensitiveGrey', 'darkest'],
-    props.theme.colors
-  )};
+              props.isActive ? ['white', 'base'] : ['sensitiveGrey', 'darkest'],
+              props.theme.colors,
+            )};
           }
         }
       `};
@@ -113,8 +121,8 @@ export const Toggle = ({ icons, onClick, ...props }) => (
   <ToggleWrapper
     hasIcons={!isEmpty(icons)}
     onClick={props.disabled ? null : onClick}
-    tabIndex='0'
-    role='button'
+    tabIndex="0"
+    role="button"
     {...props}
   >
     {icons[0] && <Glyph name={icons[0]} size={ICON_SIZE} />}

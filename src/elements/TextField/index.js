@@ -4,9 +4,9 @@ import uniqid from 'uniqid'
 import styled, { css } from 'styled-components'
 import cx from 'classnames'
 
-import GenericInput from '~/components/misc/Input'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
+import GenericInput from '../../components/misc/Input'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { GLOBAL_CSS_PREFIX } from '../../utils/consts'
 
 const InputWrapper = styled.div`
   display: inline-block;
@@ -23,7 +23,8 @@ export const LabelWrapper = styled.label`
   `};
 `
 
-const getBgColor = ({ theme, grey }) => theme.colors[grey ? 'sensitiveGrey' : 'white'].base
+const getBgColor = ({ theme, grey }) =>
+  theme.colors[grey ? 'sensitiveGrey' : 'white'].base
 const getInputStyle = multiline => css`
   padding: ${multiline ? 11 : 9}px 15px 11px;
   width: 100%;
@@ -61,6 +62,7 @@ export default class TextField extends React.Component {
     disabled: PropTypes.bool,
     style: PropTypes.object,
   }
+
   static defaultProps = {
     value: DEFAULT_VALUE,
     label: null,
@@ -72,6 +74,7 @@ export default class TextField extends React.Component {
     disabled: false,
     style: {},
   }
+
   id = `${GLOBAL_CSS_PREFIX}${uniqid()}`
   getErrorMessage = () => {
     const { validate, value } = this.props
@@ -79,8 +82,18 @@ export default class TextField extends React.Component {
     const hasErrorMessage = validationResult !== true
     return hasErrorMessage ? validationResult : null
   }
+
   render() {
-    const { value, label, style, multiline, onChange, inputClassName, error, ...props } = this.props
+    const {
+      value,
+      label,
+      style,
+      multiline,
+      onChange,
+      inputClassName,
+      error,
+      ...props
+    } = this.props
     return (
       <InputWrapper
         style={style}
@@ -90,7 +103,10 @@ export default class TextField extends React.Component {
         })}
       >
         {label && (
-          <LabelWrapper htmlFor={this.id} className={TEXT_FIELD_CLASSNAMES.LABEL}>
+          <LabelWrapper
+            htmlFor={this.id}
+            className={TEXT_FIELD_CLASSNAMES.LABEL}
+          >
             {label}
           </LabelWrapper>
         )}

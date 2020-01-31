@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { ICON_CLASSNAME } from '../../elements/Icon'
+import { cursorValue, nonTouchDevicesHoverStyles } from '../../utils/styling'
 
 export const ListItem = styled.li`
   display: flex;
@@ -22,8 +22,10 @@ export const ListItem = styled.li`
       props.onClick &&
       nonTouchDevicesHoverStyles(`
       background-color: ${
-  props.grey ? props.theme.colors.sensitiveGrey.dark : props.theme.colors.white
-};
+        props.grey
+          ? props.theme.colors.sensitiveGrey.dark
+          : props.theme.colors.white
+      };
       color: ${props.theme.colors.primary.base};
       font-weight: ${props.theme.fontWeight.black};
       transition: ${props.theme.transition};
@@ -55,7 +57,7 @@ export const ListItem = styled.li`
       margin-top: 4px;
       min-width: 16px;
       ${props =>
-    props.active &&
+        props.active &&
         css`
           svg {
             fill: ${props.theme.colors.primary.base};

@@ -1,14 +1,14 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { default as EnhancedFaq, Faq } from '~/modules/Faq'
+import EnhancedFaq, { Faq } from '../../src/modules/Faq'
 import {
   getBackgroundWrapper,
   getTextKnob,
   getSnippetTemplate,
   getPropTablesExcludeList,
 } from '../helpers'
-import { times } from '~/utils/misc'
+import { times } from '../../src/utils/misc'
 
 const headlinesTexts = {
   primary: getTextKnob({
@@ -44,7 +44,9 @@ storiesOf('Modules/Faq', module)
   })
   .add(
     'default',
-    () => <EnhancedFaq faqContent={faqContent} headlinesTexts={headlinesTexts} />,
+    () => (
+      <EnhancedFaq faqContent={faqContent} headlinesTexts={headlinesTexts} />
+    ),
     getSnippetTemplate(`
   <Faq
     faqContent={[
@@ -66,5 +68,5 @@ storiesOf('Modules/Faq', module)
       secondary: "We have been around for 350 years, yet our majority …",
     }}
   />
-    `)
+    `),
   )

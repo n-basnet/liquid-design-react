@@ -1,8 +1,11 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-import { AUX_CELL_CLASSNAME, getTableCellYPadding } from '~/components/Table/utils'
-import { cursorValue } from '~/utils/styling'
+import {
+  AUX_CELL_CLASSNAME,
+  getTableCellYPadding,
+} from '../../../components/Table/utils'
+import { cursorValue } from '../../../utils/styling'
 
 const RowWrapper = styled.tr`
   ${props => css`
@@ -14,10 +17,10 @@ const RowWrapper = styled.tr`
         background-color: ${props.theme.colors.sensitiveGrey.base};
       `};
     ${props.disabled
-    ? css`
+      ? css`
           opacity: 0.5;
         `
-    : css`
+      : css`
           &:hover {
             background-color: ${props.theme.colors.sensitiveGrey.base};
           }

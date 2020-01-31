@@ -1,7 +1,8 @@
 import { keyframes } from 'styled-components'
 
 const DEFAULT_OFFSET = 30
-const getOffsetValue = (initValue, offset = DEFAULT_OFFSET) => (100 - offset) * initValue / 100
+const getOffsetValue = (initValue, offset = DEFAULT_OFFSET) =>
+  ((100 - offset) * initValue) / 100
 
 export const scaleUpDown = keyframes`
   ${getOffsetValue(0)}% {

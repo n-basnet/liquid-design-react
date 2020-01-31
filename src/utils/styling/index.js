@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-import { isTouchDevice } from '~/utils/featureDetects'
+import { isTouchDevice } from '../../utils/featureDetects'
 
 export const getBackgroundImage = ({ src }) => css`
   background-image: url(${src});

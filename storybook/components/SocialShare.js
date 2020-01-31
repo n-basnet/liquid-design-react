@@ -1,8 +1,14 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { getBackgroundWrapper, getPropTablesExcludeList, getSnippetTemplate } from '../helpers'
-import { default as EnchancedSocialShare, SocialShare } from '~/elements/SocialShares'
+import {
+  getBackgroundWrapper,
+  getPropTablesExcludeList,
+  getSnippetTemplate,
+} from '../helpers'
+import EnchancedSocialShare, {
+  SocialShare,
+} from '../../src/elements/SocialShares'
 
 const getSocialShareSnippet = props => `
   <SocialShare ${props} />
@@ -34,11 +40,11 @@ STORIES.map(name => {
     .add(
       name,
       () => <EnchancedSocialShare hasLabel type={name} />,
-      getSnippetTemplate(getSocialShareSnippet(`hasLabel type='${name}'`))
+      getSnippetTemplate(getSocialShareSnippet(`hasLabel type='${name}'`)),
     )
     .add(
       `${name} without label`,
       () => <EnchancedSocialShare type={name} />,
-      getSnippetTemplate(getSocialShareSnippet(`type='${name}'`))
+      getSnippetTemplate(getSocialShareSnippet(`type='${name}'`)),
     )
 })

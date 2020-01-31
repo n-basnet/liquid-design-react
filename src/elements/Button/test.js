@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '.'
-import { Glyph } from '~/elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { Glyph } from '../../elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Button', () => {
   const defaultProps = {
@@ -14,7 +14,7 @@ describe('Button', () => {
     expect(
       getButtonWrapper()
         .find(Button)
-        .text()
+        .text(),
     ).toEqual(defaultProps.children)
   })
 
@@ -24,7 +24,9 @@ describe('Button', () => {
         some <i>content</i>
       </div>
     )
-    expect(getButtonWrapper({ children: <ButtonContent /> }).find(ButtonContent)).toHaveLength(1)
+    expect(
+      getButtonWrapper({ children: <ButtonContent /> }).find(ButtonContent),
+    ).toHaveLength(1)
   })
 
   it('renders an icon', () => {
@@ -32,7 +34,7 @@ describe('Button', () => {
     expect(
       getButtonWrapper({ icon: iconName })
         .find(Glyph)
-        .prop('name')
+        .prop('name'),
     ).toEqual(iconName)
   })
 

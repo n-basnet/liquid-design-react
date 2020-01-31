@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
 
-import { SingleLabel } from '~/components/misc/charts/Labels'
+import { SingleLabel } from '../../components/misc/charts/Labels'
 
 const TOOLTIP_WIDTH = 175
 const TOOLTIP_HEIGHT = 68
@@ -38,11 +38,11 @@ const Tooltip = styled.div`
     content: '';
     position: absolute;
     ${props =>
-    props.isLeftAligned
-      ? css`
+      props.isLeftAligned
+        ? css`
             left: ${TOOLTIP_ARROW_SIZE}px;
           `
-      : props.isRightAligned
+        : props.isRightAligned
         ? css`
             right: ${TOOLTIP_ARROW_SIZE}px;
           `
@@ -55,7 +55,8 @@ const Tooltip = styled.div`
     bottom: -${TOOLTIP_ARROW_SIZE}px;
     box-sizing: border-box;
     margin: auto;
-    border-top: ${TOOLTIP_ARROW_SIZE}px solid ${props => props.theme.colors.white.base};
+    border-top: ${TOOLTIP_ARROW_SIZE}px solid
+      ${props => props.theme.colors.white.base};
     border-right: ${TOOLTIP_ARROW_SIZE}px solid transparent;
     border-left: ${TOOLTIP_ARROW_SIZE}px solid transparent;
   }
@@ -90,6 +91,7 @@ class BarChartTooltip extends PureComponent {
     isRightAligned: PropTypes.bool.isRequired,
     resetTooltip: PropTypes.func.isRequired,
   }
+
   handleClickOutside = this.props.resetTooltip
   render() {
     const { width, tooltipData, isLeftAligned, isRightAligned } = this.props
@@ -100,7 +102,11 @@ class BarChartTooltip extends PureComponent {
           isRightAligned={isRightAligned}
           style={{
             top: `${tooltipData.y - TOOLTIP_HEIGHT - TOOLTIP_BOTTOM_MARGIN}px`,
-            left: getLeftOffset({ x: tooltipData.x, isLeftAligned, isRightAligned }),
+            left: getLeftOffset({
+              x: tooltipData.x,
+              isLeftAligned,
+              isRightAligned,
+            }),
           }}
         >
           <Label {...tooltipData.label} />

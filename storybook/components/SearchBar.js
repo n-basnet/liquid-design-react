@@ -2,21 +2,21 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { default as EnhancedSearchBar, SearchBar } from '~/components/SearchBar'
+import EnhancedSearchBar, { SearchBar } from '../../src/components/SearchBar'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
   getTextKnob,
   getSnippetTemplate,
 } from '../helpers'
-import { times } from '~/utils/misc'
+import { times } from '../../src/utils/misc'
 
 const getOptions = () =>
   times(4).map(v =>
     getTextKnob({
       defaultText: `Search Result ${v + 1}`,
       name: `result ${v + 1}`,
-    })
+    }),
   )
 
 const getSearchBarSnippet = props => `
@@ -27,7 +27,7 @@ const getSearchBarSnippet = props => `
       'Search Result 2',
       'Search Result 3',
       'Search Result 4',
-    ]}${props || ``}
+    ]}${props || ''}
   />
 `
 
@@ -49,23 +49,23 @@ storiesOf('Components/SearchBar', module)
   .add(
     'default',
     () => <EnhancedSearchBar {...getDefaultProps()} />,
-    getSnippetTemplate(getSearchBarSnippet())
+    getSnippetTemplate(getSearchBarSnippet()),
   )
   .add(
     'ghost',
     () => <EnhancedSearchBar ghost {...getDefaultProps()} />,
     getSnippetTemplate(
       getSearchBarSnippet(`
-    ghost`)
-    )
+    ghost`),
+    ),
   )
   .add(
     'disabled',
     () => <EnhancedSearchBar disabled />,
     getSnippetTemplate(
       getSearchBarSnippet(`
-    disabled`)
-    )
+    disabled`),
+    ),
   )
   .add(
     'disabled ghost',
@@ -73,6 +73,6 @@ storiesOf('Components/SearchBar', module)
     getSnippetTemplate(
       getSearchBarSnippet(`
     disabled
-    ghost`)
-    )
+    ghost`),
+    ),
   )

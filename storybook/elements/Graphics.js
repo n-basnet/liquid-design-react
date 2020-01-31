@@ -7,11 +7,13 @@ import EnhancedWarningLabel, {
   WarningLabel,
   WARNING_LABELS_FILES,
   DEFAULT_WIDTH,
-} from '~/elements/WarningLabel'
-import Bowl from '~/elements/Bowl'
-import EnhancedPlaceholder, { Placeholder } from '~/elements/Placeholder'
+} from '../../src/elements/WarningLabel'
+import Bowl from '../../src/elements/Bowl'
+import EnhancedPlaceholder, {
+  Placeholder,
+} from '../../src/elements/Placeholder'
 import { getBackgroundWrapper, getPropTablesExcludeList } from '../helpers'
-import { media } from '~/utils/styling'
+import { media } from '../../src/utils/styling'
 
 const WarningLabelsGroupWrapper = styled.div`
   display: flex;
@@ -59,12 +61,12 @@ storiesOf('Elements/Graphics/Placeholder', module)
   .add(
     'default',
     () => <EnhancedPlaceholder width={getNumberKnob(150)} />,
-    getCodeSnippet('<Placeholder />')
+    getCodeSnippet('<Placeholder />'),
   )
   .add(
     'square',
     () => <EnhancedPlaceholder isSquare width={getNumberKnob(150)} />,
-    getCodeSnippet('<Placeholder isSquare />')
+    getCodeSnippet('<Placeholder isSquare />'),
   )
   .add(
     'rectangular',
@@ -75,7 +77,7 @@ storiesOf('Elements/Graphics/Placeholder', module)
         height={getNumberKnob(100, 'height')}
       />
     ),
-    getCodeSnippet('<Placeholder isRectangular />')
+    getCodeSnippet('<Placeholder isRectangular />'),
   )
 
 storiesOf('Elements/Graphics', module)
@@ -85,11 +87,16 @@ storiesOf('Elements/Graphics', module)
     'Bowl',
     () => (
       <Bowl
-        percent={number('percent', 50, { range: true, min: 0, max: 100, step: 1 })}
+        percent={number('percent', 50, {
+          range: true,
+          min: 0,
+          max: 100,
+          step: 1,
+        })}
         width={getNumberKnob(180)}
       />
     ),
-    getCodeSnippet('<Bowl />')
+    getCodeSnippet('<Bowl />'),
   )
 
 storiesOf('Elements/Graphics', module)
@@ -97,8 +104,8 @@ storiesOf('Elements/Graphics', module)
   .addParameters(
     getParams(
       [WarningLabelsGroupWrapper, WarningLabelWrapper, EnhancedWarningLabel],
-      [WarningLabel]
-    )
+      [WarningLabel],
+    ),
   )
   .add(
     'Warning Labels',
@@ -109,11 +116,16 @@ storiesOf('Elements/Graphics', module)
             <span>{name}</span>
             <EnhancedWarningLabel
               name={name}
-              width={number('width', DEFAULT_WIDTH, { range: true, min: 20, max: 200, step: 1 })}
+              width={number('width', DEFAULT_WIDTH, {
+                range: true,
+                min: 20,
+                max: 200,
+                step: 1,
+              })}
             />
           </WarningLabelWrapper>
         ))}
       </WarningLabelsGroupWrapper>
     ),
-    getCodeSnippet(`<WarningLabel name='CompressedGas' />`)
+    getCodeSnippet("<WarningLabel name='CompressedGas' />"),
   )

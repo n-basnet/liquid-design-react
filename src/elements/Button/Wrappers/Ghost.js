@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { ICON_CLASSNAME } from '../../../elements/Icon'
+import { cursorValue } from '../../../utils/styling'
 
 export default styled.button`
   background-color: transparent;
@@ -31,13 +31,13 @@ export default styled.button`
     .${ICON_CLASSNAME} {
       & svg {
         fill: ${props.disabled
-    ? props.theme.colors.sensitiveGrey.darker
-    : props.theme.colors.primary.base};
+          ? props.theme.colors.sensitiveGrey.darker
+          : props.theme.colors.primary.base};
         ${props.isIconOnRight
-    ? css`
+          ? css`
               margin-left: 0;
             `
-    : css`
+          : css`
               margin-right: 5px;
             `};
       }

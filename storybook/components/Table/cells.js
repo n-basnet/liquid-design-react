@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Placeholder from '~/elements/Placeholder'
+import Placeholder from '../../../src/elements/Placeholder'
 
 const Label = styled.span`
   display: block;
@@ -34,7 +34,13 @@ const NameCellWrapper = styled.span`
   display: flex;
 `
 
-export const NameCell = ({ value, auxText, label, withMoreContent, withImages }) => (
+export const NameCell = ({
+  value,
+  auxText,
+  label,
+  withMoreContent,
+  withImages,
+}) => (
   <NameCellWrapper>
     {withImages && (
       <Placeholder

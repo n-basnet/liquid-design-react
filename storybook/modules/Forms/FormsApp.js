@@ -3,17 +3,21 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { action } from '@storybook/addon-actions'
 
-import { Headline, Checkbox, Button } from '~'
-import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
-import { BUTTON_CLASSNAME } from '~/elements/Button'
-import { HEADLINE_CLASSNAME } from '~/elements/Headline'
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { INPUT_CLASSNAME } from '~/components/misc/Input'
-import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
-import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
-import DatePicker, { DATE_PICKER_CLASSNAMES } from '~/modules/DatePicker'
-import { YEAR_INPUT_CLASSNAME } from '~/modules/Calendar'
-import { media, nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { Headline, Checkbox, Button } from '../../../src'
+import { CHECKBOX_CLASSNAMES } from '../../../src/elements/Checkbox'
+import { BUTTON_CLASSNAME } from '../../../src/elements/Button'
+import { HEADLINE_CLASSNAME } from '../../../src/elements/Headline'
+import { ICON_CLASSNAME } from '../../../src/elements/Icon'
+import { INPUT_CLASSNAME } from '../../../src/components/misc/Input'
+import TextField, {
+  TEXT_FIELD_CLASSNAMES,
+} from '../../../src/elements/TextField'
+import Dropdown, { DROPDOWN_CLASSNAME } from '../../../src/elements/Dropdown'
+import DatePicker, {
+  DATE_PICKER_CLASSNAMES,
+} from '../../../src/modules/DatePicker'
+import { YEAR_INPUT_CLASSNAME } from '../../../src/modules/Calendar'
+import { media, nonTouchDevicesHoverStyles } from '../../../src/utils/styling'
 
 import FlexRowsWrapper from './FlexRowsWrapper'
 import ProfileFormPart from './ProfileFormPart'
@@ -58,7 +62,7 @@ const FormAppContainer = styled.div`
       padding-bottom: 14px;
       padding-top: 7px;
       ${props =>
-    !props.grey &&
+        !props.grey &&
         css`
           background-color: ${props.theme.colors.white.base};
         `}
@@ -149,7 +153,7 @@ const FormApp = ({
   }
   return (
     <FormAppContainer grey={onWhiteBackground}>
-      <Headline type='H2'>{getTextKnob({ defaultText: headerText })}</Headline>
+      <Headline type="H2">{getTextKnob({ defaultText: headerText })}</Headline>
 
       {isProfile && <ProfileFormPart fieldProps={fieldProps} />}
 
@@ -164,7 +168,15 @@ const FormApp = ({
               </div>
             )
           } else {
-            return <TextField key={i} style={field.style} {...fieldProps} {...field} type={type} />
+            return (
+              <TextField
+                key={i}
+                style={field.style}
+                {...fieldProps}
+                {...field}
+                type={type}
+              />
+            )
           }
         })}
       </FlexRowsWrapper>
@@ -174,13 +186,17 @@ const FormApp = ({
           {checkboxText && (
             <CheckboxTextWrapper>
               <Checkbox label={checkboxText} />
-              {checkboxLinkText && <a href=''>{checkboxLinkText}</a>}
+              {checkboxLinkText && <a href="">{checkboxLinkText}</a>}
             </CheckboxTextWrapper>
           )}
         </div>
         <div>
           <Fragment>
-            <Button size='big' appearance='ghost' onClick={action('click cancel')}>
+            <Button
+              size="big"
+              appearance="ghost"
+              onClick={action('click cancel')}
+            >
               Cancel
             </Button>
             <Button onClick={action('click accept')}>{acceptButtonText}</Button>

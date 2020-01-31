@@ -10,12 +10,12 @@ import {
   getPropTablesExcludeList,
   includeComponentInPropTable,
 } from '../helpers'
-import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
-import Placeholder from '~/elements/Placeholder'
-import { default as EnhancedModal, Modal } from '~/components/Modal'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
-import Button from '~/elements/Button'
-import { media } from '~/utils/styling'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '../../src/elements/TextField'
+import Placeholder from '../../src/elements/Placeholder'
+import EnhancedModal, { Modal } from '../../src/components/Modal'
+import { DEFAULT_THEME } from '../../src/utils/consts/themes'
+import Button from '../../src/elements/Button'
+import { media } from '../../src/utils/styling'
 
 const BUTTON_WRAPPER_CLASSNAME = 'buttonWrapper'
 
@@ -97,10 +97,10 @@ export const Presentation = {
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 27 })}</p>
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button size='big' onClick={() => {}}>
+        <Button size="big" onClick={() => {}}>
           Button Text
         </Button>
-        <Button appearance='secondary' size='big' onClick={() => {}}>
+        <Button appearance="secondary" size="big" onClick={() => {}}>
           Cancel Text
         </Button>
       </div>
@@ -110,9 +110,9 @@ export const Presentation = {
     <ModalTextFieldPresentation>
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
-      <TextField grey placeholder='Add Placeholder Text here' />
+      <TextField grey placeholder="Add Placeholder Text here" />
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button appearance='ghost' onClick={() => {}}>
+        <Button appearance="ghost" onClick={() => {}}>
           Text
         </Button>
         <Button onClick={() => {}}>Text</Button>
@@ -125,10 +125,10 @@ export const Presentation = {
       <h1>{getTextKnob({ defaultText: 'Headline Text' })}</h1>
       <p>{getTextKnob({ placeholderTextLength: 20 })}</p>
       <div className={BUTTON_WRAPPER_CLASSNAME}>
-        <Button size='big' onClick={() => {}}>
+        <Button size="big" onClick={() => {}}>
           Button Text
         </Button>
-        <Button appearance='secondary' size='big' onClick={() => {}}>
+        <Button appearance="secondary" size="big" onClick={() => {}}>
           Cancel Text
         </Button>
       </div>
@@ -141,25 +141,34 @@ export class ModalApp extends PureComponent {
     Component: PropTypes.func,
     buttonText: PropTypes.string,
   }
+
   static defaultProps = {
     Component: EnhancedModal,
     buttonText: 'Open Modal',
   }
+
   state = {
     open: false,
   }
+
   openModal = () => {
     this.setState({ open: true })
   }
+
   closeModal = () => {
     this.setState({ open: false })
   }
+
   render() {
     const { Component, buttonText } = this.props
     return (
       <div>
         <button onClick={this.openModal}>{buttonText}</button>
-        <Component label='Header Label' open={this.state.open} onClose={this.closeModal}>
+        <Component
+          label="Header Label"
+          open={this.state.open}
+          onClose={this.closeModal}
+        >
           <Presentation.Simple />
         </Component>
       </div>
@@ -231,7 +240,7 @@ storiesOf('Components/Modal', module)
   .addDecorator(storyFn => (
     <div style={{ height: '400px' }}>
       <style>{'#storybook-theme-wrapper {display: none}'}</style>
-      <EnhancedModal label='Header Label' open onClose={action('close modal')}>
+      <EnhancedModal label="Header Label" open onClose={action('close modal')}>
         {storyFn()}
       </EnhancedModal>
     </div>

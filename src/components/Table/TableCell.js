@@ -2,16 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { media } from '~/utils/styling'
-import { isChromeBrowser } from '~/utils/featureDetects'
-import { getTableCellYPadding, CELL_MIN_WIDTH } from '~/components/Table/utils'
+import { media } from '../../utils/styling'
+import { isChromeBrowser } from '../../utils/featureDetects'
+import {
+  getTableCellYPadding,
+  CELL_MIN_WIDTH,
+} from '../../components/Table/utils'
 
 const TdWrapper = styled.td`
   > div {
     min-width: ${CELL_MIN_WIDTH};
   }
   ${props => css`
-    padding: ${props.isInfoCell ? '15px 24px' : `${getTableCellYPadding(props.size)} 25px`};
+    padding: ${props.isInfoCell
+      ? '15px 24px'
+      : `${getTableCellYPadding(props.size)} 25px`};
   `};
   ${media.max.phone`
     padding-right: 5px;

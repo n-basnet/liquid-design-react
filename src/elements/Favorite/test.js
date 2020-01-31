@@ -1,5 +1,5 @@
 import Favorite, { FavoriteWrapper } from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Favorite', () => {
   const getFavoriteWrapper = getWrapper(Favorite)

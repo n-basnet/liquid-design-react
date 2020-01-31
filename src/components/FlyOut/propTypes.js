@@ -8,7 +8,7 @@ export const flyOutPropTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       onClick: PropTypes.func,
-    })
+    }),
   ),
 }
 

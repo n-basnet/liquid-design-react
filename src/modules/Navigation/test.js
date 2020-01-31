@@ -1,7 +1,7 @@
 import Navigation from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 import NavigationLink from './NavigationLink'
-import { Glyph } from '~/elements/Icon'
+import { Glyph } from '../../elements/Icon'
 
 describe('Navigation', () => {
   const onClickFn = jest.fn()
@@ -41,7 +41,7 @@ describe('Navigation', () => {
       wrapper
         .find(Glyph)
         .at(2)
-        .prop('name')
+        .prop('name'),
     ).toEqual(navIconName)
   })
 
@@ -50,7 +50,7 @@ describe('Navigation', () => {
       wrapper
         .find(NavigationLink)
         .at(0)
-        .prop('href')
+        .prop('href'),
     ).toEqual(href)
   })
 

@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { optionPropType } from '~/elements/misc/OptionsGroupProps'
-import Tag from '~/elements/Tag'
+import { optionPropType } from '../../elements/misc/OptionsGroupProps'
+import Tag from '../../elements/Tag'
 
 const stopClickPropagation = e => e.stopPropagation()
 const SelectedItem = ({ name, handleRemove }) => (
@@ -34,7 +34,11 @@ const SelectedOptionsLabelWrapper = styled.div`
 const SelectedOptionsLabel = ({ items, handleRemove }) => (
   <SelectedOptionsLabelWrapper>
     {items.map(item => (
-      <SelectedItem key={item.id} {...item} handleRemove={() => handleRemove(item)} />
+      <SelectedItem
+        key={item.id}
+        {...item}
+        handleRemove={() => handleRemove(item)}
+      />
     ))}
   </SelectedOptionsLabelWrapper>
 )

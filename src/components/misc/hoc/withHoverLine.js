@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { isTouchDevice } from '~/utils/featureDetects'
+import { isTouchDevice } from '../../../utils/featureDetects'
 
 const Line = styled.div`
   pointer-events: none;
@@ -24,25 +24,30 @@ export default (WrappedComponent, props) => {
       max: PropTypes.number,
       lineStyle: PropTypes.object,
     }
+
     static defaultProps = {
       hideLine: false,
       max: null,
       lineStyle: {},
       ...props,
     }
+
     state = {
       position: 0,
       isInHoverRange: false,
       min: 0,
       max: 0,
     }
+
     componentDidMount() {
       document.addEventListener('scroll', this.recomputeState)
       setTimeout(this.recomputeState, 1)
     }
+
     componentWillUnmount() {
       document.removeEventListener('scroll', this.recomputeState)
     }
+
     recomputeState = () => {
       const { top, height } = this.containerRef.getBoundingClientRect()
       const { max } = this.props
@@ -51,6 +56,7 @@ export default (WrappedComponent, props) => {
         max: max || top + height,
       })
     }
+
     handleMouseMove = e => {
       const { min, max } = this.state
       const position = e.clientY - min
@@ -60,14 +66,17 @@ export default (WrappedComponent, props) => {
         isInHoverRange: position >= 0,
       })
     }
+
     handleMouseEnter = () => {
       this.setState({ isInHoverRange: true })
       document.addEventListener('mousemove', this.handleMouseMove)
     }
+
     handleMouseLeave = () => {
       this.setState({ isInHoverRange: false })
       document.removeEventListener('mousemove', this.handleMouseMove)
     }
+
     render() {
       const { hideLine, lineStyle } = this.props
       const { position, isInHoverRange } = this.state

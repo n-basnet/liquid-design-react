@@ -8,7 +8,7 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedFavorite, Favorite } from '~/elements/Favorite'
+import EnhancedFavorite, { Favorite } from '../../src/elements/Favorite'
 
 const getFavoriteSnippet = (props = '') => `
   <Favorite ${props}/>
@@ -25,15 +25,15 @@ storiesOf('Elements/Favorite', module)
   .add(
     'default',
     () => <EnhancedFavorite onChange={action('toggle favorite')} />,
-    getSnippetTemplate(getFavoriteSnippet())
+    getSnippetTemplate(getFavoriteSnippet()),
   )
   .add(
     'disabled',
     () => <EnhancedFavorite disabled />,
-    getSnippetTemplate(getFavoriteSnippet('disabled '))
+    getSnippetTemplate(getFavoriteSnippet('disabled ')),
   )
   .add(
     'active',
     () => <EnhancedFavorite active onChange={action('toggle favorite')} />,
-    getSnippetTemplate(getFavoriteSnippet('active '))
+    getSnippetTemplate(getFavoriteSnippet('active ')),
   )

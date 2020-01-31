@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import loremIpsum from 'fast-lorem-ipsum'
 import { text, number } from '@storybook/addon-knobs'
 
-import COLORS from '~/utils/consts/colors'
+import COLORS from '../../src/utils/consts/colors'
 
 const BACKGROUND_COLORS = {
   dark: '#e9e9e8',
@@ -31,7 +31,10 @@ Fragment.propTypes = {
 }
 Fragment.displayName = 'React.Fragment'
 
-export const includeComponentInPropTable = (Component, props = {}) => storyFn => (
+export const includeComponentInPropTable = (
+  Component,
+  props = {},
+) => storyFn => (
   <Fragment>
     {/* just to make addon-info aware of the Component props */}
     <div style={{ display: 'none' }}>
@@ -53,16 +56,28 @@ export const getDeterministicPlaceholderText = (seed, maxAmount = 3) => {
     .replace(',', '')
 }
 
-export const getTextKnob = ({ name = 'content', defaultText, placeholderTextLength = 30 } = {}) =>
-  text(name, defaultText || placeholderText(placeholderTextLength))
+export const getTextKnob = ({
+  name = 'content',
+  defaultText,
+  placeholderTextLength = 30,
+} = {}) => text(name, defaultText || placeholderText(placeholderTextLength))
 
-export const getNumberKnob = ({ name = 'value', defaultValue } = {}) => number(name, defaultValue)
+export const getNumberKnob = ({ name = 'value', defaultValue } = {}) =>
+  number(name, defaultValue)
 
 export const formatList = list => list.map(v => `\`${v}\``).join(', ')
 
-export const getPropTablesExcludeList = (list = []) => [Fragment, BackgroundWrapper, ...list]
+export const getPropTablesExcludeList = (list = []) => [
+  Fragment,
+  BackgroundWrapper,
+  ...list,
+]
 
-export const getStoriesByVersions = ({ versions, subversions, joinString = ' ' }) => {
+export const getStoriesByVersions = ({
+  versions,
+  subversions,
+  joinString = ' ',
+}) => {
   const VERSIONS = versions
   const SUBVERSIONS = [{ name: '', props: {} }, ...subversions]
   const pairs = []
@@ -79,7 +94,9 @@ export const getStoriesByVersions = ({ versions, subversions, joinString = ' ' }
       pairs.push({
         version,
         subversion: subversionName,
-        name: `${version}${subversionName ? `${joinString}${subversionName}` : ''}`,
+        name: `${version}${
+          subversionName ? `${joinString}${subversionName}` : ''
+        }`,
         props,
       })
     })
@@ -89,7 +106,7 @@ export const getStoriesByVersions = ({ versions, subversions, joinString = ' ' }
 
 export const getSnippetTemplate = (snippet, description) => ({
   info: {
-    text: `${description || ``}
+    text: `${description || ''}
   ~~~js
   ${snippet.trim()}
   ~~~
@@ -97,7 +114,9 @@ export const getSnippetTemplate = (snippet, description) => ({
   },
 })
 export const getStoryMDLink = (name, { type = 'Elements', storyName } = {}) =>
-  `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(storyName || name)})`
+  `[\`${name}\`](/?selectedKind=${type}%2F${encodeURIComponent(
+    storyName || name,
+  )})`
 
 export const isStorybookLokiBuild = () => process.env.STORYBOOK_LOKI_BUILD
 
@@ -106,20 +125,21 @@ export const randomInRange = (min, max, returnInt = true) => {
   return returnInt ? Math.round(num) : num
 }
 
-export const toUpperCase = string => string.charAt(0).toUpperCase() + string.slice(1)
+export const toUpperCase = string =>
+  string.charAt(0).toUpperCase() + string.slice(1)
 
 const prependStringToEachLine = (prependString, string) =>
   string
     .split(/\r?\n/)
     .map(line => `${prependString}${line}`)
-    .join(`\n`)
+    .join('\n')
 
 export const objectToJSXAttrs = (
   object,
   config = {
     lineJoin: `
     `,
-  }
+  },
 ) => {
   const FN_MARKER = '__function'
   return Object.keys(object)
@@ -142,13 +162,14 @@ export const objectToJSXAttrs = (
               '    ',
               JSON.stringify(
                 value,
-                (key, val) => (typeof val === 'function' ? `${key}${FN_MARKER}` : val),
-                2
-              )
+                (key, val) =>
+                  typeof val === 'function' ? `${key}${FN_MARKER}` : val,
+                2,
+              ),
             )
               .replace(/"([\w]*)":/g, '$1:')
               .replace(new RegExp(`"(\\w*)${FN_MARKER}"`, 'g'), '$1')
-              .trim()
+              .trim(),
           )
           break
       }

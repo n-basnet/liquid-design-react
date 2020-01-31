@@ -1,11 +1,11 @@
 import { rgba } from 'polished'
 import { mergeDeepRight } from 'ramda'
 
-import COLORS from '~/utils/consts/colors'
+import COLORS from '../../utils/consts/colors'
 
 const themeBase = {
   borderRadius: '6px',
-  fontFamily: `'Lato', sans-serif`,
+  fontFamily: "'Lato', sans-serif",
   fontSize: {
     xh1: '92px',
     xh2: '72px',
@@ -32,10 +32,18 @@ const themeBase = {
     black: '900',
   },
   transition: 'all 200ms',
-  boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
-  doubleBoxShadowSmall: `0 4px 5px 0 rgba(133, 133, 133, 0.33), 0 2px 4px 0 rgba(114, 117, 117, 0.12)`,
-  doubleBoxShadowSmallHover: `0 4px 6px 0 rgba(133, 133, 133, 0.64), 0 2px 5px 0 rgba(114, 117, 117, 0.12)`,
-  doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(COLORS.BLACK, 0.05)}`,
+  boxShadow: `0 10px 20px ${rgba(COLORS.BLACK, 0.1)}, 0 2px 4px ${rgba(
+    COLORS.BLACK,
+    0.05,
+  )}`,
+  doubleBoxShadowSmall:
+    '0 4px 5px 0 rgba(133, 133, 133, 0.33), 0 2px 4px 0 rgba(114, 117, 117, 0.12)',
+  doubleBoxShadowSmallHover:
+    '0 4px 6px 0 rgba(133, 133, 133, 0.64), 0 2px 5px 0 rgba(114, 117, 117, 0.12)',
+  doubleBoxShadow: `0 30px 40px ${rgba(COLORS.BLACK, 0.2)}, 0 2px 4px ${rgba(
+    COLORS.BLACK,
+    0.05,
+  )}`,
   zIndex: {
     tooltips: 9,
     searchbarResults: 1,
@@ -210,14 +218,14 @@ export const THEMES = {
       primary: 'RICH_PURPLE',
       secondary: 'VIBRANT_CYAN',
     },
-    { hasWhiteText: true }
+    { hasWhiteText: true },
   ),
   vibrantMagenta: getTheme(
     {
       primary: 'VIBRANT_MAGENTA',
       secondary: 'RICH_PURPLE',
     },
-    { hasWhiteText: true }
+    { hasWhiteText: true },
   ),
 }
 

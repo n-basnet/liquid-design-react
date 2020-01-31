@@ -2,16 +2,17 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { times } from '~/utils/misc'
+import { times } from '../../src/utils/misc'
 import {
   getBackgroundWrapper,
   getTextKnob,
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedList, List } from '~/elements/List'
+import EnhancedList, { List } from '../../src/elements/List'
 
-const getListHead = () => getTextKnob({ name: 'list head', defaultText: 'List head' })
+const getListHead = () =>
+  getTextKnob({ name: 'list head', defaultText: 'List head' })
 
 const getListItem = (withIcon, disabled) => index => ({
   name: getTextKnob({
@@ -25,19 +26,28 @@ const getListItem = (withIcon, disabled) => index => ({
 
 const getDefaultProps = (withIcon = true, disabled = false) => ({
   items: times(5).map(getListItem(withIcon, disabled)),
-  listHead: { name: getListHead(), ...(withIcon && { iconName: 'placeholder' }) },
+  listHead: {
+    name: getListHead(),
+    ...(withIcon && { iconName: 'placeholder' }),
+  },
 })
 
 const getSnippet = (props, withIcon, disabled) => `
   <List
     items={[
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''} },
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''}${
-  disabled ? `, isDisabled: 'true'` : ''
-} },
-      { name: 'List 01', onClick: onClickHandler${withIcon ? `, iconName: 'placeholder'` : ''} },
+      { name: 'List 01', onClick: onClickHandler${
+        withIcon ? ", iconName: 'placeholder'" : ''
+      } },
+      { name: 'List 01', onClick: onClickHandler${
+        withIcon ? ", iconName: 'placeholder'" : ''
+      }${disabled ? ", isDisabled: 'true'" : ''} },
+      { name: 'List 01', onClick: onClickHandler${
+        withIcon ? ", iconName: 'placeholder'" : ''
+      } },
     ]}
-    listHead={{ name: 'List head'${withIcon ? `, iconName: 'placeholder'` : ''} }}${
+    listHead={{ name: 'List head'${
+      withIcon ? ", iconName: 'placeholder'" : ''
+    } }}${
   props
     ? `
     ${props}`
@@ -59,22 +69,22 @@ storiesOf('Elements/List', module)
   .add(
     'default',
     () => <EnhancedList {...getDefaultProps(false)} />,
-    getSnippetTemplate(getSnippet())
+    getSnippetTemplate(getSnippet()),
   )
   .add(
     'grey',
     () => <EnhancedList grey {...getDefaultProps(false)} />,
-    getSnippetTemplate(getSnippet(`grey`))
+    getSnippetTemplate(getSnippet('grey')),
   )
   .add(
     'active',
     () => <EnhancedList activeItemIndex={1} {...getDefaultProps(false)} />,
-    getSnippetTemplate(getSnippet(`activeItemIndex={1}`))
+    getSnippetTemplate(getSnippet('activeItemIndex={1}')),
   )
   .add(
     'disabled',
     () => <EnhancedList {...getDefaultProps(false, true)} />,
-    getSnippetTemplate(getSnippet(null, null, true))
+    getSnippetTemplate(getSnippet(null, null, true)),
   )
 
 storiesOf('Elements/List/with icons', module)
@@ -83,20 +93,20 @@ storiesOf('Elements/List/with icons', module)
   .add(
     'default',
     () => <EnhancedList {...getDefaultProps()} />,
-    getSnippetTemplate(getSnippet(null, true))
+    getSnippetTemplate(getSnippet(null, true)),
   )
   .add(
     'grey',
     () => <EnhancedList grey {...getDefaultProps()} />,
-    getSnippetTemplate(getSnippet(`grey`, true))
+    getSnippetTemplate(getSnippet('grey', true)),
   )
   .add(
     'active',
     () => <EnhancedList activeItemIndex={1} {...getDefaultProps()} />,
-    getSnippetTemplate(getSnippet(`activeItemIndex={1}`, true))
+    getSnippetTemplate(getSnippet('activeItemIndex={1}', true)),
   )
   .add(
     'disabled',
     () => <EnhancedList {...getDefaultProps(true, true)} />,
-    getSnippetTemplate(getSnippet(true, true))
+    getSnippetTemplate(getSnippet(true, true)),
   )

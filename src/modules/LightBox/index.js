@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { rgba } from 'polished'
 import { withTheme } from 'styled-components'
 
-import Modal from '~/components/Modal'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import Modal from '../../components/Modal'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 const LightBoxStyles = withTheme(({ theme }) => (
   <style>
@@ -19,10 +19,10 @@ const LightBoxStyles = withTheme(({ theme }) => (
 ))
 
 export const LightBox = props => (
-  <Fragment>
+  <>
     {props.open && <LightBoxStyles />}
     <Modal overlayAuxClassName={LIGHT_BOX_OVERLAY_CLASSNAME} {...props} />
-  </Fragment>
+  </>
 )
 
 const LIGHT_BOX_OVERLAY_CLASSNAME = getClassName(LightBox)

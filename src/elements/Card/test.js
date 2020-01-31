@@ -1,5 +1,5 @@
 import Card from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Card', () => {
   const defaultProps = {

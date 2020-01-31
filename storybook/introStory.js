@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
 import { getBackgroundWrapper, getPropTablesExcludeList } from './helpers'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
-import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
+import { getClassName } from '../src/components/misc/hoc/attachClassName'
+import { GLOBAL_CSS_PREFIX } from '../src/utils/consts'
+import { THEMES, DEFAULT_THEME_NAME } from '../src/utils/consts/themes'
 
 const Heading = styled.h1`
   margin: 0;
@@ -36,8 +36,8 @@ storiesOf('Intro', module)
     <div>
       <Heading>liquid-design-react</Heading>
       <div>
-        Liquid Design System components for React. Design System and Component Kit to create
-        beautiful applications.
+        Liquid Design System components for React. Design System and Component
+        Kit to create beautiful applications.
       </div>
     </div>
   ))

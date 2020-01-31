@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { default as EnhancedQuote, Quote } from '~/components/Quote'
+import EnhancedQuote, { Quote } from '../../src/components/Quote'
 import {
   getBackgroundWrapper,
   getTextKnob,
@@ -10,21 +10,25 @@ import {
   getSnippetTemplate,
 } from '../helpers'
 
-const getAuthor = () => getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
+const getAuthor = () =>
+  getTextKnob({ name: 'author', defaultText: 'Neville Brody' })
 const getImagePath = () =>
   getTextKnob({
     name: 'imagePath',
-    defaultText: 'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg',
+    defaultText:
+      'https://swh-826d.kxcdn.com/wp-content/uploads/2011/05/Neville-Brody.jpg',
   })
 const getQuotation = () =>
   getTextKnob({
     name: 'quotation',
-    defaultText: 'Digital design is like painting, except the paint never dries ever again.',
+    defaultText:
+      'Digital design is like painting, except the paint never dries ever again.',
   })
 const getQuotationForTypographicQuote = () =>
   getTextKnob({
     name: 'quotation',
-    defaultText: 'Digital design is like painting, except the paint never dries.',
+    defaultText:
+      'Digital design is like painting, except the paint never dries.',
   })
 const getSource = () =>
   getTextKnob({
@@ -46,7 +50,7 @@ const defaultProps = {
 const getQuoteSnippet = props => `
   <Quote
     author="Neville Brody"
-    ${props || ``}
+    ${props || ''}
     source="http://merck.design"
     quotation="Digital design is like painting, except the paint …"
   />
@@ -70,8 +74,10 @@ storiesOf('Components/Quote/Default Quote', module)
       />
     ),
     getSnippetTemplate(
-      getQuoteSnippet(`imagePath="https://swh-826d.kxcdn.com/wp-content/uploads/2011…"`)
-    )
+      getQuoteSnippet(
+        'imagePath="https://swh-826d.kxcdn.com/wp-content/uploads/2011…"',
+      ),
+    ),
   )
 
 storiesOf('Components/Quote/Typographic Quote', module)
@@ -89,7 +95,7 @@ storiesOf('Components/Quote/Typographic Quote', module)
         quotation={getQuotationForTypographicQuote()}
       />
     ),
-    getSnippetTemplate(getQuoteSnippet('big'))
+    getSnippetTemplate(getQuoteSnippet('big')),
   )
   .add(
     'Small',
@@ -101,5 +107,5 @@ storiesOf('Components/Quote/Typographic Quote', module)
         quotation={getQuotationForTypographicQuote()}
       />
     ),
-    getSnippetTemplate(getQuoteSnippet('small'))
+    getSnippetTemplate(getQuoteSnippet('small')),
   )

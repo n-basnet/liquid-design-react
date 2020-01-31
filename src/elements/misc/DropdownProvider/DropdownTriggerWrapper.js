@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { media } from '~/utils/styling'
+import { media } from '../../../utils/styling'
 
 const getActiveState = props => css`
   color: ${props.theme.colors.primary.base};
@@ -18,12 +18,12 @@ export default styled.div`
     padding: ${props.inline ? '8px 15px 7px 15px' : '6px 11px 5px 15px'};
     ${media.max.phone`
       padding: ${
-  props.isFilter
-    ? '11px 13px 4px 13px'
-    : props.inline
-      ? '11px 20px 10px 15px'
-      : '11px 12px 10px 15px'
-};
+        props.isFilter
+          ? '11px 13px 4px 13px'
+          : props.inline
+          ? '11px 20px 10px 15px'
+          : '11px 12px 10px 15px'
+      };
     `};
     ${props.hasValue && getActiveState};
     &:focus {

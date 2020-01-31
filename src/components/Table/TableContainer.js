@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { TABLE_PAGINATION_CLASSNAME } from '~/components/TablePagination'
+import { TABLE_PAGINATION_CLASSNAME } from '../../components/TablePagination'
 
 const widthFromProps = props =>
   props.width
@@ -30,15 +30,19 @@ export default class TableContainer extends PureComponent {
   static propTypes = {
     width: PropTypes.number,
   }
+
   static defaultProps = {
     width: null,
   }
+
   state = {
     resetWidth: false,
   }
+
   componentDidMount() {
     window.addEventListener('resize', this.handleWindowResize)
   }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize)
   }

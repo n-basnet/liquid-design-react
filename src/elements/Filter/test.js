@@ -1,10 +1,13 @@
-import Filter from '~/elements/Filter'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import DropdownProvider from '~/elements/misc/DropdownProvider'
-import { Glyph } from '~/elements/Icon'
+import Filter from '../../elements/Filter'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import DropdownProvider from '../../elements/misc/DropdownProvider'
+import { Glyph } from '../../elements/Icon'
 
 describe('Filter', () => {
-  const OPTIONS = [{ id: '1', name: 'Option 1' }, { id: '2', name: 'Option 2' }]
+  const OPTIONS = [
+    { id: '1', name: 'Option 1' },
+    { id: '2', name: 'Option 2' },
+  ]
   const defaultProps = {
     label: 'Filter Label',
     options: OPTIONS,
@@ -31,7 +34,9 @@ describe('Filter', () => {
 
   it('always passes `nameForClassName` prop equal `Filter`', () => {
     const wrapper = getFilterWrapper()
-    expect(wrapper.find(DropdownProvider).prop('nameForClassName')).toEqual('Filter')
+    expect(wrapper.find(DropdownProvider).prop('nameForClassName')).toEqual(
+      'Filter',
+    )
   })
 
   everyComponentTestSuite(getFilterWrapper, Filter, 'Filter')

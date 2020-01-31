@@ -9,22 +9,26 @@ import {
   getSnippetTemplate,
   Fragment,
 } from '../helpers'
-import {
-  default as EnhancedLinearProgressBar,
+import EnhancedLinearProgressBar, {
   LinearProgressBar,
-} from '~/components/LinearProgressBar'
+} from '../../src/components/LinearProgressBar'
 
 class LinearProgressBarApp extends PureComponent {
   static propTypes = {
     defaultValue: PropTypes.number,
   }
+
   static defaultProps = {
     defaultValue: null,
   }
+
   state = {
     value: this.props.defaultValue || 50,
   }
-  handleChange = ({ target }) => this.setState({ value: parseInt(target.value) })
+
+  handleChange = ({ target }) =>
+    this.setState({ value: parseInt(target.value) })
+
   render() {
     const { value } = this.state
     return (
@@ -32,9 +36,9 @@ class LinearProgressBarApp extends PureComponent {
         <EnhancedLinearProgressBar value={value} {...this.props} />
         <br />
         <input
-          type='range'
-          min='0'
-          max='210'
+          type="range"
+          min="0"
+          max="210"
           value={value}
           onChange={this.handleChange}
           style={{ width: '100%' }}
@@ -67,12 +71,16 @@ storiesOf('Components/LinearProgressBar', module)
     'using theme colors',
     () => <LinearProgressBarApp useThemeColors />,
     getSnippet(`
-      useThemeColors`)
+      useThemeColors`),
   )
-  .add('overdue', () => <LinearProgressBarApp defaultValue={150} />, getSnippet(undefined, 120))
+  .add(
+    'overdue',
+    () => <LinearProgressBarApp defaultValue={150} />,
+    getSnippet(undefined, 120),
+  )
   .add(
     'disabled',
     () => <LinearProgressBarApp disabled />,
     getSnippet(`
-      disabled`)
+      disabled`),
   )

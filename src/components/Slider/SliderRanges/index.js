@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue } from '../../../utils/styling'
 
 const SliderRanges = styled.span`
   font-size: 14px;

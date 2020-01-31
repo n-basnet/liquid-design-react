@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import SingleBreadcrumb from '~/components/Breadcrumbs/SingleBreadcrumb'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import SingleBreadcrumb from '../../components/Breadcrumbs/SingleBreadcrumb'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const BreadcrumbsWrapper = styled.div`
   display: inline-block;

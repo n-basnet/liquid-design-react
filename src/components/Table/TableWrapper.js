@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
-import { getTableAuxComponentClassName } from '~/components/Table/tableIcons'
-import { SIZES } from '~/components/Table/utils'
-import { CHECKBOX_CLASSNAMES } from '~/elements/Checkbox'
-import { nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { getTableAuxComponentClassName } from '../../components/Table/tableIcons'
+import { SIZES } from '../../components/Table/utils'
+import { CHECKBOX_CLASSNAMES } from '../../elements/Checkbox'
+import { nonTouchDevicesHoverStyles } from '../../utils/styling'
 
 const getCheckboxTranslateOffset = size => {
   switch (size) {

@@ -1,6 +1,6 @@
 import List from '.'
-import { ListItem } from '~/elements/List/ListItem'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { ListItem } from '../../elements/List/ListItem'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 const items = [
   { name: 'item 1', onClick: jest.fn() },
@@ -27,7 +27,7 @@ describe('List', () => {
       getListWrapper()
         .find(ListItem)
         .first()
-        .text()
+        .text(),
     ).toEqual(items[0].name)
   })
 
@@ -35,7 +35,7 @@ describe('List', () => {
     expect(
       getListWrapper()
         .find(ListItem)
-        .get(defaultProps.activeItemIndex).props.active
+        .get(defaultProps.activeItemIndex).props.active,
     ).toBe(true)
   })
 
@@ -45,7 +45,7 @@ describe('List', () => {
       getListWrapper()
         .find(ListItem)
         .at(index)
-        .props().disabled
+        .props().disabled,
     ).toBe(true)
   })
 

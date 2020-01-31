@@ -1,7 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { getBackgroundWrapper, getPropTablesExcludeList, getStoryMDLink } from '../../helpers'
+import {
+  getBackgroundWrapper,
+  getPropTablesExcludeList,
+  getStoryMDLink,
+} from '../../helpers'
 import {
   FIELDS_GENERIC,
   FIELDS_REGISTER,
@@ -9,46 +13,49 @@ import {
   FIELDS_PROFILE_BOTTOM,
   MOBILE_BREAKPOINT,
 } from './consts'
-import { media } from '~/utils/styling'
+import { media } from '../../../src/utils/styling'
 
 import FormsApp from './FormsApp'
-import FormsWithExternalLibApp, { storyInfo, propTablesExclude } from './FormsWithExternalLibApp'
+import FormsWithExternalLibApp, {
+  storyInfo,
+  propTablesExclude,
+} from './FormsWithExternalLibApp'
 
 const getFormAppComponent = ({ type, onWhiteBackground, isProfile }) => {
   const formApps = {
     generic: () => (
       <FormsApp
         onWhiteBackground={onWhiteBackground}
-        headerText='Form Headline'
+        headerText="Form Headline"
         fields={FIELDS_GENERIC}
-        acceptButtonText='Send'
+        acceptButtonText="Send"
       />
     ),
     register: () => (
       <FormsApp
         onWhiteBackground={onWhiteBackground}
-        headerText='Add your Information to Register'
+        headerText="Add your Information to Register"
         fields={FIELDS_REGISTER}
-        acceptButtonText='Register'
-        checkboxText='I accept the '
-        checkboxLinkText='Terms & Conditions'
+        acceptButtonText="Register"
+        checkboxText="I accept the "
+        checkboxLinkText="Terms & Conditions"
       />
     ),
     login: () => (
       <FormsApp
         onWhiteBackground={onWhiteBackground}
-        headerText='Login to your account'
+        headerText="Login to your account"
         fields={FIELDS_LOGIN}
-        acceptButtonText='Login'
-        checkboxText='Keep me logged in'
+        acceptButtonText="Login"
+        checkboxText="Keep me logged in"
       />
     ),
     profile: () => (
       <FormsApp
         onWhiteBackground={onWhiteBackground}
-        headerText='Your Profile'
+        headerText="Your Profile"
         fields={FIELDS_PROFILE_BOTTOM}
-        acceptButtonText='Save'
+        acceptButtonText="Save"
         isProfile
       />
     ),
@@ -70,18 +77,23 @@ const getBackgroundWrapperDecorator = backgroundColor =>
 const getParameters = (propTablesExclude = []) => ({
   info: {
     source: false,
-    propTablesExclude: getPropTablesExcludeList([FormsApp, ...propTablesExclude]),
+    propTablesExclude: getPropTablesExcludeList([
+      FormsApp,
+      ...propTablesExclude,
+    ]),
   },
 })
 
 const getInfoMD = () => ({
   info: {
     text: `
-      Forms can be constructed with ${getStoryMDLink('TextField')}, ${getStoryMDLink(
-    'Checkbox'
-  )}, ${getStoryMDLink('Button', { storyName: 'Button/Primary' })}, and ${getStoryMDLink(
-    'Dropdown'
-  )} elements. The logic of the forms is up the to user, this library provides just the UI components.
+      Forms can be constructed with ${getStoryMDLink(
+        'TextField',
+      )}, ${getStoryMDLink('Checkbox')}, ${getStoryMDLink('Button', {
+      storyName: 'Button/Primary',
+    })}, and ${getStoryMDLink(
+      'Dropdown',
+    )} elements. The logic of the forms is up the to user, this library provides just the UI components.
     `,
   },
 })
@@ -92,18 +104,38 @@ storiesOf('Modules/Forms/Examples', module)
   .add('generic', getFormAppComponent({ type: 'generic' }), getInfoMD())
   .add('register', getFormAppComponent({ type: 'register' }), getInfoMD())
   .add('login', getFormAppComponent({ type: 'login' }), getInfoMD())
-  .add('profile', getFormAppComponent({ type: 'profile', isProfile: true }), getInfoMD())
+  .add(
+    'profile',
+    getFormAppComponent({ type: 'profile', isProfile: true }),
+    getInfoMD(),
+  )
 
 storiesOf('Modules/Forms/Examples (White)', module)
   .addParameters(getParameters())
   .addDecorator(getBackgroundWrapperDecorator('#fff'))
-  .add('generic', getFormAppComponent({ type: 'generic', onWhiteBackground: true }), getInfoMD())
-  .add('register', getFormAppComponent({ type: 'register', onWhiteBackground: true }), getInfoMD())
-  .add('login', getFormAppComponent({ type: 'login', onWhiteBackground: true }), getInfoMD())
+  .add(
+    'generic',
+    getFormAppComponent({ type: 'generic', onWhiteBackground: true }),
+    getInfoMD(),
+  )
+  .add(
+    'register',
+    getFormAppComponent({ type: 'register', onWhiteBackground: true }),
+    getInfoMD(),
+  )
+  .add(
+    'login',
+    getFormAppComponent({ type: 'login', onWhiteBackground: true }),
+    getInfoMD(),
+  )
   .add(
     'profile',
-    getFormAppComponent({ type: 'profile', isProfile: true, onWhiteBackground: true }),
-    getInfoMD()
+    getFormAppComponent({
+      type: 'profile',
+      isProfile: true,
+      onWhiteBackground: true,
+    }),
+    getInfoMD(),
   )
 
 storiesOf('Modules/Forms/using a form library', module)

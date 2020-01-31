@@ -4,30 +4,19 @@ import autoExternal from 'rollup-plugin-auto-external'
 import resolve from 'rollup-plugin-node-resolve'
 import reactSvg from 'rollup-plugin-react-svg'
 import url from 'rollup-plugin-url'
-import string from 'rollup-plugin-string'
+import { string } from 'rollup-plugin-string'
+import { terser } from 'rollup-plugin-terser'
 
-import pkg from './package.json'
+// import pkg from './package.json'
 const { getSVGOConfig } = require('./scripts/getSVGOConfig')
 
 const MAX_INLINE_FILE_SIZE_KB = 100
 
 export default {
-  input: 'src/index.js',
-  output: [
-    {
-      file: pkg.main,
-      format: 'cjs',
-    },
-    {
-      file: pkg.module,
-      format: 'es',
-    },
-  ],
   plugins: [
     autoExternal(),
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers'],
     }),
     resolve(),
     commonjs(),
@@ -41,6 +30,7 @@ export default {
     string({
       include: '**/*.css',
     }),
+    terser(),
   ],
   watch: {
     chokidar: false,

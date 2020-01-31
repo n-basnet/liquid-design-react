@@ -1,9 +1,9 @@
 import uniqid from 'uniqid'
 import { find, pluck, head, prop, uniqBy } from 'ramda'
 
-import { DEFAULT_COLORS } from '~/components/BarChart/consts'
-import { times, getElementModular } from '~/utils/misc'
-import { SCREEN_SIZES } from '~/utils/styling'
+import { DEFAULT_COLORS } from '../../components/BarChart/consts'
+import { times, getElementModular } from '../../utils/misc'
+import { SCREEN_SIZES } from '../../utils/styling'
 
 const getLabels = data =>
   data
@@ -19,10 +19,13 @@ const getLabels = data =>
 
 const getLargestValue = data => {
   const allValues = pluck('values', data).map(pluck('value'))
-  return head(allValues.reduce((a, b) => [...a, ...b], []).sort((a, b) => b - a))
+  return head(
+    allValues.reduce((a, b) => [...a, ...b], []).sort((a, b) => b - a),
+  )
 }
 
-const findByName = (name, array) => find(element => element.name === name, array)
+const findByName = (name, array) =>
+  find(element => element.name === name, array)
 
 const roundToThousands = num => Math.round(num / 1000) * 1000
 export const getTicks = (data, offset = 0, amount = 6) => {

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { tagColor } from '~/elements/Tag/TagWrapper'
+import { tagColor } from '../../elements/Tag/TagWrapper'
 
 export const Label = styled.span`
   max-width: calc(100% - 29px);

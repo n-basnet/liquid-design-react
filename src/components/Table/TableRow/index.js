@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import TableCell from '~/components/Table/TableCell'
-import { TABLE_ROW_STATES, AUX_CELL_CLASSNAME } from '~/components/Table/utils'
-import { getAuxComponent } from '~/components/Table/tableIcons'
-import RowWrapper from '~/components/Table/TableRow/RowWrapper'
+import TableCell from '../../../components/Table/TableCell'
+import {
+  TABLE_ROW_STATES,
+  AUX_CELL_CLASSNAME,
+} from '../../../components/Table/utils'
+import { getAuxComponent } from '../../../components/Table/tableIcons'
+import RowWrapper from '../../../components/Table/TableRow/RowWrapper'
 
 const TableRow = ({
   isSelectable,
@@ -23,7 +26,9 @@ const TableRow = ({
         handleStateChange(
           cellsInfo && cellsInfo.rowInfo
             ? TABLE_ROW_STATES.isExpanded
-            : isSelectable ? TABLE_ROW_STATES.isSelected : null
+            : isSelectable
+            ? TABLE_ROW_STATES.isSelected
+            : null,
         )
     }
   }
@@ -37,10 +42,10 @@ const TableRow = ({
       Component && (
         <td className={AUX_CELL_CLASSNAME}>
           <Component
-            {...isSelectable && {
+            {...(isSelectable && {
               isChecked: rowState.isSelected,
-            }}
-            {...displayRowInfoArrow && { pointingDown: rowState.isExpanded }}
+            })}
+            {...(displayRowInfoArrow && { pointingDown: rowState.isExpanded })}
             disabled={disabled}
           />
         </td>
@@ -51,13 +56,15 @@ const TableRow = ({
   const shouldDisplayInfoRow = Boolean(rowState.isExpanded && cellsInfo.rowInfo)
 
   // access and render cells
-  const cells = accessors.map(fn => fn(cellsInfo)).map((cell, index) => {
-    const cellRenderer = renderers[index]
-    return cellRenderer ? cellRenderer(cell, cellsInfo) : cell
-  })
+  const cells = accessors
+    .map(fn => fn(cellsInfo))
+    .map((cell, index) => {
+      const cellRenderer = renderers[index]
+      return cellRenderer ? cellRenderer(cell, cellsInfo) : cell
+    })
 
   return (
-    <Fragment>
+    <>
       <RowWrapper
         onClick={getClickHandler()}
         isExpanded={rowState.isExpanded}
@@ -78,7 +85,7 @@ const TableRow = ({
           </TableCell>
         </RowWrapper>
       )}
-    </Fragment>
+    </>
   )
 }
 

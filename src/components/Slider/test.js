@@ -3,11 +3,15 @@ import RcSlider from 'rc-slider'
 import { shallow } from 'enzyme'
 
 import Slider from '.'
-import Label from '~/elements/Label'
-import { SliderMax, SliderMin, SliderButton } from '~/components/Slider/SliderRanges'
-import { Tooltip } from '~/components/Slider/Tooltip'
-import { Glyph } from '~/elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Label from '../../elements/Label'
+import {
+  SliderMax,
+  SliderMin,
+  SliderButton,
+} from '../../components/Slider/SliderRanges'
+import { Tooltip } from '../../components/Slider/Tooltip'
+import { Glyph } from '../../elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Slider', () => {
   const defaultValue = 50
@@ -31,7 +35,7 @@ describe('Slider', () => {
       wrapper
         .find(Label)
         .children()
-        .text()
+        .text(),
     ).toEqual(label)
   })
 
@@ -51,13 +55,13 @@ describe('Slider', () => {
       wrapper
         .find(SliderMin)
         .find(Glyph)
-        .prop('name')
+        .prop('name'),
     ).toBe(minIconName)
     expect(
       wrapper
         .find(SliderMax)
         .find(Glyph)
-        .prop('name')
+        .prop('name'),
     ).toBe(maxIconName)
   })
 
@@ -86,7 +90,12 @@ describe('Slider', () => {
   it('updates the value on change', () => {
     const updatedValue = defaultValue + step
     const wrapper = shallow(
-      <Slider defaultValue={defaultValue} label={label} step={step} withButtons />
+      <Slider
+        defaultValue={defaultValue}
+        label={label}
+        step={step}
+        withButtons
+      />,
     )
 
     wrapper.find(RcSlider).simulate('change', updatedValue)
@@ -95,7 +104,7 @@ describe('Slider', () => {
       wrapper
         .find(Tooltip)
         .children()
-        .text()
+        .text(),
     ).toBe(updatedValue.toString())
   })
 

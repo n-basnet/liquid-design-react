@@ -1,9 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { getBackgroundWrapper, getPropTablesExcludeList, getSnippetTemplate } from '../helpers'
-import { default as EnhancedNavigation, Navigation } from '~/modules/Navigation'
-import NavigationStateWrapper from '~/modules/Navigation/NavigationStateWrapper/NavigationStateWrapper'
+import {
+  getBackgroundWrapper,
+  getPropTablesExcludeList,
+  getSnippetTemplate,
+} from '../helpers'
+import EnhancedNavigation, { Navigation } from '../../src/modules/Navigation'
+import NavigationStateWrapper from '../../src/modules/Navigation/NavigationStateWrapper/NavigationStateWrapper'
 
 const activeTabIndex = 0
 
@@ -12,7 +16,10 @@ storiesOf('Modules/Navigation', module)
   .addParameters({
     info: {
       propTables: [Navigation],
-      propTablesExclude: getPropTablesExcludeList([EnhancedNavigation, NavigationStateWrapper]),
+      propTablesExclude: getPropTablesExcludeList([
+        EnhancedNavigation,
+        NavigationStateWrapper,
+      ]),
     },
   })
   .add(
@@ -21,7 +28,7 @@ storiesOf('Modules/Navigation', module)
       <NavigationStateWrapper activeTabIndex={activeTabIndex}>
         {({ activeTabIndex, handleTabClick }) => (
           <Navigation
-            title='Title 01'
+            title="Title 01"
             activeTabIndex={activeTabIndex}
             tabs={[
               {
@@ -68,14 +75,14 @@ storiesOf('Modules/Navigation', module)
       `Navigation component contains useful navigation structure. It takes array of _tabs_, _title_ and _image data_ as arguments.
       By default a placeholder will be set. If we want to set our own icon we can pass _iconName_ or _iconUrl_ .
       Every single tab consists of _title_, _href_ or _onClick_ and _icon data_.
-      Passing optional _active_ field, sets tab to active.`
-    )
+      Passing optional _active_ field, sets tab to active.`,
+    ),
   )
   .add('with 8 tabs', () => (
     <NavigationStateWrapper activeTabIndex={activeTabIndex}>
       {({ activeTabIndex, handleTabClick }) => (
         <Navigation
-          title='Title 01'
+          title="Title 01"
           activeTabIndex={activeTabIndex}
           tabs={[
             {

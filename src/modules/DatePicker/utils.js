@@ -41,7 +41,7 @@ export const checkEndDateWithStartDate = (
   startDate,
   startDateInputValue,
   format,
-  errorMessage
+  errorMessage,
 ) => {
   if (startDate && dateFns.format(startDate, format) === startDateInputValue) {
     return dateFns.isAfter(formattedEndDate, startDate) ||

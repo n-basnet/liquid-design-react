@@ -17,10 +17,11 @@ const StyledHandle = styled.div`
     props.disabled
       ? 'none'
       : props.dragging
-        ? props.theme.doubleBoxShadowSmallHover
-        : props.theme.doubleBoxShadowSmall};
+      ? props.theme.doubleBoxShadowSmallHover
+      : props.theme.doubleBoxShadowSmall};
   & :hover {
-    box-shadow: ${props => !props.disabled && props.theme.doubleBoxShadowSmallHover};
+    box-shadow: ${props =>
+      !props.disabled && props.theme.doubleBoxShadowSmallHover};
   }
 `
 

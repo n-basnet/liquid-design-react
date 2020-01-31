@@ -3,17 +3,18 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { pick } from 'ramda'
 
-import { Glyph } from '~/elements/Icon'
+import { Glyph } from '../../elements/Icon'
 import {
   NOTIFICATION_TYPES,
   NOTIFICATION_CONFIG,
   NOTIFICATION_WRAPPER_PADDING,
-} from '~/components/Notifications/consts'
-import { media, nonTouchDevicesHoverStyles } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { getFirstTruthyKeyName } from '~/utils/misc'
+} from '../../components/Notifications/consts'
+import { media, nonTouchDevicesHoverStyles } from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { getFirstTruthyKeyName } from '../../utils/misc'
 
-const getNotificationType = props => getFirstTruthyKeyName(pick(NOTIFICATION_TYPES, props))
+const getNotificationType = props =>
+  getFirstTruthyKeyName(pick(NOTIFICATION_TYPES, props))
 
 const getBackgroundColor = ({ theme, color, ...props }, hover = false) => {
   if (color) {
@@ -80,12 +81,22 @@ const SingleNotification = props => {
   const iconColor = `${getColor(props)}.base`
   return (
     <SingleNotificationWrapper>
-      <SingleNotificationInnerWrapper {...pick(NOTIFICATION_TYPES, props)} {...passedProps}>
+      <SingleNotificationInnerWrapper
+        {...pick(NOTIFICATION_TYPES, props)}
+        {...passedProps}
+      >
         <SingleNotificationLeftInnerWrapper>
           {iconName && <Glyph color={iconColor} name={iconName} size={20} />}
-          <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>{text}</TextWrapper>
+          <TextWrapper style={iconName ? { paddingLeft: '10px' } : {}}>
+            {text}
+          </TextWrapper>
         </SingleNotificationLeftInnerWrapper>
-        <Glyph color={iconColor} name='close' size={20} onClick={getRemoveHandler(id)} />
+        <Glyph
+          color={iconColor}
+          name="close"
+          size={20}
+          onClick={getRemoveHandler(id)}
+        />
       </SingleNotificationInnerWrapper>
     </SingleNotificationWrapper>
   )

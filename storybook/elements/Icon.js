@@ -6,8 +6,8 @@ import { number } from '@storybook/addon-knobs'
 import { without } from 'ramda'
 import styled from 'styled-components'
 
-import EnhancedIcon, { Icon, Glyph } from '~/elements/Icon'
-import iconsList from '~/elements/Icon/iconsList'
+import EnhancedIcon, { Icon, Glyph } from '../../src/elements/Icon'
+import iconsList from '../../src/elements/Icon/iconsList'
 import {
   getStoryMDLink,
   getBackgroundWrapper,
@@ -42,10 +42,12 @@ const OMIT_ICONS = [
   'xing',
 ]
 
-const ICONS_LIST = Object.keys(iconsList['stroke']).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+const ICONS_LIST = Object.keys(iconsList.stroke).sort((a, b) =>
+  a < b ? -1 : a > b ? 1 : 0,
+)
 const GLYPHS_LIST = without(
   OMIT_ICONS,
-  Object.keys(iconsList['glyphs']).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0))
+  Object.keys(iconsList.glyphs).sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)),
 )
 
 const Wrapper = styled.div`
@@ -123,7 +125,12 @@ IconsListDisplayed.defaultProps = {
 
 const getParams = (excludedPropTypes = []) => ({
   info: {
-    propTablesExclude: getPropTablesExcludeList([EnhancedIcon, Glyph, IconSet, IconsListDisplayed]),
+    propTablesExclude: getPropTablesExcludeList([
+      EnhancedIcon,
+      Glyph,
+      IconSet,
+      IconsListDisplayed,
+    ]),
     propTables: [Icon],
     excludedPropTypes: ['className', ...excludedPropTypes],
   },
@@ -131,7 +138,7 @@ const getParams = (excludedPropTypes = []) => ({
 
 const iconDescription = `Icons support content by being an addition to a piece of text. They can be either stroked or filled. See list of available icons ${getStoryMDLink(
   'here',
-  { storyName: 'Icon/Icons' }
+  { storyName: 'Icon/Icons' },
 )}.`
 
 storiesOf('Elements/Icon', module)
@@ -142,22 +149,22 @@ storiesOf('Elements/Icon', module)
     () => (
       <EnhancedIcon
         size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
-        name='bottle'
+        name="bottle"
       />
     ),
     getSnippetTemplate(
       `
   <Icon size={25} name="bottle" />
   `,
-      iconDescription
-    )
+      iconDescription,
+    ),
   )
   .add(
     'Icon - filled',
     () => (
       <EnhancedIcon
         size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
-        name='bottle'
+        name="bottle"
         isFilled
       />
     ),
@@ -165,8 +172,8 @@ storiesOf('Elements/Icon', module)
       `
   <Icon size={25} name="bottle" isFilled />
   `,
-      iconDescription
-    )
+      iconDescription,
+    ),
   )
 
 storiesOf('Elements/Icon', module)
@@ -177,7 +184,7 @@ storiesOf('Elements/Icon', module)
     () => (
       <Glyph
         size={number('size', 25, { range: true, min: 0, max: 200, step: 5 })}
-        name='calendar'
+        name="calendar"
       />
     ),
     getSnippetTemplate(
@@ -186,9 +193,9 @@ storiesOf('Elements/Icon', module)
   `,
       `Glyphs support the interface and are not connected to the content. See list of available glyphs ${getStoryMDLink(
         'here',
-        { storyName: 'Icon/Glyphs' }
-      )}.`
-    )
+        { storyName: 'Icon/Glyphs' },
+      )}.`,
+    ),
   )
 
 storiesOf('Elements/Icon/Icons', module)
@@ -199,13 +206,21 @@ storiesOf('Elements/Icon/Icons', module)
     <IconsListDisplayed iconProps={{ secondary: true }} iconList={ICONS_LIST} />
   ))
   .add('alternative color', () => (
-    <IconsListDisplayed iconProps={{ color: 'richRed.base' }} iconList={ICONS_LIST} />
+    <IconsListDisplayed
+      iconProps={{ color: 'richRed.base' }}
+      iconList={ICONS_LIST}
+    />
   ))
   .add('custom color', () => (
-    <IconsListDisplayed iconProps={{ color: '#3bff00' }} iconList={ICONS_LIST} />
+    <IconsListDisplayed
+      iconProps={{ color: '#3bff00' }}
+      iconList={ICONS_LIST}
+    />
   ))
 
 storiesOf('Elements/Icon/Glyphs', module)
   .addDecorator(getBackgroundWrapper())
   .addParameters(getParams(['isFilled']))
-  .add('default', () => <IconsListDisplayed isOneColumn isGlyph iconList={GLYPHS_LIST} />)
+  .add('default', () => (
+    <IconsListDisplayed isOneColumn isGlyph iconList={GLYPHS_LIST} />
+  ))

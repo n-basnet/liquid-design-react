@@ -10,13 +10,15 @@ import {
   getSnippetTemplate,
   Fragment,
 } from '../helpers'
-import { default as EnhancedStepProgressBar, StepProgressBar } from '~/components/StepProgressBar'
-import Button from '~/elements/Button'
-import { times } from '~/utils/misc'
+import EnhancedStepProgressBar, {
+  StepProgressBar,
+} from '../../src/components/StepProgressBar'
+import Button from '../../src/elements/Button'
+import { times } from '../../src/utils/misc'
 
 const getDefaultProps = () => ({
   steps: times(4).map(v => ({
-    name: `Step label`,
+    name: 'Step label',
   })),
 })
 
@@ -30,12 +32,15 @@ class StepProgressBarApp extends PureComponent {
   static propTypes = {
     isControlledExternally: PropTypes.bool,
   }
+
   static defaultProps = {
     isControlledExternally: false,
   }
+
   state = {
     current: 1,
   }
+
   updateCurrent = current => this.setState({ current })
   render() {
     const { current } = this.state
@@ -52,7 +57,10 @@ class StepProgressBarApp extends PureComponent {
         />
         {isControlledExternally && (
           <ButtonsContainer>
-            <Button disabled={current < 0} onClick={() => this.updateCurrent(current - 1)}>
+            <Button
+              disabled={current < 0}
+              onClick={() => this.updateCurrent(current - 1)}
+            >
               {current === 0 ? 'reset' : 'previous'}
             </Button>
             <Button
@@ -86,17 +94,22 @@ storiesOf('Components/StepProgressBar', module)
   .addDecorator(includeComponentInPropTable(StepProgressBar, getDefaultProps()))
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([EnhancedStepProgressBar, StepProgressBarApp]),
+      propTablesExclude: getPropTablesExcludeList([
+        EnhancedStepProgressBar,
+        StepProgressBarApp,
+      ]),
       excludedPropTypes: ['width', 'className'],
     },
   })
   .add('default', () => <StepProgressBarApp />, getSnippet())
-  .add('controlled externally', () => <StepProgressBarApp isControlledExternally />)
+  .add('controlled externally', () => (
+    <StepProgressBarApp isControlledExternally />
+  ))
   .add(
     'disabled',
     () => <StepProgressBarApp disabled />,
     getSnippet(`
-    disabled`)
+    disabled`),
   )
   .add(
     'with disabled steps',
@@ -106,5 +119,5 @@ storiesOf('Components/StepProgressBar', module)
       steps[steps.length - 2].disabled = true
       return <StepProgressBarApp steps={steps} />
     },
-    getSnippet(undefined, true)
+    getSnippet(undefined, true),
   )

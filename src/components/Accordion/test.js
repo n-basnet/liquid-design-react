@@ -1,6 +1,6 @@
 import Accordion, { SectionTitle, SectionContent } from '.'
-import { placeholderText } from '~/../storybook/helpers'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { placeholderText } from '../../../storybook/helpers'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Accordion', () => {
   const defaultProps = {
@@ -14,7 +14,7 @@ describe('Accordion', () => {
     expect(
       getAccordionWrapper()
         .find(SectionTitle)
-        .text()
+        .text(),
     ).toEqual(defaultProps.title)
   })
 
@@ -22,7 +22,7 @@ describe('Accordion', () => {
     expect(
       getAccordionWrapper()
         .find(SectionContent)
-        .text()
+        .text(),
     ).toEqual(defaultProps.children)
   })
 

@@ -1,5 +1,5 @@
 import FlyOutContent from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../../utils/testUtils'
 
 describe('FlyOutContent', () => {
   const optionName = 'Option 1'
@@ -15,5 +15,9 @@ describe('FlyOutContent', () => {
     expect(wrapper.html()).toMatch(optionName)
   })
 
-  everyComponentTestSuite(getFlyOutContentWrapper, FlyOutContent, 'FlyOutContent')
+  everyComponentTestSuite(
+    getFlyOutContentWrapper,
+    FlyOutContent,
+    'FlyOutContent',
+  )
 })

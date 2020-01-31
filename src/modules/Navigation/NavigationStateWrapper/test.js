@@ -17,7 +17,7 @@ describe('NavigationStateWrapper', () => {
           <button onClick={() => handleTabClick(1)} />
         </div>
       )}
-    </NavigationStateWrapper>
+    </NavigationStateWrapper>,
   )
 
   it('passes proper default activeTabIndex', () => {

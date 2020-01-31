@@ -1,5 +1,5 @@
 import RadioButton from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 
 describe('RadioButton', () => {
   const value = 'someValue'

@@ -8,22 +8,31 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedToggle, Toggle } from '~/elements/Toggle'
+import EnhancedToggle, { Toggle } from '../../src/elements/Toggle'
 
 class ToggleApp extends React.Component {
   static propTypes = {
     toggleProps: PropTypes.object,
   }
+
   static defaultProps = {
     toggleProps: {},
   }
+
   state = {
     isActive: false,
   }
+
   toggle = () => this.setState(({ isActive }) => ({ isActive: !isActive }))
   render() {
     const { toggleProps } = this.props
-    return <EnhancedToggle isActive={this.state.isActive} onClick={this.toggle} {...toggleProps} />
+    return (
+      <EnhancedToggle
+        isActive={this.state.isActive}
+        onClick={this.toggle}
+        {...toggleProps}
+      />
+    )
   }
 }
 
@@ -34,11 +43,11 @@ const toggleSnippet = {
   <Toggle
     isActive
     onClick={onClickHandler}${
-  props
-    ? `
+      props
+        ? `
     ${props}`
-    : ``
-}
+        : ''
+    }
   />`,
 }
 
@@ -53,27 +62,34 @@ storiesOf('Elements/Toggle', module)
   .add(
     'default',
     () => <ToggleApp />,
-    getSnippetTemplate(toggleSnippet.getSnippet(), toggleSnippet.description)
+    getSnippetTemplate(toggleSnippet.getSnippet(), toggleSnippet.description),
   )
   .add(
     'with icons',
     () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'] }} />,
     getSnippetTemplate(
-      toggleSnippet.getSnippet(`icons={['circleX', 'circleX']}`),
-      toggleSnippet.description
-    )
+      toggleSnippet.getSnippet("icons={['circleX', 'circleX']}"),
+      toggleSnippet.description,
+    ),
   )
   .add(
     'with icons disabled',
-    () => <ToggleApp toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }} />,
+    () => (
+      <ToggleApp
+        toggleProps={{ icons: ['circleX', 'circleX'], disabled: true }}
+      />
+    ),
     getSnippetTemplate(
       toggleSnippet.getSnippet(`icons={['circleX', 'circleX']}
     disabled`),
-      toggleSnippet.description
-    )
+      toggleSnippet.description,
+    ),
   )
   .add(
     'disabled',
     () => <EnhancedToggle disabled />,
-    getSnippetTemplate(toggleSnippet.getSnippet(`disabled`), toggleSnippet.description)
+    getSnippetTemplate(
+      toggleSnippet.getSnippet('disabled'),
+      toggleSnippet.description,
+    ),
   )

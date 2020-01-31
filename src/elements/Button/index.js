@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ButtonWrapper from '~/elements/Button/Wrappers/Button'
-import GhostWrapper from '~/elements/Button/Wrappers/Ghost'
-import ButtonLabel from '~/elements/Button/Labels/Button'
-import GhostLabel from '~/elements/Button/Labels/Ghost'
-import { Glyph } from '~/elements/Icon'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import ButtonWrapper from '../../elements/Button/Wrappers/Button'
+import GhostWrapper from '../../elements/Button/Wrappers/Ghost'
+import ButtonLabel from '../../elements/Button/Labels/Button'
+import GhostLabel from '../../elements/Button/Labels/Ghost'
+import { Glyph } from '../../elements/Icon'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 export const Button = ({
   appearance,
@@ -44,7 +44,12 @@ export const Button = ({
         />
       )}
       {children && (
-        <LabelComponent appearance={appearance} disabled={disabled} hasIcon={!!icon} size={size}>
+        <LabelComponent
+          appearance={appearance}
+          disabled={disabled}
+          hasIcon={!!icon}
+          size={size}
+        >
           {children}
         </LabelComponent>
       )}

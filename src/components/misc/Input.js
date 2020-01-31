@@ -5,11 +5,11 @@ import { ResizableBox } from 'react-resizable'
 import { withResizeDetector } from 'react-resize-detector'
 import cx from 'classnames'
 
-import { cursorValue, media } from '~/utils/styling'
-import { getReactElementString, getSVGImageURLString } from '~/utils/misc'
-import TextareaExpand from '~/assets/svgIllustrations/textarea-expand.svg'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { isTouchDevice } from '~/utils/featureDetects'
+import { cursorValue, media } from '../../utils/styling'
+import { getReactElementString, getSVGImageURLString } from '../../utils/misc'
+import TextareaExpand from '../../assets/svgIllustrations/textarea-expand.svg'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { isTouchDevice } from '../../utils/featureDetects'
 
 const BOTTOM_BORDER_HEIGHT = 2
 const EXPAND_IMAGE_SIDE = 10
@@ -39,8 +39,8 @@ const InputWrapper = styled(RelativeWrapper)`
     left: 0;
     width: 100%;
     ${props =>
-    props.multiline
-      ? css`
+      props.multiline
+        ? css`
             clip: rect(
               ${props.height - BOTTOM_BORDER_HEIGHT}px,
               ${props.width}px,
@@ -49,7 +49,7 @@ const InputWrapper = styled(RelativeWrapper)`
             );
             height: 100%;
           `
-      : css`
+        : css`
             height: ${BOTTOM_BORDER_HEIGHT}px;
           `};
     ${props => css`
@@ -58,12 +58,12 @@ const InputWrapper = styled(RelativeWrapper)`
       border-bottom-right-radius: ${props.theme.borderRadius};
     `};
     ${props =>
-    props.focused &&
+      props.focused &&
       css`
         background-color: ${props.theme.colors.primary.base};
       `};
     ${props =>
-    props.errorMessage &&
+      props.errorMessage &&
       css`
         background-color: ${props.theme.colors.richRed.base};
       `};
@@ -104,7 +104,7 @@ const TextAreaWrapper = styled(InputWrapper)`
       border-radius: ${props.theme.borderRadius};
     `};
     ${props =>
-    props.grey &&
+      props.grey &&
       css`
         background-color: ${props.theme.colors.sensitiveGrey.base};
         textarea {
@@ -119,7 +119,7 @@ const TextAreaWrapper = styled(InputWrapper)`
       right: 5px;
       background-image: url("${BG_IMG_STRING}");
       ${props =>
-    props.disabled &&
+        props.disabled &&
         css`
           pointer-events: none;
         `}
@@ -180,10 +180,12 @@ class Input extends PureComponent {
     focused: false,
     height: TEXTFIELD_MIN_HEIGHT,
   }
+
   getFocusStateHandler = (focused, callback) => event => {
     event.persist()
     this.setState({ focused }, () => callback(event))
   }
+
   ComponentName = getTextField(this.props.multiline)
   handleResize = (_, { size }) => this.setState({ height: size.height })
   render() {
@@ -212,12 +214,12 @@ class Input extends PureComponent {
     const AuxWrapper = multiline ? ResizableBox : Fragment
     const auxWrapperProps = multiline
       ? {
-        width,
-        height: TEXTFIELD_MIN_HEIGHT,
-        axis: 'y',
-        minConstraints: [width, TEXTFIELD_MIN_HEIGHT],
-        onResize: this.handleResize,
-      }
+          width,
+          height: TEXTFIELD_MIN_HEIGHT,
+          axis: 'y',
+          minConstraints: [width, TEXTFIELD_MIN_HEIGHT],
+          onResize: this.handleResize,
+        }
       : {}
 
     const textFieldWrapperProps = {
@@ -230,7 +232,9 @@ class Input extends PureComponent {
       width,
     }
 
-    const inputGlobalClassName = multiline ? INPUT_MULTILINE_CLASSNAME : INPUT_SINGLELINE_CLASSNAME
+    const inputGlobalClassName = multiline
+      ? INPUT_MULTILINE_CLASSNAME
+      : INPUT_SINGLELINE_CLASSNAME
     const ErrorMessageWrapper = getErrorMessageWrapper()
 
     return (
@@ -241,7 +245,7 @@ class Input extends PureComponent {
               onChange={getOnChangeHandler(onChange)}
               onFocus={this.getFocusStateHandler(true, onFocus)}
               onBlur={this.getFocusStateHandler(false, onBlur)}
-              {...!multiline && { type }}
+              {...(!multiline && { type })}
               className={cx(inputGlobalClassName, inputClassName)}
               styleTemplateString={styleTemplateString}
               grey={grey}
@@ -249,7 +253,9 @@ class Input extends PureComponent {
             />
           </AuxWrapper>
         </TextFieldWrapper>
-        {errorMessage && <ErrorMessageWrapper>{errorMessage}</ErrorMessageWrapper>}
+        {errorMessage && (
+          <ErrorMessageWrapper>{errorMessage}</ErrorMessageWrapper>
+        )}
       </RelativeWrapper>
     )
   }

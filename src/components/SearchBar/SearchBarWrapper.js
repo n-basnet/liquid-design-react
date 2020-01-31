@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components'
 
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { INPUT_CLASSNAME } from '~/components/misc/Input'
-import { media } from '~/utils/styling'
+import { ICON_CLASSNAME } from '../../elements/Icon'
+import { INPUT_CLASSNAME } from '../../components/misc/Input'
+import { media } from '../../utils/styling'
 
 const getIconColorStyles = props => css`
   .${ICON_CLASSNAME} svg {
@@ -34,11 +34,13 @@ export default styled.form`
     `};
   }
   .${INPUT_CLASSNAME} {
-    ${props => props.disabled &&
+    ${props =>
+      props.disabled &&
       css`
         opacity: 1;
       `};
-    ${props => props.hasResults &&
+    ${props =>
+      props.hasResults &&
       css`
         overflow: visible;
         &:after {
@@ -53,12 +55,12 @@ export default styled.form`
         padding: 16px 9px 12px 44px;
       `};
       ${props =>
-    !props.disabled &&
-    css`
-      &:hover::placeholder {
-        color: ${props.theme.colors.primary.base};
-      }
-    `};
+        !props.disabled &&
+        css`
+          &:hover::placeholder {
+            color: ${props.theme.colors.primary.base};
+          }
+        `};
     }
   }
   ${props => css`
@@ -69,33 +71,39 @@ export default styled.form`
       fill: ${props.theme.colors.richBlack.lightest};
     };
     ${
-  props.hasResults || props.ghost
-    ? css`
-        border-top-left-radius: ${props.theme.borderRadius};
-        border-top-right-radius: ${props.theme.borderRadius};
-      `
-    : css`
-        overflow: hidden;
-        border-radius: ${props.theme.borderRadius};
-      `};
-    ${props.disabled
-    ? css`
-          opacity: 0.5;
-        `
-    : props.focused
-      ? css`
-          ${!props.ghost &&
-            css`
-              box-shadow: ${props.theme.boxShadow};
-            `};
-          ${getIconColorStyles};
-        `
-      : css`
-          &:hover {
-            ${getBackgroundColor(props.ghost, props.theme.colors.sensitiveGrey.dark)};
+      props.hasResults || props.ghost
+        ? css`
+            border-top-left-radius: ${props.theme.borderRadius};
+            border-top-right-radius: ${props.theme.borderRadius};
+          `
+        : css`
+            overflow: hidden;
+            border-radius: ${props.theme.borderRadius};
+          `
+    };
+    ${
+      props.disabled
+        ? css`
+            opacity: 0.5;
+          `
+        : props.focused
+        ? css`
+            ${!props.ghost &&
+              css`
+                box-shadow: ${props.theme.boxShadow};
+              `};
             ${getIconColorStyles};
-          }
-        `};
+          `
+        : css`
+            &:hover {
+              ${getBackgroundColor(
+                props.ghost,
+                props.theme.colors.sensitiveGrey.dark,
+              )};
+              ${getIconColorStyles};
+            }
+          `
+    };
       };
   `};
 `

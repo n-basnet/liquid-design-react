@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import COLORS from '~/utils/consts/colors'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import LineGraphWrapper from '~/components/LineGraph/LineGraphWrapper'
-import { defaultFormatter } from '~/utils/charts'
-import Graph from '~/components/LineGraph/Graph'
+import COLORS from '../../utils/consts/colors'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import LineGraphWrapper from '../../components/LineGraph/LineGraphWrapper'
+import { defaultFormatter } from '../../utils/charts'
+import Graph from '../../components/LineGraph/Graph'
 
 export class LineGraph extends PureComponent {
   state = {
@@ -40,7 +40,12 @@ export class LineGraph extends PureComponent {
           this.wrapperRef = v
         }}
       >
-        <Graph {...props} data={data} chartWidth={width} chartHeight={props.chartHeight} />
+        <Graph
+          {...props}
+          data={data}
+          chartWidth={width}
+          chartHeight={props.chartHeight}
+        />
       </LineGraphWrapper>
     )
   }
@@ -61,8 +66,8 @@ export const propTypes = {
       PropTypes.shape({
         x: PropTypes.number.isRequired,
         y: PropTypes.number.isRequired,
-      })
-    )
+      }),
+    ),
   ).isRequired,
   /** The range of data the component will include on x axis. */
   domainAxisX: PropTypes.arrayOf(PropTypes.number),
@@ -84,14 +89,20 @@ export const propTypes = {
   /** The tickCountAxisY prop specifies approximately how many ticks should be drawn on the axis Y. */
   tickCountAxisY: PropTypes.number,
   /** The tickFormatAxisX prop specifies how tick values should be labeled. The tickFormat prop can be given as an array of values to display for each tick, or as a function to be applied to every tickValue */
-  tickFormatAxisX: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
+  tickFormatAxisX: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.func,
+  ]),
   /** The tickValuesAxisX prop explicitly specifies a set of tick values to draw on the axis X. */
   tickValuesAxisX: PropTypes.arrayOf(PropTypes.number),
   /**
    The tickFormatAxisX prop specifies how tick values should be labeled.
    The tickFormat prop can be given as an array of values to display for each tick, or as a function to be applied to every tickValue.
   */
-  tickFormatAxisY: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
+  tickFormatAxisY: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.func,
+  ]),
   /** The tickValuesAxisY prop explicitly specifies a set of tick values to draw on the axis Y. */
   tickValuesAxisY: PropTypes.arrayOf(PropTypes.number),
   /** The tickAxisYPrecision prop specifies fractional part for default values (unless we use custom tickFormatAxisY).

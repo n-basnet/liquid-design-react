@@ -2,13 +2,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
 
-import {
-  default as EnhancedCircularProgressBar,
+import EnhancedCircularProgressBar, {
   CircularProgressBar,
   CIRCULAR_PROGRESS_BAR_CLASSNAME,
-} from '~/components/CircularProgressBar'
-import { media } from '~/utils/styling'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
+} from '../../src/components/CircularProgressBar'
+import { media } from '../../src/utils/styling'
+import { DEFAULT_THEME } from '../../src/utils/consts/themes'
 
 import {
   getBackgroundWrapper,
@@ -42,7 +41,9 @@ const getCodeSnippet = props =>
 
 storiesOf('Components/CircularProgressBar', module)
   .addDecorator(getBackgroundWrapper())
-  .addDecorator(includeComponentInPropTable(CircularProgressBar, { theme: DEFAULT_THEME }))
+  .addDecorator(
+    includeComponentInPropTable(CircularProgressBar, { theme: DEFAULT_THEME }),
+  )
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([
@@ -54,25 +55,27 @@ storiesOf('Components/CircularProgressBar', module)
     },
   })
   .addDecorator(storyFn => (
-    <CircularProgressBarStoryWrapper>{storyFn()}</CircularProgressBarStoryWrapper>
+    <CircularProgressBarStoryWrapper>
+      {storyFn()}
+    </CircularProgressBarStoryWrapper>
   ))
   .add(
     'default',
     () => <CircularProgressBarApp {...getDefaultProps()} />,
-    getCodeSnippet(`value={50}`)
+    getCodeSnippet('value={50}'),
   )
   .add(
     'overdue',
     () => <CircularProgressBarApp {...getDefaultProps()} defaultValue={150} />,
-    getCodeSnippet(`value={150}`)
+    getCodeSnippet('value={150}'),
   )
   .add(
     'disabled',
     () => <CircularProgressBarApp {...getDefaultProps()} disabled />,
-    getCodeSnippet(`value={50} disabled`)
+    getCodeSnippet('value={50} disabled'),
   )
   .add(
     'using theme colors',
     () => <CircularProgressBarApp {...getDefaultProps()} useThemeColors />,
-    getCodeSnippet(`value={50} useThemeColors`)
+    getCodeSnippet('value={50} useThemeColors'),
   )

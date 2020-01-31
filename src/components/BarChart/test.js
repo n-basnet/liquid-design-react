@@ -1,6 +1,6 @@
 import BarChart from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { defaultFormatter } from '~/utils/charts'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import { defaultFormatter } from '../../utils/charts'
 
 const label1 = {
   name: 'Some label',
@@ -14,11 +14,17 @@ const getDefaultProps = () => ({
   data: [
     {
       x: '2020',
-      values: [{ value: 20, label: label1 }, { value: 420, label: label2 }],
+      values: [
+        { value: 20, label: label1 },
+        { value: 420, label: label2 },
+      ],
     },
     {
       x: '2021',
-      values: [{ value: 10, label: label1 }, { value: 210, label: label2 }],
+      values: [
+        { value: 10, label: label1 },
+        { value: 210, label: label2 },
+      ],
     },
   ],
 })
@@ -48,7 +54,7 @@ describe('BarChart', () => {
 
   it('renders a label with color', () => {
     const firstLabelHtml = wrapper
-      .find(`[data-test-value="chart-label"]`)
+      .find('[data-test-value="chart-label"]')
       .at(firstIndex)
       .html()
     expect(firstLabelHtml).toMatch(label1.color)
@@ -56,12 +62,14 @@ describe('BarChart', () => {
   })
 
   it('renders a sum', () => {
-    const sums = wrapper.find(`[data-test-value="bar-chart-sum-label"]`)
+    const sums = wrapper.find('[data-test-value="bar-chart-sum-label"]')
     const computedSum = props.data[firstIndex].values.reduce((acc, val) => {
       acc += val.value
       return acc
     }, 0)
-    expect(sums.at(firstIndex).text()).toMatch(String(defaultFormatter(computedSum)))
+    expect(sums.at(firstIndex).text()).toMatch(
+      String(defaultFormatter(computedSum)),
+    )
   })
 
   everyComponentTestSuite(getBarChartWrapper, BarChart, 'BarChart')

@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions'
 import styled, { css, keyframes } from 'styled-components'
 
 import { getStoryMDLink, Fragment } from '../../helpers'
-import { TextField, Button } from '~'
+import { TextField, Button } from '../../../src'
 
 const rotation = keyframes`
   from { transform: rotate(0deg); }
@@ -30,7 +30,7 @@ export const propTablesExclude = [Form]
 export const storyInfo = {
   info: {
     text: `${getStoryMDLink(
-      'TextField'
+      'TextField',
     )} is just a wrapper for \`input\`/\`textfield\` HTML elements with some styling. It can easily be combined with standard React form libraries.
 
 In this example, \`react-final-form\` is used (usernames John, Paul, George or Ringo will fail async validation.):
@@ -73,11 +73,14 @@ const validateUsername = async value => {
     return 'Required'
   }
   await sleep(500)
-  if (~['john', 'paul', 'george', 'ringo'].indexOf(value && value.toLowerCase())) {
+  if (
+    ~['john', 'paul', 'george', 'ringo'].indexOf(value && value.toLowerCase())
+  ) {
     return 'Username already taken'
   }
 }
-const validateEmail = text => (/.+@.+\..+/.test(text) ? undefined : 'Invalid email address')
+const validateEmail = text =>
+  /.+@.+\..+/.test(text) ? undefined : 'Invalid email address'
 
 const ExampleForm = () => (
   <Form
@@ -92,14 +95,18 @@ const ExampleForm = () => (
           <Fragment key={i}>
             <Field name={name} validate={validate}>
               {({ input, meta }) => (
-                <TextField label={label} error={meta.touched && meta.error} {...input} />
+                <TextField
+                  label={label}
+                  error={meta.touched && meta.error}
+                  {...input}
+                />
               )}
             </Field>
             <br />
           </Fragment>
         ))}
 
-        <Button type='submit' disabled={pristine || invalid}>
+        <Button type="submit" disabled={pristine || invalid}>
           Submit
         </Button>
       </form>

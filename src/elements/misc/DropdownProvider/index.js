@@ -1,19 +1,29 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { find, innerJoin, symmetricDifferenceWith, prop, eqBy, isEmpty, without } from 'ramda'
+import {
+  find,
+  innerJoin,
+  symmetricDifferenceWith,
+  prop,
+  eqBy,
+  isEmpty,
+  without,
+} from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { getItemsWithIds } from '~/utils/misc'
-import Ellipsis from '~/components/misc/Ellipsis'
-import SelectedOptionsLabel from '~/elements/misc/SelectedOptionsLabel'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import OptionsGroup from '~/elements/misc/OptionsGroup'
-import ActiveOption from '~/elements/misc/ActiveOption'
+import { getClassName } from '../../../components/misc/hoc/attachClassName'
+import { getItemsWithIds } from '../../../utils/misc'
+import Ellipsis from '../../../components/misc/Ellipsis'
+import SelectedOptionsLabel from '../../../elements/misc/SelectedOptionsLabel'
+import { Glyph, ICON_CLASSNAME } from '../../../elements/Icon'
+import OptionsGroup from '../../../elements/misc/OptionsGroup'
+import ActiveOption from '../../../elements/misc/ActiveOption'
 
 export const DROPDOWN_ICON_CLASSNAME = `${ICON_CLASSNAME}DropdownIcon`
-export const DROPDOWN_TRIGGER_CLASSNAME = getClassName({ name: 'DropdownTrigger' })
+export const DROPDOWN_TRIGGER_CLASSNAME = getClassName({
+  name: 'DropdownTrigger',
+})
 export class DropdownProvider extends PureComponent {
   static propTypes = {
     render: PropTypes.func.isRequired,
@@ -36,7 +46,7 @@ export class DropdownProvider extends PureComponent {
         name: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
         onClick: PropTypes.func,
-      })
+      }),
     ),
     onOptionDeselect: PropTypes.func,
     onOptionSelect: PropTypes.func,
@@ -68,14 +78,25 @@ export class DropdownProvider extends PureComponent {
     submittedOption: null,
     wasSubmitted: false,
   }
-  toggle = () => this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }))
+
+  toggle = () =>
+    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }))
+
   getKeyDownHandler = handler => e => e.key === 'Enter' && handler()
   handleClickOutside = () => this.setState({ isExpanded: false })
   handleSubmit = option => {
     if (this.props.multiselect) {
       const { selectedOptionsIds, options } = this.props
-      const previouslyActiveOptions = innerJoin((o, id) => o.id === id, options, selectedOptionsIds)
-      const currentActiveOptions = symmetricDifferenceWith(eqBy(prop('id')), previouslyActiveOptions, [option])
+      const previouslyActiveOptions = innerJoin(
+        (o, id) => o.id === id,
+        options,
+        selectedOptionsIds,
+      )
+      const currentActiveOptions = symmetricDifferenceWith(
+        eqBy(prop('id')),
+        previouslyActiveOptions,
+        [option],
+      )
       this.props.onSubmit && this.props.onSubmit(currentActiveOptions)
       if (currentActiveOptions.length > previouslyActiveOptions.length) {
         this.props.onOptionSelect && this.props.onOptionSelect(option)
@@ -86,9 +107,11 @@ export class DropdownProvider extends PureComponent {
     }
 
     const activeOption = this.getActiveOption()
-    const hasReselectedSameOption = activeOption && option.id === activeOption.id
+    const hasReselectedSameOption =
+      activeOption && option.id === activeOption.id
     // if the state is internal, reselecting is resetting
-    const submittedOption = !this.props.value && hasReselectedSameOption ? null : option
+    const submittedOption =
+      !this.props.value && hasReselectedSameOption ? null : option
     this.setState({
       submittedOption,
       isExpanded: false,
@@ -101,11 +124,13 @@ export class DropdownProvider extends PureComponent {
       this.props.onOptionDeselect && this.props.onOptionDeselect(activeOption)
     }
   }
+
   getActiveOption = () => {
     const { submittedOption, wasSubmitted } = this.state
     const { defaultValue, value, options } = this.props
     // handling external control
-    const activeOptionFromValue = value && find(({ id }) => id === value, options)
+    const activeOptionFromValue =
+      value && find(({ id }) => id === value, options)
     if (activeOptionFromValue) {
       return activeOptionFromValue
     }
@@ -118,12 +143,15 @@ export class DropdownProvider extends PureComponent {
   */
   renderActiveOption = activeOption =>
     this.props.isFilter ? (
-      <ActiveOption activeOption={activeOption} onIconClick={this.handleSubmit} />
+      <ActiveOption
+        activeOption={activeOption}
+        onIconClick={this.handleSubmit}
+      />
     ) : (
       activeOption.name
     )
 
-  render () {
+  render() {
     const {
       disabled,
       multiselect,
@@ -158,7 +186,10 @@ export class DropdownProvider extends PureComponent {
       wrapperProps: {
         disabled,
         isExpanded,
-        className: cx(className, nameForClassName && getClassName({ name: nameForClassName })),
+        className: cx(
+          className,
+          nameForClassName && getClassName({ name: nameForClassName }),
+        ),
         ...props,
       },
       triggerWrapperProps: {
@@ -177,13 +208,20 @@ export class DropdownProvider extends PureComponent {
         hasSelectedOptions ? (
           <SelectedOptionsLabel
             handleRemove={option => {
-              onSubmit(getItemsWithIds(options, without(option.id, selectedOptionsIds)))
+              onSubmit(
+                getItemsWithIds(
+                  options,
+                  without(option.id, selectedOptionsIds),
+                ),
+              )
               onOptionDeselect(option)
             }}
             items={getItemsWithIds(options, selectedOptionsIds)}
           />
         ) : (
-          <Ellipsis style={{ minHeight: '28px', maxWidth: 'calc(100% - 25px)' }}>
+          <Ellipsis
+            style={{ minHeight: '28px', maxWidth: 'calc(100% - 25px)' }}
+          >
             {activeOption ? this.renderActiveOption(activeOption) : label}
           </Ellipsis>
         ),
@@ -196,7 +234,8 @@ export class DropdownProvider extends PureComponent {
           style={disabled ? { opacity: 0.05 } : {}}
         />
       ),
-      renderOptionsGroup: props => isExpanded && <OptionsGroup {...optionsGroupProps} {...props} />,
+      renderOptionsGroup: props =>
+        isExpanded && <OptionsGroup {...optionsGroupProps} {...props} />,
     })
   }
 }

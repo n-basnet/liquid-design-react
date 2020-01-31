@@ -1,6 +1,6 @@
 import Checkbox, { Label, Input } from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
-import { Glyph } from '~/elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
+import { Glyph } from '../../elements/Icon'
 
 describe('Checkbox', () => {
   const defaultProps = {
@@ -13,7 +13,7 @@ describe('Checkbox', () => {
     expect(
       getCheckboxWrapper()
         .find(Label)
-        .text()
+        .text(),
     ).toEqual(defaultProps.label)
   })
 

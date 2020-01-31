@@ -6,9 +6,9 @@ import Theme from '.'
 describe('Theme', () => {
   it('renders', () => {
     const wrapper = mount(
-      <Theme themeName='richPurple'>
+      <Theme themeName="richPurple">
         <div>hello</div>
-      </Theme>
+      </Theme>,
     )
     expect(wrapper).toBeTruthy()
   })

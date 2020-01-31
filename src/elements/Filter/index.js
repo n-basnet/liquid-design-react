@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import DropdownWrapper from '~/elements/misc/DropdownProvider/DropdownWrapper'
-import DropdownTriggerWrapper from '~/elements/misc/DropdownProvider/DropdownTriggerWrapper'
-import DropdownProvider from '~/elements/misc/DropdownProvider'
+import DropdownWrapper from '../../elements/misc/DropdownProvider/DropdownWrapper'
+import DropdownTriggerWrapper from '../../elements/misc/DropdownProvider/DropdownTriggerWrapper'
+import DropdownProvider from '../../elements/misc/DropdownProvider'
 
 const IconWrapper = styled.div`
   margin-right: 0;
@@ -15,7 +15,7 @@ const IconWrapper = styled.div`
 const Filter = props => (
   <DropdownProvider
     {...props}
-    nameForClassName='Filter'
+    nameForClassName="Filter"
     inline
     isFilter
     render={({
@@ -54,7 +54,7 @@ Filter.propTypes = {
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       onClick: PropTypes.func,
-    })
+    }),
   ),
   onOptionDeselect: PropTypes.func,
   onOptionSelect: PropTypes.func,

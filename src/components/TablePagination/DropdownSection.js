@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Dropdown, { DROPDOWN_CLASSNAME } from '~/elements/Dropdown'
-import { DROPDOWN_TRIGGER_CLASSNAME } from '~/elements/misc/DropdownProvider'
-import { OPTIONS_GROUP_CLASSNAME } from '~/elements/misc/OptionsGroup'
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { optionPropType } from '~/elements/misc/OptionsGroupProps'
-import { ClickableSection } from '~/components/TablePagination/styled'
-import { media } from '~/utils/styling'
+import Dropdown, { DROPDOWN_CLASSNAME } from '../../elements/Dropdown'
+import { DROPDOWN_TRIGGER_CLASSNAME } from '../../elements/misc/DropdownProvider'
+import { OPTIONS_GROUP_CLASSNAME } from '../../elements/misc/OptionsGroup'
+import { ICON_CLASSNAME } from '../../elements/Icon'
+import { optionPropType } from '../../elements/misc/OptionsGroupProps'
+import { ClickableSection } from '../../components/TablePagination/styled'
+import { media } from '../../utils/styling'
 
 const DropdownWrapper = styled(ClickableSection)`
   z-index: 0;
@@ -47,14 +47,19 @@ const DropdownWrapper = styled(ClickableSection)`
     min-width: 160px;
     right: 0;
     ${props =>
-    props.shouldOpenToTop &&
+      props.shouldOpenToTop &&
       css`
         bottom: 50px;
         box-shadow: 0 5px 20px #0000003d;
       `};
   }
 `
-const DropdownSection = ({ options, isItemsPerPageDropdown, shouldOpenToTop, ...props }) => (
+const DropdownSection = ({
+  options,
+  isItemsPerPageDropdown,
+  shouldOpenToTop,
+  ...props
+}) => (
   <DropdownWrapper
     isItemsPerPageDropdown={isItemsPerPageDropdown}
     shouldOpenToTop={shouldOpenToTop}

@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { ieStyles } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { ieStyles } from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const DEFAULT_GLYPH_SIZE = 40
 
@@ -27,7 +27,9 @@ const SocialShareWrapper = styled.button`
     border-radius: ${props.theme.borderRadius};
     outline: none;
     .${ICON_CLASSNAME} svg {
-        fill: ${props.theme.colors[props.type === 'snapchat' ? 'black' : 'white'].base};
+        fill: ${
+          props.theme.colors[props.type === 'snapchat' ? 'black' : 'white'].base
+        };
       }
     }
   `};
@@ -43,7 +45,8 @@ export const SocialShareLabel = styled.div`
   ${props => css`
     padding-left: ${props.type === 'mail' ? 7 : 5}px;
     font-weight: ${props.theme.fontWeight.bold};
-    color: ${props.theme.colors[props.type === 'snapchat' ? 'black' : 'white'].base};
+    color: ${props.theme.colors[props.type === 'snapchat' ? 'black' : 'white']
+      .base};
   `};
 `
 const labelMap = {
@@ -64,7 +67,9 @@ const labelMap = {
 export const SocialShare = ({ hasLabel, type, ...props }) => (
   <SocialShareWrapper type={type} hasLabel={hasLabel} {...props}>
     <Glyph name={type} size={DEFAULT_GLYPH_SIZE} />
-    {hasLabel && <SocialShareLabel type={type}>{labelMap[type]}</SocialShareLabel>}
+    {hasLabel && (
+      <SocialShareLabel type={type}>{labelMap[type]}</SocialShareLabel>
+    )}
   </SocialShareWrapper>
 )
 

@@ -2,14 +2,20 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { default as EnhancedHeader, Header } from '~/modules/Header'
-import Logo from '~/elements/Logo'
-import { getTextKnob, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
+import EnhancedHeader, { Header } from '../../src/modules/Header'
+import Logo from '../../src/elements/Logo'
+import {
+  getTextKnob,
+  getSnippetTemplate,
+  getPropTablesExcludeList,
+} from '../helpers'
 
-const LogoComponent = <Logo color='secondary.base' size={42} />
+const LogoComponent = <Logo color="secondary.base" size={42} />
 const buttonIcon = 'circleX'
-const getHeaderText = () => getTextKnob({ name: 'headerText', defaultText: 'Room 01' })
-const getButtonLabel = () => getTextKnob({ name: 'buttonLabel', defaultText: 'Text' })
+const getHeaderText = () =>
+  getTextKnob({ name: 'headerText', defaultText: 'Room 01' })
+const getButtonLabel = () =>
+  getTextKnob({ name: 'buttonLabel', defaultText: 'Text' })
 
 const searchBarOptions = [
   'Search Result 1',
@@ -27,7 +33,12 @@ storiesOf('Modules/Headers', module)
   })
   .add(
     'default',
-    () => <EnhancedHeader searchBarOptions={searchBarOptions} logoComponent={LogoComponent} />,
+    () => (
+      <EnhancedHeader
+        searchBarOptions={searchBarOptions}
+        logoComponent={LogoComponent}
+      />
+    ),
     getSnippetTemplate(`
   <Header
     searchBarOptions={[
@@ -38,7 +49,7 @@ storiesOf('Modules/Headers', module)
     ]}
     logoComponent={<Logo />}
   />
-  `)
+  `),
   )
   .add(
     'with icons',
@@ -66,7 +77,7 @@ storiesOf('Modules/Headers', module)
     infoOnClick={onClickHandler}
     settingsOnClick={onClickHandler}
   />
-  `)
+  `),
   )
   .add(
     'with text',
@@ -91,7 +102,7 @@ storiesOf('Modules/Headers', module)
     withText
     labelOne="Room 01"
     labelTwo="Room 01"
-  />`)
+  />`),
   )
   .add(
     'with button',
@@ -119,5 +130,5 @@ storiesOf('Modules/Headers', module)
     buttonLabel="Text"
     buttonOnClick={onClickHandler}
   />
-    `)
+    `),
   )

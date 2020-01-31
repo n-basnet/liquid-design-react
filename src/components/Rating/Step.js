@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { cursorValue } from '../../utils/styling'
 
 const StyledStep = styled.div`
   display: inline-block;
@@ -29,11 +29,11 @@ const StyledStep = styled.div`
       path ${!props.dots && '+ path'} {
         fill: ${props.theme.colors.primary[props.hovered ? 'dark' : 'base']};
       }
-    ${props =>
-    props.hovered &&
-    css`
-      fill: ${props.theme.colors.primary.dark};
-    `};
+      ${props =>
+        props.hovered &&
+        css`
+          fill: ${props.theme.colors.primary.dark};
+        `};
     `};
   }
 `

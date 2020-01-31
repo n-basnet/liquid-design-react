@@ -7,7 +7,7 @@ import {
   getTextKnob,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedLink, Link } from '~/elements/Link'
+import EnhancedLink, { Link } from '../../src/elements/Link'
 
 const defaultText = 'Text'
 const getDefaultProps = () => ({
@@ -30,5 +30,5 @@ storiesOf('Elements/Link', module)
   <Link>
     Text
   </Link>
-  `)
+  `),
   )

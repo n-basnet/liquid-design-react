@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import Headline from '~/elements/Headline'
-import Accordion from '~/components/Accordion'
-import COLORS from '~/utils/consts/colors'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import Headline from '../../elements/Headline'
+import Accordion from '../../components/Accordion'
+import COLORS from '../../utils/consts/colors'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 export class Faq extends PureComponent {
   static propTypes = {
@@ -13,7 +13,10 @@ export class Faq extends PureComponent {
   }
 
   accordionsContent = this.props.faqContent.map((accordionContent, index) => (
-    <Accordion key={`${index}-${accordionContent.title}`} title={accordionContent.title}>
+    <Accordion
+      key={`${index}-${accordionContent.title}`}
+      title={accordionContent.title}
+    >
       {accordionContent.content}
     </Accordion>
   ))
@@ -24,11 +27,14 @@ export class Faq extends PureComponent {
 
     return (
       <section {...props}>
-        <Headline type='H1' style={{ paddingBottom: '20px', textAlign: 'center' }}>
+        <Headline
+          type="H1"
+          style={{ paddingBottom: '20px', textAlign: 'center' }}
+        >
           {headlinesTexts.primary}
         </Headline>
         <Headline
-          type='H3'
+          type="H3"
           style={{
             maxWidth: '75%',
             minWidth: '240px',

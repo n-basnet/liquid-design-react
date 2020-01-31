@@ -9,7 +9,7 @@ export default styled.div`
     font-size: ${props.size === 'small' ? '14px' : '16px'};
     font-weight: ${props.theme.fontWeight.bold};
     color: ${props.disabled
-    ? props.theme.colors.sensitiveGrey.darkest
-    : props.theme.colors[props.hasIcon ? 'richBlack' : 'primary'].base};
+      ? props.theme.colors.sensitiveGrey.darkest
+      : props.theme.colors[props.hasIcon ? 'richBlack' : 'primary'].base};
   `};
 `

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import dateFns from 'date-fns'
 
-import { default as EnhancedCalendar, Calendar } from '~/modules/Calendar'
+import EnhancedCalendar, { Calendar } from '../../src/modules/Calendar'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -17,17 +17,23 @@ const sampleDate2 = new Date()
 sampleDate1.setDate(sampleDate1.getDate() + 1).toString()
 sampleDate2.setDate(sampleDate2.getDate() - 5).toString()
 const sampleAppointments = {
-  [dateFns.addDays(today, -5)]: [{ time: '13:00', description: 'meeting with Charlie' }],
-  [dateFns.addDays(today, 1)]: [{ time: '10:00', description: 'meeting with Brian' }],
+  [dateFns.addDays(today, -5)]: [
+    { time: '13:00', description: 'meeting with Charlie' },
+  ],
+  [dateFns.addDays(today, 1)]: [
+    { time: '10:00', description: 'meeting with Brian' },
+  ],
 }
 
 export class CalendarApp extends PureComponent {
   static propTypes = {
     rangeMode: PropTypes.bool,
   }
+
   static defaultProps = {
     rangeMode: false,
   }
+
   state = {
     selectedStartDate: null,
     selectedEndDate: null,
@@ -36,6 +42,7 @@ export class CalendarApp extends PureComponent {
   handleStartDateChange = date => {
     this.setState({ selectedStartDate: date })
   }
+
   handleEndDateChange = date => {
     this.setState({ selectedEndDate: date })
   }
@@ -61,7 +68,10 @@ storiesOf('Modules/Calendar', module)
   .addDecorator(getBackgroundWrapper())
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([EnhancedCalendar, CalendarApp]),
+      propTablesExclude: getPropTablesExcludeList([
+        EnhancedCalendar,
+        CalendarApp,
+      ]),
       propTables: [Calendar],
     },
   })
@@ -89,7 +99,7 @@ storiesOf('Modules/Calendar', module)
       )
     }
   }
-  `)
+  `),
   )
   .add(
     'with custom start of week',
@@ -116,7 +126,7 @@ storiesOf('Modules/Calendar', module)
       )
     }
   }
-  `)
+  `),
   )
   .add(
     'with appointments',
@@ -159,7 +169,7 @@ storiesOf('Modules/Calendar', module)
       )
     }
   }
-  `)
+  `),
   )
   .add(
     'in range mode',
@@ -190,5 +200,5 @@ storiesOf('Modules/Calendar', module)
         />
       )
     }
-  `)
+  `),
   )

@@ -1,16 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import CompressedGas from '~/assets/svgIllustrations/warningLabels/CompressedGas.svg'
-import Corrosive from '~/assets/svgIllustrations/warningLabels/Corrosive.svg'
-import EnvironmentalHazard from '~/assets/svgIllustrations/warningLabels/EnvironmentalHazard.svg'
-import Explosive from '~/assets/svgIllustrations/warningLabels/Explosive.svg'
-import Flammable from '~/assets/svgIllustrations/warningLabels/Flammable.svg'
-import Harmful from '~/assets/svgIllustrations/warningLabels/Harmful.svg'
-import Health from '~/assets/svgIllustrations/warningLabels/Health hazard.svg'
-import Oxidizing from '~/assets/svgIllustrations/warningLabels/Oxidizing.svg'
-import Toxic from '~/assets/svgIllustrations/warningLabels/Toxic.svg'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import CompressedGas from '../../assets/svgIllustrations/warningLabels/CompressedGas.svg'
+import Corrosive from '../../assets/svgIllustrations/warningLabels/Corrosive.svg'
+import EnvironmentalHazard from '../../assets/svgIllustrations/warningLabels/EnvironmentalHazard.svg'
+import Explosive from '../../assets/svgIllustrations/warningLabels/Explosive.svg'
+import Flammable from '../../assets/svgIllustrations/warningLabels/Flammable.svg'
+import Harmful from '../../assets/svgIllustrations/warningLabels/Harmful.svg'
+import Health from '../../assets/svgIllustrations/warningLabels/Health hazard.svg'
+import Oxidizing from '../../assets/svgIllustrations/warningLabels/Oxidizing.svg'
+import Toxic from '../../assets/svgIllustrations/warningLabels/Toxic.svg'
 
 export const WARNING_LABELS_FILES = {
   CompressedGas,

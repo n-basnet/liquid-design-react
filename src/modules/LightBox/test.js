@@ -1,6 +1,6 @@
 import LightBox from '.'
-import Modal from '~/components/Modal'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Modal from '../../components/Modal'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('LightBox', () => {
   const children = 'Some text'

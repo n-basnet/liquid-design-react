@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { getBackgroundImage } from '~/utils/styling'
-import { TypographicQuote } from '~/components/Quote/TypographicQuote'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import BlockquoteWrapper from '~/components/Quote/BlockquoteWrapper'
+import { getBackgroundImage } from '../../utils/styling'
+import { TypographicQuote } from '../../components/Quote/TypographicQuote'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import BlockquoteWrapper from '../../components/Quote/BlockquoteWrapper'
 
 const QuoteWrapper = styled(BlockquoteWrapper)`
   max-width: 300px;
@@ -38,8 +38,15 @@ export const PhraseWrapper = styled.p`
   text-align: center;
 `
 
-export const Quote = ({ author, big, imagePath, source, quotation, ...props }) => (
-  <Fragment>
+export const Quote = ({
+  author,
+  big,
+  imagePath,
+  source,
+  quotation,
+  ...props
+}) => (
+  <>
     {imagePath ? (
       <QuoteWrapper cite={source} {...props}>
         <ImageWrapper src={imagePath} />
@@ -55,7 +62,7 @@ export const Quote = ({ author, big, imagePath, source, quotation, ...props }) =
         {...props}
       />
     )}
-  </Fragment>
+  </>
 )
 
 Quote.propTypes = {

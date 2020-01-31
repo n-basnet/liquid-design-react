@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { Glyph } from '~/elements/Icon'
-import { scaleUp } from '~/utils/styling/animations'
-import { cursorValue } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
+import { scaleUp } from '../../utils/styling/animations'
+import { cursorValue } from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const bgColorSelector = props => {
   const { theme, isInfo, isWarning, disabled } = props
@@ -39,10 +39,15 @@ export const Label = styled.span`
 `
 
 export const Bubble = ({ disabled, isInfo, label, isWarning, ...props }) => (
-  <BubbleWrapper disabled={disabled} isInfo={isInfo} isWarning={isWarning} {...props}>
+  <BubbleWrapper
+    disabled={disabled}
+    isInfo={isInfo}
+    isWarning={isWarning}
+    {...props}
+  >
     {label && <Label>{label.toString().length > 2 ? 99 : label}</Label>}
-    {isInfo && <Glyph color='white.base' name='infoM' size={16} />}
-    {isWarning && <Glyph color='white.base' name='warningM' size={16} />}
+    {isInfo && <Glyph color="white.base" name="infoM" size={16} />}
+    {isWarning && <Glyph color="white.base" name="warningM" size={16} />}
   </BubbleWrapper>
 )
 

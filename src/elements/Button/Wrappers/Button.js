@@ -1,8 +1,17 @@
 import styled, { css } from 'styled-components'
 
-import { bgColorSelector, colorSelector, iconOpacitySelector } from '~/elements/Button/utils'
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import { nonTouchDevicesHoverStyles, cursorValue, ieStyles, safariStyles } from '~/utils/styling'
+import {
+  bgColorSelector,
+  colorSelector,
+  iconOpacitySelector,
+} from '../../../elements/Button/utils'
+import { ICON_CLASSNAME } from '../../../elements/Icon'
+import {
+  nonTouchDevicesHoverStyles,
+  cursorValue,
+  ieStyles,
+  safariStyles,
+} from '../../../utils/styling'
 
 export const widthSelector = props =>
   props.label ? '93px' : props.size === 'big' ? '50px' : '40px'
@@ -17,7 +26,10 @@ export default styled.button`
     min-width: ${widthSelector(props)};
     min-height: ${props.size === 'big' ? '50px' : '40px'};
     padding: ${props.size === 'big' ? '13px 0' : '8px 0px'};
-    background-color: ${bgColorSelector(props, props.disabled ? 'lightest' : 'base')};
+    background-color: ${bgColorSelector(
+      props,
+      props.disabled ? 'lightest' : 'base',
+    )};
     border-radius: ${props.theme.borderRadius};
     transition: ${props.theme.transition};
     outline: none;

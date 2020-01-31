@@ -1,8 +1,8 @@
-import { ICON_CLASSNAME } from '~/elements/Icon'
+import { ICON_CLASSNAME } from '../../elements/Icon'
 import Tooltip from '.'
 import { getArrowStyle, getPosition } from './utils'
 import { WALLS_KEYS, SIDES_KEYS } from './consts'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Tooltip', () => {
   const tooltipContent = 'some content'
@@ -27,7 +27,7 @@ describe('Tooltip', () => {
     WALLS_KEYS.map(wall =>
       SIDES_KEYS.map(side => {
         expect(getArrowStyle({ color: 'white', wall, side })).toMatchSnapshot()
-      })
+      }),
     )
   })
 
@@ -35,7 +35,7 @@ describe('Tooltip', () => {
     WALLS_KEYS.map(wall =>
       SIDES_KEYS.map(side => {
         expect(getPosition({ wall, side })).toMatchSnapshot()
-      })
+      }),
     )
   })
 

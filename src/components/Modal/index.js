@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { default as ReactModal } from 'react-modal'
+import ReactModal from 'react-modal'
 import { withTheme, injectGlobal, css } from 'styled-components'
 import cx from 'classnames'
 
-import { Base } from '~/Theme'
-import ModalContent from '~/components/Modal/ModalContent'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { disableWebkitTapHightlight } from '~/utils/styling'
+import { Base } from '../../Theme'
+import ModalContent from '../../components/Modal/ModalContent'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { disableWebkitTapHightlight } from '../../utils/styling'
 
 const TRANSITION_DURATION = 200
 const MODAL_MARGIN = 20
@@ -44,7 +44,12 @@ const modalOverlayCloseState = css`
   }
 `
 
-export const Modal = ({ open, overlayAuxClassName, reactModalProps, ...props }) => (
+export const Modal = ({
+  open,
+  overlayAuxClassName,
+  reactModalProps,
+  ...props
+}) => (
   <ReactModal
     isOpen={open}
     ariaHideApp={false}

@@ -1,15 +1,20 @@
 import DatePicker from '.'
-import { toCommonFormat, getSeparator, getFormatRegexp, checkEndDateWithStartDate } from './utils'
+import {
+  toCommonFormat,
+  getSeparator,
+  getFormatRegexp,
+  checkEndDateWithStartDate,
+} from './utils'
 import DATEPICKER_CONSTS from './consts'
 import DayCell, { DayContainer } from '../Calendar/DayCell'
-import TextField from '~/elements/TextField'
-import Calendar from '~/modules/Calendar'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
+import TextField from '../../elements/TextField'
+import Calendar from '../../modules/Calendar'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 
 describe('DatePicker', () => {
   const defaultProps = {
     onStartDateChange: jest.fn(),
-    format: DATEPICKER_CONSTS.DEFAULT_FORMAT
+    format: DATEPICKER_CONSTS.DEFAULT_FORMAT,
   }
   const getDatePickerWrapper = getWrapper(DatePicker, defaultProps)
 
@@ -61,9 +66,9 @@ describe('DatePicker utils', () => {
   it('toCommonFormat', () => {
     const sampleInputDate = '12 / 03 / 2018'
     const sampleOutputDate = '2018-03-12'
-    expect(toCommonFormat(sampleInputDate, DATEPICKER_CONSTS.DEFAULT_FORMAT, ' / ')).toBe(
-      sampleOutputDate
-    )
+    expect(
+      toCommonFormat(sampleInputDate, DATEPICKER_CONSTS.DEFAULT_FORMAT, ' / '),
+    ).toBe(sampleOutputDate)
   })
   it('getSeparator', () => {
     const sampleFormat = 'DD.MM.YYYY'
@@ -71,7 +76,9 @@ describe('DatePicker utils', () => {
   })
   it('getFormatRegexp', () => {
     const sampleFormat = 'DD.MM.YYYY'
-    const sampleOutput = new RegExp(/^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.[12]\d{3}$/)
+    const sampleOutput = new RegExp(
+      /^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.[12]\d{3}$/,
+    )
     expect(getFormatRegexp(sampleFormat)).toEqual(sampleOutput)
   })
   it('checkEndDateWithStartDate', () => {
@@ -85,8 +92,8 @@ describe('DatePicker utils', () => {
         sampleStartDate,
         sampleStartDateInputValue,
         DATEPICKER_CONSTS.DEFAULT_FORMAT,
-        DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE
-      )
+        DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE,
+      ),
     ).toBe(true)
     expect(
       checkEndDateWithStartDate(
@@ -94,8 +101,8 @@ describe('DatePicker utils', () => {
         sampleStartDate,
         sampleStartDateInputValue,
         DATEPICKER_CONSTS.DEFAULT_FORMAT,
-        DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE
-      )
+        DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE,
+      ),
     ).toBe(DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE)
   })
 })

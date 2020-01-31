@@ -4,10 +4,13 @@ import styled, { css, withTheme } from 'styled-components'
 import { withResizeDetector } from 'react-resize-detector'
 import cx from 'classnames'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { getGlyphName, getColor } from '~/components/StepProgressBar/helpers'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { cursorValue } from '~/utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import {
+  getGlyphName,
+  getColor,
+} from '../../components/StepProgressBar/helpers'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { cursorValue } from '../../utils/styling'
 
 const STEP_PROGRESS_BAR_CLASSNAME = getClassName({ name: 'StepProgressBar' })
 export const ICON_SIZE = 29
@@ -60,7 +63,10 @@ const Connector = styled.div`
 export const SingleStepNameWrapper = styled.div`
   ${props => css`
     width: ${props.stepWidth}%;
-    ${cursorValue({ ...props, defaultValue: props.onClick ? 'pointer' : 'default' })};
+    ${cursorValue({
+      ...props,
+      defaultValue: props.onClick ? 'pointer' : 'default',
+    })};
     opacity: ${props.disabled ? 0.3 : props.comingUp ? 0.4 : 1};
   `};
   padding-left: 5px;
@@ -76,7 +82,7 @@ export class StepProgressBar extends PureComponent {
       PropTypes.shape({
         name: PropTypes.string,
         disabled: PropTypes.bool,
-      })
+      }),
     ).isRequired,
     current: PropTypes.number,
     onUpdate: PropTypes.func,
@@ -85,6 +91,7 @@ export class StepProgressBar extends PureComponent {
     width: PropTypes.number,
     className: PropTypes.string,
   }
+
   static defaultProps = {
     current: 0,
     onUpdate: undefined,
@@ -92,6 +99,7 @@ export class StepProgressBar extends PureComponent {
     width: null,
     className: null,
   }
+
   getUpdateHandler = index => () => this.props.onUpdate(index)
   getStepState = index => {
     const { current } = this.props
@@ -101,6 +109,7 @@ export class StepProgressBar extends PureComponent {
       comingUp: current < index,
     }
   }
+
   getStepProps = (step, i) => {
     const { onUpdate, disabled } = this.props
     const isDisabled = step.disabled || disabled
@@ -109,6 +118,7 @@ export class StepProgressBar extends PureComponent {
       disabled: isDisabled,
     }
   }
+
   render() {
     const { steps, width, className, current, onUpdate, ...props } = this.props
     const stepPixelWidth = width / steps.length
@@ -139,7 +149,10 @@ export class StepProgressBar extends PureComponent {
                     {...stepProps}
                   />
                   {i < steps.length - 1 && (
-                    <Connector comingUp={nextStepState.comingUp} disabled={stepProps.disabled} />
+                    <Connector
+                      comingUp={nextStepState.comingUp}
+                      disabled={stepProps.disabled}
+                    />
                   )}
                 </Fragment>
               )

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { M_FONT_NAME } from '~/utils/consts'
+import { M_FONT_NAME } from '../../../utils/consts'
 
 const H = styled.div`
   margin: 0;

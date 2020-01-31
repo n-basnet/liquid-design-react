@@ -2,17 +2,24 @@ import React from 'react'
 import { bool, func, number, string } from 'prop-types'
 import styled, { css } from 'styled-components'
 import { path } from 'ramda'
-import { ICON_CLASSNAME } from '~/elements/Icon'
-import NavigationIcon from '~/modules/Navigation/NavigationIcon'
+import { ICON_CLASSNAME } from '../../../elements/Icon'
+import NavigationIcon from '../../../modules/Navigation/NavigationIcon'
 
 const NAVIGATION_ICON_SIZE = 38.2
 
 const getFill = props =>
-  path(props.isActive ? ['primary', 'base'] : ['richBlack', 'lightest'], props.theme.colors)
+  path(
+    props.isActive ? ['primary', 'base'] : ['richBlack', 'lightest'],
+    props.theme.colors,
+  )
 const getHoverFill = props =>
-  path(props.isActive ? ['primary', 'base'] : ['primary', 'darker'], props.theme.colors)
+  path(
+    props.isActive ? ['primary', 'base'] : ['primary', 'darker'],
+    props.theme.colors,
+  )
 
-const getFontWeight = ({ theme, isActive }) => theme.fontWeight[isActive ? 'black' : 'regular']
+const getFontWeight = ({ theme, isActive }) =>
+  theme.fontWeight[isActive ? 'black' : 'regular']
 
 const NavigationLinkWrapper = styled.a`
   display: block;
@@ -87,7 +94,11 @@ export class NavigationLink extends React.Component {
         {...(href ? { href } : {})}
         onClick={this.handleChange}
       >
-        <NavigationIcon size={NAVIGATION_ICON_SIZE} iconName={iconName} iconUrl={iconUrl} />
+        <NavigationIcon
+          size={NAVIGATION_ICON_SIZE}
+          iconName={iconName}
+          iconUrl={iconUrl}
+        />
         <NavigationTextWrapper>
           <NavigationText>{title}</NavigationText>
         </NavigationTextWrapper>

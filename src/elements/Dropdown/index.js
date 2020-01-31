@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import DropdownWrapper from '~/elements/misc/DropdownProvider/DropdownWrapper'
-import DropdownTriggerWrapper from '~/elements/misc/DropdownProvider/DropdownTriggerWrapper'
-import DropdownProvider from '~/elements/misc/DropdownProvider'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import DropdownWrapper from '../../elements/misc/DropdownProvider/DropdownWrapper'
+import DropdownTriggerWrapper from '../../elements/misc/DropdownProvider/DropdownTriggerWrapper'
+import DropdownProvider from '../../elements/misc/DropdownProvider'
 
 const Dropdown = props => (
   <DropdownProvider
@@ -46,7 +46,7 @@ Dropdown.propTypes = {
       name: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       onClick: PropTypes.func,
-    })
+    }),
   ),
   onOptionDeselect: PropTypes.func,
   onOptionSelect: PropTypes.func,

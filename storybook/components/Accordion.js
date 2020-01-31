@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { default as EnhancedAccordion, Accordion } from '~/components/Accordion'
-import { times } from '~/utils/misc'
+import EnhancedAccordion, { Accordion } from '../../src/components/Accordion'
+import { times } from '../../src/utils/misc'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -32,7 +32,7 @@ storiesOf('Components/Accordion', module)
   .add(
     'default single',
     () => <EnhancedAccordion {...defaultProps} />,
-    getSnippetTemplate(getAccordionSnippet())
+    getSnippetTemplate(getAccordionSnippet()),
   )
   .add(
     'default stacked',
@@ -48,5 +48,5 @@ storiesOf('Components/Accordion', module)
     .map(getAccordionSnippet)
     .join(' ')}
   </section>
-  `)
+  `),
   )

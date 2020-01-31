@@ -1,4 +1,4 @@
-import COLORS from '~/utils/consts/colors'
+import COLORS from '../../utils/consts/colors'
 
 export const DEFAULT_COLORS = [
   COLORS.VIBRANT_GREEN,

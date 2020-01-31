@@ -4,13 +4,13 @@ import styled, { css } from 'styled-components'
 import { find, values } from 'ramda'
 import cx from 'classnames'
 
-import Tooltip, { TOOLTIP_WRAPPER_CLASSNAME } from '~/components/Tooltip'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import FlyOutContent from '~/components/FlyOut/FlyOutContent'
-import { cursorValue } from '~/utils/styling'
-import { hasCSSFilters } from '~/utils/featureDetects'
-import withResizeListener from '~/components/misc/hoc/withResizeListener'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import Tooltip, { TOOLTIP_WRAPPER_CLASSNAME } from '../../components/Tooltip'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import FlyOutContent from '../../components/FlyOut/FlyOutContent'
+import { cursorValue } from '../../utils/styling'
+import { hasCSSFilters } from '../../utils/featureDetects'
+import withResizeListener from '../../components/misc/hoc/withResizeListener'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 const WIDTHS = {
   max: 500,
@@ -19,13 +19,17 @@ const WIDTHS = {
 }
 
 const getLabelStyle = props => css`
-  color: ${props.theme.colors[props.disabled || !props.isOpen ? 'black' : 'primary'].base};
+  color: ${props.theme.colors[
+    props.disabled || !props.isOpen ? 'black' : 'primary'
+  ].base};
   padding-right: ${props.isOpen && !props.disabled ? 10 : 13}px;
   transform: translateY(-${props.alignLeft ? 1 : 2}px)
-    ${props.isOpen && !props.disabled && !props.alignLeft && `translateX(-3px)`};
+    ${props.isOpen && !props.disabled && !props.alignLeft && 'translateX(-3px)'};
   ${!props.disabled &&
     css`
-      font-weight: ${props.theme.fontWeight[props.isOpen ? 'black' : 'regular']};
+      font-weight: ${props.theme.fontWeight[
+        props.isOpen ? 'black' : 'regular'
+      ]};
     `};
 `
 
@@ -59,12 +63,14 @@ const FlyOutWrapper = styled.div`
   ${props => css`
     .${TOOLTIP_WRAPPER_CLASSNAME} {
       ${hasCSSFilters()
-    ? `filter: drop-shadow(0 33px 20px rgba(0,0,0,0.2));`
-    : `box-shadow: ${props.theme.doubleBoxShadow};`};
+        ? 'filter: drop-shadow(0 33px 20px rgba(0,0,0,0.2));'
+        : `box-shadow: ${props.theme.doubleBoxShadow};`};
       ${!props.width &&
         css`
           max-width: ${props.maxWidth}px;
-          min-width: ${props.maxWidth >= WIDTHS.mid ? WIDTHS.mid : WIDTHS.min}px;
+          min-width: ${props.maxWidth >= WIDTHS.mid
+            ? WIDTHS.mid
+            : WIDTHS.min}px;
         `};
       width: ${props.width ? `${props.width}px` : 'auto'};
     }
@@ -90,7 +96,7 @@ export default class FlyOut extends PureComponent {
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         onClick: PropTypes.func,
-      })
+      }),
     ),
     label: PropTypes.node,
     alignLeft: PropTypes.bool,
@@ -109,39 +115,51 @@ export default class FlyOut extends PureComponent {
     width: null,
     className: null,
   }
+
   state = {
     isOpen: false,
     tooltipWidth: 'auto',
   }
+
   setIsOpen = isOpen => {
     this.setState(
       {
         isOpen,
         ...(isOpen && { tooltipWidth: 'auto' }),
       },
-      this.handleResize
+      this.handleResize,
     )
   }
+
   handleResize = () => {
     if (!this.props.width && this.state.isOpen && this.flyOutContentRef) {
       const windowWidth = window.innerWidth
-      const { left, right, width } = this.flyOutContentRef.getBoundingClientRect()
+      const {
+        left,
+        right,
+        width,
+      } = this.flyOutContentRef.getBoundingClientRect()
 
       const widthsArray = this.isCenterAligned() ? [WIDTHS.min] : WIDTHS
 
       const center = width / 2 + left
-      const centerAlignedRemainingSpace = Math.min(windowWidth - center, center) * 2
+      const centerAlignedRemainingSpace =
+        Math.min(windowWidth - center, center) * 2
       const remainingSpace = this.isCenterAligned()
         ? centerAlignedRemainingSpace
         : this.props.alignLeft
-          ? windowWidth - left
-          : right
+        ? windowWidth - left
+        : right
 
       this.setState({
-        tooltipWidth: find(width => width <= remainingSpace, values(widthsArray)),
+        tooltipWidth: find(
+          width => width <= remainingSpace,
+          values(widthsArray),
+        ),
       })
     }
   }
+
   isCenterAligned = () => !this.props.label
   renderLabel = () =>
     this.props.label && (
@@ -153,14 +171,23 @@ export default class FlyOut extends PureComponent {
         {this.props.label}
       </LabelWrapper>
     )
+
   render() {
-    const { name, options, alignLeft, disabled, width, className, ...props } = this.props
+    const {
+      name,
+      options,
+      alignLeft,
+      disabled,
+      width,
+      className,
+      ...props
+    } = this.props
     const iconSize = this.isCenterAligned() ? 20 : 15
     const tooltipTranslateX = this.isCenterAligned()
       ? `translateX(50%) translateX(-${iconSize}px)`
       : alignLeft
-        ? 'translateX(-7px)'
-        : 'translateX(6px)'
+      ? 'translateX(-7px)'
+      : 'translateX(6px)'
     return (
       <FlyOutWrapper
         alignCenter={this.isCenterAligned()}
@@ -173,7 +200,9 @@ export default class FlyOut extends PureComponent {
         <Tooltip
           contentStyle={{
             padding: 0,
-            transform: `${tooltipTranslateX} translateY(${this.isCenterAligned() ? 2 : 6}px)`,
+            transform: `${tooltipTranslateX} translateY(${
+              this.isCenterAligned() ? 2 : 6
+            }px)`,
           }}
           side={alignLeft ? 'left' : 'right'}
           customTrigger={toggle => (
@@ -183,13 +212,21 @@ export default class FlyOut extends PureComponent {
               disabled={disabled}
             >
               {!alignLeft && this.renderLabel()}
-              <Glyph name='dots' size={iconSize} color={disabled ? 'black.base' : undefined} />
+              <Glyph
+                name="dots"
+                size={iconSize}
+                color={disabled ? 'black.base' : undefined}
+              />
               {alignLeft && this.renderLabel()}
             </TooltipTriggerWrapper>
           )}
           onToggle={this.setIsOpen}
         >
-          <FlyOutContent name={name} options={options} getRef={v => (this.flyOutContentRef = v)} />
+          <FlyOutContent
+            name={name}
+            options={options}
+            getRef={v => (this.flyOutContentRef = v)}
+          />
         </Tooltip>
       </FlyOutWrapper>
     )

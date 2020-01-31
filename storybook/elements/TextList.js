@@ -7,7 +7,7 @@ import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
 } from '../helpers'
-import { default as EnhancedTextList, TextList } from '~/elements/TextList'
+import EnhancedTextList, { TextList } from '../../src/elements/TextList'
 
 const getListItem = id => ({
   name: getTextKnob({
@@ -74,13 +74,13 @@ storiesOf('Elements/TextList', module)
   .add(
     'numbered list',
     () => <EnhancedTextList {...getDefaultProps()} />,
-    getSnippetTemplate(getTextListSnippet())
+    getSnippetTemplate(getTextListSnippet()),
   )
   .add(
     'bullet list',
-    () => <EnhancedTextList {...getDefaultProps()} listType='bullet' />,
+    () => <EnhancedTextList {...getDefaultProps()} listType="bullet" />,
     getSnippetTemplate(
       getTextListSnippet(`
-  listType="bullet"`)
-    )
+  listType="bullet"`),
+    ),
   )

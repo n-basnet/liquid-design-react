@@ -1,15 +1,23 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { default as EnchancedPagination, Pagination } from '~/components/Pagination'
+import EnchancedPagination, {
+  Pagination,
+} from '../../src/components/Pagination'
 
-import { getBackgroundWrapper, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
-import { times } from '~/utils/misc'
+import {
+  getBackgroundWrapper,
+  getSnippetTemplate,
+  getPropTablesExcludeList,
+} from '../helpers'
+import { times } from '../../src/utils/misc'
 
-const children = times(10000).map((item, index) => <div key={index}>{item}</div>)
+const children = times(10000).map((item, index) => (
+  <div key={index}>{item}</div>
+))
 
 const getPaginationSnippet = props => `
-  <Pagination ${props || ``}>
+  <Pagination ${props || ''}>
     {items.map((item, index) => <div key={index}>{item}</div>)}
   </Pagination>
 `
@@ -25,20 +33,26 @@ storiesOf('Components/Pagination', module)
   .add(
     'default',
     () => <EnchancedPagination>{children}</EnchancedPagination>,
-    getSnippetTemplate(getPaginationSnippet())
+    getSnippetTemplate(getPaginationSnippet()),
   )
   .add(
     'custom items number',
-    () => <EnchancedPagination itemsPerPage={10}>{children}</EnchancedPagination>,
-    getSnippetTemplate(getPaginationSnippet(`itemsPerPage={10}`))
+    () => (
+      <EnchancedPagination itemsPerPage={10}>{children}</EnchancedPagination>
+    ),
+    getSnippetTemplate(getPaginationSnippet('itemsPerPage={10}')),
   )
   .add(
     'custom amount of numbers',
-    () => <EnchancedPagination paginationNumberAmount={3}>{children}</EnchancedPagination>,
-    getSnippetTemplate(getPaginationSnippet(`paginationNumberAmount={3}`))
+    () => (
+      <EnchancedPagination paginationNumberAmount={3}>
+        {children}
+      </EnchancedPagination>
+    ),
+    getSnippetTemplate(getPaginationSnippet('paginationNumberAmount={3}')),
   )
   .add(
     'disabled',
     () => <EnchancedPagination disabled>{children}</EnchancedPagination>,
-    getSnippetTemplate(getPaginationSnippet(`disabled`))
+    getSnippetTemplate(getPaginationSnippet('disabled')),
   )

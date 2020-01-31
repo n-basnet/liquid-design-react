@@ -1,13 +1,13 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
 import dateFns from 'date-fns'
 import { isEmpty, isNil } from 'ramda'
 
-import { media } from '~/utils/styling'
-import { FORMATS } from '~/utils/consts/dates'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
+import { media } from '../../utils/styling'
+import { FORMATS } from '../../utils/consts/dates'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
 
 const getRangeBeforeStyles = props => css`
   background-color: ${props.theme.colors.white.base};
@@ -155,10 +155,10 @@ export const DayContainer = styled.div`
   ${props => css`
     border-radius: ${props.theme.borderRadius};
     ${props.isFirst
-    ? css`
+      ? css`
           margin-left: 0;
         `
-    : css`
+      : css`
           margin-left: 4.6px;
           ${media.max.phone`
               margin-left: 3.8px;
@@ -166,7 +166,8 @@ export const DayContainer = styled.div`
         `};
   `};
   ${props =>
-    (props.isSelected && !props.isOutOfMonth) || (!props.isOutOfMonth && props.isHovered)
+    (props.isSelected && !props.isOutOfMonth) ||
+    (!props.isOutOfMonth && props.isHovered)
       ? css`
           color: ${props.theme.colors.white.base};
           border-color: ${props.theme.colors.primary.base};
@@ -174,16 +175,16 @@ export const DayContainer = styled.div`
           font-weight: ${props.theme.fontWeight.black};
         `
       : props.isCurrent
-        ? css`
+      ? css`
           color: ${props.theme.colors.primary.base};
           border-color: ${props.theme.colors.primary.base};
         `
-        : props.isOutOfMonth
-          ? css`
+      : props.isOutOfMonth
+      ? css`
           color: ${props.theme.colors.richBlack.lightest};
           cursor: not-allowed;
         `
-          : css``};
+      : css``};
 `
 
 const OverlayWrapper = styled.div`
@@ -211,10 +212,10 @@ const OverlayWrapper = styled.div`
           left: -20%;
         `
       : props.isLast
-        ? css`
+      ? css`
           right: -40%;
         `
-        : css`
+      : css`
           right: -125%;
         `};
 `
@@ -263,6 +264,7 @@ export class DayCell extends PureComponent {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
   }
+
   static defaultProps = {
     isOutOfMonth: false,
     isCurrent: false,
@@ -277,15 +279,19 @@ export class DayCell extends PureComponent {
     onMouseEnter: () => {},
     onMouseLeave: () => {},
   }
+
   state = {
     isHovered: false,
     isOverlayOpen: false,
   }
 
-  hasAppointments = () => !isNil(this.props.appointments) && !isEmpty(this.props.appointments)
+  hasAppointments = () =>
+    !isNil(this.props.appointments) && !isEmpty(this.props.appointments)
+
   handleClickOutside = () => {
     this.setState({ isOverlayOpen: false, isHovered: false })
   }
+
   isHandlingHover = componentName => {
     return (
       (this.props.rangeMode && componentName === 'DayCellWrapper') ||
@@ -299,14 +305,17 @@ export class DayCell extends PureComponent {
       this.props.onMouseEnter()
     }
   }
+
   handleMouseLeave = componentName => {
     if (this.isHandlingHover(componentName)) {
       this.setState({ isHovered: false })
       this.props.onMouseLeave()
     }
   }
+
   toggleOverlayVisibility = () =>
     this.setState(({ isOverlayOpen }) => ({ isOverlayOpen: !isOverlayOpen }))
+
   cellClickHandler = () => {
     const { onClick } = this.props
     onClick()
@@ -365,12 +374,14 @@ export class DayCell extends PureComponent {
           {formattedDate}
         </DayContainer>
         {this.hasAppointments() ? (
-          <Fragment>
+          <>
             <Glyph
-              name='dot'
+              name="dot"
               size={6}
               color={
-                dateFns.isBefore(day, today) || isOutOfMonth ? 'sensitiveGrey.darkest' : undefined
+                dateFns.isBefore(day, today) || isOutOfMonth
+                  ? 'sensitiveGrey.darkest'
+                  : undefined
               }
             />
             <Overlay
@@ -379,7 +390,7 @@ export class DayCell extends PureComponent {
               isFirst={isFirst}
               isLast={isLast}
             />
-          </Fragment>
+          </>
         ) : null}
       </DayCellWrapper>
     )

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { cursorValue, nonTouchDevicesHoverStyles } from '../../utils/styling'
 
 export const TablePaginationWrapper = styled.div`
   display: flex;
@@ -16,11 +16,11 @@ export const TablePaginationWrapper = styled.div`
     > div {
       background-color: ${props.theme.colors.white.base};
       ${props.isDisplayedBelowTable
-    ? css`
+        ? css`
             border-bottom-left-radius: ${props.theme.borderRadius};
             border-bottom-right-radius: ${props.theme.borderRadius};
           `
-    : css`
+        : css`
             border-top-left-radius: ${props.theme.borderRadius};
             border-top-right-radius: ${props.theme.borderRadius};
           `};
@@ -64,11 +64,11 @@ export const ClickableSection = styled.div.attrs({
   &:last-child {
     padding-right: 19px;
     ${props =>
-    props.isDisplayedBelowTable
-      ? css`
+      props.isDisplayedBelowTable
+        ? css`
             border-bottom-right-radius: ${props.theme.borderRadius};
           `
-      : css`
+        : css`
             border-top-right-radius: ${props.theme.borderRadius};
           `};
   }

@@ -4,15 +4,23 @@ import styled, { css } from 'styled-components'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { getPosition, getArrowStyle } from '~/components/Tooltip/utils'
-import { WALLS, WALLS_KEYS, SIDES, SIDES_KEYS } from '~/components/Tooltip/consts'
-import { hasCSSFilters, isTouchDevice } from '~/utils/featureDetects'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { getPosition, getArrowStyle } from '../../components/Tooltip/utils'
+import {
+  WALLS,
+  WALLS_KEYS,
+  SIDES,
+  SIDES_KEYS,
+} from '../../components/Tooltip/consts'
+import { hasCSSFilters, isTouchDevice } from '../../utils/featureDetects'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
-export const TOOLTIP_WRAPPER_CLASSNAME = getClassName({ name: 'TooltipWrapper' })
+export const TOOLTIP_WRAPPER_CLASSNAME = getClassName({
+  name: 'TooltipWrapper',
+})
 
-const getIconColor = props => (props.isOpen ? 'darker' : props.isHovered ? 'dark' : 'base')
+const getIconColor = props =>
+  props.isOpen ? 'darker' : props.isHovered ? 'dark' : 'base'
 
 const TooltipWrapper = styled.span`
   position: relative;
@@ -33,10 +41,10 @@ const TooltipContentWrapper = styled.div`
     background-color: ${props.theme.colors.white.base};
     border-radius: ${props.theme.borderRadius};
     ${hasCSSFilters()
-    ? css`
+      ? css`
           filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
         `
-    : css`
+      : css`
           box-shadow: ${props.theme.boxShadow};
         `};
 
@@ -49,10 +57,10 @@ const TooltipContentWrapper = styled.div`
           height: 0;
           ${props => css`
             ${getArrowStyle({
-    color: props.theme.colors.white.base,
-    wall: props.wall,
-    side: props.side,
-  })};
+              color: props.theme.colors.white.base,
+              wall: props.wall,
+              side: props.side,
+            })};
           `};
         }
       `};
@@ -76,6 +84,7 @@ export class Tooltip extends PureComponent {
     onToggle: PropTypes.func,
     className: PropTypes.string,
   }
+
   static defaultProps = {
     wall: WALLS.top,
     side: SIDES.left,
@@ -85,28 +94,41 @@ export class Tooltip extends PureComponent {
     onToggle: undefined,
     className: null,
   }
+
   state = {
     isOpen: false,
     isHovered: false,
   }
+
   toggle = () => {
     this.setState(
       ({ isOpen }) => ({ isOpen: !isOpen }),
       () => {
         this.props.onToggle && this.props.onToggle(this.state.isOpen)
-      }
+      },
     )
   }
+
   handleMouseEnter = () => this.setState({ isHovered: true })
   setHoverToFalse = () => this.setState({ isHovered: false })
   handleClickOutside = () => {
     this.setState({ isOpen: false })
     this.props.onToggle && this.props.onToggle(false)
   }
+
   render() {
     const { isHovered } = this.state
-    const { children, wall, side, contentStyle, customTrigger, className, ...props } = this.props
-    const isTooltipOpen = this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
+    const {
+      children,
+      wall,
+      side,
+      contentStyle,
+      customTrigger,
+      className,
+      ...props
+    } = this.props
+    const isTooltipOpen =
+      this.props.isOpen !== null ? this.props.isOpen : this.state.isOpen
     const iconName = `tooltip${isHovered || isTooltipOpen ? 'Filled' : 'Empty'}`
     const nonTouchProps = {
       onMouseEnter: this.handleMouseEnter,
@@ -117,7 +139,7 @@ export class Tooltip extends PureComponent {
         {...props}
         isOpen={isTooltipOpen}
         isHovered={isHovered}
-        {...!isTouchDevice() && nonTouchProps}
+        {...(!isTouchDevice() && nonTouchProps)}
         className={cx(getClassName(Tooltip), className)}
       >
         {customTrigger ? (

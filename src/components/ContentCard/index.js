@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { getBackgroundImage } from '~/utils/styling'
-import Card from '~/elements/Card'
-import Badge from '~/components/Badge'
-import Placeholder from '~/elements/Placeholder'
-import Label from '~/components/ContentCard/Label'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { getBackgroundImage } from '../../utils/styling'
+import Card from '../../elements/Card'
+import Badge from '../../components/Badge'
+import Placeholder from '../../elements/Placeholder'
+import Label from '../../components/ContentCard/Label'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const ImageWrapper = styled.div`
   ${getBackgroundImage};
@@ -81,7 +81,11 @@ export const ContentCard = ({
       ))}
     </LabelsWrapper>
     {badge && (
-      <Badge icon={badge.icon || badge.iconRight} isIconOnRight={Boolean(badge.iconRight)} isOnCard>
+      <Badge
+        icon={badge.icon || badge.iconRight}
+        isIconOnRight={Boolean(badge.iconRight)}
+        isOnCard
+      >
         {badge.children}
       </Badge>
     )}

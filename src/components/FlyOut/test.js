@@ -1,5 +1,5 @@
 import FlyOut from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('FlyOut', () => {
   const label = 'Some label'
@@ -8,7 +8,7 @@ describe('FlyOut', () => {
     expect(
       getFlyOutWrapper()
         .find(FlyOut)
-        .html()
+        .html(),
     ).toMatch(label)
   })
 

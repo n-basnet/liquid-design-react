@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue, safariStyles } from '~/utils/styling'
+import { cursorValue, safariStyles } from '../../../utils/styling'
 
 // additional :before on RadioButtonWrapper is required for the Firefox and Edge,
 // which do not currently support :before for input fields
@@ -16,10 +16,12 @@ export default styled.div`
   :hover {
       :before {
         ${props =>
-    !props.disabled &&
+          !props.disabled &&
           css`
             border-color: ${props =>
-    props.isSelected ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
+              props.isSelected
+                ? props.theme.colors.primary.dark
+                : props.theme.colors.primary.base};
           `}
       }
   }
@@ -37,11 +39,11 @@ export default styled.div`
       border-radius: 100%;
       background: ${props => props.theme.colors.white.base};
       ${props =>
-    css`
+        css`
           border: 2px solid ${props.theme.colors.sensitiveGrey.darker};
         `}
       ${props =>
-    !props.disabled &&
+        !props.disabled &&
         props.isSelected &&
         css`
           border: 7px solid ${props.theme.colors.primary.base};
