@@ -39,7 +39,7 @@ storiesOf('Modules/DatePicker', module)
   .addParameters({
     info: {
       propTables: [DatePicker],
-      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker])
+      propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker]),
     },
   })
   .add(
