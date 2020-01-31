@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { mount } from 'enzyme'
 
-import Theme from '~/Theme'
+import Theme from '../../Theme'
 import Notifications from '.'
 import { NOTIFICATION_TYPES } from './consts'
-import { everyComponentTestSuite } from '~/utils/testUtils'
+import { everyComponentTestSuite } from '../../utils/testUtils'
 
 const notificationText = 'some text'
 
@@ -82,5 +82,9 @@ describe('Notifications', () => {
     expect(notificationsRef.state.items).toHaveLength(1)
   })
 
-  everyComponentTestSuite(getNotificationsWrapper, Notifications, 'Notifications')
+  everyComponentTestSuite(
+    getNotificationsWrapper,
+    Notifications,
+    'Notifications',
+  )
 })

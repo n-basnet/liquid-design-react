@@ -1,6 +1,6 @@
 import Header from '.'
-import Label from '~/elements/Label'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Label from '../../elements/Label'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Header', () => {
   const defaultProps = {
@@ -16,14 +16,14 @@ describe('Header', () => {
       wrapper
         .find(Label)
         .first()
-        .text()
+        .text(),
     ).toBe(defaultProps.labelOne)
 
     expect(
       wrapper
         .find(Label)
         .at(1)
-        .text()
+        .text(),
     ).toBe(defaultProps.labelTwo)
   })
 

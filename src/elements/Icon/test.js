@@ -1,8 +1,8 @@
 import { path } from 'ramda'
 
 import Icon, { DEFAULT_SIZE, DEFAULT_UNIT } from '.'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { DEFAULT_THEME } from '../../utils/consts/themes'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Icon', () => {
   const defaultProps = { name: 'bottle' }
@@ -24,7 +24,9 @@ describe('Icon', () => {
   it('handles theme colors', () => {
     ;['black.base', 'richBlue.dark'].map(color => {
       const wrapper = getIconWrapper({ color }).find('svg')
-      expect(wrapper.prop('fill')).toEqual(path(color.split('.'), DEFAULT_THEME.colors))
+      expect(wrapper.prop('fill')).toEqual(
+        path(color.split('.'), DEFAULT_THEME.colors),
+      )
     })
   })
 

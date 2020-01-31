@@ -1,9 +1,9 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import styled from 'styled-components'
-import { media } from '~/utils/styling'
+import { media } from '../../src/utils/styling'
 
-import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '../../src/elements/TextField'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -13,7 +13,10 @@ import {
 } from '../helpers'
 
 const getDefaultProps = () => ({
-  placeholder: getTextKnob({ defaultText: 'Add Placeholder Text here', name: 'placeholder' }),
+  placeholder: getTextKnob({
+    defaultText: 'Add Placeholder Text here',
+    name: 'placeholder',
+  }),
   label: getTextKnob({ defaultText: 'Text Area label', name: 'label' }),
 })
 
@@ -36,11 +39,11 @@ const getTextFieldSnippet = props => `
     placeholder="Add Placeholder Text here"
     label="Text Area label"
     onChange={onChangeHandler}${
-  props
-    ? `
+      props
+        ? `
     ${props}`
-    : ''
-}
+        : ''
+    }
   />
 `
 
@@ -57,7 +60,8 @@ const STORIES = getStoriesByVersions({
     {
       name: 'error',
       props: {
-        validate: () => getTextKnob({ defaultText: 'Error message', name: 'error message' }),
+        validate: () =>
+          getTextKnob({ defaultText: 'Error message', name: 'error message' }),
       },
     },
   ],
@@ -65,10 +69,12 @@ const STORIES = getStoriesByVersions({
 
 STORIES.map(({ name, props }) => {
   const propsSnippet = Object.keys(props)
-    .map(prop => (prop === 'validate' ? `error={errorMessage}` : prop))
+    .map(prop => (prop === 'validate' ? 'error={errorMessage}' : prop))
     .join(' ')
   storiesOf('Elements/TextField', module)
-    .addDecorator(storyFn => <TextFieldStoryWrapper>{storyFn()}</TextFieldStoryWrapper>)
+    .addDecorator(storyFn => (
+      <TextFieldStoryWrapper>{storyFn()}</TextFieldStoryWrapper>
+    ))
     .addDecorator(getBackgroundWrapper())
     .addParameters({
       info: {
@@ -79,6 +85,6 @@ STORIES.map(({ name, props }) => {
     .add(
       name,
       () => <TextField {...getDefaultProps()} {...props} />,
-      getSnippetTemplate(getTextFieldSnippet(propsSnippet))
+      getSnippetTemplate(getTextFieldSnippet(propsSnippet)),
     )
 })

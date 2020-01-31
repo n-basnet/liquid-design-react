@@ -1,6 +1,6 @@
-import { Glyph } from '~/elements/Icon'
+import { Glyph } from '../../elements/Icon'
 import Toggle from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Toggle', () => {
   const getToggleWrapper = getWrapper(Toggle)

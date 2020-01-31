@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { cursorValue, nonTouchDevicesHoverStyles } from '../../utils/styling'
 
 const StyledSingleBreadcrumb = styled.div`
   display: inline-block;
@@ -48,8 +48,16 @@ const SingleBreadcrumbTextWrapper = styled.span`
 `
 
 const SingleBreadcrumb = ({ content, onClick, active, disabled }) => (
-  <StyledSingleBreadcrumb active={active} disabled={disabled} onClick={onClick || undefined}>
-    <Glyph name='arrowRight' size={19} color={disabled ? 'sensitiveGrey.darker' : undefined} />
+  <StyledSingleBreadcrumb
+    active={active}
+    disabled={disabled}
+    onClick={onClick || undefined}
+  >
+    <Glyph
+      name="arrowRight"
+      size={19}
+      color={disabled ? 'sensitiveGrey.darker' : undefined}
+    />
     <SingleBreadcrumbTextWrapper>{content}</SingleBreadcrumbTextWrapper>
   </StyledSingleBreadcrumb>
 )

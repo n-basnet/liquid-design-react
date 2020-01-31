@@ -1,6 +1,6 @@
 import SocialShare, { SocialShareLabel } from '.'
-import { Glyph } from '~/elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { Glyph } from '../../elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('SocialShare', () => {
   const defaultProps = {

@@ -8,14 +8,13 @@ import {
   getSnippetTemplate,
   Fragment,
 } from '../helpers'
-import {
-  default as EnhancedDatePicker,
+import EnhancedDatePicker, {
   DATE_PICKER_CLASSNAMES,
   DatePicker,
-} from '~/modules/DatePicker'
+} from '../../src/modules/DatePicker'
 
 const getDatePickerSnippet = props => `
-  <DatePicker ${props || ``} />
+  <DatePicker ${props || ''} />
 `
 
 storiesOf('Modules/DatePicker', module)
@@ -43,46 +42,58 @@ storiesOf('Modules/DatePicker', module)
       propTablesExclude: getPropTablesExcludeList([EnhancedDatePicker]),
     },
   })
-  .add('default', () => <EnhancedDatePicker />, getSnippetTemplate(getDatePickerSnippet()))
+  .add(
+    'default',
+    () => <EnhancedDatePicker />,
+    getSnippetTemplate(getDatePickerSnippet()),
+  )
   .add(
     'disabled',
     () => <EnhancedDatePicker disabled />,
-    getSnippetTemplate(getDatePickerSnippet('disabled'))
+    getSnippetTemplate(getDatePickerSnippet('disabled')),
   )
   .add(
     'range mode',
     () => <EnhancedDatePicker rangeMode />,
-    getSnippetTemplate(getDatePickerSnippet('rangeMode'))
+    getSnippetTemplate(getDatePickerSnippet('rangeMode')),
   )
   .add(
     'disabled range mode',
     () => <EnhancedDatePicker rangeMode disabled />,
-    getSnippetTemplate(getDatePickerSnippet('rangeMode disabled'))
+    getSnippetTemplate(getDatePickerSnippet('rangeMode disabled')),
   )
   .add(
     'single mode with calendar',
     () => <EnhancedDatePicker withCalendar />,
-    getSnippetTemplate(getDatePickerSnippet('withCalendar'))
+    getSnippetTemplate(getDatePickerSnippet('withCalendar')),
   )
   .add(
     'disabled single mode with calendar',
     () => <EnhancedDatePicker withCalendar disabled />,
-    getSnippetTemplate(getDatePickerSnippet('withCalendar disabled'))
+    getSnippetTemplate(getDatePickerSnippet('withCalendar disabled')),
   )
   .add(
     'range mode with calendar',
     () => <EnhancedDatePicker rangeMode withCalendar />,
-    getSnippetTemplate(getDatePickerSnippet('rangeMode withCalendar'))
+    getSnippetTemplate(getDatePickerSnippet('rangeMode withCalendar')),
   )
   .add(
     'with props passed to Calendar',
-    () => <EnhancedDatePicker rangeMode withCalendar calendarProps={{ startOfWeek: 1 }} />,
+    () => (
+      <EnhancedDatePicker
+        rangeMode
+        withCalendar
+        calendarProps={{ startOfWeek: 1 }}
+      />
+    ),
     getSnippetTemplate(
-      getDatePickerSnippet('rangeMode withCalendar calendarProps={{ startOfWeek: 1 }}')
-    )
+      getDatePickerSnippet(
+        'rangeMode withCalendar calendarProps={{ startOfWeek: 1 }}',
+      ),
+    ),
   )
   .add(
     'disabled range mode with calendar',
     () => <EnhancedDatePicker disabled rangeMode withCalendar />,
-    getSnippetTemplate(getDatePickerSnippet('disabled rangeMode withCalendar'))
+    getSnippetTemplate(getDatePickerSnippet('disabled rangeMode withCalendar')),
   )

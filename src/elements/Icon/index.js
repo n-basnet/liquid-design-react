@@ -4,8 +4,8 @@ import styled, { css, withTheme } from 'styled-components'
 import { path } from 'ramda'
 import cx from 'classnames'
 
-import iconsList from '~/elements/Icon/iconsList'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import iconsList from '../../elements/Icon/iconsList'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 export const ICON_CLASSNAME = getClassName({ name: 'Icon' })
 
@@ -39,9 +39,19 @@ const IconWrapper = styled.div`
 export const DEFAULT_SIZE = 24
 export const DEFAULT_UNIT = 'px'
 
-export const Icon = ({ name, size, unit, onClick, isFilled, className, noFill, ...props }) => {
+export const Icon = ({
+  name,
+  size,
+  unit,
+  onClick,
+  isFilled,
+  className,
+  noFill,
+  ...props
+}) => {
   const SVGIconComponent =
-    iconsList.glyphs[name] || (isFilled ? iconsList.filled[name] : iconsList.stroke[name])
+    iconsList.glyphs[name] ||
+    (isFilled ? iconsList.filled[name] : iconsList.stroke[name])
   if (SVGIconComponent === undefined) {
     return <code>invalid icon name</code>
   }

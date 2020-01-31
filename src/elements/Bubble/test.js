@@ -1,6 +1,6 @@
 import Bubble, { Label } from '.'
-import { Glyph } from '~/elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { Glyph } from '../../elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Bubble', () => {
   const getBubbleWrapper = getWrapper(Bubble)
@@ -12,7 +12,7 @@ describe('Bubble', () => {
       wrapper
         .find(Label)
         .children()
-        .text()
+        .text(),
     ).toEqual(label.toString())
   })
 
@@ -25,7 +25,7 @@ describe('Bubble', () => {
       wrapper
         .find(Label)
         .children()
-        .text()
+        .text(),
     ).toEqual(renderedLabel)
   })
 

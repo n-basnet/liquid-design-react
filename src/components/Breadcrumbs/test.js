@@ -2,7 +2,7 @@ import React from 'react'
 
 import Breadcrumbs from '.'
 import SingleBreadcrumb from './SingleBreadcrumb'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Breadcrumbs', () => {
   const getBreadcrumbsWrapper = getWrapper(Breadcrumbs)

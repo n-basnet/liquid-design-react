@@ -1,6 +1,6 @@
-import { Glyph } from '~/elements/Icon'
+import { Glyph } from '../../elements/Icon'
 import Tag from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Tag', () => {
   const defaultProps = {
@@ -13,7 +13,7 @@ describe('Tag', () => {
     expect(
       getTagWrapper()
         .find(Tag)
-        .text()
+        .text(),
     ).toMatch(defaultProps.label)
   })
 
@@ -21,7 +21,7 @@ describe('Tag', () => {
     expect(
       getTagWrapper()
         .find(Glyph)
-        .prop('name')
+        .prop('name'),
     ).toEqual('close')
   })
 

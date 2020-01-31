@@ -1,4 +1,4 @@
-import COLORS from '~/utils/consts/colors'
+import COLORS from '../../utils/consts/colors'
 
 export const SVG_GRADIENT_COLORS = {
   full: {

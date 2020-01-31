@@ -7,9 +7,11 @@ import {
   cursorValue,
   nonTouchDevicesHoverStyles,
   disbleMozTapTextBackground,
-} from '~/utils/styling'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
+} from '../../utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import attachClassName, {
+  getClassName,
+} from '../../components/misc/hoc/attachClassName'
 
 const getFill = ({ theme, checked }) => {
   const { colors } = theme
@@ -90,10 +92,17 @@ export class Checkbox extends PureComponent {
       this.props.onChange && this.props.onChange(checked)
     }
   }
-  handleMouseEnter = () => !this.props.disabled && this.setState({ hover: true })
-  handleMouseLeave = () => !this.props.disabled && this.setState({ hover: false })
 
-  isChecked = () => (this.props.isChecked !== undefined ? this.props.isChecked : this.state.checked)
+  handleMouseEnter = () =>
+    !this.props.disabled && this.setState({ hover: true })
+
+  handleMouseLeave = () =>
+    !this.props.disabled && this.setState({ hover: false })
+
+  isChecked = () =>
+    this.props.isChecked !== undefined
+      ? this.props.isChecked
+      : this.state.checked
 
   handleKeyDown = e => {
     if (!this.props.disabled && e.key === ' ') {
@@ -102,7 +111,7 @@ export class Checkbox extends PureComponent {
     }
   }
 
-  render () {
+  render() {
     const { disabled, label, className, iconSize, ...props } = this.props
     const { hover } = this.state
     const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
@@ -120,10 +129,10 @@ export class Checkbox extends PureComponent {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         onKeyDown={this.handleKeyDown}
-        tabIndex='0'
+        tabIndex="0"
         {...props}
       >
-        <Input type='checkbox' checked={this.isChecked()} readOnly />
+        <Input type="checkbox" checked={this.isChecked()} readOnly />
         <Glyph name={`checkbox${iconVersion}`} noFill size={iconSize} />
         {label && <Label disabled={disabled}>{label}</Label>}
       </CheckboxWrapper>

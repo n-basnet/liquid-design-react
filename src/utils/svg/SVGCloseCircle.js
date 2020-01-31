@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withTheme } from 'styled-components'
 
-import { times } from '~/utils/misc'
+import { times } from '../../utils/misc'
 
 const ROTATION_ORIGIN = '0 0'
 const CLOSE_CIRCLE_RADIUS = 10
@@ -20,7 +20,11 @@ const CloseIcon = ({ theme, strokeWidth, strokeLinecap, ...props }) => (
     style={{ transition: 'none' }}
   >
     {times(2).map(v => (
-      <line key={v} {...props} transform={`rotate(${v === 0 ? 45 : 135} ${ROTATION_ORIGIN})`} />
+      <line
+        key={v}
+        {...props}
+        transform={`rotate(${v === 0 ? 45 : 135} ${ROTATION_ORIGIN})`}
+      />
     ))}
   </g>
 )
@@ -41,7 +45,7 @@ const CloseIconWithTheme = withTheme(CloseIcon)
 const getOffset = radius => radius * 0.54
 const SVGCloseCircle = ({ radius, ...props }) => (
   <g {...props}>
-    <circle {...position} r={radius} fill='white' />
+    <circle {...position} r={radius} fill="white" />
     <CloseIconWithTheme
       x1={position.cx - radius + getOffset(radius)}
       y1={position.cy}

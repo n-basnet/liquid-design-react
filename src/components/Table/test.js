@@ -2,10 +2,10 @@ import { prop } from 'ramda'
 import naturalSort from 'javascript-natural-sort'
 
 import Table from '.'
-import TableContainer from '~/components/Table/TableContainer'
-import { getSortingObject, SORT_MODES } from '~/components/Table/utils'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { times } from '~/utils/misc'
+import TableContainer from '../../components/Table/TableContainer'
+import { getSortingObject, SORT_MODES } from '../../components/Table/utils'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import { times } from '../../utils/misc'
 
 describe('Table', () => {
   const rowsAmount = 5
@@ -16,7 +16,10 @@ describe('Table', () => {
     return { header, accessor: prop(header) }
   })
   const rows = times(rowsAmount).map(rowIndex =>
-    columns.reduce((acc, col) => ({ ...acc, [col.header]: `Row Content ${rowIndex}` }), {})
+    columns.reduce(
+      (acc, col) => ({ ...acc, [col.header]: `Row Content ${rowIndex}` }),
+      {},
+    ),
   )
   const defaultProps = { rows, columns }
   const getTableWrapper = getWrapper(Table, defaultProps)
@@ -29,34 +32,40 @@ describe('Table', () => {
       wrapper
         .find('tbody')
         .first()
-        .find('tr').length
+        .find('tr').length,
     ).toBe(rowsAmount)
     expect(
       wrapper
         .find('tbody')
         .first()
-        .find('td').length
+        .find('td').length,
     ).toBe(rowsAmount * colsAmount)
 
     expect(
       wrapper
         .find('tbody td')
         .first()
-        .text()
+        .text(),
     ).toBe(rows[0][columns[0].header])
   })
 
   it('handles row onChange callback', () => {
     const onChange = jest.fn()
     const copiedRow = rows[0]
-    const wrapper = getTableWrapper({ columns, rows: [...rows, { ...copiedRow, onChange }] })
+    const wrapper = getTableWrapper({
+      columns,
+      rows: [...rows, { ...copiedRow, onChange }],
+    })
     wrapper
       .find('tbody')
       .first()
       .find('tr')
       .last()
       .simulate('click')
-    expect(onChange.mock.calls[0][0]).toMatchObject({ rowState: {}, cells: copiedRow })
+    expect(onChange.mock.calls[0][0]).toMatchObject({
+      rowState: {},
+      cells: copiedRow,
+    })
   })
 
   it('renders a selectable table', () => {
@@ -89,8 +98,12 @@ describe('Table', () => {
         },
       ]
       const sortingObject = getSortingObject(naturalSort)
-      expect(data.sort(sortingObject[SORT_MODES.ascending])).toEqual(dataSortedAscending)
-      expect(data.sort(sortingObject[SORT_MODES.descending])).toEqual(dataSortedAscending.reverse())
+      expect(data.sort(sortingObject[SORT_MODES.ascending])).toEqual(
+        dataSortedAscending,
+      )
+      expect(data.sort(sortingObject[SORT_MODES.descending])).toEqual(
+        dataSortedAscending.reverse(),
+      )
     })
   })
 

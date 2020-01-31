@@ -1,6 +1,6 @@
 import Modal from '.'
 import ModalContent from './ModalContent'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('ModalContent', () => {
   const defaultProps = {

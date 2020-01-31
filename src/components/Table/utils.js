@@ -1,7 +1,7 @@
 import { prop } from 'ramda'
 import naturalSort from 'javascript-natural-sort'
 
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 export const AUX_CELL_CLASSNAME = getClassName({ name: 'TableAuxCell' })
 export const AUX_CELL_WIDTH = 30
@@ -26,7 +26,12 @@ export const getSortingObject = fn => ({
   [SORT_MODES.unsorted]: (a, b) => a.initialIndex - b.initialIndex,
 })
 
-export const getSortedRows = ({ sortMode, sortingColumnIndex, rows, columns }) => {
+export const getSortedRows = ({
+  sortMode,
+  sortingColumnIndex,
+  rows,
+  columns,
+}) => {
   if (sortingColumnIndex === undefined) {
     return rows
   }
@@ -65,4 +70,5 @@ export const getTableCellYPadding = size =>
     [SIZES.large]: '21px',
   }[size])
 
-export const renderNode = (node, props) => (typeof node === 'function' ? node(props) : node)
+export const renderNode = (node, props) =>
+  typeof node === 'function' ? node(props) : node

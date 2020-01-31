@@ -2,9 +2,9 @@ import React from 'react'
 import { arrayOf, bool, func, node, number, shape, string } from 'prop-types'
 import styled from 'styled-components'
 
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import NavigationLink from '~/modules/Navigation/NavigationLink'
-import NavigationIcon from '~/modules/Navigation/NavigationIcon'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import NavigationLink from '../../modules/Navigation/NavigationLink'
+import NavigationIcon from '../../modules/Navigation/NavigationIcon'
 
 const MAX_VISIBLE_TABS = 8
 
@@ -40,11 +40,23 @@ const NavigationTitle = styled.div`
 }
 `
 
-export const Navigation = ({ activeTabIndex, title, tabs, iconName, iconUrl, ...rest }) => (
+export const Navigation = ({
+  activeTabIndex,
+  title,
+  tabs,
+  iconName,
+  iconUrl,
+  ...rest
+}) => (
   <NavigationWrapper {...rest}>
     <NavigationBody>
       {tabs.slice(0, MAX_VISIBLE_TABS).map((link, index) => (
-        <NavigationLink {...link} key={index} index={index} active={index === activeTabIndex} />
+        <NavigationLink
+          {...link}
+          key={index}
+          index={index}
+          active={index === activeTabIndex}
+        />
       ))}
     </NavigationBody>
     <NavigationFooter>
@@ -66,7 +78,7 @@ Navigation.propTypes = {
       href: string,
       onClick: func,
       title: node.isRequired,
-    })
+    }),
   ),
   title: node.isRequired,
 }

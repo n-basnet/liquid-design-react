@@ -2,9 +2,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { getPropTablesExcludeList, getBackgroundWrapper } from '../helpers'
-import { getDefaultDropdownProps, MultiselectDropdownStateWrapper } from '../helpers/dropdown'
-import Filter from '~/elements/Filter'
-import { DropdownProvider } from '~/elements/misc/DropdownProvider'
+import {
+  getDefaultDropdownProps,
+  MultiselectDropdownStateWrapper,
+} from '../helpers/dropdown'
+import Filter from '../../src/elements/Filter'
+import { DropdownProvider } from '../../src/elements/misc/DropdownProvider'
 
 const getInfoMD = props => ({
   info: {
@@ -29,7 +32,9 @@ const getInfoMD = props => ({
 const defautProps = getDefaultDropdownProps({ defaultText: 'Filter Label' })
 
 storiesOf('Elements/Filter', module)
-  .addDecorator(getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }))
+  .addDecorator(
+    getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }),
+  )
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([
@@ -45,13 +50,13 @@ storiesOf('Elements/Filter', module)
     'active',
     () => <Filter {...defautProps} defaultValue={defautProps.options[0]} />,
     getInfoMD(`
-    defaultValue={OPTIONS[0]}`)
+    defaultValue={OPTIONS[0]}`),
   )
   .add(
     'disabled',
     () => <Filter {...defautProps} disabled />,
     getInfoMD(`
-    disabled`)
+    disabled`),
   )
   .add(
     'multiselect',
@@ -62,5 +67,5 @@ storiesOf('Elements/Filter', module)
     ),
     getInfoMD(`
     multiselect
-    selectedOptionsIds={['1']}`)
+    selectedOptionsIds={['1']}`),
   )

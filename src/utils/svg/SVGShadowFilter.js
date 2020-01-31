@@ -2,15 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const SVGShadowFilter = ({ id, spread, opacity }) => (
-  <filter id={id} x={'-50%'} y={'-50%'} width={'200%'} height={'200%'}>
-    <feOffset result='offOut' in='SourceAlpha' dx='0' dy='0' />
-    <feGaussianBlur result='blurOut' in='offOut' stdDeviation={spread} />
+  <filter id={id} x="-50%" y="-50%" width="200%" height="200%">
+    <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
+    <feGaussianBlur result="blurOut" in="offOut" stdDeviation={spread} />
     <feComponentTransfer>
-      <feFuncA type='linear' slope={opacity} />
+      <feFuncA type="linear" slope={opacity} />
     </feComponentTransfer>
     <feMerge>
       <feMergeNode />
-      <feMergeNode in='SourceGraphic' />
+      <feMergeNode in="SourceGraphic" />
     </feMerge>
   </filter>
 )

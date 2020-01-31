@@ -2,10 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 
-import InputWrapper from '~/elements/RadioButton/InputWrapper'
-import RadioButtonWrapper from '~/elements/RadioButton/RadioButtonWrapper'
-import LabelWrapper from '~/elements/RadioButton/LabelWrapper'
-import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
+import InputWrapper from '../../elements/RadioButton/InputWrapper'
+import RadioButtonWrapper from '../../elements/RadioButton/RadioButtonWrapper'
+import LabelWrapper from '../../elements/RadioButton/LabelWrapper'
+import attachClassName, {
+  getClassName,
+} from '../../components/misc/hoc/attachClassName'
 
 export class RadioButton extends PureComponent {
   static propTypes = {
@@ -29,9 +31,13 @@ export class RadioButton extends PureComponent {
     // additional props in RadioButtonWrapper are required for the Firefox and Edge, which do not currently support :before for input fields
 
     return (
-      <RadioButtonWrapper disabled={disabled} isSelected={isSelected} {...props}>
+      <RadioButtonWrapper
+        disabled={disabled}
+        isSelected={isSelected}
+        {...props}
+      >
         <InputWrapper
-          type='radio'
+          type="radio"
           id={this.id}
           isSelected={isSelected}
           onClick={onClick}

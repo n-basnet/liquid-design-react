@@ -7,8 +7,8 @@ import {
   TICKS_OFFSET,
   TICKS_PADDING,
   TICKS_LINE_HEIGHT,
-} from '~/components/BarChart/consts'
-import { getTicks } from '~/components/BarChart/utils'
+} from '../../components/BarChart/consts'
+import { getTicks } from '../../components/BarChart/utils'
 
 const YTicksContainer = styled.div`
   position: absolute;

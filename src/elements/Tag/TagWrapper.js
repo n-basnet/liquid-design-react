@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue, nonTouchDevicesHoverStyles } from '~/utils/styling'
-import { ICON_CLASSNAME } from '~/elements/Icon'
+import { cursorValue, nonTouchDevicesHoverStyles } from '../../utils/styling'
+import { ICON_CLASSNAME } from '../../elements/Icon'
 
 const tagBackground = ({ disabled, theme: { colors }, outline }) => {
   if (disabled) {
@@ -31,14 +31,16 @@ export const TagWrapper = styled.div`
     transition: ${props.theme.transition};
     border: 2px solid
       ${
-  !props.disabled ? props.theme.colors.primary.base : props.theme.colors.sensitiveGrey.darkest
-};
+        !props.disabled
+          ? props.theme.colors.primary.base
+          : props.theme.colors.sensitiveGrey.darkest
+      };
     ${!props.disabled &&
       nonTouchDevicesHoverStyles(`
       border-color: ${props.theme.colors.primary.dark};
       ${
-  props.outline
-    ? `
+        props.outline
+          ? `
           span {
             color: ${props.theme.colors.primary.dark};
           }
@@ -46,11 +48,11 @@ export const TagWrapper = styled.div`
             fill: ${props.theme.colors.primary.dark};
           }
         `
-    : `
+          : `
         background-color: ${!props.disabled && props.theme.colors.primary.dark};
         color: ${props.theme.colors.primary.dark};
       `
-};
+      };
 
     `)}
     .${ICON_CLASSNAME} svg {

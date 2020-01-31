@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 
-import { media } from '~/utils/styling'
-import { INPUT_CLASSNAME } from '~/components/misc/Input'
-import { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
-import { ICON_CLASSNAME } from '~/elements/Icon'
+import { media } from '../../utils/styling'
+import { INPUT_CLASSNAME } from '../../components/misc/Input'
+import { TEXT_FIELD_CLASSNAMES } from '../../elements/TextField'
+import { ICON_CLASSNAME } from '../../elements/Icon'
 
 export const DatePickerWrapper = styled.section`
   position: relative;
@@ -19,7 +19,7 @@ export const InputWrapper = styled.section`
     }
     label {
       ${props =>
-    props.disabled &&
+        props.disabled &&
         css`
           opacity: 0.5;
         `};
@@ -33,7 +33,7 @@ export const InputWrapper = styled.section`
   .${ICON_CLASSNAME} {
     top: 36px;
     ${props =>
-    props.disabled &&
+      props.disabled &&
       css`
         cursor: not-allowed;
       `};

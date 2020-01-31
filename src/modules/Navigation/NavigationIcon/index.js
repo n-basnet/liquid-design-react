@@ -1,8 +1,8 @@
 import React from 'react'
 import { number, string } from 'prop-types'
 import styled, { css } from 'styled-components'
-import { Glyph } from '~/elements/Icon'
-import Placeholder from '~/elements/Placeholder'
+import { Glyph } from '../../../elements/Icon'
+import Placeholder from '../../../elements/Placeholder'
 
 const PLACEHOLDER_WIDTH = 50
 const sizeToPixels = size => `${size}px`
@@ -25,7 +25,11 @@ const Icon = styled.div`
  a glyph will be loaded based on glyph/icon name */
 
 const SelectedIcon = ({ iconUrl, iconName, ...props }) =>
-  iconUrl ? <Icon iconUrl={iconUrl} {...props} /> : <Glyph name={iconName} {...props} />
+  iconUrl ? (
+    <Icon iconUrl={iconUrl} {...props} />
+  ) : (
+    <Glyph name={iconName} {...props} />
+  )
 
 SelectedIcon.propTypes = {
   iconUrl: string,

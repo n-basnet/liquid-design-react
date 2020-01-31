@@ -2,9 +2,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { getPropTablesExcludeList, getBackgroundWrapper } from '../helpers'
-import { getDefaultDropdownProps, MultiselectDropdownStateWrapper } from '../helpers/dropdown'
-import Dropdown from '~/elements/Dropdown'
-import { DropdownProvider } from '~/elements/misc/DropdownProvider'
+import {
+  getDefaultDropdownProps,
+  MultiselectDropdownStateWrapper,
+} from '../helpers/dropdown'
+import Dropdown from '../../src/elements/Dropdown'
+import { DropdownProvider } from '../../src/elements/misc/DropdownProvider'
 
 const getInfoMD = props => ({
   info: {
@@ -29,7 +32,9 @@ const getInfoMD = props => ({
 const defautProps = getDefaultDropdownProps({ defaultText: 'Dropdown Label' })
 
 storiesOf('Elements/Dropdown', module)
-  .addDecorator(getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }))
+  .addDecorator(
+    getBackgroundWrapper({ color: 'grey', style: { padding: '40px' } }),
+  )
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([
@@ -45,32 +50,34 @@ storiesOf('Elements/Dropdown', module)
     'active',
     () => <Dropdown {...defautProps} defaultValue={defautProps.options[0]} />,
     getInfoMD(`
-    defaultValue={OPTIONS[0]}`)
+    defaultValue={OPTIONS[0]}`),
   )
   .add(
     'disabled',
     () => <Dropdown {...defautProps} disabled />,
     getInfoMD(`
-    disabled`)
+    disabled`),
   )
   .add(
     'inline',
     () => <Dropdown {...defautProps} inline />,
     getInfoMD(`
-    inline`)
+    inline`),
   )
   .add(
     'inline active',
-    () => <Dropdown {...defautProps} inline defaultValue={defautProps.options[0]} />,
+    () => (
+      <Dropdown {...defautProps} inline defaultValue={defautProps.options[0]} />
+    ),
     getInfoMD(`
     inline
-    defaultValue={OPTIONS[0]}`)
+    defaultValue={OPTIONS[0]}`),
   )
   .add(
     'inline disabled',
     () => <Dropdown {...defautProps} inline disabled />,
     getInfoMD(`
-    inline disabled`)
+    inline disabled`),
   )
   .add(
     'multiselect',
@@ -81,7 +88,7 @@ storiesOf('Elements/Dropdown', module)
     ),
     getInfoMD(`
     multiselect
-    selectedOptionsIds={['1']}`)
+    selectedOptionsIds={['1']}`),
   )
   .add(
     'multiselect inline',
@@ -93,7 +100,7 @@ storiesOf('Elements/Dropdown', module)
     getInfoMD(`
     multiselect
     inline
-    selectedOptionsIds={['1']}`)
+    selectedOptionsIds={['1']}`),
   )
   .add(
     'multiselect disabled',
@@ -104,5 +111,5 @@ storiesOf('Elements/Dropdown', module)
     ),
     getInfoMD(`
     multiselect
-    selectedOptionsIds={['1']}`)
+    selectedOptionsIds={['1']}`),
   )

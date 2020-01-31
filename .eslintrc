@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "extends": [
     "standard",
-    "standard-react"
+    "standard-react",
+    "prettier"
   ],
   "env": {
     "es6": true,
@@ -10,6 +11,7 @@
     "jest": true
   },
   "plugins": [
+    "prettier",
     "react"
   ],
   "globals": {
@@ -18,7 +20,10 @@
   },
   "parserOptions": {
     "sourceType": "module",
-    "allowImportExportEverywhere": true
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   },
   "rules": {
     // don't force es6 functions to include space before paren
@@ -29,6 +34,7 @@
     "object-curly-spacing": ["error", "always"],
 
     "react/require-default-props": 2,
-    "react/sort-comp": 2,
+    "react/jsx-handler-names": "off",
+    "react/sort-comp": 2
   }
 }

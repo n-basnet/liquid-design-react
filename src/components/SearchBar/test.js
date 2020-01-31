@@ -1,5 +1,5 @@
 import SearchBar, { DEFAULT_PLACEHOLDER_TEXT, ResultWrapper } from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('SearchBar', () => {
   let wrapper
@@ -26,7 +26,7 @@ describe('SearchBar', () => {
       wrapper
         .find(ResultWrapper)
         .first()
-        .text()
+        .text(),
     ).toEqual(OPTIONS[0])
     expect(wrapper.find(ResultWrapper).length).toEqual(OPTIONS.length)
 

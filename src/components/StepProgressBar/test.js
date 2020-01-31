@@ -1,7 +1,10 @@
-import { Glyph } from '~/elements/Icon'
-import { StepProgressBar, SingleStepNameWrapper } from '~/components/StepProgressBar'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { getGlyphName } from '~/components/StepProgressBar/helpers'
+import { Glyph } from '../../elements/Icon'
+import {
+  StepProgressBar,
+  SingleStepNameWrapper,
+} from '../../components/StepProgressBar'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import { getGlyphName } from '../../components/StepProgressBar/helpers'
 
 const defaultProps = {
   steps: [{ name: 'Step 1' }, { name: 'Step 1' }, { name: 'Step 3' }],
@@ -12,7 +15,9 @@ describe('StepProgressBar', () => {
 
   it('renders n steps', () => {
     const wrapper = getStepProgressBarWrapper()
-    expect(wrapper.find(SingleStepNameWrapper).length).toEqual(defaultProps.steps.length)
+    expect(wrapper.find(SingleStepNameWrapper).length).toEqual(
+      defaultProps.steps.length,
+    )
   })
 
   it('sets glyph names', () => {
@@ -36,7 +41,9 @@ describe('StepProgressBar', () => {
 
   it('handles disabled prop', () => {
     const wrapper = getStepProgressBarWrapper({ disabled: true })
-    wrapper.find(Glyph).forEach(node => expect(node.prop('disabled')).toBe(true))
+    wrapper
+      .find(Glyph)
+      .forEach(node => expect(node.prop('disabled')).toBe(true))
   })
 
   it('renders a disabled step', () => {
@@ -47,15 +54,19 @@ describe('StepProgressBar', () => {
       wrapper
         .find(Glyph)
         .first()
-        .prop('disabled')
+        .prop('disabled'),
     ).toBe(false)
     expect(
       wrapper
         .find(Glyph)
         .at(1)
-        .prop('disabled')
+        .prop('disabled'),
     ).toBe(true)
   })
 
-  everyComponentTestSuite(getStepProgressBarWrapper, StepProgressBar, 'StepProgressBar')
+  everyComponentTestSuite(
+    getStepProgressBarWrapper,
+    StepProgressBar,
+    'StepProgressBar',
+  )
 })

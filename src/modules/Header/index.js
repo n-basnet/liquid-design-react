@@ -1,16 +1,20 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import Label from '~/elements/Label'
-import Button from '~/elements/Button'
-import SearchBar, { RESULT_WRAPPER_CLASSNAME } from '~/components/SearchBar'
-import { LOGO_CLASSNAME } from '~/elements/Logo'
-import HeaderWrapper from '~/modules/Header/HeaderWrapper'
-import LabelsWrapper from '~/modules/Header/LabelsWrapper'
-import { media, safariStyles, disableMozTextSelection } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import Label from '../../elements/Label'
+import Button from '../../elements/Button'
+import SearchBar, { RESULT_WRAPPER_CLASSNAME } from '../../components/SearchBar'
+import { LOGO_CLASSNAME } from '../../elements/Logo'
+import HeaderWrapper from '../../modules/Header/HeaderWrapper'
+import LabelsWrapper from '../../modules/Header/LabelsWrapper'
+import {
+  media,
+  safariStyles,
+  disableMozTextSelection,
+} from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const IconsWrapper = styled.div`
   padding: 0 21px;
@@ -151,26 +155,44 @@ export const Header = ({
     <IEfix />
     {withIcons && (
       <IconsWrapper>
-        <Glyph name='bell' color='white.base' size={20} onClick={notificationOnClick} />
-        <Glyph name='info' color='white.base' size={20} onClick={infoOnClick} />
-        <Glyph color='white.base' name='settings' size={20} onClick={settingsOnClick} />
+        <Glyph
+          name="bell"
+          color="white.base"
+          size={20}
+          onClick={notificationOnClick}
+        />
+        <Glyph name="info" color="white.base" size={20} onClick={infoOnClick} />
+        <Glyph
+          color="white.base"
+          name="settings"
+          size={20}
+          onClick={settingsOnClick}
+        />
       </IconsWrapper>
     )}
     {withText && (
-      <Fragment>
+      <>
         <VerticalLine />
         <LabelsWrapper>
           <Label>{labelOne}</Label>
           <Label>{labelTwo}</Label>
         </LabelsWrapper>
-      </Fragment>
+      </>
     )}
     {withButton && (
       <ButtonWrapper>
-        <Button appearance='secondary' icon={buttonIcon} onClick={buttonOnClick}>
+        <Button
+          appearance="secondary"
+          icon={buttonIcon}
+          onClick={buttonOnClick}
+        >
           {buttonLabel}
         </Button>
-        <Button appearance='secondary' icon={buttonIcon} onClick={buttonOnClick} />
+        <Button
+          appearance="secondary"
+          icon={buttonIcon}
+          onClick={buttonOnClick}
+        />
       </ButtonWrapper>
     )}
   </HeaderWrapper>
@@ -192,7 +214,7 @@ Header.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       onClick: PropTypes.func,
-    })
+    }),
   ),
   searchBarPlaceholder: PropTypes.string,
   settingsOnClick: PropTypes.func,

@@ -1,5 +1,5 @@
 import Paragraph from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Paragraph', () => {
   const defaultProps = {

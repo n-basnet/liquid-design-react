@@ -1,16 +1,20 @@
 import { path, pick } from 'ramda'
 
-import { getFirstTruthyKeyName } from '~/utils/misc'
+import { getFirstTruthyKeyName } from '../utils/misc'
 
 const getBarColor = props => {
   const colorsMap = {
     disabled: ['sensitiveGrey', 'darkest'],
     isOverdue: [props.useThemeColors ? 'secondary' : 'richRed', 'base'],
   }
-  const defaultColor = [props.useThemeColors ? 'primary' : 'vibrantGreen', 'base']
+  const defaultColor = [
+    props.useThemeColors ? 'primary' : 'vibrantGreen',
+    'base',
+  ]
   return path(
-    colorsMap[getFirstTruthyKeyName(pick(Object.keys(colorsMap), props))] || defaultColor,
-    props.theme.colors
+    colorsMap[getFirstTruthyKeyName(pick(Object.keys(colorsMap), props))] ||
+      defaultColor,
+    props.theme.colors,
   )
 }
 
@@ -21,8 +25,10 @@ export const getColors = props => {
     : ['richRed', 'lightest']
   return {
     background: path(
-      isOverdue && !disabled ? backgroundOverdueColor : ['sensitiveGrey', 'base'],
-      theme.colors
+      isOverdue && !disabled
+        ? backgroundOverdueColor
+        : ['sensitiveGrey', 'base'],
+      theme.colors,
     ),
     main: getBarColor(props),
   }

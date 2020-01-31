@@ -4,12 +4,12 @@ import { pick, omit } from 'ramda'
 import { withTheme } from 'styled-components'
 import cx from 'classnames'
 
-import PlaceholderCircular from '~/assets/svgIllustrations/placeholder/circular.svg'
-import PlaceholderCircularWhite from '~/assets/svgIllustrations/placeholder/circular-white.svg'
-import PlaceholderSquare from '~/assets/svgIllustrations/placeholder/square.svg'
-import PlaceholderRectangular from '~/assets/svgIllustrations/placeholder/rectangular.svg'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { getFirstTruthyKeyName } from '~/utils/misc'
+import PlaceholderCircular from '../../assets/svgIllustrations/placeholder/circular.svg'
+import PlaceholderCircularWhite from '../../assets/svgIllustrations/placeholder/circular-white.svg'
+import PlaceholderSquare from '../../assets/svgIllustrations/placeholder/square.svg'
+import PlaceholderRectangular from '../../assets/svgIllustrations/placeholder/rectangular.svg'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { getFirstTruthyKeyName } from '../../utils/misc'
 
 export const PLACEHOLDER_CLASSNAME = getClassName({ name: 'Placeholder' })
 
@@ -22,7 +22,14 @@ const PlaceholderImages = {
 
 const DEFAULT_TYPE = 'isCircular'
 
-export const Placeholder = ({ width, height, theme, className, style, ...props }) => {
+export const Placeholder = ({
+  width,
+  height,
+  theme,
+  className,
+  style,
+  ...props
+}) => {
   const typeProps = Object.keys(PlaceholderImages)
   const type = getFirstTruthyKeyName(pick(typeProps, props)) || DEFAULT_TYPE
   const PlaceholderComponent = PlaceholderImages[type]

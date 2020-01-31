@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const fontSizeSelector = props => {
   const sizeMap = {

@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-import { ARROW_SIZE, WALLS, SIDES } from '~/components/Tooltip/consts'
+import { ARROW_SIZE, WALLS, SIDES } from '../../components/Tooltip/consts'
 
 const isHorizontalWall = wall => wall === WALLS.top || wall === WALLS.bottom
 
@@ -53,8 +53,10 @@ const getArrow = ({ color, direction, size = ARROW_SIZE }) =>
   }[direction])
 
 export const getArrowStyle = ({ color, wall, side }) => css`
-  ${getYAttribute({ wall, side })} : ${isHorizontalWall(wall) ? -10 : 20}px;
-  ${getXAttribute({ wall, side })} : ${isHorizontalWall(wall) ? ARROW_SIZE : -ARROW_SIZE}px;
+  ${getYAttribute({ wall, side })}: ${isHorizontalWall(wall) ? -10 : 20}px;
+  ${getXAttribute({ wall, side })}: ${isHorizontalWall(wall)
+    ? ARROW_SIZE
+    : -ARROW_SIZE}px;
   ${getArrow({ direction: wall, color })};
 `
 

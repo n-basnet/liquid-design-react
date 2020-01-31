@@ -12,12 +12,12 @@ import {
 } from 'victory'
 import { max } from 'ramda'
 
-import IEVictoryChart from '~/components/LineGraph/CustomVictoryChart'
-import { CustomFlyout } from '~/components/LineGraph/CustomFlyout'
-import { CustomLabel } from '~/components/LineGraph/CustomLabel'
-import COLORS from '~/utils/consts/colors'
-import { isMobile, isIE11 } from '~/components/LineGraph/utils'
-import { defaultProps, propTypes } from '~/components/LineGraph'
+import IEVictoryChart from '../../components/LineGraph/CustomVictoryChart'
+import { CustomFlyout } from '../../components/LineGraph/CustomFlyout'
+import { CustomLabel } from '../../components/LineGraph/CustomLabel'
+import COLORS from '../../utils/consts/colors'
+import { isMobile, isIE11 } from '../../components/LineGraph/utils'
+import { defaultProps, propTypes } from '../../components/LineGraph'
 
 const { WHITE } = COLORS
 
@@ -62,7 +62,8 @@ export const Graph = props => {
   }
 
   const getColorOnScale = index => {
-    const startIndex = (linesColors && linesColors.indexOf(theme.colors.primary.base)) || 0
+    const startIndex =
+      (linesColors && linesColors.indexOf(theme.colors.primary.base)) || 0
     return linesColors[(startIndex + index) % linesColors.length]
   }
 
@@ -72,7 +73,7 @@ export const Graph = props => {
         <VictoryLine
           groupComponent={<g />}
           data={d}
-          interpolation='natural'
+          interpolation="natural"
           name={`line-${i}`}
           style={{
             data: {
@@ -100,7 +101,9 @@ export const Graph = props => {
   const formatLabel = (y, index = 0) => {
     // removes duplicated labels in Tooltips
     if (index > 0) return null
-    return typeof tickFormatAxisY === 'function' ? tickFormatAxisY(y) : tickFormatAxisY
+    return typeof tickFormatAxisY === 'function'
+      ? tickFormatAxisY(y)
+      : tickFormatAxisY
   }
 
   // checks if actual X position exceeds 85% (0.85) of whole chart
@@ -123,18 +126,18 @@ export const Graph = props => {
           target: 'parent',
           eventHandlers: isMobileSize
             ? {
-              onMouseOver: () => null,
-              onMouseOut: () => null,
+                onMouseOver: () => null,
+                onMouseOut: () => null,
 
-              onClick: () => ({
-                target: 'data',
-                childName: 'scatter',
-              }),
-            }
+                onClick: () => ({
+                  target: 'data',
+                  childName: 'scatter',
+                }),
+              }
             : {
-              onMouseLeave: () => null,
-              onClick: () => null,
-            },
+                onMouseLeave: () => null,
+                onClick: () => null,
+              },
         },
       ]}
       containerComponent={
@@ -156,7 +159,7 @@ export const Graph = props => {
                   style={{ fontFamily: theme.fontFamily, fontWeight: 900 }}
                 />
               }
-              orientation='top'
+              orientation="top"
               pointerLength={5}
               flyoutStyle={{
                 stroke: theme.colors.sensitiveGrey.dark,
@@ -183,8 +186,8 @@ export const Graph = props => {
           <CustomLabel
             dy={isMobileSize ? 0 : -16}
             isMobile={isMobileSize}
-            verticalAnchor='start'
-            textAnchor='start'
+            verticalAnchor="start"
+            textAnchor="start"
             style={tickLabelStyle}
           />
         }
@@ -198,7 +201,7 @@ export const Graph = props => {
         text={labelsAxisX[0]}
         x={isMobileSize ? mobileChartPadding.left : chartPadding.left}
         y={chartHeight - 10}
-        textAnchor='start'
+        textAnchor="start"
         dx={4}
         width={10}
         style={tickLabelStyle}
@@ -208,7 +211,7 @@ export const Graph = props => {
           text={labelsAxisX[1]}
           x={chartWidth - chartPadding.right}
           y={chartHeight - 10}
-          textAnchor='end'
+          textAnchor="end"
           style={tickLabelStyle}
         />
       )}
@@ -220,7 +223,10 @@ export const Graph = props => {
         tickFormat={t => formatLabel(t)}
         tickValues={tickValuesAxisY}
         tickLabelComponent={
-          <VictoryLabel textAnchor='end' transform={`translate(${isMobileSize ? 5 : -15} 0)`} />
+          <VictoryLabel
+            textAnchor="end"
+            transform={`translate(${isMobileSize ? 5 : -15} 0)`}
+          />
         }
         style={{
           axis: { stroke: 'transparent' },

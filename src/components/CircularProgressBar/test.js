@@ -1,6 +1,6 @@
 import CircularProgressBar, { LabelWrapper, ValueWrapper } from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { DEFAULT_THEME } from '~/utils/consts/themes'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import { DEFAULT_THEME } from '../../utils/consts/themes'
 
 describe('CircularProgressBar', () => {
   const getCircularProgressBarWrapper = getWrapper(CircularProgressBar)
@@ -20,7 +20,7 @@ describe('CircularProgressBar', () => {
       wrapper
         .find('circle')
         .last()
-        .prop('mask')
+        .prop('mask'),
     ).toMatch(svgMaskId)
   })
 
@@ -28,14 +28,18 @@ describe('CircularProgressBar', () => {
     expect(
       getCircularProgressBarWrapper({ value: 42 })
         .find(ValueWrapper)
-        .prop('textColor')
+        .prop('textColor'),
     ).toBe(DEFAULT_THEME.colors.vibrantGreen.base)
     expect(
       getCircularProgressBarWrapper({ value: 142 })
         .find(ValueWrapper)
-        .prop('textColor')
+        .prop('textColor'),
     ).toBe(DEFAULT_THEME.colors.richRed.base)
   })
 
-  everyComponentTestSuite(getCircularProgressBarWrapper, CircularProgressBar, 'CircularProgressBar')
+  everyComponentTestSuite(
+    getCircularProgressBarWrapper,
+    CircularProgressBar,
+    'CircularProgressBar',
+  )
 })

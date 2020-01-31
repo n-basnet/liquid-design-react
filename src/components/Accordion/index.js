@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { media, touchDeviceHoverStyles } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { isSupportingTouch } from '~/utils/misc'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { media, touchDeviceHoverStyles } from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { isSupportingTouch } from '../../utils/misc'
 
 const AccordionWrapper = styled.div`
   cursor: pointer;
@@ -16,7 +16,9 @@ const AccordionWrapper = styled.div`
     ${props.isHovered &&
       css`
         background-color: ${props.theme.colors.sensitiveGrey.base};
-        ${touchDeviceHoverStyles(`background-color: ${props.theme.colors.white.base};`)};
+        ${touchDeviceHoverStyles(
+          `background-color: ${props.theme.colors.white.base};`,
+        )};
       `};
   `};
 `
@@ -93,18 +95,21 @@ export class Accordion extends PureComponent {
   toggle = () => {
     this.setState(prevState => ({ isOpen: !prevState.isOpen }))
   }
+
   activateHover = () => {
     if (!isSupportingTouch()) {
       this.setState({ isHovered: true })
     }
   }
+
   deactivateHover = () => this.setState({ isHovered: false })
 
-  render () {
+  render() {
     const { children, title, isOpen, ...props } = this.props
     const { isHovered } = this.state
 
-    const isAccordionOpen = isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
+    const isAccordionOpen =
+      isOpen !== DEFAULT_IS_OPEN_VALUE ? isOpen : this.state.isOpen
 
     return (
       <AccordionWrapper
@@ -114,8 +119,12 @@ export class Accordion extends PureComponent {
         onMouseLeave={this.deactivateHover}
         {...props}
       >
-        <SectionTitle isOpen={isAccordionOpen} isHovered={isHovered} onClick={this.toggle}>
-          <Glyph name='arrowTop' size={20} style={{ marginRight: 15 }} />
+        <SectionTitle
+          isOpen={isAccordionOpen}
+          isHovered={isHovered}
+          onClick={this.toggle}
+        >
+          <Glyph name="arrowTop" size={20} style={{ marginRight: 15 }} />
           {title}
         </SectionTitle>
         <SectionContent isOpen={isAccordionOpen}>{children}</SectionContent>

@@ -1,15 +1,18 @@
 import React from 'react'
-import DropdownWrapper from '~/elements/misc/DropdownProvider/DropdownWrapper'
-import DropdownTriggerWrapper from '~/elements/misc/DropdownProvider/DropdownTriggerWrapper'
-import DropdownProvider from '~/elements/misc/DropdownProvider'
-import { ResultWrapper } from '~/elements/misc/OptionsGroup'
-import Tag from '~/elements/Tag'
-import { Input } from '~/elements/Checkbox'
-import { getWrapper } from '~/utils/testUtils'
+import DropdownWrapper from '../../../elements/misc/DropdownProvider/DropdownWrapper'
+import DropdownTriggerWrapper from '../../../elements/misc/DropdownProvider/DropdownTriggerWrapper'
+import DropdownProvider from '../../../elements/misc/DropdownProvider'
+import { ResultWrapper } from '../../../elements/misc/OptionsGroup'
+import Tag from '../../../elements/Tag'
+import { Input } from '../../../elements/Checkbox'
+import { getWrapper } from '../../../utils/testUtils'
 
 describe('DropdownProvider', () => {
   const onClick = jest.fn()
-  const OPTIONS = [{ id: '1', name: 'Option 1', onClick }, { id: '2', name: 'Option 2' }]
+  const OPTIONS = [
+    { id: '1', name: 'Option 1', onClick },
+    { id: '2', name: 'Option 2' },
+  ]
   const defaultProps = {
     label: 'Filter Label',
     options: OPTIONS,
@@ -19,7 +22,7 @@ describe('DropdownProvider', () => {
     <DropdownProvider
       {...defaultProps}
       {...props}
-      nameForClassName='Filter'
+      nameForClassName="Filter"
       inline
       render={({
         isExpanded,
@@ -64,7 +67,10 @@ describe('DropdownProvider', () => {
 
   it('handles multiselect', () => {
     const optionIndex = 0
-    const props = { multiselect: true, selectedOptionsIds: [OPTIONS[optionIndex].id] }
+    const props = {
+      multiselect: true,
+      selectedOptionsIds: [OPTIONS[optionIndex].id],
+    }
     const wrapper = getProviderWrapper(props)
     expect(wrapper.find(Tag).length).toEqual(props.selectedOptionsIds.length)
     wrapper.find(DropdownTriggerWrapper).simulate('click')
@@ -72,7 +78,7 @@ describe('DropdownProvider', () => {
       wrapper
         .find(Input)
         .at(optionIndex)
-        .prop('checked')
+        .prop('checked'),
     ).toEqual(true)
   })
 })

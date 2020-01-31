@@ -5,11 +5,15 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { contains } from 'ramda'
 
-import { media, customWebKitScrollBar, disableTextSelectionBackground } from '~/utils/styling'
-import Checkbox, { CHECKBOX_CLASSNAME } from '~/elements/Checkbox'
-import { optionPropType } from '~/elements/misc/OptionsGroupProps'
-import Ellipsis from '~/components/misc/Ellipsis'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import {
+  media,
+  customWebKitScrollBar,
+  disableTextSelectionBackground,
+} from '../../utils/styling'
+import Checkbox, { CHECKBOX_CLASSNAME } from '../../elements/Checkbox'
+import { optionPropType } from '../../elements/misc/OptionsGroupProps'
+import Ellipsis from '../../components/misc/Ellipsis'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 export const OPTIONS_GROUP_CLASSNAME = getClassName({ name: 'OptionsGroup' })
 
@@ -57,7 +61,8 @@ export const ResultWrapper = styled.div`
     padding: 12px ${PADDING_BOTTOM.MOBILE}px 10px 15px;
   `};
   ${props => css`
-    border-bottom: ${BORDER_WIDTH}px solid ${props.theme.colors.sensitiveGrey.base};
+    border-bottom: ${BORDER_WIDTH}px solid
+      ${props.theme.colors.sensitiveGrey.base};
     transition: ${props.theme.transition};
     cursor: pointer;
     &:last-child {
@@ -97,12 +102,13 @@ export const ResultWrapper = styled.div`
           fill: ${props.theme.colors.primary.base};
         }
       `};
-    padding: ${props.multiselect && `8px 9px 9px`};
-    padding-left: ${props.multiselect ? `15px` : `20px`};
+    padding: ${props.multiselect && '8px 9px 9px'};
+    padding-left: ${props.multiselect ? '15px' : '20px'};
   `};
 `
 
-const getKeyDownHandler = handler => e => e.key === 'Enter' && handler && handler()
+const getKeyDownHandler = handler => e =>
+  e.key === 'Enter' && handler && handler()
 
 const getOptionActionHandler = (option, submitHandler) => () => {
   submitHandler && submitHandler(option)
@@ -120,12 +126,13 @@ const OptionsGroup = ({
 }) => (
   <OptionsWrapper inline={inline} className={OPTIONS_GROUP_CLASSNAME}>
     {options.map(option => {
-      const isSelected = selectedOption === option || contains(option.id, selectedOptionsIds)
+      const isSelected =
+        selectedOption === option || contains(option.id, selectedOptionsIds)
       const handleAction = getOptionActionHandler(option, submitHandler)
       return (
         <ResultWrapper
-          tabIndex='0'
-          role='button'
+          tabIndex="0"
+          role="button"
           key={option.id}
           onClick={handleAction}
           onKeyDown={getKeyDownHandler(handleAction)}

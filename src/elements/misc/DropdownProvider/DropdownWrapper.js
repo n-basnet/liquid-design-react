@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 import { rgba } from 'polished'
 
-import { cursorValue, media } from '~/utils/styling'
-import { OPTIONS_GROUP_CLASSNAME } from '~/elements/misc/OptionsGroup'
-import { DROPDOWN_ICON_CLASSNAME } from '~/elements/misc/DropdownProvider'
+import { cursorValue, media } from '../../../utils/styling'
+import { OPTIONS_GROUP_CLASSNAME } from '../../../elements/misc/OptionsGroup'
+import { DROPDOWN_ICON_CLASSNAME } from '../../../elements/misc/DropdownProvider'
 
 const ICON_MOBILE_SCALE = 1.27
 const getTransformValue = ({ isExpanded, isFilter }, isMobile) =>
@@ -19,8 +19,12 @@ const getTransformValue = ({ isExpanded, isFilter }, isMobile) =>
       `
 
 const getInnerWrapperStyle = props => {
-  const boxShadow = props.theme[props.isExpanded ? 'doubleBoxShadow' : 'boxShadow']
-  const backgroundColor = rgba(props.theme.colors.white.base, props.disabled ? 0.5 : 1)
+  const boxShadow =
+    props.theme[props.isExpanded ? 'doubleBoxShadow' : 'boxShadow']
+  const backgroundColor = rgba(
+    props.theme.colors.white.base,
+    props.disabled ? 0.5 : 1,
+  )
   return css`
     min-width: 250px;
     background-color: ${backgroundColor};
@@ -53,22 +57,25 @@ export default styled.div`
     max-width: 100%;
   `};
   ${props => css`
-    color: ${rgba(props.theme.colors.richBlack.base, props.disabled ? 0.15 : 1)};
+    color: ${rgba(
+      props.theme.colors.richBlack.base,
+      props.disabled ? 0.15 : 1,
+    )};
     transition: ${props.theme.transition};
     ${cursorValue({ ...props, defaultValue: 'pointer' })};
     ${media.max.phone`
       font-size: 16px;
     `};
     ${
-  props.isExpanded
-    ? css`
+      props.isExpanded
+        ? css`
             border-top-left-radius: ${props.theme.borderRadius};
             border-top-right-radius: ${props.theme.borderRadius};
           `
-    : css`
+        : css`
             border-radius: ${props.theme.borderRadius};
           `
-}
+    }
 
     .${DROPDOWN_ICON_CLASSNAME} {
       margin-top: ${props.inline ? 2 : 3}px;
@@ -82,8 +89,8 @@ export default styled.div`
     }
 
     ${
-  props.inline
-    ? css`
+      props.inline
+        ? css`
             .${OPTIONS_GROUP_CLASSNAME} {
               transform: translate(-7px, -3px);
               ${media.max.phone`
@@ -91,7 +98,7 @@ export default styled.div`
           `};
             }
           `
-    : getInnerWrapperStyle
-};
+        : getInnerWrapperStyle
+    };
   `};
 `

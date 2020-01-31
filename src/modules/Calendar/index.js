@@ -4,17 +4,19 @@ import styled, { css } from 'styled-components'
 import dateFns from 'date-fns'
 import { isEmpty, isNil, find } from 'ramda'
 
-import { times } from '~/utils/misc'
-import { FORMATS, YEAR_FORMAT_REGEXP } from '~/utils/consts/dates'
-import { media } from '~/utils/styling'
-import { Glyph } from '~/elements/Icon'
-import TextField, { TEXT_FIELD_CLASSNAMES } from '~/elements/TextField'
-import DayCell from '~/modules/Calendar/DayCell'
-import { INPUT_SINGLELINE_CLASSNAME } from '~/components/misc/Input'
-import { isTouchDevice } from '~/utils/featureDetects'
-import attachClassName, { getClassName } from '~/components/misc/hoc/attachClassName'
+import { times } from '../../utils/misc'
+import { FORMATS, YEAR_FORMAT_REGEXP } from '../../utils/consts/dates'
+import { media } from '../../utils/styling'
+import { Glyph } from '../../elements/Icon'
+import TextField, { TEXT_FIELD_CLASSNAMES } from '../../elements/TextField'
+import DayCell from '../../modules/Calendar/DayCell'
+import { INPUT_SINGLELINE_CLASSNAME } from '../../components/misc/Input'
+import { isTouchDevice } from '../../utils/featureDetects'
+import attachClassName, {
+  getClassName,
+} from '../../components/misc/hoc/attachClassName'
 
-export const YEAR_INPUT_CLASSNAME = getClassName({ name: `YearInput` })
+export const YEAR_INPUT_CLASSNAME = getClassName({ name: 'YearInput' })
 
 const CalendarWrapper = styled.section`
   width: 400px;
@@ -175,6 +177,7 @@ export class Calendar extends PureComponent {
     /** handler for blur on year input */
     blurYearInput: PropTypes.func,
   }
+
   static defaultProps = {
     selectedStartDate: null,
     selectedEndDate: null,
@@ -191,6 +194,7 @@ export class Calendar extends PureComponent {
     changeYearInputValue: null,
     blurYearInput: () => {},
   }
+
   state = {
     currentMonth: this.props.selectedStartDate || this.props.today,
     yearValue: this.props.selectedStartDate
@@ -199,6 +203,7 @@ export class Calendar extends PureComponent {
     isSelectingRange: false,
     supposedLastDate: null,
   }
+
   hasOuterSelectionIndicator = () => this.props.isSelectingRange !== null
   hasOuterCurrentMonth = () => Boolean(this.props.currentMonth)
   hasOuterYearValue = () => Boolean(this.props.yearInputValue)
@@ -207,12 +212,15 @@ export class Calendar extends PureComponent {
       this.props.changeCurrentMonth(date)
     }
   }
+
   updateOuterYearValue = year => {
     if (this.hasOuterYearValue()) {
-      const formattedYear = year instanceof Date ? dateFns.format(year, FORMATS.YEAR_FORMAT) : year
+      const formattedYear =
+        year instanceof Date ? dateFns.format(year, FORMATS.YEAR_FORMAT) : year
       this.props.changeYearInputValue(formattedYear)
     }
   }
+
   changeMonth = isPrevious => {
     const dateFnsMethodName = isPrevious ? 'subMonths' : 'addMonths'
     const newMonth = this.hasOuterCurrentMonth()
@@ -231,8 +239,12 @@ export class Calendar extends PureComponent {
   changeYear = year => {
     this.setState({ yearValue: year })
     if (year.match(YEAR_FORMAT_REGEXP)) {
-      this.setState(({ currentMonth }) => ({ currentMonth: dateFns.setYear(currentMonth, year) }))
-      this.updateOuterCurrentMonth(dateFns.setYear(this.state.currentMonth, year))
+      this.setState(({ currentMonth }) => ({
+        currentMonth: dateFns.setYear(currentMonth, year),
+      }))
+      this.updateOuterCurrentMonth(
+        dateFns.setYear(this.state.currentMonth, year),
+      )
     }
     this.updateOuterYearValue(year)
   }
@@ -240,7 +252,9 @@ export class Calendar extends PureComponent {
   handleYearInputBlur = () => {
     const { yearValue, currentMonth } = this.state
     if (!yearValue.match(YEAR_FORMAT_REGEXP)) {
-      this.setState({ yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT) })
+      this.setState({
+        yearValue: dateFns.format(currentMonth, FORMATS.YEAR_FORMAT),
+      })
     }
     this.props.blurYearInput()
   }
@@ -255,6 +269,7 @@ export class Calendar extends PureComponent {
       this.setState({ isSelectingRange: true })
     }
   }
+
   handleLastSelect = date => {
     const { selectedStartDate, onEndDateSelect, onStartDateSelect } = this.props
     this.setState({ supposedLastDate: null })
@@ -268,6 +283,7 @@ export class Calendar extends PureComponent {
       onEndDateSelect(selectedStartDate)
     }
   }
+
   getDateSelectionHandler = (date, monthStart) => () => {
     if (!dateFns.isSameMonth(date, monthStart)) return
     if (this.props.isSelectingRange || this.state.isSelectingRange) {
@@ -286,7 +302,10 @@ export class Calendar extends PureComponent {
 
     const dayNames = times(countOfWeekDays).map(index => (
       <WeekDay key={index}>
-        {dateFns.format(dateFns.addDays(dayToStart, index), FORMATS.WEEK_DAY_FORMAT)}
+        {dateFns.format(
+          dateFns.addDays(dayToStart, index),
+          FORMATS.WEEK_DAY_FORMAT,
+        )}
       </WeekDay>
     ))
     return dayNames
@@ -312,10 +331,14 @@ export class Calendar extends PureComponent {
     const countOfWeekDays = 7
     const monthStart = dateFns.startOfMonth(currentMonthValue)
     const monthEnd = dateFns.endOfMonth(monthStart)
-    const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: startOfWeek })
+    const startDate = dateFns.startOfWeek(monthStart, {
+      weekStartsOn: startOfWeek,
+    })
     const endDate = dateFns.endOfWeek(monthEnd, { weekStartsOn: startOfWeek })
     const daysWithAppointments =
-      !isNil(appointments) && !isEmpty(appointments) ? Object.keys(appointments) : null
+      !isNil(appointments) && !isEmpty(appointments)
+        ? Object.keys(appointments)
+        : null
 
     const rows = []
     let days = []
@@ -339,7 +362,10 @@ export class Calendar extends PureComponent {
           const isInReverseRange =
             dateFns.isBefore(endDateToCompare, selectedStartDate) &&
             dateFns.isWithinRange(day, endDateToCompare, selectedStartDate)
-          const result = rangeMode && hasBothDates && (isInSequentialRange || isInReverseRange)
+          const result =
+            rangeMode &&
+            hasBothDates &&
+            (isInSequentialRange || isInReverseRange)
           return Boolean(result)
         }
         const isStartOfRange =
@@ -355,13 +381,15 @@ export class Calendar extends PureComponent {
           rangeMode &&
           ((dateFns.isSameDay(day, selectedStartDate) &&
             (supposedLastDate || selectedEndDate) &&
-            (dateFns.isAfter(day, supposedLastDate) || dateFns.isAfter(day, selectedEndDate))) ||
+            (dateFns.isAfter(day, supposedLastDate) ||
+              dateFns.isAfter(day, selectedEndDate))) ||
             (supposedLastDate &&
               dateFns.isSameDay(day, supposedLastDate) &&
               dateFns.isAfter(day, selectedStartDate)) ||
             (selectedEndDate && dateFns.isSameDay(day, selectedEndDate)))
         const dayInDaysWithAppointments =
-          daysWithAppointments && find(item => dateFns.isSameDay(item, day))(daysWithAppointments)
+          daysWithAppointments &&
+          find(item => dateFns.isSameDay(item, day))(daysWithAppointments)
         const currentAppointments =
           dayInDaysWithAppointments && appointments[dayInDaysWithAppointments]
         const handleMouseEnter = () => {
@@ -396,8 +424,8 @@ export class Calendar extends PureComponent {
             isFirst={index === 0}
             isLast={index === 6}
             onClick={this.getDateSelectionHandler(dayClone, monthStart)}
-            {...!isTouchDevice() && mouseProps}
-          />
+            {...(!isTouchDevice() && mouseProps)}
+          />,
         )
         day = dateFns.addDays(day, 1)
       })
@@ -414,10 +442,12 @@ export class Calendar extends PureComponent {
       <CalendarWrapper {...this.props}>
         <Navigation>
           <IconWrapper onClick={() => this.changeMonth(true)}>
-            <Glyph name='arrowLeft' size={25} />
+            <Glyph name="arrowLeft" size={25} />
           </IconWrapper>
           <MonthYearWrapper>
-            <MonthName>{dateFns.format(currentMonthValue, FORMATS.MONTH_FORMAT)}</MonthName>
+            <MonthName>
+              {dateFns.format(currentMonthValue, FORMATS.MONTH_FORMAT)}
+            </MonthName>
             <TextField
               grey
               value={yearValue}
@@ -427,7 +457,7 @@ export class Calendar extends PureComponent {
             />
           </MonthYearWrapper>
           <IconWrapper onClick={() => this.changeMonth()}>
-            <Glyph name='arrowRight' size={25} />
+            <Glyph name="arrowRight" size={25} />
           </IconWrapper>
         </Navigation>
         <section>

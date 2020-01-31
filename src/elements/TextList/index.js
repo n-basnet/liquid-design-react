@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import BulletList from '~/elements/TextList/BulletList'
-import NumberedList from '~/elements/TextList/NumberedList'
-import ListItem from '~/elements/TextList/ListItem'
-import { NUMBERED_LIST, BULLETED_LIST } from '~/elements/TextList/consts.js'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import BulletList from '../../elements/TextList/BulletList'
+import NumberedList from '../../elements/TextList/NumberedList'
+import ListItem from '../../elements/TextList/ListItem'
+import { NUMBERED_LIST, BULLETED_LIST } from '../../elements/TextList/consts.js'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 export const TextList = ({ items, listType, ...props }) => {
   const ListComponent = listType === BULLETED_LIST ? BulletList : NumberedList
@@ -26,7 +26,7 @@ TextList.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       items: PropTypes.array,
-    })
+    }),
   ).isRequired,
 }
 

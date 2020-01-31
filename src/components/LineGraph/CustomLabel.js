@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Rect, VictoryLabel } from 'victory'
 
-import COLORS from '~/utils/consts/colors'
+import COLORS from '../../utils/consts/colors'
 
 const { WHITE } = COLORS
 
@@ -13,7 +13,7 @@ export const CustomLabel = ({ text, style, isMobile, ...props }) => (
       width={isMobile ? 8 : text.length * 12}
       height={15}
       style={{ fill: WHITE }}
-      transform='translate(-10 -16)'
+      transform="translate(-10 -16)"
       {...props}
     />
     <VictoryLabel dx={0} text={text} style={style} {...props} />

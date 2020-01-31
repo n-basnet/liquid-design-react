@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { getTextKnob } from '../../helpers'
 import { action } from '@storybook/addon-actions'
 
-import { TextField, Headline, Button } from '~'
-import { HEADLINE_CLASSNAME } from '~/elements/Headline'
-import Placeholder from '~/elements/Placeholder'
-import { media } from '~/utils/styling'
+import { TextField, Headline, Button } from '../../../src'
+import { HEADLINE_CLASSNAME } from '../../../src/elements/Headline'
+import Placeholder from '../../../src/elements/Placeholder'
+import { media } from '../../../src/utils/styling'
 import { FIELDS_PROFILE_TOP, MOBILE_BREAKPOINT } from './consts'
 import FlexRowsWrapper from './FlexRowsWrapper'
 
@@ -49,9 +49,11 @@ const ProfileFormPart = ({ fieldProps }) => (
         <Placeholder size={120} isCircularWhite={!fieldProps.grey} />
       </div>
       <FlexRowsWrapper nested className={CLASSNAMES.nameFieldsWrapper}>
-        {[FIELDS_PROFILE_TOP.firstName, FIELDS_PROFILE_TOP.lastName].map((field, i) => (
-          <TextField key={i} style={field.style} {...fieldProps} {...field} />
-        ))}
+        {[FIELDS_PROFILE_TOP.firstName, FIELDS_PROFILE_TOP.lastName].map(
+          (field, i) => (
+            <TextField key={i} style={field.style} {...fieldProps} {...field} />
+          ),
+        )}
       </FlexRowsWrapper>
     </FlexRowsWrapper>
     <FlexRowsWrapper>
@@ -65,7 +67,9 @@ const ProfileFormPart = ({ fieldProps }) => (
         <Button onClick={action('change')}>Change</Button>
       </div>
     </FlexRowsWrapper>
-    <Headline type='H6'>{getTextKnob({ defaultText: 'Adress', name: 'address' })}</Headline>
+    <Headline type="H6">
+      {getTextKnob({ defaultText: 'Adress', name: 'address' })}
+    </Headline>
   </ProfileFormPartWrapper>
 )
 

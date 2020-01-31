@@ -1,8 +1,8 @@
 import Footer from '.'
-import Label from '~/elements/Label'
-import { Glyph } from '~/elements/Icon'
-import Headline from '~/elements/Headline'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Label from '../../elements/Label'
+import { Glyph } from '../../elements/Icon'
+import Headline from '../../elements/Headline'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Footer', () => {
   const onClickMock = jest.fn()
@@ -33,7 +33,7 @@ describe('Footer', () => {
 
   it('renders proper icon', () => {
     const firstIcon = wrapper.find(Glyph).first()
-    const firstIconName = defaultProps.iconsNamesAndActions[0]['name']
+    const firstIconName = defaultProps.iconsNamesAndActions[0].name
 
     expect(firstIcon.prop('name')).toEqual(firstIconName)
   })

@@ -1,13 +1,17 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, injectGlobal, ThemeProvider } from 'styled-components'
 
-import { THEMES, DEFAULT_THEME_NAME, getCustomTheme } from '~/utils/consts/themes'
-import { M_FONT_NAME } from '~/utils/consts'
-import { disableWebkitTapHightlight } from '~/utils/styling'
-import MWebFontWoff2 from '~/assets/fonts/MWeb-Regular.woff2'
-import MWebFontWoff from '~/assets/fonts/MWeb-Regular.woff'
-import { isTouchDevice } from '~/utils/featureDetects'
+import {
+  THEMES,
+  DEFAULT_THEME_NAME,
+  getCustomTheme,
+} from '../utils/consts/themes'
+import { M_FONT_NAME } from '../utils/consts'
+import { disableWebkitTapHightlight } from '../utils/styling'
+import MWebFontWoff2 from '../assets/fonts/MWeb-Regular.woff2'
+import MWebFontWoff from '../assets/fonts/MWeb-Regular.woff'
+import { isTouchDevice } from '../utils/featureDetects'
 
 injectGlobal`
   @font-face {
@@ -39,20 +43,29 @@ export const Base = styled.div`
 `
 
 class Theme extends PureComponent {
-  componentDidMount () {
+  componentDidMount() {
     // fixes mobile Safari handling of pseudo classes on elements (https://stackoverflow.com/a/41217194)
-    isTouchDevice() && document.addEventListener('touchstart', function () {}, false)
+    isTouchDevice() &&
+      document.addEventListener('touchstart', function() {}, false)
   }
-  render () {
+
+  render() {
     const { themeName, customTheme, ...props } = this.props
     return (
       <ThemeProvider
-        theme={customTheme ? getCustomTheme(themeName, customTheme) : THEMES[themeName]}
+        theme={
+          customTheme
+            ? getCustomTheme(themeName, customTheme)
+            : THEMES[themeName]
+        }
       >
-        <Fragment>
-          <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' />
+        <>
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:400,700,900"
+            rel="stylesheet"
+          />
           <Base {...props} />
-        </Fragment>
+        </>
       </ThemeProvider>
     )
   }
@@ -70,7 +83,7 @@ Theme.propTypes = {
         dark: PropTypes.string,
         darker: PropTypes.string,
         darkest: PropTypes.string,
-      })
+      }),
     ),
     zIndex: PropTypes.objectOf(PropTypes.number),
     fontSize: PropTypes.objectOf(PropTypes.string),

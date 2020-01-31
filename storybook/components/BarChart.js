@@ -1,8 +1,8 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
-import { default as EnhancedBarChart, BarChart } from '~/components/BarChart'
-import { times } from '~/utils/misc'
+import EnhancedBarChart, { BarChart } from '../../src/components/BarChart'
+import { times } from '../../src/utils/misc'
 import {
   randomInRange,
   getBackgroundWrapper,
@@ -17,8 +17,8 @@ const getValue = (i, k) =>
   i === 0 && k === 0
     ? 0
     : isStorybookLokiBuild()
-      ? i * k
-      : randomInRange(35, 165) * 1000 + Math.random()
+    ? i * k
+    : randomInRange(35, 165) * 1000 + Math.random()
 
 const getDefaultProps = () => ({
   valueFormatter: currencyFormatter,
@@ -34,7 +34,8 @@ const getDefaultProps = () => ({
   })),
 })
 
-const DESCRIPTION = `The bar chart is used for number comparisons in relation to a progressing value (e.g. time).`
+const DESCRIPTION =
+  'The bar chart is used for number comparisons in relation to a progressing value (e.g. time).'
 
 const defaultProps = getDefaultProps()
 const slimData = {
@@ -59,6 +60,6 @@ storiesOf('Components/BarChart', module)
       `<BarChart
     ${objectToJSXAttrs({ ...defaultProps, data: slimData })}
   />`,
-      DESCRIPTION
-    )
+      DESCRIPTION,
+    ),
   )

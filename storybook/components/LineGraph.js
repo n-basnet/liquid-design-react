@@ -2,10 +2,11 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { getPropTablesExcludeList, getNumberKnob, Fragment } from '../helpers'
-import { Graph } from '~/components/LineGraph/Graph'
-import { default as EnhancedLineGraph, LineGraph } from '~/components/LineGraph'
+import { Graph } from '../../src/components/LineGraph/Graph'
+import EnhancedLineGraph, { LineGraph } from '../../src/components/LineGraph'
 
-const getValueY = (id, value) => getNumberKnob({ name: `value-${id}`, defaultValue: value })
+const getValueY = (id, value) =>
+  getNumberKnob({ name: `value-${id}`, defaultValue: value })
 
 const getData = () => [
   [
@@ -139,5 +140,5 @@ storiesOf('Components/LineGraph', module)
     ~~~
     `,
       },
-    }
+    },
   )

@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import * as H from '~/elements/Headline/H'
-import * as BH from '~/elements/Headline/BH'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import * as H from '../../elements/Headline/H'
+import * as BH from '../../elements/Headline/BH'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const HEADLINES = {
   ...H,
@@ -15,7 +15,10 @@ export const Headline = ({ children, className, type, ...props }) => {
   const HeadlineComponent = HEADLINES[type]
 
   return (
-    <HeadlineComponent className={cx(className, `${className}--${type}`)} {...props}>
+    <HeadlineComponent
+      className={cx(className, `${className}--${type}`)}
+      {...props}
+    >
       {children}
     </HeadlineComponent>
   )

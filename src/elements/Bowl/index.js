@@ -5,10 +5,13 @@ import uniqid from 'uniqid'
 import cx from 'classnames'
 import styled from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { SVG_VIEWPORT_WIDTH, SVG_GRADIENT_COLORS } from '~/elements/Bowl/consts'
-import { getSVGFillCoordinates } from '~/elements/Bowl/helpers'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import {
+  SVG_VIEWPORT_WIDTH,
+  SVG_GRADIENT_COLORS,
+} from '../../elements/Bowl/consts'
+import { getSVGFillCoordinates } from '../../elements/Bowl/helpers'
 
 const MAIN_SVG_CLASSNAME = getClassName({ name: 'BowlMainElement' })
 const BOWL_CLASSNAME = getClassName({ name: 'Bowl' })
@@ -51,17 +54,21 @@ export default class Bowl extends PureComponent {
     width: 180,
     className: null,
   }
+
   state = {
     key: 0,
   }
+
   componentDidMount() {
     this.runAnimation()
   }
+
   componentDidUpdate({ percent }) {
     if (percent !== this.props.percent) {
       this.reset()
     }
   }
+
   reset = () => this.setState({ key: uniqid() }, this.runAnimation)
   runAnimation() {
     if (!SVG || this.displayIcon() || process.env.STORYBOOK_LOKI_BUILD) {
@@ -131,7 +138,7 @@ export default class Bowl extends PureComponent {
 
     /** Back fill path */
     this.backFill = this.transformGroup.path(
-      getSVGFillCoordinates(0.5, xspacing, amplitude, pathGen, dx)
+      getSVGFillCoordinates(0.5, xspacing, amplitude, pathGen, dx),
     )
 
     if (this.animating) {
@@ -142,7 +149,7 @@ export default class Bowl extends PureComponent {
         amplitude,
         xspacing,
         dx,
-        reverseDirection ? -speed : speed
+        reverseDirection ? -speed : speed,
       )
     }
 
@@ -151,25 +158,33 @@ export default class Bowl extends PureComponent {
       this.createGradient(
         SVG_GRADIENT_COLORS.full.back[0],
         SVG_GRADIENT_COLORS.full.back[0],
-        'back'
-      )
+        'back',
+      ),
     )
 
     /** Front fill path */
     this.frontFill = this.transformGroup.path(
-      getSVGFillCoordinates(1.8, xspacing, amplitude, pathGen, dx)
+      getSVGFillCoordinates(1.8, xspacing, amplitude, pathGen, dx),
     )
 
     if (this.animating) {
-      this.animate('frontFill', theta + 0.3, pathGen, amplitude, xspacing, dx, speed * 2)
+      this.animate(
+        'frontFill',
+        theta + 0.3,
+        pathGen,
+        amplitude,
+        xspacing,
+        dx,
+        speed * 2,
+      )
     }
 
     this.frontFill.fill(
       this.createGradient(
         SVG_GRADIENT_COLORS.full.front[0],
         SVG_GRADIENT_COLORS.full.front[1],
-        'front'
-      )
+        'front',
+      ),
     )
 
     /** Reflection circles group */
@@ -183,7 +198,9 @@ export default class Bowl extends PureComponent {
       .circle(10)
       .fill({ color: '#fff', opacity: 0.3 })
       .move(8, 8)
-    this.circle2 = circleTransformGroup.circle(6).fill({ color: '#fff', opacity: 0.3 })
+    this.circle2 = circleTransformGroup
+      .circle(6)
+      .fill({ color: '#fff', opacity: 0.3 })
     if (animationDuration) {
       this.animating = true
       circleTransformGroup
@@ -210,7 +227,10 @@ export default class Bowl extends PureComponent {
       this.animateCircles()
     } else {
       circleTransformGroup.transform({
-        y: percent < 42 ? circleGroupY + (142 - percent) : circleGroupY + (100 - percent),
+        y:
+          percent < 42
+            ? circleGroupY + (142 - percent)
+            : circleGroupY + (100 - percent),
       })
     }
   }
@@ -255,23 +275,54 @@ export default class Bowl extends PureComponent {
     return gradient
   }
 
-  animate = (fill, theta, pathGen, amplitude, xspacing, dx, speed, offset = 0) => {
-    let coords = `M0 ${pathGen(theta) * amplitude + offset}`
+  animate = (
+    fill,
+    theta,
+    pathGen,
+    amplitude,
+    xspacing,
+    dx,
+    speed,
+    offset = 0,
+  ) => {
+    const coords = `M0 ${pathGen(theta) * amplitude + offset}`
     theta += speed
 
-    const plotCoords = getSVGFillCoordinates(theta, xspacing, amplitude, pathGen, dx, coords)
+    const plotCoords = getSVGFillCoordinates(
+      theta,
+      xspacing,
+      amplitude,
+      pathGen,
+      dx,
+      coords,
+    )
 
     this[fill].plot(plotCoords)
 
     if (this.animating) {
       window.requestAnimationFrame(() =>
-        this.animate(fill, theta, pathGen, amplitude, xspacing, dx, speed, offset)
+        this.animate(
+          fill,
+          theta,
+          pathGen,
+          amplitude,
+          xspacing,
+          dx,
+          speed,
+          offset,
+        ),
       )
     } else {
       this[fill]
         .animate(this.props.animationDuration / 3, '>')
         .plot(
-          getSVGFillCoordinates(fill === 'frontFill' ? 1.8 : 0.5, xspacing, amplitude, pathGen, dx)
+          getSVGFillCoordinates(
+            fill === 'frontFill' ? 1.8 : 0.5,
+            xspacing,
+            amplitude,
+            pathGen,
+            dx,
+          ),
         )
     }
   }
@@ -297,11 +348,21 @@ export default class Bowl extends PureComponent {
   displayIcon = () => this.props.percent === 0
 
   render() {
-    const { animationDuration, percent, width, className, ...props } = this.props
+    const {
+      animationDuration,
+      percent,
+      width,
+      className,
+      ...props
+    } = this.props
     const { key } = this.state
 
     return (
-      <BowlWrapper className={cx(className, BOWL_CLASSNAME)} {...props} key={key}>
+      <BowlWrapper
+        className={cx(className, BOWL_CLASSNAME)}
+        {...props}
+        key={key}
+      >
         <svg
           width={`${width}px`}
           viewBox={`0 0 ${SVG_VIEWPORT_WIDTH} ${SVG_VIEWPORT_WIDTH}`}
@@ -310,17 +371,17 @@ export default class Bowl extends PureComponent {
           <g ref={wrapper => (this.fillWrapperRef = wrapper)}>
             <g>
               <circle
-                stroke='#DFDFE8'
+                stroke="#DFDFE8"
                 strokeWidth={4}
                 cx={SVG_VIEWPORT_WIDTH / 2}
                 cy={SVG_VIEWPORT_WIDTH / 2}
                 r={SVG_VIEWPORT_WIDTH / 2 - 10}
-                fill='#fff'
+                fill="#fff"
               />
             </g>
           </g>
         </svg>
-        {this.displayIcon() && <Glyph name='warningM' color='richRed.base' />}
+        {this.displayIcon() && <Glyph name="warningM" color="richRed.base" />}
       </BowlWrapper>
     )
   }

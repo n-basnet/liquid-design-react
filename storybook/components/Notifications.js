@@ -3,9 +3,12 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import styled from 'styled-components'
 
-import Notifications from '~/components/Notifications'
-import { NOTIFICATION_TYPES, NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
-import SingleNotification from '~/components/Notifications/SingleNotification'
+import Notifications from '../../src/components/Notifications'
+import {
+  NOTIFICATION_TYPES,
+  NOTIFICATION_WRAPPER_PADDING,
+} from '../../src/components/Notifications/consts'
+import SingleNotification from '../../src/components/Notifications/SingleNotification'
 import {
   getTextKnob,
   getPropTablesExcludeList,
@@ -16,7 +19,9 @@ import {
 
 const DEFAULT_TEXT = 'Notification text'
 const getDefaultSingleNotificationProps = (id, asKnob = true) => ({
-  text: asKnob ? getTextKnob({ defaultText: DEFAULT_TEXT, name: `item ${id}` }) : DEFAULT_TEXT,
+  text: asKnob
+    ? getTextKnob({ defaultText: DEFAULT_TEXT, name: `item ${id}` })
+    : DEFAULT_TEXT,
   id: id.toString(),
   getRemoveHandler: id => action(`remove ${id}`),
 })
@@ -31,6 +36,7 @@ class NotificationApp extends PureComponent {
       ...(type !== DEFAULT_TYPE && { [type]: true }),
     })
   }
+
   render() {
     return (
       <div>
@@ -68,7 +74,9 @@ const propTablesExclude = getPropTablesExcludeList([
 
 const sourceCode = {
   description: `Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.\n
-  Notication types can be set via boolean props: ${formatList(NOTIFICATION_TYPES)}.\n
+  Notication types can be set via boolean props: ${formatList(
+    NOTIFICATION_TYPES,
+  )}.\n
   Usage: call \`Notification\`'s \`addNotification\` method via a ref:`,
 
   notificationSnippet: `
@@ -105,7 +113,7 @@ storiesOf('Components/Notifications', module)
       {typesToDisplay.map((v, i) => (
         <SingleNotification
           key={v}
-          {...v && v !== DEFAULT_TYPE && { [v]: true }}
+          {...(v && v !== DEFAULT_TYPE && { [v]: true })}
           {...getDefaultSingleNotificationProps(i)}
         />
       ))}
@@ -123,5 +131,5 @@ storiesOf('Components/Notifications', module)
   .add(
     'usage in app',
     () => <NotificationApp />,
-    getSnippetTemplate(sourceCode.notificationSnippet, sourceCode.description)
+    getSnippetTemplate(sourceCode.notificationSnippet, sourceCode.description),
   )

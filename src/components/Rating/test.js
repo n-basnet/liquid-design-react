@@ -1,5 +1,5 @@
 import Rating, { roundToNearest } from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Rating', () => {
   const getRatingWrapper = getWrapper(Rating, { title: 'Some title' })

@@ -2,9 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { SORT_MODES, SIZES, CELL_MIN_WIDTH, AUX_CELL_CLASSNAME } from '~/components/Table/utils'
-import { ArrowIcon } from '~/components/Table/tableIcons'
-import { ICON_CLASSNAME } from '~/elements/Icon'
+import {
+  SORT_MODES,
+  SIZES,
+  CELL_MIN_WIDTH,
+  AUX_CELL_CLASSNAME,
+} from '../../components/Table/utils'
+import { ArrowIcon } from '../../components/Table/tableIcons'
+import { ICON_CLASSNAME } from '../../elements/Icon'
 
 const getYPadding = size =>
   ({
@@ -66,7 +71,13 @@ const TableHeadCellWrapper = styled.th`
     `};
 `
 
-export const TableHeadCell = ({ children, sortChangeHandler, isSortable, sortMode, size }) => (
+export const TableHeadCell = ({
+  children,
+  sortChangeHandler,
+  isSortable,
+  sortMode,
+  size,
+}) => (
   <TableHeadCellWrapper
     onClick={isSortable ? sortChangeHandler : null}
     sortMode={sortMode}

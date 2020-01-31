@@ -9,11 +9,11 @@ import fadeInDownCSSAnimation from 'animate.css/source/fading_entrances/fadeInDo
 import fadeOutUpCSSAnimation from 'animate.css/source/fading_exits/fadeOutUp.css'
 import cx from 'classnames'
 
-import { Base } from '~/Theme'
-import SingleNotification from '~/components/Notifications/SingleNotification'
-import { NOTIFICATION_WRAPPER_PADDING } from '~/components/Notifications/consts'
-import { getOrCreateDOMNode } from '~/utils/dom'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { Base } from '../../Theme'
+import SingleNotification from '../../components/Notifications/SingleNotification'
+import { NOTIFICATION_WRAPPER_PADDING } from '../../components/Notifications/consts'
+import { getOrCreateDOMNode } from '../../utils/dom'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 const DEFAULT_AUTO_REMOVE_TIMEOUT = 3000
 const ANIMATION_DURATION = 200
@@ -40,13 +40,16 @@ class Notifications extends PureComponent {
     autoRemoveTimeout: PropTypes.number,
     className: PropTypes.string,
   }
+
   static defaultProps = {
     autoRemoveTimeout: DEFAULT_AUTO_REMOVE_TIMEOUT,
     className: null,
   }
+
   state = {
     items: [],
   }
+
   addNotification = notification => {
     const id = uniqid()
 
@@ -55,28 +58,36 @@ class Notifications extends PureComponent {
     }))
 
     if (!notification.isError) {
-      setTimeout(this.removeNotificationHandler(id), this.props.autoRemoveTimeout)
+      setTimeout(
+        this.removeNotificationHandler(id),
+        this.props.autoRemoveTimeout,
+      )
     }
   }
+
   removeNotificationHandler = id => () => {
     this.setState(({ items }) => ({
       items: filter(item => item.id !== id, items),
     }))
   }
+
   getDOMNode = () => getOrCreateDOMNode(getClassName(Notifications))
   render() {
     const { autoRemoveTimeout, className, ...props } = this.props
     return ReactDOM.createPortal(
       // Theme's Base is needed because the component attaches itself directly to the body element
       <Base>
-        <NotificationsWrapper {...props} className={cx(className, getClassName(Notifications))}>
+        <NotificationsWrapper
+          {...props}
+          className={cx(className, getClassName(Notifications))}
+        >
           <Animated items>
             {this.state.items.map(item => (
               <Animated
                 key={item.id}
                 item
-                enter='fadeInDown'
-                exit='fadeOutUp'
+                enter="fadeInDown"
+                exit="fadeOutUp"
                 timeout={ANIMATED_ITEM_TIMEOUT}
               >
                 <SingleNotification
@@ -89,7 +100,7 @@ class Notifications extends PureComponent {
           </Animated>
         </NotificationsWrapper>
       </Base>,
-      this.getDOMNode()
+      this.getDOMNode(),
     )
   }
 }

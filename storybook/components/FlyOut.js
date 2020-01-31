@@ -10,7 +10,7 @@ import {
   getSnippetTemplate,
   getPropTablesExcludeList,
 } from '../helpers'
-import FlyOut from '~/components/FlyOut'
+import FlyOut from '../../src/components/FlyOut'
 
 const RightAlignedWrapper = styled.div`
   float: right;
@@ -25,19 +25,31 @@ const getOptions = () => [
     name: getTextKnob({ defaultText: 'Option 2', name: 'option2' }),
     options: [
       {
-        name: getTextKnob({ defaultText: 'Sub Option 1', name: 'sub option 1' }),
+        name: getTextKnob({
+          defaultText: 'Sub Option 1',
+          name: 'sub option 1',
+        }),
         onClick: action('Sub Option 1'),
       },
       {
-        name: getTextKnob({ defaultText: 'Sub Option 2', name: 'sub option 2' }),
+        name: getTextKnob({
+          defaultText: 'Sub Option 2',
+          name: 'sub option 2',
+        }),
         onClick: action('Sub Option 2'),
       },
       {
-        name: getTextKnob({ defaultText: 'Sub Option 3', name: 'sub option 3' }),
+        name: getTextKnob({
+          defaultText: 'Sub Option 3',
+          name: 'sub option 3',
+        }),
         onClick: action('Sub Option 3'),
       },
       {
-        name: getTextKnob({ defaultText: 'Sub Option 4', name: 'sub option 4' }),
+        name: getTextKnob({
+          defaultText: 'Sub Option 4',
+          name: 'sub option 4',
+        }),
         onClick: action('Sub Option 4'),
       },
     ],
@@ -62,15 +74,21 @@ const getFlyoutSnippet = props => `
         ]
       },
       { name: "Option 3" }
-    ]}${props || ``}
+    ]}${props || ''}
   />
 `
 
-const getLabel = () => getTextKnob({ defaultText: 'Flyout Label', name: 'label' })
-const getHeadline = () => getTextKnob({ defaultText: 'Headline', name: 'headline' })
+const getLabel = () =>
+  getTextKnob({ defaultText: 'Flyout Label', name: 'label' })
+const getHeadline = () =>
+  getTextKnob({ defaultText: 'Headline', name: 'headline' })
 
 storiesOf('Components/FlyOut', module)
-  .addDecorator(getBackgroundWrapper({ style: { marginBottom: '40px', maxWidth: '400px' } }))
+  .addDecorator(
+    getBackgroundWrapper({
+      style: { marginBottom: '40px', maxWidth: '400px' },
+    }),
+  )
   .addParameters({
     info: {
       propTablesExclude: getPropTablesExcludeList([RightAlignedWrapper]),
@@ -81,47 +99,69 @@ storiesOf('Components/FlyOut', module)
     'right aligned',
     () => (
       <RightAlignedWrapper>
-        <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} />
+        <FlyOut
+          name={getHeadline()}
+          options={getOptions()}
+          label={getLabel()}
+        />
       </RightAlignedWrapper>
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
-    label="Flyout Label"`)
-    )
+    label="Flyout Label"`),
+    ),
   )
   .add(
     'left aligned',
-    () => <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />,
+    () => (
+      <FlyOut
+        name={getHeadline()}
+        options={getOptions()}
+        label={getLabel()}
+        alignLeft
+      />
+    ),
     getSnippetTemplate(
       getFlyoutSnippet(`
     label="Flyout Label"
-    alignLeft`)
-    )
+    alignLeft`),
+    ),
   )
   .add(
     'right aligned disabled',
     () => (
       <RightAlignedWrapper>
-        <FlyOut name={getHeadline()} options={getOptions()} label={getLabel()} disabled />
+        <FlyOut
+          name={getHeadline()}
+          options={getOptions()}
+          label={getLabel()}
+          disabled
+        />
       </RightAlignedWrapper>
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
     label="Flyout Label"
-    disabled`)
-    )
+    disabled`),
+    ),
   )
   .add(
     'left aligned disabled',
     () => (
-      <FlyOut disabled name={getHeadline()} options={getOptions()} label={getLabel()} alignLeft />
+      <FlyOut
+        disabled
+        name={getHeadline()}
+        options={getOptions()}
+        label={getLabel()}
+        alignLeft
+      />
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
     label="Flyout Label"
     alignLeft
-    disabled`)
-    )
+    disabled`),
+    ),
   )
   .add(
     'center aligned',
@@ -130,7 +170,7 @@ storiesOf('Components/FlyOut', module)
         <FlyOut name={getHeadline()} options={getOptions()} />
       </div>
     ),
-    getSnippetTemplate(getFlyoutSnippet())
+    getSnippetTemplate(getFlyoutSnippet()),
   )
   .add(
     'center aligned disabled',
@@ -141,8 +181,8 @@ storiesOf('Components/FlyOut', module)
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
-    disabled`)
-    )
+    disabled`),
+    ),
   )
   .add(
     'forced width',
@@ -152,12 +192,17 @@ storiesOf('Components/FlyOut', module)
         options={getOptions()}
         label={getLabel()}
         alignLeft
-        width={number('width', 200, { range: true, min: 100, max: 600, step: 1 })}
+        width={number('width', 200, {
+          range: true,
+          min: 100,
+          max: 600,
+          step: 1,
+        })}
       />
     ),
     getSnippetTemplate(
       getFlyoutSnippet(`
     alignLeft
-    width={200}`)
-    )
+    width={200}`),
+    ),
   )

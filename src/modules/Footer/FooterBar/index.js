@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { media } from '~/utils/styling'
+import { media } from '../../../utils/styling'
 
 export default styled.div`
   display: flex;

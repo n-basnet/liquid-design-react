@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { nonTouchDevicesHoverStyles } from '~/utils/styling'
-import { Glyph } from '~/elements/Icon'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { nonTouchDevicesHoverStyles } from '../../utils/styling'
+import { Glyph } from '../../elements/Icon'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const LinkWrapper = styled.a`
   display: inline-block;
@@ -26,7 +26,7 @@ const LinkWrapper = styled.a`
 
 export const Link = ({ children, href, ...props }) => (
   <LinkWrapper href={href} {...props}>
-    <Glyph name='arrowRight' size={14} style={{ top: '2px' }} />
+    <Glyph name="arrowRight" size={14} style={{ top: '2px' }} />
     {children}
   </LinkWrapper>
 )

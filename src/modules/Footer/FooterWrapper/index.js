@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { media } from '~/utils/styling'
+import { media } from '../../../utils/styling'
 
 export default styled.footer`
   padding: 100px;

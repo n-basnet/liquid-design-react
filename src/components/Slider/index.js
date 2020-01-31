@@ -3,13 +3,17 @@ import PropTypes from 'prop-types'
 import RcSlider from 'rc-slider'
 import cx from 'classnames'
 
-import SliderWrapper from '~/components/Slider/SliderWrapper'
-import Handle from '~/components/Slider/Handle'
-import { Tooltip } from '~/components/Slider/Tooltip'
-import { SliderMax, SliderMin, SliderButton } from '~/components/Slider/SliderRanges'
-import { Glyph } from '~/elements/Icon'
-import Label from '~/elements/Label'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import SliderWrapper from '../../components/Slider/SliderWrapper'
+import Handle from '../../components/Slider/Handle'
+import { Tooltip } from '../../components/Slider/Tooltip'
+import {
+  SliderMax,
+  SliderMin,
+  SliderButton,
+} from '../../components/Slider/SliderRanges'
+import { Glyph } from '../../elements/Icon'
+import Label from '../../elements/Label'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 const SLIDER_CLASSNAME = getClassName({ name: 'Slider' })
 
@@ -55,7 +59,7 @@ class Slider extends PureComponent {
         }),
         () => {
           this.props.onChange && this.props.onChange(this.state.value)
-        }
+        },
       )
   }
 
@@ -67,7 +71,7 @@ class Slider extends PureComponent {
         }),
         () => {
           this.props.onChange && this.props.onChange(this.state.value)
-        }
+        },
       )
   }
 
@@ -76,7 +80,7 @@ class Slider extends PureComponent {
       this.props.onChange && this.props.onChange(value)
     })
 
-  render () {
+  render() {
     const {
       defaultValue,
       disabled,
@@ -108,7 +112,7 @@ class Slider extends PureComponent {
                   disabled={disabled}
                   color={disabled ? 'sensitiveGrey.darkest' : 'primary.base'}
                   size={24}
-                  name={'minus'}
+                  name="minus"
                   style={{ marginRight: '-5px', marginBottom: '-1.5px' }}
                 />
               </SliderButton>
@@ -140,7 +144,7 @@ class Slider extends PureComponent {
                 <Glyph
                   color={disabled ? 'sensitiveGrey.darkest' : 'primary.base'}
                   size={24}
-                  name={'plus'}
+                  name="plus"
                   style={{ marginBottom: '-2px', marginLeft: '-5px' }}
                 />
               </SliderButton>

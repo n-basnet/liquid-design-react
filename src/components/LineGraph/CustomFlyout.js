@@ -2,16 +2,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import uniqid from 'uniqid'
 import { VictoryTooltip } from 'victory'
-import { isMobile } from '~/components/LineGraph/utils'
-import { GLOBAL_CSS_PREFIX } from '~/utils/consts'
-import COLORS from '~/utils/consts/colors'
+import { isMobile } from '../../components/LineGraph/utils'
+import { GLOBAL_CSS_PREFIX } from '../../utils/consts'
+import COLORS from '../../utils/consts/colors'
 
 const { WHITE } = COLORS
 
 const FLYOUT_CORNER_RADIUS = 7
 
 export class CustomFlyout extends PureComponent {
-  static defaultEvents = VictoryTooltip.defaultEvents
   static propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
@@ -28,6 +27,8 @@ export class CustomFlyout extends PureComponent {
     height: undefined,
   }
 
+  static defaultEvents = VictoryTooltip.defaultEvents
+
   newWidth = () => Math.max(this.props.width + (isMobile() ? 25 : 50), 90)
 
   newHeight = () => this.props.height + 20
@@ -37,17 +38,21 @@ export class CustomFlyout extends PureComponent {
     const id = `${GLOBAL_CSS_PREFIX}LineGraphFlyout--${uniqid()}`
 
     return (
-      <g transform='translate(0 -18)'>
+      <g transform="translate(0 -18)">
         <defs>
-          <filter width={this.newWidth()} height={this.newHeight() - 20} id={id}>
-            <feOffset result='offOut' in='SourceAlpha' dx='0' dy='9' />
-            <feGaussianBlur result='blurOut' in='offOut' stdDeviation={6} />
+          <filter
+            width={this.newWidth()}
+            height={this.newHeight() - 20}
+            id={id}
+          >
+            <feOffset result="offOut" in="SourceAlpha" dx="0" dy="9" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation={6} />
             <feComponentTransfer>
-              <feFuncA type='linear' slope={0.2} />
+              <feFuncA type="linear" slope={0.2} />
             </feComponentTransfer>
             <feMerge>
               <feMergeNode />
-              <feMergeNode in='SourceGraphic' />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
@@ -61,7 +66,10 @@ export class CustomFlyout extends PureComponent {
           ry={FLYOUT_CORNER_RADIUS}
           filter={`url(#${id})`}
         />
-        <polygon points={`${x - 15}, ${y} ${x}, ${y + 15} ${x + 15}, ${y}`} fill={WHITE} />
+        <polygon
+          points={`${x - 15}, ${y} ${x}, ${y + 15} ${x + 15}, ${y}`}
+          fill={WHITE}
+        />
       </g>
     )
   }

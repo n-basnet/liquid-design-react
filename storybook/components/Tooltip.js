@@ -10,9 +10,9 @@ import {
   placeholderText,
   getSnippetTemplate,
 } from '../helpers'
-import { Tooltip, default as WrappedTooltip } from '~/components/Tooltip'
-import { WALLS_KEYS, SIDES_KEYS } from '~/components/Tooltip/consts'
-import { media } from '~/utils/styling'
+import WrappedTooltip, { Tooltip } from '../../src/components/Tooltip'
+import { WALLS_KEYS, SIDES_KEYS } from '../../src/components/Tooltip/consts'
+import { media } from '../../src/utils/styling'
 
 const ContentWrapper = styled.div`
   strong {
@@ -72,7 +72,7 @@ storiesOf('Components/Tooltip', module)
         </WrappedTooltip>
       </div>
     ),
-    getSnippetTemplate(`<Tooltip isOpen>Tooltip content</Tooltip>`)
+    getSnippetTemplate('<Tooltip isOpen>Tooltip content</Tooltip>'),
   )
   .add(
     'default',
@@ -86,7 +86,7 @@ storiesOf('Components/Tooltip', module)
                 <SampleContent />
               </WrappedTooltip>
             </Wrapper>
-          ))
+          )),
         )}
       </GroupWrapper>
     ),
@@ -95,13 +95,15 @@ storiesOf('Components/Tooltip', module)
         text: `
           Tooltip has ${WALLS_KEYS.length *
             SIDES_KEYS.length} possible placements, from the perspective of the Tooltip content: each wall (${formatList(
-  WALLS_KEYS
-)}) can have the arrow placed on either side (${formatList(SIDES_KEYS)}).
+          WALLS_KEYS,
+        )}) can have the arrow placed on either side (${formatList(
+          SIDES_KEYS,
+        )}).
 
           ~~~js
           <Tooltip>some content</Tooltip>
           ~~~
         `,
       },
-    }
+    },
   )

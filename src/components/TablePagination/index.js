@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { Glyph } from '~/elements/Icon'
-import { TEXT } from '~/components/TablePagination/consts'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
+import { TEXT } from '../../components/TablePagination/consts'
 import {
   ClickableSection,
   Section,
@@ -12,16 +12,18 @@ import {
   PerPageSection,
   ItemsSection,
   Separator,
-} from '~/components/TablePagination/styled'
-import DropdownSection from '~/components/TablePagination/DropdownSection'
-import { times } from '~/utils/misc'
+} from '../../components/TablePagination/styled'
+import DropdownSection from '../../components/TablePagination/DropdownSection'
+import { times } from '../../utils/misc'
 
 const getNumberOption = num => ({
   name: num.toString(),
   id: num.toString(),
 })
 
-export const TABLE_PAGINATION_CLASSNAME = getClassName({ name: 'TablePagination' })
+export const TABLE_PAGINATION_CLASSNAME = getClassName({
+  name: 'TablePagination',
+})
 
 export default class TablePagination extends PureComponent {
   static propTypes = {
@@ -63,14 +65,25 @@ export default class TablePagination extends PureComponent {
     }
   }
 
-  getPagesSum = () => Math.ceil(this.props.itemsCount / this.props.itemsPerPageAmount)
+  getPagesSum = () =>
+    Math.ceil(this.props.itemsCount / this.props.itemsPerPageAmount)
+
   getLastItemIndex = () =>
-    Math.min(this.props.itemsCount, this.props.itemsPerPageAmount * this.props.currentPage)
+    Math.min(
+      this.props.itemsCount,
+      this.props.itemsPerPageAmount * this.props.currentPage,
+    )
+
   getAmountOfItemsString = () =>
-    `${this.props.itemsPerPageAmount * (this.props.currentPage - 1) + 1}-${this.getLastItemIndex()}`
-  getPagesOptions = () => times(this.getPagesSum()).map(index => getNumberOption(index + 1))
+    `${this.props.itemsPerPageAmount * (this.props.currentPage - 1) +
+      1}-${this.getLastItemIndex()}`
+
+  getPagesOptions = () =>
+    times(this.getPagesSum()).map(index => getNumberOption(index + 1))
+
   getPerPageOptions = () => this.props.itemsPerPageOptions.map(getNumberOption)
-  getPageInBounds = pageNum => Math.min(Math.max(1, pageNum), this.getPagesSum())
+  getPageInBounds = pageNum =>
+    Math.min(Math.max(1, pageNum), this.getPagesSum())
 
   render() {
     const {
@@ -107,11 +120,18 @@ export default class TablePagination extends PureComponent {
             isItemsPerPageDropdown
           />
           <Separator>|</Separator>
-          <span>{ofItemsText({ amount: this.getAmountOfItemsString(), total: itemsCount })}</span>
+          <span>
+            {ofItemsText({
+              amount: this.getAmountOfItemsString(),
+              total: itemsCount,
+            })}
+          </span>
         </PerPageSection>
         <Section>
           <ItemsSection>
-            <span>{ofPagesText({ amount: currentPage, total: this.getPagesSum() })}</span>
+            <span>
+              {ofPagesText({ amount: currentPage, total: this.getPagesSum() })}
+            </span>
           </ItemsSection>
 
           <ClickableSection
@@ -119,7 +139,7 @@ export default class TablePagination extends PureComponent {
             onClick={() => onChange(this.getPageInBounds(currentPage - 1))}
           >
             <Glyph
-              name='arrowLeft'
+              name="arrowLeft"
               color={isPrevPageDisabled ? 'sensitiveGrey.darker' : undefined}
             />
           </ClickableSection>
@@ -133,10 +153,10 @@ export default class TablePagination extends PureComponent {
             disabled={isNextPageDisabled}
             onClick={() => onChange(this.getPageInBounds(currentPage + 1))}
             isDisplayedBelowTable={isDisplayedBelowTable}
-            data-test='increaseCurrentPage'
+            data-test="increaseCurrentPage"
           >
             <Glyph
-              name='arrowRight'
+              name="arrowRight"
               color={isNextPageDisabled ? 'sensitiveGrey.darker' : undefined}
             />
           </ClickableSection>

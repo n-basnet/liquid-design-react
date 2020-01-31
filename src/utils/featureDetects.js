@@ -7,7 +7,8 @@ export const hasCSSFilters = () => {
   const IE9DocumentMode = 9
   return (
     !!el.style.length &&
-    (document.documentMode === undefined || document.documentMode > IE9DocumentMode)
+    (document.documentMode === undefined ||
+      document.documentMode > IE9DocumentMode)
   )
 }
 

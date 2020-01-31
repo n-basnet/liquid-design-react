@@ -8,7 +8,7 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedCheckbox, Checkbox } from '~/elements/Checkbox'
+import EnhancedCheckbox, { Checkbox } from '../../src/elements/Checkbox'
 
 const defaultProps = {
   label: 'Checkbox text',
@@ -16,7 +16,7 @@ const defaultProps = {
 }
 
 const getCheckboxSnippet = props => `
-  <Checkbox ${props || ``}label='Checkbox text' onChange={onChangeHandler} />
+  <Checkbox ${props || ''}label='Checkbox text' onChange={onChangeHandler} />
 `
 
 storiesOf('Elements/Checkbox', module)
@@ -28,14 +28,18 @@ storiesOf('Elements/Checkbox', module)
       excludedPropTypes: ['className'],
     },
   })
-  .add('default', () => <Checkbox {...defaultProps} />, getSnippetTemplate(getCheckboxSnippet()))
+  .add(
+    'default',
+    () => <Checkbox {...defaultProps} />,
+    getSnippetTemplate(getCheckboxSnippet()),
+  )
   .add(
     'disabled',
     () => <Checkbox disabled {...defaultProps} />,
-    getSnippetTemplate(getCheckboxSnippet('disabled '))
+    getSnippetTemplate(getCheckboxSnippet('disabled ')),
   )
   .add(
     'disabled and checked',
     () => <Checkbox isChecked disabled {...defaultProps} />,
-    getSnippetTemplate(getCheckboxSnippet('disabled '))
+    getSnippetTemplate(getCheckboxSnippet('disabled ')),
   )

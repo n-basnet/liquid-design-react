@@ -9,14 +9,14 @@ import {
   getSnippetTemplate,
   getCustomPlaceholderText,
 } from '../helpers'
-import { default as EnhancedParagraph, Paragraph } from '~/elements/Paragraph'
+import EnhancedParagraph, { Paragraph } from '../../src/elements/Paragraph'
 
 const getDefaultProps = () => ({
   children: getTextKnob({ defaultText: getCustomPlaceholderText() }),
 })
 
 const getParagraphSnippet = type => `
-  <Paragraph${type ? ` type="${type}"` : ``}>
+  <Paragraph${type ? ` type="${type}"` : ''}>
     ${getCustomPlaceholderText()}
   </Paragraph>
   `
@@ -31,36 +31,36 @@ storiesOf('Elements/Paragraph', module)
   })
   .add(
     'X-Large Paragraph',
-    () => <EnhancedParagraph type='xl' {...getDefaultProps()} />,
-    getSnippetTemplate(getParagraphSnippet('xl'))
+    () => <EnhancedParagraph type="xl" {...getDefaultProps()} />,
+    getSnippetTemplate(getParagraphSnippet('xl')),
   )
   .add(
     'Large Paragraph',
-    () => <EnhancedParagraph type='lg' {...getDefaultProps()} />,
-    getSnippetTemplate(getParagraphSnippet('lg'))
+    () => <EnhancedParagraph type="lg" {...getDefaultProps()} />,
+    getSnippetTemplate(getParagraphSnippet('lg')),
   )
   .add(
     'Medium Paragraph',
     () => <EnhancedParagraph {...getDefaultProps()} />,
-    getSnippetTemplate(getParagraphSnippet())
+    getSnippetTemplate(getParagraphSnippet()),
   )
   .add(
     'Small Paragraph',
-    () => <EnhancedParagraph type='sm' {...getDefaultProps()} />,
-    getSnippetTemplate(getParagraphSnippet('sm'))
+    () => <EnhancedParagraph type="sm" {...getDefaultProps()} />,
+    getSnippetTemplate(getParagraphSnippet('sm')),
   )
   .add(
     'X-Small Paragraph',
-    () => <EnhancedParagraph type='xs' {...getDefaultProps()} />,
-    getSnippetTemplate(getParagraphSnippet('xs'))
+    () => <EnhancedParagraph type="xs" {...getDefaultProps()} />,
+    getSnippetTemplate(getParagraphSnippet('xs')),
   )
   .add(
     'Article with three Paragraphs',
     () => (
       <article>
-        <EnhancedParagraph type='xs' {...getDefaultProps()} />
-        <EnhancedParagraph type='xs' {...getDefaultProps()} />
-        <EnhancedParagraph type='xs' {...getDefaultProps()} />
+        <EnhancedParagraph type="xs" {...getDefaultProps()} />
+        <EnhancedParagraph type="xs" {...getDefaultProps()} />
+        <EnhancedParagraph type="xs" {...getDefaultProps()} />
       </article>
     ),
     getSnippetTemplate(`
@@ -84,7 +84,7 @@ storiesOf('Elements/Paragraph', module)
       breakthrough solutions and technologies.
     </Paragraph>
   </article>
-    `)
+    `),
   )
   .add(
     'Paragraph with a Link',
@@ -104,5 +104,5 @@ storiesOf('Elements/Paragraph', module)
       Read More
     </a>
   </Paragraph>
-    `)
+    `),
   )

@@ -1,5 +1,5 @@
 import TablePagination from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 
 describe('TablePagination', () => {
   const defaultProps = {
@@ -13,10 +13,10 @@ describe('TablePagination', () => {
   it('renders correct text', () => {
     const wrapper = getTablePaginationWrapper()
     const { currentPage, itemsCount, itemsPerPageAmount } = defaultProps
-    const expectedPagesString = `${currentPage} of ${itemsCount / itemsPerPageAmount} pages`
-    const expectedItemsString = `${currentPage}-${itemsPerPageAmount * currentPage} of ${
-      defaultProps.itemsCount
-    } items`
+    const expectedPagesString = `${currentPage} of ${itemsCount /
+      itemsPerPageAmount} pages`
+    const expectedItemsString = `${currentPage}-${itemsPerPageAmount *
+      currentPage} of ${defaultProps.itemsCount} items`
 
     expect(wrapper.find(TablePagination).text()).toMatch(expectedPagesString)
     expect(wrapper.find(TablePagination).text()).toMatch(expectedItemsString)
@@ -26,11 +26,17 @@ describe('TablePagination', () => {
     const wrapper = getTablePaginationWrapper()
     const updatedPageIndex = defaultProps.currentPage + 1
 
-    const increaseButton = wrapper.find('[data-test-value="increaseCurrentPage"]')
+    const increaseButton = wrapper.find(
+      '[data-test-value="increaseCurrentPage"]',
+    )
     increaseButton.simulate('click')
 
     expect(defaultProps.onChange).toHaveBeenLastCalledWith(updatedPageIndex)
   })
 
-  everyComponentTestSuite(getTablePaginationWrapper, TablePagination, 'TablePagination')
+  everyComponentTestSuite(
+    getTablePaginationWrapper,
+    TablePagination,
+    'TablePagination',
+  )
 })

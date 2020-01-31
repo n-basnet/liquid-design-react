@@ -1,5 +1,5 @@
 import Badge from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Badge', () => {
   const text = 'Some text'
@@ -9,7 +9,7 @@ describe('Badge', () => {
     expect(
       getBadgeWrapper()
         .find(Badge)
-        .text()
+        .text(),
     ).toEqual(text)
   })
 

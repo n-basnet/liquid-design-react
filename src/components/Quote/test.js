@@ -1,11 +1,13 @@
 import Quote, { AuthorWrapper, ImageWrapper, PhraseWrapper } from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Quote', () => {
   const defaultProps = {
     author: 'Neville Brody',
-    imagePath: 'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
-    quotation: 'Digital design is like painting, except the paint never dries ever again.',
+    imagePath:
+      'https://images.unsplash.com/photo-1521028640727-38d16fc99ba1?w=400&h=400',
+    quotation:
+      'Digital design is like painting, except the paint never dries ever again.',
     source: 'http://merck.design',
   }
   const getQuoteWrapper = getWrapper(Quote, defaultProps)
@@ -14,7 +16,7 @@ describe('Quote', () => {
     expect(
       getQuoteWrapper()
         .find(AuthorWrapper)
-        .text()
+        .text(),
     ).toEqual(defaultProps.author)
   })
 
@@ -22,7 +24,7 @@ describe('Quote', () => {
     expect(
       getQuoteWrapper()
         .find(PhraseWrapper)
-        .text()
+        .text(),
     ).toEqual(defaultProps.quotation)
   })
 
@@ -30,7 +32,7 @@ describe('Quote', () => {
     expect(
       getQuoteWrapper()
         .find(ImageWrapper)
-        .prop('src')
+        .prop('src'),
     ).toEqual(defaultProps.imagePath)
   })
 

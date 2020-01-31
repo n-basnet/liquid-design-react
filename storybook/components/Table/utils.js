@@ -2,7 +2,7 @@ import React from 'react'
 import { action } from '@storybook/addon-actions'
 import { values, zipObj, prop } from 'ramda'
 
-import { times } from '~/utils/misc'
+import { times } from '../../../src/utils/misc'
 import {
   getSnippetTemplate,
   getCustomPlaceholderText,
@@ -10,7 +10,7 @@ import {
   objectToJSXAttrs,
 } from '../../helpers'
 import { NameCell, RegularCell, RowInfoWrapper } from './cells'
-import { SORT_MODES } from '~/components/Table/utils'
+import { SORT_MODES } from '../../../src/components/Table/utils'
 
 const onChange = action('row change')
 
@@ -19,7 +19,9 @@ const getData = (cols, rowsAmount, config = {}) =>
     // create {[col header]: row} object
     ...zipObj(
       cols.map(
-        config.forSnippet ? (v, i) => config.forSnippet.keys[i].toLowerCase() : prop('header')
+        config.forSnippet
+          ? (v, i) => config.forSnippet.keys[i].toLowerCase()
+          : prop('header'),
       ),
       cols.map((col, i) => {
         const seed = i * rowIndex + 1
@@ -29,25 +31,25 @@ const getData = (cols, rowsAmount, config = {}) =>
             ? getDeterministicPlaceholderText(rowIndex + 10, 1)
             : `${i + 10}`
           : {
-            rowIndex,
-            label: isInFirstCol
-              ? `label ${rowIndex + 1}`
-              : getDeterministicPlaceholderText(seed, 2),
-            value: isInFirstCol
-              ? `Name ${rowIndex + 1}`
-              : getDeterministicPlaceholderText(seed + 10),
-            ...(isInFirstCol && {
-              auxText: 'Info',
-            }),
-          }
-      })
+              rowIndex,
+              label: isInFirstCol
+                ? `label ${rowIndex + 1}`
+                : getDeterministicPlaceholderText(seed, 2),
+              value: isInFirstCol
+                ? `Name ${rowIndex + 1}`
+                : getDeterministicPlaceholderText(seed + 10),
+              ...(isInFirstCol && {
+                auxText: 'Info',
+              }),
+            }
+      }),
     ),
     ...(!config.forSnippet && {
       onChange,
     }),
     ...(config.withRowContent && {
       rowInfo: config.forSnippet ? (
-        `More information`
+        'More information'
       ) : (
         <RowInfoWrapper>{getCustomPlaceholderText()}</RowInfoWrapper>
       ),
@@ -55,8 +57,8 @@ const getData = (cols, rowsAmount, config = {}) =>
     // every second one selected
     ...(config.isSelectable &&
       rowIndex % 2 === 0 && {
-      isDefaultChecked: true,
-    }),
+        isDefaultChecked: true,
+      }),
   }))
 
 const getColumns = (columnsAmount, config = {}) =>
@@ -87,7 +89,7 @@ export const DISABLED_ROW_INDEXES = [7]
 export const getSnippet = ({ props, tableProps, hideCode, auxText }) => {
   const defProps = getDefaultProps(
     { rowsAmount: 2, columnsAmount: 2 },
-    { forSnippet: { keys: ['Name', 'Age'] }, ...props }
+    { forSnippet: { keys: ['Name', 'Age'] }, ...props },
   )
   const propsSnippet = objectToJSXAttrs({ ...defProps, ...tableProps })
 
@@ -115,12 +117,12 @@ prop | description
 \`cellRenderer\` | Optional rendering function for a cell. Will receive arguments: cell data, row data.
 \`sortMethod\` | Optional custom sort method. Should implement native JS \`Array.sort\` interface.
 \`onSort\` | If set, the column data will not be sorted internally, assuming that the data is already sorted. The function will be called with a single argument: \`{ sortColumn: <column object>, sortMode: <${values(
-    SORT_MODES
-  )
-    .map(v => `"${v}"`)
-    .join(
-      ' / '
-    )}> }\`. Can be used to fetch data and update the props passed to the component to perform external sort.
+      SORT_MODES,
+    )
+      .map(v => `"${v}"`)
+      .join(
+        ' / ',
+      )}> }\`. Can be used to fetch data and update the props passed to the component to perform external sort.
 
 #### \`rows\` element
 
@@ -131,6 +133,6 @@ data key | The data for a cell (string or object) - this key will be accessed by
 \`isDefaultChecked\` | If Table is \`isSelectable\`, this will be the default value for the row's checkbox.
 \`onChange\` | Triggered on row click - the argument passed will be an object: \`{cells: <original row object>, rowState: <updated row state>}\`
 
-    `
+    `,
   )
 }

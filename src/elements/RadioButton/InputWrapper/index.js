@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue } from '~/utils/styling'
+import { cursorValue } from '../../../utils/styling'
 
 export default styled.input`
   visibility: hidden;
@@ -17,10 +17,12 @@ export default styled.input`
   :hover {
       :before {
         ${props =>
-    !props.disabled &&
+          !props.disabled &&
           css`
             border-color: ${props =>
-    props.isSelected ? props.theme.colors.primary.dark : props.theme.colors.primary.base};
+              props.isSelected
+                ? props.theme.colors.primary.dark
+                : props.theme.colors.primary.base};
           `}
       }
     }
@@ -38,11 +40,11 @@ export default styled.input`
     border-radius: 100%;
     background: ${props => props.theme.colors.white.base};
     ${props =>
-    css`
+      css`
         border: 2px solid ${props.theme.colors.sensitiveGrey.darker};
       `}
     ${props =>
-    !props.disabled &&
+      !props.disabled &&
       props.isSelected &&
       css`
         border: 7px solid ${props.theme.colors.primary.base};

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { media } from '~/utils/styling'
+import { media } from '../../../src/utils/styling'
 import { MOBILE_BREAKPOINT } from './consts'
 
 const SIDE_OFFSET = 25

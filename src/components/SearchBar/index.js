@@ -5,12 +5,12 @@ import { isEmpty } from 'ramda'
 import enhanceWithClickOutside from 'react-click-outside'
 import cx from 'classnames'
 
-import { Glyph } from '~/elements/Icon'
-import Input from '~/components/misc/Input'
-import Ellipsis from '~/components/misc/Ellipsis'
-import { media } from '~/utils/styling'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import SearchBarWrapper from '~/components/SearchBar/SearchBarWrapper'
+import { Glyph } from '../../elements/Icon'
+import Input from '../../components/misc/Input'
+import Ellipsis from '../../components/misc/Ellipsis'
+import { media } from '../../utils/styling'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import SearchBarWrapper from '../../components/SearchBar/SearchBarWrapper'
 
 export const DEFAULT_PLACEHOLDER_TEXT = 'Search…'
 
@@ -71,6 +71,7 @@ export class SearchBar extends PureComponent {
     placeholder: PropTypes.string,
     className: PropTypes.string,
   }
+
   static defaultProps = {
     onSubmit: () => {},
     disabled: false,
@@ -79,11 +80,13 @@ export class SearchBar extends PureComponent {
     placeholder: DEFAULT_PLACEHOLDER_TEXT,
     className: null,
   }
+
   state = {
     value: '',
     focused: false,
     results: EMPTY_RESULTS,
   }
+
   handleSubmit = (e, value = this.state.value) => {
     e && e.preventDefault()
     if (!this.props.disabled) {
@@ -92,23 +95,36 @@ export class SearchBar extends PureComponent {
       this.hideResults()
     }
   }
+
   setInputValue = value => {
     const results =
-      (typeof value === 'string' && value.trim().length) ? this.props.options.filter(v => {
-        return v.toLowerCase().indexOf(value.toLowerCase().trim()) !== -1
-      }) : EMPTY_RESULTS
+      typeof value === 'string' && value.trim().length
+        ? this.props.options.filter(v => {
+            return v.toLowerCase().indexOf(value.toLowerCase().trim()) !== -1
+          })
+        : EMPTY_RESULTS
     this.setState({
       value,
       results,
     })
   }
+
   hideResults = () => this.setState({ results: EMPTY_RESULTS })
   getInputFocusHandler = focused => () => this.setState({ focused })
   getResultOnClickHandler = value => () => this.handleSubmit(null, value)
-  getResultKeyDownHandler = value => e => e.key === 'Enter' && this.handleSubmit(null, value)
+  getResultKeyDownHandler = value => e =>
+    e.key === 'Enter' && this.handleSubmit(null, value)
+
   handleClickOutside = this.hideResults
   render() {
-    const { onSubmit, disabled, placeholder, ghost, className, ...props } = this.props
+    const {
+      onSubmit,
+      disabled,
+      placeholder,
+      ghost,
+      className,
+      ...props
+    } = this.props
     const { focused, value, results } = this.state
     const hasResults = !isEmpty(this.state.results)
     return (
@@ -121,7 +137,7 @@ export class SearchBar extends PureComponent {
         className={cx(getClassName(SearchBar), className)}
         {...props}
       >
-        <Glyph name='search' size={18} />
+        <Glyph name="search" size={18} />
         <Input
           placeholder={placeholder}
           value={value}
@@ -134,8 +150,8 @@ export class SearchBar extends PureComponent {
         <ResultsWrapper className={RESULT_WRAPPER_CLASSNAME}>
           {results.map((resultText, i) => (
             <ResultWrapper
-              tabIndex='0'
-              role='button'
+              tabIndex="0"
+              role="button"
               key={i}
               onClick={this.getResultOnClickHandler(resultText)}
               onKeyDown={this.getResultKeyDownHandler(resultText)}

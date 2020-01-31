@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
-import { colorSelector, opacitySelector } from '~/elements/Button/utils'
-import { safariStyles } from '~/utils/styling'
+import { colorSelector, opacitySelector } from '../../../elements/Button/utils'
+import { safariStyles } from '../../../utils/styling'
 
 export default styled.div`
   position: relative;

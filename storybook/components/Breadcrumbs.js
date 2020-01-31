@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { default as EnhancedBreadcrumbs, Breadcrumbs } from '~/components/Breadcrumbs'
+import EnhancedBreadcrumbs, {
+  Breadcrumbs,
+} from '../../src/components/Breadcrumbs'
 import {
   getBackgroundWrapper,
   getTextKnob,
@@ -10,7 +12,7 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { times } from '~/utils/misc'
+import { times } from '../../src/utils/misc'
 
 const getItems = (modifier = {}) => [
   {
@@ -39,6 +41,7 @@ class BreadcrumbsApp extends PureComponent {
   setActive = active => {
     this.setState({ active })
   }
+
   render() {
     return (
       <EnhancedBreadcrumbs
@@ -55,7 +58,7 @@ const getBreadcrumbsSnippet = props => `
       { content: 'Breadcrumb 1', onClick: onClickHandler },
       { content: 'Breadcrumb 2', onClick: onClickHandler },
       { content: 'Breadcrumb 3', onClick: onClickHandler },
-    ]} ${props || ``}
+    ]} ${props || ''}
   />
 `
 
@@ -64,21 +67,24 @@ storiesOf('Components/Breadcrumbs', module)
   .addDecorator(includeComponentInPropTable(Breadcrumbs))
   .addParameters({
     info: {
-      propTablesExclude: getPropTablesExcludeList([EnhancedBreadcrumbs, BreadcrumbsApp]),
+      propTablesExclude: getPropTablesExcludeList([
+        EnhancedBreadcrumbs,
+        BreadcrumbsApp,
+      ]),
     },
   })
   .add(
     'default',
     () => <EnhancedBreadcrumbs items={getItems()} />,
-    getSnippetTemplate(getBreadcrumbsSnippet())
+    getSnippetTemplate(getBreadcrumbsSnippet()),
   )
   .add(
     'active',
     () => <EnhancedBreadcrumbs items={getItems()} active={1} />,
     getSnippetTemplate(
       getBreadcrumbsSnippet(`
-    active={1}`)
-    )
+    active={1}`),
+    ),
   )
   .add(
     'disabled',
@@ -91,6 +97,6 @@ storiesOf('Components/Breadcrumbs', module)
       { content: 'Breadcrumb 3', onClick: onClickHandler },
     ]}
   />
-`)
+`),
   )
   .add('interactive', () => <BreadcrumbsApp />)

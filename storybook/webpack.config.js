@@ -12,8 +12,12 @@ const updateRule = ({ testRegex, use, rules }) => {
 }
 
 module.exports = (baseConfig, env, defaultConfig) => {
-  defaultConfig.module.rules = updateRule({
-    testRegex: /\.svg$/,
+  const fileLoaderRule = defaultConfig.module.rules.find(rule =>
+    rule.test.test('.svg'),
+  )
+  fileLoaderRule.exclude = /\.svg$/
+  defaultConfig.module.rules.push({
+    test: /\.svg$/,
     use: [
       {
         loader: 'babel-loader',
@@ -26,7 +30,6 @@ module.exports = (baseConfig, env, defaultConfig) => {
         },
       },
     ],
-    rules: defaultConfig.module.rules,
   })
 
   defaultConfig.module.rules = updateRule({

@@ -2,288 +2,392 @@
 
 exports[`Tooltip utils - getArrowStyle 1`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "11",
-  "px;",
-  "border-bottom:",
+  "px;
+  ",
+  "
+      border-bottom: ",
   "11",
   "px solid ",
   "white",
-  ";border-left:",
+  ";
+      border-left: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
-  "px solid transparent;",
-  ";",
+  "px solid transparent;
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 2`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "11",
-  "px;",
-  "border-bottom:",
+  "px;
+  ",
+  "
+      border-bottom: ",
   "11",
   "px solid ",
   "white",
-  ";border-left:",
+  ";
+      border-left: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
-  "px solid transparent;",
-  ";",
+  "px solid transparent;
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 3`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
   "px solid ",
   "white",
-  ";border-left:",
+  ";
+      border-left: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
-  "px solid transparent;",
-  ";",
+  "px solid transparent;
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 4`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
   "px solid ",
   "white",
-  ";border-left:",
+  ";
+      border-left: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
-  "px solid transparent;",
-  ";",
+  "px solid transparent;
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 5`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "20",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "-11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
-  "px solid transparent;border-bottom:",
+  "px solid transparent;
+      border-bottom: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
   "px solid ",
   "white",
-  ";",
-  ";",
+  ";
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 6`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "20",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "-11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
-  "px solid transparent;border-bottom:",
+  "px solid transparent;
+      border-bottom: ",
   "11",
-  "px solid transparent;border-right:",
+  "px solid transparent;
+      border-right: ",
   "11",
   "px solid ",
   "white",
-  ";",
-  ";",
+  ";
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 7`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "20",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "-11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
-  "px solid transparent;border-bottom:",
+  "px solid transparent;
+      border-bottom: ",
   "11",
-  "px solid transparent;border-left:",
+  "px solid transparent;
+      border-left: ",
   "11",
   "px solid ",
   "white",
-  ";",
-  ";",
+  ";
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getArrowStyle 8`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "20",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "-11",
-  "px;",
-  "border-top:",
+  "px;
+  ",
+  "
+      border-top: ",
   "11",
-  "px solid transparent;border-bottom:",
+  "px solid transparent;
+      border-bottom: ",
   "11",
-  "px solid transparent;border-left:",
+  "px solid transparent;
+      border-left: ",
   "11",
   "px solid ",
   "white",
-  ";",
-  ";",
+  ";
+    ",
+  ";
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 1`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "28",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 2`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "28",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 3`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "43",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 4`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "43",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "-10",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 5`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "-17",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "40",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 6`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "-26",
-  "px;",
+  "px;
+  ",
   "left",
-  ":",
+  ": ",
   "40",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 7`] = `
 Array [
+  "
+  ",
   "top",
-  ":",
+  ": ",
   "-26",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "40",
-  "px;",
+  "px;
+",
 ]
 `;
 
 exports[`Tooltip utils - getPosition 8`] = `
 Array [
+  "
+  ",
   "bottom",
-  ":",
+  ": ",
   "-17",
-  "px;",
+  "px;
+  ",
   "right",
-  ":",
+  ": ",
   "40",
-  "px;",
+  "px;
+",
 ]
 `;

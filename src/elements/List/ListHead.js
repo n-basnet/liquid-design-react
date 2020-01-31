@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { ICON_CLASSNAME } from '~/elements/Icon'
+import { ICON_CLASSNAME } from '../../elements/Icon'
 
 export const ListHead = styled.div`
   display: flex;

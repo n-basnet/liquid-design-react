@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import BlockquoteWrapper from '~/components/Quote/BlockquoteWrapper'
+import BlockquoteWrapper from '../../../components/Quote/BlockquoteWrapper'
 
 const QuoteWrapper = styled(BlockquoteWrapper)`
   ${props => css`
@@ -29,7 +29,13 @@ const AuthorWrapper = styled.div`
   `};
 `
 
-export const TypographicQuote = ({ source, author, big, quotation, ...props }) => (
+export const TypographicQuote = ({
+  source,
+  author,
+  big,
+  quotation,
+  ...props
+}) => (
   <QuoteWrapper big={big} cite={source} {...props}>
     <PhraseWrapper big={big}>{`»${quotation}«`}</PhraseWrapper>
     <AuthorWrapper big={big}>{`– ${author}`}</AuthorWrapper>

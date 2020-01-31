@@ -1,13 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Glyph } from '~/elements/Icon'
-import { TagWrapper } from '~/elements/Tag/TagWrapper'
-import { Label } from '~/elements/Tag/Label'
-import Ellipsis from '~/components/misc/Ellipsis'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
+import { TagWrapper } from '../../elements/Tag/TagWrapper'
+import { Label } from '../../elements/Tag/Label'
+import Ellipsis from '../../components/misc/Ellipsis'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
-export const Tag = ({ disabled, icon, label, outline, onIconClick, iconSize, ...props }) => (
+export const Tag = ({
+  disabled,
+  icon,
+  label,
+  outline,
+  onIconClick,
+  iconSize,
+  ...props
+}) => (
   <TagWrapper disabled={disabled} outline={outline} {...props}>
     <Label disabled={disabled} outline={outline}>
       <Ellipsis>{label}</Ellipsis>

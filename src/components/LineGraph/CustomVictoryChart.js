@@ -17,7 +17,13 @@ const IEFriendlyVictoryChart = props => (
       {...props}
       style={{
         ...props.style,
-        parent: { position: 'absolute', height: '100%', width: '100%', left: 0, top: 0 },
+        parent: {
+          position: 'absolute',
+          height: '100%',
+          width: '100%',
+          left: 0,
+          top: 0,
+        },
       }}
     />
   </div>

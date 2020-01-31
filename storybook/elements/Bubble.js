@@ -8,10 +8,10 @@ import {
   getPropTablesExcludeList,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedBubble, Bubble } from '~/elements/Bubble'
+import EnhancedBubble, { Bubble } from '../../src/elements/Bubble'
 
 const getBubbleSnippet = props => `
-  <Bubble ${props || ``}/>
+  <Bubble ${props || ''}/>
 `
 
 storiesOf('Elements/Bubble', module)
@@ -24,17 +24,25 @@ storiesOf('Elements/Bubble', module)
   })
   .add(
     'default',
-    () => <EnhancedBubble label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })} />,
-    getSnippetTemplate(getBubbleSnippet('label={2}'))
+    () => (
+      <EnhancedBubble
+        label={number('label', 2, { range: true, min: 2, max: 120, step: 4 })}
+      />
+    ),
+    getSnippetTemplate(getBubbleSnippet('label={2}')),
   )
-  .add('info', () => <EnhancedBubble isInfo />, getSnippetTemplate(getBubbleSnippet('isInfo')))
+  .add(
+    'info',
+    () => <EnhancedBubble isInfo />,
+    getSnippetTemplate(getBubbleSnippet('isInfo')),
+  )
   .add(
     'warning',
     () => <EnhancedBubble isWarning />,
-    getSnippetTemplate(getBubbleSnippet('isWarning'))
+    getSnippetTemplate(getBubbleSnippet('isWarning')),
   )
   .add(
     'disabled',
     () => <EnhancedBubble label={2} disabled />,
-    getSnippetTemplate(getBubbleSnippet('label={2} disabled'))
+    getSnippetTemplate(getBubbleSnippet('label={2} disabled')),
   )

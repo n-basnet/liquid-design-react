@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-import { cursorValue, safariStyles } from '~/utils/styling'
+import { cursorValue, safariStyles } from '../../../utils/styling'
 
 // supports (-webkit-marquee-repetition: infinite) and (object-fit: fill) - Safari selector
 

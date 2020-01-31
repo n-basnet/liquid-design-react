@@ -2,10 +2,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import Segment, { SegmentWrapper } from '~/components/FlyOut/Segment'
-import { flyOutPropTypes, flyOutDefaultProps } from '~/components/FlyOut/propTypes'
-import Ellipsis from '~/components/misc/Ellipsis'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import Segment, { SegmentWrapper } from '../../../components/FlyOut/Segment'
+import {
+  flyOutPropTypes,
+  flyOutDefaultProps,
+} from '../../../components/FlyOut/propTypes'
+import Ellipsis from '../../../components/misc/Ellipsis'
+import attachClassName from '../../../components/misc/hoc/attachClassName'
 
 const FlyOutContentWrapper = styled.div`
   overflow: hidden;
@@ -20,7 +23,7 @@ class FlyOutContent extends PureComponent {
   render() {
     const { name, options, getRef, ...props } = this.props
     return (
-      <FlyOutContentWrapper innerRef={getRef} {...props}>
+      <FlyOutContentWrapper ref={getRef} {...props}>
         <SegmentWrapper isHeadline>
           <Ellipsis>{name}</Ellipsis>
         </SegmentWrapper>

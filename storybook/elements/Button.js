@@ -9,7 +9,7 @@ import {
   getSnippetTemplate,
   getStoriesByVersions,
 } from '../helpers'
-import { default as EnhancedButton, Button } from '~/elements/Button'
+import EnhancedButton, { Button } from '../../src/elements/Button'
 
 const params = {
   info: {
@@ -19,9 +19,9 @@ const params = {
 }
 
 const getButtonSnippet = (propsString, children) => `
-  <Button ${propsString ? `${propsString} ` : ''}onClick={onClickHandler}${children ? '' : ' /'}>${
-  children ? `${children}</Button>` : ''
-}
+  <Button ${propsString ? `${propsString} ` : ''}onClick={onClickHandler}${
+  children ? '' : ' /'
+}>${children ? `${children}</Button>` : ''}
 `
 
 const icon = 'circleX'
@@ -53,7 +53,10 @@ const getButtonStories = (props = {}) =>
       { name: 'with icon', props: { icon } },
       { name: 'with icon disabled', props: { icon, disabled: true } },
       { name: 'with icon only', props: { icon, children: undefined } },
-      { name: 'with icon only disabled', props: { icon, disabled: true, children: undefined } },
+      {
+        name: 'with icon only disabled',
+        props: { icon, disabled: true, children: undefined },
+      },
     ],
   })
 
@@ -63,8 +66,12 @@ BUTTON_TOP_VERSIONS.map(({ name: topVersionName, props: topVersionProps }) => {
       .map(
         ([key, value]) =>
           `${key}${value === true ? '' : '='}${
-            value !== true ? (typeof value === 'string' ? `'${value}'` : `{${value}}`) : ''
-          }`
+            value !== true
+              ? typeof value === 'string'
+                ? `'${value}'`
+                : `{${value}}`
+              : ''
+          }`,
       )
       .join(' ')
 
@@ -74,7 +81,7 @@ BUTTON_TOP_VERSIONS.map(({ name: topVersionName, props: topVersionProps }) => {
       .add(
         name,
         () => <EnhancedButton {...props} />,
-        getSnippetTemplate(getButtonSnippet(propsString, props.children))
+        getSnippetTemplate(getButtonSnippet(propsString, props.children)),
       )
   })
 })

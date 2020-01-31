@@ -1,5 +1,5 @@
 import WarningLabel from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('WarningLabel', () => {
   const defaultProps = { name: 'Flammable' }

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { getBackgroundWrapper, getPropTablesExcludeList } from '../helpers'
-import TablePagination from '~/components/TablePagination'
+import TablePagination from '../../src/components/TablePagination'
 
 const getDefaultProps = () => ({
   itemsCount: 798,
@@ -13,6 +13,7 @@ class TablePaginationApp extends PureComponent {
     currentPage: 1,
     perPage: 10,
   }
+
   updateCurrentPage = currentPage => this.setState({ currentPage })
   updatePerPageAmount = perPage => this.setState({ perPage })
   render() {

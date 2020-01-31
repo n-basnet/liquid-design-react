@@ -8,20 +8,26 @@ import {
   includeComponentInPropTable,
   getSnippetTemplate,
 } from '../helpers'
-import { default as EnhancedCard, Card } from '~/elements/Card'
+import EnhancedCard, { Card } from '../../src/elements/Card'
 
 class CardApp extends PureComponent {
   state = {
     isCardActive: false,
   }
+
   toggleCardActive = () => {
     this.setState(({ isCardActive }) => ({ isCardActive: !isCardActive }))
   }
+
   render() {
     const { isCardActive } = this.state
 
     return (
-      <EnhancedCard active={isCardActive} onClick={this.toggleCardActive} {...this.props}>
+      <EnhancedCard
+        active={isCardActive}
+        onClick={this.toggleCardActive}
+        {...this.props}
+      >
         {getTextKnob()}
       </EnhancedCard>
     )
@@ -29,7 +35,7 @@ class CardApp extends PureComponent {
 }
 
 const getCardSnippet = props => `
-  <Card${props || ``}>
+  <Card${props || ''}>
     lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel
   </Card>
 `
@@ -43,12 +49,12 @@ const getCardAppSnippet = props => `
     }
     render () {
       const { isCardActive } = this.state
-      
+
       return (
         <Card
           active={isCardActive}
           onClick={this.toggleCardActive}
-          ${props || ``}
+          ${props || ''}
         >
         lorem ipsum dolor sit amet, consectetur adipiscing...
         </Card>
@@ -66,10 +72,14 @@ storiesOf('Elements/Card', module)
     },
   })
   .add('default', () => <CardApp />, getSnippetTemplate(getCardAppSnippet()))
-  .add('stacked', () => <CardApp stacked />, getSnippetTemplate(getCardAppSnippet(' stacked')))
+  .add(
+    'stacked',
+    () => <CardApp stacked />,
+    getSnippetTemplate(getCardAppSnippet(' stacked')),
+  )
 
   .add(
     'active',
     () => <EnhancedCard active>{getTextKnob()}</EnhancedCard>,
-    getSnippetTemplate(getCardSnippet(' active'))
+    getSnippetTemplate(getCardSnippet(' active')),
   )

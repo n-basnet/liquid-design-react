@@ -1,5 +1,5 @@
 import TextList from '.'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 const name = 'Lorem ipsum dolor sit amet'
 

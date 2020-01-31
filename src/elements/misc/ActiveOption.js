@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { media } from '~/utils/styling'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { media } from '../../utils/styling'
 
 const ACTIVE_ICON_CLASSNAME = `${ICON_CLASSNAME}ActiveIcon`
 

@@ -71,12 +71,16 @@ inquirer.prompt(QUESTIONS).then(({ name, type }) => {
     `
 ${indexFile.trim()}
 export { default as ${canonisedName} } from '~/${type}s/${canonisedName}'
-`
+`,
   )
 
   // add to storybook
-  const newStorybookModules = [...storybookModules, { name: canonisedName, type }].sort(
-    sortBy('name')
+  const newStorybookModules = [
+    ...storybookModules,
+    { name: canonisedName, type },
+  ].sort(sortBy('name'))
+  saveFile(
+    'storybook/modules.json',
+    JSON.stringify(newStorybookModules, null, 2),
   )
-  saveFile('storybook/modules.json', JSON.stringify(newStorybookModules, null, 2))
 })

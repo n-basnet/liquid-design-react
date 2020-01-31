@@ -101,12 +101,18 @@ export const FIELDS_PROFILE_BOTTOM = [
   {
     type: FIELD_TYPES.SELECT,
     label: 'Select your Region',
-    options: [{ name: 'Region 1', id: '1' }, { name: 'Region 2', id: '2' }],
+    options: [
+      { name: 'Region 1', id: '1' },
+      { name: 'Region 2', id: '2' },
+    ],
   },
   {
     type: FIELD_TYPES.SELECT,
     label: 'Select your Country',
-    options: [{ name: 'Country 1', id: '1' }, { name: 'Country 2', id: '2' }],
+    options: [
+      { name: 'Country 1', id: '1' },
+      { name: 'Country 2', id: '2' },
+    ],
   },
 ]
 

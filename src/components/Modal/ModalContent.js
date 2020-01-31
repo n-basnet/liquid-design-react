@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { media } from '~/utils/styling'
-import ModalHeader from '~/components/Modal/ModalHeader'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { media } from '../../utils/styling'
+import ModalHeader from '../../components/Modal/ModalHeader'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const ModalContentWrapper = styled.div`
   padding: 20px 30px;

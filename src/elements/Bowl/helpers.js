@@ -1,4 +1,4 @@
-import { SVG_VIEWPORT_WIDTH } from '~/elements/Bowl/consts'
+import { SVG_VIEWPORT_WIDTH } from '../../elements/Bowl/consts'
 
 export const getSVGFillCoordinates = (
   theta,
@@ -7,7 +7,7 @@ export const getSVGFillCoordinates = (
   pathGen,
   dx,
   coords = 'M0 0',
-  offset = 0
+  offset = 0,
 ) => {
   let x = theta
   for (let i = 0; i < SVG_VIEWPORT_WIDTH; i += xspacing) {

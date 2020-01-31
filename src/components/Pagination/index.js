@@ -1,11 +1,11 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { Glyph } from '~/elements/Icon'
-import { cursorValue, media } from '~/utils/styling'
-import { times } from '~/utils/misc'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
+import { cursorValue, media } from '../../utils/styling'
+import { times } from '../../utils/misc'
 import { NUMBER_SIZE, ICON_SIZE, STATES } from './consts'
 
 export const PaginationWrapper = styled.div`
@@ -30,8 +30,8 @@ const ArrowIconWrapper = styled.div`
       transform: translate(-50%, -50%);
     }
     ${props =>
-    !props.disabled &&
-    css`
+      !props.disabled &&
+      css`
       &:hover {
         ${media.min.tablet`
           background-color: ${props.theme.colors.primary.dark};
@@ -50,23 +50,23 @@ const ArrowIconWrapper = styled.div`
     `};
   }
     ${props =>
-    props.isOnLeft &&
-    css`
-      div:first-child {
-        svg {
-          left: 11px;
+      props.isOnLeft &&
+      css`
+        div:first-child {
+          svg {
+            left: 11px;
+          }
         }
-      }
-    `};
+      `};
     ${props =>
-    props.isOnRight &&
-    css`
-      div:last-child {
-        svg {
-          right: 11px;
+      props.isOnRight &&
+      css`
+        div:last-child {
+          svg {
+            right: 11px;
+          }
         }
-      }
-    `};
+      `};
   }
 `
 
@@ -169,9 +169,13 @@ export class Pagination extends PureComponent {
       case activePageIndex <= 1:
         return times(paginationNumberAmount).slice(0, paginationNumberAmount)
       case activePageIndex >= lastPageIndex - 1:
-        return times(lastPageIndex + 1).slice(lastPageIndex - paginationNumberAmount + 1)
+        return times(lastPageIndex + 1).slice(
+          lastPageIndex - paginationNumberAmount + 1,
+        )
       case activePageIndex > 1:
-        return times(activePageIndex + indexDistance + 1).slice(activePageIndex - indexDistance)
+        return times(activePageIndex + indexDistance + 1).slice(
+          activePageIndex - indexDistance,
+        )
     }
   }
 
@@ -183,7 +187,10 @@ export class Pagination extends PureComponent {
   getPageItems = () => {
     const { activePageIndex } = this.state
     const { children, itemsPerPage } = this.props
-    return children.slice(activePageIndex * itemsPerPage, (activePageIndex + 1) * itemsPerPage)
+    return children.slice(
+      activePageIndex * itemsPerPage,
+      (activePageIndex + 1) * itemsPerPage,
+    )
   }
 
   setActivePageIndex = index => this.setState({ activePageIndex: index })
@@ -196,7 +203,8 @@ export class Pagination extends PureComponent {
     if (!disabled) {
       switch (type) {
         case STATES.NEXT_PAGE:
-          activePageIndex < lastPageIndex && this.setActivePageIndex(activePageIndex + 1, e)
+          activePageIndex < lastPageIndex &&
+            this.setActivePageIndex(activePageIndex + 1, e)
           break
         case STATES.PREVIOUS_PAGE:
           activePageIndex && this.setActivePageIndex(activePageIndex - 1, e)
@@ -215,10 +223,13 @@ export class Pagination extends PureComponent {
     const { activePageIndex } = this.state
     const lastPageIndex = this.getLastPageIndex()
     const paginationItems = this.getPaginationItems()
-    return activePageIndex < lastPageIndex - 1 && index === paginationItems.length - 1
+    return (
+      activePageIndex < lastPageIndex - 1 &&
+      index === paginationItems.length - 1
+    )
   }
 
-  render () {
+  render() {
     const { activePageIndex } = this.state
     const { disabled, paginationNumberAmount, ...props } = this.props
 
@@ -230,18 +241,18 @@ export class Pagination extends PureComponent {
     const isRightArrowDisabled = activePageIndex === lastPageIndex
 
     return (
-      <Fragment>
+      <>
         {pageItems}
         <PaginationWrapper disabled={disabled} {...props}>
           <ArrowIconWrapper isOnLeft disabled={disabled || isLeftArrowDisabled}>
             <Glyph
               size={ICON_SIZE}
-              name='arrowDoubleLeft'
+              name="arrowDoubleLeft"
               onClick={() => this.onArrowClickHandler(STATES.FIRST_PAGE)}
             />
             <Glyph
               size={ICON_SIZE}
-              name='arrowLeft'
+              name="arrowLeft"
               onClick={() => this.onArrowClickHandler(STATES.PREVIOUS_PAGE)}
             />
           </ArrowIconWrapper>
@@ -263,20 +274,23 @@ export class Pagination extends PureComponent {
               {this.shouldTruncate(index) ? '...' : item + 1}
             </PaginationNumber>
           ))}
-          <ArrowIconWrapper isOnRight disabled={disabled || isRightArrowDisabled}>
+          <ArrowIconWrapper
+            isOnRight
+            disabled={disabled || isRightArrowDisabled}
+          >
             <Glyph
               size={ICON_SIZE}
-              name='arrowRight'
+              name="arrowRight"
               onClick={() => this.onArrowClickHandler(STATES.NEXT_PAGE)}
             />
             <Glyph
               size={ICON_SIZE}
-              name='arrowDoubleRight'
+              name="arrowDoubleRight"
               onClick={() => this.onArrowClickHandler(STATES.LAST_PAGE)}
             />
           </ArrowIconWrapper>
         </PaginationWrapper>
-      </Fragment>
+      </>
     )
   }
 }

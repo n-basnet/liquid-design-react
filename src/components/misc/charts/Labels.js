@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { isEmpty, pick, contains } from 'ramda'
 
-import { media } from '~/utils/styling'
+import { media } from '../../../utils/styling'
 
 const LabelsWrapper = styled.div`
   margin-top: 23px;
@@ -56,7 +56,8 @@ SingleLabel.defaultProps = {
 }
 
 const Labels = ({ labels, onLabelClick, selectedLabelsIds }) => {
-  const isLabelSelected = id => isEmpty(selectedLabelsIds) || contains(id, selectedLabelsIds)
+  const isLabelSelected = id =>
+    isEmpty(selectedLabelsIds) || contains(id, selectedLabelsIds)
   return (
     <LabelsWrapper>
       {labels.map(label => (
@@ -72,8 +73,9 @@ const Labels = ({ labels, onLabelClick, selectedLabelsIds }) => {
 }
 
 Labels.propTypes = {
-  labels: PropTypes.arrayOf(PropTypes.shape(pick(['name', 'color'], SingleLabel.propTypes)))
-    .isRequired,
+  labels: PropTypes.arrayOf(
+    PropTypes.shape(pick(['name', 'color'], SingleLabel.propTypes)),
+  ).isRequired,
   onLabelClick: PropTypes.func.isRequired,
   selectedLabelsIds: PropTypes.arrayOf(PropTypes.string).isRequired,
 }

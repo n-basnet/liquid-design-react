@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import styled, { css, withTheme } from 'styled-components'
 import cx from 'classnames'
 
-import { getClassName } from '~/components/misc/hoc/attachClassName'
-import { M_FONT_NAME } from '~/utils/consts'
-import ProgressBarSVG from '~/components/CircularProgressBar/ProgressBarSVG'
-import { getColors } from '~/utils/progressBars'
-import { cursorValue } from '~/utils/styling'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { M_FONT_NAME } from '../../utils/consts'
+import ProgressBarSVG from '../../components/CircularProgressBar/ProgressBarSVG'
+import { getColors } from '../../utils/progressBars'
+import { cursorValue } from '../../utils/styling'
 
-export const CIRCULAR_PROGRESS_BAR_CLASSNAME = getClassName({ name: 'CircularProgressBar' })
+export const CIRCULAR_PROGRESS_BAR_CLASSNAME = getClassName({
+  name: 'CircularProgressBar',
+})
 
 const CircularProgressBarWrapper = styled.div`
   position: relative;

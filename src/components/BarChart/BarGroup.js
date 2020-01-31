@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { prop, isEmpty, contains } from 'ramda'
 
-import { BARS_WRAPPER_HEIGHT } from '~/components/BarChart/consts'
-import BarChartTooltip from '~/components/BarChart/BarChartTooltip'
-import { media } from '~/utils/styling'
-import { isTouchDevice } from '~/utils/featureDetects'
+import { BARS_WRAPPER_HEIGHT } from '../../components/BarChart/consts'
+import BarChartTooltip from '../../components/BarChart/BarChartTooltip'
+import { media } from '../../utils/styling'
+import { isTouchDevice } from '../../utils/featureDetects'
 
 const BAR_PADDING = 8
 
@@ -69,8 +69,10 @@ const BarGroup = ({
 }) => {
   const handleBarClick = (point, tooltipData) => onBarClick(point.label)
   const svgWidth = point.values.length * (barWidth + BAR_PADDING) - BAR_PADDING
-  const sum = point.sum || point.values.reduce((acc, { value }) => acc + value, 0)
-  const shouldDisplayTooltip = tooltipData && contains(tooltipData.id, point.values.map(prop('id')))
+  const sum =
+    point.sum || point.values.reduce((acc, { value }) => acc + value, 0)
+  const shouldDisplayTooltip =
+    tooltipData && contains(tooltipData.id, point.values.map(prop('id')))
   return (
     <BarGroupWrapper>
       <BarsWrapper>
@@ -85,7 +87,8 @@ const BarGroup = ({
             const scale = 1 - unitsToPercent(topOffset) / 100
             const height = valueToPercent(value.valueAsPercentage * scale)
             const isDimmed =
-              !isEmpty(selectedLabelsIds) && !contains(value.label.id, selectedLabelsIds)
+              !isEmpty(selectedLabelsIds) &&
+              !contains(value.label.id, selectedLabelsIds)
             const dataForTooltip = {
               x: x + barWidth / 2,
               y: BARS_WRAPPER_HEIGHT - height,
@@ -95,13 +98,13 @@ const BarGroup = ({
             }
             const barPathProps = isTouchDevice()
               ? {
-                onClick: setTooltipData(dataForTooltip),
-              }
+                  onClick: setTooltipData(dataForTooltip),
+                }
               : {
-                onClick: handleBarClick(value, dataForTooltip),
-                onMouseEnter: setTooltipData(dataForTooltip),
-                onMouseLeave: resetTooltip,
-              }
+                  onClick: handleBarClick(value, dataForTooltip),
+                  onMouseEnter: setTooltipData(dataForTooltip),
+                  onMouseLeave: resetTooltip,
+                }
             return (
               <BarPath
                 key={value.id}

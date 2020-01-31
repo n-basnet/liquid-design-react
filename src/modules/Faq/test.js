@@ -1,7 +1,7 @@
 import Faq from '.'
-import Headline from '~/elements/Headline'
-import Accordion, { SectionContent } from '~/components/Accordion'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import Headline from '../../elements/Headline'
+import Accordion, { SectionContent } from '../../components/Accordion'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Faq', () => {
   const defaultProps = {
@@ -25,7 +25,7 @@ describe('Faq', () => {
       wrapper
         .find(Headline)
         .first()
-        .text()
+        .text(),
     ).toBe(defaultProps.headlinesTexts.primary)
   })
 
@@ -34,7 +34,7 @@ describe('Faq', () => {
       wrapper
         .find(Headline)
         .at(1)
-        .text()
+        .text(),
     ).toBe(defaultProps.headlinesTexts.secondary)
   })
 
@@ -42,7 +42,7 @@ describe('Faq', () => {
     const faqContentIndex = 0
 
     expect(wrapper.find(Accordion).prop('title')).toBe(
-      defaultProps.faqContent[faqContentIndex].title
+      defaultProps.faqContent[faqContentIndex].title,
     )
   })
 
@@ -50,7 +50,7 @@ describe('Faq', () => {
     const faqContentIndex = 0
 
     expect(wrapper.find(SectionContent).text()).toBe(
-      defaultProps.faqContent[faqContentIndex].content
+      defaultProps.faqContent[faqContentIndex].content,
     )
   })
 

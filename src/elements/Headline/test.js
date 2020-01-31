@@ -1,6 +1,6 @@
 import Headline from '.'
 import { XH1 } from './H'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Headline', () => {
   const defaultProps = {
@@ -14,7 +14,7 @@ describe('Headline', () => {
     expect(
       getHeadlineWrapper()
         .find(XH1)
-        .text()
+        .text(),
     ).toEqual(defaultProps.children)
   })
 

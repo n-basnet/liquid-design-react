@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 
-import { Glyph, ICON_CLASSNAME } from '~/elements/Icon'
-import { cursorValue } from '~/utils/styling'
-import attachClassName from '~/components/misc/hoc/attachClassName'
+import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { cursorValue } from '../../utils/styling'
+import attachClassName from '../../components/misc/hoc/attachClassName'
 
 const BadgeWrapper = styled.div`
   ${props => css`
@@ -69,18 +69,30 @@ const BadgeTextWrapper = styled.span`
 /**
  * Badges symbolize special properties of an item or person. Badges provide a short overview about that property and its value.
  */
-export const Badge = ({ children, icon, isIconOnRight, disabled, isOnCard, ...props }) => (
+export const Badge = ({
+  children,
+  icon,
+  isIconOnRight,
+  disabled,
+  isOnCard,
+  ...props
+}) => (
   <BadgeWrapper disabled={disabled} isOnCard={isOnCard} {...props}>
-    <Fragment>
+    <>
       {icon && !isIconOnRight && (
-        <Glyph color='black.base' size={14} name={icon} style={{ verticalAlign: 'middle' }} />
+        <Glyph
+          color="black.base"
+          size={14}
+          name={icon}
+          style={{ verticalAlign: 'middle' }}
+        />
       )}
       <BadgeTextWrapper padLeft={icon && !isIconOnRight} isOnCard={isOnCard}>
         {children}
       </BadgeTextWrapper>
       {icon && isIconOnRight && (
         <Glyph
-          color='black.base'
+          color="black.base"
           size={14}
           name={icon}
           style={{
@@ -91,7 +103,7 @@ export const Badge = ({ children, icon, isIconOnRight, disabled, isOnCard, ...pr
           }}
         />
       )}
-    </Fragment>
+    </>
   </BadgeWrapper>
 )
 

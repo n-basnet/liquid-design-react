@@ -1,6 +1,6 @@
 import Bowl from '.'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
-import { Glyph } from '~/elements/Icon'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
+import { Glyph } from '../../elements/Icon'
 
 describe('Bowl', () => {
   const getBowlWrapper = getWrapper(Bowl)

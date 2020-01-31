@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css, withTheme } from 'styled-components'
 
-import { Glyph } from '~/elements/Icon'
-import Checkbox from '~/elements/Checkbox'
-import { getClassName } from '~/components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
+import Checkbox from '../../elements/Checkbox'
+import { getClassName } from '../../components/misc/hoc/attachClassName'
 
 const getStyledCSS = iconProps => css`
   ${props => css`
@@ -15,7 +15,7 @@ const getStyledCSS = iconProps => css`
 
 const ArrowIconBase = ({ pointingDown, theme, inactive, ...props }) => (
   <Glyph
-    name='arrowTop'
+    name="arrowTop"
     styledCSS={getStyledCSS({ pointingDown })}
     color={inactive ? theme.colors.sensitiveGrey.darkest : undefined}
     {...props}
@@ -54,7 +54,10 @@ export const getAuxComponent = ({ rowInfoArrow, checkbox, size }) => {
   return (
     Component &&
     (props => (
-      <div className={getTableAuxComponentClassName(componentName)} style={{ paddingRight: '8px' }}>
+      <div
+        className={getTableAuxComponentClassName(componentName)}
+        style={{ paddingRight: '8px' }}
+      >
         <Component {...props} />
       </div>
     ))

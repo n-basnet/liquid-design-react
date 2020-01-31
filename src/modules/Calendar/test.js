@@ -1,7 +1,7 @@
 import Calendar, { IconWrapper, MonthName, WeekDay } from '.'
 import DayCell, { DayContainer } from './DayCell'
-import TextField from '~/elements/TextField'
-import { getWrapper, everyComponentTestSuite } from '~/utils/testUtils'
+import TextField from '../../elements/TextField'
+import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 
 describe('Calendar', () => {
   const defaultProps = {
@@ -23,7 +23,7 @@ describe('Calendar', () => {
       wrapper
         .find(WeekDay)
         .at(0)
-        .text()
+        .text(),
     ).toBe('Mon')
   })
   it('changes the month', () => {
@@ -37,7 +37,7 @@ describe('Calendar', () => {
       wrapper
         .find(DayCell)
         .at(0)
-        .text()
+        .text(),
     ).toEqual('30')
   })
   it('renders correct year', () => {
@@ -55,7 +55,7 @@ describe('Calendar', () => {
       wrapper
         .find(DayCell)
         .at(0)
-        .text()
+        .text(),
     ).toBe('29')
   })
   it('does not change a year if passed value is not 4 digits', () => {
@@ -74,7 +74,7 @@ describe('Calendar', () => {
       wrapper
         .find(DayCell)
         .at(0)
-        .text()
+        .text(),
     ).toBe('28')
   })
   it('allows to select date', () => {

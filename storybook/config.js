@@ -25,14 +25,14 @@ const runStorybookConfig = async () => {
   }
 
   if (isStorybookLokiBuild()) {
-    import('loki/configure-react')
+    import('loki/configure-react') // eslint-disable-line
   } else {
     addDecorator(
       withInfo({
         inline: true,
         header: false,
         source: false,
-      })
+      }),
     )
   }
 
@@ -49,6 +49,7 @@ const runStorybookConfig = async () => {
     </ThemeWrapper>
   ))
 
+  // eslint-disable-next-line
   if (Object.hasOwnProperty('assign')) {
     const { withKnobs } = await import('@storybook/addon-knobs')
     addDecorator(withKnobs)

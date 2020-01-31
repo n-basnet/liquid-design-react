@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Theme } from '~'
-import { THEMES, DEFAULT_THEME_NAME } from '~/utils/consts/themes'
-import { camelCaseToHuman } from '~/utils/misc'
+import { Theme } from '../src/'
+import { THEMES, DEFAULT_THEME_NAME } from '../src/utils/consts/themes'
+import { camelCaseToHuman } from '../src/utils/misc'
 
 const themeNames = Object.keys(THEMES)
 
@@ -19,13 +19,15 @@ export default class ThemeWrapper extends PureComponent {
   state = {
     currentThemeName: DEFAULT_THEME_NAME,
   }
+
   handleChange = ({ target }) => {
     this.setState({ currentThemeName: target.value })
   }
+
   render() {
     return (
       <Theme themeName={this.state.currentThemeName}>
-        <ThemeSelectWrapper id='storybook-theme-wrapper'>
+        <ThemeSelectWrapper id="storybook-theme-wrapper">
           Theme:
           <select onChange={this.handleChange} value={this.state.themeName}>
             {themeNames.map((themeName, i) => (
@@ -35,7 +37,7 @@ export default class ThemeWrapper extends PureComponent {
             ))}
           </select>
         </ThemeSelectWrapper>
-        <div id='storybook-main-element'>{this.props.children}</div>
+        <div id="storybook-main-element">{this.props.children}</div>
       </Theme>
     )
   }

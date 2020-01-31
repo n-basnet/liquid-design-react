@@ -2,8 +2,12 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { default as EnhancedFooter, Footer } from '~/modules/Footer'
-import { getTextKnob, getSnippetTemplate, getPropTablesExcludeList } from '../helpers'
+import EnhancedFooter, { Footer } from '../../src/modules/Footer'
+import {
+  getTextKnob,
+  getSnippetTemplate,
+  getPropTablesExcludeList,
+} from '../helpers'
 
 const getFooterText = () =>
   getTextKnob({
@@ -49,5 +53,5 @@ storiesOf('Modules/Footer', module)
         mainIconName={mainIconName}
       />
     ),
-    getSnippetTemplate(getFooterSnippet())
+    getSnippetTemplate(getFooterSnippet()),
   )

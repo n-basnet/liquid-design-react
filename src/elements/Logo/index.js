@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 
-import attachClassName from '~/components/misc/hoc/attachClassName'
-import { Glyph } from '~/elements/Icon'
+import attachClassName from '../../components/misc/hoc/attachClassName'
+import { Glyph } from '../../elements/Icon'
 
 export const LogoWrapper = styled(Glyph)`
   max-width: 100%;
@@ -14,7 +14,7 @@ export const LogoWrapper = styled(Glyph)`
 `
 
 export const Logo = ({ theme, size, ...props }) => (
-  <LogoWrapper size={size} name='logo' {...props} />
+  <LogoWrapper size={size} name="logo" {...props} />
 )
 
 Logo.propTypes = {

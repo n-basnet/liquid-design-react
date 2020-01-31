@@ -1,6 +1,6 @@
 import Link from '.'
-import { Glyph } from '~/elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '~/utils/testUtils'
+import { Glyph } from '../../elements/Icon'
+import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
 
 describe('Link', () => {
   const defaultProps = {
@@ -13,7 +13,7 @@ describe('Link', () => {
     expect(
       getLinkWrapper()
         .find(Link)
-        .text()
+        .text(),
     ).toEqual(defaultProps.children)
   })
 
@@ -21,7 +21,7 @@ describe('Link', () => {
     expect(
       getLinkWrapper()
         .find(Glyph)
-        .prop('name')
+        .prop('name'),
     ).toEqual(defaultProps.icon)
   })
 
