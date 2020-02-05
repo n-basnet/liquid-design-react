@@ -1,6 +1,6 @@
 {
   "name": "@liquid-design/liquid-design-react",
-  "version": "1.1.4",
+  "version": "1.1.5-release.1",
   "description": "React UI component library for the Liquid Design System of Merck KGaA, Darmstadt, Germany",
   "author": "User Experience Strategy & Design unit, part of the Chief Digital Organization at Merck KGaA, Darmstadt, Germany",
   "license": "SEE LICENSE IN LICENSE.md",
@@ -37,7 +37,7 @@
     "date-fns": "^1.29.0",
     "javascript-natural-sort": "^0.7.1",
     "polished": "^3.0.0",
-    "ramda": "^0.26.1",
+    "ramda": "^0.27.0",
     "rc-slider": "^8.6.1",
     "react-animated-transitions": "^0.0.6",
     "react-click-outside": "^3.0.1",
@@ -126,7 +126,13 @@
     "whatwg-fetch": "^3.0.0"
   },
   "release": {
-    "branches": ["master", {"name": "release", "prerelease": true}],
+    "branches": [
+      "master",
+      {
+        "name": "release",
+        "prerelease": true
+      }
+    ],
     "verifyConditions": [
       "@semantic-release/changelog",
       "@semantic-release/npm",
