@@ -49,7 +49,10 @@ describe('DatePicker', () => {
     expect(wrapper.find(Calendar)).toBeTruthy()
   })
   it('calls onStartDateChange prop if a date is selected in range/withCalendar mode', () => {
-    const wrapper = getDatePickerWrapper({ withCalendar: true, rangeMode: true })
+    const wrapper = getDatePickerWrapper({
+      withCalendar: true,
+      rangeMode: true,
+    })
     wrapper
       .find(Calendar)
       .find(DayCell)

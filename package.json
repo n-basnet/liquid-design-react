@@ -26,6 +26,7 @@
     "format": "prettier --config .prettierrc --write './{src,storybook,scripts}/**/*{js,json}' && eslint ./src ./storybook ./scripts --ext js --quiet --fix",
     "add-component": "node scripts/addComponent.js",
     "prepare-svgs": "node scripts/prepareSVGs.js",
+    "postinstall": "node scripts/remindOfTerms.js",
     "storybook:start": "cross-env BABEL_ENV=main start-storybook -s ./storybook/public -p 9001 -c storybook",
     "storybook:build": "cross-env BABEL_ENV=main build-storybook -s ./storybook/public -c storybook -o out",
     "storybook:build-loki": "STORYBOOK_LOKI_BUILD=1 npm run storybook:build",

@@ -238,7 +238,10 @@ export class DatePicker extends PureComponent {
       startDateInputValue: dateFns.format(date, this.props.format),
       currentMonth: date,
     })
-    this.handleInputChange(dateFns.format(date, this.props.format), 'startDateInputValue')
+    this.handleInputChange(
+      dateFns.format(date, this.props.format),
+      'startDateInputValue',
+    )
     if (this.props.rangeMode) {
       this.setState({ isSelectingRange: true })
     } else {
@@ -254,7 +257,10 @@ export class DatePicker extends PureComponent {
       isSelectingRange: !date,
     })
     if (date != null) {
-      this.handleInputChange(dateFns.format(date, this.props.format), 'endDateInputValue')
+      this.handleInputChange(
+        dateFns.format(date, this.props.format),
+        'endDateInputValue',
+      )
     }
   }
 
