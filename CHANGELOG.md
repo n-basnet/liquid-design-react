@@ -1,3 +1,10 @@
+## [1.1.6](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.5...v1.1.6) (2020-02-06)
+
+
+### Bug Fixes
+
+* **terms_reminder:** resolves Cannot find module ... remindOfTerms.js ([09d5af4](https://gitlab.com/liquid-design/liquid-design-react/commit/09d5af42c9047cb85e7137484b3de684bd1f34fe))
+
 ## [1.1.5](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.4...v1.1.5) (2020-02-06)
 
 
