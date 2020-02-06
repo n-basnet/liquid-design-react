@@ -1,3 +1,12 @@
+## [1.1.5](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.4...v1.1.5) (2020-02-06)
+
+
+### Bug Fixes
+
+* **bundle:** Reduce bundle size in es mode via code splitting ([0b72065](https://gitlab.com/liquid-design/liquid-design-react/commit/0b72065cf16df0bc77693b0fc00f51ff0d4d03fc))
+* **bundle:** Reduce bundle size in es mode via code splitting ([78a3931](https://gitlab.com/liquid-design/liquid-design-react/commit/78a39316ff61be9343d827efd74041fd9d6dbb91))
+* **datepicker:** Trigger prop function when dates are selected (fixes [#15](https://gitlab.com/liquid-design/liquid-design-react/issues/15)) ([2d09453](https://gitlab.com/liquid-design/liquid-design-react/commit/2d09453779aebcf747bfcb175f85cb04c780b4cf))
+
 ## [1.1.5-release.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.4...v1.1.5-release.1) (2020-02-05)
 
 
