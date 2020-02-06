@@ -1,4 +1,5 @@
 export const getOrCreateDOMNode = id => {
+  if (typeof document === 'undefined') return
   const foundDOMNode = document.getElementById(id)
   if (foundDOMNode) {
     return foundDOMNode
@@ -11,6 +12,7 @@ export const getOrCreateDOMNode = id => {
 }
 
 export const handleClickIfNotSelectingText = handler => {
+  if (typeof document === 'undefined') return
   const selection = window.getSelection && window.getSelection()
   if (!selection || selection.type !== 'Range') {
     handler()

@@ -300,6 +300,7 @@ export default class Bowl extends PureComponent {
     this[fill].plot(plotCoords)
 
     if (this.animating) {
+      if (typeof document === 'undefined') return
       window.requestAnimationFrame(() =>
         this.animate(
           fill,

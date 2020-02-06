@@ -56,4 +56,7 @@ export const recomputeData = data => {
   }
 }
 
-export const isMobile = () => window.innerWidth <= SCREEN_SIZES.phone
+export const isMobile = () => {
+  if (typeof document === 'undefined') return
+  return window.innerWidth <= SCREEN_SIZES.phone
+}

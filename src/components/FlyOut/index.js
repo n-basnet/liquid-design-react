@@ -132,6 +132,7 @@ export default class FlyOut extends PureComponent {
   }
 
   handleResize = () => {
+    if (typeof document === 'undefined') return
     if (!this.props.width && this.state.isOpen && this.flyOutContentRef) {
       const windowWidth = window.innerWidth
       const {

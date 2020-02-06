@@ -2,7 +2,8 @@
 // Modernizr does not support use without assigning itself to window object,
 // and as this is a library, we should not hijack user's own global Modernizr.
 export const hasCSSFilters = () => {
-  var el = document.createElement('a')
+  if (typeof document === 'undefined') return
+  const el = document.createElement('a')
   el.style.cssText = 'filter: blur(2px);'
   const IE9DocumentMode = 9
   return (
@@ -12,7 +13,13 @@ export const hasCSSFilters = () => {
   )
 }
 
-export const isTouchDevice = () => 'ontouchstart' in document.documentElement
+export const isTouchDevice = () => {
+  if (typeof document === 'undefined') return
+  return 'ontouchstart' in document.documentElement
+}
 
 // MS Edge also has a window.chrome object, but w/out csi
-export const isChromeBrowser = () => !!(window.chrome && window.chrome.csi)
+export const isChromeBrowser = () => {
+  if (typeof document === 'undefined') return
+  return !!(window.chrome && window.chrome.csi)
+}
