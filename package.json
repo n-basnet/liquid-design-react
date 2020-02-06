@@ -188,7 +188,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "scripts/remindOfTerms.js"
   ],
   "husky": {
     "hooks": {
