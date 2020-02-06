@@ -1,3 +1,10 @@
+## [1.1.7](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.6...v1.1.7) (2020-02-06)
+
+
+### Bug Fixes
+
+* **ssr_support:** support ssr envs using guards for browser globals ([a0f571d](https://gitlab.com/liquid-design/liquid-design-react/commit/a0f571d1d331e2ffb7ae6533e418efc5ef42a656)), closes [#18](https://gitlab.com/liquid-design/liquid-design-react/issues/18)
+
 ## [1.1.6](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.5...v1.1.6) (2020-02-06)
 
 
