@@ -29,7 +29,7 @@ publish_package:
 
   only:
     - master
-    - release
+    - rc
 
 deploy_docs:
   stage: deploy-docs

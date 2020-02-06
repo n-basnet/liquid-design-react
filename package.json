@@ -130,7 +130,7 @@
     "branches": [
       "master",
       {
-        "name": "release",
+        "name": "rc",
         "prerelease": true
       }
     ],
