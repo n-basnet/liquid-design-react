@@ -76,10 +76,10 @@ const InputWrapper = styled(RelativeWrapper)`
     `};
 `
 
-const getErrorMessageWrapper = () => styled.div.attrs({
+const getErrorMessageWrapper = () => styled.div.attrs(() => ({
   'data-test': 'error-wrapper',
   className: INPUT_ERROR_CLASSNAME,
-})`
+}))`
   position: absolute;
   font-size: 12px;
   margin-top: 5px;

@@ -44,8 +44,10 @@ export const ItemsSection = styled(Section)`
   padding-right: 13px;
 `
 
-export const ClickableSection = styled.div.attrs({
-  'data-test-value': props => props['data-test'],
+export const ClickableSection = styled.div.attrs(s => {
+  return {
+    'data-test-value': s['data-test'],
+  }
 })`
   position: relative;
   z-index: 1;

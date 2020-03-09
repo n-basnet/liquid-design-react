@@ -153,9 +153,9 @@ export class Calendar extends PureComponent {
     /** end date in a range mode. Should be passed from containing component even if first value is null when range mode is enabled */
     selectedEndDate: PropTypes.instanceOf(Date),
     /** handler for start date selection */
-    onStartDateSelect: PropTypes.func.isRequired,
+    startDateSelect: PropTypes.func.isRequired,
     /** handler for end date selection, required in range mode */
-    onEndDateSelect: PropTypes.func,
+    endDateSelect: PropTypes.func,
     rangeMode: PropTypes.bool,
     /** number of week day to be the first, 0 is Sunday */
     startOfWeek: PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
@@ -181,8 +181,8 @@ export class Calendar extends PureComponent {
   static defaultProps = {
     selectedStartDate: null,
     selectedEndDate: null,
-    onStartDateSelect: () => {},
-    onEndDateSelect: () => {},
+    startDateSelect: () => {},
+    endDateSelect: () => {},
     rangeMode: false,
     startOfWeek: 0,
     appointments: {},
@@ -260,10 +260,10 @@ export class Calendar extends PureComponent {
   }
 
   handleFirstSelect = date => {
-    const { onStartDateSelect, onEndDateSelect, rangeMode } = this.props
-    onStartDateSelect(date)
+    const { startDateSelect, endDateSelect, rangeMode } = this.props
+    startDateSelect(date)
     if (rangeMode) {
-      onEndDateSelect(null)
+      endDateSelect(null)
     }
     if (rangeMode && !this.hasOuterSelectionIndicator()) {
       this.setState({ isSelectingRange: true })
@@ -271,16 +271,16 @@ export class Calendar extends PureComponent {
   }
 
   handleLastSelect = date => {
-    const { selectedStartDate, onEndDateSelect, onStartDateSelect } = this.props
+    const { selectedStartDate, endDateSelect, startDateSelect } = this.props
     this.setState({ supposedLastDate: null })
     if (!this.hasOuterSelectionIndicator()) {
       this.setState({ isSelectingRange: false })
     }
     if (dateFns.isAfter(date, selectedStartDate)) {
-      onEndDateSelect(date)
+      endDateSelect(date)
     } else {
-      onStartDateSelect(date)
-      onEndDateSelect(selectedStartDate)
+      startDateSelect(date)
+      endDateSelect(selectedStartDate)
     }
   }
 

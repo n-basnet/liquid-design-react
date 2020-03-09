@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css, injectGlobal, ThemeProvider } from 'styled-components'
+import styled, {
+  css,
+  createGlobalStyle,
+  ThemeProvider,
+} from 'styled-components'
 
 import {
   THEMES,
@@ -13,7 +17,7 @@ import MWebFontWoff2 from '../assets/fonts/MWeb-Regular.woff2'
 import MWebFontWoff from '../assets/fonts/MWeb-Regular.woff'
 import { isTouchDevice } from '../utils/featureDetects'
 
-injectGlobal`
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: ${M_FONT_NAME};
     src: url(${MWebFontWoff2}) format('woff2'),
@@ -66,6 +70,7 @@ class Theme extends PureComponent {
           />
           <Base {...props} />
         </>
+        <GlobalStyles />
       </ThemeProvider>
     )
   }

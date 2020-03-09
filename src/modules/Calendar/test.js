@@ -6,7 +6,7 @@ import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 describe('Calendar', () => {
   const defaultProps = {
     selectedStartDate: new Date(2018, 10, 10),
-    onStartDateSelect: jest.fn(),
+    startDateSelect: jest.fn(),
   }
   const getCalendarWrapper = getWrapper(Calendar, defaultProps)
   it('renders calendar', () => {
@@ -82,7 +82,7 @@ describe('Calendar', () => {
     const changeDate = jest.fn(date => (defaultDate = date))
     const wrapper = getCalendarWrapper({
       selectedStartDate: defaultDate,
-      onStartDateSelect: changeDate,
+      startDateSelect: changeDate,
     })
     wrapper
       .find(DayCell)
@@ -91,14 +91,14 @@ describe('Calendar', () => {
       .simulate('click')
     expect(defaultDate).toEqual(new Date(2018, 10, 17))
   })
-  it('handles onStartDateSelect prop', () => {
+  it('handles startDateSelect prop', () => {
     const wrapper = getCalendarWrapper()
     wrapper
       .find(DayCell)
       .at(20)
       .find(DayContainer)
       .simulate('click')
-    expect(defaultProps.onStartDateSelect).toBeCalled()
+    expect(defaultProps.startDateSelect).toBeCalled()
   })
   it('allows to select range', () => {
     let defaultStartDate = new Date(2018, 10, 10)
@@ -108,8 +108,8 @@ describe('Calendar', () => {
     const wrapper = getCalendarWrapper({
       selectedStartDate: defaultStartDate,
       selectedEndDate: defaultEndDate,
-      onStartDateSelect: changeStartDate,
-      onEndDateSelect: changeEndDate,
+      startDateSelect: changeStartDate,
+      endDateSelect: changeEndDate,
       rangeMode: true,
     })
     wrapper

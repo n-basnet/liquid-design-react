@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import { withTheme, injectGlobal, css } from 'styled-components'
+import { withTheme, createGlobalStyle, css } from 'styled-components'
 import cx from 'classnames'
 
 import { Base } from '../../Theme'
@@ -63,13 +63,14 @@ export const Modal = ({
     {/* Theme's Base is needed because ReactModal attaches itself directly to the body element */}
     <Base>
       <ModalContent {...props} />
+      <GlobalStyles />
     </Base>
   </ReactModal>
 )
 
 const MODAL_OVERLAY_CLASSNAME = getClassName(Modal)
 
-injectGlobal`
+const GlobalStyles = createGlobalStyle`
   .${MODAL_OVERLAY_CLASSNAME}.ReactModal__Overlay {
     ${modalOverlayDefaults}
     ${modalOverlayCloseState}

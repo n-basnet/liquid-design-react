@@ -13,7 +13,7 @@ import { getWrapper, everyComponentTestSuite } from '../../utils/testUtils'
 
 describe('DatePicker', () => {
   const defaultProps = {
-    onStartDateChange: jest.fn(),
+    startDateChange: jest.fn(),
     format: DATEPICKER_CONSTS.DEFAULT_FORMAT,
   }
   const getDatePickerWrapper = getWrapper(DatePicker, defaultProps)
@@ -31,14 +31,14 @@ describe('DatePicker', () => {
       .simulate('change', { target: { value: partOfDate } })
     expect(wrapper.find(TextField).prop('value')).toBe('12 / ')
   })
-  it('calls onStartDateChange prop if value is valid', () => {
+  it('calls startDateChange prop if value is valid', () => {
     const wrapper = getDatePickerWrapper()
     const sampleStartDate = '12 / 10 / 2018'
     wrapper
       .find(TextField)
       .find('input')
       .simulate('change', { target: { value: sampleStartDate } })
-    expect(defaultProps.onStartDateChange).toBeCalled()
+    expect(defaultProps.startDateChange).toBeCalled()
   })
   it('has two inputs in range mode', () => {
     const wrapper = getDatePickerWrapper({ rangeMode: true })
@@ -48,7 +48,7 @@ describe('DatePicker', () => {
     const wrapper = getDatePickerWrapper({ withCalendar: true })
     expect(wrapper.find(Calendar)).toBeTruthy()
   })
-  it('calls onStartDateChange prop if a date is selected in range/withCalendar mode', () => {
+  it('calls startDateChange prop if a date is selected in range/withCalendar mode', () => {
     const wrapper = getDatePickerWrapper({
       withCalendar: true,
       rangeMode: true,
@@ -59,7 +59,7 @@ describe('DatePicker', () => {
       .at(20)
       .find(DayContainer)
       .simulate('click')
-    expect(defaultProps.onStartDateChange).toBeCalled()
+    expect(defaultProps.startDateChange).toBeCalled()
   })
 
   everyComponentTestSuite(getDatePickerWrapper, DatePicker, 'DatePicker')

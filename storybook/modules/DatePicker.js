@@ -78,8 +78,8 @@ storiesOf('Modules/DatePicker', module)
       <EnhancedDatePicker
         rangeMode
         withCalendar
-        onStartDateChange={() => console.log('Start Date changed')}
-        onEndDateChange={() => console.log('End Date changed')}
+        startDateChange={() => console.log('Start Date changed')}
+        endDateChange={() => console.log('End Date changed')}
       />
     ),
     getSnippetTemplate(getDatePickerSnippet('rangeMode withCalendar')),

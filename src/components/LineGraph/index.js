@@ -8,6 +8,11 @@ import { defaultFormatter } from '../../utils/charts'
 import Graph from '../../components/LineGraph/Graph'
 
 export class LineGraph extends PureComponent {
+  constructor() {
+    super()
+    this.wrapperRef = React.createRef()
+  }
+
   state = {
     width: 0,
   }
@@ -27,19 +32,14 @@ export class LineGraph extends PureComponent {
 
   updateSize = () =>
     this.setState({
-      width: this.wrapperRef.getBoundingClientRect().width,
+      width: this.wrapperRef.current.getBoundingClientRect().width,
     })
 
   render() {
     const { data, ...props } = this.props
     const { width } = this.state
     return (
-      <LineGraphWrapper
-        {...props}
-        innerRef={v => {
-          this.wrapperRef = v
-        }}
-      >
+      <LineGraphWrapper {...props} ref={this.wrapperRef}>
         <Graph
           {...props}
           data={data}

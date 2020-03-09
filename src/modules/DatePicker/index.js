@@ -45,9 +45,9 @@ export class DatePicker extends PureComponent {
     startDateLabel: PropTypes.string,
     endDateLabel: PropTypes.string,
     /** handler for start date change in range mode or single date in single mode */
-    onStartDateChange: PropTypes.func,
+    startDateChange: PropTypes.func,
     /** handler for end date change in range mode */
-    onEndDateChange: PropTypes.func,
+    endDateChange: PropTypes.func,
     className: PropTypes.string,
     /** object for additional props passed to calendar like className or desired first day of week */
     calendarProps: PropTypes.object,
@@ -66,8 +66,8 @@ export class DatePicker extends PureComponent {
     format: DATEPICKER_CONSTS.DEFAULT_FORMAT,
     startDateLabel: 'Start Date',
     endDateLabel: 'End Date',
-    onStartDateChange: () => {},
-    onEndDateChange: () => {},
+    startDateChange: () => {},
+    endDateChange: () => {},
     className: null,
     calendarProps: {},
     dateValidationError: DATEPICKER_CONSTS.DATE_FORMAT_ERROR_MESSAGE,
@@ -219,8 +219,8 @@ export class DatePicker extends PureComponent {
         this.setState({ isCalendarOpen: false })
       }
       isStartDateInput
-        ? this.props.onStartDateChange(parsedValue)
-        : this.props.onEndDateChange(parsedValue)
+        ? this.props.startDateChange(parsedValue)
+        : this.props.endDateChange(parsedValue)
     }
   }
 
@@ -357,8 +357,8 @@ export class DatePicker extends PureComponent {
             className={DATE_PICKER_CLASSNAMES.CALENDAR_CONTAINER}
           >
             <Calendar
-              onStartDateSelect={this.handleStartSelectFromCalendar}
-              onEndDateSelect={this.handleEndSelectFromCalendar}
+              startDateSelect={this.handleStartSelectFromCalendar}
+              endDateSelect={this.handleEndSelectFromCalendar}
               selectedStartDate={startDate}
               selectedEndDate={endDate}
               isSelectingRange={isSelectingRange}

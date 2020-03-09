@@ -15,9 +15,9 @@ const LabelsWrapper = styled.div`
   `}
 `
 
-const LabelWrapper = styled.div.attrs({
+const LabelWrapper = styled.div.attrs(() => ({
   'data-test-value': 'chart-label',
-})`
+}))`
   font-size: 12px;
   padding-right: 20px;
   padding-bottom: 10px;

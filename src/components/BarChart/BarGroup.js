@@ -36,9 +36,9 @@ const LabelWrapper = styled.div`
   opacity: 0.3;
   font-size: 12px;
 `
-const SumWrapper = styled.div.attrs({
+const SumWrapper = styled.div.attrs(() => ({
   'data-test-value': 'bar-chart-sum-label',
-})`
+}))`
   display: inline-block;
   margin-top: 16px;
   padding: 7px 30px;

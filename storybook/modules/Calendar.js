@@ -55,8 +55,8 @@ export class CalendarApp extends PureComponent {
         today={today}
         selectedStartDate={selectedStartDate}
         selectedEndDate={rangeMode ? selectedEndDate : undefined}
-        onStartDateSelect={this.handleStartDateChange}
-        onEndDateSelect={rangeMode ? this.handleEndDateChange : undefined}
+        startDateSelect={this.handleStartDateChange}
+        endDateSelect={rangeMode ? this.handleEndDateChange : undefined}
         rangeMode={rangeMode}
         {...props}
       />
@@ -94,7 +94,7 @@ storiesOf('Modules/Calendar', module)
       return (
         <Calendar
           selectedStartDate={selectedStartDate}
-          onStartDateSelect={this.handleStartDateChange}
+          startDateSelect={this.handleStartDateChange}
         />
       )
     }
@@ -120,7 +120,7 @@ storiesOf('Modules/Calendar', module)
       return (
         <Calendar
           selectedStartDate={selectedStartDate}
-          onStartDateSelect={this.handleStartDateChange}
+          startDateSelect={this.handleStartDateChange}
           startOfWeek={1}
         />
       )
@@ -163,7 +163,7 @@ storiesOf('Modules/Calendar', module)
       return (
         <Calendar
           selectedStartDate={selectedStartDate}
-          onStartDateSelect={this.handleStartDateChange}
+          startDateSelect={this.handleStartDateChange}
           appointments={appointments}
         />
       )
@@ -194,8 +194,8 @@ storiesOf('Modules/Calendar', module)
         <Calendar
           selectedStartDate={selectedStartDate}
           selectedEndDate={selectedEndDate}
-          onStartDateSelect={this.handleStartDateChange}
-          onEndDateSelect={this.handleEndDateChange}
+          startDateSelect={this.handleStartDateChange}
+          endDateSelect={this.handleEndDateChange}
           rangeMode
         />
       )
