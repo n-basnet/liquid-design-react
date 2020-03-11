@@ -1,3 +1,22 @@
+# [2.0.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.7...v2.0.0) (2020-03-11)
+
+
+### chore
+
+* **styled-components:** upgrade to styled-component v5.0.1 ([6200be1](https://gitlab.com/liquid-design/liquid-design-react/commit/6200be1b9340029534d9fd9f82ea48f4d9cc391c))
+
+
+### BREAKING CHANGES
+
+* **styled-components:** rename callbacks in Calendar and DatePicker
+
+onStartDateSelect -> startDateSelect
+onEndDateSelect -> endDateSelect
+onStartDateChange -> startDateChange
+onEndDateChange -> endDateChange
+
+See https://github.com/styled-components/styled-components/issues/2218
+
 ## [1.1.7](https://gitlab.com/liquid-design/liquid-design-react/compare/v1.1.6...v1.1.7) (2020-02-06)
 
 
