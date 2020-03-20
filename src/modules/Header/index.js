@@ -210,12 +210,7 @@ Header.propTypes = {
   notificationOnClick: PropTypes.func,
   infoOnClick: PropTypes.func,
   searchBarHandleSubmit: PropTypes.func,
-  searchBarOptions: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      onClick: PropTypes.func,
-    }),
-  ),
+  searchBarOptions: PropTypes.arrayOf(PropTypes.string),
   searchBarPlaceholder: PropTypes.string,
   settingsOnClick: PropTypes.func,
   logoComponent: PropTypes.node,
