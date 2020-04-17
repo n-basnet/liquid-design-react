@@ -1,3 +1,10 @@
+## [2.0.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.0...v2.0.1) (2020-04-17)
+
+
+### Bug Fixes
+
+* **react_displayname:** re-add support for component class names ([7d3ef98](https://gitlab.com/liquid-design/liquid-design-react/commit/7d3ef98cc527d041c7410514552d71f2c2e760a2)), closes [#20](https://gitlab.com/liquid-design/liquid-design-react/issues/20)
+
 ## [2.0.1-rc.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.0...v2.0.1-rc.1) (2020-04-17)
 
 
