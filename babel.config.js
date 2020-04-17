@@ -2,6 +2,7 @@ module.exports = api => {
   const isTest = api.env('test')
 
   const plugins = [
+    'add-react-displayname',
     ['@babel/plugin-proposal-decorators', { legacy: true }],
     '@babel/plugin-proposal-class-properties',
   ]
