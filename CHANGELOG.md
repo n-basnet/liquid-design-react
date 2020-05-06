@@ -1,3 +1,11 @@
+## [2.0.2](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.1...v2.0.2) (2020-05-06)
+
+
+### Bug Fixes
+
+* .snyk & package.json to reduce vulnerabilities ([b82a98b](https://gitlab.com/liquid-design/liquid-design-react/commit/b82a98bbf34f99db94bb73b0d234612d59501c57))
+* .snyk & package.json to reduce vulnerabilities ([11157e4](https://gitlab.com/liquid-design/liquid-design-react/commit/11157e453d4e7afa7f96e3ecab11e824feb381d6))
+
 ## [2.0.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.0...v2.0.1) (2020-04-17)
 
 
