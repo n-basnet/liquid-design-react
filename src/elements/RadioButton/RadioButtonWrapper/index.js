@@ -48,6 +48,13 @@ export default styled.div`
         css`
           border: 7px solid ${props.theme.colors.primary.base};
         `};
+      ${props =>
+        props.disabled &&
+        props.isSelected &&
+        css`
+          border: 7px solid ${props.theme.colors.primary.base};
+          z-index: 1;
+        `};
       box-sizing: border-box;
       outline: none;
       }

@@ -69,7 +69,7 @@ storiesOf('Elements/Radio Button', module)
     getSnippetTemplate(getRadioButtonSnippet()),
   )
   .add(
-    'active',
+    'selected',
     () => <EnhancedRadioButton {...getDefaultProps(true)} />,
     getSnippetTemplate(getRadioButtonSnippet('isSelected')),
   )
@@ -77,6 +77,11 @@ storiesOf('Elements/Radio Button', module)
     'disabled',
     () => <EnhancedRadioButton disabled {...getDefaultProps()} />,
     getSnippetTemplate(getRadioButtonSnippet('disabled')),
+  )
+  .add(
+    'disabled, selected',
+    () => <EnhancedRadioButton disabled {...getDefaultProps(true)} />,
+    getSnippetTemplate(getRadioButtonSnippet('disabled isSelected')),
   )
   .add(
     'stateful',
