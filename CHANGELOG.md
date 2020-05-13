@@ -1,3 +1,10 @@
+## [2.0.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.2...v2.0.3) (2020-05-13)
+
+
+### Bug Fixes
+
+* **radio:** radio disabled and selected looks not selected ([58f137e](https://gitlab.com/liquid-design/liquid-design-react/commit/58f137eef330570cd736b911b330a361947c0fd2))
+
 ## [2.0.2](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.1...v2.0.2) (2020-05-06)
 
 
