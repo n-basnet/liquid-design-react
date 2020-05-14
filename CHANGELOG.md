@@ -1,3 +1,10 @@
+## [2.0.4](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.3...v2.0.4) (2020-05-14)
+
+
+### Bug Fixes
+
+* **table:** on (de-)select all rows not updating state ([c1870a1](https://gitlab.com/liquid-design/liquid-design-react/commit/c1870a1ae3b6fa585e34b9c4303f9a73a31d20ec))
+
 ## [2.0.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.2...v2.0.3) (2020-05-13)
 
 
