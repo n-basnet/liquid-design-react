@@ -237,7 +237,10 @@ export default class Table extends PureComponent {
           )
         }),
       },
-      () => visibleRows.map(this.handleRowOnChange),
+      () => {
+        const visibleRows = this.getVisibleRows()
+        return visibleRows.map(this.handleRowOnChange)
+      },
     )
   }
 
