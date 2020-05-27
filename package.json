@@ -18,7 +18,7 @@
     "build": "npm run build:es && npm run build:cjs",
     "build:es": "cross-env BABEL_ENV=main rollup -c rollup.config.es.js",
     "build:cjs": "cross-env BABEL_ENV=main rollup -c rollup.config.cjs.js",
-    "start": "cross-env BABEL_ENV=main rollup -c -w",
+    "start": "cross-env BABEL_ENV=main rollup -c rollup.config.cjs.js -w",
     "prepare": "yarn run snyk-protect && yarn run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cm": "git-cz",
