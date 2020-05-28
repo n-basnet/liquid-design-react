@@ -1,3 +1,10 @@
+## [2.0.5](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.4...v2.0.5) (2020-05-28)
+
+
+### Bug Fixes
+
+* **scripts:** fix error running yarn start ([713e0ff](https://gitlab.com/liquid-design/liquid-design-react/commit/713e0ff5afaee6c9c999968cace1c64a4d5792a2))
+
 ## [2.0.4](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.3...v2.0.4) (2020-05-14)
 
 
