@@ -47,7 +47,7 @@
     "react-resizable": "^1.7.5",
     "react-resize-detector": "^3.1.2",
     "react-transition-group": "^2.4.0",
-    "snyk": "^1.316.1",
+    "snyk": "^1.330.3",
     "styled-components": "^5.0.1",
     "svg.js": "^2.6.6",
     "uniqid": "^5.0.3",
