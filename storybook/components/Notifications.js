@@ -73,7 +73,7 @@ const propTablesExclude = getPropTablesExcludeList([
 ])
 
 const sourceCode = {
-  description: `Notifications provide immediate information to the user. Those information can be confirmations, warnings, or hints.\n
+  description: `Notifications provide immediate information to the user. This can be confirmations, warnings, or hints.\n
   Notication types can be set via boolean props: ${formatList(
     NOTIFICATION_TYPES,
   )}.\n
