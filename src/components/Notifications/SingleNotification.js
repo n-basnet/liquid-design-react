@@ -26,10 +26,10 @@ const getBackgroundColor = ({ theme, color, ...props }, hover = false) => {
   return theme.colors[colorName][hover ? 'dark' : 'base']
 }
 
-const getIconName = props => {
+const getIconName = ({ icon, ...props }) => {
   const type = getNotificationType(props)
 
-  return type && NOTIFICATION_CONFIG[type].icon
+  return icon || (type && NOTIFICATION_CONFIG[type].icon)
 }
 
 const SingleNotificationWrapper = styled.div`

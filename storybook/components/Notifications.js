@@ -127,6 +127,14 @@ storiesOf('Components/Notifications', module)
       />
     </SingleNotificationsWrapper>
   ))
+  .add('custom icon', () => (
+    <SingleNotificationsWrapper>
+      <SingleNotification
+        {...getDefaultSingleNotificationProps(0)}
+        icon={getTextKnob({ name: 'icon', defaultText: 'energy' })}
+      />
+    </SingleNotificationsWrapper>
+  ))
   .addDecorator(includeComponentInPropTable(Notifications))
   .add(
     'usage in app',
