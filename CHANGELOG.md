@@ -1,3 +1,10 @@
+# [2.1.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.6...v2.1.0) (2020-06-15)
+
+
+### Features
+
+* **notification:** allow custom icon for default notification ([a1e6f41](https://gitlab.com/liquid-design/liquid-design-react/commit/a1e6f41ed4ada4153bdcb6a14d89473c7a4464bb))
+
 ## [2.0.6](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.5...v2.0.6) (2020-05-28)
 
 
