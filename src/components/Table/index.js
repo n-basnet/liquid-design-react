@@ -113,6 +113,11 @@ export default class Table extends PureComponent {
     if (!equals(this.props.rows, prevProps.rows)) {
       this.recomputeState(this.props, this.state)
     }
+    if (
+      !equals(this.props.disabledRowsIndexes, prevProps.disabledRowsIndexes)
+    ) {
+      this.recomputeState(this.props, this.state)
+    }
   }
 
   tableElementHTMLId = getClassName({ name: `Table--${uniqid()}` })
