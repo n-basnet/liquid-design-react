@@ -1,3 +1,10 @@
+## [2.1.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.1.0...v2.1.1) (2020-06-19)
+
+
+### Bug Fixes
+
+* updated ComponentDidUpdate to recompute on disabledRows change ([50b2b1a](https://gitlab.com/liquid-design/liquid-design-react/commit/50b2b1aa743ab10ff36213f76b1495b44f36a89a))
+
 # [2.1.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.0.6...v2.1.0) (2020-06-15)
 
 
