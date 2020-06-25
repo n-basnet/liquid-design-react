@@ -1,3 +1,10 @@
+# [2.2.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.1.1...v2.2.0) (2020-06-25)
+
+
+### Features
+
+* **table:** allow custom table pagination labels ([f9ec933](https://gitlab.com/liquid-design/liquid-design-react/commit/f9ec933ae1a7c3b56ea013ff5bdc5f083e21df51))
+
 ## [2.1.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.1.0...v2.1.1) (2020-06-19)
 
 
