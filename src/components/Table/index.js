@@ -74,6 +74,12 @@ export default class Table extends PureComponent {
     }),
     /** For `itemsPerPageOptions` prop on `TablePagination`. */
     paginationItemsPerPageOptions: PropTypes.array,
+    /** For `perPageText` prop on `TablePagination`. */
+    paginationPerPageText: PropTypes.func,
+    /** For `ofItemsText` prop on `TablePagination`. */
+    paginationOfItemsText: PropTypes.func,
+    /** For `ofPagesText` prop on `TablePagination`. */
+    paginationOfPagesText: PropTypes.func,
     /** By default, pagination will be placed above the table - use this prop to change it's placement to below the table */
     paginationBelow: PropTypes.bool,
   }
@@ -93,6 +99,9 @@ export default class Table extends PureComponent {
     },
     paginationItemsPerPageOptions:
       TablePagination.defaultProps.itemsPerPageOptions,
+    paginationPerPageText: TablePagination.defaultProps.perPageText,
+    paginationOfItemsText: TablePagination.defaultProps.ofItemsText,
+    paginationOfPagesText: TablePagination.defaultProps.ofPagesText,
     paginationBelow: false,
   }
 
@@ -326,6 +335,9 @@ export default class Table extends PureComponent {
       columns,
       withPagination,
       paginationItemsPerPageOptions,
+      paginationPerPageText,
+      paginationOfItemsText,
+      paginationOfPagesText,
       paginationBelow,
     } = this.props
 
@@ -334,6 +346,9 @@ export default class Table extends PureComponent {
       itemsPerPageAmount: paginationPerPage,
       itemsCount: rows.length,
       itemsPerPageOptions: paginationItemsPerPageOptions,
+      perPageText: paginationPerPageText,
+      ofItemsText: paginationOfItemsText,
+      ofPagesText: paginationOfPagesText,
       onChange: this.handlePaginationChange,
       onItemsPerPageAmountChange: this.handlePaginationItemsPerPageAmountChange,
       isDisplayedBelowTable: paginationBelow,
@@ -363,6 +378,9 @@ export default class Table extends PureComponent {
       size,
       withPagination,
       paginationItemsPerPageOptions,
+      paginationPerPageText,
+      paginationOfItemsText,
+      paginationOfPagesText,
       paginationBelow,
       columns,
       ...props

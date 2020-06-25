@@ -34,6 +34,17 @@ const STORIES = getStoriesByVersions({
       name: 'selectable with pagination',
       props: { withPagination: true, isSelectable: true },
     },
+    {
+      name: 'with pagination and altered pagination text',
+      props: {
+        withPagination: true,
+        paginationPerPageText: () => 'Einträge pro Seite',
+        paginationOfItemsText: ({ amount, total }) =>
+          `${amount} von ${total} Einträgen`,
+        paginationOfPagesText: ({ amount, total }) =>
+          `${amount} von ${total} Seiten`,
+      },
+    },
   ],
 })
 
