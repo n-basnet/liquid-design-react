@@ -253,6 +253,7 @@ export class DatePicker extends PureComponent {
 
   handleStartSelectFromCalendar = date => {
     this.setState({
+      startDateWasInUse: true,
       startDate: date,
       startDateInputValue: dateFns.format(date, this.props.format),
       currentMonth: date,
@@ -270,6 +271,7 @@ export class DatePicker extends PureComponent {
 
   handleEndSelectFromCalendar = date => {
     this.setState({
+      endDateWasInUse: true,
       endDate: date,
       endDateInputValue: date ? dateFns.format(date, this.props.format) : '',
       isCalendarOpen: !date,

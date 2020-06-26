@@ -117,3 +117,17 @@ storiesOf('Modules/DatePicker', module)
       ),
     ),
   )
+  .add(
+    'with calendar and custom validation',
+    () => (
+      <EnhancedDatePicker
+        withCalendar
+        validateStartDate={date => date.getTime() < Date.now()}
+      />
+    ),
+    getSnippetTemplate(
+      getDatePickerSnippet(
+        'withCalendar validateStartDate={date => date.getTime() < Date.now()}',
+      ),
+    ),
+  )

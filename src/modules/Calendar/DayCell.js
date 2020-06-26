@@ -57,6 +57,12 @@ const DayCellWrapper = styled.div`
     }
   }
   ${props =>
+    props.disabled &&
+    css`
+      pointer-events: none;
+      opacity: 0.5;
+    `};
+  ${props =>
     props.isWithinRange &&
     css`
       background-color: ${props.theme.colors.primary.lightest};
@@ -152,6 +158,11 @@ export const DayContainer = styled.div`
     height: 21px;
     padding-top: 1px;
   `};
+  ${props =>
+    props.disabled &&
+    css`
+      color: ${props.theme.colors.richBlack.lightest};
+    `};
   ${props => css`
     border-radius: ${props.theme.borderRadius};
     ${props.isFirst
@@ -263,6 +274,7 @@ export class DayCell extends PureComponent {
     isEndOfRange: PropTypes.bool,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
+    disabled: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -278,6 +290,7 @@ export class DayCell extends PureComponent {
     isEndOfRange: false,
     onMouseEnter: () => {},
     onMouseLeave: () => {},
+    disabled: false,
   }
 
   state = {
@@ -337,6 +350,7 @@ export class DayCell extends PureComponent {
       appointments,
       today,
       day,
+      disabled,
     } = this.props
     const { isHovered, isOverlayOpen } = this.state
     const formattedDate = dateFns.format(day, FORMATS.MONTH_DAY_FORMAT)
@@ -352,6 +366,7 @@ export class DayCell extends PureComponent {
         isOutOfMonth={isOutOfMonth}
         isFirst={isFirst}
         isLast={isLast}
+        disabled={disabled}
         onClick={this.cellClickHandler}
         onMouseEnter={() => this.handleMouseEnter('DayCellWrapper')}
         onMouseLeave={() => {
@@ -370,6 +385,7 @@ export class DayCell extends PureComponent {
           onMouseLeave={() => {
             this.handleMouseLeave('DayContainer')
           }}
+          disabled={disabled}
         >
           {formattedDate}
         </DayContainer>

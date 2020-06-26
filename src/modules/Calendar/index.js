@@ -176,6 +176,10 @@ export class Calendar extends PureComponent {
     changeYearInputValue: PropTypes.func,
     /** handler for blur on year input */
     blurYearInput: PropTypes.func,
+    /** allow only dates from and including specified date */
+    from: PropTypes.instanceOf(Date),
+    /** allow only to from and including specified date */
+    to: PropTypes.instanceOf(Date),
   }
 
   static defaultProps = {
@@ -193,6 +197,8 @@ export class Calendar extends PureComponent {
     yearInputValue: null,
     changeYearInputValue: null,
     blurYearInput: () => {},
+    from: null,
+    to: null,
   }
 
   state = {
@@ -326,6 +332,8 @@ export class Calendar extends PureComponent {
       isSelectingRange,
       today,
       currentMonth,
+      from,
+      to,
     } = this.props
     const currentMonthValue = currentMonth || currentMonthOwn
     const countOfWeekDays = 7
@@ -423,6 +431,10 @@ export class Calendar extends PureComponent {
             appointments={currentAppointments || null}
             isFirst={index === 0}
             isLast={index === 6}
+            disabled={
+              (from && day.getTime() < from.getTime()) ||
+              (to && day.getTime() > to.getTime())
+            }
             onClick={this.getDateSelectionHandler(dayClone, monthStart)}
             {...(!isTouchDevice() && mouseProps)}
           />,

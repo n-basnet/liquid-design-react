@@ -129,6 +129,35 @@ storiesOf('Modules/Calendar', module)
   `),
   )
   .add(
+    'with from and to dates',
+    () => (
+      <CalendarApp from={new Date('2020-07-13')} to={new Date('2020-07-25')} />
+    ),
+    getSnippetTemplate(`
+  class CalendarApp extends PureComponent {
+    state = {
+      selectedDate: null
+    }
+
+    handleStartDateChange = date => {
+      this.setState({ selectedStartDate: date })
+    }
+
+    render() {
+      const { selectedStartDate } = this.state
+
+      return (
+        <Calendar
+          selectedStartDate={selectedStartDate}
+          startDateSelect={this.handleStartDateChange}
+          startOfWeek={1}
+        />
+      )
+    }
+  }
+  `),
+  )
+  .add(
     'with appointments',
     () => <CalendarApp appointments={sampleAppointments} />,
     getSnippetTemplate(`
