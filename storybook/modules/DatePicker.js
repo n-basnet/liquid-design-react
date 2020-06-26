@@ -104,3 +104,16 @@ storiesOf('Modules/DatePicker', module)
     () => <EnhancedDatePicker disabled rangeMode withCalendar />,
     getSnippetTemplate(getDatePickerSnippet('disabled rangeMode withCalendar')),
   )
+  .add(
+    'with custom validation',
+    () => (
+      <EnhancedDatePicker
+        validateStartDate={date => date.getTime() < Date.now()}
+      />
+    ),
+    getSnippetTemplate(
+      getDatePickerSnippet(
+        'validateStartDate={date => date.getTime() < Date.now()}',
+      ),
+    ),
+  )

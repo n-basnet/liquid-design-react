@@ -55,6 +55,12 @@ export class DatePicker extends PureComponent {
     dateValidationError: PropTypes.string,
     /** error message which is shown when end date input value is not after the start date value */
     endDateValidationError: PropTypes.string,
+    /**
+     * additional custom validation function for start date value,
+     * takes a date object as a parameter,
+     * returns true for valid dates and fals for invalid dates
+     */
+    validateStartDate: PropTypes.func,
   }
 
   static defaultProps = {
@@ -72,6 +78,7 @@ export class DatePicker extends PureComponent {
     calendarProps: {},
     dateValidationError: DATEPICKER_CONSTS.DATE_FORMAT_ERROR_MESSAGE,
     endDateValidationError: DATEPICKER_CONSTS.END_DATE_ERROR_MESSAGE,
+    validateStartDate: undefined,
   }
 
   state = {
@@ -132,6 +139,18 @@ export class DatePicker extends PureComponent {
 
   validateStartDate = value => {
     if (!this.state.startDateWasInUse) return true
+    const { format, dateValidationError, validateStartDate } = this.props
+    if (validateStartDate) {
+      const { formatSeparator } = this.state
+      const formattedValue = toCommonFormat(value, format, formatSeparator)
+      const commonInputValidationResult = this.commonInputValidate(value)
+      if (commonInputValidationResult !== true) {
+        return commonInputValidationResult
+      }
+      return validateStartDate(new Date(formattedValue))
+        ? true
+        : dateValidationError
+    }
     return this.commonInputValidate(value)
   }
 
@@ -142,8 +161,8 @@ export class DatePicker extends PureComponent {
       endDateWasInUse,
       formatSeparator,
     } = this.state
-    const { format, endDateValidationError } = this.props
     if (!endDateWasInUse) return true
+    const { format, endDateValidationError } = this.props
     const formattedValue = toCommonFormat(value, format, formatSeparator)
     return this.commonInputValidate(value) === true
       ? checkEndDateWithStartDate(
