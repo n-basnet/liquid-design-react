@@ -1,3 +1,10 @@
+# [2.3.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.2.0...v2.3.0) (2020-06-26)
+
+
+### Features
+
+* **datepicker:** allow additional start date validation ([32f3407](https://gitlab.com/liquid-design/liquid-design-react/commit/32f34078facd1e0eaea62f04dd80081e26f314d5))
+
 # [2.2.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.1.1...v2.2.0) (2020-06-25)
 
 
