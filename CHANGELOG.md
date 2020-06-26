@@ -1,3 +1,10 @@
+# [2.4.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.3.0...v2.4.0) (2020-06-26)
+
+
+### Features
+
+* **calendar:** add from to props ([c3b2833](https://gitlab.com/liquid-design/liquid-design-react/commit/c3b283378a632e8af44e60ec8e518fd24e3fac11))
+
 # [2.3.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.2.0...v2.3.0) (2020-06-26)
 
 
