@@ -8,7 +8,7 @@ import {
   nonTouchDevicesHoverStyles,
   disbleMozTapTextBackground,
 } from '../../utils/styling'
-import { Glyph, ICON_CLASSNAME } from '../../elements/Icon'
+import { Glyph, ICON_CLASSNAME } from '../Icon'
 import attachClassName, {
   getClassName,
 } from '../../components/misc/hoc/attachClassName'

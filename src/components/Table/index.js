@@ -16,12 +16,12 @@ import {
   values,
 } from 'ramda'
 
-import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { getClassName } from '../misc/hoc/attachClassName'
 import TableRow from '../../components/Table/TableRow'
 import TableWrapper from '../../components/Table/TableWrapper'
 import TableContainer from '../../components/Table/TableContainer'
-import { TableHead, TableHeadCell } from '../../components/Table/TableHead'
-import { getAuxComponent } from '../../components/Table/tableIcons'
+import { TableHead, TableHeadCell } from './TableHead'
+import { getAuxComponent } from './tableIcons'
 import {
   getSortedRows,
   DEFAULT_SORT_MODE,
@@ -31,7 +31,7 @@ import {
   TABLE_ROW_STATES,
   AUX_CELL_CLASSNAME,
   renderNode,
-} from '../../components/Table/utils'
+} from './utils'
 import TablePagination from '../../components/TablePagination'
 
 export const TABLE_CLASSNAME = getClassName({ name: 'Table' })
@@ -64,6 +64,7 @@ export default class Table extends PureComponent {
     /** Either `small`, `medium`, or `large`. */
     size: PropTypes.oneOf(Object.keys(SIZES)),
     disabledRowsIndexes: PropTypes.arrayOf(PropTypes.number),
+    disabledCheckboxRowsIndexes: PropTypes.arrayOf(PropTypes.number),
     className: PropTypes.string,
     /** Display `TablePagination` above the table. */
     withPagination: PropTypes.bool,
@@ -91,6 +92,7 @@ export default class Table extends PureComponent {
     isSelectable: false,
     size: SIZES.small,
     disabledRowsIndexes: [],
+    disabledCheckboxRowsIndexes: [],
     className: '',
     withPagination: false,
     paginationDefaults: {
@@ -108,6 +110,7 @@ export default class Table extends PureComponent {
   state = {
     rows: [],
     disabledRowsIds: [],
+    disabledCheckboxRowsIds: [],
     sortModes: this.props.columns.map(v => DEFAULT_SORT_MODE),
     sortingColumnIndex: INITIAL_SORTING_COLUMN_INDEX,
     paginationCurrentPage: this.props.paginationDefaults.currentPage,
@@ -127,12 +130,26 @@ export default class Table extends PureComponent {
     ) {
       this.recomputeState(this.props, this.state)
     }
+    if (
+      !equals(
+        this.props.disabledCheckboxRowsIndexes,
+        prevProps.disabledCheckboxRowsIndexes,
+      )
+    ) {
+      this.recomputeState(this.props, this.state)
+    }
   }
 
   tableElementHTMLId = getClassName({ name: `Table--${uniqid()}` })
 
   recomputeState = (
-    { columns, rows, disabledRowsIndexes, isSelectable },
+    {
+      columns,
+      rows,
+      disabledRowsIndexes,
+      disabledCheckboxRowsIndexes,
+      isSelectable,
+    },
     { sortingColumnIndex } = {
       sortingColumnIndex: INITIAL_SORTING_COLUMN_INDEX,
     },
@@ -154,6 +171,9 @@ export default class Table extends PureComponent {
         sortModes,
         hasRowInfo: any(row => !!row.cells.rowInfo, preparedRows),
         disabledRowsIds: disabledRowsIndexes.map(
+          index => index < preparedRows.length && preparedRows[index].id,
+        ),
+        disabledCheckboxRowsIds: disabledCheckboxRowsIndexes.map(
           index => index < preparedRows.length && preparedRows[index].id,
         ),
       },
@@ -220,7 +240,9 @@ export default class Table extends PureComponent {
   }
 
   getNonDisabledVisibleRows = () =>
-    this.getVisibleRows().filter(({ id }) => !this.isRowDisabled(id))
+    this.getVisibleRows().filter(
+      ({ id }) => !this.isRowDisabled(id) && !this.isRowCheckboxDisabled(id),
+    )
 
   areAllRowStateOfTypeTrue = type =>
     all(v => !!v.state[type], this.getNonDisabledVisibleRows())
@@ -243,7 +265,9 @@ export default class Table extends PureComponent {
       {
         rows: rows.map(row => {
           const shouldUpdateRow =
-            !this.isRowDisabled(row.id) && contains(row.id, visibleRowsIds)
+            !this.isRowDisabled(row.id) &&
+            !this.isRowCheckboxDisabled(row.id) &&
+            contains(row.id, visibleRowsIds)
           return assoc(
             'state',
             { ...row.state, ...(shouldUpdateRow && { [type]: !newValue }) },
@@ -288,6 +312,7 @@ export default class Table extends PureComponent {
   }
 
   isRowDisabled = id => contains(id, this.state.disabledRowsIds)
+  isRowCheckboxDisabled = id => contains(id, this.state.disabledCheckboxRowsIds)
 
   handlePaginationChange = paginationCurrentPage =>
     this.setState({ paginationCurrentPage }, this.updateSorting)
@@ -375,6 +400,7 @@ export default class Table extends PureComponent {
       isSortable,
       isSelectable,
       disabledRowsIndexes,
+      disabledCheckboxRowsIndexes,
       size,
       withPagination,
       paginationItemsPerPageOptions,
@@ -424,18 +450,24 @@ export default class Table extends PureComponent {
               </tr>
             </TableHead>
             <tbody>
-              {this.getVisibleRows().map(({ cells, id, state }) => (
-                <TableRow
-                  key={id}
-                  disabled={this.isRowDisabled(id)}
-                  accessors={columns.map(prop('accessor'))}
-                  renderers={columns.map(prop('cellRenderer'))}
-                  cellsInfo={cells}
-                  rowState={state}
-                  handleStateChange={this.getRowStateChangeHandler(id)}
-                  {...rowProps}
-                />
-              ))}
+              {this.getVisibleRows().map(({ cells, id, state }) => {
+                const isRowDisabled = this.isRowDisabled(id)
+                return (
+                  <TableRow
+                    key={id}
+                    disabled={isRowDisabled}
+                    checkboxDisabled={
+                      isRowDisabled || this.isRowCheckboxDisabled(id)
+                    }
+                    accessors={columns.map(prop('accessor'))}
+                    renderers={columns.map(prop('cellRenderer'))}
+                    cellsInfo={cells}
+                    rowState={state}
+                    handleStateChange={this.getRowStateChangeHandler(id)}
+                    {...rowProps}
+                  />
+                )
+              })}
             </tbody>
 
             {paginationBelow && this.renderWrappedTablePagination()}

@@ -85,6 +85,7 @@ export const getDefaultProps = ({ rowsAmount, columnsAmount }, config) => {
 }
 
 export const DISABLED_ROW_INDEXES = [7]
+export const DISABLED_CHECKBOX_ROW_INDEXES = [2, 8]
 
 export const getSnippet = ({ props, tableProps, hideCode, auxText }) => {
   const defProps = getDefaultProps(

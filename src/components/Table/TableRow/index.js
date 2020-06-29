@@ -2,11 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import TableCell from '../../../components/Table/TableCell'
-import {
-  TABLE_ROW_STATES,
-  AUX_CELL_CLASSNAME,
-} from '../../../components/Table/utils'
-import { getAuxComponent } from '../../../components/Table/tableIcons'
+import { TABLE_ROW_STATES, AUX_CELL_CLASSNAME } from '../utils'
+import { getAuxComponent } from '../tableIcons'
 import RowWrapper from '../../../components/Table/TableRow/RowWrapper'
 
 const TableRow = ({
@@ -16,12 +13,13 @@ const TableRow = ({
   accessors,
   renderers,
   disabled,
+  checkboxDisabled,
   displayRowInfoArrow,
   size,
   rowState,
 }) => {
   const getClickHandler = () => {
-    if (!disabled) {
+    if (!disabled && !checkboxDisabled) {
       return () =>
         handleStateChange(
           cellsInfo && cellsInfo.rowInfo
@@ -36,6 +34,7 @@ const TableRow = ({
     const Component = getAuxComponent({
       rowInfoArrow: displayRowInfoArrow,
       checkbox: isSelectable,
+      checkboxDisabled,
       size,
     })
     return (
@@ -98,6 +97,7 @@ TableRow.propTypes = {
   rowState: PropTypes.object.isRequired,
   handleStateChange: PropTypes.func,
   disabled: PropTypes.bool,
+  checkboxDisabled: PropTypes.bool,
   accessors: PropTypes.array.isRequired,
   renderers: PropTypes.array.isRequired,
 }
@@ -105,6 +105,7 @@ TableRow.propTypes = {
 TableRow.defaultProps = {
   handleStateChange: () => {},
   disabled: false,
+  checkboxDisabled: false,
 }
 
 export default TableRow

@@ -8,7 +8,11 @@ import {
   getPropTablesExcludeList,
   getStoriesByVersions,
 } from '../../helpers'
-import { getSnippet, DISABLED_ROW_INDEXES } from './utils'
+import {
+  getSnippet,
+  DISABLED_ROW_INDEXES,
+  DISABLED_CHECKBOX_ROW_INDEXES,
+} from './utils'
 import TableApp from './TableApp'
 import TableFetchingApp from './TableFetchingApp'
 
@@ -78,6 +82,7 @@ STORIES.map(({ name, props = {} }) => {
           {...tableProps}
           passedProps={props}
           disabledRowsIndexes={DISABLED_ROW_INDEXES}
+          disabledCheckboxRowsIndexes={DISABLED_CHECKBOX_ROW_INDEXES}
         />
       ),
       getSnippet({ props, tableProps }),

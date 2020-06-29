@@ -78,5 +78,8 @@ export default styled.table`
     .${CHECKBOX_CLASSNAMES.UNCHECKED}:not(.${CHECKBOX_CLASSNAMES.HOVER}) svg {
       fill: ${props.theme.colors.sensitiveGrey.darker};
     }
+    .${CHECKBOX_CLASSNAMES.UNCHECKED}[disabled] {
+      opacity: 1;
+    }
   `};
 `

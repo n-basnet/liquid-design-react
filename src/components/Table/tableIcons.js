@@ -4,7 +4,7 @@ import { css, withTheme } from 'styled-components'
 
 import { Glyph } from '../../elements/Icon'
 import Checkbox from '../../elements/Checkbox'
-import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { getClassName } from '../misc/hoc/attachClassName'
 
 const getStyledCSS = iconProps => css`
   ${props => css`
@@ -41,14 +41,21 @@ export const getTableAuxComponentClassName = name =>
     name: `${TABLE_AUX_COMPONENT_CLASSNAME_BASE}--${name}`,
   })
 
-export const getAuxComponent = ({ rowInfoArrow, checkbox, size }) => {
+export const getAuxComponent = ({
+  rowInfoArrow,
+  checkbox,
+  checkboxDisabled,
+  size,
+}) => {
   let Component
   let componentName
   if (rowInfoArrow) {
     Component = props => <ArrowIcon size={25.7} {...props} />
     componentName = 'Arrow'
   } else if (checkbox) {
-    Component = props => <Checkbox iconSize={19} {...props} />
+    Component = props => (
+      <Checkbox iconSize={19} {...props} disabled={checkboxDisabled} />
+    )
     componentName = 'Checkbox'
   }
   return (
