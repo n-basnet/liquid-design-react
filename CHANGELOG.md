@@ -1,3 +1,10 @@
+# [2.5.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.4.0...v2.5.0) (2020-06-29)
+
+
+### Features
+
+* **table:** add option disabledCheckboxRowsIndexes ([f78bf17](https://gitlab.com/liquid-design/liquid-design-react/commit/f78bf17d9bffd16b1bc1f5db456d19eee8dccccf))
+
 # [2.4.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.3.0...v2.4.0) (2020-06-26)
 
 
