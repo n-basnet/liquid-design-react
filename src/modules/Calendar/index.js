@@ -180,6 +180,8 @@ export class Calendar extends PureComponent {
     from: PropTypes.instanceOf(Date),
     /** allow only to from and including specified date */
     to: PropTypes.instanceOf(Date),
+    /** hide dates of adjacent months */
+    hideDatesOfAdjacentMonths: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -199,6 +201,7 @@ export class Calendar extends PureComponent {
     blurYearInput: () => {},
     from: null,
     to: null,
+    hideDatesOfAdjacentMonths: false,
   }
 
   state = {
@@ -334,6 +337,7 @@ export class Calendar extends PureComponent {
       currentMonth,
       from,
       to,
+      hideDatesOfAdjacentMonths,
     } = this.props
     const currentMonthValue = currentMonth || currentMonthOwn
     const countOfWeekDays = 7
@@ -422,6 +426,7 @@ export class Calendar extends PureComponent {
             day={day}
             today={today}
             isOutOfMonth={isOutOfMonth}
+            hidden={isOutOfMonth && hideDatesOfAdjacentMonths}
             isWithinRange={isWithinRange()}
             isCurrent={isCurrent}
             isSelected={isSelected}

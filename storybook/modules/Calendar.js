@@ -231,3 +231,34 @@ storiesOf('Modules/Calendar', module)
     }
   `),
   )
+  .add(
+    'in range mode with hidden dates of adjecent months',
+    () => <CalendarApp rangeMode hideDatesOfAdjacentMonths />,
+    getSnippetTemplate(`
+  class CalendarApp extends PureComponent {
+    state = {
+      selectedStartDate: null,
+      selectedEndDate: null,
+    }
+
+    handleStartDateChange = date => {
+      this.setState({ selectedStartDate: date })
+    }
+
+    render() {
+      const { selectedStartDate } = this.state
+
+      return (
+        <Calendar
+          selectedStartDate={selectedStartDate}
+          selectedEndDate={selectedEndDate}
+          startDateSelect={this.handleStartDateChange}
+          endDateSelect={this.handleEndDateChange}
+          rangeMode
+          hideDatesOfAdjacentMonths
+        />
+      )
+    }
+  }
+  `),
+  )

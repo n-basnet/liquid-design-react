@@ -63,6 +63,12 @@ const DayCellWrapper = styled.div`
       opacity: 0.5;
     `};
   ${props =>
+    props.hidden &&
+    css`
+      pointer-events: none;
+      visibility: hidden;
+    `};
+  ${props =>
     props.isWithinRange &&
     css`
       background-color: ${props.theme.colors.primary.lightest};
@@ -275,6 +281,7 @@ export class DayCell extends PureComponent {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     disabled: PropTypes.bool,
+    hidden: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -291,6 +298,7 @@ export class DayCell extends PureComponent {
     onMouseEnter: () => {},
     onMouseLeave: () => {},
     disabled: false,
+    hidden: false,
   }
 
   state = {
@@ -351,6 +359,7 @@ export class DayCell extends PureComponent {
       today,
       day,
       disabled,
+      hidden,
     } = this.props
     const { isHovered, isOverlayOpen } = this.state
     const formattedDate = dateFns.format(day, FORMATS.MONTH_DAY_FORMAT)
@@ -367,6 +376,7 @@ export class DayCell extends PureComponent {
         isFirst={isFirst}
         isLast={isLast}
         disabled={disabled}
+        hidden={hidden}
         onClick={this.cellClickHandler}
         onMouseEnter={() => this.handleMouseEnter('DayCellWrapper')}
         onMouseLeave={() => {
