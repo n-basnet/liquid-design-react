@@ -1,3 +1,10 @@
+# [2.6.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.5.0...v2.6.0) (2020-07-02)
+
+
+### Features
+
+* **calendar:** add option hideDatesOfAdjacentMonths ([c9d20dc](https://gitlab.com/liquid-design/liquid-design-react/commit/c9d20dc33f9a61028a6540414038368938d248b5))
+
 # [2.5.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.4.0...v2.5.0) (2020-06-29)
 
 
