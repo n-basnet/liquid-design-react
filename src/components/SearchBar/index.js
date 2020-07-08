@@ -9,7 +9,7 @@ import { Glyph } from '../../elements/Icon'
 import Input from '../../components/misc/Input'
 import Ellipsis from '../../components/misc/Ellipsis'
 import { media } from '../../utils/styling'
-import { getClassName } from '../../components/misc/hoc/attachClassName'
+import { getClassName } from '../misc/hoc/attachClassName'
 import SearchBarWrapper from '../../components/SearchBar/SearchBarWrapper'
 
 export const DEFAULT_PLACEHOLDER_TEXT = 'Search…'
@@ -87,6 +87,12 @@ export class SearchBar extends PureComponent {
     results: EMPTY_RESULTS,
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.options !== this.props.options) {
+      this.updateResults(this.state.value)
+    }
+  }
+
   handleSubmit = (e, value = this.state.value) => {
     e && e.preventDefault()
     if (!this.props.disabled) {
@@ -96,7 +102,7 @@ export class SearchBar extends PureComponent {
     }
   }
 
-  setInputValue = value => {
+  updateResults = value => {
     const results =
       typeof value === 'string' && value.trim().length
         ? this.props.options.filter(v => {
@@ -104,9 +110,15 @@ export class SearchBar extends PureComponent {
           })
         : EMPTY_RESULTS
     this.setState({
-      value,
       results,
     })
+  }
+
+  setInputValue = value => {
+    this.setState({
+      value,
+    })
+    this.updateResults(value)
   }
 
   hideResults = () => this.setState({ results: EMPTY_RESULTS })
@@ -116,6 +128,7 @@ export class SearchBar extends PureComponent {
     e.key === 'Enter' && this.handleSubmit(null, value)
 
   handleClickOutside = this.hideResults
+
   render() {
     const {
       onSubmit,

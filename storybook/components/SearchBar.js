@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
 import EnhancedSearchBar, { SearchBar } from '../../src/components/SearchBar'
+import { Button } from '../../src/elements/Button'
 import {
   getBackgroundWrapper,
   getPropTablesExcludeList,
@@ -10,6 +11,61 @@ import {
   getSnippetTemplate,
 } from '../helpers'
 import { times } from '../../src/utils/misc'
+
+class SearchBarApp extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.searchRef = React.createRef()
+  }
+
+  state = {
+    options: ['Search Result 1', 'Search Result 2'],
+  }
+
+  render() {
+    return (
+      <>
+        <EnhancedSearchBar
+          wrappedRef={el => {
+            this.searchRef = el
+          }}
+          {...{
+            onSubmit: action('submit'),
+            placeholder: getTextKnob({
+              defaultText: 'Search…',
+              name: 'placeholder',
+            }),
+            options: this.state.options,
+          }}
+        />
+        <Button
+          style={{ marginLeft: '20px' }}
+          onClick={() => {
+            this.searchRef.setState({
+              value: '',
+            })
+          }}
+        >
+          Clear
+        </Button>
+        <Button
+          style={{ marginLeft: '20px' }}
+          onClick={() => {
+            this.setState({
+              options: [
+                ...this.state.options,
+                `Search Result ${this.state.options.length + 1}`,
+                `Search Result ${this.state.options.length + 2}`,
+              ],
+            })
+          }}
+        >
+          Add options
+        </Button>
+      </>
+    )
+  }
+}
 
 const getOptions = () =>
   times(4).map(v =>
@@ -75,4 +131,64 @@ storiesOf('Components/SearchBar', module)
     disabled
     ghost`),
     ),
+  )
+  .add(
+    'updating the state',
+    () => <SearchBarApp />,
+    getSnippetTemplate(`
+  class SearchBarApp extends PureComponent {
+    constructor(props) {
+      super(props)
+      this.searchRef = React.createRef()
+    }
+
+    state = {
+      options: ['Search Result 1', 'Search Result 2'],
+    }
+
+    render() {
+      return (
+        <>
+          <EnhancedSearchBar
+            wrappedRef={el => {
+              this.searchRef = el
+            }}
+            {...{
+              onSubmit: action('submit'),
+              placeholder: getTextKnob({
+                defaultText: 'Search…',
+                name: 'placeholder',
+              }),
+              options: this.state.options,
+            }}
+          />
+          <Button
+            style={{ marginLeft: '20px' }}
+            onClick={() => {
+              this.searchRef.setState({
+                value: '',
+              })
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            style={{ marginLeft: '20px' }}
+            onClick={() => {
+              this.setState({
+                options: [
+                  ...this.state.options,
+                  'Search Result ' + this.state.options.length,
+                  'Search Result ' + this.state.options.length,
+                ],
+              })
+            }}
+          >
+            Add options
+          </Button>
+        </>
+      )
+    }
+  }
+    `),
   )
