@@ -1,3 +1,10 @@
+## [2.6.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.0...v2.6.1) (2020-07-08)
+
+
+### Bug Fixes
+
+* **searchbar:** update results when options change ([0254b75](https://gitlab.com/liquid-design/liquid-design-react/commit/0254b7533f3511cfca5e691eebdf5741bb7bf054))
+
 # [2.6.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.5.0...v2.6.0) (2020-07-02)
 
 
