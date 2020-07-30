@@ -1,3 +1,10 @@
+## [2.6.2](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.1...v2.6.2) (2020-07-30)
+
+
+### Bug Fixes
+
+* **bundle-size:** split icons in chunks, load fonts as assets ([a13865e](https://gitlab.com/liquid-design/liquid-design-react/commit/a13865e68cf2243070b9008d686136afc7d328ce)), closes [#17](https://gitlab.com/liquid-design/liquid-design-react/issues/17)
+
 ## [2.6.1](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.0...v2.6.1) (2020-07-08)
 
 
