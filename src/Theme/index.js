@@ -13,19 +13,7 @@ import {
 } from '../utils/consts/themes'
 import { M_FONT_NAME } from '../utils/consts'
 import { disableWebkitTapHightlight } from '../utils/styling'
-import MWebFontWoff2 from '../assets/fonts/MWeb-Regular.woff2'
-import MWebFontWoff from '../assets/fonts/MWeb-Regular.woff'
 import { isTouchDevice } from '../utils/featureDetects'
-
-const GlobalStyles = createGlobalStyle`
-  @font-face {
-    font-family: ${M_FONT_NAME};
-    src: url(${MWebFontWoff2}) format('woff2'),
-         url(${MWebFontWoff}) format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-`
 
 export const Base = styled.div`
   line-height: 1.4;
@@ -47,14 +35,58 @@ export const Base = styled.div`
 `
 
 class Theme extends PureComponent {
+  state = {
+    mWebRegularWoff: undefined,
+    mWebRegularWoff2: undefined,
+    error: undefined,
+  }
+
   componentDidMount() {
     // fixes mobile Safari handling of pseudo classes on elements (https://stackoverflow.com/a/41217194)
-    isTouchDevice() &&
+    if (isTouchDevice()) {
       document.addEventListener('touchstart', function() {}, false)
+    }
+
+    const loadMWebRegularWoff = process.env.STORYBOOK_SB
+      ? () => import('../assets/fonts/MWeb-Regular.woff')
+      : () =>
+          import(
+            '@liquid-design/liquid-design-react/dist/assets/fonts/MWeb-Regular.woff'
+          )
+    const loadMWebRegularWoff2 = process.env.STORYBOOK_SB
+      ? () => import('../assets/fonts/MWeb-Regular.woff2')
+      : () =>
+          import(
+            '@liquid-design/liquid-design-react/dist/assets/fonts/MWeb-Regular.woff2'
+          )
+
+    Promise.all([loadMWebRegularWoff(), loadMWebRegularWoff2()])
+      .then(results => {
+        this.setState({
+          mWebRegularWoff: results[0].default,
+          mWebRegularWoff2: results[1].default,
+        })
+      })
+      .catch(err => {
+        this.setState({
+          error: err,
+        })
+      })
   }
 
   render() {
     const { themeName, customTheme, ...props } = this.props
+
+    const GlobalStyles = createGlobalStyle`
+      @font-face {
+        font-family: ${M_FONT_NAME};
+        src: url(${this.state.mWebRegularWoff2}) format('woff2'),
+             url(${this.state.mWebRegularWoff}) format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+    `
+
     return (
       <ThemeProvider
         theme={

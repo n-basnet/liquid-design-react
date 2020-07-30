@@ -7,7 +7,7 @@ const H = styled.div`
   line-height: 1.15;
   text-transform: uppercase;
   ${props => css`
-    font-family: ${M_FONT_NAME};
+    font-family: ${M_FONT_NAME}, Lato, Verdana, sans-serif;
     font-weight: ${props.theme.fontWeight.regular};
     color: ${props.theme.colors.richBlue.base};
   `};

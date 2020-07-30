@@ -18,10 +18,6 @@ Use `$ yarn add-component` to quickly bootstrap new components.
 1. `$ yarn storybook:build`
 2. serve the static assets from `out` (e.g. `cd out && npx http-server`)
 
-### SVG icons
-
-are optimised using [svgo](https://github.com/svg/svgo) - run `$ yarn prepare-svgs` to optimise files stored in `src/assets/svgIcons`.
-
 ## Code style
 
 This repo uses [JavaScript Standard Style](https://standardjs.com/).

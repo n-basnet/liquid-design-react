@@ -6,14 +6,23 @@ import reactSvg from 'rollup-plugin-react-svg'
 import url from 'rollup-plugin-url'
 import { string } from 'rollup-plugin-string'
 import { terser } from 'rollup-plugin-terser'
+import copy from 'rollup-plugin-copy'
 
 // import pkg from './package.json'
 const { getSVGOConfig } = require('./scripts/getSVGOConfig')
 
-const MAX_INLINE_FILE_SIZE_KB = 100
+const MAX_INLINE_FILE_SIZE_KB = 10
 
 export default {
   plugins: [
+    copy({
+      targets: [
+        {
+          src: 'src/assets/*',
+          dest: 'dist/assets',
+        },
+      ],
+    }),
     autoExternal(),
     babel({
       exclude: 'node_modules/**',
