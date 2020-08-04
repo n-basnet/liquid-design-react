@@ -114,7 +114,6 @@ export class Checkbox extends PureComponent {
   render() {
     const { disabled, label, className, iconSize, ...props } = this.props
     const { hover } = this.state
-    const iconVersion = this.isChecked() ? 'Filled' : 'Empty'
 
     return (
       <CheckboxWrapper
@@ -133,7 +132,16 @@ export class Checkbox extends PureComponent {
         {...props}
       >
         <Input type="checkbox" checked={this.isChecked()} readOnly />
-        <Glyph name={`checkbox${iconVersion}`} noFill size={iconSize} />
+        <Glyph
+          name="checkboxFilled"
+          size={iconSize}
+          style={{ display: this.isChecked() ? 'inline-block' : 'none' }}
+        />
+        <Glyph
+          name="checkboxEmpty"
+          size={iconSize}
+          style={{ display: this.isChecked() ? 'none' : 'inline-block' }}
+        />
         {label && <Label disabled={disabled}>{label}</Label>}
       </CheckboxWrapper>
     )
