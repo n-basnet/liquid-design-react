@@ -1,3 +1,10 @@
+## [2.6.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.2...v2.6.3) (2020-08-04)
+
+
+### Bug Fixes
+
+* **dropdown:** checkbox state not updating ([581e130](https://gitlab.com/liquid-design/liquid-design-react/commit/581e1303decc1ea413c1832d1ac7e291ee5d1d51)), closes [#25](https://gitlab.com/liquid-design/liquid-design-react/issues/25)
+
 ## [2.6.2](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.1...v2.6.2) (2020-07-30)
 
 
