@@ -1,3 +1,10 @@
+## [2.6.4](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.3...v2.6.4) (2020-08-11)
+
+
+### Bug Fixes
+
+* **icon:** prevent state update on unmounted component ([8aea6ba](https://gitlab.com/liquid-design/liquid-design-react/commit/8aea6ba5be59f79fc056f772f9abed8821cb86f7))
+
 ## [2.6.3](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.2...v2.6.3) (2020-08-04)
 
 
