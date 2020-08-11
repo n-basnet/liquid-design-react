@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css, withTheme } from 'styled-components'
 import { path } from 'ramda'
+import React, { PureComponent } from 'react'
 import cx from 'classnames'
 
 import iconsList from '../../elements/Icon/iconsList'
@@ -78,6 +78,7 @@ export class Icon extends PureComponent {
   }
 
   componentDidMount() {
+    this._isMounted = true
     const { name, isFilled } = this.props
 
     let importPromise
@@ -102,15 +103,23 @@ export class Icon extends PureComponent {
 
     importPromise()
       .then(({ default: DefaultExport, NamedExport }) => {
-        this.setState({
-          svgIconComponent: DefaultExport,
-        })
+        if (this._isMounted) {
+          this.setState({
+            svgIconComponent: DefaultExport,
+          })
+        }
       })
       .catch(err => {
-        this.setState({
-          error: err,
-        })
+        if (this._isMounted) {
+          this.setState({
+            error: err,
+          })
+        }
       })
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
   }
 
   render() {
