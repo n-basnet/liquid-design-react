@@ -79,8 +79,24 @@ export class Icon extends PureComponent {
 
   componentDidMount() {
     this._isMounted = true
-    const { name, isFilled } = this.props
+    this.loadSVG()
+  }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.name !== prevProps.name ||
+      this.props.isFilled !== prevProps.isFilled
+    ) {
+      this.loadSVG()
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
+  }
+
+  loadSVG() {
+    const { name, isFilled } = this.props
     let importPromise
     if (typeof iconsList.glyphs[name] === 'function') {
       importPromise = iconsList.glyphs[name]
@@ -116,10 +132,6 @@ export class Icon extends PureComponent {
           })
         }
       })
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false
   }
 
   render() {

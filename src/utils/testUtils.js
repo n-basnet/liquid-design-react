@@ -30,3 +30,7 @@ export const getWrapper = (Component, defaultProps) => (props = {}) =>
       <Component {...defaultProps} {...props} />
     </Theme>,
   )
+
+export function currentEventLoopEnd() {
+  return new Promise(resolve => setImmediate(resolve))
+}

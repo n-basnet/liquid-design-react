@@ -1,7 +1,11 @@
 import React from 'react'
 import Button from '.'
-import { Glyph } from '../../elements/Icon'
-import { everyComponentTestSuite, getWrapper } from '../../utils/testUtils'
+import { Glyph, Icon } from '../Icon'
+import {
+  everyComponentTestSuite,
+  getWrapper,
+  currentEventLoopEnd,
+} from '../../utils/testUtils'
 
 describe('Button', () => {
   const defaultProps = {
@@ -36,6 +40,52 @@ describe('Button', () => {
         .find(Glyph)
         .prop('name'),
     ).toEqual(iconName)
+  })
+
+  it('changes icon according to state', done => {
+    const iconNameEnabled = 'arrowCheck'
+    const iconNameDisabled = 'close'
+
+    class ButtonStateWrapper extends React.PureComponent {
+      state = {
+        isEnabled: false,
+      }
+
+      render() {
+        return (
+          <Button
+            icon={this.state.isEnabled ? iconNameDisabled : iconNameEnabled}
+            onClick={() => {
+              this.setState({
+                isEnabled: !this.state.toggled,
+              })
+            }}
+          >
+            Some text
+          </Button>
+        )
+      }
+    }
+
+    const ButtonWrapper = getWrapper(ButtonStateWrapper, {})()
+    currentEventLoopEnd()
+      .then(() => {
+        expect(ButtonWrapper.find(Glyph).prop('name')).toEqual(iconNameEnabled)
+        expect(
+          ButtonWrapper.find(Icon).state('svgIconComponent').displayName,
+        ).toEqual(iconNameEnabled)
+      })
+      .then(() => {
+        ButtonWrapper.find(Button).simulate('click')
+        return currentEventLoopEnd()
+      })
+      .then(() => {
+        expect(ButtonWrapper.find(Glyph).prop('name')).toEqual(iconNameDisabled)
+        expect(
+          ButtonWrapper.find(Icon).state('svgIconComponent').displayName,
+        ).toEqual(iconNameDisabled)
+      })
+      .then(done)
   })
 
   it('calls a function when clicked', () => {
