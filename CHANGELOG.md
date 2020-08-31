@@ -1,3 +1,10 @@
+## [2.6.5](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.4...v2.6.5) (2020-08-31)
+
+
+### Bug Fixes
+
+* **icon:** update icon on state change ([34b3ae4](https://gitlab.com/liquid-design/liquid-design-react/commit/34b3ae4523b506e00133a92d86250ff5168bf934)), closes [#26](https://gitlab.com/liquid-design/liquid-design-react/issues/26)
+
 ## [2.6.4](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.3...v2.6.4) (2020-08-11)
 
 
