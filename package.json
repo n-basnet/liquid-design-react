@@ -58,6 +58,7 @@
     "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
+    "@babel/compat-data": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -220,6 +221,9 @@
   "repository": {
     "type": "git",
     "url": "git@gitlab.com:liquid-design/liquid-design-react.git"
+  },
+  "resolutions": {
+    "@babel/preset-env": "^7.8.4"
   },
   "prettier": {
     "printWidth": 100
