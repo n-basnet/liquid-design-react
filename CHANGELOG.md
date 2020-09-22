@@ -1,3 +1,10 @@
+## [2.6.6](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.5...v2.6.6) (2020-09-22)
+
+
+### Bug Fixes
+
+* vulnerabilities patch & dependencies update ([749d16b](https://gitlab.com/liquid-design/liquid-design-react/commit/749d16b4f4b11b5a24c1ac05d395269425342344))
+
 ## [2.6.5](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.4...v2.6.5) (2020-08-31)
 
 
