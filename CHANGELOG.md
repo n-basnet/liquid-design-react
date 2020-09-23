@@ -1,3 +1,10 @@
+## [2.6.7](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.6...v2.6.7) (2020-09-23)
+
+
+### Bug Fixes
+
+* example/package.json & example/yarn.lock to reduce vulnerabilities ([18b6b87](https://gitlab.com/liquid-design/liquid-design-react/commit/18b6b8716f058b2923ba16bf4cf7ddd8ae711ed8))
+
 ## [2.6.6](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.5...v2.6.6) (2020-09-22)
 
 
