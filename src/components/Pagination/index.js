@@ -146,6 +146,7 @@ export class Pagination extends PureComponent {
     firstPage: PropTypes.number,
     disabled: PropTypes.bool,
     paginationNumberAmount: PropTypes.number,
+    onChange: PropTypes.func,
   }
 
   static defaultProps = {
@@ -153,6 +154,7 @@ export class Pagination extends PureComponent {
     firstPage: 1,
     disabled: false,
     paginationNumberAmount: 5,
+    onChange: null,
   }
 
   state = {
@@ -193,7 +195,10 @@ export class Pagination extends PureComponent {
     )
   }
 
-  setActivePageIndex = index => this.setState({ activePageIndex: index })
+  setActivePageIndex = index =>
+    this.setState({ activePageIndex: index }, () => {
+      this.props.onChange && this.props.onChange(this.state.activePageIndex)
+    })
 
   onArrowClickHandler = (type, e) => {
     const { activePageIndex } = this.state
