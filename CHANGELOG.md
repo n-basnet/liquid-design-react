@@ -1,3 +1,10 @@
+# [2.7.0](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.7...v2.7.0) (2021-01-11)
+
+
+### Features
+
+* **pagination:** add onChange prop ([6fc69e3](https://gitlab.com/liquid-design/liquid-design-react/commit/6fc69e34118ccdf8368714607c00024dc9000c95))
+
 ## [2.6.7](https://gitlab.com/liquid-design/liquid-design-react/compare/v2.6.6...v2.6.7) (2020-09-23)
 
 
