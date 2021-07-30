@@ -172,7 +172,7 @@ const getTextField = multiline => styled[multiline ? 'textarea' : 'input']`
   ${props => css([props.styleTemplateString])};
 `
 
-const getOnChangeHandler = handler => e => handler(e.target.value)
+const getOnChangeHandler = handler => e => handler(e)
 
 @withResizeDetector
 class Input extends PureComponent {
